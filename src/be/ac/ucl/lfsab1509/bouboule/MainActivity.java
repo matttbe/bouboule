@@ -1,5 +1,6 @@
-package lfsab1509.be.ac.ucl.bouboule;
+package be.ac.ucl.lfsab1509.bouboule;
 
+import lfsab1509.be.ac.ucl.bouboule.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
