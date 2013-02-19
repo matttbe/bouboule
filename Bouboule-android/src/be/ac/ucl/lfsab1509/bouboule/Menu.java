@@ -119,6 +119,9 @@ public class Menu extends Activity {
 		// while interacting with the UI.
 		findViewById(R.id.dummy_button).setOnTouchListener(
 				mDelayHideTouchListener);
+		
+		findViewById(R.id.PlayButton).setOnTouchListener(
+				mDelayHideTouchListener);
 	}
 
 	@Override

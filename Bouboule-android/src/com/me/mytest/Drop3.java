@@ -32,7 +32,7 @@ public class Drop3 implements ApplicationListener {
    
    @Override
    public void create() {
-      // load the images for the droplet and the bucket, 48x48 pixels each
+      // load the images for the droplet and the bucket, 128x128 pixels each
       dropImage = new Texture(Gdx.files.internal("images/a.png"));
       bucketImage = new Texture(Gdx.files.internal("images/bucket.png"));
       
@@ -53,8 +53,8 @@ public class Drop3 implements ApplicationListener {
       bucket = new Rectangle();
       bucket.x = 800 / 2 - 48 / 2; // center the bucket horizontally
       bucket.y = 20; // bottom left corner of the bucket is 20 pixels above the bottom screen edge
-      bucket.width = 48;
-      bucket.height = 48;
+      bucket.width = 128;
+      bucket.height = 128;
       
       // create the raindrops array and spawn the first raindrop
       raindrops = new Array<Rectangle>();
@@ -65,8 +65,8 @@ public class Drop3 implements ApplicationListener {
       Rectangle raindrop = new Rectangle();
       raindrop.x = MathUtils.random(0, 800-48);
       raindrop.y = 480;
-      raindrop.width = 48;
-      raindrop.height = 48;
+      raindrop.width = 128;
+      raindrop.height = 128;
       raindrops.add(raindrop);
       lastDropTime = TimeUtils.nanoTime();
    }
