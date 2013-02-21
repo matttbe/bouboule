@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFCC00"
     tools:context=".Menu" >
 
     <!--
@@ -24,28 +23,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/fullscreen_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:keepScreenOn="true"
-                android:text="@string/app_name"
-                android:textColor="#33b5e5"
-                android:textSize="50sp"
-                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/PlayButton"
                 android:layout_width="243dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/Play" />
+                android:text="@string/Play"
+                android:layout_marginTop="350dip" />
 
             <Button
                 android:id="@+id/ParameterButton"
@@ -60,6 +48,25 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/HighScore" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/fullscreen_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:keepScreenOn="true"
+                android:text="@string/dynamicName"
+                android:textColor="#33b5e5"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:layout_marginTop="250dip" />
         </LinearLayout>
 
     </FrameLayout>

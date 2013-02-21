@@ -6,11 +6,19 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -47,6 +55,28 @@ public class Menu extends Activity {
 	 * The instance of the {@link SystemUiHider} for this activity.
 	 */
 	private SystemUiHider mSystemUiHider;
+	
+	
+	
+	
+	// Need handler for callbacks to the UI thread
+    final Handler mHandler = new Handler();
+
+    // Create runnable for posting
+    final Runnable nameUpdate = new Runnable() {
+    	@Override
+        public void run() {
+            updateNameOnUI();
+            Log.i("Run","finish runnable");
+        }
+    };
+    
+    //String animated
+    String 	nameToShow;
+    int 	whatToShow	= 0;
+
+	
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +86,11 @@ public class Menu extends Activity {
 
 		
 		final View contentView = findViewById(R.id.fullscreen_content);
+		
+		//Changement de la police
+		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
+
+		((TextView) contentView).setTypeface(myTypeface);
 		
 		
 		//final View controlsView = findViewById(R.id.fullscreen_content_controls);
@@ -123,10 +158,104 @@ public class Menu extends Activity {
 		// operations to prevent the jarring behavior of controls going away
 		// while interacting with the UI.
 		
+		
+		
+		
+
+		
+
 		findViewById(R.id.PlayButton).setOnTouchListener(
 				mDelayHideTouchListener);
+		
+		
+		startFunWithUi();
+		
+		
 	}
 
+	
+	
+	protected void startFunWithUi() {
+
+        // Fire off a thread to do some work that we shouldn't do directly in the UI thread
+        Thread t = new Thread() {
+            public void run() {
+            	
+            	if (whatToShow == 0){
+            		
+            		//TODO: Get User Name instead
+            		nameToShow = "HELLO DUCIS01";
+            		whatToShow = 1;
+            		
+            	} else {
+            		
+            		nameToShow = "BOUBOULE";            		
+            		whatToShow = 0;
+            		
+            	}
+            		
+            		
+                
+                mHandler.postDelayed(nameUpdate,10*1000);
+            }
+        };
+        t.start();
+    }
+	
+	
+	private void updateNameOnUI() {
+
+		TextView myTextView = (TextView)findViewById(R.id.fullscreen_content);
+		
+		
+		//Animation
+		AnimationSet animationSet = new AnimationSet(true);
+		
+		float ROTATE_FROM = 0.0f;
+		float ROTATE_TO = 10.0f * 360.0f;
+		RotateAnimation r = new RotateAnimation(ROTATE_FROM, ROTATE_TO,
+		                                        Animation.RELATIVE_TO_SELF, 0.5f,
+		                                        Animation.RELATIVE_TO_SELF, 0.5f);
+		r.setDuration(5000);     
+		r.setRepeatCount(0);
+		
+		animationSet.addAnimation(r);
+		
+		TranslateAnimation translateAnimation = new TranslateAnimation(0, -400, 0, 0);
+        
+		//setting offset and duration to start after first rotation completed, and end at the same time with the last roration
+		translateAnimation.setStartOffset(500);
+		translateAnimation.setDuration(1000);
+		                               
+		animationSet.addAnimation(translateAnimation);
+		                               
+		AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+		alphaAnimation.setStartOffset(500);
+		alphaAnimation.setDuration(2000);
+		                               
+		animationSet.addAnimation(alphaAnimation);
+		
+		
+		
+		
+		
+		myTextView.startAnimation(animationSet);
+				
+		myTextView.setText(nameToShow);
+		
+		//relaunch
+		startFunWithUi();
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
