@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundmenu"
     tools:context=".Menu" >
 
     <!--
@@ -10,65 +11,57 @@
          TextureView, etc.
     -->
 
+
     <!--
          This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows.
     -->
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/backgroundmenu"
-        android:fitsSystemWindows="true" >
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <Button
+            android:id="@+id/PlayButton"
+            android:layout_width="243dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="350dip"
+            android:text="@string/Play" />
+
+        <Button
+            android:id="@+id/ParameterButton"
+            android:layout_width="243dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/Parameters" />
+
+        <Button
+            android:id="@+id/HighScoreButton"
+            android:layout_width="243dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/HighScore" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/fullscreen_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical" >
-
-            <Button
-                android:id="@+id/PlayButton"
-                android:layout_width="243dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/Play"
-                android:layout_marginTop="350dip" />
-
-            <Button
-                android:id="@+id/ParameterButton"
-                android:layout_width="243dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/Parameters" />
-
-            <Button
-                android:id="@+id/HighScoreButton"
-                android:layout_width="243dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/HighScore" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/fullscreen_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:keepScreenOn="true"
-                android:text="@string/dynamicName"
-                android:textColor="#33b5e5"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                android:layout_marginTop="250dip" />
-        </LinearLayout>
-
-    </FrameLayout>
+            android:layout_marginTop="250dip"
+            android:gravity="center"
+            android:keepScreenOn="true"
+            android:text="@string/dynamicName"
+            android:textColor="#33b5e5"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </FrameLayout>
