@@ -25,6 +25,12 @@
         <item name="buttonBarButtonStyle">@style/ButtonBarButton</item>
     </style>
 
+    <style name="Menu" parent="android:Theme.Light">
+    	<item name="android:windowFullscreen">true</item>	
+    	<item name="android:windowNoTitle">true</item>
+	</style>
+    
+    
     <style name="ButtonBar">
         <item name="android:paddingLeft">2dp</item>
         <item name="android:paddingTop">5dp</item>

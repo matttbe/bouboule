@@ -1,4 +1,4 @@
-package be.ac.ucl.lfsab1508.bouboule.game;
+package be.ac.ucl.lfsab1509.bouboule.game;
 
 
 import java.util.Iterator;

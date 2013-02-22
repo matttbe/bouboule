@@ -1,7 +1,8 @@
 package be.ac.ucl.lfsab1509.bouboule;
 
 import android.os.Bundle;
-import be.ac.ucl.lfsab1508.bouboule.game.Drop3;
+import be.ac.ucl.lfsab1509.bouboule.game.Drop3;
+
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 

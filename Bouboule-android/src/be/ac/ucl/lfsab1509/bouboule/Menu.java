@@ -1,18 +1,16 @@
 package be.ac.ucl.lfsab1509.bouboule;
 
-import be.ac.ucl.lfsab1509.bouboule.util.SystemUiHider;
-
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -28,45 +26,24 @@ import android.widget.Toast;
  * @see SystemUiHider
  */
 public class Menu extends Activity {
-	/**
-	 * Whether or not the system UI should be auto-hidden after
-	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-	 */
-	private static final boolean AUTO_HIDE = true;
 
-	/**
-	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-	 * user interaction before hiding the system UI.
-	 */
-	private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
-
-	/**
-	 * If set, will toggle the system UI visibility upon interaction. Otherwise,
-	 * will show the system UI visibility upon interaction.
-	 */
-	private static final boolean TOGGLE_ON_CLICK = true;
-
-	/**
-	 * The flags to pass to {@link SystemUiHider#getInstance}.
-	 */
-	private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
-
-	/**
-	 * The instance of the {@link SystemUiHider} for this activity.
-	 */
-	private SystemUiHider mSystemUiHider;
-	
-	
-	
 	
 	// Need handler for callbacks to the UI thread
     final Handler mHandler = new Handler();
 
     // Create runnable for posting
+    final Runnable animationUpdate = new Runnable() {
+    	@Override
+        public void run() {
+    		updateAnimationOnUI();
+            Log.i("Run","finish runnable");
+        }
+    };
+    
     final Runnable nameUpdate = new Runnable() {
     	@Override
         public void run() {
-            updateNameOnUI();
+            startFunWithUi();
             Log.i("Run","finish runnable");
         }
     };
@@ -82,6 +59,8 @@ public class Menu extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+	    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_menu);
 
 		
@@ -92,118 +71,72 @@ public class Menu extends Activity {
 
 		((TextView) contentView).setTypeface(myTypeface);
 		
-		
-		//final View controlsView = findViewById(R.id.fullscreen_content_controls);
-		
-
-		// Set up an instance of SystemUiHider to control the system UI for
-		// this activity.
-		mSystemUiHider = SystemUiHider.getInstance(this, contentView,
-				HIDER_FLAGS);
-		mSystemUiHider.setup();
-		mSystemUiHider
-				.setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
-					// Cached values.
-					int mControlsHeight;
-					int mShortAnimTime;
-
-					@Override
-					@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-					public void onVisibilityChange(boolean visible) {
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-							// If the ViewPropertyAnimator API is available
-							// (Honeycomb MR2 and later), use it to animate the
-							// in-layout UI controls at the bottom of the
-							// screen.
-							if (mControlsHeight == 0) {
-								//mControlsHeight = controlsView.getHeight();
-							}
-							if (mShortAnimTime == 0) {
-								mShortAnimTime = getResources().getInteger(
-										android.R.integer.config_shortAnimTime);
-							}
-							/*controlsView
-									.animate()
-									.translationY(visible ? 0 : mControlsHeight)
-									.setDuration(mShortAnimTime);
-									*/
-						} else {
-							// If the ViewPropertyAnimator APIs aren't
-							// available, simply show or hide the in-layout UI
-							// controls.
-							/*controlsView.setVisibility(visible ? View.VISIBLE
-									: View.GONE);*/
-						}
-
-						if (visible && AUTO_HIDE) {
-							// Schedule a hide().
-							delayedHide(AUTO_HIDE_DELAY_MILLIS);
-						}
-					}
-				});
-
-		// Set up the user interaction to manually show or hide the system UI.
-		contentView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (TOGGLE_ON_CLICK) {
-					mSystemUiHider.toggle();
-				} else {
-					mSystemUiHider.show();
-				}
-			}
-		});
-
-		// Upon interacting with UI controls, delay any scheduled hide()
-		// operations to prevent the jarring behavior of controls going away
-		// while interacting with the UI.
+		contentView.setRotation(-15);
 		
 		
 		
 		
-
-		
-
 		findViewById(R.id.PlayButton).setOnTouchListener(
-				mDelayHideTouchListener);
+				 mDelayHideTouchListener);
 		
 		
-		startFunWithUi();
+		mHandler.postDelayed(animationUpdate,10*1000);
 		
 		
 	}
 
 	
+	View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
+	@Override
+	public boolean onTouch(View view, MotionEvent motionEvent) {
+		
+		Context context = getApplicationContext();
+		CharSequence text = "Hello toast!";
+		int duration = Toast.LENGTH_SHORT;
+
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
+		
+		Intent intent = new Intent(Menu.this, MainActivity.class);
+		
+		startActivity(intent);
+		
+		return false;
+	} };
+	
 	
 	protected void startFunWithUi() {
 
         // Fire off a thread to do some work that we shouldn't do directly in the UI thread
-        Thread t = new Thread() {
-            public void run() {
+		//Here the name animation
+        //Thread t = new Thread() {
+        //    public void run() {
             	
-            	if (whatToShow == 0){
-            		
-            		//TODO: Get User Name instead
-            		nameToShow = "HELLO DUCIS01";
-            		whatToShow = 1;
-            		
-            	} else {
-            		
-            		nameToShow = "BOUBOULE";            		
-            		whatToShow = 0;
-            		
-            	}
-            		
-            		
-                
-                mHandler.postDelayed(nameUpdate,10*1000);
-            }
-        };
-        t.start();
+		if (whatToShow == 0){
+
+			//TODO: Get User Name instead
+			nameToShow = "HELLO\nDUCIS01";
+			whatToShow = 1;
+
+		} else {
+
+			nameToShow = "BOUBOULE";            		
+			whatToShow = 0;
+
+		}
+
+		TextView myTextView = (TextView)findViewById(R.id.fullscreen_content);
+		myTextView.setText(nameToShow);
+
+
+		mHandler.postDelayed(animationUpdate,10*1000);
+        //   }
+        //};
+        //t.start();
     }
 	
 	
-	private void updateNameOnUI() {
+	private void updateAnimationOnUI() {
 
 		TextView myTextView = (TextView)findViewById(R.id.fullscreen_content);
 		
@@ -223,7 +156,8 @@ public class Menu extends Activity {
 		
 		TranslateAnimation translateAnimation = new TranslateAnimation(0, -400, 0, 0);
         
-		//setting offset and duration to start after first rotation completed, and end at the same time with the last roration
+		//setting offset and duration to start after first rotation completed,
+		//and end at the same time with the last roration
 		translateAnimation.setStartOffset(500);
 		translateAnimation.setDuration(1000);
 		                               
@@ -241,10 +175,10 @@ public class Menu extends Activity {
 		
 		myTextView.startAnimation(animationSet);
 				
-		myTextView.setText(nameToShow);
+		//myTextView.setText(nameToShow);
 		
 		//relaunch
-		startFunWithUi();
+		mHandler.postDelayed(nameUpdate,5*1000);
     }
 	
 	
@@ -259,55 +193,6 @@ public class Menu extends Activity {
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-
-		// Trigger the initial hide() shortly after the activity has been
-		// created, to briefly hint to the user that UI controls
-		// are available.
-		delayedHide(100);
 	}
-
-	/**
-	 * Touch listener to use for in-layout UI controls to delay hiding the
-	 * system UI. This is to prevent the jarring behavior of controls going away
-	 * while interacting with activity UI.
-	 */
-	View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-		@Override
-		public boolean onTouch(View view, MotionEvent motionEvent) {
-			
-			Context context = getApplicationContext();
-			CharSequence text = "Hello toast!";
-			int duration = Toast.LENGTH_SHORT;
-
-			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();
-			
-			Intent intent = new Intent(Menu.this, MainActivity.class);
-			
-			startActivity(intent);
-			
-			if (AUTO_HIDE) {
-				delayedHide(AUTO_HIDE_DELAY_MILLIS);
-			}
-			return false;
-		}
-	};
-
-	Handler mHideHandler = new Handler();
-	Runnable mHideRunnable = new Runnable() {
-		@Override
-		public void run() {
-			mSystemUiHider.hide();
-		}
-	};
-
-	/**
-	 * Schedules a call to hide() in [delay] milliseconds, canceling any
-	 * previously scheduled calls.
-	 */
-	private void delayedHide(int delayMillis) {
-		
-		mHideHandler.removeCallbacks(mHideRunnable);
-		mHideHandler.postDelayed(mHideRunnable, delayMillis);
-	}
+	
 }
