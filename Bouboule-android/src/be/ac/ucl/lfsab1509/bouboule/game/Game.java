@@ -71,7 +71,7 @@ public class Game implements ApplicationListener {
 	      
 	     
 	      
-	      //Mouvement 
+	      //Movement 
 	      
 	      //EN X
 	      float accelX = Gdx.input.getAccelerometerX();
