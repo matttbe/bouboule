@@ -16,14 +16,18 @@ public class Game implements ApplicationListener {
 	final static int appHeigth = 800;//Gdx.graphics.getHeight();
 	
 	Texture				boubouleImg;
+	Texture				plateauImg;
 	Circle 				bouboule;
+	Circle				plateau;
 	SpriteBatch 		batch;
 	OrthographicCamera 	camera;
+	
 
 	@Override
 	public void create() {
 
 		boubouleImg = new Texture(Gdx.files.internal("images/bouboule.png"));
+		plateauImg = new Texture(Gdx.files.internal("images/plateau.png"));
 
 		// create the camera and the SpriteBatch
 		camera = new OrthographicCamera();
@@ -35,9 +39,9 @@ public class Game implements ApplicationListener {
 		
 		// create a Circle to logically represent Bouboule
 		
-		 bouboule = new Circle(appWidth/2-40/2, 60, 64/2);
-		 
-		 
+		bouboule = new Circle(appWidth/2-40/2, 60, 64/2);
+		plateau = new Circle(0, (appHeigth-appWidth) /2, appWidth/2);
+	
 		 
 		
 		
@@ -62,11 +66,10 @@ public class Game implements ApplicationListener {
 	      // tell the SpriteBatch to render in the
 	      // coordinate system specified by the camera.
 	      batch.setProjectionMatrix(camera.combined);
-	      
 	      // begin a new batch and draw Bouboule and
 	      batch.begin();
 	      batch.draw(boubouleImg, bouboule.x, bouboule.y);
-
+	      batch.draw(plateauImg, plateau.x , plateau.y , plateau.radius*2 , plateau.radius*2 ); 
 	      batch.end();
 	      
 	     
@@ -107,6 +110,7 @@ public class Game implements ApplicationListener {
 	public void dispose() {
 		
 		boubouleImg.dispose();
+		plateauImg.dispose();
 		batch.dispose();
 		
 	}
