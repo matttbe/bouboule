@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -34,7 +33,7 @@ public class Game implements ApplicationListener {
 		batch = new SpriteBatch();
 
 		
-		// create a Circle to logically represent Bouboiule
+		// create a Circle to logically represent Bouboule
 		
 		 bouboule = new Circle(appWidth/2-40/2, 60, 64/2);
 		 
