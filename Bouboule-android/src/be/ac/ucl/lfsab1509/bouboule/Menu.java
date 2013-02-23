@@ -104,7 +104,6 @@ public class Menu extends Activity {
 			toast.show();
 
 			Intent intent = new Intent(Menu.this, MainActivity.class);
-
 			startActivity(intent);
 
 			return false;
