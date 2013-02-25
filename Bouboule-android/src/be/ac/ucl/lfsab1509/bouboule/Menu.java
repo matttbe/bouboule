@@ -3,7 +3,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 import java.util.Random;
 
 import android.app.Activity;
-import android.content.Context;
+//import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -31,7 +31,7 @@ import android.widget.Toast;
 public class Menu extends Activity {
 
 
-	// Need handler for callbacks to the UI thread
+	// Need handler for callback to the UI thread
 	final Handler mHandler = new Handler();
 
 	// Create runnable for posting to the AnimationUpdater
@@ -39,7 +39,7 @@ public class Menu extends Activity {
 		@Override
 		public void run() {
 			updateAnimationOnUI();
-			Log.i("Run","finish runnable");
+			Log.i("Run","finish runnable updateAnimation");
 		}
 	};
 
@@ -48,13 +48,32 @@ public class Menu extends Activity {
 		@Override
 		public void run() {
 			startFunWithUi();
-			Log.i("Run","finish runnable");
+			Log.i("Run","finish runnable nameUpdate");
+		}
+	};
+	
+	// Create runnable for animating to the bouboules
+	final Runnable boubouleUpdate = new Runnable() {
+		@Override
+		public void run() {
+			Log.d("Run","START BOUBOULE UPDATE");
+			animateBouboules();
+			Log.i("Run","finish animate boubouleAnim");
 		}
 	};
 
 	//String animated
 	String 	nameToShow;
 	int 	whatToShow	= 0;
+	
+	
+	//Animation containers
+	AnimationSet	animationSetForTitle 	= new AnimationSet(true),
+					animationSetCase1		= new AnimationSet(true),
+					animationSetCase2		= new AnimationSet(true),
+					animationSetCase3		= new AnimationSet(true),
+					animationSetCase4		= new AnimationSet(true),
+					animationSetCaseD		= new AnimationSet(true);
 
 
 
@@ -72,39 +91,70 @@ public class Menu extends Activity {
 
 		final View contentView = findViewById(R.id.fullscreen_content);
 
-		//Changement de la police
+		//Font Update
 		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
 		((TextView) contentView).setTypeface(myTypeface);
 
+		//Incline the blue text
 		contentView.setRotation(-15);
 
-		//Listener for the Game Launcher
+		//Listeners for the Game Launcher
 		findViewById(R.id.PlayButton).setOnTouchListener(
-				gameFireListener);
+				fireListener);
+		findViewById(R.id.ParameterButton).setOnTouchListener(
+				fireListener);
+		findViewById(R.id.HighScoreButton).setOnTouchListener(
+				fireListener);
+		
+		
+		
+		//TODO: Change the font !!
+		Typeface myFontBout = Typeface.createFromAsset(getAssets(), "chineyen.ttf");
+		
+		((TextView) findViewById(R.id.PlayButton)).setTypeface(myFontBout);
+		((TextView) findViewById(R.id.ParameterButton)).setTypeface(myFontBout);
+		((TextView) findViewById(R.id.HighScoreButton)).setTypeface(myFontBout);
+		
+		//Hide the bouboules until the animation begin 
+		findViewById(R.id.boubleft ).setVisibility(View.INVISIBLE);
+		findViewById(R.id.boubright).setVisibility(View.INVISIBLE);
 
+		setAllTheAnimationAtOnce();
 
 		mHandler.post(nameUpdate);
+		mHandler.postDelayed(boubouleUpdate, 1750);
 
 
 	}
 
 
 	/*
-	 * Start the Game 
+	 * Start the Game // Parameters // HighScore
 	 */
-	View.OnTouchListener gameFireListener = new View.OnTouchListener() {
+	View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(View view, MotionEvent motionEvent) {
 
-			Context context = getApplicationContext();
-			CharSequence text = "Hello toast!";
-			int duration = Toast.LENGTH_SHORT;
-
-			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();
-
-			Intent intent = new Intent(Menu.this, MainActivity.class);
-			startActivity(intent);
+			switch (view.getId() ){
+			
+				case R.id.PlayButton :
+					Intent intent = new Intent(Menu.this, MainActivity.class);
+					startActivity(intent);
+					
+					break;
+					
+				case R.id.ParameterButton :
+					
+					break;
+					
+				case R.id.HighScoreButton :
+					
+					break;
+					
+				default :
+					
+					break;
+			}
 
 			return false;
 		} 
@@ -116,8 +166,7 @@ public class Menu extends Activity {
 	 * bouncing animation
 	 */
 	protected void startFunWithUi() {
-
-
+		
 		if (whatToShow == 0){
 
 			nameToShow = "BOUBOULE";
@@ -136,8 +185,85 @@ public class Menu extends Activity {
 		myTextView.setText(nameToShow);
 
 		//Setting the animation
-		AnimationSet animationSet = new AnimationSet(true);
+		myTextView.startAnimation(animationSetForTitle);
 
+		//Launch the new UI thread to set the Animation on 
+		//the appropriate time.
+		mHandler.postDelayed(animationUpdate,10*1000);
+	}
+	
+	
+	
+	
+
+
+	private void updateAnimationOnUI() {
+
+		//Get the Text to update
+		TextView myTextView = (TextView)findViewById(R.id.fullscreen_content);
+
+		//Animation Launcher
+
+		Random rand = new Random();
+
+		switch (rand.nextInt(5)) {
+		//Fire the right animation
+		case 1:  
+			
+			myTextView.startAnimation(animationSetCase1);
+			break;
+			
+		case 2:  
+			
+			myTextView.startAnimation(animationSetCase2);
+			break;
+			
+		case 3: 
+			
+			myTextView.startAnimation(animationSetCase3);
+			break;
+			
+		case 4:
+			
+			myTextView.startAnimation(animationSetCase4);
+			break;
+			
+		
+		default: 
+			
+			myTextView.startAnimation(animationSetCaseD);
+			break;
+		}
+
+		//re launch
+		mHandler.postDelayed(nameUpdate,5*1000);
+	}
+
+
+	private void animateBouboules() {
+
+		TranslateAnimation translateR = new TranslateAnimation(900, 0, -400, 0);
+		TranslateAnimation translateL = new TranslateAnimation( -900, 0, -400, 0);
+
+		translateR.setDuration(1000);
+		translateL.setDuration(1000);
+		
+		findViewById(R.id.boubleft ).setVisibility(View.VISIBLE);
+		findViewById(R.id.boubright).setVisibility(View.VISIBLE);
+		
+		findViewById(R.id.boubright).startAnimation(translateR);
+		findViewById(R.id.boubleft ).startAnimation(translateL);
+
+	}
+	
+	private void setAllTheAnimationAtOnce(){
+		
+		//Furnish 5 different animation 
+		//to add to the Text =)
+		
+		/**Animation for the Title Update*/
+		//Animatin for the title
+		
 		ScaleAnimation g = new ScaleAnimation(1.0f, 1.10f, 1.0f, 1.10f,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
 				0.5f);
@@ -146,116 +272,81 @@ public class Menu extends Activity {
 		g.setRepeatCount(10);
 		g.setRepeatMode(Animation.REVERSE);
 
-		animationSet.addAnimation(g);
-		myTextView.startAnimation(animationSet);
-
-		//Launch the new UI thread to set the Animation on 
-		//the appropriate time.
-		mHandler.postDelayed(animationUpdate,10*1000);
-	}
-
-
-	private void updateAnimationOnUI() {
-
-		//Get the Text to update
-		TextView myTextView = (TextView)findViewById(R.id.fullscreen_content);
-
-		//Animation
-		AnimationSet animationSet = new AnimationSet(true);
-
-		Random rand = new Random();
-
-		switch (rand.nextInt(5)) {
-
-		//Furnish 5 different animation 
-		//to add to the Text =)
-		case 1:  
-			
-			// Rotating fading and translating animation
-			
-			float ROTATE_FROM = 0.0f;
-			float ROTATE_TO = 10.0f * 360.0f;
-			RotateAnimation r = new RotateAnimation(ROTATE_FROM, ROTATE_TO,
-					Animation.RELATIVE_TO_SELF, 0.5f,
-					Animation.RELATIVE_TO_SELF, 0.5f);
-			r.setDuration(5000);     
-			r.setRepeatCount(0);
-
-			animationSet.addAnimation(r);
-
-			TranslateAnimation translateAnimation = new TranslateAnimation(0, -400, 0, 0);
-
-			//setting offset and duration to start after first rotation completed,
-			//and end at the same time with the last rotation
-			translateAnimation.setStartOffset(500);
-			translateAnimation.setDuration(1000);
-
-			animationSet.addAnimation(translateAnimation);
-
-			AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
-			alphaAnimation.setStartOffset(500);
-			alphaAnimation.setDuration(2000);
-
-			animationSet.addAnimation(alphaAnimation);
-			break;
-			
-		case 2:  
-			
-			//Translating the animation
-			
-			TranslateAnimation translateAnimation1 = new TranslateAnimation(0, 0, 0, -600);
-			translateAnimation1.setDuration(5000);
-			animationSet.addAnimation(translateAnimation1);
-			break;
-			
-		case 3: 
-			
-			//Fading the animation
-			
-			AlphaAnimation alphaAnimation1 = new AlphaAnimation(1, 0);
-			alphaAnimation1.setDuration(5000);
-			animationSet.addAnimation(alphaAnimation1);
-			break;
-			
-		case 4:
-			
-			//Upscaling and fading animation
-			
-			ScaleAnimation g = new ScaleAnimation(1.0f, 15f, 1.0f, 15f,
-					Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-					0.5f);
-			g.setDuration(5000);
-			
-			AlphaAnimation alphaAnimation2 = new AlphaAnimation(1, 0);
-			alphaAnimation2.setDuration(3000);
-			
-			animationSet.addAnimation(g);
-			animationSet.addAnimation(alphaAnimation2);
-			break;
-			
+		animationSetForTitle.addAnimation(g);
 		
-		default: 
-			
-			//Schrinking animation
-			
-			ScaleAnimation g1 = new ScaleAnimation(1.0f, 0.0f, 1.0f, 0.0f,
-					Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-					0.5f);
-			g1.setDuration(5000);
-			animationSet.addAnimation(g1);
-			
-		break;
-		}
+		
+		/**Animation for CASE 1*/
+		// Rotating fading and translating animation
 
-		//Fire the right animation
-		myTextView.startAnimation(animationSet);
+		float ROTATE_FROM = 0.0f;
+		float ROTATE_TO = 10.0f * 360.0f;
+		RotateAnimation r = new RotateAnimation(ROTATE_FROM, ROTATE_TO,
+				Animation.RELATIVE_TO_SELF, 0.5f,
+				Animation.RELATIVE_TO_SELF, 0.5f);
+		r.setDuration(5000);     
+		r.setRepeatCount(0);
 
-		//relaunch
-		mHandler.postDelayed(nameUpdate,5*1000);
+		animationSetCase1.addAnimation(r);
+
+		TranslateAnimation translateAnimation = new TranslateAnimation(0, -400, 0, 0);
+
+		//setting offset and duration to start after first rotation completed,
+		//and end at the same time with the last rotation
+		translateAnimation.setStartOffset(500);
+		translateAnimation.setDuration(1000);
+
+		animationSetCase1.addAnimation(translateAnimation);
+
+		AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+		alphaAnimation.setStartOffset(500);
+		alphaAnimation.setDuration(2000);
+
+		animationSetCase1.addAnimation(alphaAnimation);
+
+		
+		/**Animation for CASE 2*/
+		//Translating the animation
+		
+		TranslateAnimation translateAnimation1 = new TranslateAnimation(0, 0, 0, -600);
+		translateAnimation1.setDuration(5000);
+		animationSetCase2.addAnimation(translateAnimation1);
+		
+		
+		/**Animation for CASE 3*/
+		//Fading the animation
+		
+		AlphaAnimation alphaAnimation1 = new AlphaAnimation(1, 0);
+		alphaAnimation1.setDuration(5000);
+		animationSetCase3.addAnimation(alphaAnimation1);
+		
+		
+		
+		/**Animation for CASE 4*/
+		//Upscaling and fading animation
+		
+		ScaleAnimation grow = new ScaleAnimation(1.0f, 15f, 1.0f, 15f,
+				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+				0.5f);
+		grow.setDuration(5000);
+		
+		AlphaAnimation alphaAnimation2 = new AlphaAnimation(1, 0);
+		alphaAnimation2.setDuration(3000);
+		
+		animationSetCase4.addAnimation(grow);
+		animationSetCase4.addAnimation(alphaAnimation2);
+		
+		
+		
+		/**Animation for CASE D*/
+		//Schrinking animation
+		
+		ScaleAnimation g1 = new ScaleAnimation(1.0f, 0.0f, 1.0f, 0.0f,
+				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+				0.5f);
+		g1.setDuration(5000);
+		animationSetCaseD.addAnimation(g1);
+		
 	}
-
-
-
 
 	
 	@Override

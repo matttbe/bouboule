@@ -2,9 +2,9 @@
 <resources>
 
     <string name="app_name">Bouboule</string>
-    <string name="Play">Play</string>
-    <string name="Parameters">Parameters</string>
-    <string name="HighScore">Highscore</string>
+    <string name="Play">PLAY</string>
+    <string name="Parameters">PARAMETERS</string>
+    <string name="HighScore">HIGHSCORE</string>
     <string name="dynamicName">BOUBOULE</string>
 
 </resources>
