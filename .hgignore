@@ -4,6 +4,7 @@ syntax: glob
 gen/** 
 *.log
 *.apk
+.DS_Store
 syntax: regexp 
 ^bin/classes\.dex$ 
 syntax: regexp 
