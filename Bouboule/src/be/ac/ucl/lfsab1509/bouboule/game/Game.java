@@ -74,7 +74,7 @@ public class Game implements ApplicationListener {
 		batch.draw(plateauImg, plateau.x - plateau.radius, plateau.y - plateau.radius, plateau.radius*2 , plateau.radius*2 ); 
 		batch.draw(boubouleImg, bouboule.x - 64, bouboule.y - 64);
 		batch.end();
-
+ 
 
 
 		//Mouvement 
