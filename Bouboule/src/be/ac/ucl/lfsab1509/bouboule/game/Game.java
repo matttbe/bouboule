@@ -1,5 +1,7 @@
 package be.ac.ucl.lfsab1509.bouboule.game;
 
+import com.badlogic.gdx.math.Intersector;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -17,13 +19,16 @@ public class Game implements ApplicationListener {
 	Texture                         plateauImg;
 	Circle                          bouboule;
 	Circle                          plateau;
-	SpriteBatch             batch;
-	OrthographicCamera      camera;
+	SpriteBatch             		batch;
+	OrthographicCamera      		camera;
+	Intersector						intersector;
 
 
 	@Override
 	public void create() {
 
+		intersector = new Intersector();
+		
 		boubouleImg = new Texture(Gdx.files.internal("images/boub.png"));
 		plateauImg = new Texture(Gdx.files.internal("images/plateau.png"));
 
@@ -37,8 +42,8 @@ public class Game implements ApplicationListener {
 
 		// create a Circle to logically represent Bouboule
 
-		plateau = new Circle(0 + appWidth/2 , (appHeigth-appWidth) /2 + appWidth/2, appWidth/2);
-		bouboule = new Circle(plateau.x, plateau.y, 64/2);
+		plateau = new Circle(appWidth/2 , (appHeigth-appWidth) /2 + appWidth/2, appWidth/2 - 80/2);
+		bouboule = new Circle(plateau.x, plateau.y, 80/2);
 
 
 
@@ -67,7 +72,7 @@ public class Game implements ApplicationListener {
 		// begin a new batch and draw Bouboule and
 		batch.begin();
 		batch.draw(plateauImg, plateau.x - plateau.radius, plateau.y - plateau.radius, plateau.radius*2 , plateau.radius*2 ); 
-		batch.draw(boubouleImg, bouboule.x - bouboule.radius, bouboule.y - bouboule.radius);
+		batch.draw(boubouleImg, bouboule.x - 64, bouboule.y - 64);
 		batch.end();
 
 
@@ -84,14 +89,20 @@ public class Game implements ApplicationListener {
 		bouboule.x -= 100 * accelX * Gdx.graphics.getDeltaTime();
 		bouboule.y -= 100 * accelY * Gdx.graphics.getDeltaTime();
 		
-
-
+		/*
+		if(!intersector.overlapCircles(plateau, bouboule)){
+			bouboule.x=plateau.x;
+			bouboule.y=plateau.y;
+		}
+		*/
+		
 		//remetre la boule au centre quand elle tombe hors du ring
 		if((bouboule.x-plateau.x)*(bouboule.x-plateau.x) + (bouboule.y-plateau.y)*(bouboule.y-plateau.y) >= plateau.radius*plateau.radius){
 			bouboule.x=plateau.x;
 			bouboule.y=plateau.y;
 		}
 
+		
 
 
 	}
