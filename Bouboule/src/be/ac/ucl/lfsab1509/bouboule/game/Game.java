@@ -81,13 +81,9 @@ public class Game implements ApplicationListener {
 
 		Gdx.app.log ("Accelerometer", accelX+"  "+accelY+"  "+accelZ+"  ");
 
-		//move en X
-		if(accelX >  0 ) bouboule.x -= 150 * Gdx.graphics.getDeltaTime();
-		if(accelX <= 0 ) bouboule.x += 150 * Gdx.graphics.getDeltaTime();
-
-		//move EN Y
-		if(accelY >  0 ) bouboule.y -= 150 * Gdx.graphics.getDeltaTime();
-		if(accelY <= 0 ) bouboule.y += 150 * Gdx.graphics.getDeltaTime();
+		bouboule.x -= 100 * accelX * Gdx.graphics.getDeltaTime();
+		bouboule.y -= 100 * accelY * Gdx.graphics.getDeltaTime();
+		
 
 
 		//remetre la boule au centre quand elle tombe hors du ring
@@ -96,15 +92,7 @@ public class Game implements ApplicationListener {
 			bouboule.y=plateau.y;
 		}
 
-		/*
-              // make sure the bouboule stays within the screen bounds
-              if(bouboule.x < 0) bouboule.x = 0;
-              if(bouboule.x > (appWidth - bouboule.radius) ) bouboule.x = appWidth - bouboule.radius;
 
-              // make sure the bouboule stays within the screen bounds
-              if(bouboule.y < 0) bouboule.y = 0;
-              if(bouboule.y > (appHeigth - bouboule.radius) ) bouboule.y = appHeigth - bouboule.radius ;
-		 */
 
 	}
 
