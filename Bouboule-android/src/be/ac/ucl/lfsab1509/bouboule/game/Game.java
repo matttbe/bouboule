@@ -1,7 +1,5 @@
 package be.ac.ucl.lfsab1509.bouboule.game;
 
-import android.util.Log;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -81,7 +79,7 @@ public class Game implements ApplicationListener {
 		float accelY = Gdx.input.getAccelerometerY();
 		float accelZ = Gdx.input.getAccelerometerZ();
 
-		Log.d("Accelerometer", accelX+"  "+accelY+"  "+accelZ+"  ");
+		Gdx.app.log ("Accelerometer", accelX+"  "+accelY+"  "+accelZ+"  ");
 
 		//move en X
 		if(accelX >  0 ) bouboule.x -= 150 * Gdx.graphics.getDeltaTime();
