@@ -20,6 +20,8 @@ import java.util.Map;
  * name, and it will attach these fixtures to your body.
  *
  * @author Aurelien Ribon | http://www.aurelienribon.com
+ * 
+ * Physics Body Editor is under Apache 2.0 license
  */
 public class BodyEditorLoader {
 
