@@ -56,6 +56,8 @@ public class GraphicManager {
 	
 	public void update(float dt){
 		for(GameBody body:bodies){
+			
+			world.step(GlobalSettings.BOX_STEP,GlobalSettings.VELOCITY_ITERATIONS, GlobalSettings.POSITION_ITERATIONS);
 			body.update(dt);
 		}
 	}

@@ -1,5 +1,6 @@
 package be.ac.ucl.lfsab1509.bouboule.game.util;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -31,8 +32,10 @@ public class Bouboule extends GameBody{
 		}
 	}
 	
-	public void Update(float dt){
+	public void update(float dt){
 		if(isAlive){
+			
+			Gdx.app.log ("Bouboule", "Update boubloule");
 			super.update(dt);
 			
 			

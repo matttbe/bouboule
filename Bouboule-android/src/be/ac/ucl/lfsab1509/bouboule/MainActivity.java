@@ -47,7 +47,7 @@ public class MainActivity extends AndroidApplication {
         cfg.useAccelerometer = true;
         cfg.useCompass = false;
         
-        initialize(new Game(), cfg);
+        initialize(new MyGame(), cfg);
     }
     
 	@Override

@@ -1,5 +1,6 @@
 package be.ac.ucl.lfsab1509.bouboule.game.util;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -97,6 +98,8 @@ public abstract class GameBody {
 	
 	public void updatePositionVector(){
 		
+		Gdx.app.log ("updatePositionVector", positionVector.x + " " +positionVector.y );
+		
 		positionVector.set(GraphicManager.convertToWorld(body.getPosition().x),
 				GraphicManager.convertToWorld(body.getPosition().y));	
 	}
@@ -119,6 +122,9 @@ public abstract class GameBody {
 	
 	/**TODO: WEIRD !!!**/
 	public void update(float dt){ 
+		
+		Gdx.app.log ("GameBody", "updatePositionVector");
+		
 		updatePositionVector();
 	}
 
