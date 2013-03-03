@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class Bouboule extends GameBody{
 	
 	TextureRegion texture;
+	float radius;
 	
 	
 	public Bouboule(float radius, BodyType bodyType,float density,
@@ -19,6 +20,7 @@ public class Bouboule extends GameBody{
 		
 		Vector2 pos	= new Vector2(px,py);
 		texture		= new TextureRegion(texRegion);//, pos); TODO:VERIF
+		this.radius	= radius;
 
 		MakeBody(0, 0, radius, bodyType, density, elasticity, pos, angle);
 	}
@@ -27,7 +29,7 @@ public class Bouboule extends GameBody{
 		// TODO Auto-generated method stub
 		if(isAlive){
 			
-			
+			sp.draw(texture, positionVector.x-radius, positionVector.y-radius);
 			//TODO: SET up;
 		}
 	}
