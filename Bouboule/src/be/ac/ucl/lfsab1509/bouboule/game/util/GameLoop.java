@@ -1,12 +1,112 @@
 package be.ac.ucl.lfsab1509.bouboule.game.util;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+
+
 public class GameLoop {
 	
+	GraphicManager 		graphicManager;
+	Box2DDebugRenderer 	debugRenderer;
+	Matrix4 			debugMatrix;
+	
+	SpriteBatch			batch;
+	
+	Bouboule		 	bouboule;
+	TextureRegion 		boubouleImg;
+	
+	//Texture 			arenaImg;
 	
 	
-	GraphicManager graphicManager;
+	public GameLoop(OrthographicCamera cam){
+
+		batch 			= new SpriteBatch();
+		batch.setProjectionMatrix(cam.combined);
+		
+		debugMatrix		= new Matrix4(cam.combined);
+		debugMatrix.scale(GraphicManager.GAME_TO_WORLD, GraphicManager.GAME_TO_WORLD, 1f);
+
+		debugRenderer	= new Box2DDebugRenderer();
+		
+		graphicManager = new GraphicManager();
+		
+		init();
+	}
 	
+	private void init() {
+		
+		initArena();
+		initBall();
+		
+	}
+
+	
+	private void initBall() {
+		
+		boubouleImg = new TextureRegion( new Texture(Gdx.files.internal("images/boub.png")));
+		
+				
+		int gRadius		= 40;
+		int gPositionX	= 160;
+		int gPositionY	= 280;
+		
+		bouboule = new Bouboule(gRadius, BodyType.DynamicBody,
+				1, 1, gPositionX, gPositionY, 0, boubouleImg);
+		
+		//ball.SetTextureDimension(TextureDimensions.BALL_WIDTH, TextureDimensions.BALL_HEIGHT);
+		graphicManager.addBody(bouboule);
+		
+	}
+	
+	private void initArena() {
+		
+		//TODO: set Up;
+		
+
+		
+		
+	}
+	
+	public void update(float dt) {
+
+		graphicManager.update(dt);
+	}
+	
+	public void render() {
+
+		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		batch.begin();
+		
+		batch.disableBlending();
+		//arena.Draw(batch);
+		
+		batch.enableBlending();
+		graphicManager.draw(batch);
+		
+		
+		batch.end();
+		
+		batch.begin();
+		debugRenderer.render(GraphicManager.getWorld(), debugMatrix);
+		batch.end();
+	}
 	
 
+	public void dispose() {
+		// TODO Auto-generated method stub
+		debugRenderer.dispose();
+		graphicManager.dispose();
+	}
+
+	
+	
 }
