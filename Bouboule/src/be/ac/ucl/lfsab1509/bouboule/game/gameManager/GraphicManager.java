@@ -1,6 +1,8 @@
-package be.ac.ucl.lfsab1509.bouboule.game.util;
+package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 import java.util.ArrayList;
+
+import be.ac.ucl.lfsab1509.bouboule.game.body.GameBody;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;

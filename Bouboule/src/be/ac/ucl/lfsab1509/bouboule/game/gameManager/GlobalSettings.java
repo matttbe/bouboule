@@ -1,4 +1,4 @@
-package be.ac.ucl.lfsab1509.bouboule.game.util;
+package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 public class GlobalSettings {
 	

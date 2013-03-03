@@ -1,5 +1,8 @@
-package be.ac.ucl.lfsab1509.bouboule.game.util;
+package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
+
+import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
+import be.ac.ucl.lfsab1509.bouboule.game.physicEditor.BodyEditorLoader;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;

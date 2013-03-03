@@ -1,4 +1,4 @@
-package be.ac.ucl.lfsab1509.bouboule.game.util;
+package be.ac.ucl.lfsab1509.bouboule.game.body;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

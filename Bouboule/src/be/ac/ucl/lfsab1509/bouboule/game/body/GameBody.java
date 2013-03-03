@@ -1,4 +1,6 @@
-package be.ac.ucl.lfsab1509.bouboule.game.util;
+package be.ac.ucl.lfsab1509.bouboule.game.body;
+
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class GameBody {
 	
-	protected Body body;
+	public Body body;
 	
 	public Boolean isAlive;
 	
