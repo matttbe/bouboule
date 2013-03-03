@@ -5,8 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
@@ -31,9 +29,7 @@ public class GameLoop {
 	TextureRegion 		boubouleImg;
 	
 	private Body bottleModel;
-    private Vector2 bottleModelOrigin;
     Texture bottleTexture;
-    Sprite bottleSprite;
 	
 	//Texture 			arenaImg;
 	
@@ -87,6 +83,7 @@ public class GameLoop {
 		// 1. Create a BodyDef, as usual.
 		BodyDef bd = new BodyDef();
 		bd.type = BodyType.StaticBody;
+		bd.position.set(GraphicManager.convertToBox(400), 0);
 
 		// 2. Create a FixtureDef, as usual.
 		FixtureDef fd = new FixtureDef();
@@ -99,14 +96,7 @@ public class GameLoop {
 
 		// 4. Create the body fixture automatically by using the loader.
 		loader.attachFixture(bottleModel, "test01", fd, 8);
-		bottleModelOrigin = loader.getOrigin("test01", 8).cpy();
-		
-		bottleTexture = new Texture(Gdx.files.internal("data/gfx/bottle.png"));
-        bottleTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-
-        bottleSprite = new Sprite(bottleTexture);
-        bottleSprite.setSize(8, 8*bottleSprite.getHeight()/bottleSprite.getWidth());
-
+		//bottleModelOrigin = loader.getOrigin("test01", 8).cpy();
 
 	}
 
@@ -117,7 +107,7 @@ public class GameLoop {
 				
 		int gRadius		= 50;
 		int gPositionX	= 400;
-		int gPositionY	= 0;
+		int gPositionY	= 350;
 		
 		bouboule2 = new Bouboule(gRadius, BodyType.DynamicBody,
 				1, 0.9f, gPositionX, gPositionY, 0, boubouleImg);
