@@ -22,6 +22,7 @@ public class GameLoop {
 	SpriteBatch			batch;
 	
 	Bouboule		 	bouboule;
+	Bouboule		 	bouboule2;
 	TextureRegion 		boubouleImg;
 	
 	//Texture 			arenaImg;
@@ -46,6 +47,7 @@ public class GameLoop {
 		
 		initArena();
 		initBall();
+		initBall2();
 		
 	}
 
@@ -57,10 +59,10 @@ public class GameLoop {
 				
 		int gRadius		= 50;
 		int gPositionX	= 400;
-		int gPositionY	= 280;
+		int gPositionY	= 1000;
 		
 		bouboule = new Bouboule(gRadius, BodyType.DynamicBody,
-				1, 1, gPositionX, gPositionY, 0, boubouleImg);
+				1, 0.8f, gPositionX, gPositionY, 0, boubouleImg);
 		
 		//ball.SetTextureDimension(TextureDimensions.BALL_WIDTH, TextureDimensions.BALL_HEIGHT);
 		graphicManager.addBody(bouboule);
@@ -68,27 +70,38 @@ public class GameLoop {
 	}
 	
 	private void initArena() {
-		
-		//TODO: set Up;
-		
+				
+	}
 
+	private void initBall2() {
 		
+		boubouleImg = new TextureRegion( new Texture(Gdx.files.internal("images/boub.png")));
+		
+				
+		int gRadius		= 50;
+		int gPositionX	= 400;
+		int gPositionY	= 0;
+		
+		bouboule2 = new Bouboule(gRadius, BodyType.DynamicBody,
+				1, 0.9f, gPositionX, gPositionY, 0, boubouleImg);
+		
+		//ball.SetTextureDimension(TextureDimensions.BALL_WIDTH, TextureDimensions.BALL_HEIGHT);
+		graphicManager.addBody(bouboule);
 		
 	}
 	
+	
+	
 	public void update(float dt) {
 		
-		Gdx.app.log ("World INFO", "Gravity = "+ GraphicManager.getWorld().getGravity() + "\n Nunber of Obj " 
-				+ GraphicManager.getWorld().getBodyCount() +"" + GraphicManager.getWorld().getBodies().next().getMass() );
+		float accelX = Gdx.input.getAccelerometerX();
+		float accelY = Gdx.input.getAccelerometerY();
+		//float accelZ = Gdx.input.getAccelerometerZ();
 		
-		Gdx.app.log("Bouboule Mass", "Mass " + bouboule.body.getMass());
 		
-		Gdx.app.log("Bouboule Active ?","Active ? = " + bouboule.body.isActive());
+		//bouboule.body.applyForceToCenter(new Vector2(0,-1));
+		bouboule2.body.applyForceToCenter(new Vector2(-accelX*0.5f,-accelY*0.5f));
 		
-		//bouboule.body.applyForceToCenter(new Vector2(1000,-2000));
-		
-		Gdx.app.log("Bouboule Velocity","Velocity " + bouboule.body.getLinearVelocity());
-
 		graphicManager.update(dt);
 	}
 	

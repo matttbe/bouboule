@@ -18,7 +18,7 @@ public class GraphicManager {
 	
 	
 	public GraphicManager(){
-		world=new World(new Vector2(0,-20), true);
+		world=new World(new Vector2(0,0), true);
 		bodies=new ArrayList<GameBody>();
 		isPaused=false;
 	}
