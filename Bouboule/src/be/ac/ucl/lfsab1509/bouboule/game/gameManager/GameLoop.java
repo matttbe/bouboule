@@ -56,6 +56,7 @@ public class GameLoop {
 	Bouboule		 	bouboule;
 	Bouboule		 	bouboule2;
 	TextureRegion 		boubouleImg;
+	Texture				bottleImg;		
 	
 	private Body bottleModel;
     Texture bottleTexture;
@@ -124,8 +125,11 @@ public class GameLoop {
 		bottleModel = GraphicManager.getWorld().createBody(bd);
 
 		// 4. Create the body fixture automatically by using the loader.
-		loader.attachFixture(bottleModel, "test01", fd, 8);
+		loader.attachFixture(bottleModel, "bottle", fd, 8);
 		//bottleModelOrigin = loader.getOrigin("test01", 8).cpy();
+		
+        bottleImg = new Texture(Gdx.files.internal("data/gfx/bottle.png"));
+
 
 	}
 
@@ -172,6 +176,7 @@ public class GameLoop {
 		
 		batch.enableBlending();
 		graphicManager.draw(batch);
+		//batch.draw(bottleImg, bottleModel.getPosition().x, bottleModel.getPosition().y);
 		
 		
 		batch.end();
