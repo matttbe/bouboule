@@ -108,9 +108,9 @@ public class Game implements ApplicationListener {
 		//EN X
 		float accelX = Gdx.input.getAccelerometerX();
 		float accelY = Gdx.input.getAccelerometerY();
-		float accelZ = Gdx.input.getAccelerometerZ();
+		/*float accelZ = Gdx.input.getAccelerometerZ();
 
-		Gdx.app.log ("Accelerometer", accelX+"  "+accelY+"  "+accelZ+"  ");
+		Gdx.app.log ("Accelerometer", accelX+"  "+accelY+"  "+accelZ+"  ");*/
 
 		bouboule.x -= 100 * accelX * Gdx.graphics.getDeltaTime();
 		bouboule.y -= 100 * accelY * Gdx.graphics.getDeltaTime();
@@ -150,7 +150,9 @@ public class Game implements ApplicationListener {
 	}
 
 	@Override
-	public void pause() {
+	public void pause()
+	{
+		
 	}
 
 	@Override
