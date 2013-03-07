@@ -26,6 +26,7 @@
 
 package be.ac.ucl.lfsab1509.bouboule.game.body;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import be.ac.ucl.lfsab1509.bouboule.game.physicEditor.BodyEditorLoader;
 
@@ -182,6 +183,12 @@ public abstract class GameBody {
 		FixtureDef fixtureDef	= new FixtureDef();
 		fixtureDef.density		= density;
 		fixtureDef.restitution	= elasticity;
+		
+		//Definition that remove contact with the background
+		if(elasticity == 0.9f)
+			fixtureDef.filter.maskBits = GlobalSettings.MASK_PLAYER;
+		else 
+			fixtureDef.filter.maskBits = GlobalSettings.MASK_MONSTER;
 		
 		//Load the json Loader
 		BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(jsonFile));

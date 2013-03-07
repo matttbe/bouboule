@@ -111,7 +111,9 @@ public class GameLoop {
 		int gPositionY	= 1000;
 		
 		bouboule = new Bouboule(0, BodyType.DynamicBody,
-				10, 0.8f, gPositionX, gPositionY, 0, "images/boub.png", "data/jsonFile/boub.json", "boub");
+				10, 0.8f, gPositionX, gPositionY, 0,
+				"images/boub.png", "data/jsonFile/boub.json", "boub"
+				);
 		
 
 		//Add the new object to the graphic and physic manager
@@ -141,6 +143,7 @@ public class GameLoop {
 		fd.density = 1;
 		fd.friction = 0.5f;
 		fd.restitution = 0.3f;
+		fd.filter.maskBits = GlobalSettings.MASK_SCENERY;
 
 		// 3. Create a Body, as usual.
 		bottleModel = GraphicManager.getWorld().createBody(bd);
