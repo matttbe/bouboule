@@ -8,7 +8,7 @@
  *    Matthieu Baerts <matthieu.baerts@student.uclouvain.be>
  *    Baptiste Remy <baptiste.remy@student.uclouvain.be>
  *    Nicolas Van Wallendael <nicolas.vanwallendael@student.uclouvain.be>
- *    Hélène Verhaeghe <helene.verhaeghe@student.uclouvain.be>
+ *    Helene Verhaeghe <helene.verhaeghe@student.uclouvain.be>
  * 
  * Bouboule is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,37 +40,72 @@ public class GraphicManager {
 	static final float GAME_TO_WORLD=100.0f;
 	static final float WORLD_TO_GAME=0.01f;
 	
+	//Store all the body of the game
 	public ArrayList<GameBody> bodies;
 	
 	boolean isPaused;
 	
-	
+	/*
+	 * Create the world, the body container and define the game as notPaused
+	 * 
+	 * GraphicManager
+	 */
 	public GraphicManager(){
 		world=new World(new Vector2(0,0), true);
 		bodies=new ArrayList<GameBody>();
 		isPaused=false;
 	}
 	
+	/*
+	 * Return the world
+	 * 
+	 * World getWorld()
+	 */
 	public static World getWorld(){
 		return world;
 	}
 
-	public static float convertToBox(float x){
+	/*
+	 * Static function that convert the value to the game reality (for distances)
+	 * 
+	 * convertToGame(float x)
+	 */
+	public static float convertToGame(float x){
 		return x*WORLD_TO_GAME;
 	}
 	
+	/*
+	 * Static function that convert the value to the world reality (for distances) 
+	 * 
+	 * convertToWorld(float x)
+	 */
 	public static float convertToWorld(float x){
 		return x*GAME_TO_WORLD;
 	}
 	
+	/*
+	 * Set up the pause definition to true
+	 * 
+	 * pause()
+	 */
 	public void pause(){
 		isPaused=true;
 	}
 	
+	/*
+	 * Set up the pause definition to false
+	 * 
+	 * resume()
+	 */
 	public void resume(){
 		isPaused=false;
 	}
 	
+	/*
+	 * Remove all the stored bodies and delete the container
+	 * 
+	 * dispose()
+	 */
 	public void dispose(){
 		for(GameBody body:bodies){
 			body.DestroyBody();
@@ -78,10 +113,24 @@ public class GraphicManager {
 		bodies.clear();
 	}
 	
+	
+	/*
+	 * Add the specified body to the graphical container to be used
+	 * in the generated world
+	 * 
+	 * addBody(GameBody body)
+	 */
 	public void addBody(GameBody body){
 		bodies.add(body);
 	}
 	
+	
+	/*
+	 * Update all the bodies definition after a timeStep of the world of dt 
+	 * (the timeStep is done in the function)
+	 * 
+	 * update(float dt)
+	 */
 	public void update(float dt){
 		for(GameBody body:bodies){
 			
@@ -90,6 +139,12 @@ public class GraphicManager {
 		}
 	}
 	
+	
+	/*
+	 * Draw all the bodies definition
+	 * 
+	 * draw(SpriteBatch batch)
+	 */
 	public void draw(SpriteBatch batch){
 		for(GameBody body:bodies){
 			body.draw(batch);

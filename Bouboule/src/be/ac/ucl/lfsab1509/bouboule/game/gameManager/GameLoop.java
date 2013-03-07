@@ -35,7 +35,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -55,30 +54,42 @@ public class GameLoop {
 	
 	Bouboule		 	bouboule;
 	Bouboule		 	bouboule2;
-	TextureRegion 		boubouleImg;
 	Texture				bottleImg;		
 	
+	//TODO: tempory object ( need to be removed after update)
 	private Body bottleModel;
     Texture bottleTexture;
 	
-	//Texture 			arenaImg;
 	
-	
-	public GameLoop(OrthographicCamera cam){
+	/*
+	 * Launch the creation of the batch thanks to the camera.
+	 * if debug == true, set up the debugger matrix
+	 * 
+	 * GameLoop(OrthographicCamera cam, boolean debug)
+	 */
+	public GameLoop(OrthographicCamera cam, boolean debug){
 
+		//creation of the batch and matrix (physical edges of the bodies) debugger
 		batch 			= new SpriteBatch();
 		batch.setProjectionMatrix(cam.combined);
-		
-		debugMatrix		= new Matrix4(cam.combined);
-		debugMatrix.scale(GraphicManager.GAME_TO_WORLD, GraphicManager.GAME_TO_WORLD, 1f);
 
-		debugRenderer	= new Box2DDebugRenderer();
+		if ( debug ){
+			debugMatrix		= new Matrix4(cam.combined);
+			debugMatrix.scale(GraphicManager.GAME_TO_WORLD, GraphicManager.GAME_TO_WORLD, 1f);
+
+			debugRenderer	= new Box2DDebugRenderer();
+		}
 		
 		graphicManager = new GraphicManager();
 		
 		init();
 	}
 	
+	/*
+	 * Initialise all the object needed 
+	 * 
+	 * init()
+	 */
 	private void init() {
 		
 		initArena();
@@ -87,24 +98,34 @@ public class GameLoop {
 		
 	}
 
-	
+	/*
+	 * Non generic implementation to create a Bouboule thanks to the .json 
+	 * stored in jsonFile/boub.json with the code name boub and the texture 
+	 * image, images/boub.png, on position 400/1000
+	 * 
+	 * initBall()
+	 */
 	private void initBall() {
-		
-		boubouleImg = new TextureRegion( new Texture(Gdx.files.internal("images/boub2.png")));
-		
 				
-		int gRadius		= 50;
 		int gPositionX	= 400;
 		int gPositionY	= 1000;
 		
-		bouboule = new Bouboule(gRadius, BodyType.DynamicBody,
-				1, 0.8f, gPositionX, gPositionY, 0, boubouleImg);
+		bouboule = new Bouboule(0, BodyType.DynamicBody,
+				10, 0.8f, gPositionX, gPositionY, 0, "images/boub.png", "data/jsonFile/boub.json", "boub");
 		
-		//ball.SetTextureDimension(TextureDimensions.BALL_WIDTH, TextureDimensions.BALL_HEIGHT);
+
+		//Add the new object to the graphic and physic manager
 		graphicManager.addBody(bouboule);
 		
 	}
 	
+	/*
+	 * Non generic implementation to create an Arena thanks to the .json file 
+	 * ...
+	 * ...
+	 * 
+	 * initArena()
+	 */
 	private void initArena() {
 		
 		// 0. Create a loader for the file saved from the editor.
@@ -113,7 +134,7 @@ public class GameLoop {
 		// 1. Create a BodyDef, as usual.
 		BodyDef bd = new BodyDef();
 		bd.type = BodyType.StaticBody;
-		bd.position.set(GraphicManager.convertToBox(400), 0);
+		bd.position.set(GraphicManager.convertToGame(400), 0);
 
 		// 2. Create a FixtureDef, as usual.
 		FixtureDef fd = new FixtureDef();
@@ -125,7 +146,7 @@ public class GameLoop {
 		bottleModel = GraphicManager.getWorld().createBody(bd);
 
 		// 4. Create the body fixture automatically by using the loader.
-		loader.attachFixture(bottleModel, "bottle", fd, 8);
+		loader.attachFixture(bottleModel, "bottle", fd, 18);
 		//bottleModelOrigin = loader.getOrigin("test01", 8).cpy();
 		
         bottleImg = new Texture(Gdx.files.internal("data/gfx/bottle.png"));
@@ -133,25 +154,33 @@ public class GameLoop {
 
 	}
 
+	/*
+	 * Non generic implementation to create a Bouboule thanks to the .json 
+	 * stored in jsonFile/boub.json with the code name boub and the texture 
+	 * image, images/boub.png, on position 400/350
+	 * 
+	 * initBall()
+	 */
 	private void initBall2() {
 		
-		boubouleImg = new TextureRegion( new Texture(Gdx.files.internal("images/boub2.png")));
-		
-				
-		int gRadius		= 50;
 		int gPositionX	= 400;
 		int gPositionY	= 350;
 		
-		bouboule2 = new Bouboule(gRadius, BodyType.DynamicBody,
-				1, 0.9f, gPositionX, gPositionY, 0, boubouleImg);
+		bouboule2 = new Bouboule(0, BodyType.DynamicBody,
+				1, 0.9f, gPositionX, gPositionY, 0, 
+				"images/boub.png","data/jsonFile/boub.json", "boub");
 		
-		//ball.SetTextureDimension(TextureDimensions.BALL_WIDTH, TextureDimensions.BALL_HEIGHT);
 		graphicManager.addBody(bouboule2);
 		
 	}
 	
 	
-	
+	/*
+	 * Update the ball position thanks to the accelerometer and
+	 * launch the physical update function of dt the time between 2 frames
+	 * 
+	 * update(float dt)
+	 */
 	public void update(float dt) {
 		
 		float accelX = Gdx.input.getAccelerometerX();
@@ -159,36 +188,49 @@ public class GameLoop {
 		//float accelZ = Gdx.input.getAccelerometerZ();
 		
 		
-		//bouboule.body.applyForceToCenter(new Vector2(0,-1));
+		bouboule.body.applyForceToCenter(new Vector2(0,-1));
 		bouboule2.body.applyForceToCenter(new Vector2(-accelX*0.3f,-accelY*0.3f));
 		
 		graphicManager.update(dt);
 	}
 	
+	/*
+	 * Draw all the needed bodies of the game
+	 * 
+	 * render()
+	 */
 	public void render() {
 
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
 		
+
 		batch.disableBlending();
-		//arena.Draw(batch);
-		
+		//Allow to draw the background fast because it disable the color blending (override the background).
 		batch.enableBlending();
-		graphicManager.draw(batch);
-		//batch.draw(bottleImg, bottleModel.getPosition().x, bottleModel.getPosition().y);
 		
+		graphicManager.draw(batch);
+		
+		//Draw all the know bodies
+		batch.draw(bottleImg, bottleModel.getPosition().x, bottleModel.getPosition().y);
 		
 		batch.end();
 		
+		//Draw the debugging matrix
 		batch.begin();
 		debugRenderer.render(GraphicManager.getWorld(), debugMatrix);
 		batch.end();
 	}
 	
 
+	/*
+	 * Remove all the memory used object 
+	 *
+	 * dispose()
+	 */
 	public void dispose() {
-		// TODO Auto-generated method stub
+		//Remove the memory of the managed object and the debug matrix
 		debugRenderer.dispose();
 		graphicManager.dispose();
 	}

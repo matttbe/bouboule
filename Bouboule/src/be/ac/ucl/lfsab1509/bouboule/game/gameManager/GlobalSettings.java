@@ -8,7 +8,7 @@
  *    Matthieu Baerts <matthieu.baerts@student.uclouvain.be>
  *    Baptiste Remy <baptiste.remy@student.uclouvain.be>
  *    Nicolas Van Wallendael <nicolas.vanwallendael@student.uclouvain.be>
- *    Hélène Verhaeghe <helene.verhaeghe@student.uclouvain.be>
+ *    Helene Verhaeghe <helene.verhaeghe@student.uclouvain.be>
  * 
  * Bouboule is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,6 +28,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 public class GlobalSettings {
 	
+	//Definition for the time step properties
 	public static final float BOX_STEP=1/60f;
 	public static final int VELOCITY_ITERATIONS=8;
 	public static final int POSITION_ITERATIONS=3;

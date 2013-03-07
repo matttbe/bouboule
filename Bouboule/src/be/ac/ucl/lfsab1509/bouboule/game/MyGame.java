@@ -53,12 +53,8 @@ public class MyGame implements ApplicationListener {
 
 		camera=CameraHelper.GetCamera(appWidth,appHeigth);
 
-		game = new GameLoop(camera);
+		game = new GameLoop(camera, true);
 		
-
-
-
-
 	}
 
 
@@ -70,13 +66,8 @@ public class MyGame implements ApplicationListener {
 
 		game.update(dt);
 		game.render();
-		
-
 
 	}
-
-
-
 
 	@Override
 	public void dispose() {
