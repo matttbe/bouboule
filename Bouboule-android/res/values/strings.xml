@@ -6,6 +6,10 @@
     <string name="Parameters">PARAMETERS</string>
     <string name="HighScore">HIGHSCORE</string>
     <string name="dynamicName">BOUBOULE</string>
+    
+    <!-- Menu Pause -->
+    <string name="Pause_continue">Continue</string>
+    <string name="Pause_stop">Stop</string>
 
 </resources>
 
