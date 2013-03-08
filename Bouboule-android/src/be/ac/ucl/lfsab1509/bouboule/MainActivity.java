@@ -53,7 +53,9 @@ public class MainActivity extends AndroidApplication
 		cfg.useGL20 = true;
 		cfg.useAccelerometer = true;
 		cfg.useCompass = false;
-
+		// cfg.useWakelock = true; // to not lock the screen // CRASH!!
+		getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON); // to not lock the screen
+	
 		game = new Game ();
 		initialize (game, cfg);
 	}
