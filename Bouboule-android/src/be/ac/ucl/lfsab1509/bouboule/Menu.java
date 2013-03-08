@@ -181,6 +181,7 @@ public class Menu extends Activity {
 					
 					break;
 			}
+			finish ();
 
 			return false;
 		} 

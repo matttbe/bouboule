@@ -27,16 +27,20 @@
 package be.ac.ucl.lfsab1509.bouboule;
 
 import android.os.Bundle;
+import android.view.WindowManager.LayoutParams;
 import be.ac.ucl.lfsab1509.bouboule.game.*;
 import android.content.Intent;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
 public class MainActivity extends AndroidApplication
 {
 	private Game game;
+	
 	private static final int CODE_PAUSE_ACTIVITY = 1;
+
 
 	@Override
 	public void onCreate (Bundle savedInstanceState)
@@ -58,22 +62,31 @@ public class MainActivity extends AndroidApplication
 	public void onBackPressed ()
 	{
 		game.pause ();
-		Intent intent = new Intent(MainActivity.this, MenuPause.class);
-		startActivityForResult(intent,CODE_PAUSE_ACTIVITY);
+		Intent intent = new Intent (MainActivity.this, MenuPause.class);
+		startActivityForResult (intent, CODE_PAUSE_ACTIVITY);
 		// TODO Menu
 	}
+
 	@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-		switch(requestCode){
-	    	case CODE_PAUSE_ACTIVITY: // menu pause
-	    		switch(resultCode){
-		    	case 1: // cas ou on continue
-		    		game.resume ();
-		    		return;
-		    	case 2: // cas ou on stoppe
-		    		finish();
-		    		return;
-	    	}
+	protected void onActivityResult (int requestCode, int resultCode,
+			Intent data)
+	{
+		Gdx.app.log ("Matth", "onActivityResult (" + requestCode + ", " + resultCode + ")");
+		switch (requestCode)
+		{
+			case CODE_PAUSE_ACTIVITY: // menu pause
+				switch (resultCode) // it's the id of the button
+				{
+					case R.id.PauseContinueButton: // cas ou on continue
+						game.resume ();
+						return;
+					case R.id.PauseMenuButton: // cas ou on stoppe
+						Intent intent = new Intent(MainActivity.this, Menu.class);
+						startActivity(intent);
+					// case R.id.PauseQuitButton: // just quit without new activity => quit
+				}
 		}
+		finish ();
+		return;
 	}
 }

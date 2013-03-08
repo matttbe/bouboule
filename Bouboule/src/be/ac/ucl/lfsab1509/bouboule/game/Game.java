@@ -158,12 +158,14 @@ public class Game implements ApplicationListener {
 	{
 		// TODO: stop la mainloop
 		bStop = true;
+		Gdx.app.log ("Matth", "pause...");
 	}
 
 	@Override
 	public void resume ()
 	{
-		// TODO reenable loop
+		// TODO reenable loop => add delay
 		bStop = false;
+		Gdx.app.log ("Matth", "resume...");
 	}
 }

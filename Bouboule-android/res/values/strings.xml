@@ -8,8 +8,10 @@
     <string name="dynamicName">BOUBOULE</string>
     
     <!-- Menu Pause -->
-    <string name="Pause_continue">Continue</string>
-    <string name="Pause_stop">Stop</string>
+    <string name="Pause_continue">Continue</string><string name="Menu">Menu</string>
+    
+    <string name="Quit">Quit</string>
+    <string name="Pause">Pause</string>
 
 </resources>
 
