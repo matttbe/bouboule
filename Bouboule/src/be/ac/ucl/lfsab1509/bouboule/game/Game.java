@@ -48,11 +48,12 @@ public class Game implements ApplicationListener {
 	SpriteBatch             		batch;
 	OrthographicCamera      		camera;
 	Intersector						intersector;
+	
+	private boolean bStop = false;
 
 
 	@Override
 	public void create() {
-
 		intersector = new Intersector();
 		
 		boubouleImg = new Texture(Gdx.files.internal("images/boub.png"));
@@ -82,6 +83,8 @@ public class Game implements ApplicationListener {
 	@Override
 	public void render() {
 
+		if (bStop)
+			return;
 		// clear the screen with a dark blue color. The
 		// arguments to glClearColor are the red, green
 		// blue and alpha component in the range [0,1]
@@ -146,16 +149,21 @@ public class Game implements ApplicationListener {
 	}
 
 	@Override
-	public void resize(int width, int height) {
+	public void resize (int width, int height)
+	{
 	}
 
 	@Override
 	public void pause()
 	{
-		
+		// TODO: stop la mainloop
+		bStop = true;
 	}
 
 	@Override
-	public void resume() {
+	public void resume ()
+	{
+		// TODO reenable loop
+		bStop = false;
 	}
 }
