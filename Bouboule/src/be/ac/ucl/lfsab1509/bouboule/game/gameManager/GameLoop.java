@@ -143,6 +143,7 @@ public class GameLoop {
 		fd.density = 1;
 		fd.friction = 0.5f;
 		fd.restitution = 0.3f;
+		fd.filter.categoryBits = GlobalSettings.CATEGORY_SCENERY;
 		fd.filter.maskBits = GlobalSettings.MASK_SCENERY;
 
 		// 3. Create a Body, as usual.
