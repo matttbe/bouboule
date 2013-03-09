@@ -185,19 +185,19 @@ public abstract class GameBody {
 		fixtureDef.restitution	= elasticity;
 
 		//Definition that remove contact with the background
-		if(elasticity == 0.9f){
-			fixtureDef.filter.categoryBits = GlobalSettings.CATEGORY_PLAYER;
-			fixtureDef.filter.maskBits = GlobalSettings.MASK_PLAYER;
-		}else{ 
-			fixtureDef.filter.categoryBits = GlobalSettings.CATEGORY_MONSTER;
-			fixtureDef.filter.maskBits = GlobalSettings.MASK_MONSTER;
-		}
+//		if(elasticity == 0.9f){
+//			fixtureDef.filter.categoryBits = GlobalSettings.CATEGORY_PLAYER;
+//			fixtureDef.filter.maskBits = GlobalSettings.MASK_PLAYER;
+//		}else{ 
+//			fixtureDef.filter.categoryBits = GlobalSettings.CATEGORY_MONSTER;
+//			fixtureDef.filter.maskBits = GlobalSettings.MASK_MONSTER;
+//		}
 
-			//Load the json Loader
-			BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(jsonFile));
+		//Load the json Loader
+		BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(jsonFile));
 
-			loader.attachFixture(body, jsonName, fixtureDef, size);
-			origin = loader.getOrigin(jsonName, size).cpy();
+		loader.attachFixture(body, jsonName, fixtureDef, size);
+		origin = loader.getOrigin(jsonName, size).cpy();
 
 		}
 
