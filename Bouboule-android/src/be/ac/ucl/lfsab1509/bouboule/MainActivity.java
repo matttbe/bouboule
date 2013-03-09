@@ -28,8 +28,8 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import android.os.Bundle;
 import android.view.WindowManager.LayoutParams;
-import be.ac.ucl.lfsab1509.bouboule.game.*;
 import android.content.Intent;
+import be.ac.ucl.lfsab1509.bouboule.game.Game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -66,7 +66,6 @@ public class MainActivity extends AndroidApplication
 		game.pause ();
 		Intent intent = new Intent (MainActivity.this, MenuPause.class);
 		startActivityForResult (intent, CODE_PAUSE_ACTIVITY);
-		// TODO Menu
 	}
 
 	@Override
@@ -85,10 +84,12 @@ public class MainActivity extends AndroidApplication
 					case R.id.PauseMenuButton: // cas ou on stoppe
 						Intent intent = new Intent(MainActivity.this, Menu.class);
 						startActivity(intent);
-					// case R.id.PauseQuitButton: // just quit without new activity => quit
+						finish ();
+					case R.id.PauseQuitButton: // just quit without new activity => quit
+						finish ();
+						exit ();
 				}
 		}
-		finish ();
 		return;
 	}
 }

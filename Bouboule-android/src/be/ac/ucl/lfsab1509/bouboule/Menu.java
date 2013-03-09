@@ -161,12 +161,15 @@ public class Menu extends Activity {
 		@Override
 		public boolean onTouch(View view, MotionEvent motionEvent) {
 
+			mHandler.removeCallbacks (animationUpdate);
+			mHandler.removeCallbacks (nameUpdate);
+
 			switch (view.getId() ){
 			
 				case R.id.PlayButton :
 					Intent intent = new Intent(Menu.this, MainActivity.class);
 					startActivity(intent);
-					
+					Log.d ("Matth", "Launched game");
 					break;
 					
 				case R.id.ParameterButton :
