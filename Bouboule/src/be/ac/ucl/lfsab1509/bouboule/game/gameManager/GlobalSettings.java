@@ -49,6 +49,8 @@ public class GlobalSettings {
 	public static final short PLAYER 	=  1;
 	public static final short MONSTER 	= -1;
  	public static final short SCENERY 	=  0;
+ 	
+ 	public static short		 GAME_EXIT	=  0;
 	
 	
 }

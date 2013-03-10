@@ -1,5 +1,6 @@
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -7,14 +8,37 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 
+
 /*
  * Listener for detecting the end of the game.
  */
 public class EndGameListener implements ContactListener{
 
+	boolean isAlivePlayer 	= true;
+	boolean isAliveMonster	= true;
+	
 	@Override
 	public void beginContact(Contact contact) {
-		// TODO Auto-generated method stub
+		short Entity1 = (Short) contact.getFixtureA().getBody().getUserData();
+		short Entity2 = (Short) contact.getFixtureB().getBody().getUserData();
+
+
+		if (Entity1 == GlobalSettings.SCENERY |
+				Entity2 == GlobalSettings.SCENERY){
+			
+			if ( Entity1 == GlobalSettings.PLAYER |
+					Entity2 == GlobalSettings.PLAYER){
+
+				isAlivePlayer = !isAlivePlayer;
+
+
+			} else {
+
+				
+				isAliveMonster = !isAliveMonster;
+
+			}
+		}
 
 	}
 
@@ -31,30 +55,49 @@ public class EndGameListener implements ContactListener{
 			
 			if ( Entity1 == GlobalSettings.PLAYER |
 					Entity2 == GlobalSettings.PLAYER){
+				
+				if(isAlivePlayer){
 
-				Gdx.app.log("KILL", "Bouboule est mort =/");
+					Gdx.app.log("Alive", "Bouboule est VIVANT =)");
+					//DO NOTHING =)
+					isAlivePlayer = !isAlivePlayer;
+				} else {
+					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
+					Gdx.app.log("KILL", "Bouboule est MORT =/");
+					
+					GlobalSettings.GAME_EXIT = -1;
+					
+					Gdx.app.exit();
+				}
 
 
-				//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 			} else {
 
-				Gdx.app.log("KILL", "Bouboule a gagné =P");
+				if(isAliveMonster){
 
-				//TODO : END GAME BECAUSE WE HAVE A LOOSER.
+					Gdx.app.log("Alive", "MONSTER est VIVANT =)");
+					//DO NOTHING
+					isAliveMonster = !isAliveMonster;
+				} else {
+					
+					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
+					Gdx.app.log("KILL", "Bouboule a gagné =P");
+					GlobalSettings.GAME_EXIT = 1;
+					
+					Gdx.app.exit();
+				}
+				
 			}
 		}
 	}
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 

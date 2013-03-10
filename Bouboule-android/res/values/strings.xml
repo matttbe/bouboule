@@ -6,6 +6,10 @@
     <string name="Parameters">PARAMETERS</string>
     <string name="HighScore">HIGHSCORE</string>
     <string name="dynamicName">BOUBOULE</string>
+    <string name="title_activity_end_game">EndGameActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_victory">VictoryActivity</string>
+    <string name="title_activity_loosing">LoosingActivity</string>
 
 </resources>
-

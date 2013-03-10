@@ -27,38 +27,75 @@
 package be.ac.ucl.lfsab1509.bouboule;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 import be.ac.ucl.lfsab1509.bouboule.game.*;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
 public class MainActivity extends AndroidApplication {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
-        //cfg.useGL20 = false; 
-        
-        cfg.useGL20 = true;
-        cfg.useAccelerometer = true;
-        cfg.useCompass = false;
-        
-        initialize(new MyGame(), cfg);
-    }
-    
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
+		//cfg.useGL20 = false; 
+
+		cfg.useGL20 = true;
+		cfg.useAccelerometer = true;
+		cfg.useCompass = false;
+
+		initialize(new MyGame(), cfg);
+	}
+
 	@Override
 	public void onBackPressed() {
-	   Log.d("CDA", "onBackPressed Called");
-	   
-	   Context context = getApplicationContext();
+		Log.d("CDA", "onBackPressed Called");
+
+		Context context = getApplicationContext();
 		CharSequence text = "Return Pressed !\n Pause must be ENABLE !";
 		int duration = Toast.LENGTH_SHORT;
 
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.show();
+
 	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+
+		if ( GlobalSettings.GAME_EXIT != 0 ){
+
+			Context context = getApplicationContext();
+			CharSequence text = "Game Exit with number : "+GlobalSettings.GAME_EXIT;
+			int duration = Toast.LENGTH_SHORT;
+
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
+			
+			
+			if ( GlobalSettings.GAME_EXIT == 1){
+				
+				Intent intent = new Intent(this, VictoryActivity.class);
+				startActivity(intent);
+				
+			} else if (GlobalSettings.GAME_EXIT == -1) {
+				
+				Intent intent = new Intent(this, LoosingActivity.class);
+				startActivity(intent);
+				
+			}
+				
+			
+		}
+
+	}
+
+
 }

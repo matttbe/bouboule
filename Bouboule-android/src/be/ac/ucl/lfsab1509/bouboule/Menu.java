@@ -164,7 +164,7 @@ public class Menu extends Activity {
 			switch (view.getId() ){
 			
 				case R.id.PlayButton :
-					Intent intent = new Intent(Menu.this, MainActivity.class);
+					Intent intent = new Intent(Menu.this, MainActivity.class);//MainActivity.class);
 					startActivity(intent);
 					
 					break;

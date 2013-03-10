@@ -80,6 +80,7 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void pause() {
+
 	}
 
 	@Override

@@ -102,7 +102,7 @@ public class GameLoop {
 	private void initBall() {
 				
 		int gPositionX	= 400;
-		int gPositionY	= 1000;
+		int gPositionY	= 800;
 		
 		bouboule = new Bouboule(0, BodyType.DynamicBody,
 				10, 0.8f, gPositionX, gPositionY, 0,
@@ -134,36 +134,6 @@ public class GameLoop {
 
 		//Add the new object to the graphic and physic manager
 		graphicManager.addBody(arena);
-		
-		/*
-		// 0. Create a loader for the file saved from the editor.
-		BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("data/test.json"));
-
-		// 1. Create a BodyDef, as usual.
-		BodyDef bd = new BodyDef();
-		bd.type = BodyType.StaticBody;
-		bd.position.set(GraphicManager.convertToGame(400), 0);
-
-		// 2. Create a FixtureDef, as usual.
-		FixtureDef fd = new FixtureDef();
-		fd.density = 1;
-		fd.friction = 0.5f;
-		//fd.restitution = 0.3f;
-		//fd.filter.categoryBits = GlobalSettings.CATEGORY_SCENERY;
-		//fd.filter.maskBits = GlobalSettings.MASK_SCENERY;
-		
-		fd.isSensor=true;
-
-		// 3. Create a Body, as usual.
-		bottleModel = GraphicManager.getWorld().createBody(bd);
-		bottleModel.setUserData(GlobalSettings.SCENERY);
-
-		// 4. Create the body fixture automatically by using the loader.
-		loader.attachFixture(bottleModel, "bottle", fd, 18);
-		//bottleModelOrigin = loader.getOrigin("test01", 8).cpy();
-		
-        bottleImg = new Texture(Gdx.files.internal("data/gfx/bottle.png"));
-		*/
 
 	}
 
