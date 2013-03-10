@@ -27,6 +27,7 @@
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 
+import be.ac.ucl.lfsab1509.bouboule.game.body.Arena;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.physicEditor.BodyEditorLoader;
 
@@ -54,6 +55,7 @@ public class GameLoop {
 	
 	Bouboule		 	bouboule;
 	Bouboule		 	bouboule2;
+	Arena				arena;
 	Texture				bottleImg;		
 	
 	//TODO: tempory object ( need to be removed after update)
@@ -130,6 +132,18 @@ public class GameLoop {
 	 */
 	private void initArena() {
 		
+		int gPositionX	= 400;
+		int gPositionY	= 0;
+		
+		arena = new Arena(500, gPositionX, gPositionY, 0,
+				"data/gfx/bottle.png", "data/test.json", "bottle",
+				GlobalSettings.SCENERY);
+		
+
+		//Add the new object to the graphic and physic manager
+		graphicManager.addBody(arena);
+		
+		/*
 		// 0. Create a loader for the file saved from the editor.
 		BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("data/test.json"));
 
@@ -142,7 +156,7 @@ public class GameLoop {
 		FixtureDef fd = new FixtureDef();
 		fd.density = 1;
 		fd.friction = 0.5f;
-		fd.restitution = 0.3f;
+		//fd.restitution = 0.3f;
 		//fd.filter.categoryBits = GlobalSettings.CATEGORY_SCENERY;
 		//fd.filter.maskBits = GlobalSettings.MASK_SCENERY;
 		
@@ -157,7 +171,7 @@ public class GameLoop {
 		//bottleModelOrigin = loader.getOrigin("test01", 8).cpy();
 		
         bottleImg = new Texture(Gdx.files.internal("data/gfx/bottle.png"));
-
+		*/
 
 	}
 
@@ -221,7 +235,7 @@ public class GameLoop {
 		graphicManager.draw(batch);
 		
 		//Draw all the know bodies
-		batch.draw(bottleImg, bottleModel.getPosition().x, bottleModel.getPosition().y);
+		//batch.draw(bottleImg, bottleModel.getPosition().x, bottleModel.getPosition().y);
 		
 		batch.end();
 		

@@ -82,7 +82,7 @@ public abstract class GameBody {
 	 * public void MakeBody(
 	 */
 	public void MakeBody(float width, float height,float radius,BodyDef.BodyType bodyType,
-			float density,float elasticity, Vector2 pos,float angle, String jsonFile, String jsonName, float size){
+			float density,float elasticity,boolean sensor, Vector2 pos,float angle, String jsonFile, String jsonName, float size){
 
 		World world = GraphicManager.getWorld();
 
@@ -101,15 +101,15 @@ public abstract class GameBody {
 		if (jsonFile == ""){
 			if(radius==0)
 			{
-				makeRectBody(width,height,bodyType,density,elasticity,pos,angle);
+				makeRectBody(width,height,bodyType,density,elasticity,sensor,pos,angle);
 
 			}else{
-				makeCircleBody(radius,bodyType,density,elasticity,pos,angle);
+				makeCircleBody(radius,bodyType,density,elasticity,sensor,pos,angle);
 			}
 
 		} else {
 
-			makeJsonBody(bodyType,density,elasticity,pos,angle,jsonFile, jsonName, size);
+			makeJsonBody(bodyType,density,elasticity,sensor,pos,angle,jsonFile, jsonName, size);
 		}
 
 
@@ -137,7 +137,7 @@ public abstract class GameBody {
 	 * 	float density,float elasticity, Vector2 pos,float angle)
 	 */
 	void makeRectBody(float width,float height,BodyDef.BodyType bodyType,
-			float density,float elasticity, Vector2 pos,float angle){
+			float density,float elasticity,boolean sensor, Vector2 pos,float angle){
 
 
 		/** IN case of future need**/
@@ -152,12 +152,13 @@ public abstract class GameBody {
 	 * 	float density,float elasticity, Vector2 pos,float angle)
 	 */
 	void makeCircleBody(float radius,BodyDef.BodyType bodyType,
-			float density,float elasticity, Vector2 pos,float angle){
+			float density,float elasticity,boolean sensor, Vector2 pos,float angle){
 
 		//Basoic Object definition for Physics
 		FixtureDef fixtureDef	= new FixtureDef();
 		fixtureDef.density		= density;
 		fixtureDef.restitution	= elasticity;
+		fixtureDef.isSensor     = sensor;
 		//fixtureDef.friction 	= 0.5f;
 		fixtureDef.shape		= new CircleShape();
 
@@ -176,21 +177,22 @@ public abstract class GameBody {
 	 * 	float elasticity, Vector2 pos,float angle, String jsonFile, String jsonName, float size)
 	 */
 	void makeJsonBody(BodyDef.BodyType bodyType, float density,
-			float elasticity, Vector2 pos,float angle, String jsonFile, String jsonName, float size){
+			float elasticity,boolean sensor, Vector2 pos,float angle, String jsonFile, String jsonName, float size){
 
 		//Basoic Object definition for Physics
 		FixtureDef fixtureDef	= new FixtureDef();
 		fixtureDef.density		= density;
 		fixtureDef.restitution	= elasticity;
+		fixtureDef.isSensor		= sensor;
 
 		//Definition that remove contact with the background
-//		if(elasticity == 0.9f){
-//			fixtureDef.filter.categoryBits = GlobalSettings.CATEGORY_PLAYER;
-//			fixtureDef.filter.maskBits = GlobalSettings.MASK_PLAYER;
-//		}else{ 
-//			fixtureDef.filter.categoryBits = GlobalSettings.CATEGORY_MONSTER;
-//			fixtureDef.filter.maskBits = GlobalSettings.MASK_MONSTER;
-//		}
+		//		if(elasticity == 0.9f){
+		//			fixtureDef.filter.categoryBits = GlobalSettings.CATEGORY_PLAYER;
+		//			fixtureDef.filter.maskBits = GlobalSettings.MASK_PLAYER;
+		//		}else{ 
+		//			fixtureDef.filter.categoryBits = GlobalSettings.CATEGORY_MONSTER;
+		//			fixtureDef.filter.maskBits = GlobalSettings.MASK_MONSTER;
+		//		}
 
 		//Load the json Loader
 		BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(jsonFile));
@@ -198,80 +200,80 @@ public abstract class GameBody {
 		loader.attachFixture(body, jsonName, fixtureDef, size);
 		origin = loader.getOrigin(jsonName, size).cpy();
 
-		}
-
-		/*
-		 * Destroy the body if needed
-		 * 
-		 * DestroyBody()
-		 */
-		public void DestroyBody(){
-
-			if(body!=null)
-			{
-				isAlive=false;
-				GraphicManager.getWorld().destroyBody(body);
-				body=null;
-			}
-		}
-
-		/*
-		 * Update the vector position of the object by getting the world status
-		 * 
-		 * updatePositionVector()
-		 */
-		public void updatePositionVector(){
-
-			//Gdx.app.log ("updatePositionVector", positionVector.x + " " +positionVector.y );
-
-			positionVector.set(GraphicManager.convertToWorld(body.getPosition().x),
-					GraphicManager.convertToWorld(body.getPosition().y));	
-		}
-
-		/*
-		 * Set the body to a specific position but don't change the angle 
-		 * with a x/y coordinate
-		 * 
-		 * SetPosition(float px,float py)
-		 */
-		public void SetPosition(float px,float py){
-
-			//Adimentionalision
-			px=GraphicManager.convertToGame(px);
-			py=GraphicManager.convertToGame(py);
-
-			body.setTransform(px, py, body.getAngle());
-			updatePositionVector();
-		}
-
-		/*
-		 * Set the body to a specific position but don't change the angle 
-		 * with a position coordinate
-		 * 
-		 * SetPosition(Vector2 v)
-		 */
-		public void SetPosition(Vector2 v){
-			SetPosition(v.x, v.y);
-		}
-
-		/*
-		 * Launch the specific draw of the object
-		 * 
-		 * draw(SpriteBatch batch)
-		 */
-		public abstract void draw(SpriteBatch batch);
-
-
-		/*
-		 * Update in dt time of the vectorPosition after a world frame
-		 * 
-		 * update(float dt)
-		 */
-		public void update(float dt){ 
-
-			//Gdx.app.log ("GameBody", "updatePositionVector");
-
-			updatePositionVector();
-		}
-
 	}
+
+	/*
+	 * Destroy the body if needed
+	 * 
+	 * DestroyBody()
+	 */
+	public void DestroyBody(){
+
+		if(body!=null)
+		{
+			isAlive=false;
+			GraphicManager.getWorld().destroyBody(body);
+			body=null;
+		}
+	}
+
+	/*
+	 * Update the vector position of the object by getting the world status
+	 * 
+	 * updatePositionVector()
+	 */
+	public void updatePositionVector(){
+
+		//Gdx.app.log ("updatePositionVector", positionVector.x + " " +positionVector.y );
+
+		positionVector.set(GraphicManager.convertToWorld(body.getPosition().x),
+				GraphicManager.convertToWorld(body.getPosition().y));	
+	}
+
+	/*
+	 * Set the body to a specific position but don't change the angle 
+	 * with a x/y coordinate
+	 * 
+	 * SetPosition(float px,float py)
+	 */
+	public void SetPosition(float px,float py){
+
+		//Adimentionalision
+		px=GraphicManager.convertToGame(px);
+		py=GraphicManager.convertToGame(py);
+
+		body.setTransform(px, py, body.getAngle());
+		updatePositionVector();
+	}
+
+	/*
+	 * Set the body to a specific position but don't change the angle 
+	 * with a position coordinate
+	 * 
+	 * SetPosition(Vector2 v)
+	 */
+	public void SetPosition(Vector2 v){
+		SetPosition(v.x, v.y);
+	}
+
+	/*
+	 * Launch the specific draw of the object
+	 * 
+	 * draw(SpriteBatch batch)
+	 */
+	public abstract void draw(SpriteBatch batch);
+
+
+	/*
+	 * Update in dt time of the vectorPosition after a world frame
+	 * 
+	 * update(float dt)
+	 */
+	public void update(float dt){ 
+
+		//Gdx.app.log ("GameBody", "updatePositionVector");
+
+		updatePositionVector();
+	}
+
+}

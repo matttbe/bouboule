@@ -74,7 +74,7 @@ public class Bouboule extends GameBody{
 
 		this.sprite = new Sprite(texture);
 
-		MakeBody(0, 0, radius, bodyType, density, elasticity, pos, angle, jsonFile, jsonName,
+		MakeBody(0, 0, radius, bodyType, density, elasticity, false, pos, angle, jsonFile, jsonName,
 				GraphicManager.convertToGame(texture.getRegionWidth()));
 
 		//Ensure that the object don't rotate.
