@@ -29,7 +29,6 @@ package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 import be.ac.ucl.lfsab1509.bouboule.game.body.Arena;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
-import be.ac.ucl.lfsab1509.bouboule.game.physicEditor.BodyEditorLoader;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -38,11 +37,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 
 public class GameLoop {
@@ -57,10 +53,6 @@ public class GameLoop {
 	Bouboule		 	bouboule2;
 	Arena				arena;
 	Texture				bottleImg;		
-	
-	//TODO: tempory object ( need to be removed after update)
-	private Body bottleModel;
-    Texture bottleTexture;
 	
 	
 	/*
@@ -232,11 +224,10 @@ public class GameLoop {
 		//Allow to draw the background fast because it disable the color blending (override the background).
 		batch.enableBlending();
 		
-		graphicManager.draw(batch);
-		
 		//Draw all the know bodies
-		//batch.draw(bottleImg, bottleModel.getPosition().x, bottleModel.getPosition().y);
-		
+
+		graphicManager.draw(batch);
+				
 		batch.end();
 		
 		//Draw the debugging matrix

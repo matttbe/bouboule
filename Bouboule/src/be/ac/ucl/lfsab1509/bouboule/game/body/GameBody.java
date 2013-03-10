@@ -72,6 +72,7 @@ public abstract class GameBody {
 	 * - bodyType	: Static or Dynamic
 	 * - density	: Mass in [kg] of the body
 	 * - elasticity	: define the elastical property of Bouboul [0..1]f
+	 * - sensor		: true/false
 	 * - pos		: initial position
 	 * - angle		: initial rotated angle
 	 * - jsonFile	: path to the jsonFile
@@ -79,7 +80,9 @@ public abstract class GameBody {
 	 * - size		: size in pixel of the image to match the object
 	 * 
 	 * 
-	 * public void MakeBody(
+	 * MakeBody(float width, float height,float radius,BodyDef.BodyType bodyType,
+	 * 	float density,float elasticity,boolean sensor, Vector2 pos,float angle, 
+	 * 	String jsonFile, String jsonName, float size)
 	 */
 	public void MakeBody(float width, float height,float radius,BodyDef.BodyType bodyType,
 			float density,float elasticity,boolean sensor, Vector2 pos,float angle, String jsonFile, String jsonName, float size){
@@ -184,15 +187,6 @@ public abstract class GameBody {
 		fixtureDef.density		= density;
 		fixtureDef.restitution	= elasticity;
 		fixtureDef.isSensor		= sensor;
-
-		//Definition that remove contact with the background
-		//		if(elasticity == 0.9f){
-		//			fixtureDef.filter.categoryBits = GlobalSettings.CATEGORY_PLAYER;
-		//			fixtureDef.filter.maskBits = GlobalSettings.MASK_PLAYER;
-		//		}else{ 
-		//			fixtureDef.filter.categoryBits = GlobalSettings.CATEGORY_MONSTER;
-		//			fixtureDef.filter.maskBits = GlobalSettings.MASK_MONSTER;
-		//		}
 
 		//Load the json Loader
 		BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(jsonFile));

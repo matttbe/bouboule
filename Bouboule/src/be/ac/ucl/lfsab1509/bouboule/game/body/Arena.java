@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
@@ -32,7 +31,8 @@ public class Arena extends GameBody {
 	 * 	float elasticity,float px,float py, float angle,String texRegionPath,
 	 *  String jsonFile, String jsonName)
 	 */
-	public Arena(float radius,float px,float py, float angle,String texRegionPath, String jsonFile, String jsonName,short entity) {
+	public Arena(float radius,float px,float py, float angle,String texRegionPath, 
+			String jsonFile, String jsonName,short entity) {
 
 		super();
 
@@ -46,8 +46,6 @@ public class Arena extends GameBody {
 		MakeBody(0, 0, radius, BodyType.StaticBody, 0, 0, true, pos, angle, jsonFile, jsonName,
 				GraphicManager.convertToGame(texture.getRegionWidth()));
 
-		//Ensure that the object don't rotate.
-		body.setFixedRotation(true); 
 		body.setUserData(entity);
 	}
 	
@@ -61,7 +59,6 @@ public class Arena extends GameBody {
 			Vector2 pos = positionVector.sub(origin);
 			sprite.setPosition(pos.x, pos.y);
 			sprite.setOrigin(origin.x, origin.y);
-			sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
 
 			sprite.draw(sp);
 		} else {
