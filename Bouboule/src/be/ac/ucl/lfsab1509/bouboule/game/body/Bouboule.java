@@ -62,7 +62,8 @@ public class Bouboule extends GameBody{
 	 *  String jsonFile, String jsonName)
 	 */
 	public Bouboule(float radius, BodyType bodyType,float density,
-			float elasticity,float px,float py, float angle,String texRegionPath, String jsonFile, String jsonName) {
+			float elasticity,float px,float py, float angle,String texRegionPath, 
+			String jsonFile, String jsonName, short entity) {
 
 		super();
 
@@ -77,7 +78,8 @@ public class Bouboule extends GameBody{
 				GraphicManager.convertToGame(texture.getRegionWidth()));
 
 		//Ensure that the object don't rotate.
-		body.setFixedRotation(true); 		
+		body.setFixedRotation(true);
+		body.setUserData(entity);
 	}
 
 
@@ -113,11 +115,8 @@ public class Bouboule extends GameBody{
 	public void update(float dt){
 		if(isAlive){
 
-			//Gdx.app.log ("Bouboule", "Update boubloule");
 			super.update(dt);
 
-
-			//TODO: set UP;
 		}
 
 	}

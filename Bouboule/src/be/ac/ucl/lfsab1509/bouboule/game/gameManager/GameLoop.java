@@ -112,8 +112,8 @@ public class GameLoop {
 		
 		bouboule = new Bouboule(0, BodyType.DynamicBody,
 				10, 0.8f, gPositionX, gPositionY, 0,
-				"images/boub.png", "data/jsonFile/boub.json", "boub"
-				);
+				"images/boub.png", "data/jsonFile/boub.json", "boub",
+				GlobalSettings.MONSTER);
 		
 
 		//Add the new object to the graphic and physic manager
@@ -150,6 +150,7 @@ public class GameLoop {
 
 		// 3. Create a Body, as usual.
 		bottleModel = GraphicManager.getWorld().createBody(bd);
+		bottleModel.setUserData(GlobalSettings.SCENERY);
 
 		// 4. Create the body fixture automatically by using the loader.
 		loader.attachFixture(bottleModel, "bottle", fd, 18);
@@ -174,7 +175,8 @@ public class GameLoop {
 		
 		bouboule2 = new Bouboule(0, BodyType.DynamicBody,
 				1, 0.9f, gPositionX, gPositionY, 0, 
-				"images/boub.png","data/jsonFile/boub.json", "boub");
+				"images/boub.png","data/jsonFile/boub.json", "boub",
+				GlobalSettings.PLAYER);
 		
 		graphicManager.addBody(bouboule2);
 		

@@ -26,7 +26,6 @@
 
 package be.ac.ucl.lfsab1509.bouboule.game.body;
 
-import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import be.ac.ucl.lfsab1509.bouboule.game.physicEditor.BodyEditorLoader;
 
