@@ -5,7 +5,7 @@ gen/**
 *.log
 *.apk
 .DS_Store
+docs/
 syntax: regexp 
 ^bin/classes\.dex$ 
-syntax: regexp 
 ^bin/resources\.ap_$
