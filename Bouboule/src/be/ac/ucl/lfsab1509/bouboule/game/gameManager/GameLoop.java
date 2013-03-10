@@ -86,7 +86,7 @@ public class GameLoop {
 	 */
 	private void init() {
 		
-		initArena();
+		initArena();		
 		initBall();
 		initBall2();
 		
@@ -124,11 +124,11 @@ public class GameLoop {
 	 */
 	private void initArena() {
 		
-		int gPositionX	= 400;
+		int gPositionX	= 0;
 		int gPositionY	= 0;
 		
 		arena = new Arena(500, gPositionX, gPositionY, 0,
-				"data/gfx/bottle.png", "data/test.json", "bottle",
+				"images/plateau.png", "data/jsonFile/arena/arena.json", "arena",
 				GlobalSettings.SCENERY);
 		
 
