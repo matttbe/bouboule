@@ -35,6 +35,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Timer;
 
 public class Game implements ApplicationListener {
 
@@ -48,11 +53,22 @@ public class Game implements ApplicationListener {
 	SpriteBatch             		batch;
 	OrthographicCamera      		camera;
 	Intersector						intersector;
+	Skin							skin;
+	Stage							stage;
+	
+	// dialog
+	private Dialog waitDialog = null;
+	private Timer timer = null;
+	private byte iCountDown = 0;
+	private Label label = null;
+	
+	// main loop
+	private boolean bStop = true;
+	private boolean bWasStopped = true;
 
 
 	@Override
 	public void create() {
-
 		intersector = new Intersector();
 		
 		boubouleImg = new Texture(Gdx.files.internal("images/boub.png"));
@@ -97,16 +113,19 @@ public class Game implements ApplicationListener {
 
 		//Batch
 		batch = new SpriteBatch();
+		
+		// Skins and stage
+		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+		stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
+		Gdx.input.setInputProcessor(stage);
 
 
 		// create a Circle to logically represent Bouboule
 
 		plateau = new Circle(appWidth/2 , (appHeigth-appWidth) /2 + appWidth/2, appWidth/2 - 80/2);
 		bouboule = new Circle(plateau.x, plateau.y, 80/2);
-
-
-
-
+		
+		bStop = false;
 	}
 
 
@@ -115,6 +134,12 @@ public class Game implements ApplicationListener {
 	@Override
 	public void render() {
 
+		if (bStop)
+		{
+			stage.act (Math.min (Gdx.graphics.getDeltaTime (), 1 / 30f));
+			stage.draw ();
+			return;
+		}
 		// clear the screen with a dark blue color. The
 		// arguments to glClearColor are the red, green
 		// blue and alpha component in the range [0,1]
@@ -142,13 +167,18 @@ public class Game implements ApplicationListener {
 		//EN X
 		float accelX = Gdx.input.getAccelerometerX();
 		float accelY = Gdx.input.getAccelerometerY();
-		float accelZ = Gdx.input.getAccelerometerZ();
+		// float accelZ = Gdx.input.getAccelerometerZ();
 
-		Gdx.app.log ("Accelerometer", accelX+"  "+accelY+"  "+accelZ+"  ");
-
-		bouboule.x -= 100 * accelX * Gdx.graphics.getDeltaTime();
-		bouboule.y -= 100 * accelY * Gdx.graphics.getDeltaTime();
-		
+		if (bWasStopped)
+		{
+			Gdx.app.log ("Accelerometer", "x: "+ accelX+" | y: "+accelY);
+			bWasStopped = false;
+		}
+		else
+		{
+			bouboule.x -= 100 * accelX * Gdx.graphics.getDeltaTime();
+			bouboule.y -= 100 * accelY * Gdx.graphics.getDeltaTime();
+		}
 		/*
 		if(!intersector.overlapCircles(plateau, bouboule)){
 			bouboule.x=plateau.x;
@@ -176,18 +206,72 @@ public class Game implements ApplicationListener {
 		boubouleImg.dispose();
 		plateauImg.dispose();
 		batch.dispose();
+		skin.dispose ();
+		stage.dispose ();
 
 	}
 
 	@Override
-	public void resize(int width, int height) {
+	public void resize (int width, int height)
+	{
+		stage.setViewport (width, height, false);
 	}
 
 	@Override
-	public void pause() {
+	public void pause()
+	{
+		bStop = true; // seems we have to do that or we can also stop the game...
+		Gdx.app.log ("Matth", "pause...");
+	}
+
+	
+	private void InitDialog ()
+	{
+		Gdx.app.log ("Matth", "Create dialog: " + bStop + " " + bWasStopped);
+		iCountDown = 2;
+		label = new Label ("This game will continue in 3 seconds", skin);
+		waitDialog = new Dialog("Pause", skin, "dialog");
+		waitDialog.hide (); // force to hide it until the text is added
+		waitDialog.text (label);
+		waitDialog.show (stage);
+
+		// a task to wait 3 seconds
+		Timer.Task task = new Timer.Task() {
+			@Override
+			public void run ()
+			{
+				Gdx.app.log ("Matth", "Run: " + iCountDown);
+				if (iCountDown > 0)
+				{
+					label.setText ("This game will continue in " + iCountDown + " second" + (iCountDown > 1 ? "s" : ""));
+					iCountDown --;
+				}
+				else
+				{
+					bStop = false;
+					waitDialog.hide ();
+					waitDialog.clear ();
+					waitDialog = null;
+					this.cancel (); // cancel the task
+					timer.clear (); // maybe not needed?
+				}
+			}
+		};
+		timer = new Timer ();
+		timer.scheduleTask (task, 1, 1);
+		timer.start ();
 	}
 
 	@Override
-	public void resume() {
+	public void resume ()
+	{
+		Gdx.app.log ("Matth", "Init dialog start");
+		
+		if (bStop && waitDialog == null) // bStop: resume is launched during the init...
+			InitDialog ();
+		Gdx.app.log ("Matth", "Init dialog done");
+		
+		bWasStopped = true;
+		Gdx.app.log ("Matth", "resume...");
 	}
 }

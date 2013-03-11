@@ -11,5 +11,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_victory">VictoryActivity</string>
     <string name="title_activity_loosing">LoosingActivity</string>
-
+    <!-- Menu Pause -->
+    <string name="Pause_continue">Continue</string>
+    <string name="Menu">Menu</string>
+    <string name="Quit">Quit</string>
+    <string name="Pause">Pause</string>
 </resources>

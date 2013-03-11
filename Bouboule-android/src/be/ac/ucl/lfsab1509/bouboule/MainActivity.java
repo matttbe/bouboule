@@ -30,17 +30,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager.LayoutParams;
 import android.widget.Toast;
-import be.ac.ucl.lfsab1509.bouboule.game.*;
+import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
-public class MainActivity extends AndroidApplication {
+public class MainActivity extends AndroidApplication
+{
+	private MyGame game;
+	private static final int CODE_PAUSE_ACTIVITY = 1;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate (Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 
 		AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
@@ -50,20 +55,43 @@ public class MainActivity extends AndroidApplication {
 		cfg.useAccelerometer = true;
 		cfg.useCompass = false;
 
-		initialize(new MyGame(), cfg);
+		getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON); // to not lock the screen
+	
+		game = new MyGame ();
+		initialize (game, cfg);
 	}
 
 	@Override
-	public void onBackPressed() {
-		Log.d("CDA", "onBackPressed Called");
+	public void onBackPressed ()
+	{
+		game.pause ();
+		Intent intent = new Intent (MainActivity.this, MenuPause.class);
+		startActivityForResult (intent, CODE_PAUSE_ACTIVITY);
+	}
 
-		Context context = getApplicationContext();
-		CharSequence text = "Return Pressed !\n Pause must be ENABLE !";
-		int duration = Toast.LENGTH_SHORT;
-
-		Toast toast = Toast.makeText(context, text, duration);
-		toast.show();
-
+	@Override
+	protected void onActivityResult (int requestCode, int resultCode,
+			Intent data)
+	{
+		Log.d ("Matth", "onActivityResult (" + requestCode + ", " + resultCode + ")");
+		switch (requestCode)
+		{
+			case CODE_PAUSE_ACTIVITY: // menu pause
+				switch (resultCode) // it's the id of the button
+				{
+					case R.id.PauseContinueButton: // cas ou on continue
+						game.resume ();
+						return;
+					case R.id.PauseMenuButton: // cas ou on stoppe
+						Intent intent = new Intent(MainActivity.this, Menu.class);
+						startActivity(intent);
+						finish ();
+					case R.id.PauseQuitButton: // just quit without new activity => quit
+						finish ();
+						exit ();
+				}
+		}
+		return;
 	}
 
 	@Override
