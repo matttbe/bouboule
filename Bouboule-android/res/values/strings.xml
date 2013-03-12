@@ -17,4 +17,13 @@
     <string name="Quit">Quit</string>
     <string name="Pause">Pause</string>
     <string name="pause">PAUSE</string>
+    
+    <!-- Menu Victory -->
+    <string name="Victory_next_level">Next Level</string>
+    
+    <!-- Menu Loosing -->
+    <string name="Loosing_continue">Continue</string>
+    
+    
+    
 </resources>

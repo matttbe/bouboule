@@ -2,21 +2,72 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 public class VictoryActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_victory);
+
+
+		// Listeners for the Game Launcher
+		findViewById (R.id.VictoryMenuButton).setOnTouchListener (
+				fireListener);
+		findViewById (R.id.VictoryNextLevelButton).setOnTouchListener (fireListener);
+		findViewById (R.id.VictoryQuitButton).setOnTouchListener (fireListener);
+
+		// TODO: Change the font !!
+		Typeface myFontBout = Typeface.createFromAsset (getAssets (),
+				"chineyen.ttf");
+
+		((TextView) findViewById (R.id.VictoryMenuButton))
+		.setTypeface (myFontBout);
+		((TextView) findViewById (R.id.VictoryNextLevelButton))
+		.setTypeface (myFontBout);
+		((TextView) findViewById (R.id.VictoryQuitButton))
+		.setTypeface (myFontBout);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.victory, menu);
-		return true;
-	}
+	View.OnTouchListener fireListener = new View.OnTouchListener () {
+		@Override
+		public boolean onTouch (View view, MotionEvent motionEvent)
+		{
+
+
+			switch (view.getId ()) {
+
+			case R.id.VictoryMenuButton: // cas ou on stoppe
+				Intent intent = new Intent(VictoryActivity.this, Menu.class);
+				startActivity(intent);
+				finish ();
+				break;
+			case R.id.VictoryQuitButton: // just quit without new activity => quit
+				finish ();
+
+				break;
+
+			default:
+				break;
+			}
+
+
+
+			finish (); // finish activity
+
+			return false;
+		}
+	};
+
 
 }

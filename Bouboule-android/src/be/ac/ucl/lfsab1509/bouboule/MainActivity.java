@@ -88,9 +88,11 @@ public class MainActivity extends AndroidApplication
 						Intent intent = new Intent(MainActivity.this, Menu.class);
 						startActivity(intent);
 						finish ();
+						break;
 					case R.id.PauseQuitButton: // just quit without new activity => quit
 						finish ();
 						exit ();
+						break;
 				}
 		}
 		return;

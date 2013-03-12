@@ -13,4 +13,46 @@
         android:layout_height="wrap_content"
         android:text="Victory" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <Button
+            android:id="@+id/VictoryNextLevelButton"
+            android:layout_width="299dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/VictoryMenuButton"
+            android:layout_alignRight="@+id/VictoryMenuButton"
+            android:layout_marginBottom="58dp"
+            android:background="@null"
+            android:text="@string/Victory_next_level"
+            android:textColor="#33b5e5"
+            android:textSize="40sp" />
+
+        <Button
+            android:id="@+id/VictoryMenuButton"
+            android:layout_width="313dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:text="@string/Menu"
+            android:textColor="#33b5e5"
+            android:textSize="40sp" />
+
+        <Button
+            android:id="@+id/VictoryQuitButton"
+            android:layout_width="292dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/VictoryNextLevelButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="65dp"
+            android:background="@null"
+            android:text="@string/Quit"
+            android:textColor="#33b5e5"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
 </RelativeLayout>

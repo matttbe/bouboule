@@ -169,7 +169,7 @@ public class Menu extends Activity {
 				case R.id.PlayButton :
 					Intent intent = new Intent(Menu.this, MainActivity.class);//MainActivity.class);
 					startActivity(intent);
-					Log.d ("Matth", "Launched game");
+					finish();
 					break;
 					
 				case R.id.ParameterButton :
@@ -184,7 +184,6 @@ public class Menu extends Activity {
 					
 					break;
 			}
-			finish ();
 
 			return false;
 		} 
