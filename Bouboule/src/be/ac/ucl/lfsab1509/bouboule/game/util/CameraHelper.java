@@ -45,7 +45,20 @@ public class CameraHelper {
 		float viewportWidth = virtualWidth;
 		float viewportHeight = virtualHeight;
 		float physicalWidth = Gdx.graphics.getWidth();
-		float physicalHeight = Gdx.graphics.getHeight();
+		float physicalHeight = 1280;//Gdx.graphics.getHeight();
+		
+		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
+		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
+		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
+		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
+		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
+		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
+		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
+		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
+		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
+		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
+		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
+		
 		float aspect = virtualWidth / virtualHeight;
 		// This is to maintain the aspect ratio.
 		// If the virtual aspect ration does not match with the aspect ratio

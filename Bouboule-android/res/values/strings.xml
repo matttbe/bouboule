@@ -16,4 +16,5 @@
     <string name="Menu">Menu</string>
     <string name="Quit">Quit</string>
     <string name="Pause">Pause</string>
+    <string name="pause">PAUSE</string>
 </resources>

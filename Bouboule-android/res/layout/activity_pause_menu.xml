@@ -3,21 +3,7 @@
     android:id="@+id/FrameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgmenu" >
-
-    <ImageView
-        android:id="@+id/boubleft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/boubouleleft" />
-
-    <ImageView
-        android:id="@+id/boubright"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/boubouleright" />
+    android:background="@drawable/plateau_pause" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +18,7 @@
             android:layout_marginTop="75dip"
             android:gravity="center"
             android:keepScreenOn="true"
-            android:text="@string/dynamicName"
+            android:text="@string/pause"
             android:textColor="#33b5e5"
             android:textSize="40sp"
             android:textStyle="bold" />

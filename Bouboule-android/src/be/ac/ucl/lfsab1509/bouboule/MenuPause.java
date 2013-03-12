@@ -8,7 +8,7 @@
  *    Matthieu Baerts <matthieu.baerts@student.uclouvain.be>
  *    Baptiste Remy <baptiste.remy@student.uclouvain.be>
  *    Nicolas Van Wallendael <nicolas.vanwallendael@student.uclouvain.be>
- *    Hélène Verhaeghe <helene.verhaeghe@student.uclouvain.be>
+ *    Helene Verhaeghe <helene.verhaeghe@student.uclouvain.be>
  * 
  * Bouboule is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -67,14 +67,6 @@ public class MenuPause extends Activity
 		}
 	};
 
-	// Create runnable for animating to the bouboules
-	final Runnable boubouleUpdate = new Runnable () {
-		@Override
-		public void run ()
-		{
-			animateBouboules ();
-		}
-	};
 
 	// String animated
 	String nameToShow;
@@ -125,14 +117,10 @@ public class MenuPause extends Activity
 		((TextView) findViewById (R.id.PauseQuitButton))
 				.setTypeface (myFontBout);
 
-		// Hide the bouboules until the animation begin
-		findViewById (R.id.boubleft).setVisibility (View.INVISIBLE);
-		findViewById (R.id.boubright).setVisibility (View.INVISIBLE);
 
 		setAllTheAnimationAtOnce ();
 
 		mHandler.post (nameUpdate);
-		mHandler.postDelayed (boubouleUpdate, 1750);
 
 	}
 
@@ -155,7 +143,7 @@ public class MenuPause extends Activity
 	 */
 	protected void startFunWithUi ()
 	{
-		nameToShow = getResources ().getString (R.string.Pause);
+		nameToShow = getResources ().getString (R.string.pause);
 
 		// Get the text and update the name
 		TextView myTextView = (TextView) findViewById (R.id.fullscreen_content_pause);
@@ -203,23 +191,6 @@ public class MenuPause extends Activity
 		mHandler.postDelayed (nameUpdate, 5 * 1000);
 	}
 
-	private void animateBouboules ()
-	{
-
-		TranslateAnimation translateR = new TranslateAnimation (900, 0, -400, 0);
-		TranslateAnimation translateL = new TranslateAnimation (-900, 0, -400,
-				0);
-
-		translateR.setDuration (1000);
-		translateL.setDuration (1000);
-
-		findViewById (R.id.boubleft).setVisibility (View.VISIBLE);
-		findViewById (R.id.boubright).setVisibility (View.VISIBLE);
-
-		findViewById (R.id.boubright).startAnimation (translateR);
-		findViewById (R.id.boubleft).startAnimation (translateL);
-
-	}
 
 	private void setAllTheAnimationAtOnce ()
 	{

@@ -172,7 +172,7 @@ public class GameLoop {
 		//float accelZ = Gdx.input.getAccelerometerZ();
 		
 		
-		bouboule.body.applyForceToCenter(new Vector2(0,-1));
+		bouboule.body.applyForceToCenter(new Vector2(0,-0.5f));
 		bouboule2.body.applyForceToCenter(new Vector2(-accelX*0.3f,-accelY*0.3f));
 		
 		graphicManager.update();

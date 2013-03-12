@@ -8,7 +8,7 @@
  *    Matthieu Baerts <matthieu.baerts@student.uclouvain.be>
  *    Baptiste Remy <baptiste.remy@student.uclouvain.be>
  *    Nicolas Van Wallendael <nicolas.vanwallendael@student.uclouvain.be>
- *    Hélène Verhaeghe <helene.verhaeghe@student.uclouvain.be>
+ *    Helene Verhaeghe <helene.verhaeghe@student.uclouvain.be>
  * 
  * Bouboule is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -67,6 +67,8 @@ public class MainActivity extends AndroidApplication
 		game.pause ();
 		Intent intent = new Intent (MainActivity.this, MenuPause.class);
 		startActivityForResult (intent, CODE_PAUSE_ACTIVITY);
+		overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+		
 	}
 
 	@Override
@@ -107,16 +109,22 @@ public class MainActivity extends AndroidApplication
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
 			
+			int exit = GlobalSettings.GAME_EXIT;
 			
-			if ( GlobalSettings.GAME_EXIT == 1){
+			GlobalSettings.GAME_EXIT = 0;
+			
+			
+			if ( exit == 1){
 				
 				Intent intent = new Intent(this, VictoryActivity.class);
 				startActivity(intent);
+				overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 				
-			} else if (GlobalSettings.GAME_EXIT == -1) {
+			} else if (exit == -1) {
 				
 				Intent intent = new Intent(this, LoosingActivity.class);
 				startActivity(intent);
+				overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 				
 			}
 				
