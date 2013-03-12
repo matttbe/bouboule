@@ -32,11 +32,11 @@
         </activity>
         <activity
             android:name="be.ac.ucl.lfsab1509.bouboule.VictoryActivity"
-            android:label="@string/title_activity_victory" >
+            android:label="@string/title_activity_victory" android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="be.ac.ucl.lfsab1509.bouboule.LoosingActivity"
-            android:label="@string/title_activity_loosing" >
+            android:label="@string/title_activity_loosing" android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="MenuPause" android:label="@string/app_name"
