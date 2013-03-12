@@ -165,7 +165,7 @@ public class GameLoop {
 	 * 
 	 * update(float dt)
 	 */
-	public void update(float dt) {
+	public void update() {
 		
 		float accelX = Gdx.input.getAccelerometerX();
 		float accelY = Gdx.input.getAccelerometerY();
@@ -175,7 +175,7 @@ public class GameLoop {
 		bouboule.body.applyForceToCenter(new Vector2(0,-1));
 		bouboule2.body.applyForceToCenter(new Vector2(-accelX*0.3f,-accelY*0.3f));
 		
-		graphicManager.update(dt);
+		graphicManager.update();
 	}
 	
 	/*

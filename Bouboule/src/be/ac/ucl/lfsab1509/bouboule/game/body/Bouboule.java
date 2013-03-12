@@ -112,10 +112,10 @@ public class Bouboule extends GameBody{
 	 * (non-Javadoc)
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#update(float)
 	 */
-	public void update(float dt){
+	public void update(){
 		if(isAlive){
 
-			super.update(dt);
+			super.update();
 
 		}
 

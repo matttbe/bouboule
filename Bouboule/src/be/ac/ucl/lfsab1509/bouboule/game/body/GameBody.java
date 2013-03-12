@@ -263,7 +263,7 @@ public abstract class GameBody {
 	 * 
 	 * update(float dt)
 	 */
-	public void update(float dt){ 
+	public void update(){ 
 
 		//Gdx.app.log ("GameBody", "updatePositionVector");
 

@@ -30,7 +30,6 @@ import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -62,9 +61,9 @@ public class MyGame implements ApplicationListener {
 	@Override
 	public void render() {
 		
-		float dt = Gdx.graphics.getDeltaTime();
+		// float dt = Gdx.graphics.getDeltaTime();
 
-		game.update(dt);
+		game.update();
 		game.render();
 
 	}
@@ -85,5 +84,6 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void resume() {
+		
 	}
 }

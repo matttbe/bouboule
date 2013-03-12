@@ -137,11 +137,11 @@ public class GraphicManager {
 	 * 
 	 * update(float dt)
 	 */
-	public void update(float dt){
+	public void update(){
 		for(GameBody body:bodies){
 			
 			world.step(GlobalSettings.BOX_STEP,GlobalSettings.VELOCITY_ITERATIONS, GlobalSettings.POSITION_ITERATIONS);
-			body.update(dt);
+			body.update();
 		}
 	}
 	
