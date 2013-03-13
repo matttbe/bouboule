@@ -39,7 +39,7 @@ public class IA {
 		
 		//ok mnt on a la position et la vitesse de tout le monde.
 		
-		if(LocalIA.x > 4){
+		if(LocalIA.x > 3.5){
 			AccX = -0.3f;
 		}
 		
