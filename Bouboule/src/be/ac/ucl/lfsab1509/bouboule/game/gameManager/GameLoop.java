@@ -107,7 +107,7 @@ public class GameLoop {
 		bouboule = new Bouboule(0, BodyType.DynamicBody,
 				10, 0.8f, gPositionX, gPositionY, 0,
 				"images/boub.png", "data/jsonFile/boub.json", "boub",
-				GlobalSettings.MONSTER);
+				GlobalSettings.MONSTER,0);
 		
 
 		//Add the new object to the graphic and physic manager
@@ -152,7 +152,7 @@ public class GameLoop {
 		bouboule2 = new Bouboule(0, BodyType.DynamicBody,
 				1, 0.9f, gPositionX, gPositionY, 0, 
 				"images/boub.png","data/jsonFile/boub.json", "boub",
-				GlobalSettings.PLAYER);
+				GlobalSettings.PLAYER,1);
 		
 		graphicManager.addBody(bouboule2);
 		
@@ -167,13 +167,18 @@ public class GameLoop {
 	 */
 	public void update() {
 		
-		float accelX = Gdx.input.getAccelerometerX();
+		/*float accelX = Gdx.input.getAccelerometerX();
 		float accelY = Gdx.input.getAccelerometerY();
+		*/
 		//float accelZ = Gdx.input.getAccelerometerZ();
 		
 		
-		bouboule.body.applyForceToCenter(new Vector2(0,-0.5f));
+		bouboule.update();
+		bouboule2.update();
+		
+		/*bouboule.body.applyForceToCenter(new Vector2(0,-0.5f));
 		bouboule2.body.applyForceToCenter(new Vector2(-accelX*0.3f,-accelY*0.3f));
+		*/
 		
 		graphicManager.update();
 	}

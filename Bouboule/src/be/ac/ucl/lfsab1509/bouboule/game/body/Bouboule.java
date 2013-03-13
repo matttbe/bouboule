@@ -28,6 +28,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.body;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -42,8 +43,17 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class Bouboule extends GameBody{
 
 	//Texture texture;
-	TextureRegion texture;
-	Sprite sprite;
+	TextureRegion 	texture;
+	Sprite 			sprite;
+	
+	//level 0 => gyroscope
+	//level 1 => go mid
+	//level 2 => troll
+	//level 3 => arret mid
+	//level 4 => aggresif
+	//level 5 => defencif
+	//level 6 => attenticipe
+	int 			IALevel;
 
 	/*
 	 * Constructor for a Bouboule object 
@@ -63,10 +73,12 @@ public class Bouboule extends GameBody{
 	 */
 	public Bouboule(float radius, BodyType bodyType,float density,
 			float elasticity,float px,float py, float angle,String texRegionPath, 
-			String jsonFile, String jsonName, short entity) {
+			String jsonFile, String jsonName, short entity, int IALevel) {
 
 		super();
-
+		
+		this.IALevel = IALevel;
+		
 		Vector2 pos	= new Vector2(px,py);
 
 		//
@@ -113,10 +125,27 @@ public class Bouboule extends GameBody{
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#update(float)
 	 */
 	public void update(){
+		
+		Vector2 Acceleration;
+		Gdx.app.log ("Ajout IA", "hello");
+		if(IALevel == 0){
+			Gdx.app.log ("Ajout IA", "0");
+			float accelX = Gdx.input.getAccelerometerX();
+			float accelY = Gdx.input.getAccelerometerY();
+			accelX=0f;
+			accelY=0f;
+			Acceleration = new Vector2(accelX,accelY);
+		}else{
+			Gdx.app.log ("Ajout IA", "1");
+			Acceleration =  IA.compute(IALevel,this);
+			//faire l'appelle sur la classe IA
+			
+		}
+		
+		body.applyForceToCenter(Acceleration);
+		
 		if(isAlive){
-
 			super.update();
-
 		}
 
 	}
