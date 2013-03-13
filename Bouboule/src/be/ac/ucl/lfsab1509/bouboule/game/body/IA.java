@@ -12,10 +12,10 @@ import com.badlogic.gdx.physics.box2d.Body;
 public class IA {
 
 	public static Vector2 compute(int IALevel, Bouboule local){
-		float AccX = -0.01f;
-		float AccY = 0f;
-		Vector2 LocalIA, VelocityIA, LocalEnemi, VelocityEnemi;
-		Body arena;
+		float AccX = 0.4f;
+		float AccY = 0.4f;
+		Vector2 LocalIA = null, VelocityIA, LocalEnemi, VelocityEnemi;
+		Body arena = null;
 		
 		Iterator<Body> iter = GraphicManager.getWorld().getBodies();
 		
@@ -23,18 +23,29 @@ public class IA {
 		
 		while(iter.hasNext()){
 			bodytemp = iter.next();
-			if(bodytemp.getUserData() == (Object) GlobalSettings.MONSTER){ 
-				LocalIA =  bodytemp.getLocalCenter();
-				VelocityIA  = bodytemp.getLinearVelocity();
-			}else if(bodytemp.getUserData() == (Object) GlobalSettings.PLAYER){
-				LocalEnemi = bodytemp.getLocalCenter();
+			if(bodytemp.getUserData() == (Object) GlobalSettings.PLAYER){ 
+				LocalEnemi = bodytemp.getPosition();
+				Gdx.app.log ("updatePositionVector","kikoa"+ LocalEnemi.x + " " +LocalEnemi.y );
 				VelocityEnemi = bodytemp.getLinearVelocity();
+			}else if(bodytemp.getUserData() == (Object) GlobalSettings.MONSTER){
+				LocalIA =  bodytemp.getPosition();
+				Gdx.app.log ("updatePositionVector","kikob"+ LocalIA.x + " " +LocalIA.y );
+				VelocityIA  = bodytemp.getLinearVelocity();
 			}else{
 				arena = bodytemp;
+				Gdx.app.log ("updatePositionVector","kikoc"+ bodytemp.getPosition().x + " " +bodytemp.getPosition().y );
 			}
 		}
 		
 		//ok mnt on a la position et la vitesse de tout le monde.
+		
+		if(LocalIA.x > 4){
+			AccX = -0.3f;
+		}
+		
+		if(LocalIA.y > 4){
+			AccY = -0.3f;
+		}
 		
 		
 		

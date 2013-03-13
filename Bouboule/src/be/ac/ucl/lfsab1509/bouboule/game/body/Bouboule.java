@@ -130,10 +130,10 @@ public class Bouboule extends GameBody{
 		Gdx.app.log ("Ajout IA", "hello");
 		if(IALevel == 0){
 			Gdx.app.log ("Ajout IA", "0");
-			float accelX = Gdx.input.getAccelerometerX();
-			float accelY = Gdx.input.getAccelerometerY();
-			accelX=0f;
-			accelY=0f;
+			float accelX = -Gdx.input.getAccelerometerX()*0.1f;
+			float accelY = -Gdx.input.getAccelerometerY()*0.1f;
+			//accelX=0f;
+			//accelY=0f;
 			Acceleration = new Vector2(accelX,accelY);
 		}else{
 			Gdx.app.log ("Ajout IA", "1");
