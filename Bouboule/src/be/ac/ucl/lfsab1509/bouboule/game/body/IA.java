@@ -2,6 +2,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.body;
 
 import java.util.Iterator;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
 import com.badlogic.gdx.Gdx;
@@ -13,6 +14,8 @@ public class IA {
 	public static Vector2 compute(int IALevel, Bouboule local){
 		float AccX = -0.01f;
 		float AccY = 0f;
+		Vector2 LocalIA, VelocityIA, LocalEnemi, VelocityEnemi;
+		Body arena;
 		
 		Iterator<Body> iter = GraphicManager.getWorld().getBodies();
 		
@@ -20,12 +23,20 @@ public class IA {
 		
 		while(iter.hasNext()){
 			bodytemp = iter.next();
-			Gdx.app.log ("Position X", "valuehello" + bodytemp.getLocalCenter().x);
-			if(bodytemp.getClass().equals(Bouboule.class)){ // && bodytemp == local.body){
-				Gdx.app.log ("Position X", "valuehello" + bodytemp.getLocalCenter().x);
-				Gdx.app.log ("Vitesse  X", "valuehello" + bodytemp.getLinearVelocity().x);
+			if(bodytemp.getUserData() == (Object) GlobalSettings.MONSTER){ 
+				LocalIA =  bodytemp.getLocalCenter();
+				VelocityIA  = bodytemp.getLinearVelocity();
+			}else if(bodytemp.getUserData() == (Object) GlobalSettings.PLAYER){
+				LocalEnemi = bodytemp.getLocalCenter();
+				VelocityEnemi = bodytemp.getLinearVelocity();
+			}else{
+				arena = bodytemp;
 			}
 		}
+		
+		//ok mnt on a la position et la vitesse de tout le monde.
+		
+		
 		
 		return new Vector2(AccX,AccY);
 	}
