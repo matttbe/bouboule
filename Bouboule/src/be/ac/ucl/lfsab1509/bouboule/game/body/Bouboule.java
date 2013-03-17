@@ -28,7 +28,6 @@ package be.ac.ucl.lfsab1509.bouboule.game.body;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -126,25 +125,9 @@ public class Bouboule extends GameBody{
 	 */
 	public void update(){
 		
-		Vector2 Acceleration;
-		Gdx.app.log ("Ajout IA", "hello");
-		if(IALevel == 0){
-			Gdx.app.log ("Ajout IA", "0");
-			float accelX = -Gdx.input.getAccelerometerX()*0.1f;
-			float accelY = -Gdx.input.getAccelerometerY()*0.1f;
-			//accelX=0f;
-			//accelY=0f;
-			Acceleration = new Vector2(accelX,accelY);
-		}else{
-			Gdx.app.log ("Ajout IA", "1");
-			Acceleration =  IA.compute(IALevel,this);
-			//faire l'appelle sur la classe IA
-			
-		}
-		
-		body.applyForceToCenter(Acceleration);
-		
 		if(isAlive){
+			Vector2 Acceleration =  IA.compute(IALevel,this);
+			body.applyForceToCenter(Acceleration);
 			super.update();
 		}
 
