@@ -100,14 +100,16 @@ public class Menu extends Activity {
 					animationSetCase3		= new AnimationSet(true),
 					animationSetCase4		= new AnimationSet(true),
 					animationSetCaseD		= new AnimationSet(true);
-
-
-
+	
+	// MUSIC
+	private BackgroundSound menuMusic;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		// MUSIC
+		menuMusic = new BackgroundSound ("menu", R.raw.zen);
 		
 		//Request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -378,9 +380,20 @@ public class Menu extends Activity {
 	}
 
 	
-	@Override
+	/*@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
+	}*/
+	
+	@Override
+	protected void onPause () {
+		super.onPause ();
+		menuMusic.stop ();
 	}
 
+	@Override
+	protected void onResume () {
+		super.onResume ();
+		menuMusic.play (this);
+	}
 }
