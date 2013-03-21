@@ -36,8 +36,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MyGame implements ApplicationListener {
 
-	final static int appWidth = 800;
-	final static int appHeigth = 1280;
+	static final int APPWIDTH = 800;
+	static final int APPHEIGTH = 1280;
 	
 	//Test Update
 
