@@ -42,8 +42,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class Bouboule extends GameBody{
 
 	//Texture texture;
-	TextureRegion texture;
-	Sprite sprite;
+	private TextureRegion texture;
+	private Sprite sprite;
 
 	/*
 	 * Constructor for a Bouboule object 
@@ -61,15 +61,16 @@ public class Bouboule extends GameBody{
 	 * 	float elasticity,float px,float py, float angle,String texRegionPath,
 	 *  String jsonFile, String jsonName)
 	 */
-	public Bouboule(float radius, BodyType bodyType,float density,
-			float elasticity,float px,float py, float angle,String texRegionPath, 
-			String jsonFile, String jsonName, short entity) {
+	public Bouboule(final float radius, final BodyType bodyType, final float density,
+			final float elasticity, final float px, final float py, 
+			final float angle, final String texRegionPath, 
+			final String jsonFile, final String jsonName, final short entity) {
 
 		super();
 
-		Vector2 pos	= new Vector2(px,py);
+		Vector2 pos	= new Vector2(px, py);
 
-		//
+		
 		this.texture = new TextureRegion(new Texture(texRegionPath));
 
 		this.sprite = new Sprite(texture);
@@ -85,13 +86,14 @@ public class Bouboule extends GameBody{
 
 	/*
 	 * (non-Javadoc)
-	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)
+	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#
+	 * draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)
 	 */
-	public void draw(SpriteBatch sp) {
+	public void draw(final SpriteBatch sp) {
 
-		if(isAlive){
+		if (isAlive) {
 
-			if ( origin != null){
+			if (origin != null) {
 				
 				//Ensure that the body image position is set on the origin defined by 
 				//the jsonFile
@@ -112,8 +114,8 @@ public class Bouboule extends GameBody{
 	 * (non-Javadoc)
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#update(float)
 	 */
-	public void update(){
-		if(isAlive){
+	public void update() {
+		if (isAlive) {
 
 			super.update();
 
@@ -127,8 +129,8 @@ public class Bouboule extends GameBody{
 	 * 
 	 * GetBodyRotationInDegrees()
 	 */
-	public float GetBodyRotationInDegrees(){
-		return body.getAngle()*MathUtils.radiansToDegrees;
+	public float getBodyRotationInDegrees() {
+		return body.getAngle() * MathUtils.radiansToDegrees;
 	}
 
 }

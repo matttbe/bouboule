@@ -14,20 +14,20 @@ import com.badlogic.gdx.physics.box2d.Manifold;
  */
 public class EndGameListener implements ContactListener{
 
-	boolean isAlivePlayer 	= true;
-	boolean isAliveMonster	= true;
+	private boolean isAlivePlayer 	= true;
+	private boolean isAliveMonster	= true;
 	
 	@Override
-	public void beginContact(Contact contact) {
-		short Entity1 = (Short) contact.getFixtureA().getBody().getUserData();
-		short Entity2 = (Short) contact.getFixtureB().getBody().getUserData();
+	public void beginContact(final Contact contact) {
+		short entity1 = (Short) contact.getFixtureA().getBody().getUserData();
+		short entity2 = (Short) contact.getFixtureB().getBody().getUserData();
 
 
-		if (Entity1 == GlobalSettings.SCENERY |
-				Entity2 == GlobalSettings.SCENERY){
+		if (entity1 == GlobalSettings.SCENERY 
+				| entity2 == GlobalSettings.SCENERY) {
 			
-			if ( Entity1 == GlobalSettings.PLAYER |
-					Entity2 == GlobalSettings.PLAYER){
+			if (entity1 == GlobalSettings.PLAYER 
+					| entity2 == GlobalSettings.PLAYER) {
 
 				isAlivePlayer = !isAlivePlayer;
 
@@ -43,20 +43,20 @@ public class EndGameListener implements ContactListener{
 	}
 
 	@Override
-	public void endContact(Contact contact) {
+	public void endContact(final Contact contact) {
 
 
-		short Entity1 = (Short) contact.getFixtureA().getBody().getUserData();
-		short Entity2 = (Short) contact.getFixtureB().getBody().getUserData();
+		short entity1 = (Short) contact.getFixtureA().getBody().getUserData();
+		short entity2 = (Short) contact.getFixtureB().getBody().getUserData();
 
 
-		if (Entity1 == GlobalSettings.SCENERY |
-				Entity2 == GlobalSettings.SCENERY){
+		if (entity1 == GlobalSettings.SCENERY 
+				| entity2 == GlobalSettings.SCENERY) {
 			
-			if ( Entity1 == GlobalSettings.PLAYER |
-					Entity2 == GlobalSettings.PLAYER){
+			if (entity1 == GlobalSettings.PLAYER 
+					| entity2 == GlobalSettings.PLAYER) {
 				
-				if(isAlivePlayer){
+				if (isAlivePlayer) {
 
 					Gdx.app.log("Alive", "Bouboule est VIVANT =)");
 					//DO NOTHING =)
@@ -73,7 +73,7 @@ public class EndGameListener implements ContactListener{
 
 			} else {
 
-				if(isAliveMonster){
+				if (isAliveMonster) {
 
 					Gdx.app.log("Alive", "MONSTER est VIVANT =)");
 					//DO NOTHING
@@ -81,7 +81,7 @@ public class EndGameListener implements ContactListener{
 				} else {
 					
 					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
-					Gdx.app.log("KILL", "Bouboule a gagnŽ =P");
+					Gdx.app.log("KILL", "Bouboule a gagnï¿½ =P");
 					GlobalSettings.GAME_EXIT = 1;
 					
 					Gdx.app.exit();
@@ -92,11 +92,11 @@ public class EndGameListener implements ContactListener{
 	}
 
 	@Override
-	public void preSolve(Contact contact, Manifold oldManifold) {
+	public void preSolve(final Contact contact, final Manifold oldManifold) {
 	}
 
 	@Override
-	public void postSolve(Contact contact, ContactImpulse impulse) {
+	public void postSolve(final Contact contact, final ContactImpulse impulse) {
 		
 	}
 

@@ -33,7 +33,6 @@ import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -43,16 +42,15 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class GameLoop {
 	
-	GraphicManager 		graphicManager;
-	Box2DDebugRenderer 	debugRenderer;
-	Matrix4 			debugMatrix;
+	public  GraphicManager 		graphicManager;
+	private Box2DDebugRenderer 	debugRenderer;
+	private Matrix4 			debugMatrix;
 	
-	SpriteBatch			batch;
+	private SpriteBatch			batch;
 	
-	Bouboule		 	bouboule;
-	Bouboule		 	bouboule2;
-	Arena				arena;
-	Texture				bottleImg;		
+	private Bouboule		 	bouboule;
+	private Bouboule		 	bouboule2;
+	private Arena				arena;
 	
 	
 	/*
@@ -61,15 +59,15 @@ public class GameLoop {
 	 * 
 	 * GameLoop(OrthographicCamera cam, boolean debug)
 	 */
-	public GameLoop(OrthographicCamera cam, boolean debug){
+	public GameLoop(final OrthographicCamera cam, final boolean debug) {
 
 		//creation of the batch and matrix (physical edges of the bodies) debugger
 		batch 			= new SpriteBatch();
 		batch.setProjectionMatrix(cam.combined);
 
-		if ( debug ){
+		if (debug) {
 			debugMatrix		= new Matrix4(cam.combined);
-			debugMatrix.scale(GraphicManager.GAME_TO_WORLD, GraphicManager.GAME_TO_WORLD, 1f);
+			debugMatrix.scale(GraphicManager.getGameToWorld(), GraphicManager.getGameToWorld(), 1f);
 
 			debugRenderer	= new Box2DDebugRenderer();
 		}
@@ -101,11 +99,13 @@ public class GameLoop {
 	 */
 	private void initBall() {
 				
-		int gPositionX	= 400;
-		int gPositionY	= 800;
+		final int gPositionX	= 400;
+		final int gPositionY	= 800;
+		final int mass			= 10;
+		final float elasticity	= 0.8f;
 		
 		bouboule = new Bouboule(0, BodyType.DynamicBody,
-				10, 0.8f, gPositionX, gPositionY, 0,
+				mass, elasticity, gPositionX, gPositionY, 0,
 				"images/boub.png", "data/jsonFile/boub.json", "boub",
 				GlobalSettings.MONSTER);
 		
@@ -127,7 +127,7 @@ public class GameLoop {
 		int gPositionX	= 0;
 		int gPositionY	= 0;
 		
-		arena = new Arena(500, gPositionX, gPositionY, 0,
+		arena = new Arena(0, gPositionX, gPositionY, 0,
 				"images/plateau.png", "data/jsonFile/arena/arena.json", "arena",
 				GlobalSettings.SCENERY);
 		
@@ -146,12 +146,14 @@ public class GameLoop {
 	 */
 	private void initBall2() {
 		
-		int gPositionX	= 400;
-		int gPositionY	= 350;
+		final int gPositionX	= 400;
+		final int gPositionY	= 350;
+		final int mass			= 1;
+		final float elasticity	= 0.9f;
 		
 		bouboule2 = new Bouboule(0, BodyType.DynamicBody,
-				1, 0.9f, gPositionX, gPositionY, 0, 
-				"images/boub.png","data/jsonFile/boub.json", "boub",
+				mass, elasticity, gPositionX, gPositionY, 0, 
+				"images/boub.png", "data/jsonFile/boub.json", "boub",
 				GlobalSettings.PLAYER);
 		
 		graphicManager.addBody(bouboule2);
@@ -172,8 +174,8 @@ public class GameLoop {
 		//float accelZ = Gdx.input.getAccelerometerZ();
 		
 		
-		bouboule.body.applyForceToCenter(new Vector2(0,-0.5f));
-		bouboule2.body.applyForceToCenter(new Vector2(-accelX*0.3f,-accelY*0.3f));
+		bouboule.getBody().applyForceToCenter(new Vector2(0,-0.5f));
+		bouboule2.getBody().applyForceToCenter(new Vector2(-accelX*0.3f,-accelY*0.3f));
 		
 		graphicManager.update();
 	}
@@ -191,7 +193,8 @@ public class GameLoop {
 		
 
 		batch.disableBlending();
-		//Allow to draw the background fast because it disable the color blending (override the background).
+		//Allow to draw the background fast because it disable 
+		//the color blending (override the background).
 		batch.enableBlending();
 		
 		//Draw all the know bodies

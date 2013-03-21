@@ -13,47 +13,49 @@ import android.widget.TextView;
 public class VictoryActivity extends Activity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+							 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_victory);
 
 
 		// Listeners for the Game Launcher
-		findViewById (R.id.VictoryMenuButton).setOnTouchListener (
+		findViewById(R.id.VictoryMenuButton).setOnTouchListener(
 				fireListener);
-		findViewById (R.id.VictoryNextLevelButton).setOnTouchListener (fireListener);
-		findViewById (R.id.VictoryQuitButton).setOnTouchListener (fireListener);
+		findViewById(R.id.VictoryNextLevelButton).setOnTouchListener(
+				fireListener);
+		findViewById(R.id.VictoryQuitButton).setOnTouchListener(
+				fireListener);
 
 		// TODO: Change the font !!
-		Typeface myFontBout = Typeface.createFromAsset (getAssets (),
+		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
 				"chineyen.ttf");
 
-		((TextView) findViewById (R.id.VictoryMenuButton))
-		.setTypeface (myFontBout);
-		((TextView) findViewById (R.id.VictoryNextLevelButton))
-		.setTypeface (myFontBout);
-		((TextView) findViewById (R.id.VictoryQuitButton))
-		.setTypeface (myFontBout);
+		((TextView) findViewById(R.id.VictoryMenuButton))
+		.setTypeface(myFontBout);
+		((TextView) findViewById(R.id.VictoryNextLevelButton))
+		.setTypeface(myFontBout);
+		((TextView) findViewById(R.id.VictoryQuitButton))
+		.setTypeface(myFontBout);
 	}
 
-	View.OnTouchListener fireListener = new View.OnTouchListener () {
+	private View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
-		public boolean onTouch (View view, MotionEvent motionEvent)
-		{
+		public boolean onTouch(final View view, final MotionEvent motionEvent) {
 
 
-			switch (view.getId ()) {
+			switch (view.getId()) {
 
 			case R.id.VictoryMenuButton: // cas ou on stoppe
 				Intent intent = new Intent(VictoryActivity.this, Menu.class);
 				startActivity(intent);
-				finish ();
+				finish();
 				break;
 			case R.id.VictoryQuitButton: // just quit without new activity => quit
-				finish ();
+				finish();
 
 				break;
 
@@ -63,7 +65,7 @@ public class VictoryActivity extends Activity {
 
 
 
-			finish (); // finish activity
+			finish(); // finish activity
 
 			return false;
 		}

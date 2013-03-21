@@ -40,25 +40,12 @@ public class CameraHelper {
 	 * 	float virtualHeight)
 	 */
 	
-	public static OrthographicCamera GetCamera(float virtualWidth,
-			float virtualHeight) {
+	public static OrthographicCamera GetCamera(final float virtualWidth,
+			final float virtualHeight) {
 		float viewportWidth = virtualWidth;
 		float viewportHeight = virtualHeight;
 		float physicalWidth = Gdx.graphics.getWidth();
-		float physicalHeight = 1280;//Gdx.graphics.getHeight();
-		
-		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
-		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
-		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
-		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
-		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
-		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
-		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
-		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
-		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
-		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
-		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
-		
+		float physicalHeight = 1280; //Gdx.graphics.getHeight();
 		float aspect = virtualWidth / virtualHeight;
 		// This is to maintain the aspect ratio.
 		// If the virtual aspect ration does not match with the aspect ratio

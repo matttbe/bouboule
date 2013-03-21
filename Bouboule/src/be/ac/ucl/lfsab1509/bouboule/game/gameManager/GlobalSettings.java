@@ -29,7 +29,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 public class GlobalSettings {
 	
 	//Definition for the time step properties
-	public static final float BOX_STEP			= 1/60f;
+	public static final float BOX_STEP			= 1 / 60f;
 	public static final int VELOCITY_ITERATIONS	= 8;
 	public static final int POSITION_ITERATIONS	= 3;
 	
@@ -37,8 +37,10 @@ public class GlobalSettings {
 	public static final short CATEGORY_MONSTER 	= 0x0002; // 0000000000000010 in binary
 	public static final short CATEGORY_SCENERY 	= 0x0004; // 0000000000000100 in binary
 	
-	public static final short MASK_PLAYER 	= CATEGORY_MONSTER | CATEGORY_SCENERY; // or ~CATEGORY_PLAYER
-	public static final short MASK_MONSTER 	= CATEGORY_PLAYER | CATEGORY_SCENERY; // or ~CATEGORY_MONSTER
+	public static final short MASK_PLAYER 	= CATEGORY_MONSTER | CATEGORY_SCENERY; 
+											// or ~CATEGORY_PLAYER
+	public static final short MASK_MONSTER 	= CATEGORY_PLAYER | CATEGORY_SCENERY; 
+											// or ~CATEGORY_MONSTER
 	public static final short MASK_SCENERY 	= 0;
 	public static final short MASK_ALLCONT 	= -1;
 	

@@ -58,43 +58,44 @@ public class Menu extends Activity {
 
 
 	// Need handler for callback to the UI thread
-	final Handler mHandler = new Handler();
+	private final Handler mHandler = new Handler();
 
 	// Create runnable for posting to the AnimationUpdater
-	final Runnable animationUpdate = new Runnable() {
+	private final Runnable animationUpdate = new Runnable() {
 		@Override
 		public void run() {
 			updateAnimationOnUI();
-			Log.i("Run","finish runnable updateAnimation");
+			Log.i("Run", "finish runnable updateAnimation");
 		}
 	};
 
 	// Create runnable for posting to the nameUpdater
-	final Runnable nameUpdate = new Runnable() {
+	private final Runnable nameUpdate = new Runnable() {
 		@Override
 		public void run() {
 			startFunWithUi();
-			Log.i("Run","finish runnable nameUpdate");
+			Log.i("Run", "finish runnable nameUpdate");
 		}
 	};
 	
 	// Create runnable for animating to the bouboules
-	final Runnable boubouleUpdate = new Runnable() {
+	private final Runnable boubouleUpdate = new Runnable() {
 		@Override
 		public void run() {
-			Log.d("Run","START BOUBOULE UPDATE");
+			Log.d("Run", "START BOUBOULE UPDATE");
 			animateBouboules();
-			Log.i("Run","finish animate boubouleAnim");
+			Log.i("Run", "finish animate boubouleAnim");
 		}
 	};
 
 	//String animated
-	String 	nameToShow;
-	int 	whatToShow	= 0;
+	private String 	nameToShow;
+	private int 	whatToShow	= 0;
 	
 	
 	//Animation containers
-	AnimationSet	animationSetForTitle 	= new AnimationSet(true),
+	private AnimationSet
+					animationSetForTitle 	= new AnimationSet(true),
 					animationSetCase1		= new AnimationSet(true),
 					animationSetCase2		= new AnimationSet(true),
 					animationSetCase3		= new AnimationSet(true),
@@ -105,13 +106,14 @@ public class Menu extends Activity {
 
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		
 		//Request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_menu);
 
 
@@ -142,7 +144,7 @@ public class Menu extends Activity {
 		((TextView) findViewById(R.id.HighScoreButton)).setTypeface(myFontBout);
 		
 		//Hide the bouboules until the animation begin 
-		findViewById(R.id.boubleft ).setVisibility(View.INVISIBLE);
+		findViewById(R.id.boubleft) .setVisibility(View.INVISIBLE);
 		findViewById(R.id.boubright).setVisibility(View.INVISIBLE);
 
 		setAllTheAnimationAtOnce();
@@ -157,17 +159,17 @@ public class Menu extends Activity {
 	/*
 	 * Start the Game // Parameters // HighScore
 	 */
-	View.OnTouchListener fireListener = new View.OnTouchListener() {
+	private View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
-		public boolean onTouch(View view, MotionEvent motionEvent) {
+		public boolean onTouch(final View view, final MotionEvent motionEvent) {
 
-			mHandler.removeCallbacks (animationUpdate);
-			mHandler.removeCallbacks (nameUpdate);
+			mHandler.removeCallbacks(animationUpdate);
+			mHandler.removeCallbacks(nameUpdate);
 
-			switch (view.getId() ){
+			switch (view.getId()) {
 			
 				case R.id.PlayButton :
-					Intent intent = new Intent(Menu.this, MainActivity.class);//MainActivity.class);
+					Intent intent = new Intent(Menu.this, MainActivity.class);
 					startActivity(intent);
 					finish();
 					break;
@@ -196,7 +198,7 @@ public class Menu extends Activity {
 	 */
 	protected void startFunWithUi() {
 		
-		if (whatToShow == 0){
+		if (whatToShow == 0) {
 
 			nameToShow = "BOUBOULE";
 			whatToShow = 1;
@@ -210,7 +212,7 @@ public class Menu extends Activity {
 		}
 
 		//Get the text and update the name
-		TextView myTextView = (TextView)findViewById(R.id.fullscreen_content);
+		TextView myTextView = (TextView) findViewById(R.id.fullscreen_content);
 		myTextView.setText(nameToShow);
 
 		//Setting the animation
@@ -218,7 +220,7 @@ public class Menu extends Activity {
 
 		//Launch the new UI thread to set the Animation on 
 		//the appropriate time.
-		mHandler.postDelayed(animationUpdate,10*1000);
+		mHandler.postDelayed(animationUpdate, 10 * 1000);
 	}
 	
 	
@@ -229,7 +231,7 @@ public class Menu extends Activity {
 	private void updateAnimationOnUI() {
 
 		//Get the Text to update
-		TextView myTextView = (TextView)findViewById(R.id.fullscreen_content);
+		TextView myTextView = (TextView) findViewById(R.id.fullscreen_content);
 
 		//Animation Launcher
 
@@ -265,27 +267,27 @@ public class Menu extends Activity {
 		}
 
 		//re launch
-		mHandler.postDelayed(nameUpdate,5*1000);
+		mHandler.postDelayed(nameUpdate,5 * 1000);
 	}
 
 
 	private void animateBouboules() {
 
-		TranslateAnimation translateR = new TranslateAnimation(900, 0, -400, 0);
+		TranslateAnimation translateR = new TranslateAnimation(  900, 0, -400, 0);
 		TranslateAnimation translateL = new TranslateAnimation( -900, 0, -400, 0);
 
 		translateR.setDuration(1000);
 		translateL.setDuration(1000);
 		
-		findViewById(R.id.boubleft ).setVisibility(View.VISIBLE);
+		findViewById(R.id.boubleft) .setVisibility(View.VISIBLE);
 		findViewById(R.id.boubright).setVisibility(View.VISIBLE);
 		
 		findViewById(R.id.boubright).startAnimation(translateR);
-		findViewById(R.id.boubleft ).startAnimation(translateL);
+		findViewById(R.id.boubleft) .startAnimation(translateL);
 
 	}
 	
-	private void setAllTheAnimationAtOnce(){
+	private void setAllTheAnimationAtOnce() {
 		
 		//Furnish 5 different animation 
 		//to add to the Text =)
@@ -308,7 +310,7 @@ public class Menu extends Activity {
 		// Rotating fading and translating animation
 
 		float ROTATE_FROM = 0.0f;
-		float ROTATE_TO = 10.0f * 360.0f;
+		float ROTATE_TO   = 10.0f * 360.0f;
 		RotateAnimation r = new RotateAnimation(ROTATE_FROM, ROTATE_TO,
 				Animation.RELATIVE_TO_SELF, 0.5f,
 				Animation.RELATIVE_TO_SELF, 0.5f);
@@ -379,7 +381,7 @@ public class Menu extends Activity {
 
 	
 	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
+	protected void onPostCreate(final Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 	}
 

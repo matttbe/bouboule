@@ -44,95 +44,98 @@ import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
-public class MenuPause extends Activity
-{
+public class MenuPause extends Activity {
+	
 	// Need handler for callback to the UI thread
-	final Handler mHandler = new Handler ();
+	private final Handler mHandler = new Handler();
 
 	// Create runnable for posting to the AnimationUpdater
-	final Runnable animationUpdate = new Runnable () {
+	private final Runnable animationUpdate = new Runnable() {
 		@Override
-		public void run ()
-		{
-			updateAnimationOnUI ();
+		public void run() {
+			
+			updateAnimationOnUI();
 		}
 	};
 
 	// Create runnable for posting to the nameUpdater
-	final Runnable nameUpdate = new Runnable () {
+	private final Runnable nameUpdate = new Runnable() {
 		@Override
-		public void run ()
-		{
-			startFunWithUi ();
+		public void run() {
+
+			startFunWithUi();
 		}
 	};
 
 
 	// String animated
-	String nameToShow;
+	private String nameToShow;
 
 	// Animation containers
-	AnimationSet animationSetForTitle = new AnimationSet (true),
-			animationSetCase1 = new AnimationSet (true),
-			animationSetCase2 = new AnimationSet (true),
-			animationSetCase3 = new AnimationSet (true),
-			animationSetCase4 = new AnimationSet (true),
-			animationSetCaseD = new AnimationSet (true);
+	private AnimationSet 
+			animationSetForTitle = new AnimationSet(true),
+			animationSetCase1 	 = new AnimationSet(true),
+			animationSetCase2 	 = new AnimationSet(true),
+			animationSetCase3 	 = new AnimationSet(true),
+			animationSetCase4 	 = new AnimationSet(true),
+			animationSetCaseD 	 = new AnimationSet(true);
 
 	@Override
-	public void onCreate (Bundle savedInstanceState)
-	{
-		super.onCreate (savedInstanceState);
+	public void onCreate (final Bundle savedInstanceState) {
+		
+		super.onCreate(savedInstanceState);
 
 		// Request the fullScreen for the Main Screen
-		requestWindowFeature (Window.FEATURE_NO_TITLE);
-		getWindow ().setFlags (WindowManager.LayoutParams.FLAG_FULLSCREEN,
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView (R.layout.activity_pause_menu);
+		setContentView(R.layout.activity_pause_menu);
 
-		final View contentView = findViewById (R.id.fullscreen_content_pause);
+		final View contentView = findViewById(R.id.fullscreen_content_pause);
 
 		// Font Update
-		Typeface myTypeface = Typeface.createFromAsset (getAssets (),
+		Typeface myTypeface = Typeface.createFromAsset(getAssets(),
 				"menu_font.ttf");
-		((TextView) contentView).setTypeface (myTypeface);
+		((TextView) contentView).setTypeface(myTypeface);
 
 		// Incline the blue text
-		contentView.setRotation (-15);
+		contentView.setRotation(-15);
 
 		// Listeners for the Game Launcher
-		findViewById (R.id.PauseContinueButton).setOnTouchListener (
+		findViewById(R.id.PauseContinueButton).setOnTouchListener(
 				fireListener);
-		findViewById (R.id.PauseMenuButton).setOnTouchListener (fireListener);
-		findViewById (R.id.PauseQuitButton).setOnTouchListener (fireListener);
+		findViewById(R.id.PauseMenuButton).setOnTouchListener(
+				fireListener);
+		findViewById(R.id.PauseQuitButton).setOnTouchListener(
+				fireListener);
 
 		// TODO: Change the font !!
-		Typeface myFontBout = Typeface.createFromAsset (getAssets (),
+		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
 				"chineyen.ttf");
 
-		((TextView) findViewById (R.id.PauseContinueButton))
-				.setTypeface (myFontBout);
-		((TextView) findViewById (R.id.PauseMenuButton))
-				.setTypeface (myFontBout);
-		((TextView) findViewById (R.id.PauseQuitButton))
-				.setTypeface (myFontBout);
+		((TextView) findViewById(R.id.PauseContinueButton))
+				.setTypeface(myFontBout);
+		((TextView) findViewById(R.id.PauseMenuButton))
+				.setTypeface(myFontBout);
+		((TextView) findViewById(R.id.PauseQuitButton))
+				.setTypeface(myFontBout);
 
 
-		setAllTheAnimationAtOnce ();
+		setAllTheAnimationAtOnce();
 
-		mHandler.post (nameUpdate);
+		mHandler.post(nameUpdate);
 
 	}
 
 	/*
 	 * Start the Game // Parameters // HighScore
 	 */
-	View.OnTouchListener fireListener = new View.OnTouchListener () {
+	private View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
-		public boolean onTouch (View view, MotionEvent motionEvent)
-		{
-			setResult (view.getId ()); // give the id of the button
-			finish (); // finish activity
+		public boolean onTouch(View view, MotionEvent motionEvent) {
+			
+			setResult(view.getId()); // give the id of the button
+			finish(); // finish activity
 
 			return false;
 		}
@@ -141,59 +144,59 @@ public class MenuPause extends Activity
 	/*
 	 * Update the Animated String and add a bouncing animation
 	 */
-	protected void startFunWithUi ()
-	{
-		nameToShow = getResources ().getString (R.string.pause);
+	protected void startFunWithUi() {
+		
+		nameToShow = getResources().getString(R.string.pause);
 
 		// Get the text and update the name
-		TextView myTextView = (TextView) findViewById (R.id.fullscreen_content_pause);
-		myTextView.setText (nameToShow);
+		TextView myTextView = (TextView) findViewById(R.id.fullscreen_content_pause);
+		myTextView.setText(nameToShow);
 
 		// Setting the animation
-		myTextView.startAnimation (animationSetForTitle);
+		myTextView.startAnimation(animationSetForTitle);
 
 		// Launch the new UI thread to set the Animation on
 		// the appropriate time.
-		mHandler.postDelayed (animationUpdate, 10 * 1000);
+		mHandler.postDelayed(animationUpdate, 10 * 1000);
 	}
 
-	private void updateAnimationOnUI ()
-	{
+	private void updateAnimationOnUI() {
+		
 
 		// Get the Text to update
-		TextView myTextView = (TextView) findViewById (R.id.fullscreen_content_pause);
+		TextView myTextView = (TextView) findViewById(R.id.fullscreen_content_pause);
 
 		// Animation Launcher
 
-		Random rand = new Random ();
+		Random rand = new Random();
 
-		switch (rand.nextInt (5))
+		switch (rand.nextInt(5))
 		{
 		// Fire the right animation
 			case 1:
-				myTextView.startAnimation (animationSetCase1);
+				myTextView.startAnimation(animationSetCase1);
 				break;
 			case 2:
-				myTextView.startAnimation (animationSetCase2);
+				myTextView.startAnimation(animationSetCase2);
 				break;
 			case 3:
-				myTextView.startAnimation (animationSetCase3);
+				myTextView.startAnimation(animationSetCase3);
 				break;
 			case 4:
-				myTextView.startAnimation (animationSetCase4);
+				myTextView.startAnimation(animationSetCase4);
 				break;
 			default:
-				myTextView.startAnimation (animationSetCaseD);
+				myTextView.startAnimation(animationSetCaseD);
 				break;
 		}
 
 		// re launch
-		mHandler.postDelayed (nameUpdate, 5 * 1000);
+		mHandler.postDelayed(nameUpdate, 5 * 1000);
 	}
 
 
-	private void setAllTheAnimationAtOnce ()
-	{
+	private void setAllTheAnimationAtOnce()	{
+		
 
 		// Furnish 5 different animation
 		// to add to the Text =)
@@ -201,88 +204,88 @@ public class MenuPause extends Activity
 		/** Animation for the Title Update */
 		// Animatin for the title
 
-		ScaleAnimation g = new ScaleAnimation (1.0f, 1.10f, 1.0f, 1.10f,
+		ScaleAnimation g = new ScaleAnimation(1.0f, 1.10f, 1.0f, 1.10f,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
 				0.5f);
 
-		g.setDuration (1000);
-		g.setRepeatCount (10);
-		g.setRepeatMode (Animation.REVERSE);
+		g.setDuration(1000);
+		g.setRepeatCount(10);
+		g.setRepeatMode(Animation.REVERSE);
 
-		animationSetForTitle.addAnimation (g);
+		animationSetForTitle.addAnimation(g);
 
 		/** Animation for CASE 1 */
 		// Rotating fading and translating animation
 
-		float ROTATE_FROM = 0.0f;
-		float ROTATE_TO = 10.0f * 360.0f;
-		RotateAnimation r = new RotateAnimation (ROTATE_FROM, ROTATE_TO,
+		float ROTATE_FROM 	= 0.0f;
+		float ROTATE_TO 	= 10.0f * 360.0f;
+		RotateAnimation r = new RotateAnimation(ROTATE_FROM, ROTATE_TO,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
 				0.5f);
-		r.setDuration (5000);
-		r.setRepeatCount (0);
+		r.setDuration(5000);
+		r.setRepeatCount(0);
 
-		animationSetCase1.addAnimation (r);
+		animationSetCase1.addAnimation(r);
 
 		TranslateAnimation translateAnimation = new TranslateAnimation (0,
 				-400, 0, 0);
 
 		// setting offset and duration to start after first rotation completed,
 		// and end at the same time with the last rotation
-		translateAnimation.setStartOffset (500);
-		translateAnimation.setDuration (1000);
+		translateAnimation.setStartOffset(500);
+		translateAnimation.setDuration(1000);
 
-		animationSetCase1.addAnimation (translateAnimation);
+		animationSetCase1.addAnimation(translateAnimation);
 
-		AlphaAnimation alphaAnimation = new AlphaAnimation (1, 0);
-		alphaAnimation.setStartOffset (500);
-		alphaAnimation.setDuration (2000);
+		AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+		alphaAnimation.setStartOffset(500);
+		alphaAnimation.setDuration(2000);
 
-		animationSetCase1.addAnimation (alphaAnimation);
+		animationSetCase1.addAnimation(alphaAnimation);
 
 		/** Animation for CASE 2 */
 		// Translating the animation
 
 		TranslateAnimation translateAnimation1 = new TranslateAnimation (0, 0,
 				0, -600);
-		translateAnimation1.setDuration (5000);
-		animationSetCase2.addAnimation (translateAnimation1);
+		translateAnimation1.setDuration(5000);
+		animationSetCase2.addAnimation(translateAnimation1);
 
 		/** Animation for CASE 3 */
 		// Fading the animation
 
-		AlphaAnimation alphaAnimation1 = new AlphaAnimation (1, 0);
-		alphaAnimation1.setDuration (5000);
-		animationSetCase3.addAnimation (alphaAnimation1);
+		AlphaAnimation alphaAnimation1 = new AlphaAnimation(1, 0);
+		alphaAnimation1.setDuration(5000);
+		animationSetCase3.addAnimation(alphaAnimation1);
 
 		/** Animation for CASE 4 */
 		// Upscaling and fading animation
 
-		ScaleAnimation grow = new ScaleAnimation (1.0f, 15f, 1.0f, 15f,
+		ScaleAnimation grow = new ScaleAnimation(1.0f, 15f, 1.0f, 15f,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
 				0.5f);
-		grow.setDuration (5000);
+		grow.setDuration(5000);
 
-		AlphaAnimation alphaAnimation2 = new AlphaAnimation (1, 0);
-		alphaAnimation2.setDuration (3000);
+		AlphaAnimation alphaAnimation2 = new AlphaAnimation(1, 0);
+		alphaAnimation2.setDuration(3000);
 
-		animationSetCase4.addAnimation (grow);
-		animationSetCase4.addAnimation (alphaAnimation2);
+		animationSetCase4.addAnimation(grow);
+		animationSetCase4.addAnimation(alphaAnimation2);
 
 		/** Animation for CASE D */
 		// Schrinking animation
 
-		ScaleAnimation g1 = new ScaleAnimation (1.0f, 0.0f, 1.0f, 0.0f,
+		ScaleAnimation g1 = new ScaleAnimation(1.0f, 0.0f, 1.0f, 0.0f,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
 				0.5f);
-		g1.setDuration (5000);
-		animationSetCaseD.addAnimation (g1);
+		g1.setDuration(5000);
+		animationSetCaseD.addAnimation(g1);
 
 	}
 
 	@Override
-	protected void onPostCreate (Bundle savedInstanceState)
-	{
-		super.onPostCreate (savedInstanceState);
+	protected void onPostCreate(Bundle savedInstanceState) {
+		
+		super.onPostCreate(savedInstanceState);
 	}
 }

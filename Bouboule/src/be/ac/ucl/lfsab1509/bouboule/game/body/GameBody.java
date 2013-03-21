@@ -40,15 +40,16 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class GameBody {
 
-	public Body body;
+	protected Body body;
 
-	public Boolean isAlive;
+	protected Boolean isAlive;
 
 	//object direction depending on the force applied to it
-	public Vector2 positionVector;
+	protected Vector2 positionVector;
 
 	//Origin is the origin defined by a jsonFile
-	Vector2 origin;
+	protected Vector2 origin;
+
 
 
 	/*
@@ -57,11 +58,12 @@ public abstract class GameBody {
 	 * 
 	 * GameBody()
 	 */
-	public GameBody(){
+	public GameBody() {
 
 		isAlive			= true;
 		positionVector 	= new Vector2();
 	}
+
 
 	/*
 	 * Generical constructor for bodies ( circle, rectangle or jsonFiled )
@@ -84,8 +86,10 @@ public abstract class GameBody {
 	 * 	float density,float elasticity,boolean sensor, Vector2 pos,float angle, 
 	 * 	String jsonFile, String jsonName, float size)
 	 */
-	public void MakeBody(float width, float height,float radius,BodyDef.BodyType bodyType,
-			float density,float elasticity,boolean sensor, Vector2 pos,float angle, String jsonFile, String jsonName, float size){
+	public void MakeBody(final float width, final float height, final float radius,
+			final BodyDef.BodyType bodyType, final float density, final float elasticity,
+			final boolean sensor, final Vector2 pos, final float angle, 
+			final String jsonFile, final String jsonName, final float size) {
 
 		World world = GraphicManager.getWorld();
 
@@ -95,24 +99,26 @@ public abstract class GameBody {
 
 		bodyDef.type 	= bodyType;
 		bodyDef.angle	= angle;
-		bodyDef.position.set(GraphicManager.convertToGame(pos.x), GraphicManager.convertToGame(pos.y));
+		bodyDef.position.set(GraphicManager.convertToGame(pos.x), 
+				GraphicManager.convertToGame(pos.y));
 		//dont forget to use the game dimension instead of real world dimension
 
 		//Storage in the main variable
 		body = world.createBody(bodyDef);
 
-		if (jsonFile == ""){
-			if(radius==0)
-			{
-				makeRectBody(width,height,bodyType,density,elasticity,sensor,pos,angle);
+		if (jsonFile == "") {
+			if (radius == 0) {
 
-			}else{
-				makeCircleBody(radius,bodyType,density,elasticity,sensor,pos,angle);
+				makeRectBody(width, height, bodyType, density, elasticity, sensor, pos, angle);
+
+			} else {
+				makeCircleBody(radius, bodyType, density, elasticity, sensor, pos, angle);
 			}
 
 		} else {
 
-			makeJsonBody(bodyType,density,elasticity,sensor,pos,angle,jsonFile, jsonName, size);
+			makeJsonBody(bodyType, density, elasticity, sensor, pos, angle, 
+					jsonFile, jsonName, size);
 		}
 
 
@@ -128,7 +134,7 @@ public abstract class GameBody {
 	 * 
 	 * getPositionVector()
 	 */
-	public Vector2 getPositionVector(){
+	public Vector2 getPositionVector() {
 
 		return positionVector;
 	}
@@ -139,8 +145,9 @@ public abstract class GameBody {
 	 * makeRectBody(float width,float height,BodyDef.BodyType bodyType,
 	 * 	float density,float elasticity, Vector2 pos,float angle)
 	 */
-	void makeRectBody(float width,float height,BodyDef.BodyType bodyType,
-			float density,float elasticity,boolean sensor, Vector2 pos,float angle){
+	void makeRectBody(final float width, final float height, final BodyDef.BodyType bodyType,
+			final float density, final float elasticity, final boolean sensor,
+			final Vector2 pos, final float angle) {
 
 
 		/** IN case of future need**/
@@ -154,8 +161,9 @@ public abstract class GameBody {
 	 * makeCircleBody(float radius,BodyDef.BodyType bodyType,
 	 * 	float density,float elasticity, Vector2 pos,float angle)
 	 */
-	void makeCircleBody(float radius,BodyDef.BodyType bodyType,
-			float density,float elasticity,boolean sensor, Vector2 pos,float angle){
+	void makeCircleBody(final float radius, final BodyDef.BodyType bodyType,
+			final float density, final float elasticity, final boolean sensor,
+			final Vector2 pos, final float angle) {
 
 		//Basoic Object definition for Physics
 		FixtureDef fixtureDef	= new FixtureDef();
@@ -179,8 +187,10 @@ public abstract class GameBody {
 	 * makeJsonBody(BodyDef.BodyType bodyType, float density,
 	 * 	float elasticity, Vector2 pos,float angle, String jsonFile, String jsonName, float size)
 	 */
-	void makeJsonBody(BodyDef.BodyType bodyType, float density,
-			float elasticity,boolean sensor, Vector2 pos,float angle, String jsonFile, String jsonName, float size){
+	void makeJsonBody(final BodyDef.BodyType bodyType, final float density,
+			final float elasticity, final boolean sensor, final Vector2 pos,
+			final float angle, final String jsonFile, final String jsonName, 
+			final float size) {
 
 		//Basoic Object definition for Physics
 		FixtureDef fixtureDef	= new FixtureDef();
@@ -201,13 +211,13 @@ public abstract class GameBody {
 	 * 
 	 * DestroyBody()
 	 */
-	public void DestroyBody(){
+	public void destroyBody() {
 
-		if(body!=null)
-		{
-			isAlive=false;
+		if (body != null) {
+
+			isAlive	= false;
 			GraphicManager.getWorld().destroyBody(body);
-			body=null;
+			body	= null;
 		}
 	}
 
@@ -216,12 +226,39 @@ public abstract class GameBody {
 	 * 
 	 * updatePositionVector()
 	 */
-	public void updatePositionVector(){
+	public void updatePositionVector() {
 
 		//Gdx.app.log ("updatePositionVector", positionVector.x + " " +positionVector.y );
 
 		positionVector.set(GraphicManager.convertToWorld(body.getPosition().x),
 				GraphicManager.convertToWorld(body.getPosition().y));	
+	}
+
+	//Getter and Setter
+
+	public void setBody(final Body bodi) {
+		this.body = bodi;
+	}
+
+	public Body getBody() {
+		return body;
+	}
+
+
+	public Boolean getIsAlive() {
+		return isAlive;
+	}
+
+	public void setIsAlive(final Boolean alive) {
+		this.isAlive = alive;
+	}
+
+	public Vector2 getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(final Vector2 orig) {
+		this.origin = orig;
 	}
 
 	/*
@@ -230,13 +267,13 @@ public abstract class GameBody {
 	 * 
 	 * SetPosition(float px,float py)
 	 */
-	public void SetPosition(float px,float py){
+	public void setPosition(final float px, final float py) {
 
 		//Adimentionalision
-		px=GraphicManager.convertToGame(px);
-		py=GraphicManager.convertToGame(py);
+		float pX = GraphicManager.convertToGame(px);
+		float pY = GraphicManager.convertToGame(py);
 
-		body.setTransform(px, py, body.getAngle());
+		body.setTransform(pX, pY, body.getAngle());
 		updatePositionVector();
 	}
 
@@ -246,8 +283,8 @@ public abstract class GameBody {
 	 * 
 	 * SetPosition(Vector2 v)
 	 */
-	public void SetPosition(Vector2 v){
-		SetPosition(v.x, v.y);
+	public void setPosition(final Vector2 v) {
+		setPosition(v.x, v.y);
 	}
 
 	/*
@@ -255,7 +292,7 @@ public abstract class GameBody {
 	 * 
 	 * draw(SpriteBatch batch)
 	 */
-	public abstract void draw(SpriteBatch batch);
+	public abstract void draw(final SpriteBatch batch);
 
 
 	/*
@@ -263,7 +300,7 @@ public abstract class GameBody {
 	 * 
 	 * update(float dt)
 	 */
-	public void update(){ 
+	public void update() { 
 
 		//Gdx.app.log ("GameBody", "updatePositionVector");
 

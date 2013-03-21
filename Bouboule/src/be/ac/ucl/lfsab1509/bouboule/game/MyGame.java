@@ -1,3 +1,5 @@
+package be.ac.ucl.lfsab1509.bouboule.game;
+
 /*
  * This file is part of Bouboule.
  * 
@@ -24,33 +26,32 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package be.ac.ucl.lfsab1509.bouboule.game;
 
 import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+//import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 public class MyGame implements ApplicationListener {
 
-	final static int appWidth = 800;
-	final static int appHeigth = 1280;
+	static final int APPWIDTH 	= 800;
+	static final int APPHEIGHT 	= 1280;
 	
 	//Test Update
 
 
-	SpriteBatch             		batch;
-	OrthographicCamera      		camera;
+	//private SpriteBatch             		batch;
+	private OrthographicCamera      		camera;
 
-	GameLoop 						game;
+	private GameLoop 						game;
 
 	@Override
 	public void create() {
 
-		camera=CameraHelper.GetCamera(appWidth,appHeigth);
+		camera = CameraHelper.GetCamera(APPWIDTH, APPHEIGHT);
 
 		game = new GameLoop(camera, true);
 		
@@ -74,7 +75,7 @@ public class MyGame implements ApplicationListener {
 	}
 
 	@Override
-	public void resize(int width, int height) {
+	public void resize(final int width, final int height) {
 	}
 
 	@Override

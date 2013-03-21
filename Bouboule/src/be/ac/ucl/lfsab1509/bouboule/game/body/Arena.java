@@ -12,8 +12,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class Arena extends GameBody {
 
 	//Texture texture;
-	TextureRegion texture;
-	Sprite sprite;
+	private TextureRegion texture;
+	private Sprite sprite;
 	
 	/*
 	 * Constructor for a Arena object 
@@ -31,12 +31,13 @@ public class Arena extends GameBody {
 	 * 	float elasticity,float px,float py, float angle,String texRegionPath,
 	 *  String jsonFile, String jsonName)
 	 */
-	public Arena(float radius,float px,float py, float angle,String texRegionPath, 
-			String jsonFile, String jsonName,short entity) {
+	public Arena(final float radius, final float px, final float py,
+			final float angle, final String texRegionPath, 
+			final String jsonFile, final String jsonName, final short entity) {
 
 		super();
 
-		Vector2 pos	= new Vector2(px,py);
+		Vector2 pos	= new Vector2(px, py);
 
 		//
 		this.texture = new TextureRegion(new Texture(texRegionPath));
@@ -50,8 +51,8 @@ public class Arena extends GameBody {
 	}
 	
 	@Override
-	public void draw(SpriteBatch sp) {
-		if ( origin != null){
+	public void draw(final SpriteBatch sp) {
+		if (origin != null) {
 
 			//Ensure that the body image position is set on the origin defined by 
 			//the jsonFile

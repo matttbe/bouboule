@@ -38,14 +38,14 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class GraphicManager {
 	
-	static World world;
-	static final float GAME_TO_WORLD=100.0f;
-	static final float WORLD_TO_GAME=0.01f;
+	private static World world;
+	private static final float GAME_TO_WORLD = 100.0f;
+	private static final float WORLD_TO_GAME = 0.01f;
 	
 	//Store all the body of the game
 	public ArrayList<GameBody> bodies;
 	
-	boolean isPaused;
+	private boolean isPaused;
 	
 	/*
 	 * Create the world, the body container and define the game as notPaused
@@ -54,12 +54,12 @@ public class GraphicManager {
 	 */
 	
 
-	public GraphicManager(){
-		world=new World(new Vector2(0,0), true);
+	public GraphicManager() {
+		world = new World(new Vector2(0, 0), true);
 		
-		world.setContactListener( new EndGameListener() );
-		bodies=new ArrayList<GameBody>();
-		isPaused=false;
+		world.setContactListener(new EndGameListener());
+		bodies	 = new ArrayList<GameBody>();
+		isPaused = false;
 	}
 	
 	/*
@@ -67,7 +67,7 @@ public class GraphicManager {
 	 * 
 	 * World getWorld()
 	 */
-	public static World getWorld(){
+	public static World getWorld() {
 		return world;
 	}
 
@@ -76,8 +76,8 @@ public class GraphicManager {
 	 * 
 	 * convertToGame(float x)
 	 */
-	public static float convertToGame(float x){
-		return x*WORLD_TO_GAME;
+	public static float convertToGame(final float x) {
+		return x * WORLD_TO_GAME;
 	}
 	
 	/*
@@ -85,8 +85,8 @@ public class GraphicManager {
 	 * 
 	 * convertToWorld(float x)
 	 */
-	public static float convertToWorld(float x){
-		return x*GAME_TO_WORLD;
+	public static float convertToWorld(final float x) {
+		return x * GAME_TO_WORLD;
 	}
 	
 	/*
@@ -94,8 +94,8 @@ public class GraphicManager {
 	 * 
 	 * pause()
 	 */
-	public void pause(){
-		isPaused=true;
+	public void pause() {
+		isPaused = true;
 	}
 	
 	/*
@@ -103,8 +103,8 @@ public class GraphicManager {
 	 * 
 	 * resume()
 	 */
-	public void resume(){
-		isPaused=false;
+	public void resume() {
+		isPaused = false;
 	}
 	
 	/*
@@ -112,9 +112,9 @@ public class GraphicManager {
 	 * 
 	 * dispose()
 	 */
-	public void dispose(){
-		for(GameBody body:bodies){
-			body.DestroyBody();
+	public void dispose() {
+		for (GameBody body:bodies) {
+			body.destroyBody();
 		}
 		bodies.clear();
 	}
@@ -126,7 +126,7 @@ public class GraphicManager {
 	 * 
 	 * addBody(GameBody body)
 	 */
-	public void addBody(GameBody body){
+	public void addBody(final GameBody body) {
 		bodies.add(body);
 	}
 	
@@ -137,22 +137,31 @@ public class GraphicManager {
 	 * 
 	 * update(float dt)
 	 */
-	public void update(){
-		for(GameBody body:bodies){
+	public void update() {
+		for (GameBody body:bodies) {
 			
-			world.step(GlobalSettings.BOX_STEP,GlobalSettings.VELOCITY_ITERATIONS, GlobalSettings.POSITION_ITERATIONS);
+			world.step(GlobalSettings.BOX_STEP, GlobalSettings.VELOCITY_ITERATIONS, 
+						GlobalSettings.POSITION_ITERATIONS);
 			body.update();
 		}
 	}
 	
 	
+	public static float getGameToWorld() {
+		return GAME_TO_WORLD;
+	}
+
+	public static float getWorldToGame() {
+		return WORLD_TO_GAME;
+	}
+
 	/*
 	 * Draw all the bodies definition
 	 * 
 	 * draw(SpriteBatch batch)
 	 */
-	public void draw(SpriteBatch batch){
-		for(GameBody body:bodies){
+	public void draw(final SpriteBatch batch) {
+		for (GameBody body:bodies) {
 			body.draw(batch);
 		}
 	}

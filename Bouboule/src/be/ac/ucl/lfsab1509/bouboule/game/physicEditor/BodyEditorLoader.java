@@ -38,13 +38,15 @@ public class BodyEditorLoader {
 	// Ctors
 	// -------------------------------------------------------------------------
 
-	public BodyEditorLoader(FileHandle file) {
-		if (file == null) throw new NullPointerException("file is null");
+	public BodyEditorLoader(final FileHandle file) {
+		if (file == null) 
+			throw new NullPointerException("file is null");
 		model = readJson(file.readString());
 	}
 
-	public BodyEditorLoader(String str) {
-		if (str == null) throw new NullPointerException("str is null");
+	public BodyEditorLoader(final String str) {
+		if (str == null) 
+			throw new NullPointerException("str is null");
 		model = readJson(str);
 	}
 
@@ -76,17 +78,20 @@ public class BodyEditorLoader {
 	 * @param fd The fixture parameters to apply to the created body fixture.
 	 * @param scale The desired scale of the body. The default width is 1.
 	 */
-	public void attachFixture(Body body, String name, FixtureDef fd, float scale) {
+	public void attachFixture(final Body body, final String name, 
+			final FixtureDef fd, final float scale) {
+		
 		RigidBodyModel rbModel = model.rigidBodies.get(name);
-		if (rbModel == null) throw new RuntimeException("Name '" + name + "' was not found.");
+		if (rbModel == null)
+			throw new RuntimeException("Name '" + name + "' was not found.");
 
 		Vector2 origin = vec.set(rbModel.origin).mul(scale);
 
-		for (int i=0, n=rbModel.polygons.size(); i<n; i++) {
+		for (int i = 0, n = rbModel.polygons.size(); i < n; i++) {
 			PolygonModel polygon = rbModel.polygons.get(i);
 			Vector2[] vertices = polygon.buffer;
 
-			for (int ii=0, nn=vertices.length; ii<nn; ii++) {
+			for (int ii = 0, nn = vertices.length; ii < nn; ii++) {
 				vertices[ii] = newVec().set(polygon.vertices.get(ii)).mul(scale);
 				vertices[ii].sub(origin);
 			}
@@ -95,12 +100,12 @@ public class BodyEditorLoader {
 			fd.shape = polygonShape;
 			body.createFixture(fd);
 
-			for (int ii=0, nn=vertices.length; ii<nn; ii++) {
+			for (int ii = 0, nn = vertices.length; ii < nn; ii++) {
 				free(vertices[ii]);
 			}
 		}
 
-		for (int i=0, n=rbModel.circles.size(); i<n; i++) {
+		for (int i = 0, n = rbModel.circles.size(); i < n; i++) {
 			CircleModel circle = rbModel.circles.get(i);
 			Vector2 center = newVec().set(circle.center).mul(scale);
 			float radius = circle.radius * scale;
@@ -117,9 +122,10 @@ public class BodyEditorLoader {
 	/**
 	 * Gets the image path attached to the given name.
 	 */
-	public String getImagePath(String name) {
+	public String getImagePath(final String name) {
 		RigidBodyModel rbModel = model.rigidBodies.get(name);
-		if (rbModel == null) throw new RuntimeException("Name '" + name + "' was not found.");
+		if (rbModel == null) 
+			throw new RuntimeException("Name '" + name + "' was not found.");
 
 		return rbModel.imagePath;
 	}
@@ -130,9 +136,10 @@ public class BodyEditorLoader {
 	 * size. Warning: this method returns the same Vector2 object each time, so
 	 * copy it if you need it for later use.
 	 */
-	public Vector2 getOrigin(String name, float scale) {
+	public Vector2 getOrigin(final String name, final float scale) {
 		RigidBodyModel rbModel = model.rigidBodies.get(name);
-		if (rbModel == null) throw new RuntimeException("Name '" + name + "' was not found.");
+		if (rbModel == null) 
+			throw new RuntimeException("Name '" + name + "' was not found.");
 
 		return vec.set(rbModel.origin).mul(scale);
 	}
