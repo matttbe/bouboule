@@ -59,7 +59,7 @@ public class GlobalSettings {
  	public static short		 GAME_EXIT	=  0;
 	
 	public static void init(){
-		ARENAWAYPOINTALLOW = new Vector2[]{new Vector2(4,4), new Vector2(4,5)};
+		ARENAWAYPOINTALLOW = new Vector2[]{new Vector2(4.01f,4.01f), new Vector2(4,6)};
 	}
  	
 }

@@ -50,7 +50,7 @@ public class MyGame implements ApplicationListener {
 	@Override
 	public void create() {
 
-		camera=CameraHelper.GetCamera(appWidth,appHeigth);
+		camera=CameraHelper.GetCamera(APPWIDTH,APPHEIGTH);
 
 		game = new GameLoop(camera, true);
 		

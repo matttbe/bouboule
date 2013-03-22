@@ -107,7 +107,7 @@ public class GameLoop {
 		bouboule = new Bouboule(0, BodyType.DynamicBody,
 				2, 0.8f, gPositionX, gPositionY, 0,
 				"images/boub.png", "data/jsonFile/boub.json", "boub",
-				GlobalSettings.MONSTER,1);
+				GlobalSettings.MONSTER,3);
 		
 
 		//Add the new object to the graphic and physic manager
@@ -146,8 +146,8 @@ public class GameLoop {
 	 */
 	private void initBall2() {
 		
-		int gPositionX	= 400;
-		int gPositionY	= 350;
+		int gPositionX	= 410;
+		int gPositionY	= 360;
 		
 		bouboule2 = new Bouboule(0, BodyType.DynamicBody,
 				1, 0.9f, gPositionX, gPositionY, 0, 

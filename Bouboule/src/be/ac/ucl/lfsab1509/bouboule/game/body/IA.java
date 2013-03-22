@@ -22,7 +22,7 @@ public class IA {
 	public static Vector2 compute(int IALevel, Bouboule bouboule){
 		
 		
-		Vector2 IA = null, VelocityIA, LocalEnemi, VelocityEnemi;
+		Vector2 IA = null, VelocityIA =null, LocalEnemi=null, VelocityEnemi=null;
 		Body arena = null;
 		
 		Vector2 Acc = null;
@@ -35,15 +35,15 @@ public class IA {
 			bodytemp = iter.next();
 			if(bodytemp.getUserData() == (Object) GlobalSettings.PLAYER){ 
 				LocalEnemi = bodytemp.getPosition();
-				Gdx.app.log ("updatePositionVector","kikoa"+ LocalEnemi.x + " " +LocalEnemi.y );
+				//Gdx.app.log ("updatePositionVector","kikoa"+ LocalEnemi.x + " " +LocalEnemi.y );
 				VelocityEnemi = bodytemp.getLinearVelocity();
 			}else if(bodytemp.getUserData() == (Object) GlobalSettings.MONSTER){
 				IA =  bodytemp.getPosition();
-				Gdx.app.log ("updatePositionVector","kikob"+ IA.x + " " +IA.y );
+				//Gdx.app.log ("updatePositionVector","kikob"+ IA.x + " " +IA.y );
 				VelocityIA  = bodytemp.getLinearVelocity();
 			}else{
 				arena = bodytemp;
-				Gdx.app.log ("updatePositionVector","kikoc"+ bodytemp.getPosition().x + " " +bodytemp.getPosition().y );
+				//Gdx.app.log ("updatePositionVector","kikoc"+ bodytemp.getPosition().x + " " +bodytemp.getPosition().y );
 			}
 		}
 		
@@ -54,17 +54,18 @@ public class IA {
 		switch (IALevel) {
 		case 0:
 			Acc = gyroscope();
+			//Acc = middeler(LocalEnemi,0);
 			break;
 			
 		case 1:
-			Acc = middeler(IA);
+			Acc = middeler(IA,0);
 			break;
 			
 		case 2:
 
 			break;
 		case 3:
-
+			Acc = stopMid(IA, VelocityIA);
 			break;
 		case 4:
 
@@ -96,23 +97,26 @@ public class IA {
 		return new Vector2(accelX,accelY);
 	}
 	
-	public static Vector2 middeler(Vector2 IA){
+	public static Vector2 middeler(Vector2 IA,int temp){
 		
-		Vector2 Acc = new Vector2(IA);
-		Acc = GlobalSettings.ARENAWAYPOINTALLOW[1].sub(Acc);
+		Vector2 Acc = new Vector2(GlobalSettings.ARENAWAYPOINTALLOW[temp]);
+		Acc.sub(IA);
 		
-		/*
-		if(IA.x > GlobalSettings.ARENAWAYPOINTALLOW[1].x){
-			AccX = -0.3f;
-		}
-		
-		if(IA.y > GlobalSettings.ARENAWAYPOINTALLOW[1].y){
-			AccY = -0.3f;
-		}
-		*/
+		//Gdx.app.log ("updatePositionVector","kikoa"+ GlobalSettings.ARENAWAYPOINTALLOW[1].x + " " +GlobalSettings.ARENAWAYPOINTALLOW[1].y );
 		
 				
 		return Acc;
+	}
+	
+	public static Vector2 stopMid(Vector2 position,Vector2 velocity){
+		Vector2 Acc , newAcc;
+		Vector2 pc = new Vector2(GlobalSettings.ARENAWAYPOINTALLOW[1]);
+		pc.sub(position);
+		Acc = new Vector2(pc).limit(0.4f);
+		newAcc = new  Vector2(Acc);
+		newAcc.sub(velocity.mul(1.5f*position.dst(GlobalSettings.ARENAWAYPOINTALLOW[1])));
+		
+		return newAcc;
 	}
 	
 	public static Vector2 troll(Bouboule bouboule){
