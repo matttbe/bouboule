@@ -85,6 +85,7 @@ public class GameLoop {
 	 */
 	private void init() {
 		
+		GlobalSettings.init();
 		initArena();		
 		initBall();
 		initBall2();

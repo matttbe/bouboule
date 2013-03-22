@@ -26,6 +26,8 @@
 
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class GlobalSettings {
 	
 	//Definition for the time step properties
@@ -50,7 +52,14 @@ public class GlobalSettings {
 	public static final short MONSTER 	= -1;
  	public static final short SCENERY 	=  0;
  	
+ 	
+ 	public static Vector2[] ARENAWAYPOINTALLOW = null;
+ 	public static Vector2[] ARENAWAYPOINTDENY = null;
+ 	
  	public static short		 GAME_EXIT	=  0;
 	
-	
+	public static void init(){
+		ARENAWAYPOINTALLOW = new Vector2[]{new Vector2(4,4), new Vector2(4,5)};
+	}
+ 	
 }

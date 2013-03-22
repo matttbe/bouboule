@@ -25,6 +25,8 @@ public class IA {
 		Vector2 IA = null, VelocityIA, LocalEnemi, VelocityEnemi;
 		Body arena = null;
 		
+		Vector2 Acc = null;
+		
 		Iterator<Body> iter = GraphicManager.getWorld().getBodies();
 		
 		Body bodytemp;
@@ -51,11 +53,13 @@ public class IA {
 		
 		switch (IALevel) {
 		case 0:
-			return gyroscope();
-
+			Acc = gyroscope();
+			break;
+			
 		case 1:
-			return middeler(IA);
-
+			Acc = middeler(IA);
+			break;
+			
 		case 2:
 
 			break;
@@ -76,14 +80,9 @@ public class IA {
 			break;
 		}
 		
+		Acc=Acc.limit(0.4f);
 		
-		
-		
-		
-		
-		
-		
-		return null;
+		return Acc;
 	}
 	
 	
@@ -91,24 +90,29 @@ public class IA {
 		
 		float accelX = -Gdx.input.getAccelerometerX()*0.1f;
 		float accelY = -Gdx.input.getAccelerometerY()*0.1f;
+		accelX=0;
+		accelY=0;
 		
 		return new Vector2(accelX,accelY);
 	}
 	
 	public static Vector2 middeler(Vector2 IA){
 		
-		float AccX = 0.4f;
-		float AccY = 0.4f;
+		Vector2 Acc = new Vector2(IA);
+		Acc = GlobalSettings.ARENAWAYPOINTALLOW[1].sub(Acc);
 		
-		if(IA.x > 4){
+		/*
+		if(IA.x > GlobalSettings.ARENAWAYPOINTALLOW[1].x){
 			AccX = -0.3f;
 		}
 		
-		if(IA.y > 4){
+		if(IA.y > GlobalSettings.ARENAWAYPOINTALLOW[1].y){
 			AccY = -0.3f;
 		}
+		*/
 		
-		return new Vector2(AccX,AccY);
+				
+		return Acc;
 	}
 	
 	public static Vector2 troll(Bouboule bouboule){
