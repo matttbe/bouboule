@@ -18,7 +18,8 @@ public class IA {
 		//level 3 => arret mid
 		//level 4 => aggresif
 		//level 5 => defencif
-		//level 6 => attenticipe
+		//level 6 => hybrid aggresif/defencif
+		//level 7 => attenticipe
 
 	public static Vector2 compute(int IALevel, Bouboule bouboule){
 		
@@ -63,7 +64,7 @@ public class IA {
 			break;
 			
 		case 2:
-
+			Acc = troll(IA, VelocityIA);
 			break;
 		case 3:
 			Acc = stopMid(IA, VelocityIA);
@@ -77,26 +78,33 @@ public class IA {
 		case 6:
 
 			break;
-
+		case 7:
+			
+			break;
 		default:
 			break;
 		}
 		
-		Acc=Acc.limit(0.4f);
+		Acc=Acc.limit(GlobalSettings.LIMITACC);
 		
 		return Acc;
 	}
 	
 	
 	private static Vector2 aggretion(Vector2 position, Vector2 velocity,Vector2 localEnemi) {
-		Vector2 directionenemi , newAcc;
-		newAcc = stopMid(position, velocity);
-		newAcc.nor();
+		Vector2 directionenemi , dirmid;
+		dirmid = middeler(position, 1);
+		//dirmid.nor();
 		directionenemi = new Vector2(localEnemi);
-		directionenemi.sub(position);
-		directionenemi.nor().mul(1.5f);
-		newAcc.add(directionenemi);
-		return newAcc;
+		directionenemi.sub(position).nor();
+		Gdx.app.log ("updatePositionVector","vitesse2"+ velocity.len2() + "distance" +dirmid.len());
+		if(dirmid.dot(velocity) < 0 && velocity.len2()+dirmid.len()*8 > 25){
+			Gdx.app.log ("updatePositionVector","stop");
+			
+			//évitement des bords
+			return stopMid(position, velocity);
+		}
+		return directionenemi;
 	}
 
 
@@ -125,27 +133,47 @@ public class IA {
 	}
 	
 	public static Vector2 stopMid(Vector2 position,Vector2 velocity){
-		Vector2 Acc , newAcc;
-		Vector2 pc = new Vector2(GlobalSettings.ARENAWAYPOINTALLOW[1]);
-		pc.sub(position);
-		Acc = new Vector2(pc).limit(0.4f);
-		newAcc = new  Vector2(Acc);
-		newAcc.sub(velocity.mul(1.5f*position.dst(GlobalSettings.ARENAWAYPOINTALLOW[1]))).mul(1.5f);
+		Vector2 vitesse , dirmid , Acc;
+
+		vitesse = new Vector2(velocity).nor().mul(0.9f);
+		dirmid = new Vector2(middeler(position, 0)).nor();
 		
-		return newAcc;
+		Acc = new Vector2(dirmid).sub(vitesse).nor();
+		
+		if(dirmid.dot(vitesse) > 0 &&
+				 GlobalSettings.ARENAWAYPOINTALLOW[0].dst(position) < vitesse.dot(dirmid)*vitesse.dot(dirmid)/(2*GlobalSettings.LIMITACC)){
+			Gdx.app.log ("IA","stopmid STOP" );
+			Acc.rotate(180);
+		}else{
+			Gdx.app.log ("IA","stopmid Continue" );
+		}
+		
+		//newAcc.sub(velocity.mul(1.5f*position.dst(GlobalSettings.ARENAWAYPOINTALLOW[1]))).mul(1.5f);
+		
+		return Acc;
 	}
 	
 	public static Vector2 troll(Vector2 position,Vector2 velocity){
-		Vector2 newAcc = new Vector2(middeler(position, 1));
+		Vector2 newAcc = new Vector2(middeler(position, 0));
 		Vector2 temp1 = new Vector2(newAcc).nor();
 		Vector2 temp2 = new Vector2(velocity).nor();
 		
-		float angle = 90*temp1.dot(temp2);
-		if(angle > 0 ){
-			newAcc.rotate(angle-15);
+		float angle;
+		
+		angle = ((temp2.angle() - temp1.angle()) + 360) % 360;
+		if(angle<85){
+			newAcc.rotate(angle-80);
+		}else if(angle < 180){
+			newAcc.rotate(angle-84);
+		}else if(angle < 275){
+			newAcc.rotate(angle+80);
 		}else{
-			newAcc.rotate(angle+15);
+			newAcc.rotate(angle+84);
 		}
+		
+		newAcc.nor();
+		
+		//newAcc.add(middeler(position, 0)).nor();
 		
 		return newAcc;
 	}

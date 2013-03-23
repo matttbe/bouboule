@@ -52,6 +52,8 @@ public class GlobalSettings {
 	public static final short MONSTER 	= -1;
  	public static final short SCENERY 	=  0;
  	
+ 	public static final float LIMITACC	= 0.4f;
+ 	
  	
  	public static Vector2[] ARENAWAYPOINTALLOW = null;
  	public static Vector2[] ARENAWAYPOINTDENY = null;
