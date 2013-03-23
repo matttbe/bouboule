@@ -8,6 +8,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import java.lang.Math;
 
 public class IA {
 	
@@ -54,7 +55,7 @@ public class IA {
 		switch (IALevel) {
 		case 0:
 			Acc = gyroscope();
-			//Acc = middeler(LocalEnemi,0);
+			Acc = troll(LocalEnemi, VelocityEnemi);
 			break;
 			
 		case 1:
@@ -68,7 +69,7 @@ public class IA {
 			Acc = stopMid(IA, VelocityIA);
 			break;
 		case 4:
-
+			Acc = aggretion(IA,VelocityIA,LocalEnemi);
 			break;
 		case 5:
 
@@ -87,12 +88,27 @@ public class IA {
 	}
 	
 	
+	private static Vector2 aggretion(Vector2 position, Vector2 velocity,Vector2 localEnemi) {
+		Vector2 directionenemi , newAcc;
+		newAcc = stopMid(position, velocity);
+		newAcc.nor();
+		directionenemi = new Vector2(localEnemi);
+		directionenemi.sub(position);
+		directionenemi.nor().mul(1.5f);
+		newAcc.add(directionenemi);
+		return newAcc;
+	}
+
+
 	public static Vector2 gyroscope(){
 		
 		float accelX = -Gdx.input.getAccelerometerX()*0.1f;
 		float accelY = -Gdx.input.getAccelerometerY()*0.1f;
-		accelX=0;
-		accelY=0;
+		/*
+		 * Uniquement pour mes tests
+		 */
+		//accelX=0;
+		//accelY=0;
 		
 		return new Vector2(accelX,accelY);
 	}
@@ -114,12 +130,23 @@ public class IA {
 		pc.sub(position);
 		Acc = new Vector2(pc).limit(0.4f);
 		newAcc = new  Vector2(Acc);
-		newAcc.sub(velocity.mul(1.5f*position.dst(GlobalSettings.ARENAWAYPOINTALLOW[1])));
+		newAcc.sub(velocity.mul(1.5f*position.dst(GlobalSettings.ARENAWAYPOINTALLOW[1]))).mul(1.5f);
 		
 		return newAcc;
 	}
 	
-	public static Vector2 troll(Bouboule bouboule){
-		return null;
+	public static Vector2 troll(Vector2 position,Vector2 velocity){
+		Vector2 newAcc = new Vector2(middeler(position, 1));
+		Vector2 temp1 = new Vector2(newAcc).nor();
+		Vector2 temp2 = new Vector2(velocity).nor();
+		
+		float angle = 90*temp1.dot(temp2);
+		if(angle > 0 ){
+			newAcc.rotate(angle-15);
+		}else{
+			newAcc.rotate(angle+15);
+		}
+		
+		return newAcc;
 	}
 }

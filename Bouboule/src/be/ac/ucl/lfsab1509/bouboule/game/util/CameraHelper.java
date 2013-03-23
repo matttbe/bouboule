@@ -45,7 +45,7 @@ public class CameraHelper {
 		float viewportWidth = virtualWidth;
 		float viewportHeight = virtualHeight;
 		float physicalWidth = Gdx.graphics.getWidth();
-		float physicalHeight = 1280;//Gdx.graphics.getHeight();
+		float physicalHeight = Gdx.graphics.getHeight();
 		
 		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
 		Gdx.app.log("SIZE", physicalWidth + " " + physicalHeight );
