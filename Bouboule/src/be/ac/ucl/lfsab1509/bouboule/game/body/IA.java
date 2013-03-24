@@ -55,8 +55,9 @@ public class IA {
 		
 		switch (IALevel) {
 		case 0:
-			Acc = gyroscope();
-			Acc = troll(LocalEnemi, VelocityEnemi);
+			//Acc = gyroscope();
+			//Acc = troll(LocalEnemi, VelocityEnemi);
+			Acc = aggretion(LocalEnemi, VelocityEnemi,IA);
 			break;
 			
 		case 1:
@@ -73,7 +74,7 @@ public class IA {
 			Acc = aggretion(IA,VelocityIA,LocalEnemi);
 			break;
 		case 5:
-
+			Acc = defence(IA,VelocityIA,LocalEnemi);
 			break;
 		case 6:
 
@@ -87,10 +88,39 @@ public class IA {
 		
 		Acc=Acc.limit(GlobalSettings.LIMITACC);
 		
+		Vector2 slow = new Vector2(VelocityIA).nor().mul(0.05f);
+		
+		Acc.sub(slow);
+		
 		return Acc;
 	}
 	
 	
+	private static Vector2 defence(Vector2 IA, Vector2 velocityIA,Vector2 localEnemi) {
+		Vector2 acc = new Vector2(middeler(IA, 0)).nor();
+		float angleEnemi = angleCentre(localEnemi, 0) - angleCentre(IA, 0);
+		float direction = angleCentre(IA, 0) - velocityIA.angle();
+		
+		angleEnemi = casteangle(angleEnemi);
+		direction = casteangle(direction);
+		if(angleEnemi>0 == direction<0){
+			acc.rotate(45);
+		}else{
+			acc.rotate(-45);
+		}
+		
+		Vector2 dirmid = middeler(IA, 0);
+		if(dirmid.dot(velocityIA) < 0.25f && velocityIA.len2()+dirmid.len()*8 > 10){
+			Gdx.app.log ("updatePositionVector","defence stop");
+			
+			//évitement des bords
+			return stopMid(IA, velocityIA);
+		}
+		
+		return acc;
+	}
+
+
 	private static Vector2 aggretion(Vector2 position, Vector2 velocity,Vector2 localEnemi) {
 		Vector2 directionenemi , dirmid;
 		dirmid = middeler(position, 1);
@@ -98,7 +128,7 @@ public class IA {
 		directionenemi = new Vector2(localEnemi);
 		directionenemi.sub(position).nor();
 		Gdx.app.log ("updatePositionVector","vitesse2"+ velocity.len2() + "distance" +dirmid.len());
-		if(dirmid.dot(velocity) < 0 && velocity.len2()+dirmid.len()*8 > 25){
+		if(dirmid.dot(velocity) < 0.25f && velocity.len2()+dirmid.len()*8 > 25){
 			Gdx.app.log ("updatePositionVector","stop");
 			
 			//évitement des bords
@@ -153,6 +183,22 @@ public class IA {
 		return Acc;
 	}
 	
+	public static Vector2 troll2(Vector2 position,Vector2 velocity){
+		Vector2 newAcc = new Vector2(middeler(position, 1));
+		Vector2 temp1 = new Vector2(newAcc).nor();
+		Vector2 temp2 = new Vector2(velocity).nor();
+
+		float angle = 90*temp1.dot(temp2);
+		if(angle > 0 ){
+			newAcc.rotate(angle-15);
+		}else{
+			newAcc.rotate(angle+15);
+		}
+
+		return newAcc;
+	}
+
+	
 	public static Vector2 troll(Vector2 position,Vector2 velocity){
 		Vector2 newAcc = new Vector2(middeler(position, 0));
 		Vector2 temp1 = new Vector2(newAcc).nor();
@@ -177,4 +223,21 @@ public class IA {
 		
 		return newAcc;
 	}
+	
+	/*
+	 * renvoi un angle entre ]-180;180[
+	 */
+	private static float angleCentre(Vector2 position,int centre){
+		Vector2 temp = new Vector2(position);
+		temp.sub(GlobalSettings.ARENAWAYPOINTALLOW[centre]);
+		return casteangle(temp.angle());
+	}
+	
+	/*
+	 * remet l'angle entre ]-180;180[
+	 */
+	private static float casteangle(float angle){
+		return ((angle + 180)% 360 - 180);
+	}
+	
 }
