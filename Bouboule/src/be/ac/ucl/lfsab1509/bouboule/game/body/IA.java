@@ -55,9 +55,10 @@ public class IA {
 		
 		switch (IALevel) {
 		case 0:
-			//Acc = gyroscope();
-			//Acc = troll(LocalEnemi, VelocityEnemi);
-			Acc = aggretion(LocalEnemi, VelocityEnemi,IA);
+			Acc = gyroscope();
+			//Acc = troll2(LocalEnemi, VelocityEnemi);
+			//Acc = aggretion(LocalEnemi, VelocityEnemi,IA);
+			//Acc = hybrid(LocalEnemi,VelocityEnemi,IA);
 			break;
 			
 		case 1:
@@ -77,7 +78,7 @@ public class IA {
 			Acc = defence(IA,VelocityIA,LocalEnemi);
 			break;
 		case 6:
-
+			Acc = hybrid(IA,VelocityIA,LocalEnemi);
 			break;
 		case 7:
 			
@@ -96,6 +97,22 @@ public class IA {
 	}
 	
 	
+	private static Vector2 hybrid(Vector2 IA, Vector2 velocityIA,Vector2 localEnemi) {
+		float anglerelatif = angleCentre(IA, 0) - angleCentre(localEnemi, 0);
+		anglerelatif=casteangle(anglerelatif);
+		float distIA,distEnemi;
+		distIA = GlobalSettings.ARENAWAYPOINTALLOW[0].dst(IA);
+		distEnemi = GlobalSettings.ARENAWAYPOINTALLOW[0].dst(localEnemi);
+		
+		if(anglerelatif < 90 && anglerelatif > -90 && distIA>distEnemi){
+			return defence(IA, velocityIA, localEnemi);
+		}else{
+			return aggretion(IA, velocityIA, localEnemi);
+		}
+		
+	}
+
+
 	private static Vector2 defence(Vector2 IA, Vector2 velocityIA,Vector2 localEnemi) {
 		Vector2 acc = new Vector2(middeler(IA, 0)).nor();
 		float angleEnemi = angleCentre(localEnemi, 0) - angleCentre(IA, 0);
@@ -104,9 +121,9 @@ public class IA {
 		angleEnemi = casteangle(angleEnemi);
 		direction = casteangle(direction);
 		if(angleEnemi>0 == direction<0){
-			acc.rotate(45);
+			acc.rotate(75);
 		}else{
-			acc.rotate(-45);
+			acc.rotate(-75);
 		}
 		
 		Vector2 dirmid = middeler(IA, 0);
@@ -127,9 +144,9 @@ public class IA {
 		//dirmid.nor();
 		directionenemi = new Vector2(localEnemi);
 		directionenemi.sub(position).nor();
-		Gdx.app.log ("updatePositionVector","vitesse2"+ velocity.len2() + "distance" +dirmid.len());
-		if(dirmid.dot(velocity) < 0.25f && velocity.len2()+dirmid.len()*8 > 25){
-			Gdx.app.log ("updatePositionVector","stop");
+		//Gdx.app.log ("updatePositionVector","vitesse2"+ velocity.len2() + "distance" +dirmid.len());
+		if(dirmid.dot(velocity) < 0.15f && velocity.len2()+dirmid.len()*6 > 25){
+			//Gdx.app.log ("updatePositionVector","stop");
 			
 			//évitement des bords
 			return stopMid(position, velocity);
