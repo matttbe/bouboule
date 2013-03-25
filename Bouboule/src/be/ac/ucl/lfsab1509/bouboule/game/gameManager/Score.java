@@ -39,9 +39,13 @@ public class Score {
 	// lifes
 	private int iLifes;
 
-	public Score (int iInitScore, int iInitLifes) {
+	// level
+	private int iLevel;
+
+	public Score (int iInitScore, int iInitLifes, int iLevel) {
 		this.iInitScore = iInitScore;
 		this.iLifes = iInitLifes;
+		this.iLevel = iLevel;
 	}
 	
 	public void LaunchTimer () {
@@ -92,6 +96,14 @@ public class Score {
 		timer.stop ();
 		timer.clear (); // maybe not needed?
 		timer = null;
+	}
+
+	public void LevelUp () {
+		iLevel++;
+	}
+
+	public int getLevel () {
+		return iLevel;
 	}
 
 }

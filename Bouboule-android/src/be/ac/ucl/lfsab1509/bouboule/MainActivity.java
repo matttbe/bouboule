@@ -58,6 +58,7 @@ public class MainActivity extends AndroidApplication {
 		getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON); // to not lock the screen
 	
 		game = new MyGame();
+		GlobalSettings.GAME = game;
 		initialize(game, cfg);
 	}
 
@@ -102,38 +103,37 @@ public class MainActivity extends AndroidApplication {
 	}
 
 	@Override
-	protected void onPause() {
-		super.onPause();
+	protected void onPause () {
+		super.onPause ();
 
 		if (GlobalSettings.GAME_EXIT != 0) {
-
-			Context context = getApplicationContext();
-			CharSequence text = "Game Exit with number : " + GlobalSettings.GAME_EXIT;
-			int duration = Toast.LENGTH_SHORT;
-
-			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();
-			
 			int exit = GlobalSettings.GAME_EXIT;
-			
+
 			GlobalSettings.GAME_EXIT = 0;
-			
-			
+
 			if (exit == 1) {
-				
-				Intent intent = new Intent(this, VictoryActivity.class);
-				startActivity(intent);
-				overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-				
-			} else if (exit == -1) {
-				
-				Intent intent = new Intent(this, LoosingActivity.class);
-				startActivity(intent);
-				overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-				
+				Context context = getApplicationContext ();
+				CharSequence text = "Score: " + game.getScore ().getScore ()
+						+ "\nLifes: " + game.getScore ().getNbLifes ();
+				int duration = Toast.LENGTH_SHORT;
+
+				Toast toast = Toast.makeText (context, text, duration);
+				toast.show ();
+
+				Intent intent = new Intent (this, VictoryActivity.class);
+				startActivity (intent);
+				overridePendingTransition (android.R.anim.fade_in,
+						android.R.anim.fade_out);
+
 			}
-				
-			
+			else if (exit == -1) {
+				Intent intent = new Intent (this, LoosingActivity.class);
+				startActivity (intent);
+				overridePendingTransition (android.R.anim.fade_in,
+						android.R.anim.fade_out);
+
+			}
+
 		}
 
 	}

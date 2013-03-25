@@ -41,17 +41,22 @@ public class LoosingActivity extends Activity {
 		.setTypeface (myFontBout);
 
 		//Hide the bouboules until the animation begin 
+		
+		int NbLifes = GlobalSettings.GAME.getScore ().getNbLifes ();
 
-		if (GlobalSettings.LIVES==3) { // TODO => from getScore
+		if (NbLifes == GlobalSettings.INIT_LIVES) { // = 3
 			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
 			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
-		} else if ( GlobalSettings.LIVES==1) {
-			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
-			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
-		} else if ( GlobalSettings.LIVES==2) {
+		}
+		else if (NbLifes == 2) {
 			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
 			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
-		} else {
+		}
+		else if (NbLifes == 1) {
+			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
+		}
+		else {
 			Context context = getApplicationContext();
 			CharSequence text = "HighScore Menu must be enabled";
 			int duration = Toast.LENGTH_LONG;

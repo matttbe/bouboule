@@ -27,19 +27,14 @@
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 
-import be.ac.ucl.lfsab1509.bouboule.game.body.Arena;
-import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 
 public class GameLoop {
@@ -49,10 +44,6 @@ public class GameLoop {
 	private Matrix4 			debugMatrix;
 	
 	private SpriteBatch			batch;
-	
-	private Bouboule		 	bouboule;
-	private Bouboule		 	bouboule2;
-	private Arena				arena;
 	
 	
 	/*
@@ -89,7 +80,7 @@ public class GameLoop {
 		GlobalSettings.init();
 		
 		LevelLoader level = new LevelLoader();
-		level.loadLevel("Level" + GlobalSettings.LEVEL);
+		level.loadLevel("Level" + GlobalSettings.GAME.getScore ().getLevel ());
 		level.readLevelArena	(graphicManager);
 		level.readLevelBouboule (graphicManager);
 		

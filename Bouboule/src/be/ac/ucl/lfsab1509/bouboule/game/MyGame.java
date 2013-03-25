@@ -29,8 +29,8 @@ package be.ac.ucl.lfsab1509.bouboule.game;
 
 import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.Score;
-import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -53,9 +53,6 @@ public class MyGame implements ApplicationListener {
 
 	private GameLoop 						game;
 	private Score score;
-	private final int INIT_SCORE = 100;
-	private final int INIT_LIFES = 3; // TODO: Init_scrore and life: take data from config
-	private final int PAUSE_TIME = 1;
 
 	private Timer timer = null;
 	private int iCountDown = 0;
@@ -73,7 +70,9 @@ public class MyGame implements ApplicationListener {
 
 		game = new GameLoop(camera, true);
 		
-		score = new Score (INIT_SCORE, INIT_LIFES); // TODO: Init_scrore and life: take data from config
+		score = new Score (GlobalSettings.INIT_SCORE,
+				GlobalSettings.INIT_LIFES,
+				GlobalSettings.INIT_LEVEL); // TODO: Init_scrore and life: take data from config
 		score.LaunchTimer ();
 	}
 
@@ -107,8 +106,7 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void pause() {
-		Gdx.app.log ("Matth", "Pause");
-		if (score.getScore () == INIT_SCORE)
+		if (score.getScore () == GlobalSettings.INIT_SCORE)
 			return;
 		bIsPause = true;
 		score.pause ();
@@ -116,7 +114,6 @@ public class MyGame implements ApplicationListener {
 	}
 
 	private void startCountDown (int iNbTime) {
-		Gdx.app.log ("Matth", "startcountdown");
 		iCountDown = iNbTime - 1;
 		Timer.Task task = new Timer.Task () {
 			@Override
@@ -139,7 +136,6 @@ public class MyGame implements ApplicationListener {
 	}
 	
 	private void resumeStart () {
-		Gdx.app.log ("Matth", "resumeStart");
 		bIsPause = false;
 		score.play ();
 		loopMusic.play ();
@@ -147,10 +143,9 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void resume() {
-		Gdx.app.log ("Matth", "resume: " + score.getScore ());
-		if (bIsPause && score.getScore () < INIT_SCORE && // this function is called one or two time when starting the game
+		if (bIsPause && score.getScore () < GlobalSettings.INIT_SCORE && // this function is called one or two time when starting the game
 				timer == null) // not already launched
-			startCountDown (PAUSE_TIME);
+			startCountDown (GlobalSettings.PAUSE_TIME);
 	}
 		
 	public Score getScore () {

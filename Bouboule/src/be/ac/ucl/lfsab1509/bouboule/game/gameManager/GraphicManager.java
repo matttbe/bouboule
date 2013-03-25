@@ -45,8 +45,6 @@ public class GraphicManager {
 	//Store all the body of the game
 	public ArrayList<GameBody> bodies;
 	
-	private boolean isPaused;
-	
 	/*
 	 * Create the world, the body container and define the game as notPaused
 	 * 
@@ -59,7 +57,6 @@ public class GraphicManager {
 		
 		world.setContactListener(new EndGameListener());
 		bodies	 = new ArrayList<GameBody>();
-		isPaused = false;
 	}
 	
 	/*
@@ -87,24 +84,6 @@ public class GraphicManager {
 	 */
 	public static float convertToWorld(final float x) {
 		return x * GAME_TO_WORLD;
-	}
-	
-	/*
-	 * Set up the pause definition to true
-	 * 
-	 * pause()
-	 */
-	public void pause() {
-		isPaused = true;
-	}
-	
-	/*
-	 * Set up the pause definition to false
-	 * 
-	 * resume()
-	 */
-	public void resume() {
-		isPaused = false;
 	}
 	
 	/*
