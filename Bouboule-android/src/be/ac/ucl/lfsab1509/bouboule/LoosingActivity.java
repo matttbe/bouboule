@@ -1,7 +1,9 @@
 package be.ac.ucl.lfsab1509.bouboule;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
@@ -9,14 +11,15 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoosingActivity extends Activity {
 
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_loosing);
@@ -25,7 +28,6 @@ public class LoosingActivity extends Activity {
 		findViewById (R.id.LoosingMenuButton).setOnTouchListener (
 				fireListener);
 		findViewById (R.id.LoosingNextLevelButton).setOnTouchListener (fireListener);
-		findViewById (R.id.LoosingQuitButton).setOnTouchListener (fireListener);
 
 		// TODO: Change the font !!
 		Typeface myFontBout = Typeface.createFromAsset (getAssets (),
@@ -35,25 +37,46 @@ public class LoosingActivity extends Activity {
 		.setTypeface (myFontBout);
 		((TextView) findViewById (R.id.LoosingNextLevelButton))
 		.setTypeface (myFontBout);
-		((TextView) findViewById (R.id.LoosingQuitButton))
-		.setTypeface (myFontBout);
+
+		//Hide the bouboules until the animation begin 
+
+		if ( GlobalSettings.LIVES==3) {
+			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
+		} else if ( GlobalSettings.LIVES==1) {
+			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
+		} else if ( GlobalSettings.LIVES==2) {
+			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
+		} else {
+			Context context = getApplicationContext();
+			CharSequence text = "HighScore Menu must be enabled";
+			int duration = Toast.LENGTH_LONG;
+
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
+		}
 	}
 
 	View.OnTouchListener fireListener = new View.OnTouchListener () {
 		@Override
 		public boolean onTouch (View view, MotionEvent motionEvent)
 		{
-
+			
+			Intent intent;
 
 			switch (view.getId ()) {
 
 			case R.id.LoosingMenuButton: // cas ou on stoppe
-				Intent intent = new Intent(LoosingActivity.this, Menu.class);
+				intent = new Intent(LoosingActivity.this, Menu.class);
 				startActivity(intent);
 				finish ();
 				break;
-			case R.id.LoosingQuitButton: // just quit without new activity => quit
-				finish ();
+			case R.id.LoosingNextLevelButton: 
+				intent = new Intent(LoosingActivity.this, MainActivity.class);//MainActivity.class);
+				startActivity(intent);
+				finish();
 
 				break;
 

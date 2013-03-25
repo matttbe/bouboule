@@ -27,8 +27,11 @@
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 
+import java.util.ArrayList;
+
 import be.ac.ucl.lfsab1509.bouboule.game.body.Arena;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
+import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -86,75 +89,11 @@ public class GameLoop {
 	private void init() {
 		
 		GlobalSettings.init();
-		initArena();		
-		initBall();
-		initBall2();
-		
-	}
 
-	/*
-	 * Non generic implementation to create a Bouboule thanks to the .json 
-	 * stored in jsonFile/boub.json with the code name boub and the texture 
-	 * image, images/boub.png, on position 400/1000
-	 * 
-	 * initBall()
-	 */
-	private void initBall() {
-				
-		int gPositionX	= 400;
-		int gPositionY	= 800;
-		
-		bouboule = new Bouboule(0, BodyType.DynamicBody,
-				1, 0.8f, gPositionX, gPositionY, 0,
-				"images/boub2.png", "data/jsonFile/boub.json", "boub",
-				GlobalSettings.MONSTER,6);
-		
-
-		//Add the new object to the graphic and physic manager
-		graphicManager.addBody(bouboule);
-		
-	}
-	
-	/*
-	 * Non generic implementation to create an Arena thanks to the .json file 
-	 * ...
-	 * ...
-	 * 
-	 * initArena()
-	 */
-	private void initArena() {
-		
-		int gPositionX	= 0;
-		int gPositionY	= 0;
-		
-		arena = new Arena(500, gPositionX, gPositionY, 0,
-				"images/plateau.png", "data/jsonFile/arena/arena.json", "arena",
-				GlobalSettings.SCENERY);
-		
-
-		//Add the new object to the graphic and physic manager
-		graphicManager.addBody(arena);
-
-	}
-
-	/*
-	 * Non generic implementation to create a Bouboule thanks to the .json 
-	 * stored in jsonFile/boub.json with the code name boub and the texture 
-	 * image, images/boub.png, on position 400/350
-	 * 
-	 * initBall()
-	 */
-	private void initBall2() {
-		
-		int gPositionX	= 410;
-		int gPositionY	= 360;
-		
-		bouboule2 = new Bouboule(0, BodyType.DynamicBody,
-				1, 0.9f, gPositionX, gPositionY, 0, 
-				"images/boub.png","data/jsonFile/boub.json", "boub",
-				GlobalSettings.PLAYER,0);
-		
-		graphicManager.addBody(bouboule2);
+		LevelLoader level = new LevelLoader();
+		level.loadLevel("Level"+GlobalSettings.LEVEL);
+		level.readLevelArena	(graphicManager);
+		level.readLevelBouboule (graphicManager);
 		
 	}
 	
@@ -173,8 +112,8 @@ public class GameLoop {
 		//float accelZ = Gdx.input.getAccelerometerZ();
 		
 		
-		bouboule.update();
-		bouboule2.update();
+		//bouboule.update();
+		//bouboule2.update();
 		
 		/*bouboule.body.applyForceToCenter(new Vector2(0,-0.5f));
 		bouboule2.body.applyForceToCenter(new Vector2(-accelX*0.3f,-accelY*0.3f));

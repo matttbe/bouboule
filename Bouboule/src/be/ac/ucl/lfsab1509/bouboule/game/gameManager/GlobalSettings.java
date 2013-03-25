@@ -52,6 +52,7 @@ public class GlobalSettings {
 	public static final short MONSTER 	= -1;
  	public static final short SCENERY 	=  0;
  	
+ 	
  	public static final float LIMITACC	= 0.4f;
  	
  	
@@ -59,6 +60,9 @@ public class GlobalSettings {
  	public static Vector2[] ARENAWAYPOINTDENY = null;
  	
  	public static short		 GAME_EXIT	=  0;
+ 	public static int  		 LEVEL		=  1;
+ 	public static int  		 LIVES		=  3;
+
 	
 	public static void init(){
 		ARENAWAYPOINTALLOW = new Vector2[]{new Vector2(4.01f,4.01f), new Vector2(4,6)};
