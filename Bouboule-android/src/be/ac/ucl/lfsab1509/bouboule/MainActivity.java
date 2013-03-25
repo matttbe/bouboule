@@ -29,7 +29,6 @@ package be.ac.ucl.lfsab1509.bouboule;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Toast;
 import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
@@ -75,7 +74,6 @@ public class MainActivity extends AndroidApplication
 	protected void onActivityResult (int requestCode, int resultCode,
 			Intent data)
 	{
-		Log.d ("Matth", "onActivityResult (" + requestCode + ", " + resultCode + ")");
 		switch (requestCode)
 		{
 			case CODE_PAUSE_ACTIVITY: // menu pause
@@ -103,27 +101,24 @@ public class MainActivity extends AndroidApplication
 		super.onPause();
 
 		if ( GlobalSettings.GAME_EXIT != 0 ){
-
-			Context context = getApplicationContext();
-			CharSequence text = "Game Exit with number : "+GlobalSettings.GAME_EXIT;
-			int duration = Toast.LENGTH_SHORT;
-
-			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();
-			
 			int exit = GlobalSettings.GAME_EXIT;
 			
 			GlobalSettings.GAME_EXIT = 0;
 			
-			
 			if ( exit == 1){
-				
+				Context context = getApplicationContext();
+				CharSequence text = "Score: " + game.getScore ().getScore () +
+						"\nLifes: " + game.getScore ().getNbLifes ();
+				int duration = Toast.LENGTH_SHORT;
+
+				Toast toast = Toast.makeText(context, text, duration);
+				toast.show();
+
 				Intent intent = new Intent(this, VictoryActivity.class);
 				startActivity(intent);
 				overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 				
 			} else if (exit == -1) {
-				
 				Intent intent = new Intent(this, LoosingActivity.class);
 				startActivity(intent);
 				overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
