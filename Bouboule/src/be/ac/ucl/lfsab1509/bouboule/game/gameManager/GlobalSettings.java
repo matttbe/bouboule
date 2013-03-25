@@ -65,7 +65,8 @@ public class GlobalSettings {
 
 	
 	public static void init(){
-		ARENAWAYPOINTALLOW = new Vector2[]{new Vector2(4.01f,4.01f), new Vector2(4,6)};
+		ARENAWAYPOINTALLOW = new Vector2[]{new Vector2(3.5f,5.0f)};//, new Vector2(4,6)};
+		ARENAWAYPOINTDENY = new Vector2[]{new Vector2(-3.5f,5.0f), new Vector2(10.5f,5.0f)};
 	}
  	
 }
