@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +64,15 @@ public class LoosingActivity extends Activity {
 
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
+
+			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
+
+			
+			((Button) findViewById(R.id.LoosingNextLevelButton)).setEnabled(false);
+			((Button) findViewById(R.id.LoosingNextLevelButton)).setText("Game Over");
+			
 		}
 	}
 

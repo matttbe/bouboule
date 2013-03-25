@@ -127,6 +127,13 @@ public class MainActivity extends AndroidApplication {
 
 			}
 			else if (exit == -1) {
+				Context context = getApplicationContext ();
+				CharSequence text = "Score: " + 0 + "\nLifes: " + game.getUserScore ().getNbLifes ();
+				int duration = Toast.LENGTH_SHORT;
+
+				Toast toast = Toast.makeText (context, text, duration);
+				toast.show ();
+				
 				Intent intent = new Intent (this, LoosingActivity.class);
 				startActivity (intent);
 				overridePendingTransition (android.R.anim.fade_in,

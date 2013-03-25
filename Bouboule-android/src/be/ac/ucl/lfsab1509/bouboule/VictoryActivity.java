@@ -46,11 +46,11 @@ public class VictoryActivity extends Activity {
 		@Override
 		public boolean onTouch(final View view, final MotionEvent motionEvent) {
 
-
+			Intent intent;
 			switch (view.getId()) {
 
 			case R.id.VictoryMenuButton: // cas ou on stoppe
-				Intent intent = new Intent(VictoryActivity.this, Menu.class);
+				intent = new Intent(VictoryActivity.this, Menu.class);
 				startActivity(intent);
 				finish();
 				break;
@@ -58,7 +58,11 @@ public class VictoryActivity extends Activity {
 				finish();
 
 				break;
-
+			case R.id.VictoryNextLevelButton:
+				intent = new Intent(VictoryActivity.this, MainActivity.class);
+				startActivity(intent);
+				finish();
+				break;
 			default:
 				break;
 			}
