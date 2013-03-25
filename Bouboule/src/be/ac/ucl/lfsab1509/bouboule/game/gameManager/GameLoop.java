@@ -27,6 +27,7 @@
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 
+import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
 import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 
 import com.badlogic.gdx.Gdx;
@@ -80,7 +81,10 @@ public class GameLoop {
 		GlobalSettings.init();
 		
 		LevelLoader level = new LevelLoader();
-		level.loadLevel("Level" + GlobalSettings.GAME.getUserScore ().getLevel ());
+		MyGame temp42 = GlobalSettings.GAME;
+		Score temp43 = temp42.getUserScore();
+		int temp44 = temp43.getLevel();
+		level.loadLevel("Level" + temp44);
 		level.readLevelArena	(graphicManager);
 		level.readLevelBouboule (graphicManager);
 		

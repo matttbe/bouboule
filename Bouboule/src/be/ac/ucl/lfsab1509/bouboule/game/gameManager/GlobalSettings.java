@@ -69,7 +69,8 @@ public class GlobalSettings {
 	public final static int 		INIT_SCORE = 100;
 	public final static int 		INIT_LIFES = 3; // TODO: Init_scrore and life: take data from config
 	public final static int 		PAUSE_TIME = 1;
-	public static MyGame GAME = null;
+	public static MyGame			GAME = null;
+	public static Score			SCORE = null;
 
 	
 	public static void init(){

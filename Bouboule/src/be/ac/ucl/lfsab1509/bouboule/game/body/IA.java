@@ -23,7 +23,7 @@ public class IA {
 	public static Vector2 compute(int IALevel, Bouboule bouboule){
 
 
-		Vector2 IA = null, VelocityIA =null, LocalEnemi=null;//, VelocityEnemi;
+		Vector2 IA = null, VelocityIA =null, LocalEnemi=null, VelocityEnemi = null;
 		//Body arena = null;
 
 		Vector2 Acc = null;
@@ -36,7 +36,7 @@ public class IA {
 			bodytemp = iter.next();
 			if(bodytemp.getUserData() == (Object) GlobalSettings.PLAYER){ 
 				LocalEnemi = bodytemp.getPosition();
-				// VelocityEnemi = bodytemp.getLinearVelocity();
+				VelocityEnemi = bodytemp.getLinearVelocity();
 			}else if(bodytemp.getUserData() == (Object) GlobalSettings.MONSTER){
 				IA =  bodytemp.getPosition();
 				VelocityIA  = bodytemp.getLinearVelocity();
@@ -56,6 +56,7 @@ public class IA {
 			//Acc = middeler(LocalEnemi,0);
 			//Acc = aggretion(LocalEnemi, VelocityEnemi,IA);
 			//Acc = hybrid(LocalEnemi,VelocityEnemi,IA);
+			//Acc = stopMid(LocalEnemi, VelocityEnemi);
 			break;
 
 		case 1:
@@ -86,7 +87,6 @@ public class IA {
 		Acc=Acc.limit(GlobalSettings.LIMITACC);
 
 		Vector2 slow = new Vector2(VelocityIA).nor().mul(0.05f);
-
 		Acc.sub(slow);
 		
 
@@ -139,7 +139,7 @@ public class IA {
 		//dirmid.nor();
 		directionenemi = new Vector2(localEnemi);
 		directionenemi.sub(position).nor();
-		if(dirmid.dot(velocity) < 0.15f && velocity.len2()+dirmid.len()*6 > 25){
+		if(dirmid.dot(velocity) < 0.15f && velocity.len2()+dirmid.len()*8 > 30){
 
 			//évitement des bords
 			return stopMid(position, velocity);

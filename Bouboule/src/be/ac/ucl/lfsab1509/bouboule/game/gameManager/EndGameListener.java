@@ -38,6 +38,8 @@ public class EndGameListener implements ContactListener{
 				isAliveMonster = !isAliveMonster;
 
 			}
+		}else if((entity1 != GlobalSettings.SCENERY) && (entity2 != GlobalSettings.SCENERY)){
+			GlobalSettings.GAME.hitSound (); 
 		}
 
 	}
