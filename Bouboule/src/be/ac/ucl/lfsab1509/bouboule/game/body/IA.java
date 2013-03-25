@@ -8,11 +8,6 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Shape;
-
-import java.lang.Math;
-
-import javafx.scene.shape.Rectangle;
 
 public class IA {
 
@@ -28,8 +23,8 @@ public class IA {
 	public static Vector2 compute(int IALevel, Bouboule bouboule){
 
 
-		Vector2 IA = null, VelocityIA =null, LocalEnemi=null, VelocityEnemi=null;
-		Body arena = null;
+		Vector2 IA = null, VelocityIA =null, LocalEnemi=null;//, VelocityEnemi;
+		//Body arena = null;
 
 		Vector2 Acc = null;
 
@@ -41,13 +36,13 @@ public class IA {
 			bodytemp = iter.next();
 			if(bodytemp.getUserData() == (Object) GlobalSettings.PLAYER){ 
 				LocalEnemi = bodytemp.getPosition();
-				VelocityEnemi = bodytemp.getLinearVelocity();
+				// VelocityEnemi = bodytemp.getLinearVelocity();
 			}else if(bodytemp.getUserData() == (Object) GlobalSettings.MONSTER){
 				IA =  bodytemp.getPosition();
 				VelocityIA  = bodytemp.getLinearVelocity();
-			}else{
+			}/*else{
 				arena = bodytemp;
-			}
+			}*/
 		}
 
 
