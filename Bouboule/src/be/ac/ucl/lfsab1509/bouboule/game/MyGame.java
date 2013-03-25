@@ -54,6 +54,7 @@ public class MyGame implements ApplicationListener {
 	private Score score;
 	private final int INIT_SCORE = 100;
 	private final int INIT_LIFES = 3; // TODO: Init_scrore and life: take data from config
+	private final int PAUSE_TIME = 1;
 
 	private Timer timer = null;
 	private int iCountDown = 0;
@@ -148,7 +149,7 @@ public class MyGame implements ApplicationListener {
 		Gdx.app.log ("Matth", "resume: " + score.getScore ());
 		if (bIsPause && score.getScore () < INIT_SCORE && // this function is called one or two time when starting the game
 				timer == null) // not already launched
-			startCountDown (2);
+			startCountDown (PAUSE_TIME);
 	}
 		
 	public Score getScore () {
