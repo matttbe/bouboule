@@ -35,6 +35,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.Score;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 //import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
@@ -58,6 +59,9 @@ public class MyGame implements ApplicationListener {
 	private int iCountDown = 0;
 	private boolean bIsPause = false;
 	private Music loopMusic;
+	private Sound hitSound;
+	private Sound winSound;
+	private Sound looseSound;
 	@Override
 	public void create() {
 
@@ -67,6 +71,10 @@ public class MyGame implements ApplicationListener {
 		loopMusic = Gdx.audio.newMusic(Gdx.files.internal("music/klez.mp3"));
 		loopMusic.setLooping(true);
 		loopMusic.play();
+		
+		hitSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3")); // TODO: find sound and use parameters?
+		winSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
+		looseSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 
 		game = new GameLoop(camera, true);
 		
@@ -98,6 +106,9 @@ public class MyGame implements ApplicationListener {
 		game.dispose();
 		score.stop ();
 		loopMusic.dispose ();
+		hitSound.dispose ();
+		winSound.dispose ();
+		looseSound.dispose ();
 	}
 
 	@Override
@@ -150,5 +161,17 @@ public class MyGame implements ApplicationListener {
 		
 	public Score getUserScore () {
 		return score;
+	}
+	
+	public void hitSound () {
+		hitSound.play ();
+	}
+	
+	public void winSound () {
+		winSound.play ();
+	}
+	
+	public void looseSound () {
+		looseSound.play ();
 	}
 }
