@@ -80,7 +80,7 @@ public class GameLoop {
 		GlobalSettings.init();
 		
 		LevelLoader level = new LevelLoader();
-		level.loadLevel("Level" + GlobalSettings.GAME.getScore ().getLevel ());
+		level.loadLevel("Level" + GlobalSettings.GAME.getUserScore ().getLevel ());
 		level.readLevelArena	(graphicManager);
 		level.readLevelBouboule (graphicManager);
 		

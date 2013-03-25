@@ -148,7 +148,7 @@ public class MyGame implements ApplicationListener {
 			startCountDown (GlobalSettings.PAUSE_TIME);
 	}
 		
-	public Score getScore () {
+	public Score getUserScore () {
 		return score;
 	}
 }

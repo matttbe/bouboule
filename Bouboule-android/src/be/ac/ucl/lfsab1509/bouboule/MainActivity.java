@@ -113,8 +113,8 @@ public class MainActivity extends AndroidApplication {
 
 			if (exit == 1) {
 				Context context = getApplicationContext ();
-				CharSequence text = "Score: " + game.getScore ().getScore ()
-						+ "\nLifes: " + game.getScore ().getNbLifes ();
+				CharSequence text = "Score: " + game.getUserScore ().getScore ()
+						+ "\nLifes: " + game.getUserScore ().getNbLifes ();
 				int duration = Toast.LENGTH_SHORT;
 
 				Toast toast = Toast.makeText (context, text, duration);
