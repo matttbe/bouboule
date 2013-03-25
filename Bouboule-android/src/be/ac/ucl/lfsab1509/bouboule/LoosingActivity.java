@@ -27,34 +27,53 @@ public class LoosingActivity extends Activity {
 				fireListener);
 		findViewById(R.id.LoosingNextLevelButton).setOnTouchListener(
 				fireListener);
-		findViewById(R.id.LoosingQuitButton).setOnTouchListener(
-				fireListener);
 
 		// TODO: Change the font !!
 		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
 				"chineyen.ttf");
 
-		((TextView) findViewById(R.id.LoosingMenuButton))
-		.setTypeface(myFontBout);
-		((TextView) findViewById(R.id.LoosingNextLevelButton))
-		.setTypeface(myFontBout);
-		((TextView) findViewById(R.id.LoosingQuitButton))
-		.setTypeface(myFontBout);
+		((TextView) findViewById (R.id.LoosingMenuButton))
+		.setTypeface (myFontBout);
+		((TextView) findViewById (R.id.LoosingNextLevelButton))
+		.setTypeface (myFontBout);
+
+		//Hide the bouboules until the animation begin 
+
+		if ( GlobalSettings.LIVES==3) {
+			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
+		} else if ( GlobalSettings.LIVES==1) {
+			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
+		} else if ( GlobalSettings.LIVES==2) {
+			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
+		} else {
+			Context context = getApplicationContext();
+			CharSequence text = "HighScore Menu must be enabled";
+			int duration = Toast.LENGTH_LONG;
+
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
+		}
 	}
 
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(final View view, final MotionEvent motionEvent) {
 
+			Intent intent;
 
 			switch (view.getId()) {
 
 			case R.id.LoosingMenuButton: // cas ou on stoppe
-				Intent intent = new Intent(LoosingActivity.this, Menu.class);
+				intent = new Intent(LoosingActivity.this, Menu.class);
 				startActivity(intent);
-				finish();
+				finish ();
 				break;
-			case R.id.LoosingQuitButton: // just quit without new activity => quit
+			case R.id.LoosingNextLevelButton: 
+				intent = new Intent(LoosingActivity.this, MainActivity.class);//MainActivity.class);
+				startActivity(intent);
 				finish();
 
 				break;

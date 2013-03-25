@@ -1,58 +1,71 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/you_lose"
     tools:context=".LoosingActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LOOSER" />
+    <ImageView
+        android:id="@+id/coeur1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/coeur1" />
+
+    <ImageView
+        android:id="@+id/coeur2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/coeur2" />
+
+    <ImageView
+        android:id="@+id/coeur3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/coeur3" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    </FrameLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
-
-        <Button
-            android:id="@+id/LoosingNextLevelButton"
-            android:layout_width="299dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/LoosingMenuButton"
-            android:layout_alignRight="@+id/LoosingMenuButton"
-            android:layout_marginBottom="58dp"
-            android:background="@null"
-            android:text="@string/Loosing_continue"
-            android:textColor="#33b5e5"
-            android:textSize="40sp" />
+        android:layout_height="match_parent" >
 
         <Button
             android:id="@+id/LoosingMenuButton"
-            android:layout_width="313dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="55dp"
+            android:layout_marginTop="400dp"
             android:background="@null"
             android:text="@string/Menu"
             android:textColor="#33b5e5"
             android:textSize="40sp" />
 
         <Button
-            android:id="@+id/LoosingQuitButton"
-            android:layout_width="292dp"
+            android:id="@+id/LoosingNextLevelButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/LoosingNextLevelButton"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="65dp"
+            android:layout_alignBaseline="@+id/LoosingMenuButton"
+            android:layout_alignBottom="@+id/LoosingMenuButton"
+            android:layout_alignParentLeft="true"
             android:background="@null"
-            android:text="@string/Quit"
+            android:text="@string/Loosing_continue"
             android:textColor="#33b5e5"
             android:textSize="40sp" />
+
     </RelativeLayout>
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOOSER" />
+
+</FrameLayout>

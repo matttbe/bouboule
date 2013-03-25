@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Level>
+
+    <Level1>
+
+        <Bouboule
+            IALevel="6"
+            angle="0"
+            density="1"
+            elasticity="0.8f"
+            entity="-1"
+            jsonFile="data/jsonFile/boub.json"
+            jsonName="boub"
+            px="400"
+            py="800"
+            radius="0"
+            texRegionPath="images/boub2.png" >
+        </Bouboule>
+
+        <Bouboule
+            IALevel="0"
+            angle="0"
+            density="1"
+            elasticity="0.9f"
+            entity="1"
+            jsonFile="data/jsonFile/boub.json"
+            jsonName="boub"
+            px="400"
+            py="400"
+            radius="0"
+            texRegionPath="images/boub.png" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            jsonFile="data/jsonFile/arena/arena.json"
+            jsonName="arena"
+            px="0"
+            py="0"
+            radius="500"
+            texRegionPath="images/plateau_lvl1.png" >
+        </Arena>
+    </Level1>
+    
+    <Level2>
+
+        <Bouboule
+            IALevel="6"
+            angle="0"
+            density="1"
+            elasticity="0.8f"
+            entity="-1"
+            jsonFile="data/jsonFile/boub.json"
+            jsonName="boub"
+            px="400"
+            py="800"
+            radius="0"
+            texRegionPath="images/boub2.png" >
+        </Bouboule>
+
+        <Bouboule
+            IALevel="0"
+            angle="0"
+            density="1"
+            elasticity="0.9f"
+            entity="1"
+            jsonFile="data/jsonFile/boub.json"
+            jsonName="boub"
+            px="400"
+            py="400"
+            radius="0"
+            texRegionPath="images/boub.png" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            jsonFile="data/jsonFile/arena/arena.json"
+            jsonName="arena"
+            px="0"
+            py="0"
+            radius="500"
+            texRegionPath="images/plateau_lvl2.png" >
+        </Arena>
+    </Level2>
+
+</Level>

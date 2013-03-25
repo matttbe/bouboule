@@ -29,10 +29,12 @@ package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 import be.ac.ucl.lfsab1509.bouboule.game.body.Arena;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
+import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -84,79 +86,12 @@ public class GameLoop {
 	 */
 	private void init() {
 		
-		initArena();		
-		initBall();
-		initBall2();
+		GlobalSettings.init();
 		
-	}
-
-	/*
-	 * Non generic implementation to create a Bouboule thanks to the .json 
-	 * stored in jsonFile/boub.json with the code name boub and the texture 
-	 * image, images/boub.png, on position 400/1000
-	 * 
-	 * initBall()
-	 */
-	private void initBall() {
-				
-		final int gPositionX	= 400;
-		final int gPositionY	= 800;
-		final int mass			= 10;
-		final float elasticity	= 0.8f;
-		
-		bouboule = new Bouboule(0, BodyType.DynamicBody,
-				mass, elasticity, gPositionX, gPositionY, 0,
-				"images/boub.png", "data/jsonFile/boub.json", "boub",
-				GlobalSettings.MONSTER);
-		
-
-		//Add the new object to the graphic and physic manager
-		graphicManager.addBody(bouboule);
-		
-	}
-	
-	/*
-	 * Non generic implementation to create an Arena thanks to the .json file 
-	 * ...
-	 * ...
-	 * 
-	 * initArena()
-	 */
-	private void initArena() {
-		
-		int gPositionX	= 0;
-		int gPositionY	= 0;
-		
-		arena = new Arena(0, gPositionX, gPositionY, 0,
-				"images/plateau.png", "data/jsonFile/arena/arena.json", "arena",
-				GlobalSettings.SCENERY);
-		
-
-		//Add the new object to the graphic and physic manager
-		graphicManager.addBody(arena);
-
-	}
-
-	/*
-	 * Non generic implementation to create a Bouboule thanks to the .json 
-	 * stored in jsonFile/boub.json with the code name boub and the texture 
-	 * image, images/boub.png, on position 400/350
-	 * 
-	 * initBall()
-	 */
-	private void initBall2() {
-		
-		final int gPositionX	= 400;
-		final int gPositionY	= 350;
-		final int mass			= 1;
-		final float elasticity	= 0.9f;
-		
-		bouboule2 = new Bouboule(0, BodyType.DynamicBody,
-				mass, elasticity, gPositionX, gPositionY, 0, 
-				"images/boub.png", "data/jsonFile/boub.json", "boub",
-				GlobalSettings.PLAYER);
-		
-		graphicManager.addBody(bouboule2);
+		LevelLoader level = new LevelLoader();
+		level.loadLevel("Level" + GlobalSettings.LEVEL);
+		level.readLevelArena	(graphicManager);
+		level.readLevelBouboule (graphicManager);
 		
 	}
 	
@@ -169,13 +104,15 @@ public class GameLoop {
 	 */
 	public void update() {
 		
-		float accelX = Gdx.input.getAccelerometerX();
+		/*float accelX = Gdx.input.getAccelerometerX();
 		float accelY = Gdx.input.getAccelerometerY();
+		*/
 		//float accelZ = Gdx.input.getAccelerometerZ();
 		
 		
-		bouboule.getBody().applyForceToCenter(new Vector2(0,-0.5f));
-		bouboule2.getBody().applyForceToCenter(new Vector2(-accelX*0.3f,-accelY*0.3f));
+		/*bouboule.body.applyForceToCenter(new Vector2(0,-0.5f));
+		bouboule2.body.applyForceToCenter(new Vector2(-accelX*0.3f,-accelY*0.3f));
+		*/
 		
 		graphicManager.update();
 	}

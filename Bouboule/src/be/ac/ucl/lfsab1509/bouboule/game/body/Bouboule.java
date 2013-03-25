@@ -45,6 +45,7 @@ public class Bouboule extends GameBody{
 	private TextureRegion texture;
 	private Sprite sprite;
 
+	int 			IALevel;
 	/*
 	 * Constructor for a Bouboule object 
 	 * - radius 	: radius of Bouboule for a shape like body
@@ -64,10 +65,11 @@ public class Bouboule extends GameBody{
 	public Bouboule(final float radius, final BodyType bodyType, final float density,
 			final float elasticity, final float px, final float py, 
 			final float angle, final String texRegionPath, 
-			final String jsonFile, final String jsonName, final short entity) {
+			final String jsonFile, final String jsonName, final short entity, final int IALevel) {
 
 		super();
 
+		this.IALevel = IALevel;
 		Vector2 pos	= new Vector2(px, py);
 
 		
@@ -116,7 +118,8 @@ public class Bouboule extends GameBody{
 	 */
 	public void update() {
 		if (isAlive) {
-
+			Vector2 Acceleration =  IA.compute(IALevel,this);
+			body.applyForceToCenter(Acceleration);
 			super.update();
 
 		}
@@ -127,7 +130,7 @@ public class Bouboule extends GameBody{
 	 * Get body rotation in degrees
 	 * if needed =)
 	 * 
-	 * GetBodyRotationInDegrees()
+	 * getBodyRotationInDegrees()
 	 */
 	public float getBodyRotationInDegrees() {
 		return body.getAngle() * MathUtils.radiansToDegrees;

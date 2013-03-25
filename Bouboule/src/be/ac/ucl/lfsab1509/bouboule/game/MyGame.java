@@ -30,6 +30,7 @@ package be.ac.ucl.lfsab1509.bouboule.game;
 import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.Score;
+import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
