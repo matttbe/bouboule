@@ -57,7 +57,7 @@ public class GlobalSettings {
  	public static final short SCENERY 	=  0;
  	
  	
- 	public static final float LIMITACC	= 0.4f;
+ 	public static final float LIMITACC	= 0.5f;
  	
  	
  	public static Vector2[] ARENAWAYPOINTALLOW = null;

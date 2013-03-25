@@ -64,7 +64,7 @@ public class IA {
 			break;
 
 		case 2:
-			Acc = troll(IA, VelocityIA);
+			Acc = troll2(IA, VelocityIA);
 			break;
 		case 3:
 			Acc = stopMid(IA, VelocityIA);
@@ -84,9 +84,17 @@ public class IA {
 			break;
 		}
 
-		Acc=Acc.limit(GlobalSettings.LIMITACC);
+		
 
-		Vector2 slow = new Vector2(VelocityIA).nor().mul(0.05f);
+		Vector2 slow;
+		if(IALevel != 0){
+			Acc=Acc.limit(GlobalSettings.LIMITACC);
+			slow = new Vector2(VelocityIA).nor().mul(0.02f);
+		}else{
+			Acc=Acc.limit(GlobalSettings.LIMITACC);
+			slow = new Vector2(VelocityEnemi).nor().mul(0.02f);
+			//slow = new Vector2(0, 0);
+		}
 		Acc.sub(slow);
 		
 
