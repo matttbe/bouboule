@@ -112,10 +112,12 @@ public class LevelLoader {
 	}
 
 	public void readLevelMapNodes() {
+		
+		Gdx.app.log("3DEBUG", "ENTERING MAPD NODE READER");
 
 		Element mapNodes = file.getChildByName("MapNodes");	
 
-		Array<Element> node = mapNodes.getChildrenByName("Bouboule");
+		Array<Element> node = mapNodes.getChildrenByName("NodeAllow");
 		
 		MapNode mapNode;
 		Element newNode;

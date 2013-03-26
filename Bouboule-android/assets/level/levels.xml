@@ -44,23 +44,23 @@
 
         <MapNodes>
 
-            <Node
+            <NodeAllow
                 px="3.5f"
                 py="6.0f"
                 weight="1" >
-            </Node>
+            </NodeAllow>
 
-            <Node
+            <NodeAllow
                 px="3.5f"
                 py="5.0f"
                 weight="1" >
-            </Node>
+            </NodeAllow>
 
-            <Node
+            <NodeAllow
                 px="3.5f"
                 py="3.0f"
                 weight="1" >
-            </Node>
+            </NodeAllow>
         </MapNodes>
     </Level1>
 
@@ -104,6 +104,27 @@
             radius="500"
             texRegionPath="images/plateau_lvl2.png" >
         </Arena>
+        
+        <MapNodes>
+
+            <NodeAllow
+                px="3.5f"
+                py="6.0f"
+                weight="1" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.5f"
+                py="5.0f"
+                weight="1" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.5f"
+                py="3.0f"
+                weight="1" >
+            </NodeAllow>
+        </MapNodes>
     </Level2>
 
     <Level3>
@@ -146,6 +167,27 @@
             radius="500"
             texRegionPath="images/plateau_lvl3.png" >
         </Arena>
+        
+        <MapNodes>
+
+            <NodeAllow
+                px="3.5f"
+                py="6.0f"
+                weight="1" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.5f"
+                py="5.0f"
+                weight="1" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.5f"
+                py="3.0f"
+                weight="1" >
+            </NodeAllow>
+        </MapNodes>
     </Level3>
 
     <Level4>
@@ -188,6 +230,27 @@
             radius="500"
             texRegionPath="images/plateau_lvl4.png" >
         </Arena>
+        
+        <MapNodes>
+
+            <NodeAllow
+                px="3.5f"
+                py="6.0f"
+                weight="1" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.5f"
+                py="5.0f"
+                weight="1" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.5f"
+                py="3.0f"
+                weight="1" >
+            </NodeAllow>
+        </MapNodes>
     </Level4>
 
     <Level5>
@@ -230,6 +293,27 @@
             radius="500"
             texRegionPath="images/plateau_lvl5.png" >
         </Arena>
+        
+        <MapNodes>
+
+            <NodeAllow
+                px="3.5f"
+                py="6.0f"
+                weight="1" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.5f"
+                py="5.0f"
+                weight="1" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.5f"
+                py="3.0f"
+                weight="1" >
+            </NodeAllow>
+        </MapNodes>
     </Level5>
 
     <Level6>
@@ -272,6 +356,27 @@
             radius="500"
             texRegionPath="images/plateau_lvl6.png" >
         </Arena>
+        
+        <MapNodes>
+
+            <NodeAllow
+                px="3.5f"
+                py="6.0f"
+                weight="1" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.5f"
+                py="5.0f"
+                weight="1" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.5f"
+                py="3.0f"
+                weight="1" >
+            </NodeAllow>
+        </MapNodes>
     </Level6>
 
 </Level>
