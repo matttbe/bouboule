@@ -41,8 +41,29 @@
             radius="500"
             texRegionPath="images/plateau_lvl1.png" >
         </Arena>
+
+        <MapNodes>
+
+            <Node
+                px="3.5f"
+                py="6.0f"
+                weight="1" >
+            </Node>
+
+            <Node
+                px="3.5f"
+                py="5.0f"
+                weight="1" >
+            </Node>
+
+            <Node
+                px="3.5f"
+                py="3.0f"
+                weight="1" >
+            </Node>
+        </MapNodes>
     </Level1>
-    
+
     <Level2>
 
         <Bouboule
@@ -84,8 +105,7 @@
             texRegionPath="images/plateau_lvl2.png" >
         </Arena>
     </Level2>
-    
-    
+
     <Level3>
 
         <Bouboule
@@ -127,8 +147,7 @@
             texRegionPath="images/plateau_lvl3.png" >
         </Arena>
     </Level3>
-    
-    
+
     <Level4>
 
         <Bouboule
@@ -170,8 +189,7 @@
             texRegionPath="images/plateau_lvl4.png" >
         </Arena>
     </Level4>
-    
-    
+
     <Level5>
 
         <Bouboule
@@ -213,8 +231,7 @@
             texRegionPath="images/plateau_lvl5.png" >
         </Arena>
     </Level5>
-    
-    
+
     <Level6>
 
         <Bouboule

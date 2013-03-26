@@ -77,9 +77,7 @@ public class GameLoop {
 	 * init()
 	 */
 	private void init() {
-		
-		GlobalSettings.init();
-		
+				
 		LevelLoader level = new LevelLoader();
 		MyGame temp42 = GlobalSettings.GAME;
 		Score temp43 = temp42.getUserScore();
@@ -87,7 +85,7 @@ public class GameLoop {
 		level.loadLevel("Level" + temp44);
 		level.readLevelArena	(graphicManager);
 		level.readLevelBouboule (graphicManager);
-		
+		level.readLevelMapNodes ();
 	}
 	
 	

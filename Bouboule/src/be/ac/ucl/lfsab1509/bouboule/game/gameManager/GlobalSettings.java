@@ -26,9 +26,10 @@
 
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
-import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
+import java.util.ArrayList;
 
-import com.badlogic.gdx.math.Vector2;
+import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
+import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
 
 public class GlobalSettings {
 	
@@ -60,8 +61,7 @@ public class GlobalSettings {
  	public static final float LIMITACC	= 0.5f;
  	
  	
- 	public static Vector2[] ARENAWAYPOINTALLOW = null;
- 	public static Vector2[] ARENAWAYPOINTDENY = null;
+ 	public static ArrayList<MapNode> ARENAWAYPOINTALLOW;
  	
  	public static short 	GAME_EXIT	=  0;
  	public final static int 		INIT_LEVEL		=  1;
@@ -72,10 +72,6 @@ public class GlobalSettings {
 	public static MyGame			GAME = null;
 	public static Score			SCORE = null;
 
-	
-	public static void init(){
-		ARENAWAYPOINTALLOW = new Vector2[]{new Vector2(3.5f,5.0f)};//, new Vector2(4,6)};
-		ARENAWAYPOINTDENY = new Vector2[]{new Vector2(-3.5f,5.0f), new Vector2(10.5f,5.0f)};
-	}
+
  	
 }

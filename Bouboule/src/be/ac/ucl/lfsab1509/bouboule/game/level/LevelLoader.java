@@ -1,11 +1,14 @@
 package be.ac.ucl.lfsab1509.bouboule.game.level;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import be.ac.ucl.lfsab1509.bouboule.game.body.Arena;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
+import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -64,10 +67,10 @@ public class LevelLoader {
 			graphicManager.addBody( new Bouboule(radius, bodyType, density,
 					elasticity, px, py, angle,texRegionPath, 
 					jsonFile, jsonName, entity, IALevel));
-			
 
-					
-			
+
+
+
 			Gdx.app.log("XML",
 
 					"radius :"+
@@ -88,12 +91,12 @@ public class LevelLoader {
 
 		}
 	}
-	
+
 	public void readLevelArena(GraphicManager graphicManager) {
-		
+
 		Element aren = file.getChildByName("Arena");	
-		
-		
+
+
 		float radius			= Float.parseFloat(aren.getAttribute("radius"));
 		float px				= Float.parseFloat(aren.getAttribute("px"));
 		float py				= Float.parseFloat(aren.getAttribute("py"));
@@ -102,9 +105,36 @@ public class LevelLoader {
 		String jsonFile 		= aren.getAttribute("jsonFile");
 		String jsonName 		= aren.getAttribute("jsonName");
 		short entity			= Short.parseShort(aren.getAttribute("entity"));
-		
+
 		graphicManager.addBody(new Arena( radius, px, py,  angle, texRegionPath, 
-				 jsonFile,  jsonName, entity));
+				jsonFile,  jsonName, entity));
+
+	}
+
+	public void readLevelMapNodes() {
+
+		Element mapNodes = file.getChildByName("MapNodes");	
+
+		Array<Element> node = mapNodes.getChildrenByName("Bouboule");
+		
+		MapNode mapNode;
+		Element newNode;
+		
+		GlobalSettings.ARENAWAYPOINTALLOW = new ArrayList<MapNode>();
+
+		for (Iterator<Element> nodes = node.iterator(); nodes
+				.hasNext();) {
+			
+			newNode = nodes.next();
+
+			float px			= Float.parseFloat(newNode.getAttribute("px"));
+			float py			= Float.parseFloat(newNode.getAttribute("py"));
+			float weight		= Float.parseFloat(newNode.getAttribute("weight"));
+
+			mapNode = new MapNode(px, py, weight);
+			GlobalSettings.ARENAWAYPOINTALLOW.add(mapNode);
+			Gdx.app.log("XML NODES", mapNode.toString());
+		}
 		
 	}
 
