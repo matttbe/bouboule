@@ -107,8 +107,8 @@ public class IA {
 		float anglerelatif = angleCentre(IA, 0) - angleCentre(localEnemi, 0);
 		anglerelatif=casteangle(anglerelatif);
 		float distIA,distEnemi;
-		distIA = GlobalSettings.ARENAWAYPOINTALLOW[0].dst(IA);
-		distEnemi = GlobalSettings.ARENAWAYPOINTALLOW[0].dst(localEnemi);
+		distIA = GlobalSettings.ARENAWAYPOINTALLOW.get(0).getVector().dst(IA);
+		distEnemi = GlobalSettings.ARENAWAYPOINTALLOW.get(0).getVector().dst(localEnemi);
 
 		if(anglerelatif < 45 && anglerelatif > -45 && distIA>distEnemi){
 			return defence(IA, velocityIA, localEnemi);
@@ -173,7 +173,7 @@ public class IA {
 
 	public static Vector2 middeler(Vector2 IA,int temp){
 		
-		Vector2 Acc = new Vector2(GlobalSettings.ARENAWAYPOINTALLOW[temp]);
+		Vector2 Acc = new Vector2(GlobalSettings.ARENAWAYPOINTALLOW.get(temp).getVector());
 		Acc.sub(IA);
 		
 		
@@ -189,12 +189,12 @@ public class IA {
 		Acc = new Vector2(dirmid).sub(vitesse).nor();
 
 		if(dirmid.dot(vitesse) > 0 &&
-				GlobalSettings.ARENAWAYPOINTALLOW[0].dst(position) < vitesse.dot(dirmid)*vitesse.dot(dirmid)/(2*GlobalSettings.LIMITACC)){
+				GlobalSettings.ARENAWAYPOINTALLOW.get(0).getVector().dst(position) < vitesse.dot(dirmid)*vitesse.dot(dirmid)/(2*GlobalSettings.LIMITACC)){
 			Acc.rotate(180);
 		}else{
 		}
 
-		//newAcc.sub(velocity.mul(1.5f*position.dst(GlobalSettings.ARENAWAYPOINTALLOW[1]))).mul(1.5f);
+		//newAcc.sub(velocity.mul(1.5f*position.dst(GlobalSettings.ARENAWAYPOINTALLOW.get(1).getVector()))).mul(1.5f);
 
 		return Acc;
 	}
@@ -260,7 +260,7 @@ public class IA {
 	 */
 	private static float angleCentre(Vector2 position,int centre){
 		Vector2 temp = new Vector2(position);
-		temp.sub(GlobalSettings.ARENAWAYPOINTALLOW[centre]);
+		temp.sub(GlobalSettings.ARENAWAYPOINTALLOW.get(centre).getVector());
 		return casteangle(temp.angle());
 	}
 
