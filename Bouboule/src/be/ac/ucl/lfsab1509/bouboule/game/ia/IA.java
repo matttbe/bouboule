@@ -1,7 +1,8 @@
-package be.ac.ucl.lfsab1509.bouboule.game.body;
+package be.ac.ucl.lfsab1509.bouboule.game.ia;
 
 import java.util.Iterator;
 
+import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 

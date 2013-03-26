@@ -27,6 +27,7 @@
 package be.ac.ucl.lfsab1509.bouboule.game.body;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
+import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
