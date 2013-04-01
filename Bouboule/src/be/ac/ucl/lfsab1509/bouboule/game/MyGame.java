@@ -76,13 +76,16 @@ public class MyGame implements ApplicationListener {
 		winSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 		looseSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 
-
-		score= (GlobalSettings.SCORE == null)? new Score (GlobalSettings.INIT_SCORE,
-				GlobalSettings.INIT_LIFES,
-				GlobalSettings.INIT_LEVEL):GlobalSettings.SCORE; // TODO: Init_scrore and life: take data from config
+		if (GlobalSettings.SCORE == null)
+		{
+			score = new Score (GlobalSettings.INIT_SCORE, // TODO: Init_scrore and life: take data from config
+					GlobalSettings.INIT_LIFES,
+					GlobalSettings.INIT_LEVEL);
+			GlobalSettings.SCORE = score;
+		}
+		else
+			score = GlobalSettings.SCORE;
 		
-		GlobalSettings.SCORE = score;
-
 		game = new GameLoop(camera, true);
 		
 		score.LaunchTimer ();
@@ -161,10 +164,6 @@ public class MyGame implements ApplicationListener {
 		if (bIsPause && score.getScore () < GlobalSettings.INIT_SCORE && // this function is called one or two time when starting the game
 				timer == null) // not already launched
 			startCountDown (GlobalSettings.PAUSE_TIME);
-	}
-		
-	public Score getUserScore () {
-		return score;
 	}
 	
 	public void hitSound () {

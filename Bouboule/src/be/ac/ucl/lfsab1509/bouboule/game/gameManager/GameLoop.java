@@ -27,7 +27,6 @@
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 
-import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
 import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 
 import com.badlogic.gdx.Gdx;
@@ -79,10 +78,8 @@ public class GameLoop {
 	private void init() {
 				
 		LevelLoader level = new LevelLoader();
-		MyGame temp42 = GlobalSettings.GAME;
-		Score temp43 = temp42.getUserScore();
-		int temp44 = temp43.getLevel();
-		level.loadLevel("Level" + temp44);
+		int iLevel = GlobalSettings.SCORE.getLevel();
+		level.loadLevel("Level" + iLevel); // TODO will crash is no level => exception?
 		level.readLevelArena	(graphicManager);
 		level.readLevelBouboule (graphicManager);
 		level.readLevelMapNodes ();

@@ -113,9 +113,10 @@ public class MainActivity extends AndroidApplication {
 
 			if (exit == 1) {
 				Context context = getApplicationContext ();
-				CharSequence text = "Score: " + game.getUserScore ().getScore ()
-						+ "\nLifes: " + game.getUserScore ().getNbLifes ();
-				int duration = Toast.LENGTH_SHORT;
+				// TODO: remove this toast when the score will be displayed somewhere else
+				CharSequence text = "Score: " + GlobalSettings.SCORE.getScore ()
+						+ "\nLifes: " + GlobalSettings.SCORE.getNbLifes ();
+				int duration = Toast.LENGTH_LONG;
 
 				Toast toast = Toast.makeText (context, text, duration);
 				toast.show ();
@@ -128,8 +129,9 @@ public class MainActivity extends AndroidApplication {
 			}
 			else if (exit == -1) {
 				Context context = getApplicationContext ();
-				CharSequence text = "Score: " + 0 + "\nLifes: " + game.getUserScore ().getNbLifes ();
-				int duration = Toast.LENGTH_SHORT;
+				CharSequence text = "Score: " + GlobalSettings.SCORE.getScore ()
+						+ "\nLifes: " + GlobalSettings.SCORE.getNbLifes ();
+				int duration = Toast.LENGTH_LONG;
 
 				Toast toast = Toast.makeText (context, text, duration);
 				toast.show ();

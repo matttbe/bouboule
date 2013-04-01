@@ -35,6 +35,7 @@ public class Score {
 	// point
 	private int iScore;
 	private int iInitScore;
+	private int iOldScore; // point before the battle
 	
 	// lifes
 	private int iLifes;
@@ -53,7 +54,8 @@ public class Score {
 			this.stop ();
 		}
 
-		this.iScore = this.iInitScore;
+		this.iOldScore = this.iScore;
+		this.iScore += this.iInitScore + this.iInitScore / 4 * (this.iLevel - 1); // TODO: more score?
 
 		Timer.Task task = new Timer.Task () {
 			@Override
@@ -74,6 +76,10 @@ public class Score {
 	
 	public void addScore (int iNewScore) {
 		this.iScore += iNewScore;
+	}
+
+	public void cancelNewScore () {
+		this.iScore = this.iOldScore;
 	}
 
 	public int getNbLifes () {
