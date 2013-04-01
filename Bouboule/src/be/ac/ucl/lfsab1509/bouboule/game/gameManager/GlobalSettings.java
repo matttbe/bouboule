@@ -64,8 +64,8 @@ public class GlobalSettings {
  	public static ArrayList<MapNode> ARENAWAYPOINTALLOW;
  	
  	public static short 	GAME_EXIT	=  0;
- 	public final static int 		INIT_LEVEL		=  1;
- 	public final static int 		INIT_LIVES		=  3;
+ 	public final static String		PROFILE_NAME = "Bouboule";
+ 	public final static int 		INIT_LEVEL = 1;
 	public final static int 		INIT_SCORE = 100;
 	public final static int 		INIT_LIFES = 3; // TODO: Init_scrore and life: take data from config
 	public final static int 		PAUSE_TIME = 1;

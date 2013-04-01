@@ -109,7 +109,6 @@ public class MenuPause extends Activity {
 		findViewById(R.id.PauseQuitButton).setOnTouchListener(
 				fireListener);
 
-		// TODO: Change the font !!
 		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
 				"chineyen.ttf");
 

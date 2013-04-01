@@ -78,9 +78,7 @@ public class MyGame implements ApplicationListener {
 
 		if (GlobalSettings.PROFILE == null)
 		{
-			score = new Profile (GlobalSettings.INIT_SCORE, // TODO: Init_scrore and life: take data from config
-					GlobalSettings.INIT_LIFES,
-					GlobalSettings.INIT_LEVEL);
+			score = new Profile (GlobalSettings.PROFILE_NAME);
 			GlobalSettings.PROFILE = score;
 		}
 		else

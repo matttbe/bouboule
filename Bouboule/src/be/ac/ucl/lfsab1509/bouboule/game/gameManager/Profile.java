@@ -26,27 +26,63 @@
 
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.utils.Timer;
 
 public class Profile {
 
 	private Timer timer;
 
-	// point
+	// user
+	private String cName;
+	private Preferences prefs;
+	private final static String INIT_SCORE_KEY = "InitScore";
+	private final static String LIFES_KEY = "Lifes";
+	private final static String LEVEL_KEY = "Level";
+	private final static String SCORE_KEY = "Score";
+	private static final String HIGHSCORE_KEY = "HighScore";
+
+	// score
 	private int iScore;
 	private int iInitScore;
 	private int iOldScore; // point before the battle
+	private int iHighScore;
+	private boolean bNewHighScore = false;
 	
 	// lifes
 	private int iLifes;
 
 	// level
 	private int iLevel;
+	
+	public Profile (String cName)
+	{
+		this.cName = cName;
+		prefs = Gdx.app.getPreferences (this.cName);
 
-	public Profile (int iInitScore, int iInitLifes, int iLevel) {
-		this.iInitScore = iInitScore;
-		this.iLifes = iInitLifes;
-		this.iLevel = iLevel;
+		iInitScore = prefs.getInteger (INIT_SCORE_KEY, GlobalSettings.INIT_SCORE);
+		iLifes = prefs.getInteger (LIFES_KEY, GlobalSettings.INIT_LIFES);
+		iLevel = prefs.getInteger (LEVEL_KEY, GlobalSettings.INIT_LEVEL);
+		iScore = prefs.getInteger (SCORE_KEY, 0);
+		iHighScore = prefs.getInteger (HIGHSCORE_KEY, 0);
+	}
+
+	public void resetProfile () {
+		iInitScore = GlobalSettings.INIT_SCORE;
+		prefs.putInteger (INIT_SCORE_KEY, iInitScore);
+		iLifes = GlobalSettings.INIT_LIFES;
+		prefs.putInteger (LIFES_KEY, iLifes);
+		iLevel = GlobalSettings.INIT_LEVEL;
+		prefs.putInteger (LEVEL_KEY, iLevel);
+		iScore = 0;
+		prefs.putInteger (SCORE_KEY, iScore);
+		prefs.flush (); // Makes sure the preferences are persisted.
+		// don't reset the highscore...
+	}
+
+	public String getName () {
+		return cName;
 	}
 	
 	public void LaunchTimer () {
@@ -75,11 +111,33 @@ public class Profile {
 	}
 	
 	public void addScore (int iNewScore) {
-		this.iScore += iNewScore;
+		iScore += iNewScore;
+		saveScore ();
 	}
 
 	public void cancelNewScore () {
-		this.iScore = this.iOldScore;
+		iScore = iOldScore;
+	}
+
+	public int getHighScore () {
+		return iHighScore;
+	}
+
+	public boolean isNewHighScore () {
+		return bNewHighScore;
+	}
+
+	public boolean saveScore () {
+		prefs.putInteger (SCORE_KEY, iScore);
+		bNewHighScore = false;
+		if (iScore > iHighScore)
+		{
+			iHighScore = iScore;
+			prefs.putInteger (SCORE_KEY, iHighScore);
+			bNewHighScore = true;
+		}
+		prefs.flush ();
+		return bNewHighScore;
 	}
 
 	public int getNbLifes () {
@@ -87,7 +145,9 @@ public class Profile {
 	}
 
 	public void addLifes (int iNewLifes) {
-		this.iLifes += iNewLifes;
+		iLifes += iNewLifes;
+		this.prefs.putInteger (LIFES_KEY, iLifes);
+		prefs.flush ();
 	}
 
 	public void play () {
@@ -106,6 +166,8 @@ public class Profile {
 
 	public void LevelUp () {
 		iLevel++;
+		this.prefs.putInteger (LEVEL_KEY, iLevel);
+		prefs.flush ();
 	}
 
 	public int getLevel () {

@@ -28,6 +28,8 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import java.util.Random;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+
 import android.app.Activity;
 //import android.content.Context;
 import android.content.Intent;
@@ -136,9 +138,6 @@ public class Menu extends Activity {
 		findViewById(R.id.HighScoreButton).setOnTouchListener(
 				fireListener);
 		
-		
-		
-		//TODO: Change the font !!
 		Typeface myFontBout = Typeface.createFromAsset(getAssets(), "chineyen.ttf");
 		
 		((TextView) findViewById(R.id.PlayButton)).setTypeface(myFontBout);
@@ -201,14 +200,14 @@ public class Menu extends Activity {
 	protected void startFunWithUi() {
 		
 		if (whatToShow == 0) {
-
 			nameToShow = "BOUBOULE";
 			whatToShow = 1;
 
 		} else {
-
-			//TODO: Get User Name instead
-			nameToShow = "HELLO\nDUCIS01";            		
+			String cProfileName = GlobalSettings.PROFILE != null // TODO: profile not loaded at startup... we start with the menu...
+					? GlobalSettings.PROFILE.getName ()
+					: GlobalSettings.PROFILE_NAME;
+			nameToShow = "HELLO\n" + cProfileName.toUpperCase ();
 			whatToShow = 0;
 
 		}

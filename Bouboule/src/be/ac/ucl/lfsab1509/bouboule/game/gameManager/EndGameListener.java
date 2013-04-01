@@ -89,6 +89,7 @@ public class EndGameListener implements ContactListener{
 					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 					Gdx.app.log("KILL", "Bouboule a gagné =P");
 					GlobalSettings.GAME_EXIT = 1;
+					GlobalSettings.PROFILE.saveScore ();
 					GlobalSettings.PROFILE.LevelUp ();
 					// TODO: save data to config file
 					

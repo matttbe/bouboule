@@ -30,7 +30,6 @@ public class VictoryActivity extends Activity {
 		findViewById(R.id.VictoryQuitButton).setOnTouchListener(
 				fireListener);
 
-		// TODO: Change the font !!
 		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
 				"chineyen.ttf");
 

@@ -32,7 +32,6 @@ public class LoosingActivity extends Activity {
 		findViewById(R.id.LoosingNextLevelButton).setOnTouchListener(
 				fireListener);
 
-		// TODO: Change the font !!
 		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
 				"chineyen.ttf");
 
@@ -45,7 +44,7 @@ public class LoosingActivity extends Activity {
 		
 		int NbLifes = GlobalSettings.PROFILE.getNbLifes ();
 
-		if (NbLifes == GlobalSettings.INIT_LIVES) { // = 3
+		if (NbLifes == GlobalSettings.INIT_LIFES) { // = 3
 			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
 			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
 		}
