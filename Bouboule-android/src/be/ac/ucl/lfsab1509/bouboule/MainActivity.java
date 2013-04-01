@@ -114,8 +114,8 @@ public class MainActivity extends AndroidApplication {
 			if (exit == 1) {
 				Context context = getApplicationContext ();
 				// TODO: remove this toast when the score will be displayed somewhere else
-				CharSequence text = "Score: " + GlobalSettings.SCORE.getScore ()
-						+ "\nLifes: " + GlobalSettings.SCORE.getNbLifes ();
+				CharSequence text = "Score: " + GlobalSettings.PROFILE.getScore ()
+						+ "\nLifes: " + GlobalSettings.PROFILE.getNbLifes ();
 				int duration = Toast.LENGTH_LONG;
 
 				Toast toast = Toast.makeText (context, text, duration);
@@ -129,8 +129,8 @@ public class MainActivity extends AndroidApplication {
 			}
 			else if (exit == -1) {
 				Context context = getApplicationContext ();
-				CharSequence text = "Score: " + GlobalSettings.SCORE.getScore ()
-						+ "\nLifes: " + GlobalSettings.SCORE.getNbLifes ();
+				CharSequence text = "Score: " + GlobalSettings.PROFILE.getScore ()
+						+ "\nLifes: " + GlobalSettings.PROFILE.getNbLifes ();
 				int duration = Toast.LENGTH_LONG;
 
 				Toast toast = Toast.makeText (context, text, duration);

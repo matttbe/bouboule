@@ -69,8 +69,8 @@ public class EndGameListener implements ContactListener{
 					Gdx.app.log("KILL", "Bouboule est MORT =/");
 					
 					GlobalSettings.GAME_EXIT = -1;
-					GlobalSettings.SCORE.addLifes (-1);
-					GlobalSettings.SCORE.cancelNewScore ();
+					GlobalSettings.PROFILE.addLifes (-1);
+					GlobalSettings.PROFILE.cancelNewScore ();
 					
 					
 					Gdx.app.exit();
@@ -89,7 +89,7 @@ public class EndGameListener implements ContactListener{
 					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 					Gdx.app.log("KILL", "Bouboule a gagné =P");
 					GlobalSettings.GAME_EXIT = 1;
-					GlobalSettings.SCORE.LevelUp ();
+					GlobalSettings.PROFILE.LevelUp ();
 					// TODO: save data to config file
 					
 					Gdx.app.exit();

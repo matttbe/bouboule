@@ -78,7 +78,7 @@ public class GameLoop {
 	private void init() {
 				
 		LevelLoader level = new LevelLoader();
-		int iLevel = GlobalSettings.SCORE.getLevel();
+		int iLevel = GlobalSettings.PROFILE.getLevel();
 		level.loadLevel("Level" + iLevel); // TODO will crash is no level => exception?
 		level.readLevelArena	(graphicManager);
 		level.readLevelBouboule (graphicManager);

@@ -43,7 +43,7 @@ public class LoosingActivity extends Activity {
 
 		//Hide the bouboules until the animation begin 
 		
-		int NbLifes = GlobalSettings.SCORE.getNbLifes ();
+		int NbLifes = GlobalSettings.PROFILE.getNbLifes ();
 
 		if (NbLifes == GlobalSettings.INIT_LIVES) { // = 3
 			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);

@@ -30,7 +30,7 @@ package be.ac.ucl.lfsab1509.bouboule.game;
 import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
-import be.ac.ucl.lfsab1509.bouboule.game.gameManager.Score;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.Profile;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -53,7 +53,7 @@ public class MyGame implements ApplicationListener {
 	private OrthographicCamera      		camera;
 
 	private GameLoop 						game;
-	private Score score;
+	private Profile score;
 
 	private Timer timer = null;
 	private int iCountDown = 0;
@@ -76,15 +76,15 @@ public class MyGame implements ApplicationListener {
 		winSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 		looseSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 
-		if (GlobalSettings.SCORE == null)
+		if (GlobalSettings.PROFILE == null)
 		{
-			score = new Score (GlobalSettings.INIT_SCORE, // TODO: Init_scrore and life: take data from config
+			score = new Profile (GlobalSettings.INIT_SCORE, // TODO: Init_scrore and life: take data from config
 					GlobalSettings.INIT_LIFES,
 					GlobalSettings.INIT_LEVEL);
-			GlobalSettings.SCORE = score;
+			GlobalSettings.PROFILE = score;
 		}
 		else
-			score = GlobalSettings.SCORE;
+			score = GlobalSettings.PROFILE;
 		
 		game = new GameLoop(camera, true);
 		

@@ -28,7 +28,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 import com.badlogic.gdx.utils.Timer;
 
-public class Score {
+public class Profile {
 
 	private Timer timer;
 
@@ -43,7 +43,7 @@ public class Score {
 	// level
 	private int iLevel;
 
-	public Score (int iInitScore, int iInitLifes, int iLevel) {
+	public Profile (int iInitScore, int iInitLifes, int iLevel) {
 		this.iInitScore = iInitScore;
 		this.iLifes = iInitLifes;
 		this.iLevel = iLevel;
