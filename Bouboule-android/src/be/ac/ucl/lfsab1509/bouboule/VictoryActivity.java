@@ -27,18 +27,6 @@ public class VictoryActivity extends Activity {
 				fireListener);
 		findViewById(R.id.VictoryNextLevelButton).setOnTouchListener(
 				fireListener);
-		findViewById(R.id.VictoryQuitButton).setOnTouchListener(
-				fireListener);
-
-		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
-				"chineyen.ttf");
-
-		((TextView) findViewById(R.id.VictoryMenuButton))
-		.setTypeface(myFontBout);
-		((TextView) findViewById(R.id.VictoryNextLevelButton))
-		.setTypeface(myFontBout);
-		((TextView) findViewById(R.id.VictoryQuitButton))
-		.setTypeface(myFontBout);
 	}
 
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
@@ -53,10 +41,7 @@ public class VictoryActivity extends Activity {
 				startActivity(intent);
 				finish();
 				break;
-			case R.id.VictoryQuitButton: // just quit without new activity => quit
-				finish();
 
-				break;
 			case R.id.VictoryNextLevelButton:
 				intent = new Intent(VictoryActivity.this, MainActivity.class);
 				startActivity(intent);

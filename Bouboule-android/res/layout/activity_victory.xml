@@ -21,39 +21,22 @@
         android:layout_alignParentTop="true" >
 
         <Button
-            android:id="@+id/VictoryNextLevelButton"
-            android:layout_width="299dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/VictoryMenuButton"
-            android:layout_alignRight="@+id/VictoryMenuButton"
-            android:layout_marginBottom="58dp"
-            android:background="@null"
-            android:text="@string/Victory_next_level"
-            android:textColor="#33b5e5"
-            android:textSize="40sp" />
-
-        <Button
             android:id="@+id/VictoryMenuButton"
-            android:layout_width="313dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:text="@string/Menu"
-            android:textColor="#33b5e5"
-            android:textSize="40sp" />
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="121dp"
+            android:layout_toRightOf="@+id/VictoryNextLevelButton" />
 
         <Button
-            android:id="@+id/VictoryQuitButton"
-            android:layout_width="292dp"
+            android:id="@+id/VictoryNextLevelButton"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/VictoryNextLevelButton"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="65dp"
-            android:background="@null"
-            android:text="@string/Quit"
-            android:textColor="#33b5e5"
-            android:textSize="40sp" />
+            android:layout_alignBaseline="@+id/VictoryMenuButton"
+            android:layout_alignBottom="@+id/VictoryMenuButton"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="23dp" />
     </RelativeLayout>
 
 </RelativeLayout>

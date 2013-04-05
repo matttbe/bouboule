@@ -44,10 +44,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="55dp"
             android:layout_marginTop="400dp"
-            android:background="@null"
-            android:text="@string/Menu"
-            android:textColor="#33b5e5"
-            android:textSize="40sp" />
+            />
 
         <Button
             android:id="@+id/LoosingNextLevelButton"
@@ -56,10 +53,7 @@
             android:layout_alignBaseline="@+id/LoosingMenuButton"
             android:layout_alignBottom="@+id/LoosingMenuButton"
             android:layout_alignParentLeft="true"
-            android:background="@null"
-            android:text="@string/Loosing_continue"
-            android:textColor="#33b5e5"
-            android:textSize="40sp" />
+			 />
 
     </RelativeLayout>
 

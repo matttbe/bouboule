@@ -19,15 +19,15 @@
 
     <ImageView
         android:id="@+id/boubleft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:contentDescription="@string/app_name"
         android:src="@drawable/boubouleleft" />
 
     <ImageView
         android:id="@+id/boubright"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:contentDescription="@string/app_name"
         android:src="@drawable/boubouleright" />
 
@@ -50,44 +50,37 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
         <Button
             android:id="@+id/PlayButton"
-            android:layout_width="299dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/ParameterButton"
-            android:layout_alignRight="@+id/ParameterButton"
-            android:layout_marginBottom="58dp"
-            android:background="@null"
-            android:text="@string/Play"
-            android:textColor="#33b5e5"
-            android:textSize="40sp" />
+            android:layout_width="300dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="270dp"
+          />
+        <!-- android:text="@string/Play" -->
 
         <Button
             android:id="@+id/ParameterButton"
-            android:layout_width="313dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:text="@string/Parameters"
-            android:textColor="#33b5e5"
-            android:textSize="40sp" />
+            android:layout_width="300dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="11dp"
+          />
+        <!-- android:text="@string/Parameters" -->
 
         <Button
             android:id="@+id/HighScoreButton"
-            android:layout_width="292dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ParameterButton"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="65dp"
-            android:background="@null"
-            android:text="@string/HighScore"
-            android:textColor="#33b5e5"
-            android:textSize="40sp" />
-    </RelativeLayout>
+            android:layout_width="300dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="11dp"
+            />
+        <!-- android:text="@string/HighScore" -->
+    </LinearLayout>
 
 </FrameLayout>

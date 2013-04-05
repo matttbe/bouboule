@@ -48,14 +48,8 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
-//import android.widget.Toast;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- * 
- * @see SystemUiHider
- */
+
 public class Menu extends Activity {
 
 
@@ -138,11 +132,11 @@ public class Menu extends Activity {
 		findViewById(R.id.HighScoreButton).setOnTouchListener(
 				fireListener);
 		
-		Typeface myFontBout = Typeface.createFromAsset(getAssets(), "chineyen.ttf");
+/*		Typeface myFontBout = Typeface.createFromAsset(getAssets(), "chineyen.ttf");
 		
 		((TextView) findViewById(R.id.PlayButton)).setTypeface(myFontBout);
 		((TextView) findViewById(R.id.ParameterButton)).setTypeface(myFontBout);
-		((TextView) findViewById(R.id.HighScoreButton)).setTypeface(myFontBout);
+		((TextView) findViewById(R.id.HighScoreButton)).setTypeface(myFontBout);*/
 		
 		//Hide the bouboules until the animation begin 
 		findViewById(R.id.boubleft) .setVisibility(View.INVISIBLE);
