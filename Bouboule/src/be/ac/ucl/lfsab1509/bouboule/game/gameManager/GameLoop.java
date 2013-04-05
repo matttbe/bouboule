@@ -35,6 +35,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 
 
 public class GameLoop {
@@ -78,8 +79,13 @@ public class GameLoop {
 	private void init() {
 				
 		LevelLoader level = new LevelLoader();
+		GlobalSettings.NBLEVELS = level.getNbLevels ();
 		int iLevel = GlobalSettings.PROFILE.getLevel();
-		level.loadLevel("Level" + iLevel); // TODO will crash is no level => exception?
+		try {
+			level.loadLevel ("Level" + iLevel);
+		} catch (GdxRuntimeException e) {
+			level.loadLevel ("Level1"); // TODO: should not happen...
+		}
 		level.readLevelArena	(graphicManager);
 		level.readLevelBouboule (graphicManager);
 		level.readLevelMapNodes ();
