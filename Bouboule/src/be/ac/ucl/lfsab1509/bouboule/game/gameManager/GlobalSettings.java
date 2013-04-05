@@ -63,7 +63,9 @@ public class GlobalSettings {
  	
  	public static ArrayList<MapNode> ARENAWAYPOINTALLOW;
  	
- 	public static short 	GAME_EXIT	=  0;
+ 	public static enum GameExitStatus {NONE, WIN, LOOSE, GAMEOVER};
+ 	public static GameExitStatus 	GAME_EXIT	= GameExitStatus.NONE;
+ 
  	public final static String		PROFILE_NAME = "Bouboule";
  	public final static int 		INIT_LEVEL = 1;
 	public final static int 		INIT_SCORE = 100;
@@ -71,6 +73,7 @@ public class GlobalSettings {
 	public final static int 		PAUSE_TIME = 1;
 	public static MyGame			GAME = null;
 	public static Profile			PROFILE = null;
+	public static int				NBLEVELS; // nb of levels in the current xml files
 
 
  	
