@@ -29,7 +29,7 @@ public class LevelLoader {
 		this.reader = new XmlReader();
 		try {
 			root = reader.parse( 
-					Gdx.files.internal("level/levels.xml")
+					Gdx.files.internal("level/newlevels.xml")
 					);
 			this.iNbLevels = root.getChildCount ();
 		} catch (IOException e) {
