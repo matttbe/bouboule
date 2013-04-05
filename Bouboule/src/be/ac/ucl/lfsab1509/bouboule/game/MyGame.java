@@ -44,7 +44,7 @@ import com.badlogic.gdx.utils.Timer;
 public class MyGame implements ApplicationListener {
 
 	static final int APPWIDTH 	= 800;
-	static final int APPHEIGHT 	= 1280;
+	static final int APPHEIGHT 	= 1250;
 	
 	//Test Update
 
