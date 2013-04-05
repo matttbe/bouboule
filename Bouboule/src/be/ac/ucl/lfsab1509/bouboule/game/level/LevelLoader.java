@@ -13,6 +13,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
@@ -21,6 +22,7 @@ public class LevelLoader {
 	private XmlReader 			reader;
 	private Element 			root;
 	private Element 			file;
+	private int 				iNbLevels;
 
 	public LevelLoader() {
 
@@ -29,15 +31,21 @@ public class LevelLoader {
 			root = reader.parse( 
 					Gdx.files.internal("level/levels.xml")
 					);
+			this.iNbLevels = root.getChildCount ();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	public void loadLevel(String level) {
+	public int getNbLevels () {
+		return iNbLevels;
+	}
 
+	public void loadLevel(String level) {
 		file = root.getChildByName(level);
+		if (file == null)
+			throw new GdxRuntimeException ("Level not found");
 
 	}
 
