@@ -34,6 +34,7 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.Toast;
 import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
@@ -120,33 +121,30 @@ public class MainActivity extends AndroidApplication {
 	protected void onPause () {
 		super.onPause ();
 
-		if (GlobalSettings.GAME_EXIT != 0) {
-			int exit = GlobalSettings.GAME_EXIT;
-
-			GlobalSettings.GAME_EXIT = 0;
-
-			if (exit == 1) {
+		Intent intent = null;
+		switch (GlobalSettings.GAME_EXIT)
+		{
+			case NONE :
+				return;
+			case WIN :
 				displayInfo ();
 
-				Intent intent = new Intent (this, VictoryActivity.class);
-				startActivity (intent);
-				overridePendingTransition (android.R.anim.fade_in,
-						android.R.anim.fade_out);
-
-			}
-			else if (exit == -1) {
+				intent = new Intent (this, VictoryActivity.class);
+				break;
+			case LOOSE :
 				displayInfo ();
-				
-				Intent intent = new Intent (this, LoosingActivity.class);
-				startActivity (intent);
-				overridePendingTransition (android.R.anim.fade_in,
-						android.R.anim.fade_out);
 
-			}
+				intent = new Intent (this, LoosingActivity.class);
+				break;
+			case GAMEOVER :
 
+				intent = new Intent (this, GameOverActivity.class);
+				break;
 		}
 
+		startActivity (intent);
+		overridePendingTransition (android.R.anim.fade_in,
+				android.R.anim.fade_out);
+		GlobalSettings.GAME_EXIT = GameExitStatus.NONE;
 	}
-
-
 }
