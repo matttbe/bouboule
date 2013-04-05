@@ -122,7 +122,7 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void pause() {
-		if (score.getScore () == GlobalSettings.INIT_SCORE)
+		if (timer == null || ! score.isRunning ())
 			return;
 		bIsPause = true;
 		score.pause ();
@@ -159,8 +159,10 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void resume() {
-		if (bIsPause && score.getScore () < GlobalSettings.INIT_SCORE && // this function is called one or two time when starting the game
-				timer == null) // not already launched
+		if (bIsPause
+				// this function is called one or two time when starting the game
+				&& score.isRunning ()
+				&& timer == null) // not already launched
 			startCountDown (GlobalSettings.PAUSE_TIME);
 	}
 	
