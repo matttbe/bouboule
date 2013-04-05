@@ -1,6 +1,8 @@
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -68,10 +70,13 @@ public class EndGameListener implements ContactListener{
 					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 					Gdx.app.log("KILL", "Bouboule est MORT =/");
 					
-					GlobalSettings.GAME_EXIT = -1;
-					GlobalSettings.PROFILE.addLifes (-1);
+					GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
 					GlobalSettings.PROFILE.cancelNewScore ();
-					
+					if (! GlobalSettings.PROFILE.addLifes (-1))
+					{
+						GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
+						GlobalSettings.PROFILE.resetProfile (); // TODO: what to do?
+					}
 					
 					Gdx.app.exit();
 				}
@@ -88,10 +93,14 @@ public class EndGameListener implements ContactListener{
 					GlobalSettings.GAME.winSound ();
 					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 					Gdx.app.log("KILL", "Bouboule a gagné =P");
-					GlobalSettings.GAME_EXIT = 1;
 					GlobalSettings.PROFILE.saveScore ();
-					GlobalSettings.PROFILE.LevelUp ();
-					// TODO: save data to config file
+					if (GlobalSettings.PROFILE.LevelUp ())
+						GlobalSettings.GAME_EXIT = GameExitStatus.WIN;
+					else
+					{
+						GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
+						GlobalSettings.PROFILE.resetProfile (); // TODO: what to do?
+					}
 					
 					Gdx.app.exit();
 				}

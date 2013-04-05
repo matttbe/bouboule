@@ -43,6 +43,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name="GameOverActivity" android:label="@string/title_activity_gameover" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

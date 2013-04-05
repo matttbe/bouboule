@@ -3,15 +3,18 @@ package be.ac.ucl.lfsab1509.bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class LoosingActivity extends Activity {
+public class GameOverActivity extends Activity {
 
 	
 	@Override
@@ -32,6 +35,7 @@ public class LoosingActivity extends Activity {
 		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
 				"chineyen.ttf");
 
+		// TODO: create a menu for GameOver
 		((TextView) findViewById (R.id.LoosingMenuButton))
 		.setTypeface (myFontBout);
 		((TextView) findViewById (R.id.LoosingNextLevelButton))
@@ -41,7 +45,11 @@ public class LoosingActivity extends Activity {
 		
 		int NbLifes = GlobalSettings.PROFILE.getNbLifes ();
 
-		if (NbLifes == 2) {
+		if (NbLifes == GlobalSettings.INIT_LIFES) { // = 3
+			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
+		}
+		else if (NbLifes == 2) {
 			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
 			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
 		}
@@ -49,11 +57,26 @@ public class LoosingActivity extends Activity {
 			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
 			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
 		}
-		else { // TODO: more than 3 lifes?
+		else { // loose and gameover... TODO: or on LoosingActivity?
 			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
 			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
 		}
-		// no life? => GameOverActivity
+
+		Context context = getApplicationContext();
+		CharSequence text = "HighScore Menu must be enabled"; // TODO
+		int duration = Toast.LENGTH_LONG;
+
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
+
+		findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
+		findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
+		findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
+
+		
+		((Button) findViewById(R.id.LoosingNextLevelButton)).setEnabled(false);
+		((Button) findViewById(R.id.LoosingNextLevelButton)).setText("Game Over");
 	}
 
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
@@ -65,12 +88,12 @@ public class LoosingActivity extends Activity {
 			switch (view.getId()) {
 
 			case R.id.LoosingMenuButton: // cas ou on stoppe
-				intent = new Intent(LoosingActivity.this, Menu.class);
+				intent = new Intent(GameOverActivity.this, Menu.class);
 				startActivity(intent);
 				finish ();
 				break;
 			case R.id.LoosingNextLevelButton: 
-				intent = new Intent(LoosingActivity.this, MainActivity.class);//MainActivity.class);
+				intent = new Intent(GameOverActivity.this, MainActivity.class);//MainActivity.class);
 				startActivity(intent);
 				finish();
 
