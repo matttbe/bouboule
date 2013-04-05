@@ -46,6 +46,7 @@ public class Profile {
 	// score
 	private int iScore;
 	private int iInitScore;
+	private int iNewInitScore;
 	private int iOldScore; // point before the battle
 	private int iHighScore;
 	private boolean bNewHighScore = false;
@@ -55,6 +56,7 @@ public class Profile {
 
 	// level
 	private int iLevel;
+
 	
 	public Profile (String cName)
 	{
@@ -91,7 +93,8 @@ public class Profile {
 		}
 
 		this.iOldScore = this.iScore;
-		this.iScore += this.iInitScore + this.iInitScore / 4 * (this.iLevel - 1); // TODO: more score?
+		this.iNewInitScore = this.iScore + this.iInitScore + this.iInitScore / 4 * (this.iLevel - 1);
+		this.iScore = iNewInitScore; // TODO: more score?
 
 		Timer.Task task = new Timer.Task () {
 			@Override
@@ -119,6 +122,12 @@ public class Profile {
 		iScore = iOldScore;
 	}
 
+	public boolean isRunning () {
+		return (timer != null // timer not created
+				&& iScore != iOldScore // reset but timer not stop (should not happen)
+				&& iScore < iNewInitScore); // timer created but game not launched (or launched since less than one second)
+	}
+
 	public int getHighScore () {
 		return iHighScore;
 	}
@@ -133,7 +142,7 @@ public class Profile {
 		if (iScore > iHighScore)
 		{
 			iHighScore = iScore;
-			prefs.putInteger (SCORE_KEY, iHighScore);
+			prefs.putInteger (HIGHSCORE_KEY, iHighScore);
 			bNewHighScore = true;
 		}
 		prefs.flush ();
@@ -144,10 +153,15 @@ public class Profile {
 		return iLifes;
 	}
 
-	public void addLifes (int iNewLifes) {
+	public boolean addLifes (int iNewLifes) {
 		iLifes += iNewLifes;
+
+		if (iLifes <= 0)
+			return false;
+
 		this.prefs.putInteger (LIFES_KEY, iLifes);
 		prefs.flush ();
+		return true;
 	}
 
 	public void play () {
@@ -164,10 +178,14 @@ public class Profile {
 		timer = null;
 	}
 
-	public void LevelUp () {
+	public boolean LevelUp () {
+		if (iLevel >= GlobalSettings.NBLEVELS) // we are already on the last level
+			return false;
+
 		iLevel++;
 		this.prefs.putInteger (LEVEL_KEY, iLevel);
 		prefs.flush ();
+		return true;
 	}
 
 	public int getLevel () {
