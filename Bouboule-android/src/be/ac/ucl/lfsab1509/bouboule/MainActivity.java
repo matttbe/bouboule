@@ -26,15 +26,12 @@
 
 package be.ac.ucl.lfsab1509.bouboule;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager.LayoutParams;
-import android.widget.Toast;
 import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
-import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
@@ -42,7 +39,8 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 public class MainActivity extends AndroidApplication {
 	
 	private MyGame game;
-	private static final int CODE_PAUSE_ACTIVITY = 1;
+	public static final int CODE_PAUSE_ACTIVITY = 1;
+	public static final int CODE_MENU_ACTIVITY = 2;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -58,14 +56,23 @@ public class MainActivity extends AndroidApplication {
 
 		getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON); // to not lock the screen
 	
-		game = new MyGame();
+		game = new MyGame ();
 		GlobalSettings.GAME = game;
-		initialize(game, cfg);
+		
+		GlobalSettings.MENUS = new MyAndroidMenus (this);
+		
+		// TODO: start Menu Activity... and then game.start ();
+		Log.d ("Matth","initialize now");
+		initialize (game, cfg);
+		Log.d ("Matth","initialized");
+
+		game.createProfile ();
+		GlobalSettings.MENUS.launchInitMenu ();
 	}
 
 	@Override
 	public void onBackPressed()	{
-		game.pause();
+		game.screen.pause();
 		Intent intent = new Intent(MainActivity.this, MenuPause.class);
 		startActivityForResult(intent, CODE_PAUSE_ACTIVITY);
 		overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -83,68 +90,47 @@ public class MainActivity extends AndroidApplication {
 				switch (resultCode) { // it's the id of the button
 				
 					case R.id.PauseContinueButton: // cas ou on continue
-						game.resume();
+						game.screen.resume();
 						return;
 					case R.id.PauseMenuButton: // cas ou on stoppe
 						Intent intent = new Intent(MainActivity.this, Menu.class);
 						startActivity(intent);
-						finish();
 						break;
 					case R.id.PauseQuitButton: // just quit without new activity => quit
-						finish();
 						exit();
 						break;
 				default:
 					break;
 				}
+				break;
+			case CODE_MENU_ACTIVITY:
+				switch (resultCode) {
+					case R.id.PlayButton:
+						Log.i ("Matth", "Menu Activity finished: start game");
+						// gameScreen.show ();
+						break;
+					default:
+						break;
+				}
+				break;
 		default:
 			break;
 		}
-		return;
 	}
 
-	// TODO: remove this toast when the score will be displayed somewhere else
-	private void displayInfo () {
-		Context context = getApplicationContext ();
-		CharSequence text = "Score: " + GlobalSettings.PROFILE.getScore ()
-				+ "\nLifes: " + GlobalSettings.PROFILE.getNbLifes ()
-				+ "\nLevel: " + GlobalSettings.PROFILE.getLevel ()
-				+ "\n" + (GlobalSettings.PROFILE.isNewHighScore () ? "NEW " : "")
-				+ "HighScore: " + GlobalSettings.PROFILE.getHighScore ();
-		int duration = Toast.LENGTH_LONG;
-
-		Toast toast = Toast.makeText (context, text, duration);
-		toast.show ();
-	}
-
+	/*
 	@Override
 	protected void onPause () {
 		super.onPause ();
+		//finish ();
+	}*/
 
-		Intent intent = null;
-		switch (GlobalSettings.GAME_EXIT)
-		{
-			case NONE :
-				return;
-			case WIN :
-				displayInfo ();
-
-				intent = new Intent (this, VictoryActivity.class);
-				break;
-			case LOOSE :
-				displayInfo ();
-
-				intent = new Intent (this, LoosingActivity.class);
-				break;
-			case GAMEOVER :
-
-				intent = new Intent (this, GameOverActivity.class);
-				break;
-		}
-
-		startActivity (intent);
-		overridePendingTransition (android.R.anim.fade_in,
-				android.R.anim.fade_out);
-		GlobalSettings.GAME_EXIT = GameExitStatus.NONE;
-	}
+	/*@Override
+	protected void onResume() {
+		super.onResume ();
+		Intent intent = new Intent (this, Menu.class);
+		startActivity (intent); => call before the initialization...
+		
+		Gdx.app.log ("Matth", "Resume! " + firstResume);
+	}*/
 }

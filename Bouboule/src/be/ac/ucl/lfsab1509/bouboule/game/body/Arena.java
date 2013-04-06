@@ -39,7 +39,6 @@ public class Arena extends GameBody {
 
 		Vector2 pos	= new Vector2(px, py);
 
-		//
 		this.texture = new TextureRegion(new Texture(texRegionPath));
 
 		this.sprite = new Sprite(texture);

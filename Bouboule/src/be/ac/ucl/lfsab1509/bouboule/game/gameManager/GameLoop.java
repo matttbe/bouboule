@@ -70,10 +70,9 @@ public class GameLoop {
 		}
 		
 		graphicManager = new GraphicManager();
-		
-		init();
+		init ();
 	}
-	
+
 	/*
 	 * Initialise all the object needed 
 	 * 

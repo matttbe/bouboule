@@ -61,7 +61,7 @@ public class Profile {
 	public Profile (String cName)
 	{
 		this.cName = cName;
-		prefs = Gdx.app.getPreferences (this.cName);
+		prefs = Gdx.app.getPreferences (cName);
 
 		iInitScore = prefs.getInteger (INIT_SCORE_KEY, GlobalSettings.INIT_SCORE);
 		iLifes = prefs.getInteger (LIFES_KEY, GlobalSettings.INIT_LIFES);

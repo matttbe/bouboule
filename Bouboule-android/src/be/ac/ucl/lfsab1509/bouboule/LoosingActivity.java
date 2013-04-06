@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -65,15 +66,14 @@ public class LoosingActivity extends Activity {
 			switch (view.getId()) {
 
 			case R.id.LoosingMenuButton: // cas ou on stoppe
+				Log.i ("Matth", "LoosingActivity: Menu");
 				intent = new Intent(LoosingActivity.this, Menu.class);
 				startActivity(intent);
 				finish ();
 				break;
 			case R.id.LoosingNextLevelButton: 
-				intent = new Intent(LoosingActivity.this, MainActivity.class);//MainActivity.class);
-				startActivity(intent);
-				finish();
-
+				Log.i ("Matth", "LoosingActivity: Next");
+				finish(); // return to main activity
 				break;
 
 			default:

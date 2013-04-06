@@ -3,12 +3,10 @@ package be.ac.ucl.lfsab1509.bouboule;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 public class VictoryActivity extends Activity {
 
@@ -43,9 +41,7 @@ public class VictoryActivity extends Activity {
 				break;
 
 			case R.id.VictoryNextLevelButton:
-				intent = new Intent(VictoryActivity.this, MainActivity.class);
-				startActivity(intent);
-				finish();
+				finish(); // return to MainActivity
 				break;
 			default:
 				break;

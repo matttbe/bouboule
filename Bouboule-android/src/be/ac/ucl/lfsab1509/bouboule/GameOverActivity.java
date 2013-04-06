@@ -92,13 +92,6 @@ public class GameOverActivity extends Activity {
 				startActivity(intent);
 				finish ();
 				break;
-			case R.id.LoosingNextLevelButton: 
-				intent = new Intent(GameOverActivity.this, MainActivity.class);//MainActivity.class);
-				startActivity(intent);
-				finish();
-
-				break;
-
 			default:
 				break;
 			}

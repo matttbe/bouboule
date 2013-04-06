@@ -65,7 +65,8 @@ public class EndGameListener implements ContactListener{
 					Gdx.app.log("Alive", "Bouboule est VIVANT =)");
 					//DO NOTHING =)
 					isAlivePlayer = !isAlivePlayer;
-				} else {
+				}
+				else {
 					GlobalSettings.GAME.looseSound ();
 					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 					Gdx.app.log("KILL", "Bouboule est MORT =/");
@@ -78,18 +79,19 @@ public class EndGameListener implements ContactListener{
 						GlobalSettings.PROFILE.resetProfile (); // TODO: what to do?
 					}
 					
-					Gdx.app.exit();
+					GlobalSettings.MENUS.launchEndGameMenu ();
+					GlobalSettings.GAME.screen.hide (); // TODO: stop this screen to return to mainactivity
+					//Gdx.app.exit();
 				}
-
-
-			} else {
-
+			}
+			else {
 				if (isAliveMonster) {
 					GlobalSettings.GAME.looseSound ();
 					Gdx.app.log("Alive", "MONSTER est VIVANT =)");
 					//DO NOTHING
 					isAliveMonster = !isAliveMonster;
-				} else {
+				}
+				else {
 					GlobalSettings.GAME.winSound ();
 					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 					Gdx.app.log("KILL", "Bouboule a gagné =P");
@@ -101,8 +103,9 @@ public class EndGameListener implements ContactListener{
 						GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
 						GlobalSettings.PROFILE.resetProfile (); // TODO: what to do?
 					}
-					
-					Gdx.app.exit();
+
+					GlobalSettings.MENUS.launchEndGameMenu ();
+					GlobalSettings.GAME.screen.hide ();
 				}
 				
 			}

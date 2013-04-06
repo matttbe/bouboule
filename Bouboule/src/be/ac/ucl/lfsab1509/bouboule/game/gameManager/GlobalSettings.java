@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
 import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
+import be.ac.ucl.lfsab1509.bouboule.game.menu.Menus;
 
 public class GlobalSettings {
 	
@@ -74,6 +75,7 @@ public class GlobalSettings {
 	public static MyGame			GAME = null;
 	public static Profile			PROFILE = null;
 	public static int				NBLEVELS; // nb of levels in the current xml files
+	public static Menus 			MENUS;
 
 
  	
