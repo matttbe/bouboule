@@ -39,7 +39,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="images/plateau_lvl1.png" >
+            texRegionPath="images/gameboard1.jpg" >
         </Arena>
 
         <MapNodes>
@@ -102,7 +102,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="images/plateau_lvl2.png" >
+            texRegionPath="images/gameboard1.jpg" >
         </Arena>
         
         <MapNodes>
@@ -165,7 +165,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="images/plateau_lvl3.png" >
+            texRegionPath="images/gameboard1.jpg" >
         </Arena>
         
         <MapNodes>
@@ -228,7 +228,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="images/plateau_lvl4.png" >
+            texRegionPath="images/gameboard1.jpg" >
         </Arena>
         
         <MapNodes>
@@ -291,7 +291,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="images/plateau_lvl5.png" >
+            texRegionPath="images/gameboard1.jpg" >
         </Arena>
         
         <MapNodes>
@@ -354,7 +354,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="images/plateau_lvl6.png" >
+            texRegionPath="images/gameboard1.jpg" >
         </Arena>
         
         <MapNodes>
