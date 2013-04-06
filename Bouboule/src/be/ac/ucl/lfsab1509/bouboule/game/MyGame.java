@@ -43,9 +43,9 @@ import com.badlogic.gdx.utils.Timer;
 
 public class MyGame implements ApplicationListener {
 
-	static final int APPWIDTH 	= 800;
-	static final int APPHEIGHT 	= 1250;
-	
+	static final float APPWIDTH 	=  800f;
+	static final float APPHEIGHT 	= 1250f;
+
 	//Test Update
 
 
@@ -95,11 +95,9 @@ public class MyGame implements ApplicationListener {
 	public void render() {
 		if (bIsPause)
 		{
-			// we need to draw something...
+			bIsPause = game.renderPause();
 			return;
 		}
-		
-		// float dt = Gdx.graphics.getDeltaTime();
 
 		game.update();
 		game.render();
@@ -150,7 +148,7 @@ public class MyGame implements ApplicationListener {
 		timer.scheduleTask (task, 1, 1); // first time, time between
 		timer.start ();
 	}
-	
+
 	private void resumeStart () {
 		bIsPause = false;
 		score.play ();
@@ -159,21 +157,23 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void resume() {
-		if (bIsPause
+		/*if (bIsPause
 				// this function is called one or two time when starting the game
 				&& score.isRunning ()
 				&& timer == null) // not already launched
 			startCountDown (GlobalSettings.PAUSE_TIME);
+		*/
+		bIsPause = true; //Works my it seems...
 	}
-	
+
 	public void hitSound () {
 		hitSound.play ();
 	}
-	
+
 	public void winSound () {
 		winSound.play ();
 	}
-	
+
 	public void looseSound () {
 		looseSound.play ();
 	}

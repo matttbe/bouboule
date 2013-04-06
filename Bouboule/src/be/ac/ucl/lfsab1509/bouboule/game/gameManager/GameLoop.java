@@ -27,6 +27,7 @@
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 
+import be.ac.ucl.lfsab1509.bouboule.game.anim.CountDown;
 import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 
 import com.badlogic.gdx.Gdx;
@@ -44,7 +45,9 @@ public class GameLoop {
 	private Box2DDebugRenderer 	debugRenderer;
 	private Matrix4 			debugMatrix;
 	
-	private SpriteBatch			batch;
+	private CountDown 			countDown;
+	public SpriteBatch			batch;
+	
 	
 	
 	/*
@@ -89,6 +92,8 @@ public class GameLoop {
 		level.readLevelArena	(graphicManager);
 		level.readLevelBouboule (graphicManager);
 		level.readLevelMapNodes ();
+		
+		countDown = new CountDown();
 	}
 	
 	
@@ -125,10 +130,10 @@ public class GameLoop {
 		batch.begin();
 		
 
-		batch.disableBlending();
+		//batch.disableBlending();
 		//Allow to draw the background fast because it disable 
 		//the color blending (override the background).
-		batch.enableBlending();
+		//batch.enableBlending();
 		
 		//Draw all the know bodies
 
@@ -140,6 +145,27 @@ public class GameLoop {
 		batch.begin();
 		debugRenderer.render(GraphicManager.getWorld(), debugMatrix);
 		batch.end();
+	}
+	
+	/*
+	 * Draw all the needed bodies of the game pause
+	 * 
+	 * render()
+	 */
+	public boolean renderPause() {
+
+		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		batch.begin();
+		
+		//Draw all the know bodies
+
+		graphicManager.draw(batch);
+		boolean status = countDown.draw(batch);
+				
+		batch.end();
+		
+		return status;
 	}
 	
 

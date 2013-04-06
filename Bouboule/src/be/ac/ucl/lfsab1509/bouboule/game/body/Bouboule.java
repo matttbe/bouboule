@@ -100,8 +100,9 @@ public class Bouboule extends GameBody{
 				
 				//Ensure that the body image position is set on the origin defined by 
 				//the jsonFile
+				Vector2 pos = positionVector.cpy();
 				
-				Vector2 pos = positionVector.sub(origin);
+				pos = pos.sub(origin);
 				sprite.setPosition(pos.x, pos.y);
 				sprite.setOrigin(origin.x, origin.y);
 				sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
