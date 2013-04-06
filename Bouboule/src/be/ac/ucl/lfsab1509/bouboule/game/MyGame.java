@@ -93,14 +93,10 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void render() {
-		if (bIsPause)
-		{
-			bIsPause = game.renderPause();
-			return;
-		}
 
-		game.update();
-		game.render();
+		if (!bIsPause)
+			game.update();
+		bIsPause = game.render(bIsPause);
 
 	}
 

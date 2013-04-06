@@ -52,6 +52,9 @@ public class Arena extends GameBody {
 	
 	@Override
 	public void draw(final SpriteBatch sp) {
+		
+		sp.disableBlending();
+		
 		if (origin != null) {
 
 			//Ensure that the body image position is set on the origin defined by 
@@ -65,6 +68,9 @@ public class Arena extends GameBody {
 		} else {
 			sp.draw(texture, positionVector.x, positionVector.y);
 		}
+		
+		sp.enableBlending();
+
 	}
 
 }

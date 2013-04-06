@@ -33,6 +33,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -40,16 +41,17 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 
 public class GameLoop {
-	
+
 	public  GraphicManager 		graphicManager;
 	private Box2DDebugRenderer 	debugRenderer;
 	private Matrix4 			debugMatrix;
-	
+
 	private CountDown 			countDown;
+	private BitmapFont			font;
 	public SpriteBatch			batch;
-	
-	
-	
+
+
+
 	/*
 	 * Launch the creation of the batch thanks to the camera.
 	 * if debug == true, set up the debugger matrix
@@ -68,19 +70,20 @@ public class GameLoop {
 
 			debugRenderer	= new Box2DDebugRenderer();
 		}
-		
+
 		graphicManager = new GraphicManager();
-		
+
 		init();
 	}
-	
+
 	/*
 	 * Initialise all the object needed 
 	 * 
 	 * init()
 	 */
 	private void init() {
-				
+
+		//load level
 		LevelLoader level = new LevelLoader();
 		GlobalSettings.NBLEVELS = level.getNbLevels ();
 		int iLevel = GlobalSettings.PROFILE.getLevel();
@@ -92,11 +95,18 @@ public class GameLoop {
 		level.readLevelArena	(graphicManager);
 		level.readLevelBouboule (graphicManager);
 		level.readLevelMapNodes ();
-		
+
+		//load the counter 
 		countDown = new CountDown();
+
+		//Load the font + enable white
+		font = new BitmapFont(Gdx.files.internal("data/default.fnt"),
+				Gdx.files.internal("data/default.png"), false);
+		font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+
 	}
-	
-	
+
+
 	/*
 	 * Update the ball position thanks to the accelerometer and
 	 * launch the physical update function of dt the time between 2 frames
@@ -104,70 +114,64 @@ public class GameLoop {
 	 * update(float dt)
 	 */
 	public void update() {
-		
+
 		/*float accelX = Gdx.input.getAccelerometerX();
 		float accelY = Gdx.input.getAccelerometerY();
-		*/
+		 */
 		//float accelZ = Gdx.input.getAccelerometerZ();
-		
-		
+
+
 		/*bouboule.body.applyForceToCenter(new Vector2(0,-0.5f));
 		bouboule2.body.applyForceToCenter(new Vector2(-accelX*0.3f,-accelY*0.3f));
-		*/
-		
+		 */
+
 		graphicManager.update();
 	}
-	
+
 	/*
 	 * Draw all the needed bodies of the game
 	 * 
 	 * render()
 	 */
-	public void render() {
+	public boolean render(final boolean pause) {
+		
+		boolean status = false;
 
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+
+		CharSequence lives = Integer.toString(GlobalSettings.PROFILE.getNbLifes  ());
+		CharSequence level = Integer.toString(GlobalSettings.PROFILE.getLevel    ());
+		CharSequence score = Integer.toString(GlobalSettings.PROFILE.getScore    ());
+
 		batch.begin();
-		
+
 
 		//batch.disableBlending();
 		//Allow to draw the background fast because it disable 
 		//the color blending (override the background).
 		//batch.enableBlending();
-		
+
 		//Draw all the know bodies
 
 		graphicManager.draw(batch);
-				
-		batch.end();
+
+		font.draw(batch, lives, 630, 1160);
+		font.draw(batch, level, 300, 1135);
+		font.draw(batch, score, 630, 1200);
 		
+		if ( pause )
+			status = countDown.draw(batch);
+
+		batch.end();
+
+		batch.begin();
 		//Draw the debugging matrix
-		batch.begin();
 		debugRenderer.render(GraphicManager.getWorld(), debugMatrix);
-		batch.end();
-	}
-	
-	/*
-	 * Draw all the needed bodies of the game pause
-	 * 
-	 * render()
-	 */
-	public boolean renderPause() {
-
-		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		batch.begin();
-		
-		//Draw all the know bodies
-
-		graphicManager.draw(batch);
-		boolean status = countDown.draw(batch);
-				
 		batch.end();
 		
 		return status;
 	}
-	
+
 
 	/*
 	 * Remove all the memory used object 
@@ -180,6 +184,6 @@ public class GameLoop {
 		graphicManager.dispose();
 	}
 
-	
-	
+
+
 }
