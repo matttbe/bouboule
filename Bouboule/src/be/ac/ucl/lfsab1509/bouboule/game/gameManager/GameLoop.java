@@ -144,10 +144,10 @@ public class GameLoop {
 
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		CharSequence lives = Integer.toString(GlobalSettings.PROFILE.getNbLifes());
-		CharSequence levelD= Integer.toString(GlobalSettings.PROFILE.getLevel  ()/10);
-		CharSequence levelU= Integer.toString(GlobalSettings.PROFILE.getLevel  ());
-		CharSequence score = Integer.toString(GlobalSettings.PROFILE.getScore  ());
+		CharSequence lives = Integer.toString(GlobalSettings.PROFILE.getNbLifes ());
+		CharSequence levelD= Integer.toString(GlobalSettings.PROFILE.getLevel   ()/10);
+		CharSequence levelU= Integer.toString(GlobalSettings.PROFILE.getLevel   ()%10);
+		CharSequence score = Integer.toString(GlobalSettings.PROFILE.getOldScore());
 		
 
 		batch.begin();
