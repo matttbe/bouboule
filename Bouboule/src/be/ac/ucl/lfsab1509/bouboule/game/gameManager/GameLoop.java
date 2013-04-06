@@ -47,7 +47,8 @@ public class GameLoop {
 	private Matrix4 			debugMatrix;
 
 	private CountDown 			countDown;
-	private BitmapFont			font;
+	private BitmapFont			fontOswald;
+	private BitmapFont			fontOsaka;
 	public SpriteBatch			batch;
 
 
@@ -100,9 +101,13 @@ public class GameLoop {
 		countDown = new CountDown();
 
 		//Load the font + enable white
-		font = new BitmapFont(Gdx.files.internal("data/default.fnt"),
-				Gdx.files.internal("data/default.png"), false);
-		font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		fontOswald = new BitmapFont(Gdx.files.internal("fonts/Oswald/Oswald.fnt"),
+				Gdx.files.internal("fonts/Oswald/Oswald.png"), false);
+		fontOswald.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		
+		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
+				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
+		fontOsaka.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	}
 
@@ -139,9 +144,11 @@ public class GameLoop {
 
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		CharSequence lives = Integer.toString(GlobalSettings.PROFILE.getNbLifes  ());
-		CharSequence level = Integer.toString(GlobalSettings.PROFILE.getLevel    ());
-		CharSequence score = Integer.toString(GlobalSettings.PROFILE.getScore    ());
+		CharSequence lives = Integer.toString(GlobalSettings.PROFILE.getNbLifes());
+		CharSequence levelD= Integer.toString(GlobalSettings.PROFILE.getLevel  ()/10);
+		CharSequence levelU= Integer.toString(GlobalSettings.PROFILE.getLevel  ());
+		CharSequence score = Integer.toString(GlobalSettings.PROFILE.getScore  ());
+		
 
 		batch.begin();
 
@@ -155,9 +162,10 @@ public class GameLoop {
 
 		graphicManager.draw(batch);
 
-		font.draw(batch, lives, 630, 1160);
-		font.draw(batch, level, 300, 1135);
-		font.draw(batch, score, 630, 1200);
+		fontOsaka .draw(batch, lives , 630, 1167);
+		fontOsaka .draw(batch, score , 630, 1205);
+		fontOswald.draw(batch, levelD, 285, 1180);
+		fontOswald.draw(batch, levelU, 345, 1180);
 		
 		if ( pause )
 			status = countDown.draw(batch);
