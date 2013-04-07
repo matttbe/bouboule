@@ -58,11 +58,17 @@ public class ScreenGame implements Screen {
 	private Timer timer = null;
 	// private int iCountDown = 0;
 	private boolean bIsPause = false;
-	private boolean bWaitBeforeStart = true;
 
 	@Override
 	public void show() {
 		Gdx.app.log ("Matth", "Screen: SHOW");
+		
+		// start the playback of the background music immediately
+		loopMusic = Gdx.audio.newMusic(Gdx.files.internal("music/klez.mp3"));
+		loopMusic.setLooping(true);
+
+		camera = CameraHelper.GetCamera(APPWIDTH, APPHEIGHT);
+		game = new GameLoop(camera, true);
 
 		// GlobalSettings.LISTENER.dispose (); // display the menu for the first time
 		profile = GlobalSettings.PROFILE;
@@ -70,22 +76,16 @@ public class ScreenGame implements Screen {
 	}
 
 	public void start() {
-		// start the playback of the background music immediately
-		loopMusic = Gdx.audio.newMusic(Gdx.files.internal("music/klez.mp3"));
-		loopMusic.setLooping(true);
-
-		camera = CameraHelper.GetCamera(APPWIDTH, APPHEIGHT);
-		game = new GameLoop(camera, true);
 		loopMusic.play();
+		game.start ();
 		profile.LaunchTimer ();
-		bWaitBeforeStart = false; // TODO: find a better way...
 		bIsPause = false;
 	}
 
 
 	@Override
 	public void render (float delta) {
-		if (bIsPause || bWaitBeforeStart)
+		if (bIsPause)
 		{
 			bIsPause = game.renderPause();
 			Gdx.app.log ("Matth", "Screen: RENDER + PAUSE: " + bIsPause);

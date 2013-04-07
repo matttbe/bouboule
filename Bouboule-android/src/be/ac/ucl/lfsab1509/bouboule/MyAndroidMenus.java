@@ -13,6 +13,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.menu.Menus;
 public class MyAndroidMenus implements Menus {
 
 	private AndroidApplication app;
+	private static final int CODE_RETURN = 3;
 
 	public MyAndroidMenus (AndroidApplication app) {
 		this.app = app;
@@ -63,7 +64,7 @@ public class MyAndroidMenus implements Menus {
 				break;
 		}
 
-		app.startActivity (intent);
+		app.startActivityForResult (intent, CODE_RETURN);
 		app.overridePendingTransition (android.R.anim.fade_in,
 				android.R.anim.fade_out);
 		GlobalSettings.GAME_EXIT = GameExitStatus.NONE;

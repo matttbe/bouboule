@@ -68,9 +68,6 @@ public class GameLoop {
 
 			debugRenderer	= new Box2DDebugRenderer();
 		}
-		
-		graphicManager = new GraphicManager();
-		init ();
 	}
 
 	/*
@@ -78,8 +75,9 @@ public class GameLoop {
 	 * 
 	 * init()
 	 */
-	private void init() {
-				
+	public void start() {
+		graphicManager = new GraphicManager();
+
 		LevelLoader level = new LevelLoader();
 		GlobalSettings.NBLEVELS = level.getNbLevels ();
 		int iLevel = GlobalSettings.PROFILE.getLevel();
