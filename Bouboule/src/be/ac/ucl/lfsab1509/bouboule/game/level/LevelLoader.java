@@ -72,8 +72,11 @@ public class LevelLoader {
 
 	public void loadLevel(String level) {
 		file = root.getChildByName(level);
-		if (file == null)
+		if (file == null) {
+			Gdx.app.log("Matth", "Level not found");
 			throw new GdxRuntimeException ("Level not found");
+		}
+			
 
 	}
 
@@ -145,11 +148,11 @@ public class LevelLoader {
 		graphicManager.addBody(new Arena( radius, px, py,  angle, texRegionPath, 
 				jsonFile,  jsonName, entity));
 
+		Gdx.app.log("XML","Arena Loaded :"+jsonName);
+		
 	}
 
 	public void readLevelMapNodes() {
-
-		Gdx.app.log("3DEBUG", "ENTERING MAPD NODE READER");
 
 		Element mapNodes = file.getChildByName("MapNodes");	
 
@@ -207,6 +210,8 @@ public class LevelLoader {
 			graphicManager.addBody( new Obstacle(bodyType, density,
 					elasticity, px, py, angle,texRegionPath, 
 					jsonFile, jsonName, entity));
+			
+			Gdx.app.log("XML", "Obstacle loaded : "+jsonName);
 		}
 	}
 }

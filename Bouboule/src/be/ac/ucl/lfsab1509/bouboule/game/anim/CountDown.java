@@ -74,6 +74,11 @@ public class CountDown {
 		
 		return stateTime != 0f;
 	}
+	
+	public void dispose() {
+		
+		countDownSheet.dispose();
+	}
 
 	
 }

@@ -33,6 +33,7 @@ import android.view.WindowManager.LayoutParams;
 import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
@@ -74,6 +75,7 @@ public class MainActivity extends AndroidApplication {
 	@Override
 	public void onBackPressed()	{
 		game.getScreen ().pause();
+		Gdx.app.log("Matth","Game should pause now !");
 		Intent intent = new Intent(MainActivity.this, MenuPause.class);
 		startActivityForResult(intent, CODE_PAUSE_ACTIVITY);
 		overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

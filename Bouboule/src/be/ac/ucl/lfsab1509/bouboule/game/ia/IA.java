@@ -194,7 +194,6 @@ public class IA {
 		//accelX=0;
 		//accelY=0;
 		// Gdx.app.log ("IA","gyroscope"+ Acc.len());
-		Gdx.app.log ("IA","gyroscope"+ Acc.len());
 
 		return Acc;
 	}

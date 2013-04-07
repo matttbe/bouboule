@@ -40,8 +40,8 @@ import com.badlogic.gdx.physics.box2d.Manifold;
  */
 public class EndGameListener implements ContactListener{
 
-	private int isAlivePlayer 	= 0;
-	private int isAliveMonster	= 0;
+	private static int isAlivePlayer 	= 0;
+	private static int isAliveMonster	= 0;
 	
 	@Override
 	public void beginContact(final Contact contact) {
@@ -94,7 +94,6 @@ public class EndGameListener implements ContactListener{
 
 				}
 				else {
-					GlobalSettings.GAME.looseSound ();
 					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 					Gdx.app.log("KILL", "Bouboule est MORT =/");
 					
@@ -112,13 +111,11 @@ public class EndGameListener implements ContactListener{
 			}
 			else {
 				if (isAliveMonster > 1) {
-					GlobalSettings.GAME.looseSound ();
 					Gdx.app.log("Alive", "MONSTER est VIVANT =)");
 					//DO NOTHING
 					isAliveMonster --;
 				}
 				else {
-					GlobalSettings.GAME.winSound ();
 					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 					Gdx.app.log("KILL", "Bouboule a gagné =P");
 					GlobalSettings.PROFILE.saveScore ();
@@ -144,6 +141,12 @@ public class EndGameListener implements ContactListener{
 	@Override
 	public void postSolve(final Contact contact, final ContactImpulse impulse) {
 		
+	}
+	
+	public static void resetListener() {
+		
+		isAlivePlayer 	= 0;
+		isAliveMonster	= 0;
 	}
 
 

@@ -72,7 +72,7 @@ public class ScreenGame implements Screen {
 
 		// GlobalSettings.LISTENER.dispose (); // display the menu for the first time
 		profile = GlobalSettings.PROFILE;
-		start ();// TODO: remove...?
+		//start ();// TODO: remove...?
 	}
 
 	public void start() {
@@ -105,12 +105,13 @@ public class ScreenGame implements Screen {
 
 	@Override
 	public void pause() {
-		Gdx.app.log ("Matth", "Screen: PAUSE");
+		//Gdx.app.log ("Matth", "Screen: PAUSE");
 		if (timer == null || ! profile.isRunning ())
 			return;
 		bIsPause = true;
 		profile.pause ();
 		loopMusic.pause ();
+		Gdx.app.log ("Matth", "Screen: PAUSE + pause status : "+bIsPause);
 	}
 
 	/*private void startCountDown (int iNbTime) {
@@ -143,7 +144,15 @@ public class ScreenGame implements Screen {
 
 	@Override
 	public void resume() {
-		Gdx.app.log ("Matth", "Screen: RESUME");
+		Gdx.app.log ("Matth", "Screen: RESUME + pause staus : "+bIsPause);
+		
+		if (!bIsPause)
+			start ();		//must relaunch the game when the activity is not paused
+							//and comes back from a menu or what ever
+		else {
+			//TODO : relaunch the sounds and timer
+		}
+		
 		/*if (bIsPause
 				// this function is called one or two time when starting the game
 				&& profile.isRunning ()

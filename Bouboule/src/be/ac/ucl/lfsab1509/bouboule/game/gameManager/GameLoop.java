@@ -41,19 +41,19 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 
 public class GameLoop {
-	
+
 	public  GraphicManager 		graphicManager;
 	private Box2DDebugRenderer 	debugRenderer;
 	private Matrix4 			debugMatrix;
-	
+
 	private CountDown 			countDown;
 	private BitmapFont			fontOswald;
 	private BitmapFont			fontOsaka;
 	private SpriteBatch			batch;
 	private LevelLoader 		level;
-	
-	
-	
+
+
+
 	/*
 	 * Launch the creation of the batch thanks to the camera.
 	 * if debug == true, set up the debugger matrix
@@ -72,29 +72,35 @@ public class GameLoop {
 
 			debugRenderer	= new Box2DDebugRenderer();
 		}
-		
+
+		//Create only once the graphicManager
+		graphicManager = new GraphicManager();
+
 		level = new LevelLoader();
 		GlobalSettings.NBLEVELS = level.getNbLevels ();
 
 		//Load the font + enable white
 		fontOswald = new BitmapFont(Gdx.files.internal("fonts/Oswald/Oswald.fnt"),
 				Gdx.files.internal("fonts/Oswald/Oswald.png"), false);
-		fontOswald.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		
+
 		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
 				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
-		fontOsaka.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+		//load the counter 
+		countDown = new CountDown();
 	}
-	
+
 	/* 
 	 * Used to (re)start a new game
 	 */
 	public void start() {
-		/**
-		 * TODO: reset the background, the position of the objects, etc.
-		 */
+
+		Gdx.app.log("Matth","Dipose of the graphicManager");
+		//Clear the graphic Manager for a new use.
+		graphicManager.dispose();
 		
-		graphicManager = new GraphicManager();
+		//Reset EndGame Listener
+		EndGameListener.resetListener();
 
 		//load level
 		int iLevel = GlobalSettings.PROFILE.getLevel();
@@ -107,12 +113,10 @@ public class GameLoop {
 		level.readLevelBouboule (graphicManager);
 		level.readLevelObstacles(graphicManager);
 		level.readLevelMapNodes ();
-		
-		//load the counter 
-		countDown = new CountDown(); // TODO: reload a new countdown each time?
+
 	}
-	
-	
+
+
 	/*
 	 * Update the ball position thanks to the accelerometer and
 	 * launch the physical update function of dt the time between 2 frames
@@ -122,74 +126,64 @@ public class GameLoop {
 	public void update() {
 		graphicManager.update();
 	}
-	
+
 	/*
 	 * Draw all the needed bodies of the game
 	 * 
 	 * render()
 	 */
 	public boolean render(final boolean pause) {
-		
+
 		boolean status = false;
 
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		batch.begin();
+
+
+		//batch.disableBlending();
+		//Allow to draw the background fast because it disable 
+		//the color blending (override the background).
+		//batch.enableBlending();
+
+		//Draw all the know bodies
+
+		graphicManager.draw(batch);
+
+		writeText();
+		
+		if ( pause )
+			status = countDown.draw(batch);
+
+		batch.end();
+
+		/*batch.begin();
+		//Draw the debugging matrix
+		debugRenderer.render(GraphicManager.getWorld(), debugMatrix);
+		batch.end();
+		*/
+		return status;
+	}
+
+	public void writeText() {
 
 		CharSequence lives = Integer.toString(GlobalSettings.PROFILE.getNbLifes ());
 		CharSequence levelD= Integer.toString(GlobalSettings.PROFILE.getLevel   ()/10);
 		CharSequence levelU= Integer.toString(GlobalSettings.PROFILE.getLevel   ()%10);
 		CharSequence score = Integer.toString(GlobalSettings.PROFILE.getOldScore());
 		
-		batch.begin();
+		int timer = GlobalSettings.PROFILE.getScore() - GlobalSettings.PROFILE.getOldScore();
 		
-
-		//batch.disableBlending();
-		//Allow to draw the background fast because it disable 
-		//the color blending (override the background).
-		//batch.enableBlending();
+		CharSequence timerM= Integer.toString((timer/60)); 
+		CharSequence timerS= Integer.toString(timer%60);
 		
-		//Draw all the know bodies
-
-		graphicManager.draw(batch);
-
+		fontOsaka .draw(batch, timerM+"' "+timerS+"''" , 630, 1122);
 		fontOsaka .draw(batch, lives , 630, 1167);
 		fontOsaka .draw(batch, score , 630, 1205);
 		fontOswald.draw(batch, levelD, 285, 1180);
 		fontOswald.draw(batch, levelU, 345, 1180);
 
-		if ( pause )
-			status = countDown.draw(batch);
-
-		batch.end();
-		
-		batch.begin();
-		//Draw the debugging matrix
-		debugRenderer.render(GraphicManager.getWorld(), debugMatrix);
-		batch.end();
-
-		return status;
 	}
-	
-	/*
-	 * Draw all the needed bodies of the game pause
-	 * 
-	 * render()
-	 */
-	public boolean renderPause() {
-
-		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		batch.begin();
-		
-		//Draw all the know bodies
-
-		graphicManager.draw(batch);
-		boolean status = countDown.draw(batch);
-				
-		batch.end();
-		
-		return status;
-	}
-	
 
 	/*
 	 * Remove all the memory used object 
@@ -202,6 +196,6 @@ public class GameLoop {
 		graphicManager.dispose();
 	}
 
-	
-	
+
+
 }
