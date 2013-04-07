@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import be.ac.ucl.lfsab1509.bouboule.game.body.Arena;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
+import be.ac.ucl.lfsab1509.bouboule.game.body.Obstacle;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
@@ -120,21 +121,21 @@ public class LevelLoader {
 	}
 
 	public void readLevelMapNodes() {
-		
+
 		Gdx.app.log("3DEBUG", "ENTERING MAPD NODE READER");
 
 		Element mapNodes = file.getChildByName("MapNodes");	
 
 		Array<Element> node = mapNodes.getChildrenByName("NodeAllow");
-		
+
 		MapNode mapNode;
 		Element newNode;
-		
+
 		GlobalSettings.ARENAWAYPOINTALLOW = new ArrayList<MapNode>();
 
 		for (Iterator<Element> nodes = node.iterator(); nodes
 				.hasNext();) {
-			
+
 			newNode = nodes.next();
 
 			float px			= Float.parseFloat(newNode.getAttribute("px"));
@@ -145,7 +146,40 @@ public class LevelLoader {
 			GlobalSettings.ARENAWAYPOINTALLOW.add(mapNode);
 			Gdx.app.log("XML NODES", mapNode.toString());
 		}
-		
+
 	}
 
+
+	public void readLevelObstacles(GraphicManager graphicManager) {
+
+		Element obstaclesGroup = file.getChildByName("Obstacles");	
+
+		Array<Element> obstaclesArray = obstaclesGroup.getChildrenByName("Obstacle");
+
+		Element  newobstacle;
+
+		for (Iterator<Element> obstacleElem = obstaclesArray.iterator(); obstacleElem
+				.hasNext();) {
+
+			newobstacle = obstacleElem.next();
+			
+			BodyType bodyType		= (newobstacle.getAttribute("bodyType") == ("Dynamic")) 
+					? BodyType.DynamicBody : BodyType.StaticBody;
+			
+			float density			= Float.parseFloat(newobstacle.getAttribute("density"));
+			float elasticity		= Float.parseFloat(newobstacle.getAttribute("elasticity"));
+			float px				= Float.parseFloat(newobstacle.getAttribute("px"));
+			float py				= Float.parseFloat(newobstacle.getAttribute("py"));
+			float angle				= Float.parseFloat(newobstacle.getAttribute("angle"));
+			String texRegionPath 	= newobstacle.getAttribute("texRegionPath");
+			String jsonFile 		= newobstacle.getAttribute("jsonFile");
+			String jsonName 		= newobstacle.getAttribute("jsonName");
+			short entity			= Short.parseShort(newobstacle.getAttribute("entity"));
+
+
+			graphicManager.addBody( new Obstacle(bodyType, density,
+					elasticity, px, py, angle,texRegionPath, 
+					jsonFile, jsonName, entity));
+		}
+	}
 }

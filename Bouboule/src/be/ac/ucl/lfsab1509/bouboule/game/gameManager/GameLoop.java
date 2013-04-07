@@ -95,6 +95,7 @@ public class GameLoop {
 		}
 		level.readLevelArena	(graphicManager);
 		level.readLevelBouboule (graphicManager);
+		level.readLevelObstacles(graphicManager);
 		level.readLevelMapNodes ();
 
 		//load the counter 
