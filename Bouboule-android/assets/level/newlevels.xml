@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Level>
 
-    <Level1>
+    <Level7>
 
         <Bouboule
             IALevel="2"
@@ -62,9 +62,12 @@
                 weight="1" >
             </NodeAllow>
         </MapNodes>
-    </Level1>
 
-    <Level2>
+        <Obstacles>
+        </Obstacles>
+    </Level7>
+
+    <Level12>
 
         <Bouboule
             IALevel="6"
@@ -125,9 +128,12 @@
                 weight="1" >
             </NodeAllow>
         </MapNodes>
-    </Level2>
 
-    <Level3>
+        <Obstacles>
+        </Obstacles>
+    </Level12>
+
+    <Level1>
 
         <Bouboule
             IALevel="6"
@@ -137,8 +143,8 @@
             entity="-1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="800"
+            px="100"
+            py="1000"
             radius="0"
             texRegionPath="images/boub2.png" >
         </Bouboule>
@@ -151,8 +157,8 @@
             entity="1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="400"
+            px="600"
+            py="100"
             radius="0"
             texRegionPath="images/boub.png" >
         </Bouboule>
@@ -188,7 +194,10 @@
                 weight="1" >
             </NodeAllow>
         </MapNodes>
-    </Level3>
+
+        <Obstacles>
+        </Obstacles>
+    </Level1>
 
     <Level4>
 
@@ -251,6 +260,9 @@
                 weight="1" >
             </NodeAllow>
         </MapNodes>
+
+        <Obstacles>
+        </Obstacles>
     </Level4>
 
     <Level5>
@@ -314,6 +326,9 @@
                 weight="1" >
             </NodeAllow>
         </MapNodes>
+
+        <Obstacles>
+        </Obstacles>
     </Level5>
 
     <Level6>
@@ -377,9 +392,12 @@
                 weight="1" >
             </NodeAllow>
         </MapNodes>
+
+        <Obstacles>
+        </Obstacles>
     </Level6>
 
-    <Level7>
+    <Level3>
 
         <Bouboule
             IALevel="6"
@@ -440,7 +458,23 @@
                 weight="1" >
             </NodeAllow>
         </MapNodes>
-    </Level7>
+
+        <Obstacles>
+
+            <Obstacle
+                bodyType="Static"
+                density="1"
+                elasticity="0.5f"
+                entity="-2"
+                angle="0"
+                jsonFile="data/terrain/OneWay/oneway_mur.json"
+                jsonName="oneway_mur"
+                px="0"
+                py="0"
+                texRegionPath="data/terrain/OneWay/oneway_mur.png" >
+            </Obstacle>
+        </Obstacles>
+    </Level3>
 
     <Level8>
 
@@ -503,6 +537,9 @@
                 weight="1" >
             </NodeAllow>
         </MapNodes>
+
+        <Obstacles>
+        </Obstacles>
     </Level8>
 
     <Level9>
@@ -566,6 +603,9 @@
                 weight="1" >
             </NodeAllow>
         </MapNodes>
+
+        <Obstacles>
+        </Obstacles>
     </Level9>
 
     <Level10>
@@ -629,6 +669,9 @@
                 weight="1" >
             </NodeAllow>
         </MapNodes>
+
+        <Obstacles>
+        </Obstacles>
     </Level10>
 
     <Level11>
@@ -692,9 +735,12 @@
                 weight="1" >
             </NodeAllow>
         </MapNodes>
+
+        <Obstacles>
+        </Obstacles>
     </Level11>
 
-    <Level12>
+    <Level2>
 
         <Bouboule
             IALevel="6"
@@ -755,6 +801,9 @@
                 weight="1" >
             </NodeAllow>
         </MapNodes>
-    </Level12>
+
+        <Obstacles>
+        </Obstacles>
+    </Level2>
 
 </Level>

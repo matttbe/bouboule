@@ -191,5 +191,9 @@ public class Profile {
 	public int getLevel () {
 		return iLevel;
 	}
+	
+	public int getOldScore() {
+		return iOldScore;
+	}
 
 }

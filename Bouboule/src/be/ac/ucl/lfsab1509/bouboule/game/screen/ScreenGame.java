@@ -85,19 +85,9 @@ public class ScreenGame implements Screen {
 
 	@Override
 	public void render (float delta) {
-		if (bIsPause)
-		{
-			bIsPause = game.renderPause();
-			Gdx.app.log ("Matth", "Screen: RENDER + PAUSE: " + bIsPause);
-			// we need to draw something...
-			return;
-		}
-		
-		// float dt = Gdx.graphics.getDeltaTime();
-
-		game.update();
-		game.render();
-
+		if (!bIsPause)
+			game.update();
+		bIsPause = game.render(bIsPause);
 	}
 
 	@Override
