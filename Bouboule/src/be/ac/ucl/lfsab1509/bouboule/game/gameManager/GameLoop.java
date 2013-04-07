@@ -49,7 +49,8 @@ public class GameLoop {
 	private CountDown 			countDown;
 	private BitmapFont			fontOswald;
 	private BitmapFont			fontOsaka;
-	public SpriteBatch			batch;
+	private SpriteBatch			batch;
+	private LevelLoader 		level;
 	
 	
 	
@@ -71,19 +72,31 @@ public class GameLoop {
 
 			debugRenderer	= new Box2DDebugRenderer();
 		}
-	}
+		
+		level = new LevelLoader();
+		GlobalSettings.NBLEVELS = level.getNbLevels ();
 
-	/*
-	 * Initialise all the object needed 
-	 * 
-	 * init()
+		//Load the font + enable white
+		fontOswald = new BitmapFont(Gdx.files.internal("fonts/Oswald/Oswald.fnt"),
+				Gdx.files.internal("fonts/Oswald/Oswald.png"), false);
+		fontOswald.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		
+		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
+				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
+		fontOsaka.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+	}
+	
+	/* 
+	 * Used to (re)start a new game
 	 */
 	public void start() {
+		/**
+		 * TODO: reset the background, the position of the objects, etc.
+		 */
+		
 		graphicManager = new GraphicManager();
 
 		//load level
-		LevelLoader level = new LevelLoader();
-		GlobalSettings.NBLEVELS = level.getNbLevels ();
 		int iLevel = GlobalSettings.PROFILE.getLevel();
 		try {
 			level.loadLevel ("Level" + iLevel);
@@ -96,16 +109,7 @@ public class GameLoop {
 		level.readLevelMapNodes ();
 		
 		//load the counter 
-		countDown = new CountDown();
-
-		//Load the font + enable white
-		fontOswald = new BitmapFont(Gdx.files.internal("fonts/Oswald/Oswald.fnt"),
-				Gdx.files.internal("fonts/Oswald/Oswald.png"), false);
-		fontOswald.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		
-		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
-				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
-		fontOsaka.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		countDown = new CountDown(); // TODO: reload a new countdown each time?
 	}
 	
 	
@@ -116,17 +120,6 @@ public class GameLoop {
 	 * update(float dt)
 	 */
 	public void update() {
-		
-		/*float accelX = Gdx.input.getAccelerometerX();
-		float accelY = Gdx.input.getAccelerometerY();
-		*/
-		//float accelZ = Gdx.input.getAccelerometerZ();
-		
-		
-		/*bouboule.body.applyForceToCenter(new Vector2(0,-0.5f));
-		bouboule2.body.applyForceToCenter(new Vector2(-accelX*0.3f,-accelY*0.3f));
-		*/
-		
 		graphicManager.update();
 	}
 	
