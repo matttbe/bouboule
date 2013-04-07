@@ -161,7 +161,7 @@ public class LevelLoader {
 		MapNode mapNode;
 		Element newNode;
 
-		GlobalSettings.ARENAWAYPOINTALLOW = new ArrayList<MapNode>();
+		GlobalSettings.ARENAWAYPOINTALLOW.clear();
 
 		for (Iterator<Element> nodes = node.iterator(); nodes
 				.hasNext();) {
