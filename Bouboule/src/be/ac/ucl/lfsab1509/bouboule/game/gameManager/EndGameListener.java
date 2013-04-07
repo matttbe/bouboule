@@ -65,7 +65,8 @@ public class EndGameListener implements ContactListener{
 				isAliveMonster ++;
 
 			}
-		}else if((entity1 != GlobalSettings.SCENERY) && (entity2 != GlobalSettings.SCENERY)){
+		} else if((entity1 == GlobalSettings.PLAYER  && entity2 == GlobalSettings.MONSTER) |
+				  (entity1 == GlobalSettings.MONSTER && entity2 == GlobalSettings.PLAYER) ) {
 			Gdx.app.log("Chocs de Bouboules", "CHOCS || CHOCS");
 			GlobalSettings.GAME.hitSound (); 
 		}
