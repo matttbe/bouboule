@@ -62,13 +62,13 @@ public class EndGameListener implements ContactListener{
 					| entity2 == GlobalSettings.PLAYER) {
 				
 				if (isAlivePlayer>1) {
-					GlobalSettings.GAME.winSound ();
+					//GlobalSettings.GAME.winSound ();
 					isAlivePlayer --;
 					Gdx.app.log("Alive", "End Contact = "+isAlivePlayer);
 					//DO NOTHING =)
 
 				} else {
-					GlobalSettings.GAME.looseSound ();
+					//GlobalSettings.GAME.looseSound ();
 					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 					Gdx.app.log("KILL", "Bouboule est MORT =/");
 					
@@ -87,12 +87,12 @@ public class EndGameListener implements ContactListener{
 			} else {
 
 				if (isAliveMonster>1) {
-					GlobalSettings.GAME.looseSound ();
+					//GlobalSettings.GAME.looseSound ();
 					Gdx.app.log("Alive", "MONSTER est VIVANT =)");
 					//DO NOTHING
 					isAliveMonster --;
 				} else {
-					GlobalSettings.GAME.winSound ();
+					//GlobalSettings.GAME.winSound ();
 					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 					Gdx.app.log("KILL", "Bouboule a gagné =P");
 					GlobalSettings.PROFILE.saveScore ();
