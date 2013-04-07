@@ -3,9 +3,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -60,30 +58,8 @@ public class LoosingActivity extends Activity {
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-
-			Intent intent;
-
-			switch (view.getId()) {
-
-			case R.id.LoosingMenuButton: // cas ou on stoppe
-				Log.i ("Matth", "LoosingActivity: Menu");
-				intent = new Intent(LoosingActivity.this, Menu.class);
-				startActivity(intent);
-				finish ();
-				break;
-			case R.id.LoosingNextLevelButton: 
-				Log.i ("Matth", "LoosingActivity: Next");
-				finish(); // return to main activity
-				break;
-
-			default:
-				break;
-			}
-
-
-
-			finish(); // finish activity
-
+			setResult (view.getId ());
+			finish(); // finish activity => return to MainActivity
 			return false;
 		}
 	};

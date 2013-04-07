@@ -172,6 +172,8 @@ public class GameLoop {
 		//Draw the debugging matrix
 		debugRenderer.render(GraphicManager.getWorld(), debugMatrix);
 		batch.end();
+
+		return status;
 	}
 	
 	/*

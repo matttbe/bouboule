@@ -2,7 +2,6 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -30,27 +29,8 @@ public class VictoryActivity extends Activity {
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-
-			Intent intent;
-			switch (view.getId()) {
-
-			case R.id.VictoryMenuButton: // cas ou on stoppe
-				intent = new Intent(VictoryActivity.this, Menu.class);
-				startActivity(intent);
-				finish();
-				break;
-
-			case R.id.VictoryNextLevelButton:
-				finish(); // return to MainActivity
-				break;
-			default:
-				break;
-			}
-
-
-
-			finish(); // finish activity
-
+			setResult (view.getId ());
+			finish(); // finish activity => return to MainActivity
 			return false;
 		}
 	};

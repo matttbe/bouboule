@@ -4,7 +4,6 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.View;
@@ -82,24 +81,8 @@ public class GameOverActivity extends Activity {
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-
-			Intent intent;
-
-			switch (view.getId()) {
-
-			case R.id.LoosingMenuButton: // cas ou on stoppe
-				intent = new Intent(GameOverActivity.this, Menu.class);
-				startActivity(intent);
-				finish ();
-				break;
-			default:
-				break;
-			}
-
-
-
-			finish(); // finish activity
-
+			setResult (view.getId ());
+			finish(); // finish activity => return to MainActivity
 			return false;
 		}
 	};

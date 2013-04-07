@@ -40,7 +40,8 @@ public class MainActivity extends AndroidApplication {
 	
 	private MyGame game;
 	public static final int CODE_PAUSE_ACTIVITY = 1;
-	public static final int CODE_MENU_ACTIVITY = 2;
+	public static final int CODE_MENU_ACTIVITY 	= 2;
+	public static final int CODE_END_GAME 		= 3;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class MainActivity extends AndroidApplication {
 
 	@Override
 	public void onBackPressed()	{
-		game.screen.pause();
+		game.getScreen ().pause();
 		Intent intent = new Intent(MainActivity.this, MenuPause.class);
 		startActivityForResult(intent, CODE_PAUSE_ACTIVITY);
 		overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -90,31 +91,42 @@ public class MainActivity extends AndroidApplication {
 				switch (resultCode) { // it's the id of the button
 				
 					case R.id.PauseContinueButton: // cas ou on continue
-						game.screen.resume();
+						game.getScreen ().resume();
 						return;
 					case R.id.PauseMenuButton: // cas ou on stoppe
-						Intent intent = new Intent(MainActivity.this, Menu.class);
-						startActivity(intent);
+						GlobalSettings.MENUS.launchInitMenu ();
 						break;
 					case R.id.PauseQuitButton: // just quit without new activity => quit
 						exit();
 						break;
-				default:
-					break;
+					default:
+						break;
 				}
 				break;
 			case CODE_MENU_ACTIVITY:
 				switch (resultCode) {
 					case R.id.PlayButton:
 						Log.i ("Matth", "Menu Activity finished: start game");
-						// gameScreen.show ();
+						// gameScreen.show (); // TODO: we should do nothing... we are now in the game, no?
 						break;
 					default:
 						break;
 				}
 				break;
-		default:
-			break;
+			case CODE_END_GAME:
+				switch (resultCode) {
+					case R.id.VictoryMenuButton:
+					case R.id.LoosingMenuButton:
+					// case R.id.GameOverMenuButton: // TODO
+						GlobalSettings.MENUS.launchInitMenu ();
+						break;
+					case R.id.VictoryNextLevelButton:
+					case R.id.LoosingNextLevelButton:
+						game.screenGame.start ();
+						break;
+				}
+			default:
+				break;
 		}
 	}
 

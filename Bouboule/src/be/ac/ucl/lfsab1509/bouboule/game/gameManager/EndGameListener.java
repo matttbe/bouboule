@@ -82,7 +82,7 @@ public class EndGameListener implements ContactListener{
 					}
 					
 					GlobalSettings.MENUS.launchEndGameMenu ();
-					GlobalSettings.GAME.screen.hide (); // TODO: stop this screen to return to mainactivity
+					GlobalSettings.GAME.getScreen ().hide (); // TODO: stop this screen to return to mainactivity
 					//Gdx.app.exit();
 				}
 			}
@@ -106,7 +106,7 @@ public class EndGameListener implements ContactListener{
 					}
 
 					GlobalSettings.MENUS.launchEndGameMenu ();
-					GlobalSettings.GAME.screen.hide ();
+					GlobalSettings.GAME.getScreen ().hide ();
 				}
 				
 			}

@@ -3,9 +3,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 
-import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 import be.ac.ucl.lfsab1509.bouboule.game.menu.Menus;
@@ -13,7 +11,6 @@ import be.ac.ucl.lfsab1509.bouboule.game.menu.Menus;
 public class MyAndroidMenus implements Menus {
 
 	private AndroidApplication app;
-	private static final int CODE_RETURN = 3;
 
 	public MyAndroidMenus (AndroidApplication app) {
 		this.app = app;
@@ -27,7 +24,7 @@ public class MyAndroidMenus implements Menus {
 
 
 	// TODO: remove this toast when the score will be displayed somewhere else
-	private void displayInfo () {
+	/*private void displayInfo () {
 		Context context = app.getApplicationContext ();
 		CharSequence text = "Score: " + GlobalSettings.PROFILE.getScore ()
 				+ "\nLifes: " + GlobalSettings.PROFILE.getNbLifes ()
@@ -38,7 +35,7 @@ public class MyAndroidMenus implements Menus {
 
 		Toast toast = Toast.makeText (context, text, duration);
 		toast.show ();
-	}
+	}*/
 
 	@Override
 	public void launchEndGameMenu () {
@@ -49,13 +46,9 @@ public class MyAndroidMenus implements Menus {
 			case NONE :
 				return;
 			case WIN :
-				// displayInfo ();
-
 				intent = new Intent (app, VictoryActivity.class);
 				break;
 			case LOOSE :
-				// displayInfo ();
-
 				intent = new Intent (app, LoosingActivity.class);
 				break;
 			case GAMEOVER :
@@ -64,7 +57,7 @@ public class MyAndroidMenus implements Menus {
 				break;
 		}
 
-		app.startActivityForResult (intent, CODE_RETURN);
+		app.startActivityForResult (intent, MainActivity.CODE_END_GAME);
 		app.overridePendingTransition (android.R.anim.fade_in,
 				android.R.anim.fade_out);
 		GlobalSettings.GAME_EXIT = GameExitStatus.NONE;

@@ -10,7 +10,7 @@ import com.badlogic.gdx.audio.Sound;
 
 public class MyGame extends Game {
 
-	public ScreenGame screen;
+	public ScreenGame screenGame;
 	private Sound hitSound;
 	private Sound winSound;
 	private Sound looseSound;
@@ -24,8 +24,8 @@ public class MyGame extends Game {
 
 		createProfile ();
 
-		screen = new ScreenGame();
-		setScreen (screen);
+		screenGame = new ScreenGame();
+		setScreen (screenGame); // 
 	}
 
 	public void createProfile () {
