@@ -30,6 +30,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.Profile;
 
 import com.badlogic.gdx.Gdx;
@@ -58,28 +59,33 @@ public class ScreenGame implements Screen {
 	private Timer timer = null;
 	// private int iCountDown = 0;
 	private boolean bIsPause = false;
+	private boolean bNewGame = true;
 
-	@Override
-	public void show() {
-		Gdx.app.log ("Matth", "Screen: SHOW");
-		
-		// start the playback of the background music immediately
+	// INIT => on create
+	public ScreenGame () {
+		profile = GlobalSettings.PROFILE;
 		loopMusic = Gdx.audio.newMusic(Gdx.files.internal("music/klez.mp3"));
 		loopMusic.setLooping(true);
 
 		camera = CameraHelper.GetCamera(APPWIDTH, APPHEIGHT);
 		game = new GameLoop(camera, true);
-
-		// GlobalSettings.LISTENER.dispose (); // display the menu for the first time
-		profile = GlobalSettings.PROFILE;
-		//start ();// TODO: remove...?
 	}
 
-	public void start() {
+	@Override
+	public void show() {
+		Gdx.app.log ("Matth", "Screen: SHOW");
+	
+		loopMusic.stop(); // to play at startup
 		loopMusic.play();
 		game.start ();
 		profile.LaunchTimer ();
 		bIsPause = false;
+		bNewGame = false;
+
+		// start the playback of the background music immediately
+
+		// GlobalSettings.LISTENER.dispose (); // display the menu for the first time
+		//start ();// TODO: remove...?
 	}
 
 
@@ -101,17 +107,18 @@ public class ScreenGame implements Screen {
 
 	@Override
 	public void resize(final int width, final int height) {
+		//TODO? position of the countdown, the score, etc.?
 	}
 
 	@Override
 	public void pause() {
 		//Gdx.app.log ("Matth", "Screen: PAUSE");
+		Gdx.app.log ("Matth", "Screen: PAUSE + pause status : "+bIsPause);
 		if (timer == null || ! profile.isRunning ())
 			return;
 		bIsPause = true;
 		profile.pause ();
 		loopMusic.pause ();
-		Gdx.app.log ("Matth", "Screen: PAUSE + pause status : "+bIsPause);
 	}
 
 	/*private void startCountDown (int iNbTime) {
@@ -146,11 +153,14 @@ public class ScreenGame implements Screen {
 	public void resume() {
 		Gdx.app.log ("Matth", "Screen: RESUME + pause staus : "+bIsPause);
 		
-		if (!bIsPause)
-			start ();		//must relaunch the game when the activity is not paused
-							//and comes back from a menu or what ever
-		else {
-			//TODO : relaunch the sounds and timer
+		if (bNewGame)
+			show (); //must relaunch the game when the activity is not paused
+					 //and comes back from a menu or what ever
+		else if (bIsPause) {
+			bIsPause = false;
+			profile.play ();
+			loopMusic.play ();
+			// TODO: launch the countdown: 3 -> 2 -> 1
 		}
 		
 		/*if (bIsPause
@@ -162,10 +172,9 @@ public class ScreenGame implements Screen {
 
 	@Override
 	public void hide () {
-		Gdx.app.log ("Matth", "Screen: HIDE");
-		// TODO Auto-generated method stub
-		bIsPause = true;
-		profile.pause ();
-		loopMusic.pause ();
+		Gdx.app.log ("Matth", "Screen: HIDE + pause " + bIsPause);
+		Gdx.app.log ("Matth", "Screen: HIDE + exit: " + GlobalSettings.GAME_EXIT);
+		
+		bNewGame = GlobalSettings.GAME_EXIT != GameExitStatus.NONE; // a new game is needed?
 	}
 }

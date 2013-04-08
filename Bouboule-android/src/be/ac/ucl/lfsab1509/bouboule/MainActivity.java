@@ -124,7 +124,7 @@ public class MainActivity extends AndroidApplication {
 						break;
 					case R.id.VictoryNextLevelButton:
 					case R.id.LoosingNextLevelButton:
-						game.screenGame.start ();
+						// return to the screen, nothing to do...
 						break;
 				}
 			default:

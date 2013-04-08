@@ -90,13 +90,12 @@ public class EndGameListener implements ContactListener{
 				if (isAlivePlayer > 1) {
 					//DO NOTHING =)
 					isAlivePlayer --;
-					Gdx.app.log("Alive", "End Contact = "+isAlivePlayer);
+					// Gdx.app.log("Alive", "End Contact = "+isAlivePlayer);
 					//DO NOTHING =)
 
 				}
 				else {
 					GlobalSettings.GAME.looseSound ();
-					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 					Gdx.app.log("KILL", "Bouboule est MORT =/");
 					
 					GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
@@ -106,20 +105,20 @@ public class EndGameListener implements ContactListener{
 						GlobalSettings.PROFILE.resetProfile (); // TODO: what to do?
 					}
 					
+					GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
+					
 					GlobalSettings.MENUS.launchEndGameMenu ();
-					GlobalSettings.GAME.getScreen ().hide (); // TODO: stop this screen to return to mainactivity
 					//Gdx.app.exit();
 				}
 			}
 			else {
 				if (isAliveMonster > 1) {
-					Gdx.app.log("Alive", "MONSTER est VIVANT =)");
+					// Gdx.app.log("Alive", "MONSTER est VIVANT =)");
 					//DO NOTHING
 					isAliveMonster --;
 				}
 				else {
 					GlobalSettings.GAME.winSound ();
-					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
 					Gdx.app.log("KILL", "Bouboule a gagné =P");
 					GlobalSettings.PROFILE.saveScore ();
 					if (GlobalSettings.PROFILE.LevelUp ())
@@ -128,9 +127,9 @@ public class EndGameListener implements ContactListener{
 						GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
 						GlobalSettings.PROFILE.resetProfile (); // TODO: what to do?
 					}
+					GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
 
 					GlobalSettings.MENUS.launchEndGameMenu ();
-					GlobalSettings.GAME.getScreen ().hide ();
 				}
 				
 			}
