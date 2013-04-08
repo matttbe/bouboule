@@ -1,5 +1,30 @@
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
+/*
+ * This file is part of Bouboule.
+ * 
+ * Copyright 2013 UCLouvain
+ * 
+ * Authors:
+ *  * Group 7 - Course: http://www.uclouvain.be/en-cours-2013-lfsab1509.html
+ *    Matthieu Baerts <matthieu.baerts@student.uclouvain.be>
+ *    Baptiste Remy <baptiste.remy@student.uclouvain.be>
+ *    Nicolas Van Wallendael <nicolas.vanwallendael@student.uclouvain.be>
+ *    Helene Verhaeghe <helene.verhaeghe@student.uclouvain.be>
+ * 
+ * Bouboule is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 
@@ -10,14 +35,13 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 
-
 /*
  * Listener for detecting the end of the game.
  */
 public class EndGameListener implements ContactListener{
 
-	private int isAlivePlayer 	= 0;
-	private int isAliveMonster	= 0;
+	private static int isAlivePlayer 	= 0;
+	private static int isAliveMonster	= 0;
 	
 	@Override
 	public void beginContact(final Contact contact) {
@@ -34,15 +58,17 @@ public class EndGameListener implements ContactListener{
 				isAlivePlayer ++;
 				Gdx.app.log("Alive", "Begin Contact = "+isAlivePlayer);
 
+
 			} else {
 
 				
 				isAliveMonster ++;
 
 			}
-		} else if((entity1 != GlobalSettings.SCENERY) && (entity2 != GlobalSettings.SCENERY)) {
+		} else if((entity1 == GlobalSettings.PLAYER  && entity2 == GlobalSettings.MONSTER) |
+				  (entity1 == GlobalSettings.MONSTER && entity2 == GlobalSettings.PLAYER) ) {
 			Gdx.app.log("Chocs de Bouboules", "CHOCS || CHOCS");
-			GlobalSettings.GAME.hitSound (); 	
+			GlobalSettings.GAME.hitSound (); 
 		}
 
 	}
@@ -61,50 +87,49 @@ public class EndGameListener implements ContactListener{
 			if (entity1 == GlobalSettings.PLAYER 
 					| entity2 == GlobalSettings.PLAYER) {
 				
-				if (isAlivePlayer>1) {
-					//GlobalSettings.GAME.winSound ();
+				if (isAlivePlayer > 1) {
+					//DO NOTHING =)
 					isAlivePlayer --;
-					Gdx.app.log("Alive", "End Contact = "+isAlivePlayer);
+					// Gdx.app.log("Alive", "End Contact = "+isAlivePlayer);
 					//DO NOTHING =)
 
-				} else {
-					//GlobalSettings.GAME.looseSound ();
-					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
+				}
+				else {
+					GlobalSettings.GAME.looseSound ();
 					Gdx.app.log("KILL", "Bouboule est MORT =/");
 					
 					GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
 					GlobalSettings.PROFILE.cancelNewScore ();
-					if (! GlobalSettings.PROFILE.addLifes (-1))
-					{
+					if (! GlobalSettings.PROFILE.addLifes (-1)) {
 						GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
 						GlobalSettings.PROFILE.resetProfile (); // TODO: what to do?
 					}
 					
-					Gdx.app.exit();
+					GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
+					
+					GlobalSettings.MENUS.launchEndGameMenu ();
+					//Gdx.app.exit();
 				}
-
-
-			} else {
-
-				if (isAliveMonster>1) {
-					//GlobalSettings.GAME.looseSound ();
-					Gdx.app.log("Alive", "MONSTER est VIVANT =)");
+			}
+			else {
+				if (isAliveMonster > 1) {
+					// Gdx.app.log("Alive", "MONSTER est VIVANT =)");
 					//DO NOTHING
 					isAliveMonster --;
-				} else {
-					//GlobalSettings.GAME.winSound ();
-					//TODO : END GAME BECAUSE WE HAVE A LOOSER.
+				}
+				else {
+					GlobalSettings.GAME.winSound ();
 					Gdx.app.log("KILL", "Bouboule a gagné =P");
 					GlobalSettings.PROFILE.saveScore ();
 					if (GlobalSettings.PROFILE.LevelUp ())
 						GlobalSettings.GAME_EXIT = GameExitStatus.WIN;
-					else
-					{
+					else {
 						GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
 						GlobalSettings.PROFILE.resetProfile (); // TODO: what to do?
 					}
-					
-					Gdx.app.exit();
+					GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
+
+					GlobalSettings.MENUS.launchEndGameMenu ();
 				}
 				
 			}
@@ -118,6 +143,12 @@ public class EndGameListener implements ContactListener{
 	@Override
 	public void postSolve(final Contact contact, final ContactImpulse impulse) {
 		
+	}
+	
+	public static void resetListener() {
+		
+		isAlivePlayer 	= 0;
+		isAliveMonster	= 0;
 	}
 
 

@@ -49,7 +49,8 @@ public class GameLoop {
 	private CountDown 			countDown;
 	private BitmapFont			fontOswald;
 	private BitmapFont			fontOsaka;
-	public SpriteBatch			batch;
+	private SpriteBatch			batch;
+	private LevelLoader 		level;
 
 
 
@@ -72,21 +73,36 @@ public class GameLoop {
 			debugRenderer	= new Box2DDebugRenderer();
 		}
 
+		//Create only once the graphicManager
 		graphicManager = new GraphicManager();
 
-		init();
+		level = new LevelLoader();
+		GlobalSettings.NBLEVELS = level.getNbLevels ();
+
+		//Load the font + enable white
+		fontOswald = new BitmapFont(Gdx.files.internal("fonts/Oswald/Oswald.fnt"),
+				Gdx.files.internal("fonts/Oswald/Oswald.png"), false);
+
+		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
+				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
+
+		//load the counter 
+		countDown = new CountDown();
 	}
 
-	/*
-	 * Initialise all the object needed 
-	 * 
-	 * init()
+	/* 
+	 * Used to (re)start a new game
 	 */
-	private void init() {
+	public void start() {
+
+		Gdx.app.log("Matth","Dipose of the graphicManager");
+		//Clear the graphic Manager for a new use.
+		graphicManager.dispose();
+		
+		//Reset EndGame Listener
+		EndGameListener.resetListener();
 
 		//load level
-		LevelLoader level = new LevelLoader();
-		GlobalSettings.NBLEVELS = level.getNbLevels ();
 		int iLevel = GlobalSettings.PROFILE.getLevel();
 		try {
 			level.loadLevel ("Level" + iLevel);
@@ -98,18 +114,6 @@ public class GameLoop {
 		level.readLevelObstacles(graphicManager);
 		level.readLevelMapNodes ();
 
-		//load the counter 
-		countDown = new CountDown();
-
-		//Load the font + enable white
-		fontOswald = new BitmapFont(Gdx.files.internal("fonts/Oswald/Oswald.fnt"),
-				Gdx.files.internal("fonts/Oswald/Oswald.png"), false);
-		fontOswald.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		
-		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
-				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
-		fontOsaka.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-
 	}
 
 
@@ -120,17 +124,6 @@ public class GameLoop {
 	 * update(float dt)
 	 */
 	public void update() {
-
-		/*float accelX = Gdx.input.getAccelerometerX();
-		float accelY = Gdx.input.getAccelerometerY();
-		 */
-		//float accelZ = Gdx.input.getAccelerometerZ();
-
-
-		/*bouboule.body.applyForceToCenter(new Vector2(0,-0.5f));
-		bouboule2.body.applyForceToCenter(new Vector2(-accelX*0.3f,-accelY*0.3f));
-		 */
-
 		graphicManager.update();
 	}
 
@@ -139,17 +132,11 @@ public class GameLoop {
 	 * 
 	 * render()
 	 */
-	public boolean render(final boolean pause) {
-		
+	public boolean render(final boolean pause, float delta) {
+
 		boolean status = false;
 
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		CharSequence lives = Integer.toString(GlobalSettings.PROFILE.getNbLifes ());
-		CharSequence levelD= Integer.toString(GlobalSettings.PROFILE.getLevel   ()/10);
-		CharSequence levelU= Integer.toString(GlobalSettings.PROFILE.getLevel   ()%10);
-		CharSequence score = Integer.toString(GlobalSettings.PROFILE.getOldScore());
-		
 
 		batch.begin();
 
@@ -163,24 +150,40 @@ public class GameLoop {
 
 		graphicManager.draw(batch);
 
+		writeText();
+		
+		if (pause) // draw the countdown
+			status = countDown.draw(batch, delta);
+
+		batch.end();
+
+		/*batch.begin();
+		//Draw the debugging matrix
+		debugRenderer.render(GraphicManager.getWorld(), debugMatrix);
+		batch.end();
+		*/
+		return status;
+	}
+
+	public void writeText() {
+
+		CharSequence lives = Integer.toString(GlobalSettings.PROFILE.getNbLifes ());
+		CharSequence levelD= Integer.toString(GlobalSettings.PROFILE.getLevel   ()/10);
+		CharSequence levelU= Integer.toString(GlobalSettings.PROFILE.getLevel   ()%10);
+		CharSequence score = Integer.toString(GlobalSettings.PROFILE.getOldScore());
+		
+		int timer = GlobalSettings.PROFILE.getScore() - GlobalSettings.PROFILE.getOldScore();
+		
+		CharSequence timerM= Integer.toString((timer/60)); 
+		CharSequence timerS= Integer.toString(timer%60);
+		
+		fontOsaka .draw(batch, timerM+"' "+timerS+"''" , 630, 1122);
 		fontOsaka .draw(batch, lives , 630, 1167);
 		fontOsaka .draw(batch, score , 630, 1205);
 		fontOswald.draw(batch, levelD, 285, 1180);
 		fontOswald.draw(batch, levelU, 345, 1180);
-		
-		if ( pause )
-			status = countDown.draw(batch);
 
-		batch.end();
-
-		batch.begin();
-		//Draw the debugging matrix
-		debugRenderer.render(GraphicManager.getWorld(), debugMatrix);
-		batch.end();
-		
-		return status;
 	}
-
 
 	/*
 	 * Remove all the memory used object 
@@ -193,6 +196,8 @@ public class GameLoop {
 		graphicManager.dispose();
 	}
 
-
+	public CountDown getCountDown () {
+		return countDown;
+	}
 
 }

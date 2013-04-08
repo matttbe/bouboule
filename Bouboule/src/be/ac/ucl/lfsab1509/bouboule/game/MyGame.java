@@ -26,151 +26,57 @@ package be.ac.ucl.lfsab1509.bouboule.game;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
-import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.Profile;
+import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 
-import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-//import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Timer;
 
+public class MyGame extends Game {
 
-public class MyGame implements ApplicationListener {
-
-	static final float APPWIDTH 	=  800f;
-	static final float APPHEIGHT 	= 1250f;
-
-	//Test Update
-
-
-	//private SpriteBatch             		batch;
-	private OrthographicCamera      		camera;
-
-	private GameLoop 						game;
-	private Profile score;
-
-	private Timer timer = null;
-	private int iCountDown = 0;
-	private boolean bIsPause = false;
-	private Music loopMusic;
+	public ScreenGame screenGame;
 	private Sound hitSound;
 	private Sound winSound;
 	private Sound looseSound;
+
 	@Override
-	public void create() {
-
-		camera = CameraHelper.GetCamera(APPWIDTH, APPHEIGHT);
-
-		// start the playback of the background music immediately
-		loopMusic = Gdx.audio.newMusic(Gdx.files.internal("music/klez.mp3"));
-		loopMusic.setLooping(true);
-		loopMusic.play();
-		
+	public void create () {
+		Gdx.app.log ("Matth", "Game: Create");
 		hitSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3")); // TODO: find sound and use parameters?
 		winSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 		looseSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 
+		createProfile ();
+
+		screenGame = new ScreenGame();
+		setScreen (screenGame); // 
+	}
+
+	public void createProfile () {
 		if (GlobalSettings.PROFILE == null)
-		{
-			score = new Profile (GlobalSettings.PROFILE_NAME);
-			GlobalSettings.PROFILE = score;
-		}
-		else
-			score = GlobalSettings.PROFILE;
-		
-		game = new GameLoop(camera, true);
-		
-		score.LaunchTimer ();
-	}
-
-
-
-	@Override
-	public void render() {
-
-		if (!bIsPause)
-			game.update();
-		bIsPause = game.render(bIsPause);
-
+			GlobalSettings.PROFILE = new Profile (GlobalSettings.PROFILE_NAME);
 	}
 
 	@Override
-	public void dispose() {
-		game.dispose();
-		score.stop ();
-		loopMusic.dispose ();
+	public void dispose () {
+		super.dispose ();
 		hitSound.dispose ();
 		winSound.dispose ();
 		looseSound.dispose ();
 	}
-
-	@Override
-	public void resize(final int width, final int height) {
-	}
-
-	@Override
-	public void pause() {
-		if (timer == null || ! score.isRunning ())
-			return;
-		bIsPause = true;
-		score.pause ();
-		loopMusic.pause ();
-	}
-
-	private void startCountDown (int iNbTime) {
-		iCountDown = iNbTime - 1;
-		Timer.Task task = new Timer.Task () {
-			@Override
-			public void run () {
-				if (iCountDown > 0) {
-					// add new image?
-					iCountDown--;
-				}
-				else {
-					resumeStart ();
-					this.cancel (); // cancel the task
-					timer.clear (); // maybe not needed?
-					timer = null;
-				}
-			}
-		};
-		timer = new Timer ();
-		timer.scheduleTask (task, 1, 1); // first time, time between
-		timer.start ();
-	}
-
-	private void resumeStart () {
-		bIsPause = false;
-		score.play ();
-		loopMusic.play ();
-	}
-
-	@Override
-	public void resume() {
-		/*if (bIsPause
-				// this function is called one or two time when starting the game
-				&& score.isRunning ()
-				&& timer == null) // not already launched
-			startCountDown (GlobalSettings.PAUSE_TIME);
-		*/
-		bIsPause = true; //Works my it seems...
-	}
-
+	
 	public void hitSound () {
 		hitSound.play ();
 	}
-
+	
 	public void winSound () {
 		winSound.play ();
 	}
-
+	
 	public void looseSound () {
 		looseSound.play ();
 	}
+
 }

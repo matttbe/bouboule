@@ -1,4 +1,4 @@
-package be.ac.ucl.lfsab1509.bouboule.game.ia;
+package be.ac.ucl.lfsab1509.bouboule.game.menu;
 
 /*
  * This file is part of Bouboule.
@@ -26,29 +26,23 @@ package be.ac.ucl.lfsab1509.bouboule.game.ia;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * Interface needed to interact with menus.
+ * Menus are (currently) not created with GDX
+ * (mainly because Android Menu are really nice and easy to do and maintain :) )
+ *
+ */
+public interface Menus {
 
-import com.badlogic.gdx.math.Vector2;
-
-public class MapNode {
+	/**
+	 * Launch the init menu: to play a new game, change parameters, see
+	 * highscores, etc.
+	 */
+	public void launchInitMenu ();
 	
-	private Vector2 vector;
-	private float weight;
-	
-	public MapNode(final float px, final float py, final float poids) {
-		
-		this.vector = new Vector2(px, py);
-		this.weight	= poids;
-	}
-
-	public Vector2 getVector() {
-		return vector;
-	}
-
-	public float getWeight() {
-		return weight;
-	}
-
-	public String toString(){
-		return "px :"+this.vector.x+" py :"+this.vector.y+" weigth :"+ this.weight;
-	}
+	/**
+	 * Launch the right menu at the end of a game: when winning, loosing or when
+	 * the game is over.
+	 */
+	public void launchEndGameMenu ();
 }

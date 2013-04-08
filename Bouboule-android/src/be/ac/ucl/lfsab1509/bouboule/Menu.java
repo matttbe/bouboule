@@ -30,9 +30,8 @@ import java.util.Random;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-//import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -158,30 +157,31 @@ public class Menu extends Activity {
 		@Override
 		public boolean onTouch(final View view, final MotionEvent motionEvent) {
 
-			mHandler.removeCallbacks(animationUpdate);
-			mHandler.removeCallbacks(nameUpdate);
-
-			switch (view.getId()) {
-			
-				case R.id.PlayButton :
-					Intent intent = new Intent(Menu.this, MainActivity.class);
-					startActivity(intent);
-					finish();
-					break;
-					
-				case R.id.ParameterButton :
-					
-					break;
-					
-				case R.id.HighScoreButton :
-					
-					break;
-					
-				default :
-					
-					break;
+			if (view.isPressed ())
+			{
+				switch (view.getId()) {
+				
+					case R.id.PlayButton :
+						mHandler.removeCallbacks(animationUpdate);
+						mHandler.removeCallbacks(nameUpdate);
+						setResult(view.getId());
+						finish();
+						break;
+						
+					case R.id.ParameterButton :
+						
+						break;
+						
+					case R.id.HighScoreButton :
+						// ((TextView) findViewById(R.id.HighScoreButton)).setText (GlobalSettings.PROFILE.getHighScore ());
+						Log.i ("Matth", "HighScore " + GlobalSettings.PROFILE.getHighScore ());
+						break;
+						
+					default :
+						
+						break;
+				}
 			}
-
 			return false;
 		} 
 	};
@@ -191,6 +191,7 @@ public class Menu extends Activity {
 	 * Update the Animated String and add a 
 	 * bouncing animation
 	 */
+	@SuppressLint("DefaultLocale")
 	protected void startFunWithUi() {
 		
 		if (whatToShow == 0) {
@@ -198,9 +199,7 @@ public class Menu extends Activity {
 			whatToShow = 1;
 
 		} else {
-			String cProfileName = GlobalSettings.PROFILE != null // TODO: profile not loaded at startup... we start with the menu...
-					? GlobalSettings.PROFILE.getName ()
-					: GlobalSettings.PROFILE_NAME;
+			String cProfileName = GlobalSettings.PROFILE.getName ();
 			nameToShow = "HELLO\n" + cProfileName.toUpperCase ();
 			whatToShow = 0;
 

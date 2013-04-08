@@ -281,10 +281,4 @@ public class MenuPause extends Activity {
 		animationSetCaseD.addAnimation(g1);
 
 	}
-
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		
-		super.onPostCreate(savedInstanceState);
-	}
 }
