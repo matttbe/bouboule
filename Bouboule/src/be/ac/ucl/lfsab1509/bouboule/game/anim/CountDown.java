@@ -27,7 +27,8 @@ package be.ac.ucl.lfsab1509.bouboule.game.anim;
  */
 
 
-import com.badlogic.gdx.Gdx;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -38,13 +39,14 @@ public class CountDown {
 	private static final int        FRAME_COLS = 2;
 	private static final int        FRAME_ROWS = 2;
 
-	Animation                       countDownAnimation;
-	Texture                         countDownSheet;
-	TextureRegion[]                 countDownFrames;
-	TextureRegion                   currentFrame;
+	private Animation                       countDownAnimation;
+	private Texture                         countDownSheet;
+	private TextureRegion[]                 countDownFrames;
+	private TextureRegion                   currentFrame;
 
-	float STEPTIME = 0.7f;
-	float stateTime;
+	private float STEPTIME = 0.7f;
+	private float stateTime;
+	private boolean bFirstTime = true;
 
 	
 	public CountDown() {
@@ -62,23 +64,39 @@ public class CountDown {
 		stateTime = 0f;
 	}
 
-	
+	public void reset () {
+		stateTime = 0f;
+		bFirstTime = true;
+	}
 
-	public boolean draw(SpriteBatch batch) {
-		stateTime += Gdx.graphics.getDeltaTime();
+	/**
+	 * Return the status of the pause => true = pause
+	 */
+	public boolean draw(SpriteBatch batch, float delta) {
+		if (bFirstTime)
+		{
+			bFirstTime = false;
+			return true; // skip the first render, it's ok
+		}
+		
+		stateTime += delta;
 		currentFrame = countDownAnimation.getKeyFrame(stateTime, true);
 		batch.draw(currentFrame,400-currentFrame.getRegionWidth()/2,625-currentFrame.getRegionHeight()/2);
 		
-		if (stateTime > 4*STEPTIME) 
-			stateTime = 0f;
-		
-		return stateTime != 0f;
+		if (stateTime > 4*STEPTIME)
+		{
+			GlobalSettings.GAME.getScreen ().resume ();
+			reset ();
+			return false;
+		}
+		return true;
 	}
 	
 	public void dispose() {
-		
 		countDownSheet.dispose();
 	}
-
 	
+	public boolean isLaunched () {
+		return !bFirstTime;
+	}
 }

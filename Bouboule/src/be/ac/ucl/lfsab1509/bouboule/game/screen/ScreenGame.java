@@ -37,8 +37,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-//import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Timer;
 
 
 public class ScreenGame implements Screen {
@@ -56,7 +54,6 @@ public class ScreenGame implements Screen {
 	private Profile profile;
 	private Music loopMusic;
 
-	private Timer timer = null;
 	// private int iCountDown = 0;
 	private boolean bIsPause = false;
 	private boolean bNewGame = true;
@@ -74,18 +71,14 @@ public class ScreenGame implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log ("Matth", "Screen: SHOW");
-	
-		loopMusic.stop(); // to play at startup
-		loopMusic.play();
-		game.start ();
-		profile.LaunchTimer ();
-		bIsPause = false;
+
+		bIsPause = true; // show the countdown at startup
+		game.getCountDown ().reset ();
 		bNewGame = false;
 
-		// start the playback of the background music immediately
-
-		// GlobalSettings.LISTENER.dispose (); // display the menu for the first time
-		//start ();// TODO: remove...?
+		loopMusic.stop(); // to play at startup
+		game.start ();
+		profile.LaunchTimer ();
 	}
 
 
@@ -93,7 +86,7 @@ public class ScreenGame implements Screen {
 	public void render (float delta) {
 		if (!bIsPause)
 			game.update();
-		bIsPause = game.render(bIsPause);
+		bIsPause = game.render(bIsPause, delta);
 	}
 
 	@Override
@@ -107,67 +100,34 @@ public class ScreenGame implements Screen {
 
 	@Override
 	public void resize(final int width, final int height) {
-		//TODO? position of the countdown, the score, etc.?
+		// nothing to do
 	}
 
 	@Override
 	public void pause() {
 		//Gdx.app.log ("Matth", "Screen: PAUSE");
-		Gdx.app.log ("Matth", "Screen: PAUSE + pause status : "+bIsPause);
-		if (timer == null || ! profile.isRunning ())
+		Gdx.app.log ("Matth", "Screen: PAUSE + pause status : "+bIsPause + " " + profile.isRunning ());
+		if (! profile.isRunning ()) // already stopped... we start a new game?
 			return;
 		bIsPause = true;
 		profile.pause ();
 		loopMusic.pause ();
+		Gdx.app.log ("Matth", "Screen: PAUSE + pause status ok : "+bIsPause);
 	}
-
-	/*private void startCountDown (int iNbTime) {
-		iCountDown = iNbTime - 1;
-		Timer.Task task = new Timer.Task () {
-			@Override
-			public void run () {
-				if (iCountDown > 0) {
-					// add new image?
-					iCountDown--;
-				}
-				else {
-					resumeStart ();
-					this.cancel (); // cancel the task
-					timer.clear (); // maybe not needed?
-					timer = null;
-				}
-			}
-		};
-		timer = new Timer ();
-		timer.scheduleTask (task, 1, 1); // first time, time between
-		timer.start ();
-	}
-	
-	private void resumeStart () {
-		bIsPause = false;
-		profile.play ();
-		loopMusic.play ();
-	}*/
 
 	@Override
 	public void resume() {
-		Gdx.app.log ("Matth", "Screen: RESUME + pause staus : "+bIsPause);
+		Gdx.app.log ("Matth", "Screen: RESUME + pause status : " + bIsPause + " " + game.getCountDown ().isLaunched () + " " + bNewGame);
 		
 		if (bNewGame)
 			show (); //must relaunch the game when the activity is not paused
 					 //and comes back from a menu or what ever
-		else if (bIsPause) {
-			bIsPause = false;
+		else if (bIsPause && game.getCountDown ().isLaunched ()) { // resume from CountDown
 			profile.play ();
 			loopMusic.play ();
-			// TODO: launch the countdown: 3 -> 2 -> 1
+			bIsPause = false;
 		}
-		
-		/*if (bIsPause
-				// this function is called one or two time when starting the game
-				&& profile.isRunning ()
-				&& timer == null) // not already launched
-			startCountDown (GlobalSettings.PAUSE_TIME);*/
+		// else: nothing to do, we are waiting for the signal from the countdown
 	}
 
 	@Override

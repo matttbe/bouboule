@@ -119,13 +119,12 @@ public class Profile {
 	}
 
 	public void cancelNewScore () {
+		stop ();
 		iScore = iOldScore;
 	}
 
 	public boolean isRunning () {
-		return (timer != null // timer not created
-				&& iScore != iOldScore // reset but timer not stop (should not happen)
-				&& iScore < iNewInitScore); // timer created but game not launched (or launched since less than one second)
+		return (timer != null); // timer created
 	}
 
 	public int getHighScore () {
@@ -137,6 +136,7 @@ public class Profile {
 	}
 
 	public boolean saveScore () {
+		stop ();
 		prefs.putInteger (SCORE_KEY, iScore);
 		bNewHighScore = false;
 		if (iScore > iHighScore)

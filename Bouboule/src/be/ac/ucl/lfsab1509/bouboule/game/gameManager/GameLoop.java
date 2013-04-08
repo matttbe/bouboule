@@ -132,7 +132,7 @@ public class GameLoop {
 	 * 
 	 * render()
 	 */
-	public boolean render(final boolean pause) {
+	public boolean render(final boolean pause, float delta) {
 
 		boolean status = false;
 
@@ -152,8 +152,8 @@ public class GameLoop {
 
 		writeText();
 		
-		if ( pause )
-			status = countDown.draw(batch);
+		if (pause) // draw the countdown
+			status = countDown.draw(batch, delta);
 
 		batch.end();
 
@@ -196,6 +196,8 @@ public class GameLoop {
 		graphicManager.dispose();
 	}
 
-
+	public CountDown getCountDown () {
+		return countDown;
+	}
 
 }

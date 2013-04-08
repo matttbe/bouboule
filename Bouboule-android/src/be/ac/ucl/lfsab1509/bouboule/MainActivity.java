@@ -93,7 +93,7 @@ public class MainActivity extends AndroidApplication {
 				switch (resultCode) { // it's the id of the button
 				
 					case R.id.PauseContinueButton: // cas ou on continue
-						game.getScreen ().resume();
+						// game.getScreen ().resume();
 						return;
 					case R.id.PauseMenuButton: // cas ou on stoppe
 						GlobalSettings.MENUS.launchInitMenu ();
