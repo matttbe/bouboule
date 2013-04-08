@@ -62,5 +62,9 @@ public class VictoryActivity extends Activity {
 		}
 	};
 
-
+	@Override
+	public void onBackPressed() {
+		setResult (R.id.VictoryMenuButton);
+		finish ();
+	}
 }

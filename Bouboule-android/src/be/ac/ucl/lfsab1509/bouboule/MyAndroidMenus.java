@@ -79,7 +79,6 @@ public class MyAndroidMenus implements Menus {
 				intent = new Intent (app, LoosingActivity.class);
 				break;
 			case GAMEOVER :
-
 				intent = new Intent (app, GameOverActivity.class);
 				break;
 		}

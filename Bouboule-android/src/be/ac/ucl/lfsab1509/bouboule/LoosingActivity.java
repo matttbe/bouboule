@@ -91,4 +91,9 @@ public class LoosingActivity extends Activity {
 		}
 	};
 
+	@Override
+	public void onBackPressed() {
+		setResult (R.id.LoosingMenuButton);
+		finish ();
+	}
 }

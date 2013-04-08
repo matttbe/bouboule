@@ -114,4 +114,9 @@ public class GameOverActivity extends Activity {
 		}
 	};
 
+	@Override
+	public void onBackPressed() {
+		setResult (R.id.LoosingMenuButton); // TODO: EndGameMenuButton?
+		finish ();
+	}
 }
