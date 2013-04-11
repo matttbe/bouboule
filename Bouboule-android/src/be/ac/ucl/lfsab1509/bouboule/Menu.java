@@ -36,6 +36,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -119,6 +120,7 @@ public class Menu extends Activity {
 		//Font Update
 		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
 		((TextView) contentView).setTypeface(myTypeface);
+		((TextView) contentView).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
 
 		//Incline the blue text
 		contentView.setRotation(-15);

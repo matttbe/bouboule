@@ -26,35 +26,27 @@
         android:contentDescription="@string/app_name"
         android:src="@drawable/coeur3" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-    </FrameLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <Button
             android:id="@+id/LoosingMenuButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="230dp"
+            android:layout_height="75dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="55dp"
-            android:layout_marginTop="400dp"
-            />
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="395dp" />
 
         <Button
             android:id="@+id/LoosingNextLevelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="230dp"
+            android:layout_height="75dp"
             android:layout_alignBaseline="@+id/LoosingMenuButton"
             android:layout_alignBottom="@+id/LoosingMenuButton"
             android:layout_alignParentLeft="true"
-			 />
-
+            android:layout_marginLeft="40dp" />
     </RelativeLayout>
 
     <TextView

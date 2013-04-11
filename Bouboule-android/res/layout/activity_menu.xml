@@ -5,18 +5,6 @@
     android:background="@drawable/bgmenu"
     tools:context=".Menu" >
 
-    <!--
-         The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc.
-    -->
-
-
-    <!--
-         This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows.
-    -->
-
     <ImageView
         android:id="@+id/boubleft"
         android:layout_width="match_parent"
@@ -46,8 +34,8 @@
             android:keepScreenOn="true"
             android:text="@string/dynamicName"
             android:textColor="#33b5e5"
-            android:textSize="40sp"
             android:textStyle="bold" />
+        <!-- android:textSize="40sp" -->
     </LinearLayout>
 
     <LinearLayout
@@ -57,29 +45,26 @@
 
         <Button
             android:id="@+id/PlayButton"
-            android:layout_width="300dp"
-            android:layout_height="95dp"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="270dp"
-          />
+            android:layout_width="322dp"
+            android:layout_height="115dp"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="285dp" />
         <!-- android:text="@string/Play" -->
 
         <Button
             android:id="@+id/ParameterButton"
-            android:layout_width="300dp"
-            android:layout_height="95dp"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="11dp"
-          />
+            android:layout_width="322dp"
+            android:layout_height="115dp"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="4dp" />
         <!-- android:text="@string/Parameters" -->
 
         <Button
             android:id="@+id/HighScoreButton"
-            android:layout_width="300dp"
-            android:layout_height="95dp"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="11dp"
-            />
+            android:layout_width="322dp"
+            android:layout_height="115dp"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="7dp" />
         <!-- android:text="@string/HighScore" -->
     </LinearLayout>
 
