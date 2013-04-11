@@ -117,7 +117,7 @@ public class ScreenGame implements Screen {
 
 	@Override
 	public void resume() {
-		Gdx.app.log ("Matth", "Screen: RESUME + pause status : " + bIsPause + " " + game.getCountDown ().isLaunched () + " " + bNewGame);
+		Gdx.app.log ("Matth", "Screen: RESUME + pause status : " + bIsPause + " Count " + game.getCountDown ().isLaunched () + " " + bNewGame);
 		
 		if (bNewGame)
 			show (); //must relaunch the game when the activity is not paused

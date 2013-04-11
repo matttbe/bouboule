@@ -79,7 +79,7 @@ public class GameLoop {
 		level = new LevelLoader();
 		GlobalSettings.NBLEVELS = level.getNbLevels ();
 
-		//Load the font + enable white
+		//Load the font
 		fontOswald = new BitmapFont(Gdx.files.internal("fonts/Oswald/Oswald.fnt"),
 				Gdx.files.internal("fonts/Oswald/Oswald.png"), false);
 
@@ -194,6 +194,7 @@ public class GameLoop {
 		//Remove the memory of the managed object and the debug matrix
 		debugRenderer.dispose();
 		graphicManager.dispose();
+		countDown.dispose();
 	}
 
 	public CountDown getCountDown () {

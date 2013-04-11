@@ -79,11 +79,14 @@ public class CountDown {
 			return true; // skip the first render, it's ok
 		}
 		
-		stateTime += delta;
+		//we are not in the pause menu		
+		if ( delta < 1f )
+			stateTime += delta;
+		
 		currentFrame = countDownAnimation.getKeyFrame(stateTime, true);
 		batch.draw(currentFrame,400-currentFrame.getRegionWidth()/2,625-currentFrame.getRegionHeight()/2);
 		
-		if (stateTime > 4*STEPTIME)
+		if (stateTime > 4*STEPTIME - 0.1f)
 		{
 			GlobalSettings.GAME.getScreen ().resume ();
 			reset ();
