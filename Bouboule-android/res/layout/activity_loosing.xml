@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/FullscreenTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/you_lose"
@@ -25,33 +26,49 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/app_name"
         android:src="@drawable/coeur3" />
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:weightSum="100" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="47.5" />
 
-        <Button
-            android:id="@+id/LoosingMenuButton"
-            android:layout_width="230dp"
-            android:layout_height="75dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="395dp" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="77dp"
+            android:weightSum="100" >
 
-        <Button
-            android:id="@+id/LoosingNextLevelButton"
-            android:layout_width="230dp"
-            android:layout_height="75dp"
-            android:layout_alignBaseline="@+id/LoosingMenuButton"
-            android:layout_alignBottom="@+id/LoosingMenuButton"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="40dp" />
-    </RelativeLayout>
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="fill_parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LOOSER" />
+            <Button
+                android:id="@+id/LoosingMenuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="50" />
+
+            <Space
+                android:layout_width="55dp"
+                android:layout_height="fill_parent" />
+
+            <Button
+                android:id="@+id/LoosingNextLevelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="50" />
+            
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="fill_parent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </FrameLayout>
