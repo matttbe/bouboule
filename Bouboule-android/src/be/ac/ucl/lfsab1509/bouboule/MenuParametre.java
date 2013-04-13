@@ -1,5 +1,6 @@
 package be.ac.ucl.lfsab1509.bouboule;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class MenuParametre extends Activity {
 						break;
 						
 					case R.id.button_param_sound :
+						GlobalSettings.PROFILE_MGR.getProfileGlobal ().toggleSoundSettings ();
 						break;
 						
 					case R.id.button_param_about :

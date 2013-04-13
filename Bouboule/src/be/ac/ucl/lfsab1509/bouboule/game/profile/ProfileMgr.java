@@ -38,10 +38,13 @@ public class ProfileMgr {
 	private Preferences prefs;
 	private static final String LAST_PROFILE_KEY = "last_profile";
 	private static final String PROFILES_KEY = "profiles";
+	private ProfileGlobal profileGlobal;
 
 	public ProfileMgr () {
 		prefs = Gdx.app.getPreferences (GlobalSettings.PREFS_GLOBAL);
 		loadDefaultProfile ();
+		profileGlobal = new ProfileGlobal (prefs);
+		profileGlobal.loadDefaultSettings ();
 	}
 
 	/**
@@ -84,5 +87,9 @@ public class ProfileMgr {
 		profiles += "," + cName;
 		prefs.putString (PROFILES_KEY, profiles); // no need to flush => done in loadProfile
 		loadProfile (cName);
+	}
+	
+	public ProfileGlobal getProfileGlobal () {
+		return this.profileGlobal;
 	}
 }

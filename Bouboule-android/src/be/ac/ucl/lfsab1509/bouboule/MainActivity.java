@@ -61,8 +61,6 @@ public class MainActivity extends AndroidApplication {
 		game = new MyGame ();
 		GlobalSettings.GAME = game;
 		
-		GlobalSettings.SOUND = true; //TODO trouver comment recuperer si la tablette a le son on ou off
-		
 		GlobalSettings.MENUS = new MyAndroidMenus (this);
 		
 		// TODO: start Menu Activity... and then game.start ();

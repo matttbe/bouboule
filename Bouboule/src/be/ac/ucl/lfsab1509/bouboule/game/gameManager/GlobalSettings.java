@@ -69,16 +69,16 @@ public class GlobalSettings {
  	
  	public static enum GameExitStatus {NONE, WIN, LOOSE, GAMEOVER};
  	public static GameExitStatus 	GAME_EXIT	= GameExitStatus.NONE;
- 
- 	public final static int 		INIT_LEVEL = 1;
+
+	public final static int 		INIT_LEVEL = 1;
 	public final static int 		INIT_SCORE = 100;
 	public final static int 		INIT_LIFES = 3; // TODO: Init_scrore and life: take data from config
-	public final static int 		PAUSE_TIME = 1;
 
 	public static int				NBLEVELS; // nb of levels in the current xml files
-	public static Menus 			MENUS;
-	
-	public static boolean SOUND;
+	public static Menus 			MENUS; // interface to display menus
+
+	// Settings that can be changed from ProfileGlobal
+	public static boolean			SOUND_IS_MUTED = false;
 
 	// Profiles
  	public final static String		DEFAULT_PROFILE_NAME = "Bouboule";
