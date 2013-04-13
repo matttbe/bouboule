@@ -27,18 +27,32 @@ package be.ac.ucl.lfsab1509.bouboule.game.profile;
  */
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.badlogic.gdx.Preferences;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 public class ProfileGlobal {
+	private String SEPARATOR;
+	private String HIGHSCORE_DEFAULT_VALUE;
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat ("dd MM yyyy HH:mm:ss Z");
+
+	private static final int iMaxNbHighScore = 5;
 	
 	private static final String MUTE_SOUND_KEY = "mute_sound";
+	private static final String HIGHSCORE_KEY = "highscore"; // score + name + level + date
 
 	private Preferences prefs;
 	
-	public ProfileGlobal (Preferences prefs) {
+	public ProfileGlobal (Preferences prefs, String SEPARATOR) {
 		this.prefs = prefs;
+		this.SEPARATOR = SEPARATOR;
+		this.HIGHSCORE_DEFAULT_VALUE = 0 + SEPARATOR // score
+				+ GlobalSettings.DEFAULT_PROFILE_NAME + SEPARATOR // name
+				+ 0 + SEPARATOR // level
+				+ "01 01 1970 00:00:00 0000"; // date
 	}
 
 	public void loadDefaultSettings () {
@@ -49,5 +63,87 @@ public class ProfileGlobal {
 		GlobalSettings.SOUND_IS_MUTED = ! GlobalSettings.SOUND_IS_MUTED;
 		prefs.putBoolean (MUTE_SOUND_KEY, GlobalSettings.SOUND_IS_MUTED);
 		prefs.flush ();
+	}
+
+	/**
+	 * Check if there is a new highscore. If yes, save it in the global settings
+	 * @param iScore, the new score
+	 * @return true if there is a new highscore
+	 */
+	public boolean checkHighScoreGlobal () {
+		boolean bNewHighScore = false;
+		int iNewScore = GlobalSettings.PROFILE.getScore ();
+
+		String cCurrInfo, cPrevInfo = null;
+		for (int i = 0; i < iMaxNbHighScore; i++) {
+			cCurrInfo = prefs.getString (HIGHSCORE_KEY + i, null);
+			if (bNewHighScore) { // move the other highscore
+				if (cPrevInfo != null)
+					prefs.putString (HIGHSCORE_KEY + i, cPrevInfo);
+				if (cCurrInfo == null) // no need to continue
+					break;
+				cPrevInfo = cCurrInfo;
+				continue;
+			}
+
+			int iCurrScore = 0;
+			if (cCurrInfo != null) {
+				cPrevInfo = cCurrInfo; // save the older string
+				cCurrInfo = cCurrInfo.substring (0, cCurrInfo.indexOf (SEPARATOR)); // get the score
+				try {
+					iCurrScore = Integer.parseInt (cCurrInfo);
+				} catch (NumberFormatException e) {
+					iCurrScore = 0;
+				}
+			}
+			if (iNewScore > iCurrScore) { // new high score!
+				cCurrInfo = iNewScore + SEPARATOR // Score
+						+ GlobalSettings.PROFILE.getName () + SEPARATOR // name
+						+ GlobalSettings.PROFILE.getLevel () + SEPARATOR // level
+						+ dateFormat.format (new Date ()).toString (); // date
+				prefs.putString (HIGHSCORE_KEY + i, cCurrInfo); // save the new score here
+				bNewHighScore = true;
+			}
+		}
+		if (bNewHighScore)
+			prefs.flush ();
+
+		return bNewHighScore;
+	}
+
+	/**
+	 * @param bFillWithDefaultValues: true to fill highscore array with default
+	 * value if no highscore is saved for this id.
+	 * @return all HighScore as an array (fill with default values if needed)
+	 */
+	public HighScoreInfo[] getAllHighScores (boolean bFillWithDefaultValues) {
+		HighScoreInfo highScores[] = new HighScoreInfo[iMaxNbHighScore];
+		for (int i = 0; i < highScores.length; i++) {
+			String infos[];
+			if (bFillWithDefaultValues)
+				infos = prefs.getString (HIGHSCORE_KEY + i,
+						HIGHSCORE_DEFAULT_VALUE).split (SEPARATOR);
+			else {
+				String info = prefs.getString (HIGHSCORE_KEY + i, null);
+				if (info == null)
+					break;
+				infos = info.split (SEPARATOR);
+			}
+			String cName = infos[1];
+			int iScore;
+			int iLevel;
+			Date pDate;
+			try {
+				iScore = Integer.parseInt (infos[0]);
+				iLevel = Integer.parseInt (infos[2]);
+				pDate = dateFormat.parse (infos[3]);
+			} catch (Exception e) { // should not happen...
+				iScore = 0;
+				iLevel = 0;
+				pDate = new Date ();
+			}
+			highScores[i] = new HighScoreInfo (cName, iScore, iLevel, pDate);
+		}
+		return highScores;
 	}
 }

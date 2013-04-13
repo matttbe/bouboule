@@ -175,6 +175,7 @@ public class Profile {
 			bNewHighScore = true;
 		}
 		prefs.flush ();
+		GlobalSettings.PROFILE_MGR.getProfileGlobal ().checkHighScoreGlobal ();
 		return bNewHighScore;
 	}
 

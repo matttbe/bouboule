@@ -36,14 +36,17 @@ import com.badlogic.gdx.Preferences;
 
 public class ProfileMgr {
 	private Preferences prefs;
+	private ProfileGlobal profileGlobal;
+
+	protected final String SEPARATOR = System.getProperty ("file.separator"); // /!\ can change but it's not
+
 	private static final String LAST_PROFILE_KEY = "last_profile";
 	private static final String PROFILES_KEY = "profiles";
-	private ProfileGlobal profileGlobal;
 
 	public ProfileMgr () {
 		prefs = Gdx.app.getPreferences (GlobalSettings.PREFS_GLOBAL);
 		loadDefaultProfile ();
-		profileGlobal = new ProfileGlobal (prefs);
+		profileGlobal = new ProfileGlobal (prefs, SEPARATOR);
 		profileGlobal.loadDefaultSettings ();
 	}
 
@@ -69,7 +72,7 @@ public class ProfileMgr {
 	}
 
 	public String[] getAllProfiles () {
-		return getAllProfilesAsString ().split (","); 
+		return getAllProfilesAsString ().split (SEPARATOR);
 	}
 
 	public ArrayList<String> getAllProfilesAndExceptions () {
@@ -79,12 +82,13 @@ public class ProfileMgr {
 	}
 	
 	/**
-	 * @pre: cName should not be included in PROFILES_KEY
+	 * @pre: cName should not be included in PROFILES_KEY and can't contain invalid char:
+	 *  => String.IndexOfAny (System.IO.Path.GetInvalidPathChars ()) == 0
 	 * @param cName: the new profile name
 	 */
-	public void createAndLoadProfile (String cName) {
+	public void createAndLoadNewProfile (String cName) {
 		String profiles = getAllProfilesAsString ();
-		profiles += "," + cName;
+		profiles += SEPARATOR + cName; // should at least contain Bouboule (default)
 		prefs.putString (PROFILES_KEY, profiles); // no need to flush => done in loadProfile
 		loadProfile (cName);
 	}
