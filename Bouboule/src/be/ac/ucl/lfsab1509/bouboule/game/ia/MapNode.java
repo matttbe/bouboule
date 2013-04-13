@@ -29,6 +29,11 @@ package be.ac.ucl.lfsab1509.bouboule.game.ia;
 
 import com.badlogic.gdx.math.Vector2;
 
+/*
+ * Class that construct an Object witch contains a position and 
+ * a weight of points on the screen that limitate the action on restricted
+ * area of the game level arena. 
+ */
 public class MapNode {
 	
 	private Vector2 vector;

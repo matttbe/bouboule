@@ -44,13 +44,24 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
+/*
+ * Class that create an XML reader to load all a level on the appropriate time.
+ */
 public class LevelLoader {
 
-	private XmlReader 			reader;
-	private Element 			root;
-	private Element 			file;
-	private int 				iNbLevels;
+	private XmlReader 			reader;			//XML Reader
+	private Element 			root;			//root of the global levelfile
+	private Element 			file;			//current level
+	private int 				iNbLevels;		//Number of levels
 
+	/**
+	 * Contructor of the xml loader
+	 * Automatically load the file : level/newlevels.xml
+	 * 
+	 * @catch : ParseException
+	 * 
+	 * 	public LevelLoader()
+	 */
 	public LevelLoader() {
 
 		this.reader = new XmlReader();
@@ -65,10 +76,21 @@ public class LevelLoader {
 
 	}
 
+	/**
+	 * Return the number of levels
+	 * 
+	 * 	public int getNbLevels ()
+	 */
 	public int getNbLevels () {
 		return iNbLevels;
 	}
 
+	/**
+	 * Load the 'level' in the Element file
+	 * Update the bonus option
+	 * 
+	 * 	public void loadLevel(String level)
+	 */
 	public void loadLevel(String level) {
 		file = root.getChildByName(level);
 		if (file == null) {
@@ -83,11 +105,17 @@ public class LevelLoader {
 
 	}
 
+	/**
+	 * Load all the Bouboule containt in the 'file' level
+	 * 
+	 * 	public void readLevelBouboule(GraphicManager graphicManager)
+	 */
 	public void readLevelBouboule(GraphicManager graphicManager) {
 
 
 		Array<Element> maps = file.getChildrenByName("Bouboule");
 
+		//iterate on all the children 
 		for (Iterator<Element> map = maps.iterator(); map
 				.hasNext();) {
 			Element boub = map.next();
@@ -134,6 +162,11 @@ public class LevelLoader {
 		}
 	}
 
+	/**
+	 * Load the arena of the 'file' level
+	 * 
+	 * 	public void readLevelArena(GraphicManager graphicManager)
+	 */
 	public void readLevelArena(GraphicManager graphicManager) {
 
 		Element aren = file.getChildByName("Arena");	
@@ -154,6 +187,11 @@ public class LevelLoader {
 		
 	}
 
+	/**
+	 * Load the nodes for the IA
+	 * 
+	 * public void readLevelMapNodes()
+	 */
 	public void readLevelMapNodes() {
 
 		Element mapNodes = file.getChildByName("MapNodes");	
@@ -165,6 +203,7 @@ public class LevelLoader {
 
 		GlobalSettings.ARENAWAYPOINTALLOW.clear();
 
+		//iterate on all the children 
 		for (Iterator<Element> nodes = node.iterator(); nodes
 				.hasNext();) {
 
@@ -181,7 +220,11 @@ public class LevelLoader {
 
 	}
 
-
+	/**
+	 * Load the obstacles of the 'file' level
+	 * 
+	 * 	public void readLevelObstacles(GraphicManager graphicManager)
+	 */
 	public void readLevelObstacles(GraphicManager graphicManager) {
 
 		Element obstaclesGroup = file.getChildByName("Obstacles");	

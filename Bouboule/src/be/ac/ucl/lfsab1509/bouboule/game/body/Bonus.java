@@ -38,12 +38,28 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
+/**
+ * Class that define bonus that can be found on the board
+ *
+ */
 public class Bonus extends GameBody{
 
-	//Texture texture;
-	private TextureRegion texture;
-	private Sprite sprite;
+	private TextureRegion 	texture;		//Texture of the Bonus
+	private Sprite 			sprite;			//Sprite to draw the Bonus
 
+
+	/**
+	 * Constructor for a Bonus object 
+	 * - px/py		: initial position
+	 * - angle		: initial rotation
+	 * - texRegionPath : Path to the image file
+	 * - jsonFile	: Path to the jsonFile if needed ( "" else)
+	 * - jsonName	: jsonName of the object ( must match the json file attribute )
+	 *
+	 * public Bonus( final float px, final float py, 
+	 *		final float angle, final String texRegionPath, 
+	 *		final String jsonFile, final String jsonName, final short bonusType)
+	 */
 	public Bonus( final float px, final float py, 
 			final float angle, final String texRegionPath, 
 			final String jsonFile, final String jsonName, final short bonusType) {
@@ -62,13 +78,13 @@ public class Bonus extends GameBody{
 		//Ensure that the object don't rotate.
 		body.setFixedRotation(true);
 		
-		//TODO
+		//Create the userData of type Bonus and bonusType
 		this.entity = new Entity(Entity.BONUS, true, bonusType);
 		
 		body.setUserData(this.entity);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#
 	 * draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)

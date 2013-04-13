@@ -38,12 +38,32 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
+/**
+ * Load obstacle and draw it on the screen 
+ *
+ */
 public class Obstacle extends GameBody{
 
-	//Texture texture;
-	private TextureRegion texture;
-	private Sprite sprite;
+	private TextureRegion 	texture;		//Texture of the Obstacle
+	private Sprite 			sprite;			//Sprite to draw the Obstacle
 
+
+	/**
+	 * Constructor for a Obstacle object 
+	 * - Bodytype 	: Dynamic or Static 
+	 * - density 	: Mass in [kg] of the obstacle 
+	 * - elasticity : define the elastical property of Bouboul [0..1]f
+	 * - px/py		: initial position
+	 * - angle		: initial rotation
+	 * - texRegionPath : Path to the image file
+	 * - jsonFile	: Path to the jsonFile if needed ( "" else)
+	 * - jsonName	: jsonName of the object ( must match the json file attribute )
+	 *
+	 * public Obstacle( final BodyType bodyType, final float density,
+	 * 	final float elasticity, final float px, final float py,
+	 *  final float angle, final String texRegionPath, 
+	 *  final String jsonFile, final String jsonName)
+	 */
 	public Obstacle( final BodyType bodyType, final float density,
 			final float elasticity, final float px, final float py, 
 			final float angle, final String texRegionPath, 
@@ -67,7 +87,7 @@ public class Obstacle extends GameBody{
 		body.setUserData(this.entity);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#
 	 * draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)
@@ -94,7 +114,7 @@ public class Obstacle extends GameBody{
 		}
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#update(float)
 	 */

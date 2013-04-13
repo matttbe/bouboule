@@ -6,21 +6,32 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 public class Entity {
 
+	//Constant for all the Generic Body's
 	public static final short PLAYER 	=  1;
 	public static final short MONSTER 	= -1;
 	public static final short SCENERY 	=  0;
 	public static final short OBSTACLE 	= -2;
 	public static final short BONUS 	= -3;
 
+	//Bonus options
 	public static final short BONUS_LIVE  = -31;
 	public static final short BONUS_SPEED = -32;
 	public static final short BONUS_POINT = -33;
 
+	
+	private short 	entity;					//Store the Constant of the Generic Body's
+	private short 	bonus;					//Store the bonus option
+	private boolean isAlive;				//isAlive =)
 
-	private short 	entity;
-	private short 	bonus;
-	private boolean isAlive;
-
+	/**
+	 * Constructor for a Bonus Entity
+	 * 
+	 * @param type = Constant of the Generic Body's
+	 * @param live = Is the body alive
+	 * @param bonusType = Bonus Option
+	 * 
+	 * 	public Entity (final short type, final boolean live, final short bonusType)
+	 */
 	public Entity (final short type, final boolean live, final short bonusType) {
 
 		this.entity = type;
@@ -28,18 +39,40 @@ public class Entity {
 		this.isAlive= live;
 	}
 
-
+	/**
+	 * Constructor for a Bouboule Object
+	 * 
+	 * @param type = Constant of the Generic Body's
+	 * @param live = Is the body alive
+	 * 
+	 * 	public Entity (final short type, final boolean live) 
+	 */
 	public Entity (final short type, final boolean live) {
 
 		this.entity = type;
 		this.isAlive= live;
 	}
 
+	
+	/**
+	 * Constructor for a Arena Object
+	 * 
+	 * @param type = Constant of the Generic Body's
+	 * 
+	 * public Entity (final short type ) {
+	 */
 	public Entity (final short type ) {
 
 		this.entity = type;
 	}
 
+	/**
+	 * Launch the right bonus
+	 * 
+	 * @param type = Type of the object
+	 * 
+	 * public void attributeBonus(final short type)
+	 */
 	public void attributeBonus(final short type) {
 
 		if (this.isAlive) {
