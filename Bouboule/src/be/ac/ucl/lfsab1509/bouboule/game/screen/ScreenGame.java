@@ -57,6 +57,8 @@ public class ScreenGame implements Screen {
 	// private int iCountDown = 0;
 	private boolean bIsPause = false;
 	private boolean bNewGame = true;
+	
+	private boolean bIsMuted = false;
 
 	// INIT => on create
 	public ScreenGame () {
@@ -124,7 +126,8 @@ public class ScreenGame implements Screen {
 					 //and comes back from a menu or what ever
 		else if (bIsPause && game.getCountDown ().isLaunched ()) { // resume from CountDown
 			profile.play ();
-			loopMusic.play ();
+			if (! bIsMuted)
+				loopMusic.play ();
 			bIsPause = false;
 		}
 		// else: nothing to do, we are waiting for the signal from the countdown
@@ -136,5 +139,16 @@ public class ScreenGame implements Screen {
 		Gdx.app.log ("Matth", "Screen: HIDE + exit: " + GlobalSettings.GAME_EXIT);
 		
 		bNewGame = GlobalSettings.GAME_EXIT != GameExitStatus.NONE; // a new game is needed?
+	}
+
+	public void mute () {
+		bIsMuted = true;
+		loopMusic.stop (); // to restart at the beginning
+	}
+	
+	public void unmute () {
+		bIsMuted = false;
+		if (! bIsPause)
+			loopMusic.play ();
 	}
 }

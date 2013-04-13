@@ -40,6 +40,7 @@ public class MyGame extends Game {
 	private Sound hitSound;
 	private Sound winSound;
 	private Sound looseSound;
+	private boolean bIsMuted = false;
 
 	@Override
 	public void create () {
@@ -68,15 +69,31 @@ public class MyGame extends Game {
 	}
 	
 	public void hitSound () {
-		hitSound.play ();
+		if (! bIsMuted)
+			hitSound.play ();
 	}
 	
 	public void winSound () {
-		winSound.play ();
+		if (! bIsMuted)
+			winSound.play ();
 	}
 	
 	public void looseSound () {
-		looseSound.play ();
+		if (! bIsMuted)
+			looseSound.play ();
 	}
 
+	public boolean getMuteStatus () {
+		return bIsMuted;
+	}
+	
+	public void muteAllSounds () {
+		screenGame.mute ();
+		bIsMuted = true;
+	}
+	
+	public void unMuteAllSounds () {
+		screenGame.unmute ();
+		bIsMuted = false;
+	}
 }
