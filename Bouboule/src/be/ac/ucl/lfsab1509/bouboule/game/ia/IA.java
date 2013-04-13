@@ -216,7 +216,7 @@ public class IA {
 
 		if(dirmid.dot(vitesse) > 0 &&
 				getClosestCentre(position).getVector().dst(position) < vitesse.dot(dirmid)*vitesse.dot(dirmid)/(2*GlobalSettings.LIMITACC)){
-			Acc.rotate(180);
+			//Acc.rotate(180);
 		}else{
 		}
 
