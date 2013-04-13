@@ -101,7 +101,7 @@ public class IA {
 		//Acc.sub(slow);
 		
 		if(IALevel == 0)
-		Gdx.app.log ("Player","player"+LocalEnemi.x+"speed"+VelocityEnemi.len2()+"acc"+Acc.len());
+		Gdx.app.log ("Player","playerx"+LocalEnemi.x+"y"+LocalEnemi.y+"speed2"+VelocityEnemi.len2()+"acc"+Acc.len());
 		
 		return Acc;
 	}
@@ -160,7 +160,8 @@ public class IA {
 		directionenemi = new Vector2(localEnemi);
 		directionenemi.add(new Vector2(VelocityEnemi).rotate(localEnemi.angle()).set(0, VelocityEnemi.y).rotate(0-localEnemi.angle()).mul(2)).sub(fictposition).nor();
 		
-		if(!(Math.abs(angleCentre(fictposition, centreIA.getVector())-angleCentre(localEnemi,centreIA.getVector())) < 10))
+		if(!(Math.abs(angleCentre(fictposition, centreIA.getVector())-angleCentre(localEnemi,centreIA.getVector())) < 10 &&
+				centreIA == getClosestCentre(localEnemi)))
 		if(dirmid.dot(velocity) < 0.0f && velocity.len2()*1.75 + dirmid.len() > centreIA.getWeight()){
 			Gdx.app.log ("Player","IA:attaque slow");
 			//évitement des bords
