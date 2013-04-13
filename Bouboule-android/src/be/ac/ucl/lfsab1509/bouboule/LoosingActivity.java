@@ -30,6 +30,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.os.Bundle;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -53,10 +54,13 @@ public class LoosingActivity extends Activity {
 				fireListener);
 		findViewById(R.id.LoosingNextLevelButton).setOnTouchListener(
 				fireListener);
+		
+		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
+				"chineyen.ttf");
+		TextView pScoreView = (TextView) findViewById (R.id.LoosingScore);
 
-		((TextView) findViewById (R.id.LoosingScore)).setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
-
-		//Hide the bouboules until the animation begin 
+		pScoreView.setTypeface (myFontBout);
+		pScoreView.setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
 		
 		int NbLifes = GlobalSettings.PROFILE.getNbLifes ();
 

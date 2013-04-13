@@ -37,38 +37,41 @@
         <Space
             android:layout_width="fill_parent"
             android:layout_height="0px"
-            android:layout_weight="43" />
+            android:layout_weight="38.5" />
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="4.5"
             android:weightSum="100" >
 
             <Space
                 android:layout_width="0dp"
-                android:layout_weight="27.5"
+                android:layout_weight="34"
                 android:layout_height="fill_parent" />
 
             <TextView
                 android:id="@+id/LoosingScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|left"
                 android:text="@string/app_name"
                 android:textAppearance="?android:attr/textAppearanceButton"
                 android:textColor="@color/black_overlay"
-                android:textSize="@dimen/activity_vertical_margin" />
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <Space
             android:layout_width="fill_parent"
             android:layout_height="0px"
-            android:layout_weight="0" />
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="77dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:weightSum="100" >
 
             <Space
@@ -79,8 +82,8 @@
                 android:id="@+id/LoosingNextLevelButton"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:alpha="0"
-                android:layout_weight="50" />
+                android:layout_weight="50"
+                android:alpha="0" />
 
             <Space
                 android:layout_width="55dp"
@@ -98,7 +101,6 @@
                 android:layout_height="fill_parent" />
 
         </LinearLayout>
-
     </LinearLayout>
 
 </FrameLayout>

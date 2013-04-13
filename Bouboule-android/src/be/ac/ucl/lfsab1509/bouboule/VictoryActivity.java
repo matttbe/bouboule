@@ -30,6 +30,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.os.Bundle;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -54,7 +55,29 @@ public class VictoryActivity extends Activity {
 		findViewById(R.id.VictoryNextLevelButton).setOnTouchListener(
 				fireListener);
 
-		((TextView) findViewById (R.id.VictoryScore)).setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
+		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
+				"chineyen.ttf");
+		TextView pScoreView = (TextView) findViewById (R.id.VictoryScore);
+
+		pScoreView.setTypeface (myFontBout);
+		pScoreView.setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
+		
+
+		
+		int NbLifes = GlobalSettings.PROFILE.getNbLifes ();
+
+		if (NbLifes == 2) {
+			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
+		}
+		else if (NbLifes == 1) {
+			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
+		}
+		else { // TODO: more than 3 lifes?
+			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
+			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
+		}
 	}
 
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
