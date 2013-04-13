@@ -101,8 +101,11 @@ public class IA {
 		}
 		//Acc.sub(slow);
 		
-		if(IALevel == 0)
-		Gdx.app.log ("Player","playerx"+LocalEnemi.x+"y"+LocalEnemi.y+"speed2"+VelocityEnemi.len2()+"acc"+Acc.len());
+		if(IALevel == 0){
+			Gdx.app.log ("Player","playerx"+LocalEnemi.x+"y"+LocalEnemi.y+"speed2"+VelocityEnemi.len2()+"acc"+Acc.len());
+		}
+		
+		Acc.mul(3.0f);
 		
 		return Acc;
 	}
