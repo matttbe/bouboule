@@ -90,7 +90,7 @@ public class GameOverActivity extends Activity {
 		}
 
 		Context context = getApplicationContext();
-		CharSequence text = "HighScore Menu must be enabled"; // TODO
+		CharSequence text = "HighScore Menu must be enabled\nBackground should be changed"; // TODO
 		int duration = Toast.LENGTH_LONG;
 
 		Toast toast = Toast.makeText(context, text, duration);
@@ -103,6 +103,8 @@ public class GameOverActivity extends Activity {
 		
 		((Button) findViewById(R.id.LoosingNextLevelButton)).setEnabled(false);
 		((Button) findViewById(R.id.LoosingNextLevelButton)).setText("Game Over");
+		
+		((TextView) findViewById (R.id.LoosingScore)).setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
 	}
 
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {

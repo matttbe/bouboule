@@ -27,12 +27,14 @@ package be.ac.ucl.lfsab1509.bouboule;
  */
 
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 public class VictoryActivity extends Activity {
 
@@ -51,6 +53,8 @@ public class VictoryActivity extends Activity {
 				fireListener);
 		findViewById(R.id.VictoryNextLevelButton).setOnTouchListener(
 				fireListener);
+
+		((TextView) findViewById (R.id.VictoryScore)).setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
 	}
 
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
