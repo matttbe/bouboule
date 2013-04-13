@@ -104,7 +104,7 @@ public class GameOverActivity extends Activity {
 		((Button) findViewById(R.id.LoosingNextLevelButton)).setEnabled(false);
 		((Button) findViewById(R.id.LoosingNextLevelButton)).setText("Game Over");
 		
-		((TextView) findViewById (R.id.LoosingScore)).setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
+		((TextView) findViewById (R.id.LoosingScore)).setText (Integer.toString (GlobalSettings.PROFILE.getEndGameScore ()));
 	}
 
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {

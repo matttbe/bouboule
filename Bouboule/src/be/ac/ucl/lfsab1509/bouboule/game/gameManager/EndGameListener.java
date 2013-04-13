@@ -140,7 +140,7 @@ public class EndGameListener implements ContactListener{
 					GlobalSettings.PROFILE.saveScore ();
 					if (GlobalSettings.PROFILE.LevelUp ())
 						GlobalSettings.GAME_EXIT = GameExitStatus.WIN;
-					else {
+					else { // no more level: end game
 						GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
 						GlobalSettings.PROFILE.resetProfile (); // TODO: what to do?
 					}
