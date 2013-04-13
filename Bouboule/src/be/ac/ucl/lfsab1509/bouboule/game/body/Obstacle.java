@@ -27,6 +27,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.body;
  */
 
 
+import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -46,7 +47,7 @@ public class Obstacle extends GameBody{
 	public Obstacle( final BodyType bodyType, final float density,
 			final float elasticity, final float px, final float py, 
 			final float angle, final String texRegionPath, 
-			final String jsonFile, final String jsonName, final short entity) {
+			final String jsonFile, final String jsonName) {
 
 		super();
 
@@ -61,7 +62,9 @@ public class Obstacle extends GameBody{
 
 		//Ensure that the object don't rotate.
 		body.setFixedRotation(true);
-		body.setUserData(entity);
+
+		this.entity = new Entity(Entity.OBSTACLE, true);
+		body.setUserData(this.entity);
 	}
 
 	/*
@@ -71,7 +74,7 @@ public class Obstacle extends GameBody{
 	 */
 	public void draw(final SpriteBatch sp) {
 
-		if (isAlive) {
+		if (entity.isAlive()) {
 
 			if (origin != null) {
 

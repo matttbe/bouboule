@@ -26,6 +26,7 @@
 
 package be.ac.ucl.lfsab1509.bouboule.game.body;
 
+import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 
@@ -66,7 +67,7 @@ public class Bouboule extends GameBody{
 	public Bouboule(final float radius, final BodyType bodyType, final float density,
 			final float elasticity, final float px, final float py, 
 			final float angle, final String texRegionPath, 
-			final String jsonFile, final String jsonName, final short entity, final int IALevel) {
+			final String jsonFile, final String jsonName, final short type, final int IALevel) {
 
 		super();
 
@@ -83,7 +84,10 @@ public class Bouboule extends GameBody{
 
 		//Ensure that the object don't rotate.
 		body.setFixedRotation(true);
-		body.setUserData(entity);
+		
+		this.entity = new Entity(type, true);
+		
+		body.setUserData(this.entity);
 	}
 
 
@@ -94,7 +98,7 @@ public class Bouboule extends GameBody{
 	 */
 	public void draw(final SpriteBatch sp) {
 
-		if (isAlive) {
+		if (entity.isAlive()) {
 
 			if (origin != null) {
 				
@@ -119,7 +123,7 @@ public class Bouboule extends GameBody{
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#update(float)
 	 */
 	public void update() {
-		if (isAlive) {
+		if (entity.isAlive()) {
 			Vector2 Acceleration =  IA.compute(IALevel,this);
 			body.applyForceToCenter(Acceleration);
 			super.update();

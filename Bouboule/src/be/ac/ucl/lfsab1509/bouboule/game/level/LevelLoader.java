@@ -75,7 +75,11 @@ public class LevelLoader {
 			Gdx.app.log("Matth", "Level not found");
 			throw new GdxRuntimeException ("Level not found");
 		}
-			
+		
+		GraphicManager.ALLOW_BONUS = Boolean.parseBoolean(file.getAttribute("bonus","false"));
+		
+		
+		Gdx.app.log("Settings", "Bonus ="+GraphicManager.ALLOW_BONUS);	
 
 	}
 
@@ -142,10 +146,9 @@ public class LevelLoader {
 		String texRegionPath 	= aren.getAttribute("texRegionPath");
 		String jsonFile 		= aren.getAttribute("jsonFile");
 		String jsonName 		= aren.getAttribute("jsonName");
-		short entity			= Short.parseShort(aren.getAttribute("entity"));
 
 		graphicManager.addBody(new Arena( radius, px, py,  angle, texRegionPath, 
-				jsonFile,  jsonName, entity));
+				jsonFile,  jsonName));
 
 		Gdx.app.log("XML","Arena Loaded :"+jsonName);
 		
@@ -203,12 +206,11 @@ public class LevelLoader {
 			String texRegionPath 	= newobstacle.getAttribute("texRegionPath");
 			String jsonFile 		= newobstacle.getAttribute("jsonFile");
 			String jsonName 		= newobstacle.getAttribute("jsonName");
-			short entity			= Short.parseShort(newobstacle.getAttribute("entity"));
 
 
 			graphicManager.addBody( new Obstacle(bodyType, density,
 					elasticity, px, py, angle,texRegionPath, 
-					jsonFile, jsonName, entity));
+					jsonFile, jsonName));
 			
 			Gdx.app.log("XML", "Obstacle loaded : "+jsonName);
 		}

@@ -26,6 +26,7 @@
 
 package be.ac.ucl.lfsab1509.bouboule.game.body;
 
+import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import be.ac.ucl.lfsab1509.bouboule.game.physicEditor.BodyEditorLoader;
 
@@ -42,7 +43,7 @@ public abstract class GameBody {
 
 	protected Body body;
 
-	protected Boolean isAlive;
+	protected Entity entity;
 
 	//object direction depending on the force applied to it
 	protected Vector2 positionVector;
@@ -60,7 +61,6 @@ public abstract class GameBody {
 	 */
 	public GameBody() {
 
-		isAlive			= true;
 		positionVector 	= new Vector2();
 	}
 
@@ -215,7 +215,7 @@ public abstract class GameBody {
 
 		if (body != null) {
 
-			isAlive	= false;
+			entity.setAlive(false);
 			GraphicManager.getWorld().destroyBody(body);
 			body	= null;
 		}
@@ -246,11 +246,11 @@ public abstract class GameBody {
 
 
 	public Boolean getIsAlive() {
-		return isAlive;
+		return entity.isAlive();
 	}
 
 	public void setIsAlive(final Boolean alive) {
-		this.isAlive = alive;
+		entity.setAlive(alive);
 	}
 
 	public Vector2 getOrigin() {

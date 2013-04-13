@@ -27,6 +27,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.body;
  */
 
 
+import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -43,10 +44,9 @@ public class Bonus extends GameBody{
 	private TextureRegion texture;
 	private Sprite sprite;
 
-	public Bonus( final BodyType bodyType, final float density,
-			final float elasticity, final float px, final float py, 
+	public Bonus( final float px, final float py, 
 			final float angle, final String texRegionPath, 
-			final String jsonFile, final String jsonName, final short entity) {
+			final String jsonFile, final String jsonName, final short bonusType) {
 
 		super();
 
@@ -56,12 +56,16 @@ public class Bonus extends GameBody{
 
 		this.sprite = new Sprite(texture);
 
-		MakeBody(0, 0, 0, bodyType, density, elasticity, false, pos, angle, jsonFile, jsonName,
+		MakeBody(0, 0, 0, BodyType.StaticBody, 0, 0, true, pos, angle, jsonFile, jsonName,
 				GraphicManager.convertToGame(texture.getRegionWidth()));
 
 		//Ensure that the object don't rotate.
 		body.setFixedRotation(true);
-		body.setUserData(entity);
+		
+		//TODO
+		this.entity = new Entity(Entity.BONUS, true, bonusType);
+		
+		body.setUserData(this.entity);
 	}
 
 	/*
@@ -71,7 +75,7 @@ public class Bonus extends GameBody{
 	 */
 	public void draw(final SpriteBatch sp) {
 
-		if (isAlive) {
+		if (entity.isAlive()) {
 
 			if (origin != null) {
 
@@ -90,18 +94,5 @@ public class Bonus extends GameBody{
 			}
 		}
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#update(float)
-	 */
-	public void update() {
-		
-			super.update();
-	}
-
-
-
-
-
+	
 }

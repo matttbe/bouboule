@@ -42,6 +42,8 @@ public class GraphicManager {
 	private static final float GAME_TO_WORLD = 100.0f;
 	private static final float WORLD_TO_GAME = 0.01f;
 	
+	public static boolean ALLOW_BONUS = false;
+	
 	//Store all the body of the game
 	public ArrayList<GameBody> bodies;
 	
@@ -117,10 +119,11 @@ public class GraphicManager {
 	 * update(float dt)
 	 */
 	public void update() {
+		
+		world.step(GlobalSettings.BOX_STEP, GlobalSettings.VELOCITY_ITERATIONS, 
+				GlobalSettings.POSITION_ITERATIONS);
+		
 		for (GameBody body:bodies) {
-			
-			world.step(GlobalSettings.BOX_STEP, GlobalSettings.VELOCITY_ITERATIONS, 
-						GlobalSettings.POSITION_ITERATIONS);
 			body.update();
 		}
 	}

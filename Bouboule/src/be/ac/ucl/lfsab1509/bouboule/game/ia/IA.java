@@ -6,6 +6,7 @@ import java.util.Iterator;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
+import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -36,10 +37,10 @@ public class IA {
 
 		while(iter.hasNext()){
 			bodytemp = iter.next();
-			if(bodytemp.getUserData() == (Object) GlobalSettings.PLAYER){ 
+			if( ((Entity) bodytemp.getUserData()).getEntity()  == Entity.PLAYER){ 
 				LocalEnemi = bodytemp.getPosition();
 				VelocityEnemi = bodytemp.getLinearVelocity();
-			}else if(bodytemp.getUserData() == (Object) GlobalSettings.MONSTER){
+			}else if( ((Entity) bodytemp.getUserData()).getEntity() == Entity.MONSTER){
 				IA =  bodytemp.getPosition();
 				VelocityIA  = bodytemp.getLinearVelocity();
 			}/*else{

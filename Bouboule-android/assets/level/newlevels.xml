@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Level>
 
-    <Level1>
+    <Level1 bonus="True">
 
         <Bouboule
             IALevel="6"
@@ -125,7 +125,7 @@
         </Obstacles>
     </Level1>
 
-    <Level3>
+    <Level3 bonus="True">
 
         <Bouboule
             IALevel="6"
@@ -191,7 +191,7 @@
         </Obstacles>
     </Level3>
 
-    <Level2>
+    <Level2 bonus="True">
 
         <Bouboule
             IALevel="6"

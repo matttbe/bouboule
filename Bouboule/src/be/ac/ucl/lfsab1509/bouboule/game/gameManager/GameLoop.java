@@ -27,7 +27,11 @@
 package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 
+import java.util.Random;
+
 import be.ac.ucl.lfsab1509.bouboule.game.anim.CountDown;
+import be.ac.ucl.lfsab1509.bouboule.game.body.Bonus;
+import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 
 import com.badlogic.gdx.Gdx;
@@ -51,6 +55,8 @@ public class GameLoop {
 	private BitmapFont			fontOsaka;
 	private SpriteBatch			batch;
 	private LevelLoader 		level;
+	
+	private Random 				random;
 
 
 
@@ -88,6 +94,9 @@ public class GameLoop {
 
 		//load the counter 
 		countDown = new CountDown();
+		
+		//new randomGenerator
+		random = new Random();
 	}
 
 	/* 
@@ -125,6 +134,15 @@ public class GameLoop {
 	 */
 	public void update() {
 		graphicManager.update();
+		Gdx.app.log("FPS", ""+1/Gdx.graphics.getDeltaTime());
+		
+		if (GraphicManager.ALLOW_BONUS == true && random.nextInt(5432) == 5) {
+			
+			Gdx.app.log("heart", "new heart created");
+			graphicManager.addBody(new Bonus( 200+random.nextInt(400), 200+random.nextInt(800), 0,
+					"bonus/heart/heart.png", "bonus/heart/heart.json", "heart", Entity.BONUS_LIVE));
+		}
+			
 	}
 
 	/*
