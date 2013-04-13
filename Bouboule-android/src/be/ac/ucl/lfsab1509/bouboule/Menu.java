@@ -29,6 +29,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 import java.util.Random;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.profile.HighScoreInfo;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -178,7 +179,15 @@ public class Menu extends Activity {
 						
 					case R.id.HighScoreButton :
 						// ((TextView) findViewById(R.id.HighScoreButton)).setText (GlobalSettings.PROFILE.getHighScore ());
-						Log.i ("Matth", "HighScore " + GlobalSettings.PROFILE.getHighScore ());
+						Log.i ("Matth", "HighScore " + GlobalSettings.PROFILE.getHighScore ()); // high score of this profile
+						HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (true);
+						for (int i = 0; i < highscores.length; i++) {
+							HighScoreInfo info = highscores[i];
+							Log.i ("Matth", "HighScore " + (i+1) + ": " + info.getScore ()
+								+ " by " + info.getName ()
+								+ " at level " + info.getLevel ()
+								+ " (date: " + info.getDate ().toString () + ")");
+						}
 						break;
 						
 					default :
