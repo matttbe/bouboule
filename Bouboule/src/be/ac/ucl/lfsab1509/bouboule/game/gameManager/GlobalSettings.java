@@ -40,27 +40,6 @@ public class GlobalSettings {
 	public static final float BOX_STEP			= 1 / 60f;
 	public static final int VELOCITY_ITERATIONS	= 8;
 	public static final int POSITION_ITERATIONS	= 3;
-	
-	public static final short CATEGORY_PLAYER 	= 0x0001;  // 0000000000000001 in binary
-	public static final short CATEGORY_MONSTER 	= 0x0002; // 0000000000000010 in binary
-	public static final short CATEGORY_SCENERY 	= 0x0004; // 0000000000000100 in binary
-	
-	public static final short MASK_PLAYER 	= CATEGORY_MONSTER | CATEGORY_SCENERY; 
-											// or ~CATEGORY_PLAYER
-	public static final short MASK_MONSTER 	= CATEGORY_PLAYER | CATEGORY_SCENERY; 
-											// or ~CATEGORY_MONSTER
-	public static final short MASK_SCENERY 	= 0;
-	public static final short MASK_ALLCONT 	= -1;
-	
-	public static final short GROUP_PLAYER 	= -1;
-	public static final short GROUP_MONSTER = -2;
-	public static final short GROUP_SCENERY = 1;
-	
-	public static final short PLAYER 	=  1;
-	public static final short MONSTER 	= -1;
- 	public static final short SCENERY 	=  0;
- 	public static final short OBSTACLE 	= -2;
- 	
  	
  	public static final float LIMITACC	= 0.5f;
  	
