@@ -101,20 +101,21 @@ public class IA {
 		//Acc.sub(slow);
 		
 		if(IALevel == 0)
-		Gdx.app.log ("Player","player"+LocalEnemi.x+"speed"+VelocityEnemi.x+"acc"+Acc.x);
+		Gdx.app.log ("Player","playerx"+LocalEnemi.x+"y"+LocalEnemi.y+"speed2"+VelocityEnemi.len2()+"acc"+Acc.len());
 		
 		return Acc;
 	}
 
 
 	private static Vector2 hybrid(Vector2 IA, Vector2 velocityIA,Vector2 localEnemi,Vector2 VelocityEnemi) {
-		float anglerelatif = angleCentre(IA, getClosestCentre(IA).getVector()) - angleCentre(localEnemi, getClosestCentre(IA).getVector());
+		MapNode close = getClosestCentre(IA);
+		float anglerelatif = angleCentre(IA, close.getVector()) - angleCentre(localEnemi, close.getVector());
 		anglerelatif=casteangle(anglerelatif);
 		float distIA,distEnemi;
-		distIA = GlobalSettings.ARENAWAYPOINTALLOW.get(0).getVector().dst(IA);
-		distEnemi = GlobalSettings.ARENAWAYPOINTALLOW.get(0).getVector().dst(localEnemi);
+		distIA = close.getVector().dst(IA);
+		distEnemi = close.getVector().dst(localEnemi);
 
-		if(anglerelatif < 45 && anglerelatif > -45 && distIA>distEnemi){
+		if(anglerelatif < 45 && anglerelatif > -45 && distIA > distEnemi){
 			return defence(IA, velocityIA, localEnemi);
 		}else{
 			return aggretion(IA, velocityIA, localEnemi, VelocityEnemi);
@@ -155,12 +156,13 @@ public class IA {
 		dirmid = middeler(position, centreIA);
 		//dirmid.nor();
 		fictposition = new Vector2(position);
-		fictposition.add(new Vector2(velocity).mul(2));
+		fictposition.add(new Vector2(velocity).rotate(position.angle()).set(0, velocity.y).rotate(0-position.angle()).mul(2));
 		directionenemi = new Vector2(localEnemi);
-		directionenemi.add(new Vector2(VelocityEnemi.mul(2))).sub(fictposition).nor();
+		directionenemi.add(new Vector2(VelocityEnemi).rotate(localEnemi.angle()).set(0, VelocityEnemi.y).rotate(0-localEnemi.angle()).mul(2)).sub(fictposition).nor();
 		
-		if(!(Math.abs(angleCentre(fictposition, centreIA.getVector())-angleCentre(localEnemi,centreIA.getVector())) < 10))
-		if(dirmid.dot(velocity) < 0.0f && velocity.len2()+dirmid.len() > centreIA.getWeight()){
+		if(!(Math.abs(angleCentre(fictposition, centreIA.getVector())-angleCentre(localEnemi,centreIA.getVector())) < 10 &&
+				centreIA == getClosestCentre(localEnemi)))
+		if(dirmid.dot(velocity) < 0.0f && velocity.len2()*1.75 + dirmid.len() > centreIA.getWeight()){
 			Gdx.app.log ("Player","IA:attaque slow");
 			//évitement des bords
 			return stopMid(position, velocity);

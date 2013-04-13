@@ -14,7 +14,7 @@
             px="100"
             py="1000"
             radius="0"
-            texRegionPath="images/boub2.png" >
+            texRegionPath="images/boub/boub_samurai.png" >
         </Bouboule>
 
         <Bouboule
@@ -28,7 +28,7 @@
             px="600"
             py="100"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena
@@ -45,21 +45,79 @@
         <MapNodes>
 
             <NodeAllow
-                px="3.5f"
-                py="6.0f"
-                weight="3.5f" >
+                px="1.65789f"
+                py="8.36098f"
+                weight="1.65789f" >
             </NodeAllow>
-
             <NodeAllow
-                px="3.5f"
-                py="5.0f"
-                weight="3.5f" >
+                px="1.77138f"
+                py="5.71220f"
+                weight="1.77138f" >
             </NodeAllow>
-
             <NodeAllow
-                px="3.5f"
-                py="3.0f"
-                weight="3.5f" >
+                px="3.76480f"
+                py="5.02927f"
+                weight="0.93257f" >
+            </NodeAllow>
+            <NodeAllow
+                px="5.30921f"
+                py="1.55122f"
+                weight="1.53947f" >
+            </NodeAllow>
+            <NodeAllow
+                px="5.82730f"
+                py="4.34634f"
+                weight="1.67270f" >
+            </NodeAllow>
+            <NodeAllow
+                px="0.93750f"
+                py="3.70732f"
+                weight="0.93750f" >
+            </NodeAllow>
+            <NodeAllow
+                px="0.81414f"
+                py="2.36585f"
+                weight="0.81414f" >
+            </NodeAllow>
+            <NodeAllow
+                px="1.13487f"
+                py="1.07317f"
+                weight="1.13487f" >
+            </NodeAllow>
+            <NodeAllow
+                px="2.61513f"
+                py="0.71220f"
+                weight="0.69079f" >
+            </NodeAllow>
+            <NodeAllow
+                px="3.89803f"
+                py="3.70732f"
+                weight="0.69079f" >
+            </NodeAllow>
+            <NodeAllow
+                px="6.46382f"
+                py="8.97561f"
+                weight="1.03618f" >
+            </NodeAllow>
+            <NodeAllow
+                px="3.54276f"
+                py="9.22927f"
+                weight="0.77961f" >
+            </NodeAllow>
+            <NodeAllow
+                px="4.88487f"
+                py="9.31707f"
+                weight="0.69079f" >
+            </NodeAllow>
+            <NodeAllow
+                px="6.85855f"
+                py="7.46341f"
+                weight="0.64145f" >
+            </NodeAllow>
+            <NodeAllow
+                px="6.71053f"
+                py="6.34146f"
+                weight="0.74013f" >
             </NodeAllow>
         </MapNodes>
 
@@ -67,7 +125,7 @@
         </Obstacles>
     </Level1>
 
-    <Level2>
+    <Level3>
 
         <Bouboule
             IALevel="6"
@@ -80,7 +138,7 @@
             px="400"
             py="800"
             radius="0"
-            texRegionPath="images/boub2.png" >
+            texRegionPath="images/boub/boub_monk.png" >
         </Bouboule>
 
         <Bouboule
@@ -94,7 +152,7 @@
             px="400"
             py="400"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena
@@ -131,9 +189,9 @@
 
         <Obstacles>
         </Obstacles>
-    </Level2>
+    </Level3>
 
-    <Level3>
+    <Level2>
 
         <Bouboule
             IALevel="6"
@@ -146,7 +204,7 @@
             px="400"
             py="800"
             radius="0"
-            texRegionPath="images/boub2.png" >
+            texRegionPath="images/boub/boub_chef.png" >
         </Bouboule>
 
         <Bouboule
@@ -160,7 +218,99 @@
             px="400"
             py="400"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            jsonFile="data/terrain/Sushi/sushi.json"
+            jsonName="sushi"
+            px="0"
+            py="0"
+            radius="500"
+            texRegionPath="data/terrain/Sushi/sushi.jpg" >
+        </Arena>
+
+        <MapNodes>
+
+            <NodeAllow
+                px="3.5f"
+                py="6.0f"
+                weight="3.5f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.5f"
+                py="5.0f"
+                weight="3.5f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.5f"
+                py="3.0f"
+                weight="3.5f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                bodyType="Static"
+                density="1"
+                elasticity="0.5f"
+                entity="-2"
+                angle="0"
+                jsonFile="data/terrain/Sushi/sushi_mur.json"
+                jsonName="sushi_mur"
+                px="0"
+                py="0"
+                texRegionPath="data/terrain/Sushi/sushi_mur.png" >
+            </Obstacle>
+            
+            <Obstacle
+                bodyType="Static"
+                density="1"
+                elasticity="0.5f"
+                entity="-2"
+                angle="0"
+                jsonFile="data/terrain/Sushi/sushi_obs.json"
+                jsonName="sushi_obs"
+                px="0"
+                py="0"
+                texRegionPath="data/terrain/Sushi/sushi_obs.png" >
+            </Obstacle>
+        </Obstacles>
+    </Level2>
+    
+    <Level13>
+
+        <Bouboule
+            IALevel="6"
+            angle="0"
+            density="1"
+            elasticity="1.1f"
+            entity="-1"
+            jsonFile="data/jsonFile/boub.json"
+            jsonName="boub"
+            px="400"
+            py="800"
+            radius="0"
+            texRegionPath="images/boub/boub_bbmonk.png" >
+        </Bouboule>
+
+        <Bouboule
+            IALevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            jsonFile="data/jsonFile/boub.json"
+            jsonName="boub"
+            px="400"
+            py="400"
+            radius="0"
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena
@@ -197,7 +347,7 @@
 
         <Obstacles>
 
-            <Obstacleeee
+            <Obstacle
                 bodyType="Static"
                 density="1"
                 elasticity="0.5f"
@@ -210,7 +360,7 @@
                 texRegionPath="data/terrain/OneWay/oneway_mur.png" >
             </Obstacle>
         </Obstacles>
-    </Level3>
+    </Level13>
 
     <Level4>
 
@@ -225,7 +375,7 @@
             px="400"
             py="800"
             radius="0"
-            texRegionPath="images/boub2.png" >
+            texRegionPath="images/boub/boub_geisha.png" >
         </Bouboule>
 
         <Bouboule
@@ -239,7 +389,7 @@
             px="400"
             py="400"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena
@@ -291,7 +441,7 @@
             px="400"
             py="800"
             radius="0"
-            texRegionPath="images/boub2.png" >
+            texRegionPath="images/boub/boub_inuit.png" >
         </Bouboule>
 
         <Bouboule
@@ -305,7 +455,7 @@
             px="400"
             py="400"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena
@@ -357,7 +507,7 @@
             px="400"
             py="800"
             radius="0"
-            texRegionPath="images/boub2.png" >
+            texRegionPath="images/boub/boub_fireball.png" >
         </Bouboule>
 
         <Bouboule
@@ -371,7 +521,7 @@
             px="400"
             py="400"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena
@@ -423,7 +573,7 @@
             px="400"
             py="800"
             radius="0"
-            texRegionPath="images/boub2.png" >
+            texRegionPath="images/boub/boub_basic.png" >
         </Bouboule>
 
         <Bouboule
@@ -437,7 +587,7 @@
             px="400"
             py="400"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena
@@ -490,7 +640,7 @@
             px="400"
             py="800"
             radius="0"
-            texRegionPath="images/boub2.png" >
+            texRegionPath="images/boub/boub_seal.png" >
         </Bouboule>
 
         <Bouboule
@@ -504,7 +654,7 @@
             px="400"
             py="400"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena
@@ -556,7 +706,7 @@
             px="400"
             py="800"
             radius="0"
-            texRegionPath="images/boub2.png" >
+            texRegionPath="images/boub/boub_nuage.png" >
         </Bouboule>
 
         <Bouboule
@@ -570,7 +720,7 @@
             px="400"
             py="400"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena
@@ -622,7 +772,7 @@
             px="400"
             py="800"
             radius="0"
-            texRegionPath="images/boub2.png" >
+            texRegionPath="images/boub/boub_salaryman.png" >
         </Bouboule>
 
         <Bouboule
@@ -636,7 +786,7 @@
             px="400"
             py="400"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena
@@ -688,7 +838,7 @@
             px="400"
             py="800"
             radius="0"
-            texRegionPath="images/boub2.png" >
+            texRegionPath="images/boub/boub_kid.png" >
         </Bouboule>
 
         <Bouboule
@@ -702,7 +852,7 @@
             px="400"
             py="400"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena
@@ -754,7 +904,7 @@
             px="400"
             py="800"
             radius="0"
-            texRegionPath="images/boub2.png" >
+            texRegionPath="images/boub/boub_mouse.png" >
         </Bouboule>
 
         <Bouboule
@@ -768,7 +918,7 @@
             px="400"
             py="400"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena
