@@ -12,7 +12,7 @@
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
             px="100"
-            py="1000"
+            py="900"
             radius="0"
             texRegionPath="images/boub/boub_samurai.png" >
         </Bouboule>
@@ -135,8 +135,8 @@
             entity="-1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="800"
+            px="350"
+            py="700"
             radius="0"
             texRegionPath="images/boub/boub_monk.png" >
         </Bouboule>
@@ -149,8 +149,8 @@
             entity="1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="400"
+            px="350"
+            py="300"
             radius="0"
             texRegionPath="images/boub/boub.png" >
         </Bouboule>
@@ -216,7 +216,7 @@
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
             px="400"
-            py="400"
+            py="300"
             radius="0"
             texRegionPath="images/boub/boub.png" >
         </Bouboule>
@@ -293,8 +293,8 @@
             entity="-1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="800"
+            px="350"
+            py="620"
             radius="0"
             texRegionPath="images/boub/boub_bbmonk.png" >
         </Bouboule>
@@ -307,8 +307,8 @@
             entity="1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="400"
+            px="350"
+            py="380"
             radius="0"
             texRegionPath="images/boub/boub.png" >
         </Bouboule>
@@ -372,8 +372,8 @@
             entity="-1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="800"
+            px="350"
+            py="620"
             radius="0"
             texRegionPath="images/boub/boub_geisha.png" >
         </Bouboule>
@@ -386,8 +386,8 @@
             entity="1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="400"
+            px="350"
+            py="380"
             radius="0"
             texRegionPath="images/boub/boub.png" >
         </Bouboule>
@@ -438,7 +438,7 @@
             entity="-1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
+            px="350"
             py="800"
             radius="0"
             texRegionPath="images/boub/boub_inuit.png" >
@@ -452,8 +452,8 @@
             entity="1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="400"
+            px="350"
+            py="200"
             radius="0"
             texRegionPath="images/boub/boub.png" >
         </Bouboule>
@@ -504,8 +504,8 @@
             entity="-1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="800"
+            px="350"
+            py="750"
             radius="0"
             texRegionPath="images/boub/boub_fireball.png" >
         </Bouboule>
@@ -518,8 +518,8 @@
             entity="1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="400"
+            px="350"
+            py="250"
             radius="0"
             texRegionPath="images/boub/boub.png" >
         </Bouboule>
@@ -570,8 +570,8 @@
             entity="-1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="800"
+            px="350"
+            py="620"
             radius="0"
             texRegionPath="images/boub/boub_basic.png" >
         </Bouboule>
@@ -584,8 +584,8 @@
             entity="1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="400"
+            px="350"
+            py="380"
             radius="0"
             texRegionPath="images/boub/boub.png" >
         </Bouboule>
@@ -637,8 +637,8 @@
             entity="-1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="800"
+            px="350"
+            py="620"
             radius="0"
             texRegionPath="images/boub/boub_seal.png" >
         </Bouboule>
@@ -651,8 +651,8 @@
             entity="1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="400"
+            px="350"
+            py="380"
             radius="0"
             texRegionPath="images/boub/boub.png" >
         </Bouboule>
@@ -703,8 +703,8 @@
             entity="-1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="800"
+            px="350"
+            py="900"
             radius="0"
             texRegionPath="images/boub/boub_nuage.png" >
         </Bouboule>
@@ -717,8 +717,8 @@
             entity="1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="400"
+            px="350"
+            py="100"
             radius="0"
             texRegionPath="images/boub/boub.png" >
         </Bouboule>
@@ -769,8 +769,8 @@
             entity="-1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="800"
+            px="350"
+            py="700"
             radius="0"
             texRegionPath="images/boub/boub_salaryman.png" >
         </Bouboule>
@@ -783,8 +783,8 @@
             entity="1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="400"
+            px="350"
+            py="300"
             radius="0"
             texRegionPath="images/boub/boub.png" >
         </Bouboule>
@@ -835,8 +835,8 @@
             entity="-1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="800"
+            px="600"
+            py="750"
             radius="0"
             texRegionPath="images/boub/boub_kid.png" >
         </Bouboule>
@@ -849,8 +849,8 @@
             entity="1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
-            py="400"
+            px="80"
+            py="220"
             radius="0"
             texRegionPath="images/boub/boub.png" >
         </Bouboule>
@@ -901,7 +901,7 @@
             entity="-1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
+            px="350"
             py="800"
             radius="0"
             texRegionPath="images/boub/boub_mouse.png" >
@@ -915,7 +915,7 @@
             entity="1"
             jsonFile="data/jsonFile/boub.json"
             jsonName="boub"
-            px="400"
+            px="350"
             py="400"
             radius="0"
             texRegionPath="images/boub/boub.png" >

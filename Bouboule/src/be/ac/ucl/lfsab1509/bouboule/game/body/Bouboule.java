@@ -43,12 +43,13 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
  */
 public class Bouboule extends GameBody{
 
-	//Texture texture;
-	private TextureRegion texture;
-	private Sprite sprite;
+	private TextureRegion 	texture;		//Texture of the Bouboule
+	private Sprite 			sprite;			//Sprite to draw the Bouboule
 
-	int 			IALevel;
-	/*
+	int 					IALevel;		//Level of the IA or controller
+	
+	
+	/**
 	 * Constructor for a Bouboule object 
 	 * - radius 	: radius of Bouboule for a shape like body
 	 * - Bodytype 	: Dynamic or Static 

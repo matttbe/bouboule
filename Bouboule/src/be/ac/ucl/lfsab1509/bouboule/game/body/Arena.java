@@ -39,11 +39,10 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Arena extends GameBody {
 
-	//Texture texture;
-	private TextureRegion texture;
-	private Sprite sprite;
-	
-	/*
+	private TextureRegion 	texture;		//Texture of the Arena
+	private Sprite 			sprite;			//Sprite to draw the Arena
+
+	/**
 	 * Constructor for a Arena object 
 	 * - radius 	: radius of Arena for a shape like body
 	 * - Bodytype 	: Dynamic or Static 
@@ -78,6 +77,11 @@ public class Arena extends GameBody {
 		body.setUserData(this.entity);
 	}
 	
+	/**
+	 * draw the Arena object (bg drawing > Disable Blending)
+	 * 
+	 * 	public void draw(final SpriteBatch sp) {
+	 */
 	@Override
 	public void draw(final SpriteBatch sp) {
 		

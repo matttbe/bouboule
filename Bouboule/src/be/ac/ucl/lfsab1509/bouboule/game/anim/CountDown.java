@@ -34,21 +34,30 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * Class that load a countDown from the assets and display it.
+ *
+ */
 public class CountDown {
 
-	private static final int        FRAME_COLS = 2;
-	private static final int        FRAME_ROWS = 2;
+	private static final int        FRAME_COLS = 2;				//Number of Cols in the Atlas file
+	private static final int        FRAME_ROWS = 2;				//Number of Rows in the Atlas file
 
-	private Animation                       countDownAnimation;
-	private Texture                         countDownSheet;
-	private TextureRegion[]                 countDownFrames;
-	private TextureRegion                   currentFrame;
+	private Animation               countDownAnimation; 		//The animation of the countDown
+	private Texture                 countDownSheet;				//Initial big file of the countDown
+	private TextureRegion[]         countDownFrames;			//Tab that contains all the frames
+	private TextureRegion           currentFrame;				//Current image displayed
 
-	private float STEPTIME = 0.7f;
-	private float stateTime;
-	private boolean bFirstTime = true;
+	private float 					STEPTIME   = 0.7f;			//Step time between 2 frames
+	private float 					stateTime;					//Current time of the animation
+	private boolean 				bFirstTime = true;			//first time the anim is display
 
-	
+	/**
+	 * Constructor for a CountDown Object 
+	 * Automatically load the images/anim/countdown.png, countDown
+	 * 
+	 * public CountDown()
+	 */
 	public CountDown() {
 		countDownSheet = new Texture("images/anim/countdown.png");
 		TextureRegion[][] tmp = TextureRegion.split(countDownSheet, countDownSheet.getWidth() / 
@@ -95,10 +104,17 @@ public class CountDown {
 		return true;
 	}
 	
+	/**
+	 * Remove used memory
+	 */
 	public void dispose() {
 		countDownSheet.dispose();
 	}
 	
+	/**
+	 * 
+	 * @return launch status
+	 */
 	public boolean isLaunched () {
 		return !bFirstTime;
 	}

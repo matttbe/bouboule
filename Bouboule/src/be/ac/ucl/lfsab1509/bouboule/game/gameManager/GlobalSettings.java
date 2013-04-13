@@ -44,7 +44,7 @@ public class GlobalSettings {
  	public static final float LIMITACC	= 0.5f;
  	
  	
- 	public static ArrayList<MapNode> ARENAWAYPOINTALLOW = new ArrayList<MapNode>();
+ 	public static ArrayList<MapNode> ARENAWAYPOINTALLOW = new ArrayList<MapNode>(); //TODO: A mettre dasn IA
  	
  	public static enum GameExitStatus {NONE, WIN, LOOSE, GAMEOVER};
  	public static GameExitStatus 	GAME_EXIT	= GameExitStatus.NONE;
@@ -53,8 +53,8 @@ public class GlobalSettings {
 	public final static int 		INIT_SCORE = 100;
 	public final static int 		INIT_LIFES = 3; // TODO: Init_scrore and life: take data from config
 
-	public static int				NBLEVELS; // nb of levels in the current xml files
-	public static Menus 			MENUS; // interface to display menus
+	public static int				NBLEVELS; 		// nb of levels in the current xml files
+	public static Menus 			MENUS; 			// interface to display menus
 
 	// Settings that can be changed from ProfileGlobal
 	public static boolean			SOUND_IS_MUTED = false;
