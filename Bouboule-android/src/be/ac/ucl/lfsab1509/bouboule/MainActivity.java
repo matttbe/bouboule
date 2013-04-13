@@ -70,7 +70,7 @@ public class MainActivity extends AndroidApplication {
 		initialize (game, cfg);
 		Log.d ("Matth","initialized");
 
-		game.createProfile ();
+		game.loadDefaultProfile ();
 		GlobalSettings.MENUS.launchInitMenu ();
 	}
 

@@ -24,7 +24,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
+package be.ac.ucl.lfsab1509.bouboule.game.profile;
+
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;

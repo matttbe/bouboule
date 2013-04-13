@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
 import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
 import be.ac.ucl.lfsab1509.bouboule.game.menu.Menus;
+import be.ac.ucl.lfsab1509.bouboule.game.profile.Profile;
+import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 
 public class GlobalSettings {
 	
@@ -68,17 +70,22 @@ public class GlobalSettings {
  	public static enum GameExitStatus {NONE, WIN, LOOSE, GAMEOVER};
  	public static GameExitStatus 	GAME_EXIT	= GameExitStatus.NONE;
  
- 	public final static String		PROFILE_NAME = "Bouboule";
  	public final static int 		INIT_LEVEL = 1;
 	public final static int 		INIT_SCORE = 100;
 	public final static int 		INIT_LIFES = 3; // TODO: Init_scrore and life: take data from config
 	public final static int 		PAUSE_TIME = 1;
-	public static MyGame			GAME = null;
-	public static Profile			PROFILE = null;
+
 	public static int				NBLEVELS; // nb of levels in the current xml files
 	public static Menus 			MENUS;
 	
 	public static boolean SOUND;
+
+	// Profiles
+ 	public final static String		DEFAULT_PROFILE_NAME = "Bouboule";
+	public final static String		PREFS_GLOBAL = "_GLOBAL_SETTINGS_";
+	public static ProfileMgr		PROFILE_MGR = null;
+	public static Profile			PROFILE = null;
+	public static MyGame			GAME = null;
 
 
  	

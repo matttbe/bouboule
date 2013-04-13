@@ -27,7 +27,7 @@ package be.ac.ucl.lfsab1509.bouboule.game;
  */
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
-import be.ac.ucl.lfsab1509.bouboule.game.gameManager.Profile;
+import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 
 import com.badlogic.gdx.Game;
@@ -49,15 +49,15 @@ public class MyGame extends Game {
 		winSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 		looseSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 
-		createProfile ();
+		loadDefaultProfile ();
 
 		screenGame = new ScreenGame();
 		setScreen (screenGame); // 
 	}
 
-	public void createProfile () {
-		if (GlobalSettings.PROFILE == null)
-			GlobalSettings.PROFILE = new Profile (GlobalSettings.PROFILE_NAME);
+	public void loadDefaultProfile () {
+		if (GlobalSettings.PROFILE_MGR == null)
+			GlobalSettings.PROFILE_MGR = new ProfileMgr ();
 	}
 
 	@Override

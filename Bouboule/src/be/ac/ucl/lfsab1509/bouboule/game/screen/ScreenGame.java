@@ -27,11 +27,11 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  */
 
 
+import be.ac.ucl.lfsab1509.bouboule.game.profile.Profile;
 import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
-import be.ac.ucl.lfsab1509.bouboule.game.gameManager.Profile;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
