@@ -54,7 +54,7 @@ public class LoosingActivity extends Activity {
 		findViewById(R.id.LoosingNextLevelButton).setOnTouchListener(
 				fireListener);
 
-		((TextView) findViewById (R.id.LoosingScore)).setText (GlobalSettings.PROFILE.getScore ());
+		((TextView) findViewById (R.id.LoosingScore)).setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
 
 		//Hide the bouboules until the animation begin 
 		
