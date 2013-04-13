@@ -14,7 +14,7 @@
             px="100"
             py="1000"
             radius="0"
-            texRegionPath="images/boub/boub_basic.png" >
+            texRegionPath="images/boub/boub_samurai.png" >
         </Bouboule>
 
         <Bouboule
