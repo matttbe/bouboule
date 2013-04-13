@@ -27,6 +27,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
  */
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
+import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -42,33 +43,49 @@ public class EndGameListener implements ContactListener{
 
 	private static int isAlivePlayer 	= 0;
 	private static int isAliveMonster	= 0;
-	
+
 	@Override
 	public void beginContact(final Contact contact) {
-		short entity1 = (Short) contact.getFixtureA().getBody().getUserData();
-		short entity2 = (Short) contact.getFixtureB().getBody().getUserData();
+		short entity1 = ((Entity) contact.getFixtureA().getBody().getUserData()).getEntity();
+		short entity2 = ((Entity) contact.getFixtureB().getBody().getUserData()).getEntity();
 
+		Gdx.app.log("Contact", entity1 + "    "+ entity2);
 
-		if (entity1 == GlobalSettings.SCENERY 
-				| entity2 == GlobalSettings.SCENERY) {
-			
-			if (entity1 == GlobalSettings.PLAYER 
-					| entity2 == GlobalSettings.PLAYER) {
+		if (entity1 == Entity.SCENERY 
+				| entity2 == Entity.SCENERY) {
 
-				isAlivePlayer ++;
-				Gdx.app.log("Alive", "Begin Contact = "+isAlivePlayer);
+			if (entity1 == Entity.BONUS | entity2 == Entity.BONUS) {
 
+				((Entity) contact.getFixtureA().getBody().getUserData()).setAlive(true);
+				((Entity) contact.getFixtureB().getBody().getUserData()).setAlive(true);
 
 			} else {
 
-				
-				isAliveMonster ++;
+				if (entity1 == Entity.PLAYER 
+						| entity2 == Entity.PLAYER) {
+
+					isAlivePlayer ++;
+					Gdx.app.log("Alive", "Begin Contact = "+isAlivePlayer);
+
+				} else {
+
+					isAliveMonster ++;
+				}
 
 			}
-		} else if((entity1 == GlobalSettings.PLAYER  && entity2 == GlobalSettings.MONSTER) |
-				  (entity1 == GlobalSettings.MONSTER && entity2 == GlobalSettings.PLAYER) ) {
+
+		} else if((entity1 == Entity.PLAYER  && entity2 == Entity.MONSTER) |
+				(entity1 == Entity.MONSTER && entity2 == Entity.PLAYER) ) {
+
 			Gdx.app.log("Chocs de Bouboules", "CHOCS || CHOCS");
-			GlobalSettings.GAME.hitSound (); 
+			GlobalSettings.GAME.hitSound ();
+
+		} else if(entity1 == Entity.BONUS) {
+			
+			((Entity) contact.getFixtureA().getBody().getUserData()).attributeBonus(entity2);
+		} else if(entity2 == Entity.BONUS) {
+			
+			((Entity) contact.getFixtureB().getBody().getUserData()).attributeBonus(entity1);			
 		}
 
 	}
@@ -77,16 +94,16 @@ public class EndGameListener implements ContactListener{
 	public void endContact(final Contact contact) {
 
 
-		short entity1 = (Short) contact.getFixtureA().getBody().getUserData();
-		short entity2 = (Short) contact.getFixtureB().getBody().getUserData();
+		short entity1 = ((Entity) contact.getFixtureA().getBody().getUserData()).getEntity();
+		short entity2 = ((Entity) contact.getFixtureB().getBody().getUserData()).getEntity();
 
 
-		if (entity1 == GlobalSettings.SCENERY 
-				| entity2 == GlobalSettings.SCENERY) {
-			
-			if (entity1 == GlobalSettings.PLAYER 
-					| entity2 == GlobalSettings.PLAYER) {
-				
+		if (entity1 == Entity.SCENERY 
+				| entity2 == Entity.SCENERY) {
+
+			if (entity1 == Entity.PLAYER 
+					| entity2 == Entity.PLAYER) {
+
 				if (isAlivePlayer > 1) {
 					//DO NOTHING =)
 					isAlivePlayer --;
@@ -97,16 +114,16 @@ public class EndGameListener implements ContactListener{
 				else {
 					GlobalSettings.GAME.looseSound ();
 					Gdx.app.log("KILL", "Bouboule est MORT =/");
-					
+
 					GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
 					GlobalSettings.PROFILE.cancelNewScore ();
 					if (! GlobalSettings.PROFILE.addLifes (-1)) {
 						GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
 						GlobalSettings.PROFILE.resetProfile (); // TODO: what to do?
 					}
-					
+
 					GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
-					
+
 					GlobalSettings.MENUS.launchEndGameMenu ();
 					//Gdx.app.exit();
 				}
@@ -131,7 +148,7 @@ public class EndGameListener implements ContactListener{
 
 					GlobalSettings.MENUS.launchEndGameMenu ();
 				}
-				
+
 			}
 		}
 	}
@@ -142,11 +159,11 @@ public class EndGameListener implements ContactListener{
 
 	@Override
 	public void postSolve(final Contact contact, final ContactImpulse impulse) {
-		
+
 	}
-	
+
 	public static void resetListener() {
-		
+
 		isAlivePlayer 	= 0;
 		isAliveMonster	= 0;
 	}

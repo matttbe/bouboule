@@ -27,6 +27,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.body;
  */
 
 
+import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -60,7 +61,7 @@ public class Arena extends GameBody {
 	 */
 	public Arena(final float radius, final float px, final float py,
 			final float angle, final String texRegionPath, 
-			final String jsonFile, final String jsonName, final short entity) {
+			final String jsonFile, final String jsonName) {
 
 		super();
 
@@ -73,7 +74,8 @@ public class Arena extends GameBody {
 		MakeBody(0, 0, radius, BodyType.StaticBody, 0, 0, true, pos, angle, jsonFile, jsonName,
 				GraphicManager.convertToGame(texture.getRegionWidth()));
 
-		body.setUserData(entity);
+		this.entity = new Entity(Entity.SCENERY);
+		body.setUserData(this.entity);
 	}
 	
 	@Override
