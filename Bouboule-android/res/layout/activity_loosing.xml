@@ -48,9 +48,10 @@
                 android:layout_height="fill_parent" />
 
             <Button
-                android:id="@+id/LoosingMenuButton"
+                android:id="@+id/LoosingNextLevelButton"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
+                android:alpha="0"
                 android:layout_weight="50" />
 
             <Space
@@ -58,10 +59,11 @@
                 android:layout_height="fill_parent" />
 
             <Button
-                android:id="@+id/LoosingNextLevelButton"
+                android:id="@+id/LoosingMenuButton"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:layout_weight="50" />
+                android:layout_weight="50"
+                android:alpha="0" />
             
             <Space
                 android:layout_width="40dp"
