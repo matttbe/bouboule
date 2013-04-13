@@ -50,6 +50,7 @@ public class Profile {
 	private int iInitScore;
 	private int iNewInitScore;
 	private int iOldScore; // point before the battle
+	private int iEndGameScore; // score just before the reset
 	private int iHighScore;
 	private boolean bNewHighScore = false;
 	
@@ -79,6 +80,7 @@ public class Profile {
 		prefs.putInteger (LIFES_KEY, iLifes);
 		iLevel = GlobalSettings.INIT_LEVEL;
 		prefs.putInteger (LEVEL_KEY, iLevel);
+		iEndGameScore = iScore;
 		iScore = 0;
 		prefs.putInteger (SCORE_KEY, iScore);
 		prefs.flush (); // Makes sure the preferences are persisted.
@@ -88,6 +90,8 @@ public class Profile {
 	public String getName () {
 		return cName;
 	}
+
+	//__________ TIMER
 	
 	public void createTimer () {
 		if (timer != null) { // stop the previous timer
@@ -109,6 +113,24 @@ public class Profile {
 		timer.stop (); // do not launch it immediately
 	}
 
+	public boolean isRunning () {
+		return (timer != null); // timer created
+	}
+
+	public void play () {
+		timer.start ();
+	}
+
+	public void pause () {
+		timer.stop ();
+	}
+	
+	public void stop () {
+		timer.stop ();
+		timer.clear (); // maybe not needed?
+		timer = null;
+	}
+
 	/**
 	 * @return the current score
 	 */
@@ -125,9 +147,13 @@ public class Profile {
 		stop ();
 		iScore = iOldScore;
 	}
+	
+	public int getOldScore() {
+		return iOldScore;
+	}
 
-	public boolean isRunning () {
-		return (timer != null); // timer created
+	public int getEndGameScore () {
+		return iEndGameScore;
 	}
 
 	public int getHighScore () {
@@ -152,6 +178,8 @@ public class Profile {
 		return bNewHighScore;
 	}
 
+	//__________ LIFES
+
 	public int getNbLifes () {
 		return iLifes;
 	}
@@ -167,19 +195,7 @@ public class Profile {
 		return true;
 	}
 
-	public void play () {
-		timer.start ();
-	}
-
-	public void pause () {
-		timer.stop ();
-	}
-	
-	public void stop () {
-		timer.stop ();
-		timer.clear (); // maybe not needed?
-		timer = null;
-	}
+	//__________ LEVEL
 
 	public boolean LevelUp () {
 		if (iLevel >= GlobalSettings.NBLEVELS) // we are already on the last level
@@ -193,10 +209,6 @@ public class Profile {
 
 	public int getLevel () {
 		return iLevel;
-	}
-	
-	public int getOldScore() {
-		return iOldScore;
 	}
 
 }
