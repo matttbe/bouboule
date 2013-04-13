@@ -3,19 +3,6 @@
 
     <Level1>
 
-        <Bouboule
-            IALevel="6"
-            angle="0"
-            density="1"
-            elasticity="0.9f"
-            entity="-1"
-            jsonFile="data/jsonFile/boub.json"
-            jsonName="boub"
-            px="350"
-            py="300"
-            radius="0"
-            texRegionPath="images/boub2.png" >
-        </Bouboule>
 
         <Bouboule
             IALevel="0"
@@ -28,7 +15,7 @@
             px="350"
             py="600"
             radius="0"
-            texRegionPath="images/boub.png" >
+            texRegionPath="images/boub/boub.png" >
         </Bouboule>
 
         <Arena

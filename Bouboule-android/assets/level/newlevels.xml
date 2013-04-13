@@ -45,21 +45,79 @@
         <MapNodes>
 
             <NodeAllow
-                px="3.5f"
-                py="6.0f"
-                weight="3.5f" >
+                px="1.65789f"
+                py="8.36098f"
+                weight="1.65789f" >
             </NodeAllow>
-
             <NodeAllow
-                px="3.5f"
-                py="5.0f"
-                weight="3.5f" >
+                px="1.77138f"
+                py="5.71220f"
+                weight="1.77138f" >
             </NodeAllow>
-
             <NodeAllow
-                px="3.5f"
-                py="3.0f"
-                weight="3.5f" >
+                px="3.76480f"
+                py="5.02927f"
+                weight="0.93257f" >
+            </NodeAllow>
+            <NodeAllow
+                px="5.30921f"
+                py="1.55122f"
+                weight="1.53947f" >
+            </NodeAllow>
+            <NodeAllow
+                px="5.82730f"
+                py="4.34634f"
+                weight="1.67270f" >
+            </NodeAllow>
+            <NodeAllow
+                px="0.93750f"
+                py="3.70732f"
+                weight="0.93750f" >
+            </NodeAllow>
+            <NodeAllow
+                px="0.81414f"
+                py="2.36585f"
+                weight="0.81414f" >
+            </NodeAllow>
+            <NodeAllow
+                px="1.13487f"
+                py="1.07317f"
+                weight="1.13487f" >
+            </NodeAllow>
+            <NodeAllow
+                px="2.61513f"
+                py="0.71220f"
+                weight="0.69079f" >
+            </NodeAllow>
+            <NodeAllow
+                px="3.89803f"
+                py="3.70732f"
+                weight="0.69079f" >
+            </NodeAllow>
+            <NodeAllow
+                px="6.46382f"
+                py="8.97561f"
+                weight="1.03618f" >
+            </NodeAllow>
+            <NodeAllow
+                px="3.54276f"
+                py="9.22927f"
+                weight="0.77961f" >
+            </NodeAllow>
+            <NodeAllow
+                px="4.88487f"
+                py="9.31707f"
+                weight="0.69079f" >
+            </NodeAllow>
+            <NodeAllow
+                px="6.85855f"
+                py="7.46341f"
+                weight="0.64145f" >
+            </NodeAllow>
+            <NodeAllow
+                px="6.71053f"
+                py="6.34146f"
+                weight="0.74013f" >
             </NodeAllow>
         </MapNodes>
 
