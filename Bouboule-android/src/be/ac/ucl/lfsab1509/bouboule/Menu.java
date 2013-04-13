@@ -32,6 +32,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -105,8 +106,9 @@ public class Menu extends Activity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		menuMusic = new BackgroundSound ("menu", R.raw.zen);
+		
+		if (GlobalSettings.SOUND)
+			menuMusic = new BackgroundSound ("menu", R.raw.zen);
 		
 		//Request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -171,7 +173,8 @@ public class Menu extends Activity {
 						break;
 						
 					case R.id.ParameterButton :
-						
+						Intent intent = new Intent(Menu.this, MenuParametre.class);
+						startActivity(intent);
 						break;
 						
 					case R.id.HighScoreButton :

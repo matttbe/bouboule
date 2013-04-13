@@ -55,11 +55,13 @@ public class MainActivity extends AndroidApplication {
 		cfg.useGL20 = true;
 		cfg.useAccelerometer = true;
 		cfg.useCompass = false;
-
+		
 		getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON); // to not lock the screen
 	
 		game = new MyGame ();
 		GlobalSettings.GAME = game;
+		
+		GlobalSettings.SOUND = true; //TODO trouver comment recuperer si la tablette a le son on ou off
 		
 		GlobalSettings.MENUS = new MyAndroidMenus (this);
 		

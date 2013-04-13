@@ -10,6 +10,32 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_victory">VictoryActivity</string>
     <string name="title_activity_loosing">LoosingActivity</string>
+    
+    <!-- Menu Parametre -->
+    <string name="title_activiy_menuParametre">Settings</string>
+    <string name="user">User</string>
+    <string name="sound">Sound</string>
+    <string name="about">About</string>
+    
+    
+    
+    <!-- Menu Parametre_about -->
+    <string name="about_nameapp">App\'s name :</string>
+    <string name="about_nameapp_txt">Bouboule</string>
+    <string name="about_authors">Authors : </string>
+    <string name="about_authors_txt">Baerts Matthieu, Remy Baptiste, Van Wallendael Nicolas and Verhaeghe Hélène</string>
+    <string name="about_licence">Licence :</string>
+    <string name="about_licence_txt">Open source licence GPL3</string>
+    <string name="about_version">Version :</string>
+    <string name="about_version_txt">Version 2.6</string>
+    <string name="about_date">Date :</string>
+    <string name="about_date_txt">2013</string>
+    <string name="about_graphism">Graphisms :</string>
+    <string name="about_graphism_txt">Van Wallendael Julien</string>
+    <string name="about_music">Music :</string>
+    <string name="about_music_txt"></string>
+    
+    
     <!-- Menu Pause -->
     <string name="Pause_continue">Continue</string>
     <string name="Menu">Menu</string>
