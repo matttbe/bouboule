@@ -78,7 +78,7 @@ public class ScreenGame implements Screen {
 
 		loopMusic.stop(); // to play at startup
 		game.start ();
-		profile.LaunchTimer ();
+		profile.createTimer ();
 	}
 
 

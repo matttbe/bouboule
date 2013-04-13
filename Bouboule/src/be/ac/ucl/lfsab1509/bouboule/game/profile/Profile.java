@@ -89,7 +89,7 @@ public class Profile {
 		return cName;
 	}
 	
-	public void LaunchTimer () {
+	public void createTimer () {
 		if (timer != null) { // stop the previous timer
 			this.stop ();
 		}
@@ -106,6 +106,7 @@ public class Profile {
 		};
 		timer = new Timer ();
 		timer.scheduleTask (task, 1, 1); // first time, time between
+		timer.stop (); // do not launch it immediately
 	}
 
 	/**
