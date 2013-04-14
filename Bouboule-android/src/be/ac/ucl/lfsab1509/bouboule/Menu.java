@@ -39,6 +39,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -49,7 +51,6 @@ import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 
@@ -136,11 +137,8 @@ public class Menu extends Activity {
 		findViewById(R.id.HighScoreButton).setOnTouchListener(
 				fireListener);
 		
-/*		Typeface myFontBout = Typeface.createFromAsset(getAssets(), "chineyen.ttf");
-		
-		((TextView) findViewById(R.id.PlayButton)).setTypeface(myFontBout);
-		((TextView) findViewById(R.id.ParameterButton)).setTypeface(myFontBout);
-		((TextView) findViewById(R.id.HighScoreButton)).setTypeface(myFontBout);*/
+		// HighScoreContextMenu: long click
+		registerForContextMenu (findViewById(R.id.HighScoreButton));
 		
 		//Hide the bouboules until the animation begin 
 		findViewById(R.id.boubleft) .setVisibility(View.INVISIBLE);
@@ -200,9 +198,7 @@ public class Menu extends Activity {
 		} 
 	};
 
-	public void showPopup (View v) {
-		PopupMenu popupMenu = new PopupMenu (this, v);
-		popupMenu.inflate (R.menu.high_score_popup);
+	private void addScoreInMenu (android.view.Menu menu) {
 		HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (false);
 		for (int i = 0; i < highscores.length; i++) {
 			HighScoreInfo info = highscores[i];
@@ -213,9 +209,25 @@ public class Menu extends Activity {
 			String cTitle = info.getScore () + " "
 					+ getString (R.string.by_someone) + " " + info.getName () + " "
 					+ getString (R.string.at_level_x) + " " + info.getLevel ();
-			popupMenu.getMenu ().add (cTitle);
+			menu.add (cTitle);
 		}
-		popupMenu.show ();
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, view, menuInfo);
+		menu.setHeaderTitle(getString (R.string.HighScore));
+		addScoreInMenu (menu);
+		// TODO: customize...
+	}
+
+	public void showPopup (View v) {
+		openContextMenu (v); // maybe better a context menu?
+
+		/*PopupMenu popupMenu = new PopupMenu (this, v);
+		popupMenu.inflate (R.menu.high_score_popup);
+		addScoreInMenu (popupMenu.getMenu ());
+		popupMenu.show ();*/
 	}
 
 
