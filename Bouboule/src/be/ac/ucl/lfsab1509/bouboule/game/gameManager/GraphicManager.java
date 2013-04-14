@@ -43,6 +43,7 @@ public class GraphicManager {
 	private static final float WORLD_TO_GAME = 0.01f;
 	
 	public static boolean ALLOW_BONUS = false;
+	public static int	  BONUS_SPAWN_RATE = 0;
 	
 	//Store all the body of the game
 	public ArrayList<GameBody> bodies;

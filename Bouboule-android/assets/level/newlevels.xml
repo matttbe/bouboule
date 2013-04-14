@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Level>
 
-    <Level1 bonus="True">
+    <Level1 bonus="True" bonusrate="5432">
 
         <Bouboule
             IALevel="6"
@@ -67,7 +67,7 @@
         </Obstacles>
     </Level1>
 
-    <Level2>
+    <Level2 bonus="True" bonusrate="5432">
 
         <Bouboule
             IALevel="6"
@@ -134,7 +134,7 @@
     </Level2>
     
     
-    <Level3 bonus="True">
+    <Level3 bonus="True" bonusrate="5432">
 
         <Bouboule
             IALevel="6"
@@ -335,7 +335,7 @@
         </Obstacles>
     </Level4>
 
-    <Level5 bonus="True" >
+    <Level5>
 
         <Bouboule
             IALevel="6"
@@ -581,7 +581,7 @@
         </Obstacles>
     </Level7>
 
-    <Level8 bonus="True" >
+    <Level8>
 
         <Bouboule
             IALevel="6"
@@ -937,7 +937,7 @@
         </Obstacles>
     </Level12>
 
-    <Level13 bonus="True" >
+    <Level13>
 
         <Bouboule
             IALevel="6"

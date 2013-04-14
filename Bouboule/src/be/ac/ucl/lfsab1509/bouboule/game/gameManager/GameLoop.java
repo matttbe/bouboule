@@ -181,7 +181,7 @@ public class GameLoop {
 
 	private void bonus() {
 
-		if (random.nextInt(5432) == 5) {
+		if (random.nextInt(GraphicManager.BONUS_SPAWN_RATE) == 5) {
 
 			switch (random.nextInt(3)) {
 			case 0:

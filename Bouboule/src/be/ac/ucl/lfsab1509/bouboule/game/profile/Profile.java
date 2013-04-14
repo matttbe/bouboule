@@ -203,7 +203,7 @@ public class Profile {
 	}
 
 	public boolean addLifes (int iNewLifes) {
-		iLifes += iNewLifes;
+		iLifes += (iLifes+iNewLifes > 3) ? 0 : iNewLifes;
 
 		if (iLifes <= 0)
 			return false;

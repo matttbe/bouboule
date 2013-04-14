@@ -99,6 +99,7 @@ public class LevelLoader {
 		}
 		
 		GraphicManager.ALLOW_BONUS = Boolean.parseBoolean(file.getAttribute("bonus","false"));
+		GraphicManager.BONUS_SPAWN_RATE = Integer.parseInt(file.getAttribute("bonusrate","0"));
 		
 		
 		Gdx.app.log("Settings", "Bonus ="+GraphicManager.ALLOW_BONUS);	
