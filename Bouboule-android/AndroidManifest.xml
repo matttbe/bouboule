@@ -42,6 +42,7 @@
         <activity android:name="GameOverActivity" android:label="@string/title_activity_gameover" android:screenOrientation="portrait"></activity>
         <activity android:name="MenuParametre" android:label="@string/title_activiy_menuParametre"></activity>
         <activity android:name="MenuParametre_about" android:label="@string/title_activiy_menuParametre"></activity>
+        <activity android:name="MenuParametre_global" android:label="@string/title_activiy_menuParametre"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,6 @@
 package be.ac.ucl.lfsab1509.bouboule;
 
-import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ public class MenuParametre extends Activity {
 		setContentView(R.layout.activity_parametre_menu);
 		
 		findViewById(R.id.button_param_user).setOnTouchListener(fireListener);
-		findViewById(R.id.button_param_sound).setOnTouchListener(fireListener);
+		findViewById(R.id.button_param_global).setOnTouchListener(fireListener);
 		findViewById(R.id.button_param_about).setOnTouchListener(fireListener);
 		
 		
@@ -35,17 +35,20 @@ public class MenuParametre extends Activity {
 			
 			if (view.isPressed ())
 			{
+				Intent intent;
 				switch (view.getId()) {
 				
 					case R.id.button_param_user :
 						break;
 						
-					case R.id.button_param_sound :
-						GlobalSettings.PROFILE_MGR.getProfileGlobal ().toggleSoundSettings ();
+					case R.id.button_param_global :
+						
+						intent = new Intent(MenuParametre.this, MenuParametre_global.class);
+						startActivity(intent);
 						break;
 						
 					case R.id.button_param_about :
-						Intent intent = new Intent(MenuParametre.this, MenuParametre_about.class);
+						intent = new Intent(MenuParametre.this, MenuParametre_about.class);
 						startActivity(intent);
 						break;
 						

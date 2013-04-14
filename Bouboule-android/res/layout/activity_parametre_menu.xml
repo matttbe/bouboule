@@ -36,11 +36,11 @@
     
 
     <Button
-        android:id="@+id/button_param_sound"
+        android:id="@+id/button_param_global"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/sound" />
+        android:text="@string/global" />
     
     <Space
         android:layout_width="match_parent"

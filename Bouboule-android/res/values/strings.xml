@@ -13,10 +13,16 @@
     
     <!-- Menu Parametre -->
     <string name="title_activiy_menuParametre">Settings</string>
-    <string name="user">User</string>
-    <string name="sound">Sound</string>
+    <string name="user">User settings</string>
+    <string name="global">Global settings</string>
     <string name="about">About</string>
     
+    <!-- Menu global settings -->
+    <string name="global_save">Save new settings</string>
+    <string name="global_sound">Sound :</string>
+    <string name="global_sound_on">Mute</string>
+    <string name="global_sound_off">Music on</string>
+    <string name="global_sensitivity">Sensitivity :</string>
     
     
     <!-- Menu Parametre_about -->
