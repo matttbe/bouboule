@@ -26,6 +26,7 @@
 
 package be.ac.ucl.lfsab1509.bouboule;
 
+import java.text.SimpleDateFormat;
 import java.util.Random;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
@@ -198,7 +199,9 @@ public class Menu extends Activity {
 		} 
 	};
 
+	@SuppressLint("SimpleDateFormat")
 	private void addScoreInMenu (android.view.Menu menu) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat ("dd/MM/yyyy");
 		HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (false);
 		for (int i = 0; i < highscores.length; i++) {
 			HighScoreInfo info = highscores[i];
@@ -206,9 +209,10 @@ public class Menu extends Activity {
 			if (info == null)
 				break;
 
-			String cTitle = info.getScore () + " "
-					+ getString (R.string.by_someone) + " " + info.getName () + " "
-					+ getString (R.string.at_level_x) + " " + info.getLevel ();
+			String cTitle = getString (R.string.Score) + " " + info.getScore () + "\t"
+					+ getString (R.string.by_someone) + " " + info.getName () + "\t"
+					+ getString (R.string.at_level_x) + " " + info.getLevel () + "\t("
+					+ dateFormat.format (info.getDate ()) + ")";// info.getDate ()
 			menu.add (cTitle);
 		}
 	}

@@ -52,6 +52,7 @@
     <string name="title_activity_gameover">GameOverActivity</string>
     <string name="by_someone">by</string>
     <string name="at_level_x">at level</string>
+    <string name="Score">Score:</string>
     
     
     
