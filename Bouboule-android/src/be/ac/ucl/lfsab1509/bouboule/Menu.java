@@ -29,6 +29,8 @@ package be.ac.ucl.lfsab1509.bouboule;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 
+import com.badlogic.gdx.Gdx;
+
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.HighScoreInfo;
 
@@ -232,6 +234,12 @@ public class Menu extends Activity {
 		popupMenu.inflate (R.menu.high_score_popup);
 		addScoreInMenu (popupMenu.getMenu ());
 		popupMenu.show ();*/
+	}
+
+	@Override
+	public void onBackPressed() {
+		Gdx.app.exit (); // or do nothing but by default, it will (re)start the game => we can use the 'play' button for that.
+		finish ();
 	}
 
 

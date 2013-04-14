@@ -55,7 +55,7 @@ public class GameLoop {
 	private BitmapFont			fontOsaka;
 	private SpriteBatch			batch;
 	private LevelLoader 		level;
-	
+
 	private Random 				random;
 
 
@@ -94,7 +94,7 @@ public class GameLoop {
 
 		//load the counter 
 		countDown = new CountDown();
-		
+
 		//new randomGenerator
 		random = new Random();
 	}
@@ -107,7 +107,7 @@ public class GameLoop {
 		Gdx.app.log("Matth","Dipose of the graphicManager");
 		//Clear the graphic Manager for a new use.
 		graphicManager.dispose();
-		
+
 		//Reset EndGame Listener
 		EndGameListener.resetListener();
 
@@ -135,14 +135,10 @@ public class GameLoop {
 	public void update() {
 		graphicManager.update();
 		Gdx.app.log("FPS", ""+1/Gdx.graphics.getDeltaTime());
-		
-		if (GraphicManager.ALLOW_BONUS == true && random.nextInt(5432) == 5) {
-			
-			Gdx.app.log("heart", "new heart created");
-			graphicManager.addBody(new Bonus( 200+random.nextInt(400), 200+random.nextInt(800), 0,
-					"bonus/heart/heart.png", "bonus/heart/heart.json", "heart", Entity.BONUS_LIVE));
-		}
-			
+
+		if (GraphicManager.ALLOW_BONUS == true)
+			bonus();
+
 	}
 
 	/*
@@ -169,7 +165,7 @@ public class GameLoop {
 		graphicManager.draw(batch);
 
 		writeText();
-		
+
 		if (pause) // draw the countdown
 			status = countDown.draw(batch, delta);
 
@@ -179,8 +175,35 @@ public class GameLoop {
 		//Draw the debugging matrix
 		debugRenderer.render(GraphicManager.getWorld(), debugMatrix);
 		batch.end();
-		*/
+		 */
 		return status;
+	}
+
+	private void bonus() {
+
+		if (random.nextInt(5432) == 5) {
+
+			switch (random.nextInt(3)) {
+			case 0:
+				Gdx.app.log("heart", "new heart created");
+				graphicManager.addBody(new Bonus( 200+random.nextInt(400), 200+random.nextInt(800), 0,
+						"bonus/heart/heart.png", "bonus/heart/heart.json", "heart", Entity.BONUS_LIVE));
+				break;
+			case 1:
+				Gdx.app.log("heart", "new heart created");
+				graphicManager.addBody(new Bonus( 200+random.nextInt(400), 200+random.nextInt(800), 0,
+						"bonus/star/star.png", "bonus/star/star.json", "star", Entity.BONUS_POINT));
+				break;
+			case 2:
+				/*Gdx.app.log("heart", "new heart created");
+				graphicManager.addBody(new Bonus( 200+random.nextInt(400), 200+random.nextInt(800), 0,
+						"bonus/heart/heart.png", "bonus/heart/heart.json", "heart", Entity.BONUS_LIVE));
+				break;*/
+
+			default:
+				break;
+			}
+		}
 	}
 
 	public void writeText() {
@@ -188,13 +211,15 @@ public class GameLoop {
 		CharSequence lives = Integer.toString(GlobalSettings.PROFILE.getNbLifes ());
 		CharSequence levelD= Integer.toString(GlobalSettings.PROFILE.getLevel   ()/10);
 		CharSequence levelU= Integer.toString(GlobalSettings.PROFILE.getLevel   ()%10);
-		CharSequence score = Integer.toString(GlobalSettings.PROFILE.getOldScore());
-		
+		CharSequence score = Integer.toString(GlobalSettings.PROFILE.getScore());
+
 		int timer = GlobalSettings.PROFILE.getScore() - GlobalSettings.PROFILE.getOldScore();
 		
+		timer = (timer < 0) ? 0: timer;
+
 		CharSequence timerM= Integer.toString((timer/60)); 
 		CharSequence timerS= Integer.toString(timer%60);
-		
+
 		fontOsaka .draw(batch, timerM+"' "+timerS+"''" , 630, 1122);
 		fontOsaka .draw(batch, lives , 630, 1167);
 		fontOsaka .draw(batch, score , 630, 1205);
