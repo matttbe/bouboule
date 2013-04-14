@@ -37,7 +37,8 @@
         <activity
             android:name="MenuPause" android:label="@string/app_name"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentActivity">
         </activity>
         <activity android:name="GameOverActivity" android:label="@string/title_activity_gameover" android:screenOrientation="portrait"></activity>
         <activity android:name="MenuParametre" android:label="@string/title_activiy_menuParametre"></activity>

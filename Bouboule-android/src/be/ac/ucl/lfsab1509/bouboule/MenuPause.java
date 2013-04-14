@@ -119,6 +119,12 @@ public class MenuPause extends Activity {
 		((TextView) findViewById(R.id.PauseQuitButton))
 				.setTypeface(myFontBout);
 
+		// getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND); // deprecated
+		WindowManager.LayoutParams lp = getWindow().getAttributes();
+		lp.dimAmount=0.75f;
+		// lp.screenBrightness = 1.0f; // brighness
+		getWindow ().setAttributes(lp);
+		getWindow ().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
 		setAllTheAnimationAtOnce();
 
