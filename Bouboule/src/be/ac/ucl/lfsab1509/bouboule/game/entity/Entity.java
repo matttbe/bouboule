@@ -86,7 +86,7 @@ public class Entity {
 					break;
 				case BONUS_POINT:
 					Gdx.app.log("star","Adding 100 point to player");
-					//GlobalSettings.PROFILE.addScore(100);				
+					GlobalSettings.PROFILE.addScore(100);
 					break;
 
 				case BONUS_SPEED:

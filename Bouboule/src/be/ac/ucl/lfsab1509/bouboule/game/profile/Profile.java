@@ -158,7 +158,6 @@ public class Profile {
 	
 	public void addScore (int iNewScore) {
 		iScore += iNewScore;
-		saveScore ();
 	}
 
 	public void cancelNewScore () {
