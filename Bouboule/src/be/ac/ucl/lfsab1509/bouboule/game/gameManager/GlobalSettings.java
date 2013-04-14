@@ -63,6 +63,7 @@ public class GlobalSettings {
 
 	// Profiles
  	public final static String		DEFAULT_PROFILE_NAME = "Bouboule";
+	public static final String		DEFAULT_BOUB_NAME = "boub"; // can be used to load the image of the bouboule (boub.png, boub.json, etc.)
 	public final static String		PREFS_GLOBAL = "_GLOBAL_SETTINGS_";
 	public static ProfileMgr		PROFILE_MGR = null;
 	public static Profile			PROFILE = null;

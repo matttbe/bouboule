@@ -38,12 +38,14 @@ public class Profile {
 
 	// user
 	private String cName;
+	private String cBoubName;
 	private Preferences prefs;
 	private final static String INIT_SCORE_KEY = "InitScore";
 	private final static String LIFES_KEY = "Lifes";
 	private final static String LEVEL_KEY = "Level";
 	private final static String SCORE_KEY = "Score";
-	private static final String HIGHSCORE_KEY = "HighScore";
+	private final static String HIGHSCORE_KEY = "HighScore";
+	private final static String BOUB_NAME_KEY = "BoubName";
 
 	// score
 	private int iScore;
@@ -71,8 +73,12 @@ public class Profile {
 		iLevel = prefs.getInteger (LEVEL_KEY, GlobalSettings.INIT_LEVEL);
 		iScore = prefs.getInteger (SCORE_KEY, 0);
 		iHighScore = prefs.getInteger (HIGHSCORE_KEY, 0);
+		cBoubName = prefs.getString (BOUB_NAME_KEY, GlobalSettings.DEFAULT_BOUB_NAME);
 	}
 
+	/**
+	 * Reset all data about the score (init score, lifes, level, current score
+	 */
 	public void resetProfile () {
 		iInitScore = GlobalSettings.INIT_SCORE;
 		prefs.putInteger (INIT_SCORE_KEY, iInitScore);
@@ -87,8 +93,20 @@ public class Profile {
 		// don't reset the highscore...
 	}
 
+	//__________ NAME and IMAGE
+
 	public String getName () {
 		return cName;
+	}
+
+	public String getBoubName () {
+		return cBoubName;
+	}
+
+	public void setBoubName (String cBoubName) {
+		this.cBoubName = cBoubName;
+		prefs.putString (BOUB_NAME_KEY, cBoubName);
+		prefs.flush ();
 	}
 
 	//__________ TIMER
