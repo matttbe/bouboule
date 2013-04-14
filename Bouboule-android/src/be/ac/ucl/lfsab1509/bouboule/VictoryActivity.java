@@ -56,11 +56,11 @@ public class VictoryActivity extends Activity {
 				fireListener);
 
 		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
-				"chineyen.ttf");
+				"osaka-re.ttf");
 		TextView pScoreView = (TextView) findViewById (R.id.VictoryScore);
 
-		pScoreView.setTypeface (myFontBout);
 		pScoreView.setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
+		pScoreView.setTypeface (myFontBout);
 		
 
 		
