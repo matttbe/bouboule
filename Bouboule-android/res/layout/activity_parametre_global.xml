@@ -36,21 +36,5 @@
 	    android:layout_height="wrap_content"
         android:layout_marginBottom="5dp" />
         
-    <LinearLayout
-        
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/button_global_save"
-            android:layout_gravity="bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/global_save" />
-
-        
-        
-    </LinearLayout>
 
 </LinearLayout>

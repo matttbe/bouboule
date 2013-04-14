@@ -39,6 +39,8 @@ public class MenuParametre extends Activity {
 				switch (view.getId()) {
 				
 					case R.id.button_param_user :
+						intent = new Intent(MenuParametre.this, MenuParametre_user.class);
+						startActivity(intent);
 						break;
 						
 					case R.id.button_param_global :

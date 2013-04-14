@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="50dp"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/user_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="12" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+		android:id="@+id/button_user_create"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="5dp"
+		android:layout_marginBottom="5dp"
+		android:text="@string/user_new" />
+
+    <ExpandableListView
+        android:id="@+id/user_players_explist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ExpandableListView>
+
+    <TextView
+        android:id="@+id/user_playerball_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_playerball"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Gallery
+        android:id="@+id/user_playerball_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/user_opponentball_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_opponentball"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Gallery
+        android:id="@+id/user_oppenentball_galery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

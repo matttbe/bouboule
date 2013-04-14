@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.*;
+import android.util.Log;
 
 public class MenuParametre_global extends Activity {
 
@@ -27,9 +28,6 @@ public class MenuParametre_global extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_parametre_global);
 		
-		// set the save button
-		findViewById(R.id.button_global_save).setOnTouchListener(fireListener);
-		
 		// ask the preview values
 		newSoundIsMuted = GlobalSettings.SOUND_IS_MUTED;
 		newSensitivity = GlobalSettings.SENSITIVITY;
@@ -42,34 +40,32 @@ public class MenuParametre_global extends Activity {
 		sound_switch.setChecked(newSoundIsMuted);
 		sensitivity_seekbar.setMax(GlobalSettings.SENSITIVITY_MAX);
 		sensitivity_seekbar.setProgress(newSensitivity);
+		
+		// set the listeners
+		sound_switch.setOnCheckedChangeListener(switchListener);
+		sensitivity_seekbar.setOnSeekBarChangeListener(seekBarListener);
 	}
 	
-	private View.OnTouchListener fireListener = new View.OnTouchListener() {
-		@Override
-		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-			
-			if (view.isPressed ())
-			{
-				switch (view.getId()) {
-				
-					case R.id.button_global_save :
-						//got the values back from views
-						newSoundIsMuted = sound_switch.isChecked();
-						newSensitivity = sensitivity_seekbar.getProgress();
-						//save the values
-						GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSoundSettings(newSoundIsMuted);
-						GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSensibilitySettings(newSensitivity);
-						break;
-						
-					default :
-						
-						break;
-				}
+	private CompoundButton.OnCheckedChangeListener switchListener = new CompoundButton.OnCheckedChangeListener() {
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			if (buttonView == sound_switch){
+				newSoundIsMuted = sound_switch.isChecked();
+				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSoundSettings(newSoundIsMuted);
 			}
-			return false;
-			
 		}
 	};
+	
+	private SeekBar.OnSeekBarChangeListener seekBarListener = new SeekBar.OnSeekBarChangeListener() {
+		public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+			if (seekBar == sensitivity_seekbar) {
+				newSensitivity = sensitivity_seekbar.getProgress();
+				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSensibilitySettings(newSensitivity);
+			}
+		}
+		public void onStartTrackingTouch (SeekBar seekBar) {}
+		public void onStopTrackingTouch (SeekBar seekBar){}
+	};
+	
 	
 	
 }

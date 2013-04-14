@@ -17,13 +17,16 @@
     <string name="global">Global settings</string>
     <string name="about">About</string>
     
+    <!-- Menu user settings -->
+    <string name="user_new">Create new</string>
+    <string name="user_playerball">Your bouboule</string>
+    <string name="user_opponentball">Opponent\'s bouboule</string>
+    
     <!-- Menu global settings -->
-    <string name="global_save">Save new settings</string>
     <string name="global_sound">Sound :</string>
     <string name="global_sound_on">Mute</string>
     <string name="global_sound_off">Music on</string>
     <string name="global_sensitivity">Sensitivity :</string>
-    
     
     <!-- Menu Parametre_about -->
     <string name="about_nameapp">App\'s name :</string>
