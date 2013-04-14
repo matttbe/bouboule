@@ -49,6 +49,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 
@@ -180,14 +181,14 @@ public class Menu extends Activity {
 					case R.id.HighScoreButton :
 						// ((TextView) findViewById(R.id.HighScoreButton)).setText (GlobalSettings.PROFILE.getHighScore ());
 						Log.i ("Matth", "HighScore " + GlobalSettings.PROFILE.getHighScore ()); // high score of this profile
-						HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (true);
+						/*HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (true);
 						for (int i = 0; i < highscores.length; i++) {
 							HighScoreInfo info = highscores[i];
 							Log.i ("Matth", "HighScore " + (i+1) + ": " + info.getScore ()
 								+ " by " + info.getName ()
 								+ " at level " + info.getLevel ()
 								+ " (date: " + info.getDate ().toString () + ")");
-						}
+						}*/
 						break;
 						
 					default :
@@ -198,6 +199,24 @@ public class Menu extends Activity {
 			return false;
 		} 
 	};
+
+	public void showPopup (View v) {
+		PopupMenu popupMenu = new PopupMenu (this, v);
+		popupMenu.inflate (R.menu.high_score_popup);
+		HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (false);
+		for (int i = 0; i < highscores.length; i++) {
+			HighScoreInfo info = highscores[i];
+
+			if (info == null)
+				break;
+
+			String cTitle = info.getScore () + " "
+					+ getString (R.string.by_someone) + " " + info.getName () + " "
+					+ getString (R.string.at_level_x) + " " + info.getLevel ();
+			popupMenu.getMenu ().add (cTitle);
+		}
+		popupMenu.show ();
+	}
 
 
 	/*

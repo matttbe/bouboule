@@ -50,6 +50,8 @@
     <string name="Loosing_continue">Retry</string>
     <string name="GameOver">Game Over</string>
     <string name="title_activity_gameover">GameOverActivity</string>
+    <string name="by_someone">by</string>
+    <string name="at_level_x">at level</string>
     
     
     
