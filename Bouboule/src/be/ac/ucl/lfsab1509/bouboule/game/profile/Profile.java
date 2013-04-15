@@ -201,7 +201,8 @@ public class Profile {
 		iScore = iOldScore;
 		if (bNeedSaveScoreEvenIfCancel)
 			saveScore ();
-		stop ();
+		else
+			stop ();
 	}
 	
 	/**
