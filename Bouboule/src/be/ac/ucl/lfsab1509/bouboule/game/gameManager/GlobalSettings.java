@@ -53,6 +53,7 @@ public class GlobalSettings {
 	public final static int 		INIT_SCORE = 100;
 	public final static int 		INIT_LIFES = 3; // TODO: Init_scrore and life: take data from config
 	public final static int			MAX_LIFES  = INIT_LIFES;
+	public final static int			SCORE_BONUS = 100;
 
 	public static int				NBLEVELS; 		// nb of levels in the current xml files
 	public static Menus 			MENUS; 			// interface to display menus
