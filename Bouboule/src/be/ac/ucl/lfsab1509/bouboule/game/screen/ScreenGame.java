@@ -106,8 +106,9 @@ public class ScreenGame implements Screen {
 	@Override
 	public void pause() {
 		//Gdx.app.log ("Matth", "Screen: PAUSE");
-		Gdx.app.log ("Matth", "Screen: PAUSE + pause status : "+bIsPause + " " + profile.isRunning ());
-		if (! profile.isRunning ()) // already stopped... we start a new game?
+		Gdx.app.log ("Matth", "Screen: PAUSE + pause status : "+bIsPause + " " + profile.isRunning () + " " + game.getCountDown ().isLaunched ());
+		game.getCountDown ().reset (); // reset the countdown (if it's running)
+		if (bIsPause || ! profile.isRunning ()) // already stopped... we start a new game?
 			return;
 		bIsPause = true;
 		profile.pause ();
@@ -115,6 +116,10 @@ public class ScreenGame implements Screen {
 		Gdx.app.log ("Matth", "Screen: PAUSE + pause status ok : "+bIsPause);
 	}
 
+	/**
+	 * Will be launch when resuming after the pause but we have to skip that
+	 * because it will be use a second time when the countdown is over
+	 */
 	@Override
 	public void resume() {
 		Gdx.app.log ("Matth", "Screen: RESUME + pause status : " + bIsPause + " Count " + game.getCountDown ().isLaunched () + " " + bNewGame);
