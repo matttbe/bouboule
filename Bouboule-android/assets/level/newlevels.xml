@@ -70,7 +70,7 @@
     <Level2 bonus="True" bonusrate="5432">
 
         <Bouboule
-            IALevel="5"
+            IALevel="4"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -204,7 +204,7 @@
     <Level4>
 
         <Bouboule
-            IALevel="5"
+            IALevel="4"
             angle="0"
             density="1"
             elasticity="1.1f"
