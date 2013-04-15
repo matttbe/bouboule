@@ -59,6 +59,7 @@ public class GraphicManager {
 		world = new World(new Vector2(0, 0), true);
 		
 		world.setContactListener(new EndGameListener());
+		//world.setVelocityThreshold(10.0f);
 		bodies	 = new ArrayList<GameBody>();
 	}
 	
