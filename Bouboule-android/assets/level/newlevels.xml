@@ -45,21 +45,21 @@
         <MapNodes>
 
             <NodeAllow
-                px="3.5f"
-                py="6.0f"
-                weight="3.5f" >
+                px="3.7401f"
+                py="5.3783f"
+                weight="3.7401f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.5f"
-                py="5.0f"
-                weight="3.5f" >
+                px="3.7401f"
+                py="6.7303f"
+                weight="3.7401f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.5f"
-                py="3.0f"
-                weight="3.5f" >
+                px="3.7401f"
+                py="8.0724f"
+                weight="3.7401f" >
             </NodeAllow>
         </MapNodes>
 
@@ -70,7 +70,7 @@
     <Level2 bonus="True" bonusrate="5432">
 
         <Bouboule
-            IALevel="6"
+            IALevel="5"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -111,21 +111,21 @@
         <MapNodes>
 
             <NodeAllow
-                px="3.5f"
-                py="6.0f"
-                weight="3.5f" >
+                px="3.7401f"
+                py="5.3783f"
+                weight="3.7401f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.5f"
-                py="5.0f"
-                weight="3.5f" >
+                px="3.7401f"
+                py="6.7303f"
+                weight="3.7401f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.5f"
-                py="3.0f"
-                weight="3.5f" >
+                px="3.7401f"
+                py="8.0724f"
+                weight="3.7401f" >
             </NodeAllow>
         </MapNodes>
 
@@ -178,101 +178,33 @@
         <MapNodes>
 
             <NodeAllow
-                px="3.5f"
-                py="6.0f"
-                weight="3.5f" >
+                px="3.7401f"
+                py="5.3783f"
+                weight="3.7401f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.5f"
-                py="5.0f"
-                weight="3.5f" >
+                px="3.7401f"
+                py="6.7303f"
+                weight="3.7401f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.5f"
-                py="3.0f"
-                weight="3.5f" >
+                px="3.7401f"
+                py="8.0724f"
+                weight="3.7401f" >
             </NodeAllow>
         </MapNodes>
 
         <Obstacles>
         </Obstacles>
 
-        <Level2>
-        </Level2>
-
-        <Level2>
-
-            <Bouboule
-                IALevel="6"
-                angle="0"
-                density="2"
-                elasticity="1.1f"
-                entity="-1"
-                jsonFile="data/jsonFile/boub_giant.json"
-                jsonName="boub_giant"
-                px="350"
-                py="620"
-                radius="0"
-                texRegionPath="images/boub/boub_basic_giant.png" >
-            </Bouboule>
-
-            <Bouboule
-                IALevel="0"
-                angle="0"
-                density="1"
-                elasticity="1.10f"
-                entity="1"
-                jsonFile="data/jsonFile/boub.json"
-                jsonName="boub"
-                px="350"
-                py="380"
-                radius="0"
-                texRegionPath="images/boub/boub.png" >
-            </Bouboule>
-
-            <Arena
-                angle="0"
-                entity="0"
-                jsonFile="data/terrain/Arena/arena.json"
-                jsonName="arena"
-                px="0"
-                py="0"
-                radius="500"
-                texRegionPath="data/terrain/Arena/arena.jpg" >
-            </Arena>
-
-            <MapNodes>
-
-                <NodeAllow
-                    px="3.5f"
-                    py="6.0f"
-                    weight="3.5f" >
-                </NodeAllow>
-
-                <NodeAllow
-                    px="3.5f"
-                    py="5.0f"
-                    weight="3.5f" >
-                </NodeAllow>
-
-                <NodeAllow
-                    px="3.5f"
-                    py="3.0f"
-                    weight="3.5f" >
-                </NodeAllow>
-            </MapNodes>
-
-            <Obstacles>
-            </Obstacles>
-        </Level2>
     </Level3>
 
     <Level4>
 
         <Bouboule
-            IALevel="6"
+            IALevel="5"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -381,91 +313,97 @@
             <NodeAllow
                 px="1.65789f"
                 py="8.36098f"
-                weight="1.65789f" >
+                weight="1.35789f" >
             </NodeAllow>
 
             <NodeAllow
                 px="1.77138f"
                 py="5.71220f"
-                weight="1.77138f" >
+                weight="1.47138f" >
             </NodeAllow>
 
             <NodeAllow
                 px="3.76480f"
                 py="5.02927f"
-                weight="0.93257f" >
+                weight="0.63257f" >
             </NodeAllow>
 
             <NodeAllow
                 px="5.30921f"
                 py="1.55122f"
-                weight="1.53947f" >
+                weight="1.23947f" >
             </NodeAllow>
 
             <NodeAllow
                 px="5.82730f"
                 py="4.34634f"
-                weight="1.67270f" >
+                weight="1.37270f" >
             </NodeAllow>
 
             <NodeAllow
                 px="0.93750f"
                 py="3.70732f"
-                weight="0.93750f" >
+                weight="0.63750f" >
             </NodeAllow>
 
             <NodeAllow
                 px="0.81414f"
                 py="2.36585f"
-                weight="0.81414f" >
+                weight="0.51414f" >
             </NodeAllow>
 
             <NodeAllow
                 px="1.13487f"
                 py="1.07317f"
-                weight="1.13487f" >
+                weight="0.83487f" >
             </NodeAllow>
 
             <NodeAllow
                 px="2.61513f"
                 py="0.71220f"
-                weight="0.69079f" >
+                weight="0.39079f" >
             </NodeAllow>
 
             <NodeAllow
                 px="3.89803f"
                 py="3.70732f"
-                weight="0.69079f" >
+                weight="0.39079f" >
             </NodeAllow>
 
             <NodeAllow
                 px="6.46382f"
                 py="8.97561f"
-                weight="1.03618f" >
+                weight="0.73618f" >
             </NodeAllow>
 
             <NodeAllow
                 px="3.54276f"
                 py="9.22927f"
-                weight="0.77961f" >
+                weight="0.47961f" >
             </NodeAllow>
 
             <NodeAllow
                 px="4.88487f"
                 py="9.31707f"
-                weight="0.69079f" >
+                weight="0.39079f" >
             </NodeAllow>
 
             <NodeAllow
                 px="6.85855f"
                 py="7.46341f"
-                weight="0.64145f" >
+                weight="0.34145f" >
             </NodeAllow>
 
             <NodeAllow
                 px="6.71053f"
                 py="6.34146f"
-                weight="0.74013f" >
+                weight="0.44013f" >
+            </NodeAllow>
+            
+            <NodeAllow
+                px="1.5592f"
+                py="7.2390f"
+                weight="1.2592f" >
             </NodeAllow>
         </MapNodes>
 
@@ -717,21 +655,27 @@
         <MapNodes>
 
             <NodeAllow
-                px="3.5f"
-                py="6.0f"
-                weight="3.5f" >
+                px="3.7599f"
+                py="7.9610f"
+                weight="2.0822f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.5f"
-                py="5.0f"
-                weight="3.5f" >
+                px="3.7500f"
+                py="2.0878f"
+                weight="2.0724f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.5f"
-                py="3.0f"
-                weight="3.5f" >
+                px="3.7303f"
+                py="5.5707f"
+                weight="1.5197f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.7204f"
+                py="4.4000f"
+                weight="1.5296f" >
             </NodeAllow>
         </MapNodes>
 
@@ -783,22 +727,11 @@
         <MapNodes>
 
             <NodeAllow
-                px="3.5f"
-                py="6.0f"
-                weight="3.5f" >
+                px="3.2566f"
+                py="5.5122f"
+                weight="2.8421f" >
             </NodeAllow>
 
-            <NodeAllow
-                px="3.5f"
-                py="5.0f"
-                weight="3.5f" >
-            </NodeAllow>
-
-            <NodeAllow
-                px="3.5f"
-                py="3.0f"
-                weight="3.5f" >
-            </NodeAllow>
         </MapNodes>
 
         <Obstacles>
@@ -849,21 +782,9 @@
         <MapNodes>
 
             <NodeAllow
-                px="3.5f"
-                py="6.0f"
-                weight="3.5f" >
-            </NodeAllow>
-
-            <NodeAllow
-                px="3.5f"
-                py="5.0f"
-                weight="3.5f" >
-            </NodeAllow>
-
-            <NodeAllow
-                px="3.5f"
-                py="3.0f"
-                weight="3.5f" >
+                px="3.7303f"
+                py="5.0244f"
+                weight="3.0099f" >
             </NodeAllow>
         </MapNodes>
 
@@ -915,22 +836,11 @@
         <MapNodes>
 
             <NodeAllow
-                px="3.5f"
-                py="6.0f"
-                weight="3.5f" >
+                px="3.7401f"
+                py="4.9756f"
+                weight="3.2862f" >
             </NodeAllow>
 
-            <NodeAllow
-                px="3.5f"
-                py="5.0f"
-                weight="3.5f" >
-            </NodeAllow>
-
-            <NodeAllow
-                px="3.5f"
-                py="3.0f"
-                weight="3.5f" >
-            </NodeAllow>
         </MapNodes>
 
         <Obstacles>
@@ -1035,21 +945,33 @@
         <MapNodes>
 
             <NodeAllow
-                px="3.5f"
-                py="6.0f"
-                weight="3.5f" >
+                px="2.7730f"
+                py="6.9268f"
+                weight="2.27961f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.5f"
-                py="5.0f"
-                weight="3.5f" >
+                px="4.3224f"
+                py="5.7854f"
+                weight="2.01316f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.5f"
-                py="3.0f"
-                weight="3.5f" >
+                px="5.4671f"
+                py="5.6195f"
+                weight="1.89474f" >
+            </NodeAllow>
+            
+            <NodeAllow
+                px="3.2566f"
+                py="2.8585f"
+                weight="0.98684f" >
+            </NodeAllow>
+            
+            <NodeAllow
+                px="1.0263f"
+                py="4.7707f"
+                weight="0.58224f" >
             </NodeAllow>
         </MapNodes>
 
@@ -1101,22 +1023,12 @@
         <MapNodes>
 
             <NodeAllow
-                px="3.5f"
-                py="6.0f"
-                weight="3.5f" >
+                px="3.7993f"
+                py="8.1756f"
+                weight="6.3651f" >
             </NodeAllow>
 
-            <NodeAllow
-                px="3.5f"
-                py="5.0f"
-                weight="3.5f" >
-            </NodeAllow>
 
-            <NodeAllow
-                px="3.5f"
-                py="3.0f"
-                weight="3.5f" >
-            </NodeAllow>
         </MapNodes>
 
         <Obstacles>
