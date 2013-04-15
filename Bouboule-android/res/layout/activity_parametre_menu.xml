@@ -1,60 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/FullscreenTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:layout_margin="50dp"
-    android:orientation="vertical" >
-
-    
-   	<TextView
-        android:id="@+id/txt_settings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/title_activiy_menuParametre"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5" />
-
-    <Button
-        android:id="@+id/button_param_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/user" />
-    
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5" />
+    android:background="@drawable/settings"
+    tools:context=".MenuParametre" >
     
 
-    <Button
-        android:id="@+id/button_param_global"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/global" />
-    
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5" />
     
 
-    <Button
-        android:id="@+id/button_param_about"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/about" />
+        android:layout_height="match_parent"
+        android:weightSum="100" >
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="25" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="50"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:weightSum="100" >
 
-</LinearLayout>
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+            <Button
+                android:id="@+id/button_param_user"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:alpha="0" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+            <Button
+                android:id="@+id/button_param_global"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:alpha="0" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+            <Button
+                android:id="@+id/button_param_about"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:alpha="0" />
+        </LinearLayout>
+    </LinearLayout>
+    
+	
+</FrameLayout>

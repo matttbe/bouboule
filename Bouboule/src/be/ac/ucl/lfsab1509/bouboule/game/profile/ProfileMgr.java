@@ -74,6 +74,11 @@ public class ProfileMgr {
 	public String[] getAllProfiles () {
 		return getAllProfilesAsString ().split (SEPARATOR);
 	}
+	
+	public ArrayList<String> getAllProfilesAL () {
+		ArrayList<String> profiles = new ArrayList<String> (Arrays.asList(getAllProfiles ()));
+		return profiles;
+	}
 
 	public ArrayList<String> getAllProfilesAndExceptions () {
 		ArrayList<String> profiles = new ArrayList<String> (Arrays.asList(getAllProfiles ()));

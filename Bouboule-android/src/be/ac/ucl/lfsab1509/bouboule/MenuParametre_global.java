@@ -3,12 +3,9 @@ package be.ac.ucl.lfsab1509.bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.*;
-import android.util.Log;
 
 public class MenuParametre_global extends Activity {
 
@@ -69,5 +66,3 @@ public class MenuParametre_global extends Activity {
 	
 	
 }
-//import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
-//GlobalSettings.PROFILE_MGR.getProfileGlobal ().toggleSoundSettings ();
