@@ -56,11 +56,15 @@ public class ProfileGlobal {
 				+ "01 01 1970 00:00:00 0000"; // date
 	}
 
+	/**
+	 * Load settings that can be saved between sessions
+	 */
 	public void loadDefaultSettings () {
 		GlobalSettings.SOUND_IS_MUTED = prefs.getBoolean (MUTE_SOUND_KEY, false);
-		GlobalSettings.SENSITIVITY = prefs.getInteger (SENSITIVITY_KEY,500);
+		GlobalSettings.SENSITIVITY = prefs.getInteger (SENSITIVITY_KEY, 500);
 	}
-	
+
+	//_________________ SAVE SETTINGS THAT CAN BE CHANGED FROM THE CONFIG PANEL
 	public void toggleSoundSettings () {
 		GlobalSettings.SOUND_IS_MUTED = ! GlobalSettings.SOUND_IS_MUTED;
 		prefs.putBoolean (MUTE_SOUND_KEY, GlobalSettings.SOUND_IS_MUTED);
@@ -79,6 +83,7 @@ public class ProfileGlobal {
 		prefs.flush();
 	}
 
+	//_______________ HighScore Mgr
 	/**
 	 * Check if there is a new highscore. If yes, save it in the global settings
 	 * @param iScore, the new score

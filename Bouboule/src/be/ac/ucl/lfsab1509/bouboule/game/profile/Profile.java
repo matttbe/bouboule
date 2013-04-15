@@ -55,7 +55,8 @@ public class Profile {
 	private int iEndGameScore; // score just before the reset
 	private int iHighScore;
 	private boolean bNewHighScore = false;
-	
+	private boolean bNeedSaveScoreEvenIfCancel = false;
+
 	// lifes
 	private int iLifes;
 
@@ -103,6 +104,10 @@ public class Profile {
 		return cBoubName;
 	}
 
+	/**
+	 * Set a new name for the bouboube (image)
+	 * @param cBoubName, the name of the image (ex: boub -> boub.png, boub.json)
+	 */
 	public void setBoubName (String cBoubName) {
 		this.cBoubName = cBoubName;
 		prefs.putString (BOUB_NAME_KEY, cBoubName);
@@ -111,6 +116,11 @@ public class Profile {
 
 	//__________ TIMER
 	
+	/**
+	 * Create a new timer and init the score (but do not start this timer)
+	 * The timer will decrement the score each second
+	 * The new init score will increase when playing new levels
+	 */
 	public void createTimer () {
 		if (timer != null) { // stop the previous timer
 			this.stop ();
@@ -119,6 +129,8 @@ public class Profile {
 		this.iOldScore = this.iScore;
 		this.iNewInitScore = this.iScore + this.iInitScore + this.iInitScore / 4 * (this.iLevel - 1);
 		this.iScore = iNewInitScore; // TODO: more score?
+		this.bNewHighScore = false;
+		this.bNeedSaveScoreEvenIfCancel = false;
 
 		Timer.Task task = new Timer.Task () {
 			@Override
@@ -155,20 +167,48 @@ public class Profile {
 	public int getScore () {
 		return iScore;
 	}
-	
+
+	/**
+	 * Add score: bonus (will only be saved if the player wins the current level)
+	 * @param iNewScore, the new bonus
+	 */
 	public void addScore (int iNewScore) {
 		iScore += iNewScore;
 	}
 
-	public void cancelNewScore () {
-		stop ();
+	/**
+	 * Add score: bonus (will be saved even if the player looses the current level)
+	 * @param iNewScore, the new bonus
+	 */
+	public void addScorePermanent (int iNewScore) {
+		iScore += iNewScore;
+		iOldScore += iNewScore;
+		bNeedSaveScoreEvenIfCancel = true;
+	}
+
+	/**
+	 * Stop the timer and revert the score
+	 * @return true if there is a new highscore
+	 * (e.g. if the user get permanent bonus {@link #addScorePermanent(int)})
+	 */
+	public boolean cancelNewScore () {
 		iScore = iOldScore;
+		if (bNeedSaveScoreEvenIfCancel)
+			return saveScore ();
+		stop ();
+		return false;
 	}
 	
+	/**
+	 * @return the score before playing this game
+	 */
 	public int getOldScore() {
 		return iOldScore;
 	}
 
+	/**
+	 * @return the score that the user had just before the reset
+	 */
 	public int getEndGameScore () {
 		return iEndGameScore;
 	}
@@ -181,6 +221,10 @@ public class Profile {
 		return bNewHighScore;
 	}
 
+	/**
+	 * Stop the timer, check if there is a new highscore and save the scores
+	 * @return true if there is a new highscore
+	 */
 	public boolean saveScore () {
 		stop ();
 		prefs.putInteger (SCORE_KEY, iScore);
@@ -202,10 +246,17 @@ public class Profile {
 		return iLifes;
 	}
 
+	/**
+	 * 
+	 * @param iNewLifes, the new life(s) (can be negative)
+	 * @return false if there is no more life.
+	 */
 	public boolean addLifes (int iNewLifes) {
-		iLifes += (iLifes+iNewLifes > 3) ? 0 : iNewLifes;
+		int iNewLifesTmp = iLifes + iNewLifes;
+		if (iNewLifesTmp <= GlobalSettings.MAX_LIFES) // we can't add more than 3 lifes
+			iLifes = iNewLifesTmp;
 
-		if (iLifes <= 0)
+		if (iLifes <= 0) // no more life
 			return false;
 
 		this.prefs.putInteger (LIFES_KEY, iLifes);
@@ -215,6 +266,9 @@ public class Profile {
 
 	//__________ LEVEL
 
+	/**
+	 * @return true if there is no more level
+	 */
 	public boolean LevelUp () {
 		if (iLevel >= GlobalSettings.NBLEVELS) // we are already on the last level
 			return false;
