@@ -35,6 +35,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Obstacle;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
+import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
 
 import com.badlogic.gdx.Gdx;
@@ -99,7 +100,9 @@ public class LevelLoader {
 		}
 		
 		GraphicManager.ALLOW_BONUS = Boolean.parseBoolean(file.getAttribute("bonus","false"));
-		
+		GraphicManager.BONUS_SPAWN_RATE = Integer.parseInt(file.getAttribute("bonusrate","0"));
+		IA.FORCE_MAX_IA = Float.parseFloat(file.getAttribute("forcemaxia", "0.5f"));
+		IA.FORCE_MAX_PLAYER = Float.parseFloat(file.getAttribute("forcemaxplayer", "0.5f"));
 		
 		Gdx.app.log("Settings", "Bonus ="+GraphicManager.ALLOW_BONUS);	
 

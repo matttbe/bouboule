@@ -38,11 +38,14 @@ public class ProfileMgr {
 	private Preferences prefs;
 	private ProfileGlobal profileGlobal;
 
-	protected final String SEPARATOR = System.getProperty ("file.separator"); // /!\ can change but it's not
+	protected final String SEPARATOR = System.getProperty ("file.separator"); // /!\ can change if we use it on different systems
 
 	private static final String LAST_PROFILE_KEY = "last_profile";
 	private static final String PROFILES_KEY = "profiles";
 
+	/**
+	 * Create PREFS_GLOBAL, PROFILE and load default settings
+	 */
 	public ProfileMgr () {
 		prefs = Gdx.app.getPreferences (GlobalSettings.PREFS_GLOBAL);
 		loadDefaultProfile ();
@@ -51,18 +54,27 @@ public class ProfileMgr {
 	}
 
 	/**
-	 * @return get the last profile or the default one
+	 * @return get the last profile name or the default one
 	 */
 	public String getDefaultProfileName () {
 		return prefs.getString (LAST_PROFILE_KEY, GlobalSettings.DEFAULT_PROFILE_NAME);
 	}
 
+	/**
+	 * Load an profile that already exists.
+	 * @pre this profile should have been created with {@link #createAndLoadNewProfile(String)}
+	 * @param cName, the profile name
+	 */
 	public void loadProfile (String cName) {
 		GlobalSettings.PROFILE = new Profile (cName);
 		prefs.putString (LAST_PROFILE_KEY, cName);
 		prefs.flush ();
 	}
 
+	/**
+	 * Load the default profile (the last profile that has been used or
+	 * DEFAULT_PROFILE_NAME)
+	 */
 	public void loadDefaultProfile () {
 		loadProfile (getDefaultProfileName());
 	}
@@ -71,6 +83,9 @@ public class ProfileMgr {
 		return prefs.getString (PROFILES_KEY, GlobalSettings.DEFAULT_PROFILE_NAME);
 	}
 
+	/**
+	 * @return an array with all profiles' name
+	 */
 	public String[] getAllProfiles () {
 		return getAllProfilesAsString ().split (SEPARATOR);
 	}
@@ -80,6 +95,10 @@ public class ProfileMgr {
 		return profiles;
 	}
 
+	/**
+	 * @return an arraylist with all profiles that can't be used when creating
+	 * a new one
+	 */
 	public ArrayList<String> getAllProfilesAndExceptions () {
 		ArrayList<String> profiles = new ArrayList<String> (Arrays.asList(getAllProfiles ()));
 		profiles.add (GlobalSettings.PREFS_GLOBAL); // we can't use a profile name with this name
@@ -87,6 +106,7 @@ public class ProfileMgr {
 	}
 	
 	/**
+	 * Create and load a new profile
 	 * @pre: cName should not be included in PROFILES_KEY and can't contain invalid char:
 	 *  => String.IndexOfAny (System.IO.Path.GetInvalidPathChars ()) == 0
 	 * @param cName: the new profile name

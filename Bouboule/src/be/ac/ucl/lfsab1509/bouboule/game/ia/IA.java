@@ -14,6 +14,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 public class IA {
 
+	public static float FORCE_MAX_IA;
+	public static float FORCE_MAX_PLAYER;
+	
 	//level 0 => gyroscope
 	//level 1 => go mid
 	//level 2 => troll
@@ -92,10 +95,10 @@ public class IA {
 
 		Vector2 slow;
 		if(IALevel != 0){
-			Acc=Acc.limit(GlobalSettings.LIMITACC);
+			Acc=Acc.limit(FORCE_MAX_IA);
 			slow = new Vector2(VelocityIA).nor().mul(0.02f);
 		}else{
-			Acc=Acc.limit(GlobalSettings.LIMITACC);
+			Acc=Acc.limit(FORCE_MAX_PLAYER);
 			slow = new Vector2(VelocityEnemi).nor().mul(0.02f);
 			//slow = new Vector2(0, 0);
 		}
@@ -160,11 +163,11 @@ public class IA {
 		dirmid = middeler(position, centreIA);
 		//dirmid.nor();
 		fictposition = new Vector2(position);
-		fictposition.add(new Vector2(velocity).rotate(position.angle()).set(0, velocity.y).rotate(0-position.angle()).mul(2));
+		fictposition.add(new Vector2(velocity).rotate(position.angle()).set(0, velocity.y).rotate(0-position.angle()).mul(1));
 		directionenemi = new Vector2(localEnemi);
-		directionenemi.add(new Vector2(VelocityEnemi).rotate(localEnemi.angle()).set(0, VelocityEnemi.y).rotate(0-localEnemi.angle()).mul(2)).sub(fictposition).nor();
+		directionenemi.add(new Vector2(VelocityEnemi).rotate(localEnemi.angle()).set(0, VelocityEnemi.y).rotate(0-localEnemi.angle()).mul(1)).sub(fictposition).nor();
 		
-		if(!(Math.abs(angleCentre(fictposition, centreIA.getVector())-angleCentre(localEnemi,centreIA.getVector())) < 10 &&
+		if(!(Math.abs(angleCentre(fictposition, centreIA.getVector())-angleCentre(localEnemi,centreIA.getVector())) < 15 &&
 				centreIA == getClosestCentre(localEnemi)))
 		if(dirmid.dot(velocity) < 0.0f && velocity.len2()*1.75 + dirmid.len() > centreIA.getWeight()){
 			Gdx.app.log ("Player","IA:attaque slow");
@@ -215,7 +218,7 @@ public class IA {
 		Acc = new Vector2(dirmid).sub(vitesse).nor();
 
 		if(dirmid.dot(vitesse) > 0 &&
-				getClosestCentre(position).getVector().dst(position) < vitesse.dot(dirmid)*vitesse.dot(dirmid)/(2*GlobalSettings.LIMITACC)){
+				getClosestCentre(position).getVector().dst(position) < vitesse.dot(dirmid)*vitesse.dot(dirmid)/(2*FORCE_MAX_IA)){
 			//Acc.rotate(180);
 		}else{
 		}
@@ -299,17 +302,19 @@ public class IA {
 	
 	private static MapNode getClosestCentre(Vector2 position){
 		ArrayList<MapNode> tabNode = GlobalSettings.ARENAWAYPOINTALLOW;
-		float mindist = position.dst(tabNode.get(0).getVector());
-		int min = 0;
+		MapNode temp=tabNode.get(0);
+		float maxdist = temp.getWeight() - position.dst(temp.getVector());
+		int max = 0;
 		float tempdist;
 		for(int i=1;i<tabNode.size();i++){
-			tempdist=position.dst(tabNode.get(i).getVector());
-			if(tempdist < mindist){
-				mindist = tempdist;
-				min = i;
+			temp=tabNode.get(i);
+			tempdist=temp.getWeight() - position.dst(temp.getVector());
+			if(tempdist > maxdist){
+				maxdist = tempdist;
+				max = i;
 			}
 		}
-		return tabNode.get(min);
+		return tabNode.get(max);
 	}
 
 }
