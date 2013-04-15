@@ -78,9 +78,13 @@ public class Profile {
 	}
 
 	/**
-	 * Reset all data about the score (init score, lifes, level, current score
+	 * Check if there is a new high score (for this profile and for all profiles)
+	 * Reset all data about the score (init score, lifes, level, current score)
+	 * @return true if there is a new highscore global (for all profiles)
 	 */
-	public void resetProfile () {
+	public boolean checkHighScoreAndResetProfile () {
+		boolean bNewHighScoreGlobal = checkHighScore ();
+
 		iInitScore = GlobalSettings.INIT_SCORE;
 		prefs.putInteger (INIT_SCORE_KEY, iInitScore);
 		iLifes = GlobalSettings.INIT_LIFES;
@@ -92,6 +96,8 @@ public class Profile {
 		prefs.putInteger (SCORE_KEY, iScore);
 		prefs.flush (); // Makes sure the preferences are persisted.
 		// don't reset the highscore...
+
+		return bNewHighScoreGlobal;
 	}
 
 	//__________ NAME and IMAGE
@@ -191,12 +197,11 @@ public class Profile {
 	 * @return true if there is a new highscore
 	 * (e.g. if the user get permanent bonus {@link #addScorePermanent(int)})
 	 */
-	public boolean cancelNewScore () {
+	public void cancelNewScore () {
 		iScore = iOldScore;
 		if (bNeedSaveScoreEvenIfCancel)
-			return saveScore ();
+			saveScore ();
 		stop ();
-		return false;
 	}
 	
 	/**
@@ -221,23 +226,26 @@ public class Profile {
 		return bNewHighScore;
 	}
 
-	/**
-	 * Stop the timer, check if there is a new highscore and save the scores
-	 * @return true if there is a new highscore
-	 */
-	public boolean saveScore () {
-		stop ();
-		prefs.putInteger (SCORE_KEY, iScore);
+	private boolean checkHighScore () {
 		bNewHighScore = false;
 		if (iScore > iHighScore)
 		{
 			iHighScore = iScore;
 			prefs.putInteger (HIGHSCORE_KEY, iHighScore);
+			prefs.flush ();
 			bNewHighScore = true;
 		}
+		return GlobalSettings.PROFILE_MGR.getProfileGlobal ().checkHighScoreGlobal ();
+	}
+
+	/**
+	 * Stop the timer, check if there is a new highscore and save the scores
+	 * @return true if there is a new highscore
+	 */
+	public void saveScore () {
+		stop ();
+		prefs.putInteger (SCORE_KEY, iScore);
 		prefs.flush ();
-		GlobalSettings.PROFILE_MGR.getProfileGlobal ().checkHighScoreGlobal ();
-		return bNewHighScore;
 	}
 
 	//__________ LIFES

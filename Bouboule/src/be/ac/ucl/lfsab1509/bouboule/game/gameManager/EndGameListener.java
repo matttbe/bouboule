@@ -119,7 +119,7 @@ public class EndGameListener implements ContactListener{
 					GlobalSettings.PROFILE.cancelNewScore ();
 					if (! GlobalSettings.PROFILE.addLifes (-1)) {
 						GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
-						GlobalSettings.PROFILE.resetProfile (); // TODO: what to do?
+						GlobalSettings.PROFILE.checkHighScoreAndResetProfile (); // TODO: what to do?
 					}
 
 					GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
@@ -142,7 +142,7 @@ public class EndGameListener implements ContactListener{
 						GlobalSettings.GAME_EXIT = GameExitStatus.WIN;
 					else { // no more level: end game
 						GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
-						GlobalSettings.PROFILE.resetProfile (); // TODO: what to do?
+						GlobalSettings.PROFILE.checkHighScoreAndResetProfile (); // TODO: what to do?
 					}
 					GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
 
