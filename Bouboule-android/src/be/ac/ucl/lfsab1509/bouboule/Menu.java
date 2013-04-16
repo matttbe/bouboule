@@ -113,7 +113,7 @@ public class Menu extends Activity {
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		menuMusic = new BackgroundSound ("menu", R.raw.zen);
+		menuMusic = new BackgroundSound ("menu", R.raw.menu);
 		
 		//Request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
