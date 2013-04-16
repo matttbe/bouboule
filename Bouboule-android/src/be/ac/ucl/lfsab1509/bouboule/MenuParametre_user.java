@@ -2,9 +2,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.*;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
