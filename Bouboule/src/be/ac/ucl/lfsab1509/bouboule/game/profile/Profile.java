@@ -63,6 +63,8 @@ public class Profile {
 	// level
 	private int iLevel;
 
+	// tutorial
+	private boolean bNeedTuto = false;
 	
 	public Profile (String cName)
 	{
@@ -292,4 +294,12 @@ public class Profile {
 		return iLevel;
 	}
 
+	//__________ TUTORIAL
+	public boolean needTutorial () {
+		return bNeedTuto;
+	}
+
+	public void setNeedTutorial (boolean bNeedTuto) {
+		this.bNeedTuto = bNeedTuto;
+	}
 }

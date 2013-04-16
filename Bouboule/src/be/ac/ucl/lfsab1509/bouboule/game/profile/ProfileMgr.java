@@ -116,6 +116,7 @@ public class ProfileMgr {
 		profiles += SEPARATOR + cName; // should at least contain Bouboule (default)
 		prefs.putString (PROFILES_KEY, profiles); // no need to flush => done in loadProfile
 		loadProfile (cName);
+		GlobalSettings.PROFILE.setNeedTutorial (true); // display the tutorial the first time
 	}
 	
 	public ProfileGlobal getProfileGlobal () {
