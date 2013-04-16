@@ -81,4 +81,12 @@ public class MyGame extends Game {
 		if (! GlobalSettings.SOUND_IS_MUTED)
 			looseSound.play ();
 	}
+
+	/**
+	 * @param cNewMusic should be a file that can be read by GDX in 'music'
+	 */
+	public void setNewLoopMusic (String cNewMusic) {
+		if (screenGame != null)
+			screenGame.setNewLoopMusic (cNewMusic);
+	}
 }

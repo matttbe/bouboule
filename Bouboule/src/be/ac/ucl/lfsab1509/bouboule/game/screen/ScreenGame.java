@@ -143,4 +143,18 @@ public class ScreenGame implements Screen {
 		
 		bNewGame = GlobalSettings.GAME_EXIT != GameExitStatus.NONE; // a new game is needed?
 	}
+
+	/**
+	 * @param cNewMusic should be a file that can be read by GDX in 'music'
+	 */
+	public void setNewLoopMusic (String cNewMusic) {
+		boolean bWasPlaying = loopMusic.isPlaying ();
+		loopMusic.stop ();
+
+		loopMusic = Gdx.audio.newMusic(Gdx.files.internal("music/" + cNewMusic));
+		loopMusic.setLooping(true);
+
+		if (bWasPlaying)
+			loopMusic.play ();
+	}
 }
