@@ -111,6 +111,9 @@ public class Profile {
 		return cName;
 	}
 
+	/**
+	 * @return the name of the image (ex: boub -> boub.png, boub.json)
+	 */
 	public String getBoubName () {
 		return cBoubName;
 	}

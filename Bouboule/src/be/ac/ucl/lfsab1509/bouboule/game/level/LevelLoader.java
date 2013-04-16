@@ -33,10 +33,12 @@ import java.util.Iterator;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Arena;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Obstacle;
+import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
+import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -130,11 +132,22 @@ public class LevelLoader {
 			float px				= Float.parseFloat(boub.getAttribute("px"));
 			float py				= Float.parseFloat(boub.getAttribute("py"));
 			float angle				= Float.parseFloat(boub.getAttribute("angle"));
-			String texRegionPath 	= boub.getAttribute("texRegionPath");
-			String jsonFile 		= boub.getAttribute("jsonFile");
-			String jsonName 		= boub.getAttribute("jsonName");
-			short entity			= Short.parseShort(boub.getAttribute("entity"));
 			int IALevel				= Integer.parseInt(boub.getAttribute("IALevel"));
+			short entity			= Short.parseShort(boub.getAttribute("entity"));
+			String jsonFile			= boub.getAttribute("jsonFile");
+			String jsonName			= extractJSonName (jsonFile);
+			String texRegionPath;
+			if (entity == Entity.PLAYER)
+				texRegionPath = BoubImages.BOUB_DIR // images/boub/
+						+ GlobalSettings.PROFILE.getBoubName () // boub_geisha
+						+ (jsonName.endsWith (BoubImages.BOUB_SMALL_SUFFIX) // _small
+							? BoubImages.BOUB_SMALL_SUFFIX
+							: (jsonName.endsWith (BoubImages.BOUB_GIANT_SUFFIX) // or _giant
+								? BoubImages.BOUB_GIANT_SUFFIX
+								: ""))
+						+ BoubImages.BOUB_EXTENTION; // .png
+			else
+				texRegionPath 		= boub.getAttribute("texRegionPath");
 
 
 			graphicManager.addBody( new Bouboule(radius, bodyType, density,
@@ -165,6 +178,11 @@ public class LevelLoader {
 		}
 	}
 
+	private String extractJSonName (String jsonFile) {
+		return jsonFile.substring (jsonFile.lastIndexOf ('/') + 1,
+				jsonFile.lastIndexOf ('.'));
+	}
+
 	/**
 	 * Load the arena of the 'file' level
 	 * 
@@ -181,7 +199,7 @@ public class LevelLoader {
 		float angle				= Float.parseFloat(aren.getAttribute("angle"));
 		String texRegionPath 	= aren.getAttribute("texRegionPath");
 		String jsonFile 		= aren.getAttribute("jsonFile");
-		String jsonName 		= aren.getAttribute("jsonName");
+		String jsonName 		= extractJSonName (jsonFile);
 
 		graphicManager.addBody(new Arena( radius, px, py,  angle, texRegionPath, 
 				jsonFile,  jsonName));
@@ -251,7 +269,7 @@ public class LevelLoader {
 			float angle				= Float.parseFloat(newobstacle.getAttribute("angle"));
 			String texRegionPath 	= newobstacle.getAttribute("texRegionPath");
 			String jsonFile 		= newobstacle.getAttribute("jsonFile");
-			String jsonName 		= newobstacle.getAttribute("jsonName");
+			String jsonName 		= extractJSonName (jsonFile);
 
 
 			graphicManager.addBody( new Obstacle(bodyType, density,

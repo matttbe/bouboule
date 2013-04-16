@@ -32,9 +32,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
 public class BoubImages {
-	private static final String GIANT_SUFFIX = "_giant.png";
-	private static final String SMALL_SUFFIX = "_small.png";
-	private static final String BOUB_DIR = "images/boub";
+	public static final String BOUB_GIANT_SUFFIX = "_giant";
+	public static final String BOUB_SMALL_SUFFIX = "_small";
+	public static final String BOUB_EXTENTION = ".png";
+
+	public static final String BOUB_DIR = "images/boub/";
 	
 	/**
 	 * @return a list of files all bouboules images which have a normal size
@@ -47,8 +49,8 @@ public class BoubImages {
 		for (int i = 0; i < pAllFiles.length; i++) {
 			FileHandle pCurrFile = pAllFiles[i];
 
-			if (! pCurrFile.name ().endsWith (GIANT_SUFFIX) // only normal files
-					&& ! pCurrFile.name ().endsWith (SMALL_SUFFIX))
+			if (! pCurrFile.name ().endsWith (BOUB_GIANT_SUFFIX + BOUB_EXTENTION) // only normal files
+					&& ! pCurrFile.name ().endsWith (BOUB_SMALL_SUFFIX + BOUB_EXTENTION))
 				pList.add (pCurrFile);
 		}
 
