@@ -60,7 +60,7 @@ public class GlobalSettings {
 
 	// Settings that can be changed from ProfileGlobal
 	public static boolean			SOUND_IS_MUTED = false; // false = sound on
-	public static int 			SENSITIVITY = 500; // from 0 to 1000
+	public static int				SENSITIVITY = 500; // from 0 to 1000
 	public static final int 		SENSITIVITY_MAX = 1000;
 
 	// Profiles

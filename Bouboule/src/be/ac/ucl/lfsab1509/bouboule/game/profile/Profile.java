@@ -43,6 +43,7 @@ public class Profile {
 	private final static String INIT_SCORE_KEY = "InitScore";
 	private final static String LIFES_KEY = "Lifes";
 	private final static String LEVEL_KEY = "Level";
+	private final static String BEST_LEVEL_KEY = "BestLevel";
 	private final static String SCORE_KEY = "Score";
 	private final static String HIGHSCORE_KEY = "HighScore";
 	private final static String BOUB_NAME_KEY = "BoubName";
@@ -62,6 +63,7 @@ public class Profile {
 
 	// level
 	private int iLevel;
+	private int iBestLevel;
 
 	// tutorial
 	private boolean bNeedTuto = false;
@@ -74,6 +76,7 @@ public class Profile {
 		iInitScore = prefs.getInteger (INIT_SCORE_KEY, GlobalSettings.INIT_SCORE);
 		iLifes = prefs.getInteger (LIFES_KEY, GlobalSettings.INIT_LIFES);
 		iLevel = prefs.getInteger (LEVEL_KEY, GlobalSettings.INIT_LEVEL);
+		iBestLevel = prefs.getInteger (BEST_LEVEL_KEY, GlobalSettings.INIT_LEVEL);
 		iScore = prefs.getInteger (SCORE_KEY, 0);
 		iHighScore = prefs.getInteger (HIGHSCORE_KEY, 0);
 		cBoubName = prefs.getString (BOUB_NAME_KEY, GlobalSettings.DEFAULT_BOUB_NAME);
@@ -285,6 +288,7 @@ public class Profile {
 			return false;
 
 		iLevel++;
+		checkBestLevel ();
 		this.prefs.putInteger (LEVEL_KEY, iLevel);
 		prefs.flush ();
 		return true;
@@ -292,6 +296,20 @@ public class Profile {
 
 	public int getLevel () {
 		return iLevel;
+	}
+
+	private void checkBestLevel () {
+		if (iLevel > iBestLevel) {
+			iBestLevel = iLevel; // no need to flush
+			this.prefs.putInteger (BEST_LEVEL_KEY, iBestLevel);
+		}
+	}
+
+	/**
+	 * @return the best level that has already been played
+	 */
+	public int getBestLevel () {
+		return iBestLevel;
 	}
 
 	//__________ TUTORIAL
