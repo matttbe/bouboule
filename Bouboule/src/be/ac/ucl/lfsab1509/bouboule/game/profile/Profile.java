@@ -287,11 +287,19 @@ public class Profile {
 		if (iLevel >= GlobalSettings.NBLEVELS) // we are already on the last level
 			return false;
 
-		iLevel++;
+		setLevel (iLevel + 1);
+		return true;
+	}
+
+	/**
+	 * Set the new level
+	 * @pre iNewLevel < GlobalSettings.NBLEVELS
+	 */
+	public void setLevel (int iNewLevel) {
+		iLevel = iNewLevel;
 		checkBestLevel ();
 		this.prefs.putInteger (LEVEL_KEY, iLevel);
 		prefs.flush ();
-		return true;
 	}
 
 	public int getLevel () {
