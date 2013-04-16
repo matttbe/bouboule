@@ -112,19 +112,7 @@ public class EndGameListener implements ContactListener{
 
 				}
 				else {
-					GlobalSettings.GAME.looseSound ();
-					Gdx.app.log("KILL", "Bouboule est MORT =/");
-
-					GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
-					GlobalSettings.PROFILE.cancelNewScore ();
-					if (! GlobalSettings.PROFILE.addLifes (-1)) {
-						GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
-						GlobalSettings.PROFILE.checkHighScoreAndResetProfile (); // TODO: what to do?
-					}
-
-					GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
-
-					GlobalSettings.MENUS.launchEndGameMenu ();
+					looseGame ();
 					//Gdx.app.exit();
 				}
 			}
@@ -135,18 +123,7 @@ public class EndGameListener implements ContactListener{
 					isAliveMonster --;
 				}
 				else {
-					GlobalSettings.GAME.winSound ();
-					Gdx.app.log("KILL", "Bouboule a gagné =P");
-					GlobalSettings.PROFILE.saveScore ();
-					if (GlobalSettings.PROFILE.LevelUp ())
-						GlobalSettings.GAME_EXIT = GameExitStatus.WIN;
-					else { // no more level: end game
-						GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
-						GlobalSettings.PROFILE.checkHighScoreAndResetProfile (); // TODO: what to do?
-					}
-					GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
-
-					GlobalSettings.MENUS.launchEndGameMenu ();
+					winGame ();
 				}
 
 			}
@@ -168,6 +145,38 @@ public class EndGameListener implements ContactListener{
 		isAliveMonster	= 0;
 	}
 
+	private static void endGame () {
+		GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
+
+		GlobalSettings.MENUS.launchEndGameMenu ();
+	}
+
+	public static void looseGame () {
+		GlobalSettings.GAME.looseSound ();
+		Gdx.app.log("KILL", "Bouboule est MORT =/");
+
+		GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
+		GlobalSettings.PROFILE.cancelNewScore ();
+		if (! GlobalSettings.PROFILE.addLifes (-1)) {
+			GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
+			GlobalSettings.PROFILE.checkHighScoreAndResetProfile ();
+		}
+
+		endGame ();
+	}
+
+	public static void winGame () {
+		GlobalSettings.GAME.winSound ();
+		Gdx.app.log("KILL", "Bouboule a gagné =P");
+		GlobalSettings.PROFILE.saveScore ();
+		if (GlobalSettings.PROFILE.LevelUp ())
+			GlobalSettings.GAME_EXIT = GameExitStatus.WIN;
+		else { // no more level: end game
+			GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
+			GlobalSettings.PROFILE.checkHighScoreAndResetProfile ();
+		}
+		endGame ();
+	}
 
 
 }

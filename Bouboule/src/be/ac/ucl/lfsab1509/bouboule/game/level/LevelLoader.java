@@ -178,7 +178,7 @@ public class LevelLoader {
 		}
 	}
 
-	private String extractJSonName (String jsonFile) {
+	private static String extractJSonName (String jsonFile) {
 		return jsonFile.substring (jsonFile.lastIndexOf ('/') + 1,
 				jsonFile.lastIndexOf ('.'));
 	}
