@@ -134,27 +134,22 @@ public class LevelLoader {
 			float angle				= Float.parseFloat(boub.getAttribute("angle"));
 			int IALevel				= Integer.parseInt(boub.getAttribute("IALevel"));
 			short entity			= Short.parseShort(boub.getAttribute("entity"));
-			String jsonFile			= boub.getAttribute("jsonFile");
-			String jsonName			= extractJSonName (jsonFile);
-			String texRegionPath;
+			
+			String texRegionPath;			
+			String type				= boub.getAttribute("type");
+			String directory		= (type.equals("normal")) ? 
+											BoubImages.BOUB_DIR_NORMAL : (type.equals("small")) ?
+													BoubImages.BOUB_DIR_SMALL : BoubImages.BOUB_DIR_GIANT;
+			
+			String jsonFile			= directory+BoubImages.BOUB_JSON_EXT;
+			
+			
 			if (entity == Entity.PLAYER)
-				texRegionPath = BoubImages.BOUB_DIR // images/boub/
-						+ GlobalSettings.PROFILE.getBoubName () // boub_geisha
-						+ (jsonName.endsWith (BoubImages.BOUB_SMALL_SUFFIX) // _small
-							? BoubImages.BOUB_SMALL_SUFFIX
-							: (jsonName.endsWith (BoubImages.BOUB_GIANT_SUFFIX) // or _giant
-								? BoubImages.BOUB_GIANT_SUFFIX
-								: ""))
-						+ BoubImages.BOUB_EXTENTION; // .png
+				
+				texRegionPath = directory+GlobalSettings.PROFILE.getBoubName ()+BoubImages.BOUB_EXTENTION;
+
 			else
-				texRegionPath 		= boub.getAttribute("texRegionPath");
-
-
-			graphicManager.addBody( new Bouboule(radius, bodyType, density,
-					elasticity, px, py, angle,texRegionPath, 
-					jsonFile, jsonName, entity, IALevel));
-
-
+				texRegionPath 		= directory+boub.getAttribute("texRegionPath");
 
 
 			Gdx.app.log("XML",
@@ -168,11 +163,20 @@ public class LevelLoader {
 							py				+" angle :"+
 							angle				+" tex :"+
 							texRegionPath 	+" jsonFile :"+
-							jsonFile 		+" name :"+
-							jsonName 		+" entity :"+
+							jsonFile 		+ "jsonName :"+
+							"boub_"+type    +" entity :"+
 							entity			+" IA :"+
 							IALevel
 					);
+			
+			graphicManager.addBody( new Bouboule(radius, bodyType, density,
+					elasticity, px, py, angle,texRegionPath, 
+					jsonFile, "boub_"+type, entity, IALevel));
+
+
+
+
+			
 
 
 		}

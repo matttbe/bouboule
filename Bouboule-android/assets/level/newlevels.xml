@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Level>
 
-    <Level1 bonus="True" bonusrate="5432">
+    <Level1
+        bonus="True"
+        bonusrate="5432" >
 
         <Bouboule
             IALevel="6"
@@ -9,11 +11,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="620"
             radius="0"
-            texRegionPath="images/boub/boub_basic.png" >
+            texRegionPath="boub_basic.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -22,20 +24,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="380"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/Arena/arena.json"
+            jsonFile="terrain/Arena/arena.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/Arena/arena.jpg" >
+            texRegionPath="terrain/Arena/arena.jpg" >
         </Arena>
 
         <MapNodes>
@@ -63,7 +65,9 @@
         </Obstacles>
     </Level1>
 
-    <Level2 bonus="True" bonusrate="5432">
+    <Level2
+        bonus="True"
+        bonusrate="5432" >
 
         <Bouboule
             IALevel="4"
@@ -71,11 +75,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub_giant.json"
             px="350"
             py="620"
             radius="0"
-            texRegionPath="images/boub/boub_basic_giant.png" >
+            texRegionPath="boub_basic.png"
+            type="giant" >
         </Bouboule>
 
         <Bouboule
@@ -84,20 +88,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="380"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/Arena/arena.json"
+            jsonFile="terrain/Arena/arena.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/Arena/arena.jpg" >
+            texRegionPath="terrain/Arena/arena.jpg" >
         </Arena>
 
         <MapNodes>
@@ -124,9 +128,10 @@
         <Obstacles>
         </Obstacles>
     </Level2>
-    
-    
-    <Level3 bonus="True" bonusrate="5432">
+
+    <Level3
+        bonus="True"
+        bonusrate="5432" >
 
         <Bouboule
             IALevel="6"
@@ -134,11 +139,11 @@
             density="2"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub_small.json"
             px="350"
             py="620"
             radius="0"
-            texRegionPath="images/boub/boub_basic_small.png" >
+            texRegionPath="boub_basic.png"
+            type="small" >
         </Bouboule>
 
         <Bouboule
@@ -147,20 +152,20 @@
             density="2"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub_small.json"
             px="350"
             py="380"
-            radius="0" >
+            radius="0"
+            type="small" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/Arena/arena.json"
+            jsonFile="terrain/Arena/arena.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/Arena/arena.jpg" >
+            texRegionPath="terrain/Arena/arena.jpg" >
         </Arena>
 
         <MapNodes>
@@ -186,7 +191,6 @@
 
         <Obstacles>
         </Obstacles>
-
     </Level3>
 
     <Level4>
@@ -197,11 +201,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="620"
             radius="0"
-            texRegionPath="images/boub/boub_geisha.png" >
+            texRegionPath="boub_geisha.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -210,20 +214,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="380"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/Eggroll/eggroll.json"
+            jsonFile="terrain/Eggroll/eggroll.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/Eggroll/eggroll.jpg" >
+            texRegionPath="terrain/Eggroll/eggroll.jpg" >
         </Arena>
 
         <MapNodes>
@@ -259,11 +263,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub.json"
             px="100"
             py="900"
             radius="0"
-            texRegionPath="images/boub/boub_samurai.png" >
+            texRegionPath="boub_samurai.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -272,20 +276,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="600"
             py="100"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/DoubleHoles/doubleholes.json"
+            jsonFile="terrain/DoubleHoles/doubleholes.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/DoubleHoles/doubleholes.jpg" >
+            texRegionPath="terrain/DoubleHoles/doubleholes.jpg" >
         </Arena>
 
         <MapNodes>
@@ -379,7 +383,7 @@
                 py="6.34146f"
                 weight="0.44013f" >
             </NodeAllow>
-            
+
             <NodeAllow
                 px="1.5592f"
                 py="7.2390f"
@@ -399,11 +403,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="800"
             radius="0"
-            texRegionPath="images/boub/boub_inuit.png" >
+            texRegionPath="boub_inuit.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -412,20 +416,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="200"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/Ice/ice.json"
+            jsonFile="terrain/Ice/ice.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/Ice/ice.jpg" >
+            texRegionPath="terrain/Ice/ice.jpg" >
         </Arena>
 
         <MapNodes>
@@ -449,11 +453,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="750"
             radius="0"
-            texRegionPath="images/boub/boub_fireball.png" >
+            texRegionPath="boub_fireball.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -462,20 +466,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="250"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/Lava/lava.json"
+            jsonFile="terrain/Lava/lava.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/Lava/lava.jpg" >
+            texRegionPath="terrain/Lava/lava.jpg" >
         </Arena>
 
         <MapNodes>
@@ -499,11 +503,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub.json"
             px="400"
             py="800"
             radius="0"
-            texRegionPath="images/boub/boub_chef.png" >
+            texRegionPath="boub_chef.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -512,20 +516,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="400"
             py="300"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/Sushi/sushi.json"
+            jsonFile="terrain/Sushi/sushi.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/Sushi/sushi.jpg" >
+            texRegionPath="terrain/Sushi/sushi.jpg" >
         </Arena>
 
         <MapNodes>
@@ -557,10 +561,10 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="data/terrain/Sushi/sushi_mur.json"
+                jsonFile="terrain/Sushi/sushi_mur.json"
                 px="0"
                 py="0"
-                texRegionPath="data/terrain/Sushi/sushi_mur.png" >
+                texRegionPath="terrain/Sushi/sushi_mur.png" >
             </Obstacle>
 
             <Obstacle
@@ -569,10 +573,10 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="data/terrain/Sushi/sushi_obs.json"
+                jsonFile="terrain/Sushi/sushi_obs.json"
                 px="0"
                 py="0"
-                texRegionPath="data/terrain/Sushi/sushi_obs.png" >
+                texRegionPath="terrain/Sushi/sushi_obs.png" >
             </Obstacle>
         </Obstacles>
     </Level8>
@@ -585,11 +589,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="900"
             radius="0"
-            texRegionPath="images/boub/boub_nuage.png" >
+            texRegionPath="boub_nuage.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -598,20 +602,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="100"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/Schrink/schrink.json"
+            jsonFile="terrain/Schrink/schrink.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/Schrink/schrink.jpg" >
+            texRegionPath="terrain/Schrink/schrink.jpg" >
         </Arena>
 
         <MapNodes>
@@ -653,11 +657,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub.json"
             px="600"
             py="750"
             radius="0"
-            texRegionPath="images/boub/boub_kid.png" >
+            texRegionPath="boub_kid.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -666,20 +670,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="80"
             py="220"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/Tatami/tatami.json"
+            jsonFile="terrain/Tatami/tatami.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/Tatami/tatami.jpg" >
+            texRegionPath="terrain/Tatami/tatami.jpg" >
         </Arena>
 
         <MapNodes>
@@ -689,7 +693,6 @@
                 py="5.5122f"
                 weight="2.8421f" >
             </NodeAllow>
-
         </MapNodes>
 
         <Obstacles>
@@ -704,11 +707,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="700"
             radius="0"
-            texRegionPath="images/boub/boub_salaryman.png" >
+            texRegionPath="boub_salaryman.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -717,20 +720,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="300"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/Skyline/sky.json"
+            jsonFile="terrain/Skyline/sky.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/Skyline/sky.jpg" >
+            texRegionPath="terrain/Skyline/sky.jpg" >
         </Arena>
 
         <MapNodes>
@@ -754,11 +757,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="620"
             radius="0"
-            texRegionPath="images/boub/boub_seal.png" >
+            texRegionPath="boub_seal.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -767,20 +770,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="380"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/Rock/rock.json"
+            jsonFile="terrain/Rock/rock.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/Rock/rock.jpg" >
+            texRegionPath="terrain/Rock/rock.jpg" >
         </Arena>
 
         <MapNodes>
@@ -790,7 +793,6 @@
                 py="4.9756f"
                 weight="3.2862f" >
             </NodeAllow>
-
         </MapNodes>
 
         <Obstacles>
@@ -805,11 +807,11 @@
             density="5"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub_small.json"
             px="350"
             py="700"
             radius="0"
-            texRegionPath="images/boub/boub_monk_small.png" >
+            texRegionPath="boub_monk.png"
+            type="small" >
         </Bouboule>
 
         <Bouboule
@@ -818,20 +820,20 @@
             density="5"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub_small.json"
             px="350"
             py="300"
-            radius="0" >
+            radius="0"
+            type="small" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/YinYang/yinyang.json"
+            jsonFile="terrain/YinYang/yinyang.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/YinYang/yinyang.jpg" >
+            texRegionPath="terrain/YinYang/yinyang.jpg" >
         </Arena>
 
         <MapNodes>
@@ -855,11 +857,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="800"
             radius="0"
-            texRegionPath="images/boub/boub_mouse.png" >
+            texRegionPath="boub_mouse.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -868,20 +870,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="400"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/Cheesy/cheesy.json"
+            jsonFile="terrain/Cheesy/cheesy.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/Cheesy/cheesy.jpg" >
+            texRegionPath="terrain/Cheesy/cheesy.jpg" >
         </Arena>
 
         <MapNodes>
@@ -903,13 +905,13 @@
                 py="5.6195f"
                 weight="1.89474f" >
             </NodeAllow>
-            
+
             <NodeAllow
                 px="3.2566f"
                 py="2.8585f"
                 weight="0.98684f" >
             </NodeAllow>
-            
+
             <NodeAllow
                 px="1.0263f"
                 py="4.7707f"
@@ -929,11 +931,11 @@
             density="1"
             elasticity="1.1f"
             entity="-1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="620"
             radius="0"
-            texRegionPath="images/boub/boub_bbmonk.png" >
+            texRegionPath="boub_bbmonk.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -942,20 +944,20 @@
             density="1"
             elasticity="1.10f"
             entity="1"
-            jsonFile="data/jsonFile/boub.json"
             px="350"
             py="380"
-            radius="0" >
+            radius="0"
+            type="normal" >
         </Bouboule>
 
         <Arena
             angle="0"
             entity="0"
-            jsonFile="data/terrain/OneWay/oneway.json"
+            jsonFile="terrain/OneWay/oneway.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="data/terrain/OneWay/oneway.jpg" >
+            texRegionPath="terrain/OneWay/oneway.jpg" >
         </Arena>
 
         <MapNodes>
@@ -965,8 +967,6 @@
                 py="8.1756f"
                 weight="6.3651f" >
             </NodeAllow>
-
-
         </MapNodes>
 
         <Obstacles>
@@ -977,10 +977,10 @@
                 density="1"
                 elasticity="0.5f"
                 entity="-2"
-                jsonFile="data/terrain/OneWay/oneway_mur.json"
+                jsonFile="terrain/OneWay/oneway_mur.json"
                 px="0"
                 py="0"
-                texRegionPath="data/terrain/OneWay/oneway_mur.png" >
+                texRegionPath="terrain/OneWay/oneway_mur.png" >
             </Obstacle>
         </Obstacles>
     </Level15>

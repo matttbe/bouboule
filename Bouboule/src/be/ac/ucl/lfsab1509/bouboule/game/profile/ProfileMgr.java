@@ -65,7 +65,7 @@ public class ProfileMgr {
 	 * @pre this profile should have been created with {@link #createAndLoadNewProfile(String)}
 	 * @param cName, the profile name
 	 */
-	public void loadProfile (String cName) {
+	public void loadProfile (final String cName) {
 		GlobalSettings.PROFILE = new Profile (cName);
 		prefs.putString (LAST_PROFILE_KEY, cName);
 		prefs.flush ();
@@ -111,7 +111,7 @@ public class ProfileMgr {
 	 *  => String.IndexOfAny (System.IO.Path.GetInvalidPathChars ()) == 0
 	 * @param cName: the new profile name
 	 */
-	public void createAndLoadNewProfile (String cName) {
+	public void createAndLoadNewProfile (final String cName) {
 		String profiles = getAllProfilesAsString ();
 		profiles += SEPARATOR + cName; // should at least contain Bouboule (default)
 		prefs.putString (PROFILES_KEY, profiles); // no need to flush => done in loadProfile
