@@ -28,9 +28,13 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 import android.os.Bundle;
 import android.app.Activity;
+import android.graphics.Point;
 import android.graphics.Typeface;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -58,9 +62,12 @@ public class LoosingActivity extends Activity {
 		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
 				"osaka-re.ttf");
 		TextView pScoreView = (TextView) findViewById (R.id.LoosingScore);
+		
+		float ratio = getDisplayVector().y/ScreenGame.APPHEIGHT;
 
 		pScoreView.setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
 		pScoreView.setTypeface (myFontBout);
+		pScoreView.setTextSize(TypedValue.COMPLEX_UNIT_PX,35*ratio);
 		
 		int NbLifes = GlobalSettings.PROFILE.getNbLifes ();
 
@@ -77,6 +84,14 @@ public class LoosingActivity extends Activity {
 			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
 		}
 		// no life? => GameOverActivity
+	}
+	
+	private Point getDisplayVector() {
+		Display display = getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+
+		return size;
 	}
 
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {

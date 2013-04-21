@@ -41,20 +41,19 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class ScreenGame implements Screen {
 
-	static final float APPWIDTH 	= 800f;
-	static final float APPHEIGHT 	= 1250f;
+	public static final float APPWIDTH 	= 800f;
+	public static final float APPHEIGHT = 1250f;
 	
 	//Test Update
 
 
-	//private SpriteBatch             		batch;
 	private OrthographicCamera      		camera;
 
 	private GameLoop 						game;
 	private Profile profile;
 	private Music loopMusic;
 
-	// private int iCountDown = 0;
+
 	private boolean bIsPause = false;
 	private boolean bNewGame = true;
 
@@ -66,6 +65,7 @@ public class ScreenGame implements Screen {
 
 		camera = CameraHelper.GetCamera(APPWIDTH, APPHEIGHT);
 		game = new GameLoop(camera, true);
+		
 	}
 
 	@Override

@@ -27,33 +27,29 @@ package be.ac.ucl.lfsab1509.bouboule.game.profile;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
 public class BoubImages {
-	public static final String BOUB_GIANT_SUFFIX = "_giant";
-	public static final String BOUB_SMALL_SUFFIX = "_small";
+
 	public static final String BOUB_EXTENTION = ".png";
 
-	public static final String BOUB_DIR = "images/boub/";
+	public static final String BOUB_DIR_NORMAL = "boub/normal/";
+	public static final String BOUB_DIR_GIANT  = "boub/giant/";
+	public static final String BOUB_DIR_SMALL  = "boub/small/";
+
+	public static final String BOUB_JSON_EXT   = "boub.json";
+
+	
 	
 	/**
 	 * @return a list of files all bouboules images which have a normal size
 	 */
 	public static ArrayList<FileHandle> getAllNormalBoub () {
-		FileHandle pDir = Gdx.files.internal(BOUB_DIR);
-		FileHandle pAllFiles[] = pDir.list ();
-		ArrayList<FileHandle> pList = new ArrayList<FileHandle> (pAllFiles.length);
+		FileHandle pDir = Gdx.files.internal(BOUB_DIR_NORMAL);
 
-		for (int i = 0; i < pAllFiles.length; i++) {
-			FileHandle pCurrFile = pAllFiles[i];
-
-			if (! pCurrFile.name ().endsWith (BOUB_GIANT_SUFFIX + BOUB_EXTENTION) // only normal files
-					&& ! pCurrFile.name ().endsWith (BOUB_SMALL_SUFFIX + BOUB_EXTENTION))
-				pList.add (pCurrFile);
-		}
-
-		return pList;
+		return new ArrayList<FileHandle>(Arrays.asList(pDir.list (".png")));
 	}
 }

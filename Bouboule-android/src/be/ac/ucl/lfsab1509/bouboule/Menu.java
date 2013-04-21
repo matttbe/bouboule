@@ -33,10 +33,12 @@ import com.badlogic.gdx.Gdx;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.HighScoreInfo;
+import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,6 +46,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -127,7 +130,11 @@ public class Menu extends Activity {
 		//Font Update
 		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
 		((TextView) contentView).setTypeface(myTypeface);
-		((TextView) contentView).setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+		
+		float ratio = getDisplayVector().y /ScreenGame.APPHEIGHT;
+		
+		((TextView) contentView).setTextSize(TypedValue.COMPLEX_UNIT_PX,  
+				45*ratio);
 
 		//Incline the blue text
 		contentView.setRotation(-15);
@@ -154,9 +161,18 @@ public class Menu extends Activity {
 
 
 	}
+	
+	
+	private Point getDisplayVector() {
+		Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        
+        return size;
+	}
 
 
-	/*
+	/**
 	 * Start the Game // Parameters // HighScore
 	 */
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
@@ -243,7 +259,7 @@ public class Menu extends Activity {
 	}
 
 
-	/*
+	/**
 	 * Update the Animated String and add a 
 	 * bouncing animation
 	 */
@@ -428,12 +444,6 @@ public class Menu extends Activity {
 		animationSetCaseD.addAnimation(g1);
 		
 	}
-
-	
-	/*@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
-	}*/
 	
 	@Override
 	protected void onPause () {

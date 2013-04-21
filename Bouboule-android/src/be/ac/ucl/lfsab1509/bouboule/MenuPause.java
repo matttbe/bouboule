@@ -28,10 +28,15 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import java.util.Random;
 
+import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
+
 import android.app.Activity;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -45,7 +50,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
 public class MenuPause extends Activity {
-	
+
 	// Need handler for callback to the UI thread
 	private final Handler mHandler = new Handler();
 
@@ -53,7 +58,7 @@ public class MenuPause extends Activity {
 	private final Runnable animationUpdate = new Runnable() {
 		@Override
 		public void run() {
-			
+
 			updateAnimationOnUI();
 		}
 	};
@@ -73,16 +78,16 @@ public class MenuPause extends Activity {
 
 	// Animation containers
 	private AnimationSet 
-			animationSetForTitle = new AnimationSet(true),
-			animationSetCase1 	 = new AnimationSet(true),
-			animationSetCase2 	 = new AnimationSet(true),
-			animationSetCase3 	 = new AnimationSet(true),
-			animationSetCase4 	 = new AnimationSet(true),
-			animationSetCaseD 	 = new AnimationSet(true);
+	animationSetForTitle = new AnimationSet(true),
+	animationSetCase1 	 = new AnimationSet(true),
+	animationSetCase2 	 = new AnimationSet(true),
+	animationSetCase3 	 = new AnimationSet(true),
+	animationSetCase4 	 = new AnimationSet(true),
+	animationSetCaseD 	 = new AnimationSet(true);
 
 	@Override
 	public void onCreate (final Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
 
 		// Request the fullScreen for the Main Screen
@@ -91,13 +96,16 @@ public class MenuPause extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_pause_menu);
 
+		//size of the font
+		float ratio = 45*getDisplayVector().y/ScreenGame.APPHEIGHT;
+		
 		final View contentView = findViewById(R.id.fullscreen_content_pause);
 
 		// Font Update
 		Typeface myTypeface = Typeface.createFromAsset(getAssets(),
 				"menu_font.ttf");
 		((TextView) contentView).setTypeface(myTypeface);
-
+		((TextView) contentView).setTextSize(TypedValue.COMPLEX_UNIT_PX, ratio);
 		// Incline the blue text
 		contentView.setRotation(-15);
 
@@ -109,15 +117,27 @@ public class MenuPause extends Activity {
 		findViewById(R.id.PauseQuitButton).setOnTouchListener(
 				fireListener);
 
+		
+		// Create font for the other buttons
 		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
 				"chineyen.ttf");
-
+		
+		//Set Font
 		((TextView) findViewById(R.id.PauseContinueButton))
-				.setTypeface(myFontBout);
+			.setTypeface(myFontBout);
 		((TextView) findViewById(R.id.PauseMenuButton))
-				.setTypeface(myFontBout);
+			.setTypeface(myFontBout);
 		((TextView) findViewById(R.id.PauseQuitButton))
-				.setTypeface(myFontBout);
+			.setTypeface(myFontBout);
+
+		
+		//Set size Font
+		((TextView) findViewById(R.id.PauseContinueButton))
+			.setTextSize(TypedValue.COMPLEX_UNIT_PX, ratio);
+		((TextView) findViewById(R.id.PauseMenuButton))
+			.setTextSize(TypedValue.COMPLEX_UNIT_PX, ratio);
+		((TextView) findViewById(R.id.PauseQuitButton))
+			.setTextSize(TypedValue.COMPLEX_UNIT_PX, ratio);
 
 		// getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND); // deprecated
 		WindowManager.LayoutParams lp = getWindow().getAttributes();
@@ -132,13 +152,21 @@ public class MenuPause extends Activity {
 
 	}
 
+	private Point getDisplayVector() {
+		Display display = getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+
+		return size;
+	}
+
 	/*
 	 * Start the Game // Parameters // HighScore
 	 */
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(View view, MotionEvent motionEvent) {
-			
+
 			setResult(view.getId()); // give the id of the button
 			finish(); // finish activity
 
@@ -150,7 +178,7 @@ public class MenuPause extends Activity {
 	 * Update the Animated String and add a bouncing animation
 	 */
 	protected void startFunWithUi() {
-		
+
 		nameToShow = getResources().getString(R.string.pause);
 
 		// Get the text and update the name
@@ -166,7 +194,7 @@ public class MenuPause extends Activity {
 	}
 
 	private void updateAnimationOnUI() {
-		
+
 
 		// Get the Text to update
 		TextView myTextView = (TextView) findViewById(R.id.fullscreen_content_pause);
@@ -178,21 +206,21 @@ public class MenuPause extends Activity {
 		switch (rand.nextInt(5))
 		{
 		// Fire the right animation
-			case 1:
-				myTextView.startAnimation(animationSetCase1);
-				break;
-			case 2:
-				myTextView.startAnimation(animationSetCase2);
-				break;
-			case 3:
-				myTextView.startAnimation(animationSetCase3);
-				break;
-			case 4:
-				myTextView.startAnimation(animationSetCase4);
-				break;
-			default:
-				myTextView.startAnimation(animationSetCaseD);
-				break;
+		case 1:
+			myTextView.startAnimation(animationSetCase1);
+			break;
+		case 2:
+			myTextView.startAnimation(animationSetCase2);
+			break;
+		case 3:
+			myTextView.startAnimation(animationSetCase3);
+			break;
+		case 4:
+			myTextView.startAnimation(animationSetCase4);
+			break;
+		default:
+			myTextView.startAnimation(animationSetCaseD);
+			break;
 		}
 
 		// re launch
@@ -201,7 +229,7 @@ public class MenuPause extends Activity {
 
 
 	private void setAllTheAnimationAtOnce()	{
-		
+
 
 		// Furnish 5 different animation
 		// to add to the Text =)
