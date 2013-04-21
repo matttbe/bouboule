@@ -110,15 +110,12 @@ public class GameOverActivity extends Activity {
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-			setResult (view.getId ());
-			finish(); // finish activity => return to MainActivity
-			return false;
+			return MyAndroidMenus.onTouchGeneric (GameOverActivity.this, view.getId ());
 		}
 	};
 
 	@Override
 	public void onBackPressed() {
-		setResult (R.id.LoosingMenuButton); // TODO: EndGameMenuButton?
-		finish ();
+		MyAndroidMenus.onBackPressedGeneric (this, R.id.LoosingMenuButton);
 	}
 }

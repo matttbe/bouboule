@@ -30,6 +30,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
@@ -87,6 +88,17 @@ public class MyAndroidMenus implements Menus {
 		app.overridePendingTransition (android.R.anim.fade_in,
 				android.R.anim.fade_out);
 		GlobalSettings.GAME_EXIT = GameExitStatus.NONE;
+	}
+
+	public static void onBackPressedGeneric (Activity activity, int iButtonId) {
+		activity.setResult (iButtonId);
+		activity.finish ();
+	}
+
+	public static boolean onTouchGeneric (Activity activity, int id) {
+		activity.setResult (id);
+		activity.finish(); // finish activity => return to MainActivity
+		return true; // prevent double calls
 	}
 
 }

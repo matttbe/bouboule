@@ -188,7 +188,7 @@ public class Menu extends Activity {
 						mHandler.removeCallbacks(nameUpdate);
 						setResult(view.getId());
 						finish();
-						break;
+						return true;
 						
 					case R.id.ParameterButton :
 						Intent intent = new Intent(Menu.this, MenuParametre.class);
