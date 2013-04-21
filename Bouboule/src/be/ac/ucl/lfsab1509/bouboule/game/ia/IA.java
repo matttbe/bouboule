@@ -52,7 +52,7 @@ public class IA {
 	//level 6 => hybrid aggresif/defencif
 	//level 7 => attenticipe
 
-	public static Vector2 compute(int IALevel, Bouboule bouboule){
+	public static Vector2 compute(int IALevel, Bouboule bouboule) {
 
 
 		Vector2 IA = null, VelocityIA =null, LocalEnemi=null, VelocityEnemi = null;

@@ -193,12 +193,12 @@ public class GameLoop {
 			switch (random.nextInt(nextInt)) {
 			case 0:
 				Gdx.app.log("heart", "new star created");
-				graphicManager.addBody(new Bonus( 200+random.nextInt(400), 200+random.nextInt(800), 0,
+				graphicManager.addBody(new Bonus( 0,
 						"bonus/star/star.png", "bonus/star/star.json", "star", Entity.BONUS_POINT));
 				break;
 			case 1:
 				Gdx.app.log("heart", "new heart created");
-				graphicManager.addBody(new Bonus( 200+random.nextInt(400), 200+random.nextInt(800), 0,
+				graphicManager.addBody(new Bonus( 0,
 						"bonus/heart/heart.png", "bonus/heart/heart.json", "heart", Entity.BONUS_LIVE));
 				break;
 

@@ -56,4 +56,14 @@ public class MapNode {
 	public String toString(){
 		return "px :"+this.vector.x+" py :"+this.vector.y+" weigth :"+ this.weight;
 	}
+	
+	public float xToPixel() {
+		
+		return 20 + 304/3 *vector.x;
+	}
+	
+	public float yToPixel() {
+		
+		return 1215 - 205/2 *vector.y;
+	}
 }
