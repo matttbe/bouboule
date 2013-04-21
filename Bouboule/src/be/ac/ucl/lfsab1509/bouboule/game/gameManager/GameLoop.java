@@ -53,6 +53,7 @@ public class GameLoop {
 	private CountDown 			countDown;
 	private BitmapFont			fontOswald;
 	private BitmapFont			fontOsaka;
+	private BitmapFont			fontOsakaRed;
 	private SpriteBatch			batch;
 	private LevelLoader 		level;
 
@@ -91,6 +92,10 @@ public class GameLoop {
 
 		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
 				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
+
+		fontOsakaRed = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
+				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
+		fontOsakaRed.setColor (.95f, .05f, .05f, 1f);
 
 		//load the counter 
 		countDown = new CountDown();
@@ -212,12 +217,19 @@ public class GameLoop {
 
 		int timer = GlobalSettings.PROFILE.getScore() - GlobalSettings.PROFILE.getOldScore();
 		
-		timer = (timer < 0) ? 0: timer;
+		if (timer < 0) {
+			EndGameListener.looseGame ();
+			return;
+		}
 
 		CharSequence timerM= Integer.toString((timer/60)); 
 		CharSequence timerS= Integer.toString(timer%60);
 
-		fontOsaka .draw(batch, timerM+"' "+timerS+"''" , 630, 1122);
+		if (timer < 6) // last 5 seconds
+			fontOsakaRed.draw(batch, timerM+"' "+timerS+"''" , 630, 1122);
+		else
+			fontOsaka.draw(batch, timerM+"' "+timerS+"''" , 630, 1122);
+		
 		fontOsaka .draw(batch, lives , 630, 1167);
 		fontOsaka .draw(batch, score , 630, 1205);
 		fontOswald.draw(batch, levelD, 285, 1180);
