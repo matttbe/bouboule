@@ -221,6 +221,13 @@ public class Profile {
 	}
 
 	/**
+	 * @return the score at the beginning of the current game
+	 */
+	public int getNewInitScore () {
+		return iNewInitScore;
+	}
+
+	/**
 	 * @return the score that the user had just before the reset
 	 */
 	public int getEndGameScore () {

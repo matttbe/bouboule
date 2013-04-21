@@ -43,10 +43,11 @@ public class MyGestureListener implements GestureListener {
 	public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2,
 			Vector2 pointer1, Vector2 pointer2) {
 		
-		Gdx.app.log("Touch","Pinch event");
+		Gdx.app.log("Touch","Pinch event " + GlobalSettings.PROFILE.isRunning ());
 		
 		if (GlobalSettings.PROFILE.getName().equals("Deville")
-				&& GlobalSettings.PROFILE.isRunning ()) { // prevent double stop, double level up, etc.
+				&& GlobalSettings.PROFILE.isRunning () // prevent double stop, double level up, etc.
+				&& GlobalSettings.PROFILE.getScore () < GlobalSettings.PROFILE.getNewInitScore ()) { // it seems this method is called just after the resume... wait at least one second before cheating ;)
 			EndGameListener.winGame (); // cheater!!!!
 		}
 			
