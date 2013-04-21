@@ -119,20 +119,20 @@ public class IA {
 
 		
 
-		Vector2 slow;
+		// Vector2 slow;
 		if(IALevel != 0){
 			Acc=Acc.limit(FORCE_MAX_IA);
-			slow = new Vector2(VelocityIA).nor().mul(0.02f);
+			//slow = new Vector2(VelocityIA).nor().mul(0.02f);
 		}else{
 			Acc=Acc.limit(FORCE_MAX_PLAYER);
-			slow = new Vector2(VelocityEnemi).nor().mul(0.02f);
+			//slow = new Vector2(VelocityEnemi).nor().mul(0.02f);
 			//slow = new Vector2(0, 0);
 		}
 		//Acc.sub(slow);
 		
-		if(IALevel == 0){
+		/*if(IALevel == 0){
 			Gdx.app.log ("Player","playerx"+LocalEnemi.x+"y"+LocalEnemi.y+"speed2"+VelocityEnemi.len2()+"acc"+Acc.len());
-		}
+		}*/
 		
 		Acc.mul(3.0f);
 		
@@ -175,10 +175,10 @@ public class IA {
 		Vector2 dirmid = middeler(IA, close);
 		if(dirmid.dot(velocityIA) < 0.25f && velocityIA.len2()+dirmid.len() > close.getWeight()){
 			//évitement des bords
-			Gdx.app.log ("Player","IA:defence slow");
+			// Gdx.app.log ("Player","IA:defence slow");
 			return stopMid(IA, velocityIA);
 		}
-		Gdx.app.log ("Player","IA:defence normal");
+		// Gdx.app.log ("Player","IA:defence normal");
 		return acc;
 	}
 
@@ -196,11 +196,11 @@ public class IA {
 		if(!(Math.abs(angleCentre(fictposition, centreIA.getVector())-angleCentre(localEnemi,centreIA.getVector())) < 15 &&
 				centreIA == getClosestCentre(localEnemi)))
 		if(dirmid.dot(velocity) < 0.0f && velocity.len2()*1.75 + dirmid.len() > centreIA.getWeight()){
-			Gdx.app.log ("Player","IA:attaque slow");
+			//Gdx.app.log ("Player","IA:attaque slow");
 			//évitement des bords
 			return stopMid(position, velocity);
 		}
-		Gdx.app.log ("Player","IA:attaque normal");
+		// Gdx.app.log ("Player","IA:attaque normal");
 		return directionenemi;
 	}
 

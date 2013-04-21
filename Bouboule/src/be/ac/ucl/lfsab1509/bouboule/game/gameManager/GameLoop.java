@@ -134,7 +134,7 @@ public class GameLoop {
 	 */
 	public void update() {
 		graphicManager.update();
-		Gdx.app.log("FPS", ""+1/Gdx.graphics.getDeltaTime());
+		// Gdx.app.log("FPS", ""+1/Gdx.graphics.getDeltaTime());
 
 		if (GraphicManager.ALLOW_BONUS == true)
 			bonus();
