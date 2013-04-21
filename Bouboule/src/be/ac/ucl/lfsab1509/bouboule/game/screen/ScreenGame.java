@@ -27,7 +27,6 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  */
 
 
-import be.ac.ucl.lfsab1509.bouboule.game.profile.Profile;
 import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
@@ -50,7 +49,6 @@ public class ScreenGame implements Screen {
 	private OrthographicCamera      		camera;
 
 	private GameLoop 						game;
-	private Profile profile;
 	private Music loopMusic;
 
 
@@ -59,7 +57,6 @@ public class ScreenGame implements Screen {
 
 	// INIT => on create
 	public ScreenGame () {
-		profile = GlobalSettings.PROFILE;
 		loopMusic = Gdx.audio.newMusic(Gdx.files.internal("music/klez.mp3"));
 		loopMusic.setLooping(true);
 
@@ -78,7 +75,7 @@ public class ScreenGame implements Screen {
 
 		loopMusic.stop(); // to play at startup
 		game.start ();
-		profile.createTimer ();
+		GlobalSettings.PROFILE.createTimer ();
 	}
 
 
@@ -94,7 +91,7 @@ public class ScreenGame implements Screen {
 		Gdx.app.log ("Matth", "Screen: DISPOSE");
 		if (game != null)
 			game.dispose();
-		profile.stop ();
+		GlobalSettings.PROFILE.stop ();
 		loopMusic.dispose ();
 	}
 
@@ -106,12 +103,12 @@ public class ScreenGame implements Screen {
 	@Override
 	public void pause() {
 		//Gdx.app.log ("Matth", "Screen: PAUSE");
-		Gdx.app.log ("Matth", "Screen: PAUSE + pause status : "+bIsPause + " " + profile.isRunning () + " " + game.getCountDown ().isLaunched ());
+		Gdx.app.log ("Matth", "Screen: PAUSE + pause status : "+bIsPause + " " + GlobalSettings.PROFILE.isRunning () + " " + game.getCountDown ().isLaunched ());
 		game.getCountDown ().reset (); // reset the countdown (if it's running)
-		if (bIsPause || ! profile.isRunning ()) // already stopped... we start a new game?
+		if (bIsPause || ! GlobalSettings.PROFILE.isRunning ()) // already stopped... we start a new game?
 			return;
 		bIsPause = true;
-		profile.pause ();
+		GlobalSettings.PROFILE.pause ();
 		loopMusic.pause ();
 		Gdx.app.log ("Matth", "Screen: PAUSE + pause status ok : "+bIsPause);
 	}
@@ -128,7 +125,7 @@ public class ScreenGame implements Screen {
 			show (); //must relaunch the game when the activity is not paused
 					 //and comes back from a menu or what ever
 		else if (bIsPause && game.getCountDown ().isLaunched ()) { // resume from CountDown
-			profile.play ();
+			GlobalSettings.PROFILE.play ();
 			if (! GlobalSettings.SOUND_IS_MUTED)
 				loopMusic.play ();
 			bIsPause = false;
