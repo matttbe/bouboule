@@ -183,9 +183,9 @@ public class GameLoop {
 
 		if (random.nextInt(GraphicManager.BONUS_SPAWN_RATE) == 5) {
 			// add a new bonus to get more lifes only if we have less than 3 lifes
-			int nextInt = GlobalSettings.PROFILE.getNbLifes () < GlobalSettings.MAX_LIFES ? 2 : 1;
+			int nextInt = GlobalSettings.PROFILE.getNbLifes () < GlobalSettings.MAX_LIFES ? 3 : 2;
 
-			switch (random.nextInt(nextInt)) {
+			switch (random.nextInt(nextInt)) { // int value between 0 (inclusive) and the specified value (exclusive)
 			case 0:
 				Gdx.app.log("heart", "new star created");
 				graphicManager.addBody(new Bonus( 200+random.nextInt(400), 200+random.nextInt(800), 0,
