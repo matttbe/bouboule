@@ -27,8 +27,12 @@ package be.ac.ucl.lfsab1509.bouboule.game.body;
  */
 
 
+import java.util.Random;
+
 import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
+import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -46,7 +50,9 @@ public class Bonus extends GameBody{
 
 	private TextureRegion 	texture;		//Texture of the Bonus
 	private Sprite 			sprite;			//Sprite to draw the Bonus
-
+	
+	private static final Random			random = new Random();
+	
 
 	/**
 	 * Constructor for a Bonus object 
@@ -60,13 +66,16 @@ public class Bonus extends GameBody{
 	 *		final float angle, final String texRegionPath, 
 	 *		final String jsonFile, final String jsonName, final short bonusType)
 	 */
-	public Bonus( final float px, final float py, 
-			final float angle, final String texRegionPath, 
+	public Bonus( final float angle, final String texRegionPath, 
 			final String jsonFile, final String jsonName, final short bonusType) {
 
 		super();
 
-		Vector2 pos	= new Vector2(px, py);
+		int size = GlobalSettings.ARENAWAYPOINTALLOW.size();
+		MapNode node = GlobalSettings.ARENAWAYPOINTALLOW.get(random.nextInt(size));
+		
+		
+		Vector2 pos	= new Vector2(node.xToPixel(), node.yToPixel());
 		
 		this.texture = new TextureRegion(new Texture(texRegionPath));
 
