@@ -1,5 +1,6 @@
 package be.ac.ucl.lfsab1509.bouboule.game.screen;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 
@@ -46,17 +47,7 @@ public class MyGestureListener implements GestureListener {
 		Gdx.app.log("Touch","Pinch event");
 		
 		if ( GlobalSettings.PROFILE.getName().equals("Deville")) {
-			
-			//GlobalSettings.PROFILE.saveScore ();
-			if (GlobalSettings.PROFILE.LevelUp ())
-				GlobalSettings.GAME_EXIT = GameExitStatus.WIN;
-			else { // no more level: end game
-				GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
-				GlobalSettings.PROFILE.checkHighScoreAndResetProfile (); // TODO: what to do?
-			}
-			GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
-
-			GlobalSettings.MENUS.launchEndGameMenu ();
+			EndGameListener.winGame (); // cheater!!!!
 		}
 			
 		return false;
