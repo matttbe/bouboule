@@ -221,6 +221,13 @@ public class Menu extends Activity {
 	private void addScoreInMenu (android.view.Menu menu) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat ("dd/MM/yyyy");
 		HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (false);
+
+		// no highscore: display a message even if there is no high scores
+		if (highscores.length == 0 || highscores[0] == null) { // the first time, we receive only one elem which is null
+			menu.add (getString (R.string.no_highscore));
+			return;
+		}
+
 		for (int i = 0; i < highscores.length; i++) {
 			HighScoreInfo info = highscores[i];
 
