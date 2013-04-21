@@ -2,7 +2,6 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
-import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
@@ -46,7 +45,8 @@ public class MyGestureListener implements GestureListener {
 		
 		Gdx.app.log("Touch","Pinch event");
 		
-		if ( GlobalSettings.PROFILE.getName().equals("Deville")) {
+		if (GlobalSettings.PROFILE.getName().equals("Deville")
+				&& GlobalSettings.PROFILE.isRunning ()) { // prevent double stop, double level up, etc.
 			EndGameListener.winGame (); // cheater!!!!
 		}
 			
