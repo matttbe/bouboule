@@ -65,12 +65,14 @@ public class MenuParametre_user extends Activity {
 		super.onResume();
 		Log.d("LN","onResume");
 		listProfile = GlobalSettings.PROFILE_MGR.getAllProfilesAL();
-		int i = listProfile.indexOf(GlobalSettings.PROFILE.getName());
-		listProfile.remove(i);
-		listProfile.add(0,GlobalSettings.PROFILE.getName());
+
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listProfile);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		user_selectprofile_spin.setAdapter(adapter);
+
+		Log.d ("Matth", "Users: " + Arrays.toString (GlobalSettings.PROFILE_MGR.getAllProfiles ()));
+		Log.d("Matth", "User: " + listProfile.indexOf(GlobalSettings.PROFILE.getName()));
+		user_selectprofile_spin.setSelection (listProfile.indexOf(GlobalSettings.PROFILE.getName())); // select the current user
 	}
 	
 	private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
@@ -101,7 +103,7 @@ public class MenuParametre_user extends Activity {
 				
 					case R.id.button_user_create :
 						createNewProfile();
-						break;
+						return true; // consume the event => prevent double calls
 					default :
 						break;
 				}
@@ -115,7 +117,7 @@ public class MenuParametre_user extends Activity {
 		String text = ((EditText) findViewById(R.id.user_newname)).getText().toString();
 		Log.d("LN","new profile sauvegarde : "+text);
 		GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
-		onResume(); // refresh th view
+		finish (); // quit the view (there is no more option and we have to understand that it's done)
 	}
 	
 	
