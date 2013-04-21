@@ -146,28 +146,30 @@ public class EndGameListener implements ContactListener{
 	}
 
 	private static void endGame () {
+		Gdx.app.log ("KILL", "EndGame: hide + launch menu");
 		GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
 
 		GlobalSettings.MENUS.launchEndGameMenu ();
 	}
 
 	public static void looseGame () {
-		GlobalSettings.GAME.looseSound ();
 		Gdx.app.log("KILL", "Bouboule est MORT =/");
 
-		GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
 		GlobalSettings.PROFILE.cancelNewScore ();
-		if (! GlobalSettings.PROFILE.addLifes (-1)) {
+		if (GlobalSettings.PROFILE.addLifes (-1))
+			GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
+		else {
 			GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
 			GlobalSettings.PROFILE.checkHighScoreAndResetProfile ();
 		}
 
+		GlobalSettings.GAME.looseSound ();
 		endGame ();
 	}
 
 	public static void winGame () {
-		GlobalSettings.GAME.winSound ();
 		Gdx.app.log("KILL", "Bouboule a gagné =P");
+
 		GlobalSettings.PROFILE.saveScore ();
 		if (GlobalSettings.PROFILE.LevelUp ())
 			GlobalSettings.GAME_EXIT = GameExitStatus.WIN;
@@ -175,6 +177,8 @@ public class EndGameListener implements ContactListener{
 			GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
 			GlobalSettings.PROFILE.checkHighScoreAndResetProfile ();
 		}
+
+		GlobalSettings.GAME.winSound ();
 		endGame ();
 	}
 
