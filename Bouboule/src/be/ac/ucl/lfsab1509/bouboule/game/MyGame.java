@@ -28,11 +28,13 @@ package be.ac.ucl.lfsab1509.bouboule.game;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
+import be.ac.ucl.lfsab1509.bouboule.game.screen.MyGestureListener;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.input.GestureDetector;
 
 public class MyGame extends Game {
 
@@ -52,6 +54,8 @@ public class MyGame extends Game {
 
 		screenGame = new ScreenGame();
 		setScreen (screenGame); // 
+		
+		Gdx.input.setInputProcessor( new GestureDetector(new MyGestureListener()));
 	}
 
 	public void loadDefaultProfile () {
