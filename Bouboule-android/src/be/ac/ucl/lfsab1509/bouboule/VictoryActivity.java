@@ -28,9 +28,13 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 import android.os.Bundle;
 import android.app.Activity;
+import android.graphics.Point;
 import android.graphics.Typeface;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -48,6 +52,7 @@ public class VictoryActivity extends Activity {
 							 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_victory);
 
+		float ratio = getDisplayVector().y/ScreenGame.APPHEIGHT;
 
 		// Listeners for the Game Launcher
 		findViewById(R.id.VictoryMenuButton).setOnTouchListener(
@@ -61,6 +66,7 @@ public class VictoryActivity extends Activity {
 
 		pScoreView.setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
 		pScoreView.setTypeface (myFontBout);
+		pScoreView.setTextSize(TypedValue.COMPLEX_UNIT_PX,35*ratio);
 		
 
 		
@@ -78,6 +84,14 @@ public class VictoryActivity extends Activity {
 			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
 			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
 		}
+	}
+	
+	private Point getDisplayVector() {
+		Display display = getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+
+		return size;
 	}
 
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {

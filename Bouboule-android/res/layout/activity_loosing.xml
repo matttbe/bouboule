@@ -58,7 +58,6 @@
                 android:text="@string/pause"
                 android:textAppearance="?android:attr/textAppearanceButton"
                 android:textColor="@color/black_overlay"
-                android:textSize="25sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

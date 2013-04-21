@@ -27,6 +27,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.profile;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -48,15 +49,7 @@ public class BoubImages {
 	 */
 	public static ArrayList<FileHandle> getAllNormalBoub () {
 		FileHandle pDir = Gdx.files.internal(BOUB_DIR_NORMAL);
-		FileHandle pAllFiles[] = pDir.list ();
-		ArrayList<FileHandle> pList = new ArrayList<FileHandle> (pAllFiles.length);
 
-		for (int i = 0; i < pAllFiles.length; i++) {
-			FileHandle pCurrFile = pAllFiles[i];
-
-				pList.add (pCurrFile);
-		}
-
-		return pList;
+		return new ArrayList<FileHandle>(Arrays.asList(pDir.list (".png")));
 	}
 }
