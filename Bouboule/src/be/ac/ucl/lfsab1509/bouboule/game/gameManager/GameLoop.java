@@ -198,27 +198,27 @@ public class GameLoop {
 			case 0:
 				Gdx.app.log("heart", "new speed-created");
 				graphicManager.addBody(new Bonus( 0,
-						"bonus/speed/speed_low.png", "bonus/speed/speed.json", "speed", Entity.BONUS_SPEEL));
+						"bonus/speed/speed_low.png", "bonus/speed/speed.json", "speed", Entity.BonusType.SPEED_LOW));
 				break;
 
 
 			case 1:
 				Gdx.app.log("heart", "new speed+created");
 				graphicManager.addBody(new Bonus( 0,
-						"bonus/speed/speed_high.png", "bonus/speed/speed.json", "speed", Entity.BONUS_SPEEH));
+						"bonus/speed/speed_high.png", "bonus/speed/speed.json", "speed", Entity.BonusType.SPEED_HIGH));
 				break;
 
 			case 2:
 
 				Gdx.app.log("heart", "new star created");
 				graphicManager.addBody(new Bonus( 0,
-						"bonus/star/star.png", "bonus/star/star.json", "star", Entity.BONUS_POINT));
+						"bonus/star/star.png", "bonus/star/star.json", "star", Entity.BonusType.POINT));
 				break;
 				
 			case 3:
 				Gdx.app.log("heart", "new heart created");
 				graphicManager.addBody(new Bonus( 0,
-						"bonus/heart/heart.png", "bonus/heart/heart.json", "heart", Entity.BONUS_LIVE));
+						"bonus/heart/heart.png", "bonus/heart/heart.json", "heart", Entity.BonusType.LIVE_UP));
 				break;
 				
 			default:

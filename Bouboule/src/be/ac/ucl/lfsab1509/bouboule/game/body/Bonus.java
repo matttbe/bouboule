@@ -67,7 +67,7 @@ public class Bonus extends GameBody{
 	 *		final String jsonFile, final String jsonName, final short bonusType)
 	 */
 	public Bonus( final float angle, final String texRegionPath, 
-			final String jsonFile, final String jsonName, final short bonusType) {
+			final String jsonFile, final String jsonName, Entity.BonusType bonusType) {
 
 		super();
 
