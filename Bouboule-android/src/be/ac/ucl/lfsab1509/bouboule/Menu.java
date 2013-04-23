@@ -165,10 +165,10 @@ public class Menu extends Activity {
 	
 	private Point getDisplayVector() {
 		Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        
-        return size;
+		Point size = new Point();
+		display.getSize(size);
+
+		return size;
 	}
 
 
@@ -178,7 +178,7 @@ public class Menu extends Activity {
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-			Log.d("LN","double click");
+			// return true <=> prevent double tabs
 			if (view.isPressed ())
 			{
 				switch (view.getId()) {
@@ -206,7 +206,7 @@ public class Menu extends Activity {
 								+ " at level " + info.getLevel ()
 								+ " (date: " + info.getDate ().toString () + ")");
 						}*/
-						break;
+						return true;
 						
 					default :
 						
