@@ -50,7 +50,7 @@ public class Entity {
 	private short 	entity;					//Store the Constant of the Generic Body's
 	private short 	bonus;					//Store the bonus option
 	private boolean isAlive;				//isAlive =)
-	
+
 	private Timer timer;
 
 	/**
@@ -122,13 +122,32 @@ public class Entity {
 				case BONUS_SPEEH:
 					Gdx.app.log("bonus", "Add 10");
 					IA.FORCE_MAX_PLAYER *= 10;
-					resetSpeed();
+					resetSpeed(type);
 					break;
 
 				case BONUS_SPEEL:
 					Gdx.app.log("bonus", "rm 10");
 					IA.FORCE_MAX_PLAYER /= 10;
-					resetSpeed();
+					resetSpeed(type);
+					break;
+
+				default:
+					break;
+				}
+			} else {
+
+				switch (this.bonus) {
+
+				case BONUS_SPEEH:
+					Gdx.app.log("bonus", "Add 10");
+					IA.FORCE_MAX_IA *= 10;
+					resetSpeed(type);
+					break;
+
+				case BONUS_SPEEL:
+					Gdx.app.log("bonus", "rm 10");
+					IA.FORCE_MAX_IA /= 10;
+					resetSpeed(type);
 					break;
 
 				default:
@@ -140,30 +159,40 @@ public class Entity {
 		}
 	}
 
-	public void resetSpeed() {			//TODO : STOP TIMER IF END OF GAME !!!
+	public void resetSpeed(final short type) {
 		Timer.Task task = new Timer.Task () {
 			@Override
 			public void run () {
 				Gdx.app.log("bonus", "reset " + bonus);
-				if (BONUS_SPEEH == bonus) {
-					IA.FORCE_MAX_PLAYER /= 10;
 
+				if (type==PLAYER) {
+					if (BONUS_SPEEH == bonus) {
+						IA.FORCE_MAX_PLAYER /= 10;
+
+					} else {
+						IA.FORCE_MAX_PLAYER *= 10;
+					}
 				} else {
-					IA.FORCE_MAX_PLAYER *= 10;
+					if (BONUS_SPEEH == bonus) {
+						IA.FORCE_MAX_IA /= 10;
+
+					} else {
+						IA.FORCE_MAX_IA *= 10;
+					}
 				}
 			}
 
 		};//Program a task to reset the Speed to initial value;
-		
+
 		timer = new Timer ();
 		timer.scheduleTask (task, 10);
 	}
-	
+
 	public void stopSpeedTask() {
-		
+
 		if (this.timer != null)
 			this.timer.clear();
-		
+
 		Gdx.app.log("Timer", "Stopped the Timer if needed");
 	}
 
