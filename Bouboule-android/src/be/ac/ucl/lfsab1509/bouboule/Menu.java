@@ -47,7 +47,6 @@ import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Display;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -142,7 +141,6 @@ public class Menu extends Activity {
 		//Listeners for the Game Launcher
 		findViewById(R.id.PlayButton).setOnClickListener(clickListener);
 		findViewById(R.id.ParameterButton).setOnClickListener(clickListener);
-		findViewById(R.id.HighScoreButton).setOnClickListener(clickListener);
 		
 		// HighScoreContextMenu: long click
 		registerForContextMenu (findViewById(R.id.HighScoreButton));
@@ -190,19 +188,6 @@ public class Menu extends Activity {
 				case R.id.ParameterButton :
 					Intent intent = new Intent(Menu.this, MenuParametre.class);
 					startActivity(intent);
-					break;
-					
-				case R.id.HighScoreButton :
-					// ((TextView) findViewById(R.id.HighScoreButton)).setText (GlobalSettings.PROFILE.getHighScore ());
-					Log.i ("Matth", "HighScore " + GlobalSettings.PROFILE.getHighScore ()); // high score of this profile
-					/*HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (true);
-					for (int i = 0; i < highscores.length; i++) {
-						HighScoreInfo info = highscores[i];
-						Log.i ("Matth", "HighScore " + (i+1) + ": " + info.getScore ()
-							+ " by " + info.getName ()
-							+ " at level " + info.getLevel ()
-							+ " (date: " + info.getDate ().toString () + ")");
-					}*/
 					break;
 					
 				default :
