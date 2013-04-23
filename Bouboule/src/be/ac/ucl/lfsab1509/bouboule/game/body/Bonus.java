@@ -141,7 +141,7 @@ public class Bonus extends GameBody{
 			GraphicManager.getWorld().destroyBody(body);
 			body	= null;
 			
-			this.entity.stopSpeedTask();
+			this.entity.stopTask();
 		}
 	}
 	

@@ -192,36 +192,75 @@ public class GameLoop {
 
 		if (random.nextInt(GraphicManager.BONUS_SPAWN_RATE) == 5) {
 			// add a new bonus to get more lifes only if we have less than 3 lifes
-			int nextInt = GlobalSettings.PROFILE.getNbLifes () < GlobalSettings.MAX_LIFES ? 2 : 2; //TODO
+			int iNBonus = Entity.BonusType.values ().length;
+			int nextInt = GlobalSettings.PROFILE.getNbLifes () < GlobalSettings.MAX_LIFES ? iNBonus : iNBonus - 1;
 
 			switch (random.nextInt(nextInt)) {
 			case 0:
-				Gdx.app.log("heart", "new speed-created");
+				Gdx.app.log("bonus", "new speed-created");
 				graphicManager.addBody(new Bonus( 0,
-						"bonus/speed/speed_low.png", "bonus/speed/speed.json", "speed", Entity.BonusType.SPEED_LOW));
+						"bonus/speed/speed_low.png", "bonus/speed/speed_low.json", "speed_low", Entity.BonusType.SPEED_LOW));
 				break;
 
 
 			case 1:
-				Gdx.app.log("heart", "new speed+created");
+				Gdx.app.log("bonus", "new speed+created");
 				graphicManager.addBody(new Bonus( 0,
-						"bonus/speed/speed_high.png", "bonus/speed/speed.json", "speed", Entity.BonusType.SPEED_HIGH));
+						"bonus/speed/speed_high.png", "bonus/speed/speed_high.json", "speed_high", Entity.BonusType.SPEED_HIGH));
 				break;
 
 			case 2:
-
-				Gdx.app.log("heart", "new star created");
+				Gdx.app.log("bonus", "new star created");
 				graphicManager.addBody(new Bonus( 0,
 						"bonus/star/star.png", "bonus/star/star.json", "star", Entity.BonusType.POINT));
 				break;
-				
+
 			case 3:
-				Gdx.app.log("heart", "new heart created");
+				Gdx.app.log("bonus", "new weight+ created");
 				graphicManager.addBody(new Bonus( 0,
-						"bonus/heart/heart.png", "bonus/heart/heart.json", "heart", Entity.BonusType.LIVE_UP));
+						"bonus/weight/weight_high.png", "bonus/weight/weight_high.json", "weight_high", Entity.BonusType.WEIGHT_HIGH));
+				break;
+
+			case 4:
+				Gdx.app.log("bonus", "new weight- created");
+				graphicManager.addBody(new Bonus( 0,
+						"bonus/weight/weight_low.png", "bonus/weight/weight_low.json", "weight_low", Entity.BonusType.WEIGHT_LOW));
+				break;
+
+			case 5:
+				Gdx.app.log("bonus", "new elasticity+ created");
+				graphicManager.addBody(new Bonus( 0,
+						"bonus/elasticity/elasticity_high.png", "bonus/elasticity/elasticity_high.json", "elasticity_high", Entity.BonusType.ELASTICITY_HIGH));
+				break;
+
+			case 6:
+				Gdx.app.log("bonus", "new elasticity- created");
+				graphicManager.addBody(new Bonus( 0,
+						"bonus/elasticity/elasticity_low.png", "bonus/elasticity/elasticity_low.json", "elasticity_low", Entity.BonusType.ELASTICITY_LOW));
+				break;
+
+			case 7:
+				Gdx.app.log("bonus", "new invincible created");
+				graphicManager.addBody(new Bonus( 0,
+						"bonus/invincible/invincible.png", "bonus/invincible/invincible.json", "invincible", Entity.BonusType.INVINCIBLE));
+				break;
+
+			case 8:
+				Gdx.app.log("bonus", "new invisible created");
+				graphicManager.addBody(new Bonus( 0,
+						"bonus/invisible/invisible.png", "bonus/invisible/invisible.json", "invisible", Entity.BonusType.INVISIBLE));
+				break;
+
+			case 9:
+				Gdx.app.log("bonus", "new inverse created");
+				graphicManager.addBody(new Bonus( 0,
+						"bonus/inverse/inverse.png", "bonus/inverse/inverse.json", "inverse", Entity.BonusType.INVERSE));
 				break;
 				
 			default:
+				Gdx.app.log("bonus", "new heart created");
+				graphicManager.addBody(new Bonus( 0,
+						"bonus/heart/heart.png", "bonus/heart/heart.json", "heart", Entity.BonusType.LIVE_UP));
 				break;
 			}
 		}

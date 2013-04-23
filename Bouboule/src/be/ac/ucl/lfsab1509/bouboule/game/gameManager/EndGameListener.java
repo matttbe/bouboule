@@ -49,7 +49,7 @@ public class EndGameListener implements ContactListener{
 		short entity1 = ((Entity) contact.getFixtureA().getBody().getUserData()).getEntity();
 		short entity2 = ((Entity) contact.getFixtureB().getBody().getUserData()).getEntity();
 
-		Gdx.app.log("Contact", entity1 + "    "+ entity2);
+		// Gdx.app.log("Contact", entity1 + "    "+ entity2);
 
 		if (entity1 == Entity.SCENERY 
 				| entity2 == Entity.SCENERY) {
@@ -65,7 +65,7 @@ public class EndGameListener implements ContactListener{
 						| entity2 == Entity.PLAYER) {
 
 					isAlivePlayer ++;
-					Gdx.app.log("Alive", "Begin Contact = "+isAlivePlayer);
+					// Gdx.app.log("Alive", "Begin Contact = "+isAlivePlayer);
 
 				} else {
 
@@ -77,15 +77,15 @@ public class EndGameListener implements ContactListener{
 		} else if((entity1 == Entity.PLAYER  && entity2 == Entity.MONSTER) |
 				(entity1 == Entity.MONSTER && entity2 == Entity.PLAYER) ) {
 
-			Gdx.app.log("Chocs de Bouboules", "CHOCS || CHOCS");
+			// Gdx.app.log("Chocs de Bouboules", "CHOCS || CHOCS");
 			GlobalSettings.GAME.hitSound ();
 
-		} else if(entity1 == Entity.BONUS) {
-			
-			((Entity) contact.getFixtureA().getBody().getUserData()).attributeBonus(entity2);
-		} else if(entity2 == Entity.BONUS) {
-			
-			((Entity) contact.getFixtureB().getBody().getUserData()).attributeBonus(entity1);			
+		}
+		else if(entity1 == Entity.BONUS) {
+			((Entity) contact.getFixtureA().getBody().getUserData()).attributeBonus(entity2, contact.getFixtureB());
+		}
+		else if(entity2 == Entity.BONUS) {
+			((Entity) contact.getFixtureB().getBody().getUserData()).attributeBonus(entity1, contact.getFixtureA());
 		}
 
 	}

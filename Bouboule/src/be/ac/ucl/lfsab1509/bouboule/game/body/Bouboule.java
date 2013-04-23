@@ -84,6 +84,9 @@ public class Bouboule extends GameBody{
 		MakeBody(0, 0, radius, bodyType, density, elasticity, false, pos, angle, jsonFile, jsonName,
 				GraphicManager.convertToGame(texture.getRegionWidth()));
 
+		// added sprite to the fixture (to modify it somewhere else
+		body.getFixtureList ().get (0).setUserData (sprite);
+
 		//Ensure that the object don't rotate.
 		body.setFixedRotation(GlobalSettings.FIXED_ROTATION);
 		

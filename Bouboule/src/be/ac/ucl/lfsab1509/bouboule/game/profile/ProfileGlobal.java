@@ -74,6 +74,8 @@ public class ProfileGlobal {
 	}
 
 	public void changeSensibilitySettings (int newSensitivity) {
+		if (newSensitivity <= GlobalSettings.SENSITIVITY_MAX/10)
+			newSensitivity = GlobalSettings.SENSITIVITY_MAX/10;
 		GlobalSettings.SENSITIVITY = newSensitivity;
 		prefs.putInteger(SENSITIVITY_KEY, newSensitivity);
 		prefs.flush();
