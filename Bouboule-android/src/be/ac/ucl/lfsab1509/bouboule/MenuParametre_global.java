@@ -37,9 +37,11 @@ public class MenuParametre_global extends Activity {
 
 	// to contains the changes before they got saved
 	private static boolean newSoundIsMuted;
+	private static boolean newNoRotate;
 	private static int newSensitivity;
 	
 	private static Switch sound_switch;
+	private static Switch rotate_switch;
 	private static SeekBar sensitivity_seekbar;
 	
 	@Override
@@ -53,19 +55,23 @@ public class MenuParametre_global extends Activity {
 		
 		// ask the preview values
 		newSoundIsMuted = GlobalSettings.SOUND_IS_MUTED;
+		newNoRotate = GlobalSettings.FIXED_ROTATION;
 		newSensitivity = GlobalSettings.SENSITIVITY;
 		
 		// find the different views
 		sound_switch = (Switch) findViewById(R.id.global_sound_switch);
+		rotate_switch = (Switch) findViewById(R.id.global_rotate_switch);
 		sensitivity_seekbar = (SeekBar) findViewById(R.id.global_sensitivity_bar);
 		
 		// set the originals values
 		sound_switch.setChecked(newSoundIsMuted);
+		rotate_switch.setChecked(newNoRotate);
 		sensitivity_seekbar.setMax(GlobalSettings.SENSITIVITY_MAX);
 		sensitivity_seekbar.setProgress(newSensitivity);
 		
 		// set the listeners
 		sound_switch.setOnCheckedChangeListener(switchListener);
+		rotate_switch.setOnCheckedChangeListener(switchListener);
 		sensitivity_seekbar.setOnSeekBarChangeListener(seekBarListener);
 	}
 	
@@ -74,6 +80,9 @@ public class MenuParametre_global extends Activity {
 			if (buttonView == sound_switch){
 				newSoundIsMuted = sound_switch.isChecked();
 				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSoundSettings(newSoundIsMuted);
+			} else if (buttonView == rotate_switch){
+				newNoRotate = sound_switch.isChecked();
+				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeFixedRotation(newNoRotate);
 			}
 		}
 	};

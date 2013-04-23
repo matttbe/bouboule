@@ -28,10 +28,14 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.*;
 import android.util.*;
 import java.util.ArrayList;
@@ -44,6 +48,11 @@ public class MenuParametre_user extends Activity {
 	private Spinner user_selectprofile_spin;
 	private ArrayList<String> listProfile;
 	private ArrayAdapter<String> adapter;
+	private Toast toastChar;
+	private Toast toastIdentical;
+	private Toast toastEmpty;
+	int duration;
+	Context context;
 	
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -60,6 +69,15 @@ public class MenuParametre_user extends Activity {
 		
 		user_selectprofile_spin.setOnItemSelectedListener(spinnerListener);
 		
+		// toast
+		context = getApplicationContext();
+		duration = Toast.LENGTH_LONG;
+		toastChar = Toast.makeText(context, getString (R.string.user_namecharerror), duration);
+		toastChar.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+		toastIdentical = Toast.makeText(context, getString (R.string.user_nameidenticalerror), duration);
+		toastIdentical.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+		toastEmpty = Toast.makeText(context, getString (R.string.user_nameemptyerror), duration);
+		toastEmpty.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 	}
 	
 	@Override
@@ -93,7 +111,27 @@ public class MenuParametre_user extends Activity {
 			switch (view.getId()) {
 				
 				case R.id.button_user_create :
-					createNewProfile(); //TODO
+					// on recupere le text
+					String text = ((EditText) findViewById(R.id.user_newname)).getText().toString();
+					switch (testName(text)){
+					case 0:
+						Log.d("LN","new profile sauvegarde : "+text);
+						GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
+						finish (); // quit the view (there is no more option and we have to understand that it's done)
+						break;
+					case 1:
+						toastIdentical.show();
+						break;
+					case 2:
+						toastEmpty.show();
+						break;
+					case 3:
+						toastChar.show();
+						break;
+					default :
+						break;
+					}
+						
 					break; 
 				default :
 					break;
@@ -102,40 +140,26 @@ public class MenuParametre_user extends Activity {
 	};
 	
 	
-	private boolean createNewProfile(){
-		// on recupere le text
-		String text = ((EditText) findViewById(R.id.user_newname)).getText().toString();
-		// on le test
-		if (testName(text)){
-			// cas text ok
-			Log.d("LN","new profile sauvegarde : "+text);
-			GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
-			finish (); // quit the view (there is no more option and we have to understand that it's done)
-			return true;
-		} else {
-			// cas text pas ok
-			return false;
-		}
-		
-	}
+	
 	// TODO : care about the unacceptable carracter, blanc name and other wrong names
 	// cName should not be included in PROFILES_KEY and can't contain invalid char:
 	// => String.IndexOfAny (System.IO.Path.GetInvalidPathChars ()) == 0
-	private boolean testName(String name){
+	private int testName(String name){
 		ArrayList<String> unusable = GlobalSettings.PROFILE_MGR.getAllProfilesAndExceptions (); 
 		if(unusable.contains (name))
-			return false;
+			return 1;
 		if(name.equals(""))
-			return false;
+			return 2;
 		String[] unusableChar ={ "/", "\n", "\r", "\t", "\0", "\f", "`", "?", "*", "\\", "<", ">", "|", "\"", ":" };
 		for (String var : unusableChar)
 		{
 			if(name.contains(var))
-				return false;
+				return 3;
 		}
-		return true;
+		return 0;
 	}
 	
+
 	
 	
 }
