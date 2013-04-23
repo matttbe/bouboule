@@ -50,9 +50,9 @@ public class Bonus extends GameBody{
 
 	private TextureRegion 	texture;		//Texture of the Bonus
 	private Sprite 			sprite;			//Sprite to draw the Bonus
-	
+
 	private static final Random			random = new Random();
-	
+
 
 	/**
 	 * Constructor for a Bonus object 
@@ -73,10 +73,10 @@ public class Bonus extends GameBody{
 
 		int size = GlobalSettings.ARENAWAYPOINTALLOW.size();
 		MapNode node = GlobalSettings.ARENAWAYPOINTALLOW.get(random.nextInt(size));
-		
-		
+
+
 		Vector2 pos	= new Vector2(node.xToPixel(), node.yToPixel());
-		
+
 		this.texture = new TextureRegion(new Texture(texRegionPath));
 
 		this.sprite = new Sprite(texture);
@@ -86,10 +86,10 @@ public class Bonus extends GameBody{
 
 		//Ensure that the object don't rotate.
 		body.setFixedRotation(true);
-		
+
 		//Create the userData of type Bonus and bonusType
 		this.entity = new Entity(Entity.BONUS, true, bonusType);
-		
+
 		body.setUserData(this.entity);
 	}
 
@@ -117,6 +117,31 @@ public class Bonus extends GameBody{
 			} else {
 				sp.draw(texture, positionVector.x, positionVector.y);
 			}
+		}
+	}
+
+	public void inputMouv (final int force) {
+
+		if (entity.isAlive()) {
+			body.applyForceToCenter(new Vector2(100f, 0));
+			super.update();
+		}
+	}
+
+	/**
+	 * Destroy the body+kill speed Task if needed if needed
+	 * 
+	 * DestroyBody()
+	 */
+	public void destroyBody() {
+
+		if (body != null) {
+
+			entity.setAlive(false);
+			GraphicManager.getWorld().destroyBody(body);
+			body	= null;
+			
+			this.entity.stopSpeedTask();
 		}
 	}
 	

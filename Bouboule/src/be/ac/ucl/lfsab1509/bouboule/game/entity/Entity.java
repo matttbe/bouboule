@@ -27,8 +27,10 @@ package be.ac.ucl.lfsab1509.bouboule.game.entity;
  */
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Timer;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 
 public class Entity {
 
@@ -41,13 +43,15 @@ public class Entity {
 
 	//Bonus options
 	public static final short BONUS_LIVE  = -31;
-	public static final short BONUS_SPEED = -32;
-	public static final short BONUS_POINT = -33;
+	public static final short BONUS_SPEEH = -32;
+	public static final short BONUS_SPEEL = -33;
+	public static final short BONUS_POINT = -34;
 
-	
 	private short 	entity;					//Store the Constant of the Generic Body's
 	private short 	bonus;					//Store the bonus option
 	private boolean isAlive;				//isAlive =)
+	
+	private Timer timer;
 
 	/**
 	 * Constructor for a Bonus Entity
@@ -79,7 +83,7 @@ public class Entity {
 		this.isAlive= live;
 	}
 
-	
+
 	/**
 	 * Constructor for a Arena Object
 	 * 
@@ -102,7 +106,7 @@ public class Entity {
 	public void attributeBonus(final short type) {
 
 		if (this.isAlive) {
-			
+
 			if (type == PLAYER) {
 
 				switch (this.bonus) {
@@ -115,8 +119,16 @@ public class Entity {
 					GlobalSettings.PROFILE.addScorePermanent (GlobalSettings.SCORE_BONUS);
 					break;
 
-				case BONUS_SPEED:
+				case BONUS_SPEEH:
+					Gdx.app.log("bonus", "Add 10");
+					IA.FORCE_MAX_PLAYER *= 10;
+					resetSpeed();
+					break;
 
+				case BONUS_SPEEL:
+					Gdx.app.log("bonus", "rm 10");
+					IA.FORCE_MAX_PLAYER /= 10;
+					resetSpeed();
 					break;
 
 				default:
@@ -126,6 +138,33 @@ public class Entity {
 
 			this.isAlive = false;
 		}
+	}
+
+	public void resetSpeed() {			//TODO : STOP TIMER IF END OF GAME !!!
+		Timer.Task task = new Timer.Task () {
+			@Override
+			public void run () {
+				Gdx.app.log("bonus", "reset " + bonus);
+				if (BONUS_SPEEH == bonus) {
+					IA.FORCE_MAX_PLAYER /= 10;
+
+				} else {
+					IA.FORCE_MAX_PLAYER *= 10;
+				}
+			}
+
+		};//Program a task to reset the Speed to initial value;
+		
+		timer = new Timer ();
+		timer.scheduleTask (task, 10);
+	}
+	
+	public void stopSpeedTask() {
+		
+		if (this.timer != null)
+			this.timer.clear();
+		
+		Gdx.app.log("Timer", "Stopped the Timer if needed");
 	}
 
 	public short getEntity() {
