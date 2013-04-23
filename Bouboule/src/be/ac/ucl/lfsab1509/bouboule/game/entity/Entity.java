@@ -42,13 +42,12 @@ public class Entity {
 	public static final short BONUS 	= -3;
 
 	//Bonus options
-	public static final short BONUS_LIVE  = -31;
-	public static final short BONUS_SPEEH = -32;
-	public static final short BONUS_SPEEL = -33;
-	public static final short BONUS_POINT = -34;
+	public static enum BonusType {LIVE_UP, SPEED_HIGH, SPEED_LOW, POINT,
+		WEIGHT_HIGH, WEIGHT_LOW, ELASTICITY_HIGH, ELASTICITY_LOW,
+		INVINSIBILITY, INVISIBILITY, INVERSE};
 
 	private short 	entity;					//Store the Constant of the Generic Body's
-	private short 	bonus;					//Store the bonus option
+	private BonusType 	bonus;					//Store the bonus option
 	private boolean isAlive;				//isAlive =)
 
 	private Timer timer;
@@ -62,7 +61,7 @@ public class Entity {
 	 * 
 	 * 	public Entity (final short type, final boolean live, final short bonusType)
 	 */
-	public Entity (final short type, final boolean live, final short bonusType) {
+	public Entity (final short type, final boolean live, BonusType bonusType) {
 
 		this.entity = type;
 		this.bonus  = bonusType; 
@@ -110,22 +109,22 @@ public class Entity {
 			if (type == PLAYER) {
 
 				switch (this.bonus) {
-				case BONUS_LIVE:
+				case LIVE_UP:
 					Gdx.app.log("heart","Adding 1 life to player");
 					GlobalSettings.PROFILE.addLifes(1);
 					break;
-				case BONUS_POINT:
+				case POINT:
 					Gdx.app.log("star","Adding 100 point to player");
 					GlobalSettings.PROFILE.addScorePermanent (GlobalSettings.SCORE_BONUS);
 					break;
 
-				case BONUS_SPEEH:
+				case SPEED_HIGH:
 					Gdx.app.log("bonus", "Add 10");
 					IA.FORCE_MAX_PLAYER *= 10;
 					resetSpeed(type);
 					break;
 
-				case BONUS_SPEEL:
+				case SPEED_LOW:
 					Gdx.app.log("bonus", "rm 10");
 					IA.FORCE_MAX_PLAYER /= 10;
 					resetSpeed(type);
@@ -134,17 +133,18 @@ public class Entity {
 				default:
 					break;
 				}
-			} else {
+			}
+			else {
 
 				switch (this.bonus) {
 
-				case BONUS_SPEEH:
+				case SPEED_HIGH:
 					Gdx.app.log("bonus", "Add 10");
 					IA.FORCE_MAX_IA *= 10;
 					resetSpeed(type);
 					break;
 
-				case BONUS_SPEEL:
+				case SPEED_LOW:
 					Gdx.app.log("bonus", "rm 10");
 					IA.FORCE_MAX_IA /= 10;
 					resetSpeed(type);
@@ -166,14 +166,14 @@ public class Entity {
 				Gdx.app.log("bonus", "reset " + bonus);
 
 				if (type==PLAYER) {
-					if (BONUS_SPEEH == bonus) {
+					if (bonus == BonusType.SPEED_HIGH) {
 						IA.FORCE_MAX_PLAYER /= 10;
 
 					} else {
 						IA.FORCE_MAX_PLAYER *= 10;
 					}
 				} else {
-					if (BONUS_SPEEH == bonus) {
+					if (bonus == BonusType.SPEED_HIGH) {
 						IA.FORCE_MAX_IA /= 10;
 
 					} else {
@@ -212,11 +212,11 @@ public class Entity {
 		this.isAlive = isAlive;
 	}
 
-	public short getBonus() {
+	public BonusType getBonus() {
 		return bonus;
 	}
 
-	public void setBonus(short bonus) {
+	public void setBonus(BonusType bonus) {
 		this.bonus = bonus;
 	}
 
