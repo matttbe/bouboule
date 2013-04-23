@@ -280,7 +280,7 @@ public class GameLoop {
 		CharSequence levelU= Integer.toString(GlobalSettings.PROFILE.getLevel   ()%10);
 		CharSequence score = Integer.toString(GlobalSettings.PROFILE.getScore());
 
-		int timer = GlobalSettings.PROFILE.getScore() - GlobalSettings.PROFILE.getOldScore();
+		int timer = GlobalSettings.PROFILE.getRemainingTime ();
 		
 		if (timer < 0) {
 			EndGameListener.looseGame ();

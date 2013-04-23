@@ -58,6 +58,9 @@ public class Profile {
 	private boolean bNewHighScore = false;
 	private boolean bNeedSaveScoreEvenIfCancel = false;
 
+	// timer
+	private int iRemainingTime;
+
 	// lifes
 	private int iLifes;
 
@@ -135,10 +138,11 @@ public class Profile {
 	 * The timer will decrement the score each second
 	 * The new init score will increase when playing new levels
 	 */
-	public void createTimer () {
+	public void createTimer (final int iTimer) {
 		if (timer != null) { // stop the previous timer
 			this.stop ();
 		}
+		this.iRemainingTime = iTimer;
 
 		this.iOldScore = this.iScore;
 		this.iNewInitScore = this.iScore + this.iInitScore + this.iInitScore / 4 * (this.iLevel - 1);
@@ -150,6 +154,7 @@ public class Profile {
 			@Override
 			public void run () {
 				iScore--; // launched in the main loop (no need to use mutex)
+				iRemainingTime--;
 			}
 		};
 		timer = new Timer ();
@@ -173,6 +178,13 @@ public class Profile {
 		timer.stop ();
 		timer.clear (); // maybe not needed?
 		timer = null;
+	}
+
+	/**
+	 * @return the 
+	 */
+	public int getRemainingTime () {
+		return iRemainingTime;
 	}
 
 	/**
@@ -211,13 +223,6 @@ public class Profile {
 			saveScore ();
 		else
 			stop ();
-	}
-	
-	/**
-	 * @return the score before playing this game
-	 */
-	public int getOldScore() {
-		return iOldScore;
 	}
 
 	/**

@@ -103,6 +103,7 @@ public class LevelLoader {
 		
 		GraphicManager.ALLOW_BONUS = Boolean.parseBoolean(file.getAttribute("bonus","false"));
 		GraphicManager.BONUS_SPAWN_RATE = Integer.parseInt(file.getAttribute("bonusrate","0"));
+		GraphicManager.TIME = Integer.parseInt(file.getAttribute("time", "30"));
 		IA.FORCE_MAX_IA = Float.parseFloat(file.getAttribute("forcemaxia", "0.5f"));
 		IA.FORCE_MAX_PLAYER = Float.parseFloat(file.getAttribute("forcemaxplayer", "0.5f"));
 		

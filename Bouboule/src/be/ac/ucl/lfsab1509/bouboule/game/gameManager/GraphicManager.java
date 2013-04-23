@@ -41,9 +41,11 @@ public class GraphicManager {
 	private static World world;
 	private static final float GAME_TO_WORLD = 100.0f;
 	private static final float WORLD_TO_GAME = 0.01f;
-	
+
+	// settings about the levels
 	public static boolean ALLOW_BONUS = false;
 	public static int	  BONUS_SPAWN_RATE = 0;
+	public static int	  TIME = 30;
 	
 	//Store all the body of the game
 	public ArrayList<GameBody> bodies;

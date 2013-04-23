@@ -3,7 +3,8 @@
 
     <Level1
         bonus="True"
-        bonusrate="5432" >
+        bonusrate="5432"
+        time="45" >
 
         <Bouboule
             IALevel="6"
@@ -67,7 +68,8 @@
 
     <Level2
         bonus="True"
-        bonusrate="5432" >
+        bonusrate="5432"
+        time="45" >
 
         <Bouboule
             IALevel="4"
@@ -131,7 +133,8 @@
 
     <Level3
         bonus="True"
-        bonusrate="5432" >
+        bonusrate="5432"
+        time="45" >
 
         <Bouboule
             IALevel="6"
@@ -193,7 +196,8 @@
         </Obstacles>
     </Level3>
 
-    <Level4>
+    <Level4
+        time="45" >
 
         <Bouboule
             IALevel="4"
@@ -255,7 +259,8 @@
         </Obstacles>
     </Level4>
 
-    <Level5>
+    <Level5
+        time="45" >
 
         <Bouboule
             IALevel="6"
@@ -395,7 +400,8 @@
         </Obstacles>
     </Level5>
 
-    <Level6>
+    <Level6
+        time="45" >
 
         <Bouboule
             IALevel="6"
@@ -445,7 +451,8 @@
         </Obstacles>
     </Level6>
 
-    <Level7>
+    <Level7
+        time="45" >
 
         <Bouboule
             IALevel="6"
@@ -495,7 +502,8 @@
         </Obstacles>
     </Level7>
 
-    <Level8>
+    <Level8
+        time="45" >
 
         <Bouboule
             IALevel="6"
@@ -581,7 +589,8 @@
         </Obstacles>
     </Level8>
 
-    <Level9>
+    <Level9
+        time="45" >
 
         <Bouboule
             IALevel="6"
@@ -649,7 +658,8 @@
         </Obstacles>
     </Level9>
 
-    <Level10>
+    <Level10
+        time="45" >
 
         <Bouboule
             IALevel="6"
@@ -699,7 +709,8 @@
         </Obstacles>
     </Level10>
 
-    <Level11>
+    <Level11
+        time="45" >
 
         <Bouboule
             IALevel="6"
@@ -749,7 +760,8 @@
         </Obstacles>
     </Level11>
 
-    <Level12>
+    <Level12
+        time="45" >
 
         <Bouboule
             IALevel="6"
@@ -799,7 +811,8 @@
         </Obstacles>
     </Level12>
 
-    <Level13>
+    <Level13
+        time="45" >
 
         <Bouboule
             IALevel="6"
@@ -849,7 +862,8 @@
         </Obstacles>
     </Level13>
 
-    <Level14>
+    <Level14
+        time="45" >
 
         <Bouboule
             IALevel="6"
@@ -923,7 +937,8 @@
         </Obstacles>
     </Level14>
 
-    <Level15>
+    <Level15
+        time="45" >
 
         <Bouboule
             IALevel="6"

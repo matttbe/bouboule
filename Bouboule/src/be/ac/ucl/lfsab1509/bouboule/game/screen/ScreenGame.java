@@ -31,6 +31,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -75,7 +76,7 @@ public class ScreenGame implements Screen {
 
 		loopMusic.stop(); // to play at startup
 		game.start ();
-		GlobalSettings.PROFILE.createTimer ();
+		GlobalSettings.PROFILE.createTimer (GraphicManager.TIME);
 	}
 
 
