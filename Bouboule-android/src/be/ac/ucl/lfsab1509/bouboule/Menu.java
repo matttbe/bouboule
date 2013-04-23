@@ -178,7 +178,7 @@ public class Menu extends Activity {
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-
+			Log.d("LN","double click");
 			if (view.isPressed ())
 			{
 				switch (view.getId()) {
@@ -193,7 +193,7 @@ public class Menu extends Activity {
 					case R.id.ParameterButton :
 						Intent intent = new Intent(Menu.this, MenuParametre.class);
 						startActivity(intent);
-						break;
+						return true;
 						
 					case R.id.HighScoreButton :
 						// ((TextView) findViewById(R.id.HighScoreButton)).setText (GlobalSettings.PROFILE.getHighScore ());
@@ -213,7 +213,7 @@ public class Menu extends Activity {
 						break;
 				}
 			}
-			return true;
+			return false;
 		} 
 	};
 

@@ -67,25 +67,25 @@ public class MenuParametre extends Activity {
 					case R.id.button_param_user :
 						intent = new Intent(MenuParametre.this, MenuParametre_user.class);
 						startActivity(intent);
-						break;
+						return true;
 						
 					case R.id.button_param_global :
 						
 						intent = new Intent(MenuParametre.this, MenuParametre_global.class);
 						startActivity(intent);
-						break;
+						return true;
 						
 					case R.id.button_param_about :
 						intent = new Intent(MenuParametre.this, MenuParametre_about.class);
 						startActivity(intent);
-						break;
+						return true;
 						
 					default :
 						
 						break;
 				}
 			}
-			return true;
+			return false;
 			
 		}
 	};
