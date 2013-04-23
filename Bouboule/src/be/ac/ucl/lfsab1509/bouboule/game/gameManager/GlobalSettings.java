@@ -54,6 +54,7 @@ public class GlobalSettings {
 	public final static int 		INIT_LIFES = 3; // TODO: Init_scrore and life: take data from config
 	public final static int			MAX_LIFES  = INIT_LIFES;
 	public final static int			SCORE_BONUS = 100;
+	public final static int 		SENSITIVITY_MAX = 1000;
 
 	public static int				NBLEVELS; 		// nb of levels in the current xml files
 	public static Menus 			MENUS; 			// interface to display menus
@@ -61,7 +62,7 @@ public class GlobalSettings {
 	// Settings that can be changed from ProfileGlobal
 	public static boolean			SOUND_IS_MUTED = false; // false = sound on
 	public static int				SENSITIVITY = 500; // from 0 to 1000
-	public static final int 		SENSITIVITY_MAX = 1000;
+	public static boolean			FIXED_ROTATION = true; // fix the rotation of the bouboules
 
 	// Profiles
  	public final static String		DEFAULT_PROFILE_NAME = "Bouboule";
