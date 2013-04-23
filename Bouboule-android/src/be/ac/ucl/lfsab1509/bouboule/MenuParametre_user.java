@@ -148,9 +148,9 @@ public class MenuParametre_user extends Activity {
 		ArrayList<String> unusable = GlobalSettings.PROFILE_MGR.getAllProfilesAndExceptions (); 
 		if(unusable.contains (name))
 			return 1;
-		if(name.equals(""))
+		if(name.equals("") || name.equals(".") || name.equals(".."))
 			return 2;
-		String[] unusableChar ={ "/", "\n", "\r", "\t", "\0", "\f", "`", "?", "*", "\\", "<", ">", "|", "\"", ":", "..", "." };
+		String[] unusableChar ={ "/", "\n", "\r", "\t", "\0", "\f", "`", "?", "*", "\\", "<", ">", "|", "\"", ":"};
 		for (String var : unusableChar)
 		{
 			if(name.contains(var))
