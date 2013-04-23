@@ -209,6 +209,7 @@ public class BodyEditorLoader {
 	// Json reading process
 	// -------------------------------------------------------------------------
 
+	@SuppressWarnings("unchecked")
 	private Model readJson(String str) {
 		Model m = new Model();
 		OrderedMap<String,?> rootElem = (OrderedMap<String,?>) new JsonReader().parse(str);
@@ -224,6 +225,7 @@ public class BodyEditorLoader {
 		return m;
 	}
 
+	@SuppressWarnings("unchecked")
 	private RigidBodyModel readRigidBody(OrderedMap<String,?> bodyElem) {
 		RigidBodyModel rbModel = new RigidBodyModel();
 		rbModel.name = (String) bodyElem.get("name");
