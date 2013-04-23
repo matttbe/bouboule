@@ -150,7 +150,7 @@ public class MenuParametre_user extends Activity {
 			return 1;
 		if(name.equals(""))
 			return 2;
-		String[] unusableChar ={ "/", "\n", "\r", "\t", "\0", "\f", "`", "?", "*", "\\", "<", ">", "|", "\"", ":" };
+		String[] unusableChar ={ "/", "\n", "\r", "\t", "\0", "\f", "`", "?", "*", "\\", "<", ">", "|", "\"", ":", "..", "." };
 		for (String var : unusableChar)
 		{
 			if(name.contains(var))
