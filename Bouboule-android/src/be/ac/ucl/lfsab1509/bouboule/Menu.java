@@ -140,12 +140,9 @@ public class Menu extends Activity {
 		contentView.setRotation(-15);
 
 		//Listeners for the Game Launcher
-		findViewById(R.id.PlayButton).setOnTouchListener(
-				fireListener);
-		findViewById(R.id.ParameterButton).setOnTouchListener(
-				fireListener);
-		findViewById(R.id.HighScoreButton).setOnTouchListener(
-				fireListener);
+		findViewById(R.id.PlayButton).setOnClickListener(clickListener);
+		findViewById(R.id.ParameterButton).setOnClickListener(clickListener);
+		findViewById(R.id.HighScoreButton).setOnClickListener(clickListener);
 		
 		// HighScoreContextMenu: long click
 		registerForContextMenu (findViewById(R.id.HighScoreButton));
@@ -175,47 +172,47 @@ public class Menu extends Activity {
 	/**
 	 * Start the Game // Parameters // HighScore
 	 */
-	private View.OnTouchListener fireListener = new View.OnTouchListener() {
+	private View.OnClickListener clickListener = new View.OnClickListener() {
+		
 		@Override
-		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-			Log.d("LN","double click");
-			if (view.isPressed ())
-			{
-				switch (view.getId()) {
+		public void onClick (View view)
+		{
+			Log.d("LN","clickmenu");
+			switch (view.getId()) {
 				
-					case R.id.PlayButton :
-						mHandler.removeCallbacks(animationUpdate);
-						mHandler.removeCallbacks(nameUpdate);
-						setResult(view.getId());
-						finish();
-						return true;
-						
-					case R.id.ParameterButton :
-						Intent intent = new Intent(Menu.this, MenuParametre.class);
-						startActivity(intent);
-						return true;
-						
-					case R.id.HighScoreButton :
-						// ((TextView) findViewById(R.id.HighScoreButton)).setText (GlobalSettings.PROFILE.getHighScore ());
-						Log.i ("Matth", "HighScore " + GlobalSettings.PROFILE.getHighScore ()); // high score of this profile
-						/*HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (true);
-						for (int i = 0; i < highscores.length; i++) {
-							HighScoreInfo info = highscores[i];
-							Log.i ("Matth", "HighScore " + (i+1) + ": " + info.getScore ()
-								+ " by " + info.getName ()
-								+ " at level " + info.getLevel ()
-								+ " (date: " + info.getDate ().toString () + ")");
-						}*/
-						break;
-						
-					default :
-						
-						break;
-				}
+				case R.id.PlayButton :
+					mHandler.removeCallbacks(animationUpdate);
+					mHandler.removeCallbacks(nameUpdate);
+					setResult(view.getId());
+					finish();
+					break;
+					
+				case R.id.ParameterButton :
+					Intent intent = new Intent(Menu.this, MenuParametre.class);
+					startActivity(intent);
+					break;
+					
+				case R.id.HighScoreButton :
+					// ((TextView) findViewById(R.id.HighScoreButton)).setText (GlobalSettings.PROFILE.getHighScore ());
+					Log.i ("Matth", "HighScore " + GlobalSettings.PROFILE.getHighScore ()); // high score of this profile
+					/*HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (true);
+					for (int i = 0; i < highscores.length; i++) {
+						HighScoreInfo info = highscores[i];
+						Log.i ("Matth", "HighScore " + (i+1) + ": " + info.getScore ()
+							+ " by " + info.getName ()
+							+ " at level " + info.getLevel ()
+							+ " (date: " + info.getDate ().toString () + ")");
+					}*/
+					break;
+					
+				default :
+					
+					break;
 			}
-			return false;
-		} 
+			
+		}
 	};
+
 
 	@SuppressLint("SimpleDateFormat")
 	private void addScoreInMenu (android.view.Menu menu) {

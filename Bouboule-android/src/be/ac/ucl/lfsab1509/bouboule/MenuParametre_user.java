@@ -52,7 +52,7 @@ public class MenuParametre_user extends Activity {
 		setContentView(R.layout.activity_parametre_user);
 		
 		// link the listeners
-		findViewById(R.id.button_user_create).setOnTouchListener(fireListener);
+		findViewById(R.id.button_user_create).setOnClickListener(clickListener);
 		
 		user_selectprofile_spin = (Spinner) findViewById(R.id.user_selectprofile_spin);
 		
@@ -93,22 +93,19 @@ public class MenuParametre_user extends Activity {
 		public void onNothingSelected (AdapterView<?> parent) {}
 	};
 	
-	private View.OnTouchListener fireListener = new View.OnTouchListener() {
+	private View.OnClickListener clickListener = new View.OnClickListener() {
+		
 		@Override
-		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-			
-			if (view.isPressed ())
-			{
-				switch (view.getId()) {
+		public void onClick (View view)
+		{
+			switch (view.getId()) {
 				
-					case R.id.button_user_create :
-						createNewProfile();
-						return true; // consume the event => prevent double calls
-					default :
-						break;
-				}
+				case R.id.button_user_create :
+					createNewProfile();
+					break; 
+				default :
+					break;
 			}
-			return false;
 		}
 	};
 	
@@ -119,6 +116,7 @@ public class MenuParametre_user extends Activity {
 		GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
 		finish (); // quit the view (there is no more option and we have to understand that it's done)
 	}
+	
 	
 	
 }

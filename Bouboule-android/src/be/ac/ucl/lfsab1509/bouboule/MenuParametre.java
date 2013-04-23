@@ -30,10 +30,10 @@ package be.ac.ucl.lfsab1509.bouboule;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.util.Log;
 
 public class MenuParametre extends Activity {
 	
@@ -46,49 +46,45 @@ public class MenuParametre extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_parametre_menu);
 		
-		findViewById(R.id.button_param_user).setOnTouchListener(fireListener);
-		findViewById(R.id.button_param_global).setOnTouchListener(fireListener);
-		findViewById(R.id.button_param_about).setOnTouchListener(fireListener);
+		
+		findViewById(R.id.button_param_user).setOnClickListener(clickListener);
+		findViewById(R.id.button_param_global).setOnClickListener(clickListener);
+		findViewById(R.id.button_param_about).setOnClickListener(clickListener);
 		
 		
 		
 	}
-	
-	
-	private View.OnTouchListener fireListener = new View.OnTouchListener() {
+	private View.OnClickListener clickListener = new View.OnClickListener() {
+		
 		@Override
-		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-			
-			if (view.isPressed ())
-			{
-				Intent intent;
-				switch (view.getId()) {
-				
-					case R.id.button_param_user :
-						intent = new Intent(MenuParametre.this, MenuParametre_user.class);
-						startActivity(intent);
-						return true;
-						
-					case R.id.button_param_global :
-						
-						intent = new Intent(MenuParametre.this, MenuParametre_global.class);
-						startActivity(intent);
-						return true;
-						
-					case R.id.button_param_about :
-						intent = new Intent(MenuParametre.this, MenuParametre_about.class);
-						startActivity(intent);
-						return true;
-						
-					default :
-						
-						break;
-				}
+		public void onClick (View view)
+		{
+			Intent intent;
+			Log.d("LN","click");
+			switch (view.getId()) {
+				case R.id.button_param_user :
+					intent = new Intent(MenuParametre.this, MenuParametre_user.class);
+					startActivity(intent);
+					break;
+					
+				case R.id.button_param_global :
+					
+					intent = new Intent(MenuParametre.this, MenuParametre_global.class);
+					startActivity(intent);
+					break;
+					
+				case R.id.button_param_about :
+					intent = new Intent(MenuParametre.this, MenuParametre_about.class);
+					startActivity(intent);
+					break;
+					
+				default :
+					
+					break;
 			}
-			return false;
-			
 		}
 	};
+	
 	
 	
 	

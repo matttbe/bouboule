@@ -45,5 +45,4 @@ public class MenuParametre_about extends Activity{
 	}
 	
 	
-	
 }
