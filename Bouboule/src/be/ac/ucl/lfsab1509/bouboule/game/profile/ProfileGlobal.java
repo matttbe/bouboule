@@ -79,7 +79,7 @@ public class ProfileGlobal {
 		prefs.flush();
 	}
 
-	public void changeAllowRotations (boolean bFixedRotation) {
+	public void changeFixedRotation (boolean bFixedRotation) {
 		GlobalSettings.FIXED_ROTATION = bFixedRotation;
 		prefs.putBoolean (FIXED_ROTATIONS_KEY, bFixedRotation);
 		prefs.flush ();
