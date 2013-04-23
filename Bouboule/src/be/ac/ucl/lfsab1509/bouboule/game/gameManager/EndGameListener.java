@@ -155,6 +155,7 @@ public class EndGameListener implements ContactListener{
 	public static void looseGame () {
 		Gdx.app.log("KILL", "Bouboule est MORT =/");
 
+		GlobalSettings.PROFILE.addScorePermanent (- GlobalSettings.INIT_SCORE / 2);
 		GlobalSettings.PROFILE.cancelNewScore ();
 		if (GlobalSettings.PROFILE.addLifes (-1))
 			GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
