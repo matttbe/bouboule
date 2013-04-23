@@ -18,7 +18,8 @@
 	        android:id="@+id/user_newname"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:ems="12" >
+	        android:ems="12"
+	        android:inputType="text" >
 	
 	        <requestFocus />
 	    </EditText>
@@ -36,8 +37,8 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content" />
 	
-	    <!-- Begin for changing bouboule -->
-	    <!-- <TextView
+	    
+	    <TextView
 	        android:id="@+id/user_playerball_txt"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
@@ -60,7 +61,7 @@
 	        android:id="@+id/user_oppenentball_galery"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content" />
-		 -->
+		 
 		 
 	</LinearLayout>
 </FrameLayout>

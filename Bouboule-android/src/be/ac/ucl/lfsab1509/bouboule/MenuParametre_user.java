@@ -34,7 +34,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.*;
 import android.util.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
+
 
 public class MenuParametre_user extends Activity {
 
@@ -72,6 +76,8 @@ public class MenuParametre_user extends Activity {
 		Log.d ("Matth", "Users: " + Arrays.toString (GlobalSettings.PROFILE_MGR.getAllProfiles ()));
 		Log.d("Matth", "User: " + listProfile.indexOf(GlobalSettings.PROFILE.getName()));
 		user_selectprofile_spin.setSelection (listProfile.indexOf(GlobalSettings.PROFILE.getName())); // select the current user
+		
+		
 	}
 	
 	private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
@@ -100,7 +106,7 @@ public class MenuParametre_user extends Activity {
 			switch (view.getId()) {
 				
 				case R.id.button_user_create :
-					createNewProfile();
+					createNewProfile(); //TODO
 					break; 
 				default :
 					break;
@@ -108,12 +114,39 @@ public class MenuParametre_user extends Activity {
 		}
 	};
 	
-	// TODO : care about the unacceptable carracter, blanc name and other wrong names
-	private void createNewProfile(){
+	
+	private boolean createNewProfile(){
+		// on recupere le text
 		String text = ((EditText) findViewById(R.id.user_newname)).getText().toString();
-		Log.d("LN","new profile sauvegarde : "+text);
-		GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
-		finish (); // quit the view (there is no more option and we have to understand that it's done)
+		// on le test
+		if (testName(text)){
+			// cas text ok
+			Log.d("LN","new profile sauvegarde : "+text);
+			GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
+			finish (); // quit the view (there is no more option and we have to understand that it's done)
+			return true;
+		} else {
+			// cas text pas ok
+			return false;
+		}
+		
+	}
+	// TODO : care about the unacceptable carracter, blanc name and other wrong names
+	// cName should not be included in PROFILES_KEY and can't contain invalid char:
+	// => String.IndexOfAny (System.IO.Path.GetInvalidPathChars ()) == 0
+	private boolean testName(String name){
+		ArrayList<String> unusable = GlobalSettings.PROFILE_MGR.getAllProfilesAndExceptions (); 
+		if(unusable.contains (name))
+			return false;
+		if(name.equals(""))
+			return false;
+		String[] unusableChar ={ "/", "\n", "\r", "\t", "\0", "\f", "`", "?", "*", "\\", "<", ">", "|", "\"", ":" };
+		for (String var : unusableChar)
+		{
+			if(name.contains(var))
+				return false;
+		}
+		return true;
 	}
 	
 	
