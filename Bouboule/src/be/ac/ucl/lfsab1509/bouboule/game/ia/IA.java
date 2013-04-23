@@ -42,6 +42,8 @@ public class IA {
 
 	public static float FORCE_MAX_IA;
 	public static float FORCE_MAX_PLAYER;
+	public static float AXE_POSITION = -1;
+	private static float SENSIBILITY_DEFAULT = .15f;
 	
 	//level 0 => gyroscope
 	//level 1 => go mid
@@ -206,8 +208,9 @@ public class IA {
 
 
 	public static Vector2 gyroscope(){
-		float accelX = -Gdx.input.getAccelerometerX()*0.1f;
-		float accelY = -Gdx.input.getAccelerometerY()*0.1f;
+		float sensibility = SENSIBILITY_DEFAULT * GlobalSettings.SENSITIVITY * 2 / GlobalSettings.SENSITIVITY_MAX;
+		float accelX = AXE_POSITION * sensibility * Gdx.input.getAccelerometerX();
+		float accelY = AXE_POSITION * sensibility * Gdx.input.getAccelerometerY();
 		Vector2 Acc= new Vector2(accelX, accelY);
 		/*
 		 * Uniquement pour mes tests
