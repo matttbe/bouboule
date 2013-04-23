@@ -29,6 +29,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.profile;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
@@ -104,7 +105,17 @@ public class ProfileMgr {
 		profiles.add (GlobalSettings.PREFS_GLOBAL); // we can't use a profile name with this name
 		return profiles;
 	}
-	
+
+	/**
+	 * Change the current profile
+	 * @param cName the profile that already exists.
+	 */
+	public void changeProfile (final String cName) {
+		Gdx.app.log ("LN", "Load: " + cName);
+		EndGameListener.cancelGame ();
+		loadProfile (cName);
+	}
+
 	/**
 	 * Create and load a new profile
 	 * @pre: cName should not be included in PROFILES_KEY and can't contain invalid char:
@@ -112,6 +123,7 @@ public class ProfileMgr {
 	 * @param cName: the new profile name
 	 */
 	public void createAndLoadNewProfile (final String cName) {
+		EndGameListener.cancelGame ();
 		String profiles = getAllProfilesAsString ();
 		profiles += SEPARATOR + cName; // should at least contain Bouboule (default)
 		prefs.putString (PROFILES_KEY, profiles); // no need to flush => done in loadProfile

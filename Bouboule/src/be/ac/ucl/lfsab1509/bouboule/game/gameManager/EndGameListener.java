@@ -111,7 +111,7 @@ public class EndGameListener implements ContactListener{
 					//DO NOTHING =)
 
 				}
-				else {
+				else if (GlobalSettings.GAME_EXIT == GameExitStatus.NONE) { // we can loose and win the game at the same time!!
 					looseGame ();
 					//Gdx.app.exit();
 				}
@@ -122,7 +122,7 @@ public class EndGameListener implements ContactListener{
 					//DO NOTHING
 					isAliveMonster --;
 				}
-				else {
+				else if (GlobalSettings.GAME_EXIT == GameExitStatus.NONE) { // we can loose and win the game at the same time!!
 					winGame ();
 				}
 
@@ -145,11 +145,12 @@ public class EndGameListener implements ContactListener{
 		isAliveMonster	= 0;
 	}
 
-	private static void endGame () {
+	private static void endGame (boolean bWithMenu) {
 		Gdx.app.log ("KILL", "EndGame: hide + launch menu");
 		GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
 
-		GlobalSettings.MENUS.launchEndGameMenu ();
+		if (bWithMenu)
+			GlobalSettings.MENUS.launchEndGameMenu ();
 	}
 
 	public static void looseGame () {
@@ -165,7 +166,7 @@ public class EndGameListener implements ContactListener{
 		}
 
 		GlobalSettings.GAME.looseSound ();
-		endGame ();
+		endGame (true);
 	}
 
 	public static void winGame () {
@@ -180,7 +181,17 @@ public class EndGameListener implements ContactListener{
 		}
 
 		GlobalSettings.GAME.winSound ();
-		endGame ();
+		endGame (true);
+	}
+
+	public static void cancelGame () {
+		Gdx.app.log("KILL", "Cancel Game!");
+		if (GlobalSettings.PROFILE.isRunning ()) {
+			GlobalSettings.PROFILE.cancelNewScore ();
+			GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER; // we need a new game
+			endGame (false);
+			GlobalSettings.GAME_EXIT = GameExitStatus.NONE; // we need a new game
+		}
 	}
 
 
