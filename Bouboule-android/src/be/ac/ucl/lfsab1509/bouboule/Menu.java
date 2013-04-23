@@ -213,7 +213,7 @@ public class Menu extends Activity {
 						break;
 				}
 			}
-			return false;
+			return true;
 		} 
 	};
 

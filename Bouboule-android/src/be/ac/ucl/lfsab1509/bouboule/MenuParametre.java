@@ -85,7 +85,7 @@ public class MenuParametre extends Activity {
 						break;
 				}
 			}
-			return false;
+			return true;
 			
 		}
 	};
