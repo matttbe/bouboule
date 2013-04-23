@@ -27,6 +27,7 @@
 package be.ac.ucl.lfsab1509.bouboule.game.body;
 
 import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 
@@ -84,7 +85,7 @@ public class Bouboule extends GameBody{
 				GraphicManager.convertToGame(texture.getRegionWidth()));
 
 		//Ensure that the object don't rotate.
-		body.setFixedRotation(true);
+		body.setFixedRotation(GlobalSettings.FIXED_ROTATION);
 		
 		this.entity = new Entity(type, true);
 		

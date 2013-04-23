@@ -44,6 +44,7 @@ public class ProfileGlobal {
 	private static final String MUTE_SOUND_KEY = "mute_sound";
 	private static final String HIGHSCORE_KEY = "highscore"; // score + name + level + date
 	private static final String SENSITIVITY_KEY = "sensitivity";
+	private static final String FIXED_ROTATIONS_KEY = "fixed_rotations";
 
 	private Preferences prefs;
 	
@@ -62,25 +63,26 @@ public class ProfileGlobal {
 	public void loadDefaultSettings () {
 		GlobalSettings.SOUND_IS_MUTED = prefs.getBoolean (MUTE_SOUND_KEY, false);
 		GlobalSettings.SENSITIVITY = prefs.getInteger (SENSITIVITY_KEY, 500);
+		GlobalSettings.FIXED_ROTATION = prefs.getBoolean (FIXED_ROTATIONS_KEY, true);
 	}
 
 	//_________________ SAVE SETTINGS THAT CAN BE CHANGED FROM THE CONFIG PANEL
-	public void toggleSoundSettings () {
-		GlobalSettings.SOUND_IS_MUTED = ! GlobalSettings.SOUND_IS_MUTED;
-		prefs.putBoolean (MUTE_SOUND_KEY, GlobalSettings.SOUND_IS_MUTED);
-		prefs.flush ();
-	}
-	
 	public void changeSoundSettings (boolean newSoundIsMuted){
 		GlobalSettings.SOUND_IS_MUTED = newSoundIsMuted;
 		prefs.putBoolean (MUTE_SOUND_KEY, GlobalSettings.SOUND_IS_MUTED);
 		prefs.flush ();
 	}
-	
+
 	public void changeSensibilitySettings (int newSensitivity) {
 		GlobalSettings.SENSITIVITY = newSensitivity;
 		prefs.putInteger(SENSITIVITY_KEY, newSensitivity);
 		prefs.flush();
+	}
+
+	public void changeAllowRotations (boolean bFixedRotation) {
+		GlobalSettings.FIXED_ROTATION = bFixedRotation;
+		prefs.putBoolean (FIXED_ROTATIONS_KEY, bFixedRotation);
+		prefs.flush ();
 	}
 
 	//_______________ HighScore Mgr
