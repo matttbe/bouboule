@@ -43,10 +43,10 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
  */
 public class Bouboule extends GameBody{
 
-	private TextureRegion 	texture;		//Texture of the Bouboule
-	private Sprite 			sprite;			//Sprite to draw the Bouboule
+	private final TextureRegion 	texture;		//Texture of the Bouboule
+	private final Sprite			sprite;			//Sprite to draw the Bouboule
 
-	int 					IALevel;		//Level of the IA or controller
+	private final int				IALevel;		//Level of the IA or controller
 	
 	
 	/**

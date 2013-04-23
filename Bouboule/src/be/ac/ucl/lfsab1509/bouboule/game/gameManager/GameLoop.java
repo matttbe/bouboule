@@ -61,7 +61,7 @@ public class GameLoop {
 
 
 
-	/*
+	/**
 	 * Launch the creation of the batch thanks to the camera.
 	 * if debug == true, set up the debugger matrix
 	 * 
@@ -104,7 +104,7 @@ public class GameLoop {
 		random = new Random();
 	}
 
-	/* 
+	/** 
 	 * Used to (re)start a new game
 	 */
 	public void start() {
@@ -131,7 +131,7 @@ public class GameLoop {
 	}
 
 
-	/*
+	/**
 	 * Update the ball position thanks to the accelerometer and
 	 * launch the physical update function of dt the time between 2 frames
 	 * 
@@ -139,17 +139,16 @@ public class GameLoop {
 	 */
 	public void update() {
 		graphicManager.update();
-		// Gdx.app.log("FPS", ""+1/Gdx.graphics.getDeltaTime());
 
 		if (GraphicManager.ALLOW_BONUS == true)
 			bonus();
 
 	}
 
-	/*
+	/**
 	 * Draw all the needed bodies of the game
 	 * 
-	 * render()
+	 * render(final boolean pause, float delta)
 	 */
 	public boolean render(final boolean pause, float delta) {
 
@@ -184,6 +183,11 @@ public class GameLoop {
 		return status;
 	}
 
+	/**
+	 * Create a Bonus instance in the GraphicManager if the spawn rate is reached
+	 * 
+	 *  private void bonus()
+	 */
 	private void bonus() {
 
 		if (random.nextInt(GraphicManager.BONUS_SPAWN_RATE) == 5) {
@@ -208,7 +212,14 @@ public class GameLoop {
 		}
 	}
 
+	/**
+	 * Write the lives/levels/score and Timer text on the screen
+	 * 
+	 * public void writeText()
+	 */
 	public void writeText() {
+		if (! GlobalSettings.PROFILE.isRunning()) // avoid displaying the wrong level at the end of the game and crashes
+			return;
 
 		CharSequence lives = Integer.toString(GlobalSettings.PROFILE.getNbLifes ());
 		CharSequence levelD= Integer.toString(GlobalSettings.PROFILE.getLevel   ()/10);
@@ -237,7 +248,7 @@ public class GameLoop {
 
 	}
 
-	/*
+	/**
 	 * Remove all the memory used object 
 	 *
 	 * dispose()

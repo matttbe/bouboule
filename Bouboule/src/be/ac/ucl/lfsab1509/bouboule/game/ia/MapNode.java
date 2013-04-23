@@ -64,6 +64,6 @@ public class MapNode {
 	
 	public float yToPixel() {
 		
-		return 1215 - 205/2 *vector.y;
+		return (float) (102.5 *vector.y);
 	}
 }
