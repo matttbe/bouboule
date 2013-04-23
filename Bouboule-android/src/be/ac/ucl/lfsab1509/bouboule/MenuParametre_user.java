@@ -35,7 +35,6 @@ import android.view.WindowManager;
 import android.widget.*;
 import android.util.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 
@@ -72,27 +71,15 @@ public class MenuParametre_user extends Activity {
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listProfile);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		user_selectprofile_spin.setAdapter(adapter);
-
-		Log.d ("Matth", "Users: " + Arrays.toString (GlobalSettings.PROFILE_MGR.getAllProfiles ()));
-		Log.d("Matth", "User: " + listProfile.indexOf(GlobalSettings.PROFILE.getName()));
+		
 		user_selectprofile_spin.setSelection (listProfile.indexOf(GlobalSettings.PROFILE.getName())); // select the current user
-		
-		
 	}
 	
 	private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
 		@Override
 		public void onItemSelected (AdapterView<?> parent, View view, int position, long id){
-			
-				switch (view.getId()) {
-				
-					case R.id.user_selectprofile_spin :
-						Log.d("LN",position + " + " + id);
-						GlobalSettings.PROFILE_MGR.loadProfile(listProfile.get((int) id));
-						break;
-					default :
-						break;
-				}
+			Log.d("LN",position + " + " + id);
+			GlobalSettings.PROFILE_MGR.changeProfile (listProfile.get((int) id));
 		}
 		@Override
 		public void onNothingSelected (AdapterView<?> parent) {}
