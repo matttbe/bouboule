@@ -36,6 +36,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
 
@@ -50,6 +51,8 @@ public class ScreenGame implements Screen {
 	private OrthographicCamera      		camera;
 
 	private GameLoop 						game;
+	private FileHandle loopMusicFile;
+	private FileHandle loopMusicDefaultFile;
 	private Music loopMusic;
 
 
@@ -58,7 +61,8 @@ public class ScreenGame implements Screen {
 
 	// INIT => on create
 	public ScreenGame () {
-		loopMusic = Gdx.audio.newMusic(Gdx.files.internal("music/klez.mp3"));
+		loopMusicDefaultFile = loopMusicFile = Gdx.files.internal("music/klez.mp3");
+		loopMusic = Gdx.audio.newMusic(loopMusicFile);
 		loopMusic.setLooping(true);
 
 		camera = CameraHelper.GetCamera(APPWIDTH, APPHEIGHT);
@@ -143,16 +147,24 @@ public class ScreenGame implements Screen {
 	}
 
 	/**
-	 * @param cNewMusic should be a file that can be read by GDX in 'music'
+	 * @param cNewMusic should be a file that can be read by GDX
 	 */
-	public void setNewLoopMusic (String cNewMusic) {
+	public void setNewLoopMusic (FileHandle pNewMusicFile) {
+		if (pNewMusicFile.equals (loopMusicFile))
+			return;
+
 		boolean bWasPlaying = loopMusic.isPlaying ();
 		loopMusic.stop ();
 
-		loopMusic = Gdx.audio.newMusic(Gdx.files.internal("music/" + cNewMusic));
+		loopMusicFile = pNewMusicFile;
+		loopMusic = Gdx.audio.newMusic(pNewMusicFile);
 		loopMusic.setLooping(true);
 
 		if (bWasPlaying)
 			loopMusic.play ();
+	}
+
+	public void setDefaultLoopMusicPath () {
+		setNewLoopMusic (loopMusicDefaultFile);
 	}
 }

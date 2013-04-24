@@ -100,12 +100,14 @@ public class LevelLoader {
 			Gdx.app.log("Matth", "Level not found");
 			throw new GdxRuntimeException ("Level not found");
 		}
-		
+
+		// load settings about the level:
 		GraphicManager.ALLOW_BONUS = Boolean.parseBoolean(file.getAttribute("bonus","false"));
 		GraphicManager.BONUS_SPAWN_RATE = Integer.parseInt(file.getAttribute("bonusrate","0"));
 		GraphicManager.TIME = Integer.parseInt(file.getAttribute("time", "30"));
 		IA.FORCE_MAX_IA = Float.parseFloat(file.getAttribute("forcemaxia", "0.5f"));
 		IA.FORCE_MAX_PLAYER = Float.parseFloat(file.getAttribute("forcemaxplayer", "0.5f"));
+		GlobalSettings.GAME.setNewLoopMusic (file.getAttribute ("music", null)); // e.g. klez.mp3
 		
 		Gdx.app.log("Settings", "Bonus ="+GraphicManager.ALLOW_BONUS);	
 

@@ -34,6 +34,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.input.GestureDetector;
 
 public class MyGame extends Game {
@@ -90,7 +91,15 @@ public class MyGame extends Game {
 	 * @param cNewMusic should be a file that can be read by GDX in 'music'
 	 */
 	public void setNewLoopMusic (String cNewMusic) {
-		if (screenGame != null)
-			screenGame.setNewLoopMusic (cNewMusic);
+		if (screenGame == null) // not loaded yet.
+			return;
+		if (cNewMusic != null) {
+			FileHandle pMusicFile = Gdx.files.internal ("music/" + cNewMusic);
+			if (pMusicFile.exists ()) {
+				screenGame.setNewLoopMusic (pMusicFile);
+				return;
+			}
+		}// load the default one (if it's not currently playing)
+		screenGame.setDefaultLoopMusicPath ();
 	}
 }
