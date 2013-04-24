@@ -28,75 +28,54 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.*;
 import android.util.*;
 import java.util.ArrayList;
 
-
-
-
 public class MenuParametre_user extends Activity {
 
 	private Spinner user_selectprofile_spin;
+	
 	private ArrayList<String> listProfile;
-	private ArrayAdapter<String> adapter;
-	private Toast toastChar;
-	private Toast toastIdentical;
-	private Toast toastEmpty;
-	int duration;
-	Context context;
 	
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// Request the fullScreen for the Main Screen
+		
+		// request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_parametre_user);
 		
-		// link the listeners
-		findViewById(R.id.button_user_create).setOnClickListener(clickListener);
-		
+		// find the different views
 		user_selectprofile_spin = (Spinner) findViewById(R.id.user_selectprofile_spin);
 		
+		// link the listeners
+		findViewById(R.id.button_user_create).setOnClickListener(clickListener);
 		user_selectprofile_spin.setOnItemSelectedListener(spinnerListener);
-		
-		// toast
-		context = getApplicationContext();
-		duration = Toast.LENGTH_LONG;
-		toastChar = Toast.makeText(context, getString (R.string.user_namecharerror), duration);
-		toastChar.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-		toastIdentical = Toast.makeText(context, getString (R.string.user_nameidenticalerror), duration);
-		toastIdentical.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-		toastEmpty = Toast.makeText(context, getString (R.string.user_nameemptyerror), duration);
-		toastEmpty.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 	}
 	
 	@Override
-	protected void onResume(){
+	protected void onResume(){ // used as refresh of the view
 		super.onResume();
 		Log.d("LN","onResume");
+		// set the list into the spinner
 		listProfile = GlobalSettings.PROFILE_MGR.getAllProfilesAL();
-
-		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listProfile);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listProfile);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		user_selectprofile_spin.setAdapter(adapter);
-		
+		//set the selected item on the spinner
 		user_selectprofile_spin.setSelection (listProfile.indexOf(GlobalSettings.PROFILE.getName())); // select the current user
 	}
 	
 	private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
 		@Override
 		public void onItemSelected (AdapterView<?> parent, View view, int position, long id){
-			Log.d("LN",position + " + " + id);
 			GlobalSettings.PROFILE_MGR.changeProfile (listProfile.get((int) id));
 		}
 		@Override
@@ -109,29 +88,27 @@ public class MenuParametre_user extends Activity {
 		public void onClick (View view)
 		{
 			switch (view.getId()) {
-				
 				case R.id.button_user_create :
-					// on recupere le text
+					// catch the name
 					String text = ((EditText) findViewById(R.id.user_newname)).getText().toString();
 					switch (testName(text)){
-					case 0:
-						Log.d("LN","new profile sauvegarde : "+text);
-						GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
-						finish (); // quit the view (there is no more option and we have to understand that it's done)
-						break;
-					case 1:
-						toastIdentical.show();
-						break;
-					case 2:
-						toastEmpty.show();
-						break;
-					case 3:
-						toastChar.show();
-						break;
-					default :
-						break;
+						// treat the name following the case
+						case 0:
+							GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
+							finish (); // quit the view (there is no more option and we have to understand that it's done)
+							break;
+						case 1:
+							makeToast(getString (R.string.user_nameidenticalerror));
+							break;
+						case 2:
+							makeToast(getString (R.string.user_nameemptyerror));
+							break;
+						case 3:
+							makeToast(getString (R.string.user_namecharerror));
+							break;
+						default :
+							break;
 					}
-						
 					break; 
 				default :
 					break;
@@ -139,11 +116,17 @@ public class MenuParametre_user extends Activity {
 		}
 	};
 	
+	private void makeToast(String s){
+		Toast genericToast = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG);
+		genericToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+		genericToast.show();
+		
+	}
 	
-	
-	// TODO : care about the unacceptable carracter, blanc name and other wrong names
-	// cName should not be included in PROFILES_KEY and can't contain invalid char:
-	// => String.IndexOfAny (System.IO.Path.GetInvalidPathChars ()) == 0
+	/* Method to test if a String can be used as new username
+	 * @pre: name, the string to test
+	 * @post: 0 means no problem, 1 name already used, 2 usuported file name, 3 contains unsusable character
+	 */
 	private int testName(String name){
 		ArrayList<String> unusable = GlobalSettings.PROFILE_MGR.getAllProfilesAndExceptions (); 
 		if(unusable.contains (name))

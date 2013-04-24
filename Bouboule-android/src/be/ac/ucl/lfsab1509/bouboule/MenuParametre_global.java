@@ -35,10 +35,6 @@ import android.widget.*;
 
 public class MenuParametre_global extends Activity {
 
-	// to contains the changes before they got saved
-	private static boolean newSoundIsMuted;
-	private static boolean newNoRotate;
-	private static int newSensitivity;
 	
 	private static Switch sound_switch;
 	private static Switch rotate_switch;
@@ -48,15 +44,11 @@ public class MenuParametre_global extends Activity {
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		// Request the fullScreen for the Main Screen
+		// request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_parametre_global);
 		
-		// ask the preview values
-		newSoundIsMuted = GlobalSettings.SOUND_IS_MUTED;
-		newNoRotate = GlobalSettings.FIXED_ROTATION;
-		newSensitivity = GlobalSettings.SENSITIVITY;
 		
 		// find the different views
 		sound_switch = (Switch) findViewById(R.id.global_sound_switch);
@@ -64,10 +56,10 @@ public class MenuParametre_global extends Activity {
 		sensitivity_seekbar = (SeekBar) findViewById(R.id.global_sensitivity_bar);
 		
 		// set the originals values
-		sound_switch.setChecked(newSoundIsMuted);
-		rotate_switch.setChecked(newNoRotate);
+		sound_switch.setChecked(GlobalSettings.SOUND_IS_MUTED);
+		rotate_switch.setChecked(GlobalSettings.FIXED_ROTATION);
 		sensitivity_seekbar.setMax(GlobalSettings.SENSITIVITY_MAX);
-		sensitivity_seekbar.setProgress(newSensitivity);
+		sensitivity_seekbar.setProgress(GlobalSettings.SENSITIVITY);
 		
 		// set the listeners
 		sound_switch.setOnCheckedChangeListener(switchListener);
@@ -75,23 +67,22 @@ public class MenuParametre_global extends Activity {
 		sensitivity_seekbar.setOnSeekBarChangeListener(seekBarListener);
 	}
 	
+	// listener for the switchs
 	private CompoundButton.OnCheckedChangeListener switchListener = new CompoundButton.OnCheckedChangeListener() {
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			if (buttonView == sound_switch){
-				newSoundIsMuted = sound_switch.isChecked();
-				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSoundSettings(newSoundIsMuted);
+				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSoundSettings(sound_switch.isChecked());
 			} else if (buttonView == rotate_switch){
-				newNoRotate = sound_switch.isChecked();
-				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeFixedRotation(newNoRotate);
+				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeFixedRotation(rotate_switch.isChecked());
 			}
 		}
 	};
 	
+	// listener for seekbar
 	private SeekBar.OnSeekBarChangeListener seekBarListener = new SeekBar.OnSeekBarChangeListener() {
 		public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
 			if (seekBar == sensitivity_seekbar) {
-				newSensitivity = sensitivity_seekbar.getProgress();
-				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSensibilitySettings(newSensitivity);
+				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSensibilitySettings(sensitivity_seekbar.getProgress());
 			}
 		}
 		public void onStartTrackingTouch (SeekBar seekBar) {}

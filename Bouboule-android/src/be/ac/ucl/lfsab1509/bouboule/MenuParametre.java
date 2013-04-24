@@ -33,7 +33,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.util.Log;
 
 public class MenuParametre extends Activity {
 	
@@ -41,45 +40,40 @@ public class MenuParametre extends Activity {
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		//Request the fullScreen for the Main Screen
+		// request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_parametre_menu);
 		
-		
+		// add listeners on buttons
 		findViewById(R.id.button_param_user).setOnClickListener(clickListener);
 		findViewById(R.id.button_param_global).setOnClickListener(clickListener);
 		findViewById(R.id.button_param_about).setOnClickListener(clickListener);
 		
-		
-		
 	}
+	
+	// listener for the buttons
 	private View.OnClickListener clickListener = new View.OnClickListener() {
 		
 		@Override
 		public void onClick (View view)
 		{
 			Intent intent;
-			Log.d("LN","click");
 			switch (view.getId()) {
+				// start the activities according to the button pressed
 				case R.id.button_param_user :
 					intent = new Intent(MenuParametre.this, MenuParametre_user.class);
 					startActivity(intent);
 					break;
-					
 				case R.id.button_param_global :
-					
 					intent = new Intent(MenuParametre.this, MenuParametre_global.class);
 					startActivity(intent);
 					break;
-					
 				case R.id.button_param_about :
 					intent = new Intent(MenuParametre.this, MenuParametre_about.class);
 					startActivity(intent);
 					break;
-					
 				default :
-					
 					break;
 			}
 		}

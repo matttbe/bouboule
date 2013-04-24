@@ -23,7 +23,7 @@
     <string name="user_opponentball">Opponent\'s bouboule</string>
     <string name="user_namecharerror">The username can\'t contains special characters.</string>
     <string name="user_nameidenticalerror">The username can\'t be the same as one existing player.</string>
-    <string name="user_nameemptyerror">The username can\'t be empty, "." or "..".</string>
+    <string name="user_nameemptyerror">The username can\'t be empty, \".\" or \"..\".</string>
     
     <!-- Menu global settings -->
     <string name="global_sound">Sound :</string>
