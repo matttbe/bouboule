@@ -196,8 +196,7 @@
         </Obstacles>
     </Level3>
 
-    <Level4
-        time="45" >
+    <Level4 time="45" >
 
         <Bouboule
             IALevel="4"
@@ -259,8 +258,7 @@
         </Obstacles>
     </Level4>
 
-    <Level5
-        time="45" >
+    <Level5 time="45" >
 
         <Bouboule
             IALevel="6"
@@ -400,8 +398,7 @@
         </Obstacles>
     </Level5>
 
-    <Level6
-        time="45" >
+    <Level6 time="45" >
 
         <Bouboule
             IALevel="6"
@@ -451,8 +448,7 @@
         </Obstacles>
     </Level6>
 
-    <Level7
-        time="45" >
+    <Level7 time="45" >
 
         <Bouboule
             IALevel="6"
@@ -502,8 +498,7 @@
         </Obstacles>
     </Level7>
 
-    <Level8
-        time="45" >
+    <Level8 time="45" >
 
         <Bouboule
             IALevel="6"
@@ -589,8 +584,7 @@
         </Obstacles>
     </Level8>
 
-    <Level9
-        time="45" >
+    <Level9 time="45" >
 
         <Bouboule
             IALevel="6"
@@ -658,8 +652,7 @@
         </Obstacles>
     </Level9>
 
-    <Level10
-        time="45" >
+    <Level10 time="45" >
 
         <Bouboule
             IALevel="6"
@@ -709,8 +702,7 @@
         </Obstacles>
     </Level10>
 
-    <Level11
-        time="45" >
+    <Level11 time="45" >
 
         <Bouboule
             IALevel="6"
@@ -760,8 +752,7 @@
         </Obstacles>
     </Level11>
 
-    <Level12
-        time="45" >
+    <Level12 time="45" >
 
         <Bouboule
             IALevel="6"
@@ -811,8 +802,7 @@
         </Obstacles>
     </Level12>
 
-    <Level13
-        time="45" >
+    <Level13 time="45" >
 
         <Bouboule
             IALevel="6"
@@ -862,8 +852,7 @@
         </Obstacles>
     </Level13>
 
-    <Level14
-        time="45" >
+    <Level14 time="45" >
 
         <Bouboule
             IALevel="6"
@@ -937,8 +926,7 @@
         </Obstacles>
     </Level14>
 
-    <Level15
-        time="45" >
+    <Level15 time="45" >
 
         <Bouboule
             IALevel="6"
@@ -999,5 +987,117 @@
             </Obstacle>
         </Obstacles>
     </Level15>
+
+    <Level16 time="45" >
+
+        <Bouboule
+            IALevel="6"
+            angle="0"
+            density="1"
+            elasticity="1.1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_eventail.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            IALevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            jsonFile="terrain/CherryBlossom/cherryblossom.json"
+            px="0"
+            py="0"
+            radius="500"
+            texRegionPath="terrain/CherryBlossom/cherryblossom.jpg" >
+        </Arena>
+
+        <MapNodes>
+
+            <NodeAllow
+                px="3.7993f"
+                py="8.1756f"
+                weight="6.3651f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+        </Obstacles>
+    </Level16>
+
+    <Level17 time="45" >
+
+        <Bouboule
+            IALevel="6"
+            angle="0"
+            density="1"
+            elasticity="1.1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_pirate.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            IALevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            jsonFile="terrain/Ship/ship.json"
+            px="0"
+            py="0"
+            radius="500"
+            texRegionPath="terrain/Ship/ship.jpg" >
+        </Arena>
+
+        <MapNodes>
+
+            <NodeAllow
+                px="3.7993f"
+                py="8.1756f"
+                weight="6.3651f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                jsonFile="terrain/Ship/ship_mur.json"
+                px="0"
+                py="0"
+                texRegionPath="terrain/Ship/ship_mur.png" >
+            </Obstacle>
+        </Obstacles>
+    </Level17>
 
 </Level>
