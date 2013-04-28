@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Level>
 
-    <Level1
+    <Level17
         bonus="True"
         bonusrate="5432"
         time="45" >
@@ -64,7 +64,195 @@
 
         <Obstacles>
         </Obstacles>
-    </Level1>
+    </Level17>
+
+    <Level2 time="45" >
+
+        <Bouboule
+            IALevel="6"
+            angle="0"
+            density="1"
+            elasticity="0.9f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_sailor.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            IALevel="0"
+            angle="0"
+            density="1"
+            elasticity="0.9f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            jsonFile="terrain/Sailor/sailor.json"
+            px="0"
+            py="0"
+            radius="500"
+            texRegionPath="terrain/Sailor/sailor.jpg" >
+        </Arena>
+
+        <MapNodes>
+
+            <NodeAllow
+                px="3.7993f"
+                py="8.1756f"
+                weight="6.3651f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                jsonFile="terrain/Sailor/sailor_mur.json"
+                px="0"
+                py="0"
+                texRegionPath="terrain/Sailor/sailor_mur.png" >
+            </Obstacle>
+        </Obstacles>
+    </Level2>
+
+    <Level3 time="45" >
+
+        <Bouboule
+            IALevel="6"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_ninja.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            IALevel="0"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            jsonFile="terrain/Lazer/lazer.json"
+            px="0"
+            py="0"
+            radius="500"
+            texRegionPath="terrain/Lazer/lazer.jpg" >
+        </Arena>
+
+        <MapNodes>
+
+            <NodeAllow
+                px="3.7993f"
+                py="8.1756f"
+                weight="6.3651f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                jsonFile="terrain/Lazer/lazer_mur.json"
+                px="0"
+                py="0"
+                texRegionPath="terrain/Lazer/lazer_mur.png" >
+            </Obstacle>
+
+            <Obstacle
+                angle="0"
+                blink="True"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                jsonFile="terrain/Lazer/lazer_lazer.json"
+                px="0"
+                py="0"
+                texRegionPath="terrain/Lazer/lazer_lazer.png"
+                time="5" >
+            </Obstacle>
+        </Obstacles>
+    </Level3>
+
+    <Level4 time="45" >
+
+        <Bouboule
+            IALevel="6"
+            angle="0"
+            density="1"
+            elasticity="1.1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_yoda.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            IALevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            jsonFile="terrain/SpaceShip/spaceship.json"
+            px="0"
+            py="0"
+            radius="500"
+            texRegionPath="terrain/SpaceShip/spaceship.jpg" >
+        </Arena>
+
+        <MapNodes>
+
+            <NodeAllow
+                px="3.7993f"
+                py="8.1756f"
+                weight="6.3651f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+        </Obstacles>
+    </Level4>
 
     <Level2
         bonus="True"
@@ -504,7 +692,7 @@
             IALevel="6"
             angle="0"
             density="1"
-            elasticity="1.1f"
+            elasticity="1f"
             entity="-1"
             px="400"
             py="800"
@@ -517,7 +705,7 @@
             IALevel="0"
             angle="0"
             density="1"
-            elasticity="1.10f"
+            elasticity="1f"
             entity="1"
             px="400"
             py="300"
@@ -932,7 +1120,7 @@
             IALevel="6"
             angle="0"
             density="1"
-            elasticity="1.1f"
+            elasticity="1f"
             entity="-1"
             px="350"
             py="620"
@@ -945,7 +1133,7 @@
             IALevel="0"
             angle="0"
             density="1"
-            elasticity="1.10f"
+            elasticity="1f"
             entity="1"
             px="350"
             py="380"
@@ -1038,13 +1226,13 @@
         </Obstacles>
     </Level16>
 
-    <Level17 time="45" >
+    <Level1 time="45" >
 
         <Bouboule
             IALevel="6"
             angle="0"
             density="1"
-            elasticity="1.1f"
+            elasticity="1f"
             entity="-1"
             px="350"
             py="620"
@@ -1057,7 +1245,7 @@
             IALevel="0"
             angle="0"
             density="1"
-            elasticity="1.10f"
+            elasticity="1f"
             entity="1"
             px="350"
             py="380"
@@ -1087,6 +1275,38 @@
         <Obstacles>
 
             <Obstacle
+                accx="200"
+                accy="0"
+                angle="0"
+                bodyType="Dynamic"
+                density="2"
+                elasticity="0.1f"
+                entity="-2"
+                jsonFile="terrain/Ship/ship_canonball.json"
+                produce="True"
+                px="25"
+                py="340"
+                texRegionPath="terrain/Ship/ship_canonball.png"
+                time="5" >
+            </Obstacle>
+
+            <Obstacle
+                accx="-200"
+                accy="0"
+                angle="3.14"
+                bodyType="Dynamic"
+                density="2"
+                elasticity="0.1f"
+                entity="-2"
+                jsonFile="terrain/Ship/ship_canonball.json"
+                produce="True"
+                px="775"
+                py="770"
+                texRegionPath="terrain/Ship/ship_canonball.png"
+                time="5" >
+            </Obstacle>
+
+            <Obstacle
                 angle="0"
                 bodyType="Static"
                 density="1"
@@ -1098,6 +1318,6 @@
                 texRegionPath="terrain/Ship/ship_mur.png" >
             </Obstacle>
         </Obstacles>
-    </Level17>
+    </Level1>
 
 </Level>

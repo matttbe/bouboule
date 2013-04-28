@@ -96,7 +96,7 @@ public class Bouboule extends GameBody{
 	}
 
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#
 	 * draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)
@@ -123,7 +123,7 @@ public class Bouboule extends GameBody{
 		}
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#update(float)
 	 */
@@ -137,7 +137,7 @@ public class Bouboule extends GameBody{
 
 	}
 
-	/*
+	/**
 	 * Get body rotation in degrees
 	 * if needed =)
 	 * 

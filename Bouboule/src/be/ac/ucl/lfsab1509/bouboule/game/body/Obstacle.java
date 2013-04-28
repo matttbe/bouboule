@@ -46,6 +46,7 @@ public class Obstacle extends GameBody{
 
 	private TextureRegion 	texture;		//Texture of the Obstacle
 	private Sprite 			sprite;			//Sprite to draw the Obstacle
+	private Vector2			initialPos;		//Initial Position
 
 
 	/**
@@ -67,21 +68,27 @@ public class Obstacle extends GameBody{
 	public Obstacle( final BodyType bodyType, final float density,
 			final float elasticity, final float px, final float py, 
 			final float angle, final String texRegionPath, 
-			final String jsonFile, final String jsonName) {
+			final String jsonFile, final String jsonName,
+			final float initAccX, final float initAccY) {
 
 		super();
 
-		Vector2 pos	= new Vector2(px, py);
-		
+		this.initialPos	= new Vector2(px, py);
+
 		this.texture = new TextureRegion(new Texture(texRegionPath));
 
 		this.sprite = new Sprite(texture);
 
-		MakeBody(0, 0, 0, bodyType, density, elasticity, false, pos, angle, jsonFile, jsonName,
+		MakeBody(0, 0, 0, bodyType, density, elasticity, false, initialPos, angle, jsonFile, jsonName,
 				GraphicManager.convertToGame(texture.getRegionWidth()));
 
 		//Ensure that the object don't rotate.
-		body.setFixedRotation(true);
+		//body.setFixedRotation(true);
+
+		//Add Initail Velocity
+
+		body.applyForceToCenter(new Vector2(initAccX,initAccY));
+
 
 		this.entity = new Entity(Entity.OBSTACLE, true);
 		body.setUserData(this.entity);
@@ -119,12 +126,12 @@ public class Obstacle extends GameBody{
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#update(float)
 	 */
 	public void update() {
-		
-			super.update();
+
+		if ( positionVector.x > 1000 | positionVector.x < -200 | 
+				positionVector.y > 2000 | positionVector.y < -200)
+			this.entity.setAlive(false);
+			
+		super.update();
 	}
-
-
-
-
 
 }

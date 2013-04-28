@@ -110,6 +110,10 @@ public class GameLoop {
 	public void start() {
 
 		Gdx.app.log("Matth","Dipose of the graphicManager");
+		
+		//kill the timer task set by the previous level
+		level.resetTimer();
+		
 		//Clear the graphic Manager for a new use.
 		graphicManager.dispose();
 

@@ -28,6 +28,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.level;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import be.ac.ucl.lfsab1509.bouboule.game.body.Arena;
@@ -42,8 +43,10 @@ import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
@@ -56,6 +59,8 @@ public class LevelLoader {
 	private Element 			root;			//root of the global levelfile
 	private Element 			file;			//current level
 	private int 				iNbLevels;		//Number of levels
+	public static Timer 				timer = new Timer (); 
+	private static Timer.Task			task;
 
 	/**
 	 * Contructor of the xml loader
@@ -78,6 +83,22 @@ public class LevelLoader {
 		}
 
 	}
+
+
+	/**
+	 * 
+	 * Rest the timer used for the animated Obstacles
+	 */
+	public void resetTimer() {
+
+		if (task != null)
+			task.cancel();
+		timer.clear();
+		if (task != null)
+			Gdx.app.log("Timer", ""+task.isScheduled());
+	}
+
+
 
 	/**
 	 * Return the number of levels
@@ -108,7 +129,7 @@ public class LevelLoader {
 		IA.FORCE_MAX_IA = Float.parseFloat(file.getAttribute("forcemaxia", "0.5f"));
 		IA.FORCE_MAX_PLAYER = Float.parseFloat(file.getAttribute("forcemaxplayer", "0.5f"));
 		GlobalSettings.GAME.setNewLoopMusic (file.getAttribute ("music", null)); // e.g. klez.mp3
-		
+
 		Gdx.app.log("Settings", "Bonus ="+GraphicManager.ALLOW_BONUS);	
 
 	}
@@ -137,18 +158,18 @@ public class LevelLoader {
 			float angle				= Float.parseFloat(boub.getAttribute("angle"));
 			int IALevel				= Integer.parseInt(boub.getAttribute("IALevel"));
 			short entity			= Short.parseShort(boub.getAttribute("entity"));
-			
+
 			String texRegionPath;			
 			String type				= boub.getAttribute("type");
 			String directory		= (type.equals("normal")) ? 
-											BoubImages.BOUB_DIR_NORMAL : (type.equals("small")) ?
-													BoubImages.BOUB_DIR_SMALL : BoubImages.BOUB_DIR_GIANT;
-			
+					BoubImages.BOUB_DIR_NORMAL : (type.equals("small")) ?
+							BoubImages.BOUB_DIR_SMALL : BoubImages.BOUB_DIR_GIANT;
+
 			String jsonFile			= directory+BoubImages.BOUB_JSON_EXT;
-			
-			
+
+
 			if (entity == Entity.PLAYER)
-				
+
 				texRegionPath = directory+GlobalSettings.PROFILE.getBoubName ()+BoubImages.BOUB_EXTENTION;
 
 			else
@@ -171,7 +192,7 @@ public class LevelLoader {
 							entity			+" IA :"+
 							IALevel
 					);
-			
+
 			graphicManager.addBody( new Bouboule(radius, bodyType, density,
 					elasticity, px, py, angle,texRegionPath, 
 					jsonFile, "boub_"+type, entity, IALevel));
@@ -179,7 +200,7 @@ public class LevelLoader {
 
 
 
-			
+
 
 
 		}
@@ -212,7 +233,7 @@ public class LevelLoader {
 				jsonFile,  jsonName));
 
 		Gdx.app.log("XML","Arena Loaded :"+jsonName);
-		
+
 	}
 
 	/**
@@ -265,25 +286,95 @@ public class LevelLoader {
 				.hasNext();) {
 
 			newobstacle = obstacleElem.next();
-			
-			BodyType bodyType		= (newobstacle.getAttribute("bodyType") == ("Dynamic")) 
+
+			BodyType bodyType		= (newobstacle.getAttribute("bodyType").equals("Dynamic")) 
 					? BodyType.DynamicBody : BodyType.StaticBody;
-			
+
 			float density			= Float.parseFloat(newobstacle.getAttribute("density"));
 			float elasticity		= Float.parseFloat(newobstacle.getAttribute("elasticity"));
 			float px				= Float.parseFloat(newobstacle.getAttribute("px"));
 			float py				= Float.parseFloat(newobstacle.getAttribute("py"));
 			float angle				= Float.parseFloat(newobstacle.getAttribute("angle"));
+			float initAccX			= Float.parseFloat(newobstacle.getAttribute("accx","0"));
+			float initAccY			= Float.parseFloat(newobstacle.getAttribute("accy","0"));
+			float time				= Float.parseFloat(newobstacle.getAttribute("time","0"));
 			String texRegionPath 	= newobstacle.getAttribute("texRegionPath");
 			String jsonFile 		= newobstacle.getAttribute("jsonFile");
 			String jsonName 		= extractJSonName (jsonFile);
+			Boolean produce 		= Boolean.parseBoolean(newobstacle.getAttribute("produce","false"));
+			Boolean blink	 		= Boolean.parseBoolean(newobstacle.getAttribute("blink","false"));
 
 
-			graphicManager.addBody( new Obstacle(bodyType, density,
+			/*Obstacle obs = new Obstacle(bodyType, density,
 					elasticity, px, py, angle,texRegionPath, 
-					jsonFile, jsonName));
-			
-			Gdx.app.log("XML", "Obstacle loaded : "+jsonName);
+					jsonFile, jsonName, initAccX, initAccY);*/
+
+			if (produce)
+				addContinuousObstacle (graphicManager, time,
+						bodyType, density,
+						elasticity, px, py, angle,texRegionPath, 
+						jsonFile, jsonName, initAccX, initAccY);
+
+			else {
+
+				Obstacle Obs = new Obstacle(bodyType, density,
+						elasticity, px, py, angle,texRegionPath, 
+						jsonFile, jsonName, initAccX, initAccY);
+
+				graphicManager.addBody(Obs);
+
+				if (blink)
+					setBlink( Obs , time);
+
+			}
+
+			Gdx.app.log("XML", "Obstacle loaded : "+ produce +jsonName + bodyType.toString()+ time);
 		}
+	}
+
+	private void addContinuousObstacle (final GraphicManager graphicManager, final float time,
+			final BodyType bodyType, final float density,
+			final float elasticity, final float px, final float py, final float angle,
+			final String texRegionPath, final String jsonFile, final String jsonName,
+			final float initAccX, final float initAccY) {
+
+		task = new Timer.Task () {
+			@Override
+			public void run () {
+				Gdx.app.log("Obstacle", "reset Obstacle");
+
+				Obstacle obs = new Obstacle(bodyType, density,
+						elasticity, px, py, angle,texRegionPath, 
+						jsonFile, jsonName, initAccX, initAccY);
+
+				graphicManager.addBody(obs);				
+			}
+
+		};
+
+		timer.scheduleTask (task, 0, time);
+	}
+
+	private void setBlink(final Obstacle obs, final float time) {
+
+		task = new Timer.Task () {
+			@Override
+			public void run () {
+				Gdx.app.log("Obstacle", "blink Obstacle");
+
+				ArrayList<Fixture> fixt = obs.getBody().getFixtureList();
+
+				
+				for ( Fixture fix:fixt ) {
+					fix.setSensor(!fix.isSensor());
+				}
+				
+				
+				obs.getEntity().setAlive(!obs.getEntity().isAlive());	
+			}
+
+		};
+
+		timer.scheduleTask (task, 0, time);		
 	}
 }
