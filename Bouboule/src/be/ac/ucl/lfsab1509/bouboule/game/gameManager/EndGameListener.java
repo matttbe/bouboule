@@ -67,7 +67,8 @@ public class EndGameListener implements ContactListener{
 					isAlivePlayer ++;
 					// Gdx.app.log("Alive", "Begin Contact = "+isAlivePlayer);
 
-				} else {
+				} else if (entity1 == Entity.MONSTER 
+						| entity2 == Entity.MONSTER) {
 
 					isAliveMonster ++;
 				}
@@ -116,9 +117,10 @@ public class EndGameListener implements ContactListener{
 					//Gdx.app.exit();
 				}
 			}
-			else {
+			else if (entity1 == Entity.MONSTER 
+					| entity2 == Entity.MONSTER){
 				if (isAliveMonster > 1) {
-					// Gdx.app.log("Alive", "MONSTER est VIVANT =)");
+					Gdx.app.log("Alive", "MONSTER est VIVANT =)"+(isAliveMonster-1));
 					//DO NOTHING
 					isAliveMonster --;
 				}
