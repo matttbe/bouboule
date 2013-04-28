@@ -307,4 +307,12 @@ public abstract class GameBody {
 		updatePositionVector();
 	}
 
+	/**
+	 * Get the Entity of the designed body
+	 * @return GameBody entity
+	 */
+	public Entity getEntity() {
+		return entity;
+	}
+
 }

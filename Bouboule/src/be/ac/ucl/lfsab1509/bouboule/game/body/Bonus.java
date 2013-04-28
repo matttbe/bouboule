@@ -120,14 +120,6 @@ public class Bonus extends GameBody{
 		}
 	}
 
-	public void inputMouv (final int force) {
-
-		if (entity.isAlive()) {
-			body.applyForceToCenter(new Vector2(100f, 0));
-			super.update();
-		}
-	}
-
 	/**
 	 * Destroy the body+kill speed Task if needed if needed
 	 * 
