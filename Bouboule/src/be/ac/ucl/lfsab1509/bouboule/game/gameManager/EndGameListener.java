@@ -196,5 +196,15 @@ public class EndGameListener implements ContactListener{
 		}
 	}
 
+	public static void resetGame () {
+		Gdx.app.log("KILL", "Reset Game!");
+		if (GlobalSettings.PROFILE.isRunning ())
+			GlobalSettings.PROFILE.cancelNewScore ();
+		GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER; // we need a new game
+		endGame (false);
+		GlobalSettings.PROFILE.checkHighScoreAndResetProfile (); // reset profile
+		GlobalSettings.GAME_EXIT = GameExitStatus.NONE;
+	}
+
 
 }
