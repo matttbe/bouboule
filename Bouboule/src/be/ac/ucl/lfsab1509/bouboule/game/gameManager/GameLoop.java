@@ -51,6 +51,7 @@ public class GameLoop {
 	private Matrix4 			debugMatrix;
 
 	private CountDown 			countDown;
+	private CountDown 			tutorial;
 	private BitmapFont			fontOswald;
 	private BitmapFont			fontOsaka;
 	private BitmapFont			fontOsakaRed;
@@ -98,7 +99,10 @@ public class GameLoop {
 		fontOsakaRed.setColor (.95f, .05f, .05f, 1f);
 
 		//load the counter 
-		countDown = new CountDown();
+		countDown = new CountDown(2, 2, 0.7f, "anim/countdown.png", true);
+		
+		//load the tuto
+		tutorial = new CountDown(1, 2, 2f, "anim/tuto.png",false);
 
 		//new randomGenerator
 		random = new Random();
@@ -174,8 +178,15 @@ public class GameLoop {
 
 		writeText();
 
-		if (pause) // draw the countdown
-			status = countDown.draw(batch, delta);
+		if (pause) { // draw the countdown or tuto
+			
+			
+			if (GlobalSettings.PROFILE.needTutorial()) {
+				GlobalSettings.PROFILE.setNeedTutorial(tutorial.draw(batch, delta));
+				status 	= true;
+			} else 
+				status 	= countDown.draw(batch,  delta);
+		}
 
 		batch.end();
 

@@ -40,26 +40,37 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class CountDown {
 
-	private static final int        FRAME_COLS = 2;				//Number of Cols in the Atlas file
-	private static final int        FRAME_ROWS = 2;				//Number of Rows in the Atlas file
+	private int						FRAME_COLS;				//Number of Cols in the Atlas file
+	private int						FRAME_ROWS;				//Number of Rows in the Atlas file
+	private int						N_FRAME;
 
-	private Animation               countDownAnimation; 		//The animation of the countDown
-	private Texture                 countDownSheet;				//Initial big file of the countDown
-	private TextureRegion[]         countDownFrames;			//Tab that contains all the frames
-	private TextureRegion           currentFrame;				//Current image displayed
+	private Animation				countDownAnimation; 		//The animation of the countDown
+	private Texture					countDownSheet;				//Initial big file of the countDown
+	private TextureRegion[]			countDownFrames;			//Tab that contains all the frames
+	private TextureRegion			currentFrame;				//Current image displayed
 
-	private float 					STEPTIME   = 0.7f;			//Step time between 2 frames
-	private float 					stateTime;					//Current time of the animation
-	private boolean 				bFirstTime = true;			//first time the anim is display
+	private float					STEPTIME;					//Step time between 2 frames
+	private float					stateTime;					//Current time of the animation
+	private boolean					bFirstTime = true;			//first time the anim is display
+	private boolean					RESUME_AFTER_END;
 
 	/**
 	 * Constructor for a CountDown Object 
 	 * Automatically load the images/anim/countdown.png, countDown
 	 * 
-	 * public CountDown()
+	 * public CountDown(final int col, final int row
+	 * 				final String path, final boolean resume)
 	 */
-	public CountDown() {
-		countDownSheet = new Texture("images/anim/countdown.png");
+	public CountDown(final int col, final int row, final float time,
+			final String path, final boolean resume) {
+		
+		FRAME_COLS = col;
+		FRAME_ROWS = row;
+		N_FRAME	   = col*row;
+		STEPTIME   = time;
+		RESUME_AFTER_END = resume;
+		
+		countDownSheet = new Texture(path);
 		TextureRegion[][] tmp = TextureRegion.split(countDownSheet, countDownSheet.getWidth() / 
 				FRAME_COLS, countDownSheet.getHeight() / FRAME_ROWS);
 		countDownFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
@@ -95,9 +106,10 @@ public class CountDown {
 		currentFrame = countDownAnimation.getKeyFrame(stateTime, true);
 		batch.draw(currentFrame,400-currentFrame.getRegionWidth()/2,625-currentFrame.getRegionHeight()/2);
 		
-		if (stateTime > 4*STEPTIME - 0.1f)
+		if (stateTime > N_FRAME*STEPTIME - 0.1f)
 		{
-			GlobalSettings.GAME.getScreen ().resume ();
+			if (RESUME_AFTER_END)
+				GlobalSettings.GAME.getScreen ().resume ();
 			reset ();
 			return false;
 		}

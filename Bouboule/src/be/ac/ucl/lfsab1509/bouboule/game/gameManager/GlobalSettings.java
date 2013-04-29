@@ -71,7 +71,5 @@ public class GlobalSettings {
 	public static ProfileMgr		PROFILE_MGR = null;
 	public static Profile			PROFILE = null;
 	public static MyGame			GAME = null;
-
-
- 	
+	
 }
