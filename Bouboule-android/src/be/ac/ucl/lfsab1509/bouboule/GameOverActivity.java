@@ -30,15 +30,12 @@ package be.ac.ucl.lfsab1509.bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class GameOverActivity extends Activity {
 
@@ -50,61 +47,18 @@ public class GameOverActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 							 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.activity_loosing);
+		setContentView(R.layout.activity_gameover);
 
 		// Listeners for the Game Launcher
-		findViewById(R.id.LoosingMenuButton).setOnTouchListener(
+		findViewById(R.id.GameOverMenuButton).setOnTouchListener(
 				fireListener);
-		findViewById(R.id.LoosingNextLevelButton).setOnTouchListener(
+		findViewById(R.id.GameOverRestartButton).setOnTouchListener(
 				fireListener);
 
-		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
-				"chineyen.ttf");
-
-		// TODO: create a menu for GameOver
-		((TextView) findViewById (R.id.LoosingMenuButton))
-		.setTypeface (myFontBout);
-		((TextView) findViewById (R.id.LoosingNextLevelButton))
-		.setTypeface (myFontBout);
-
-		//Hide the bouboules until the animation begin 
-		
-		int NbLifes = GlobalSettings.PROFILE.getNbLifes ();
-
-		if (NbLifes == GlobalSettings.INIT_LIFES) { // = 3
-			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
-			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
-		}
-		else if (NbLifes == 2) {
-			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
-			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
-		}
-		else if (NbLifes == 1) {
-			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
-			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
-		}
-		else { // loose and gameover... TODO: or on LoosingActivity?
-			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
-			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
-			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
-		}
-
-		Context context = getApplicationContext();
-		CharSequence text = "This is the end of the game!\n\nBackground should be changed"; // TODO
-		int duration = Toast.LENGTH_LONG;
-
-		Toast toast = Toast.makeText(context, text, duration);
-		toast.show();
-
-		findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
-		findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
-		findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
-
-		
-		((Button) findViewById(R.id.LoosingNextLevelButton)).setEnabled(false);
-		((Button) findViewById(R.id.LoosingNextLevelButton)).setText("Game Over");
-		
-		((TextView) findViewById (R.id.LoosingScore)).setText ("Game Over " + GlobalSettings.PROFILE.getEndGameScore ());
+		Typeface font = Typeface.createFromAsset(getAssets(), "chineyen.ttf"); // "osaka-re.ttf");
+		TextView score = (TextView) findViewById (R.id.GameOverScore);
+		score.setTypeface (font);
+		score.setText (Integer.toString (GlobalSettings.PROFILE.getEndGameScore ()));
 	}
 
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
@@ -116,6 +70,6 @@ public class GameOverActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		MyAndroidMenus.onBackPressedGeneric (this, R.id.LoosingMenuButton);
+		MyAndroidMenus.onBackPressedGeneric (this, R.id.GameOverMenuButton);
 	}
 }

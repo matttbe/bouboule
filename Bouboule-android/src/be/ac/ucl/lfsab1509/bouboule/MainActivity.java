@@ -119,11 +119,14 @@ public class MainActivity extends AndroidApplication {
 				switch (resultCode) {
 					case R.id.VictoryMenuButton:
 					case R.id.LoosingMenuButton:
+					case R.id.GameOverMenuButton:
 					// case R.id.GameOverMenuButton: // TODO
 						GlobalSettings.MENUS.launchInitMenu ();
 						break;
 					case R.id.VictoryNextLevelButton:
 					case R.id.LoosingNextLevelButton:
+					case R.id.GameOverRestartButton:
+					default:
 						// return to the screen, nothing to do...
 						break;
 				}
@@ -131,20 +134,4 @@ public class MainActivity extends AndroidApplication {
 				break;
 		}
 	}
-
-	/*
-	@Override
-	protected void onPause () {
-		super.onPause ();
-		//finish ();
-	}*/
-
-	/*@Override
-	protected void onResume() {
-		super.onResume ();
-		Intent intent = new Intent (this, Menu.class);
-		startActivity (intent); => call before the initialization...
-		
-		Gdx.app.log ("Matth", "Resume! " + firstResume);
-	}*/
 }
