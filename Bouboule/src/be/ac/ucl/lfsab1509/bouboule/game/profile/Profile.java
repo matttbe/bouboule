@@ -69,7 +69,7 @@ public class Profile {
 	private int iBestLevel;
 
 	// tutorial
-	private boolean bNeedTuto = true;
+	private boolean bNeedTuto = false;
 	
 	public Profile (String cName)
 	{
@@ -338,11 +338,6 @@ public class Profile {
 	//__________ TUTORIAL
 	public boolean needTutorial () {
 		return bNeedTuto;
-	}
-	
-	//__________ TUTORIAL
-	public void setTutorial (boolean needTutorial) {
-			bNeedTuto = needTutorial;
 	}
 
 	public void setNeedTutorial (boolean bNeedTuto) {
