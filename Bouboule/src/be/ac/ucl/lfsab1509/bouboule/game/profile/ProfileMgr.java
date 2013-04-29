@@ -55,10 +55,10 @@ public class ProfileMgr {
 	}
 
 	/**
-	 * @return get the last profile name or the default one
+	 * @return get the last profile name or null if we need the default one.
 	 */
 	public String getDefaultProfileName () {
-		return prefs.getString (LAST_PROFILE_KEY, GlobalSettings.DEFAULT_PROFILE_NAME);
+		return prefs.getString (LAST_PROFILE_KEY, null);
 	}
 
 	/**
@@ -77,7 +77,13 @@ public class ProfileMgr {
 	 * DEFAULT_PROFILE_NAME)
 	 */
 	public void loadDefaultProfile () {
-		loadProfile (getDefaultProfileName());
+		String profileName = getDefaultProfileName();
+		if (profileName == null) {
+			loadProfile (GlobalSettings.DEFAULT_PROFILE_NAME);
+			GlobalSettings.PROFILE.setNeedTutorial (true); // display the tutorial the first time
+		}
+		else
+			loadProfile (profileName);
 	}
 
 	private String getAllProfilesAsString () {
