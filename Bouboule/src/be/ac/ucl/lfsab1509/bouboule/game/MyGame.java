@@ -30,6 +30,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.MyGestureListener;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
+import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerMgr;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -39,10 +40,22 @@ import com.badlogic.gdx.input.GestureDetector;
 
 public class MyGame extends Game {
 
-	public ScreenGame screenGame;
+	private ScreenGame screenGame;
 	private Sound hitSound;
 	private Sound winSound;
 	private Sound looseSound;
+
+	private TimerMgr timer;
+
+	/**
+	 * This class should be the first one which is called after having
+	 * initialized GDX
+	 */
+	public void init () {
+		GlobalSettings.GAME = this;
+		timer = new TimerMgr (1, 1);
+		GlobalSettings.PROFILE_MGR = new ProfileMgr ();
+	}
 
 	@Override
 	public void create () {
@@ -51,17 +64,13 @@ public class MyGame extends Game {
 		winSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 		looseSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 
-		loadDefaultProfile ();
+		if (GlobalSettings.GAME == null) // should not happen!!!
+			init ();
 
 		screenGame = new ScreenGame();
 		setScreen (screenGame); // 
 		
 		Gdx.input.setInputProcessor( new GestureDetector(new MyGestureListener()));
-	}
-
-	public void loadDefaultProfile () {
-		if (GlobalSettings.PROFILE_MGR == null)
-			GlobalSettings.PROFILE_MGR = new ProfileMgr ();
 	}
 
 	@Override
@@ -101,5 +110,9 @@ public class MyGame extends Game {
 			}
 		}// load the default one (if it's not currently playing)
 		screenGame.setDefaultLoopMusicPath ();
+	}
+
+	public TimerMgr getTimer () {
+		return timer;
 	}
 }

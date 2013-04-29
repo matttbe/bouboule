@@ -287,7 +287,7 @@ public class GameLoop {
 	 * public void writeText()
 	 */
 	public void writeText() {
-		if (! GlobalSettings.PROFILE.isRunning()) // avoid displaying the wrong level at the end of the game and crashes
+		if (! GlobalSettings.GAME.getTimer ().isRunning()) // avoid displaying the wrong level at the end of the game and crashes
 			return;
 
 		CharSequence lives = Integer.toString(GlobalSettings.PROFILE.getNbLifes ());
