@@ -10,6 +10,8 @@ import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 
 public class MyGestureListener implements GestureListener {
+	
+	private static final String CHEATER_NAME = "Deville";
 
 	@Override
 	public boolean touchDown(float x, float y, int pointer, int button) {
@@ -18,14 +20,14 @@ public class MyGestureListener implements GestureListener {
 
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
-		if (GlobalSettings.PROFILE.getName().equals("Deville"))
+		if (GlobalSettings.PROFILE.getName().equals(CHEATER_NAME))
 			GameLoop.bonus (true);
 		return false;
 	}
 
 	@Override
 	public boolean longPress(float x, float y) {
-		if (GlobalSettings.PROFILE.getName().equals("Deville"))
+		if (GlobalSettings.PROFILE.getName().equals(CHEATER_NAME))
 			GameLoop.iBonus = (GameLoop.iBonus + 1) % Entity.BonusType.values ().length;
 		return false;
 	}
@@ -51,7 +53,7 @@ public class MyGestureListener implements GestureListener {
 		
 		Gdx.app.log("Touch","Pinch event " + GlobalSettings.GAME.getTimer ().isRunning ());
 		
-		if (GlobalSettings.PROFILE.getName().equals("Deville")
+		if (GlobalSettings.PROFILE.getName().equals(CHEATER_NAME)
 				&& GlobalSettings.GAME.getTimer ().isRunning () // prevent double stop, double level up, etc.
 				&& GlobalSettings.PROFILE.getScore () < GlobalSettings.PROFILE.getNewInitScore ()) { // it seems this method is called just after the resume... wait at least one second before cheating ;)
 			EndGameListener.winGame (); // cheater!!!!
