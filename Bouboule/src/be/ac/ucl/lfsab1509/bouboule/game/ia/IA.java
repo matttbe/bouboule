@@ -114,6 +114,9 @@ public class IA {
 			Acc = hybrid(IA,VelocityIA,LocalEnemi,VelocityEnemi);
 			break;
 		case 7:
+			Acc = middeler (IA,1);
+			Vector2 slow = new Vector2(VelocityIA).nor().mul(.3f);
+			Acc.sub(slow);
 			break;
 		default:
 			break;
