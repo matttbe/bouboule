@@ -260,7 +260,9 @@ public class LevelLoader {
 	 */
 	public void readLevelObstacles(GraphicManager graphicManager) {
 
-		Element obstaclesGroup = file.getChildByName("Obstacles");	
+		Element obstaclesGroup = file.getChildByName("Obstacles");
+		if (obstaclesGroup == null)
+			return;
 
 		Array<Element> obstaclesArray = obstaclesGroup.getChildrenByName("Obstacle");
 
