@@ -109,16 +109,18 @@ public class ProfileGlobal {
 				continue;
 			}
 
-			int iCurrScore = 0;
+			int iCurrScore = Integer.MIN_VALUE;
 			if (cCurrInfo != null) {
 				cPrevInfo = cCurrInfo; // save the older string
 				cCurrInfo = cCurrInfo.substring (0, cCurrInfo.indexOf (SEPARATOR)); // get the score
 				try {
 					iCurrScore = Integer.parseInt (cCurrInfo);
 				} catch (NumberFormatException e) {
-					iCurrScore = 0;
+					iCurrScore = Integer.MIN_VALUE;
 				}
 			}
+			else
+				cPrevInfo = null;
 			if (iNewScore > iCurrScore) { // new high score!
 				cCurrInfo = iNewScore + SEPARATOR // Score
 						+ GlobalSettings.PROFILE.getName () + SEPARATOR // name
