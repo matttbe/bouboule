@@ -52,9 +52,8 @@
 	        <ImageButton
 	            android:id="@+id/user_boub_left"
 	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1"
-	            android:src="@drawable/boub" />
+	            android:layout_height="match_parent"
+	            android:layout_weight="1" />
 
 	        <ImageView
 	            android:id="@+id/user_boub"
@@ -65,9 +64,8 @@
 	        <ImageButton
 	            android:id="@+id/user_boub_right"
 	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1"
-	            android:src="@drawable/boub" />
+	            android:layout_height="match_parent"
+	            android:layout_weight="1" />
 	        
 	    </LinearLayout>
 	

@@ -29,6 +29,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.profile;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
@@ -41,7 +42,6 @@ public class BoubImages {
 	public static final String BOUB_DIR_SMALL  = "boub/small/";
 
 	public static final String BOUB_JSON_EXT   = "boub.json";
-	public static final String BOUB_PATH = "android_asset/";
 	
 	
 	/**
@@ -53,19 +53,17 @@ public class BoubImages {
 		return new ArrayList<FileHandle>(Arrays.asList(pDir.list (".png")));
 	}
 	
-	public static ArrayList<FileHandle> getAllGiantBoub () {
-		FileHandle pDir = Gdx.files.internal(BOUB_DIR_GIANT);
-
-		return new ArrayList<FileHandle>(Arrays.asList(pDir.list (".png")));
-	}
-	
-	public static FileHandle getBoubFH(String name){
-		FileHandle pDir = Gdx.files.internal(BOUB_DIR_NORMAL);
-		return pDir.child(name + ".png");
-	}
-	
-	public static String getBoubS(FileHandle fileHandle){
-		return fileHandle.nameWithoutExtension();
+	/**
+	 * @return a list of String, each is the name of a bouboule
+	 */
+	public static ArrayList<String> getBoubName (){
+		ArrayList<FileHandle> fh = getAllNormalBoub();
+		ArrayList<String> str = new ArrayList<String>();
+		while (fh.size() != 0){
+			FileHandle tempFH = fh.remove(0);
+			str.add(tempFH.nameWithoutExtension());
+		}
+		return str;
 	}
 	
 }

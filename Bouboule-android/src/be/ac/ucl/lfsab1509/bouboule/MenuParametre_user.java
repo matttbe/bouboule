@@ -29,7 +29,8 @@ package be.ac.ucl.lfsab1509.bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -37,11 +38,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.*;
 import android.util.*;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
-import com.badlogic.gdx.files.FileHandle;
 
-import android.net.Uri;
 
 public class MenuParametre_user extends Activity {
 
@@ -51,8 +53,7 @@ public class MenuParametre_user extends Activity {
 	private ImageView user_boub;
 	
 	private ArrayList<String> listProfile;
-	private ArrayList<Uri> boub_uri;
-	private ArrayList<FileHandle> boub_fh;
+	
 	private ArrayList<String> boub_str;
 	private int boub_index;
 	private int BOUB_INDEX_MAX;
@@ -78,40 +79,28 @@ public class MenuParametre_user extends Activity {
 		user_boub_right.setOnClickListener(clickListener);
 		user_selectprofile_spin.setOnItemSelectedListener(spinnerListener);
 		
-		boub_fh = BoubImages.getAllGiantBoub ();
-		boub_uri = new ArrayList<Uri> ();
-		boub_str = new ArrayList<String>();
-		while (boub_fh.size() != 0){
-			FileHandle tempFH = boub_fh.remove(0);
-			boub_uri.add(Uri.fromFile(tempFH.file()));
-			boub_str.add(BoubImages.getBoubS(tempFH));
-		}
-		BOUB_INDEX_MAX = boub_uri.size();
+		// concern choice of bouboule
+		boub_str = BoubImages.getBoubName ();
+		BOUB_INDEX_MAX = boub_str.size();
 		
 	}
 	
 	@Override
 	protected void onResume(){ // used as refresh of the view
 		super.onResume();
-		Log.d("LN","onResume");
 		// set the list into the spinner
 		listProfile = GlobalSettings.PROFILE_MGR.getAllProfilesAL();
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listProfile);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		user_selectprofile_spin.setAdapter(adapter);
-		//set the selected item on the spinner
+		// set the selected item on the spinner
 		user_selectprofile_spin.setSelection (listProfile.indexOf(GlobalSettings.PROFILE.getName())); // select the current user
 		boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
-		//user_boub.setImageURI(boub_uri.get(boub_index));
-		//Log.d("LN",boub_uri.get(boub_index).toString());
-		//Uri.Builder build = new Uri.Builder();
-		//build = build.appendPath("file:///android_asset/boub/giant/boub_chef.png");
-		//Log.d("LN","uri test : " + build.build().toString());
-		//user_boub.setImageURI(build.build());
-		user_boub.setImageDrawable(Drawable.createFromPath("/boub/giant/boub_chef"));
-		user_boub.setImageDrawable(Drawable.createFromPath("boub/giant/boub_chef"));
-		user_boub.setImageDrawable(Drawable.createFromPath("/boub/giant/boub_chef"));
-		user_boub.setImageDrawable(Drawable.createFromPath("boub/giant/boub_chef"));
+		// update the pictures of the bouboules for the selection
+		openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
+		openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
+		openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
+	    
 	}
 	
 	private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
@@ -136,7 +125,7 @@ public class MenuParametre_user extends Activity {
 						// treat the name following the case
 						case 0:
 							GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
-							finish (); // quit the view (there is no more option and we have to understand that it's done)
+							//finish (); // quit the view (there is no more option and we have to understand that it's done)
 							break;
 						case 1:
 							makeToast(getString (R.string.user_nameidenticalerror));
@@ -152,18 +141,24 @@ public class MenuParametre_user extends Activity {
 					}
 					break; 
 				case R.id.user_boub_left :
-					boub_index = (boub_index + BOUB_INDEX_MAX - 1) % BOUB_INDEX_MAX;
+					// go to the next bouboule
+					boub_index = getPrevIndex(boub_index);
+					// save it
 					GlobalSettings.PROFILE.setBoubName(boub_str.get(boub_index));
-					Log.d("LN","left "+ boub_index);
-					user_boub.setImageURI(boub_uri.get(boub_index));
-					Log.d("LN",boub_uri.get(boub_index).toString() + " -> left");
+					// update pictures
+					openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
+					openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
+					openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
 					break;
 				case R.id.user_boub_right :
-					boub_index = (boub_index + 1) % BOUB_INDEX_MAX;
+					// go to the previous bouboule
+					boub_index = getNextIndex(boub_index);
+					// save it
 					GlobalSettings.PROFILE.setBoubName(boub_str.get(boub_index));
-					Log.d("LN","right "+ boub_index);
-					user_boub.setImageURI(boub_uri.get(boub_index));
-					Log.d("LN",boub_uri.get(boub_index).toString() + " -> right");
+					// update pictures
+					openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
+					openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
+					openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
 					break;
 				default :
 					break;
@@ -171,6 +166,10 @@ public class MenuParametre_user extends Activity {
 		}
 	};
 	
+	/**
+	 * set a Toast centered verticaly on the screen
+	 * @param s : string to set on the Toast
+	 */
 	private void makeToast(String s){
 		Toast genericToast = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG);
 		genericToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
@@ -178,16 +177,23 @@ public class MenuParametre_user extends Activity {
 		
 	}
 	
-	/* Method to test if a String can be used as new username
-	 * @pre: name, the string to test
-	 * @post: 0 means no problem, 1 name already used, 2 usuported file name, 3 contains unsusable character
+	/**
+	 * Method to test if a String can be used as new username
+	 * @param name : string to be tested
+	 * @return 0 means no problem
+	 * 			1 name already used
+	 * 			2 unsupported file name
+	 * 			3 contains unusable character
 	 */
 	private int testName(String name){
 		ArrayList<String> unusable = GlobalSettings.PROFILE_MGR.getAllProfilesAndExceptions (); 
+		// check if already taken
 		if(unusable.contains (name))
 			return 1;
+		// check if unsupported file name
 		if(name.equals("") || name.equals(".") || name.equals(".."))
 			return 2;
+		// check if contains unusable character
 		String[] unusableChar ={ "/", "\n", "\r", "\t", "\0", "\f", "`", "?", "*", "\\", "<", ">", "|", "\"", ":"};
 		for (String var : unusableChar)
 		{
@@ -195,6 +201,56 @@ public class MenuParametre_user extends Activity {
 				return 3;
 		}
 		return 0;
+	}
+
+	/**
+	 * Open the picture of bouboule asked from the asset direcory
+	 * @param view : the ImageView where it has to be set
+	 * @param name : name of the bouboule chosen
+	 * @param big : if true, uses big bouboule, if false, uses small ones
+	 */
+	private void openPictureFromAssets (ImageView view, String name, boolean big){
+		String size;
+		if (big)
+			size = "giant";
+		else
+			size = "small";
+		
+		InputStream bitmap=null;
+
+		try {
+		    bitmap=getAssets().open("boub/" + size + "/" + name + ".png");
+		    Bitmap bit=BitmapFactory.decodeStream(bitmap);
+		    view.setImageBitmap(bit);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} finally {
+		    if(bitmap!=null)
+				try
+				{
+					bitmap.close();
+				} catch (IOException e)
+				{
+					
+					e.printStackTrace();
+				}
+		}
+	}
+	
+	/**
+	 * @param index : current index
+	 * @return previous index, if index == 0 then previous is MAX - 1
+	 */
+	private int getPrevIndex (int index) {
+		return ((index + BOUB_INDEX_MAX - 1) % BOUB_INDEX_MAX) ;
+	}
+	
+	/**
+	 * @param index : current index
+	 * @return next index, if index == MAX - 1 then next is 0
+	 */
+	private int getNextIndex (int index) {
+		return ((boub_index + 1) % BOUB_INDEX_MAX);
 	}
 
 	
