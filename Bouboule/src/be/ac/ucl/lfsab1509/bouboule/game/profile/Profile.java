@@ -150,6 +150,10 @@ public class Profile {
 				bNeedSaveScoreEvenIfCancel = false;
 				
 			}
+
+			@Override
+			public void end () {
+			}
 		};
 
 		GlobalSettings.GAME.getTimer ().addTimerListener (listener);

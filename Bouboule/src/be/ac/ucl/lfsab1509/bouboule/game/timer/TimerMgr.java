@@ -78,6 +78,7 @@ public class TimerMgr {
 	}
 	
 	public void stop () {
+		fireEnd ();
 		timer.stop ();
 		timer.clear (); // maybe not needed?
 		timer = null;
@@ -103,9 +104,16 @@ public class TimerMgr {
 		}
 	}
 
-	private void fireNewRemainingTime (final int iRemainingTime) {
+	protected void fireNewRemainingTime (final int iRemainingTime) {
 		for (TimerListener timerListener : timerListeners) {
 			timerListener.newTimer (iRemainingTime);
 		}
 	}
+
+	protected void fireEnd () {
+		for (TimerListener timerListener : timerListeners) {
+			timerListener.end ();
+		}
+	}
+
 }
