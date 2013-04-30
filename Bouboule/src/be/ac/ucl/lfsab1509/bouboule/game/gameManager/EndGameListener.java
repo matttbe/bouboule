@@ -188,7 +188,7 @@ public class EndGameListener implements ContactListener{
 
 	public static void cancelGame () {
 		Gdx.app.log("KILL", "Cancel Game!");
-		if (GlobalSettings.PROFILE.isRunning ()) {
+		if (GlobalSettings.GAME.getTimer ().isRunning ()) {
 			GlobalSettings.PROFILE.cancelNewScore ();
 			GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER; // we need a new game
 			endGame (false);
@@ -198,7 +198,7 @@ public class EndGameListener implements ContactListener{
 
 	public static void resetGame () {
 		Gdx.app.log("KILL", "Reset Game!");
-		if (GlobalSettings.PROFILE.isRunning ())
+		if (GlobalSettings.GAME.getTimer ().isRunning ())
 			GlobalSettings.PROFILE.cancelNewScore ();
 		GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER; // we need a new game
 		endGame (false);

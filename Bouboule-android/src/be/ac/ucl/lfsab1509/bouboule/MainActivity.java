@@ -55,20 +55,19 @@ public class MainActivity extends AndroidApplication {
 		cfg.useGL20 = true;
 		cfg.useAccelerometer = true;
 		cfg.useCompass = false;
-		
+
 		getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON); // to not lock the screen
-	
-		game = new MyGame ();
-		GlobalSettings.GAME = game;
-		
+
 		GlobalSettings.MENUS = new MyAndroidMenus (this);
-		
-		// TODO: start Menu Activity... and then game.start ();
+
+		game = new MyGame ();
+
 		Log.d ("Matth","initialize now");
 		initialize (game, cfg);
 		Log.d ("Matth","initialized");
 
-		game.loadDefaultProfile ();
+		game.init ();
+
 		GlobalSettings.MENUS.launchInitMenu ();
 	}
 

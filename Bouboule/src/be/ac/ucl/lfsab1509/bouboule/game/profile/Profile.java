@@ -27,15 +27,12 @@
 package be.ac.ucl.lfsab1509.bouboule.game.profile;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerListener;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.utils.Timer;
 
 public class Profile {
-
-	private Timer timer;
-
 	// user
 	private String cName;
 	private String cBoubName;
@@ -83,6 +80,8 @@ public class Profile {
 		iScore = prefs.getInteger (SCORE_KEY, 0);
 		iHighScore = prefs.getInteger (HIGHSCORE_KEY, 0);
 		cBoubName = prefs.getString (BOUB_NAME_KEY, GlobalSettings.DEFAULT_BOUB_NAME);
+
+		addNewTimerListener ();
 	}
 
 	/**
@@ -132,60 +131,38 @@ public class Profile {
 	}
 
 	//__________ TIMER
-	
-	/**
-	 * Create a new timer and init the score (but do not start this timer)
-	 * The timer will decrement the score each second
-	 * The new init score will increase when playing new levels
-	 */
-	public void createTimer (final int iTimer) {
-		if (timer != null) { // stop the previous timer
-			this.stop ();
-		}
-		this.iRemainingTime = iTimer;
-
-		this.iOldScore = this.iScore;
-		this.iNewInitScore = this.iScore + this.iInitScore + this.iInitScore / 4 * (this.iLevel - 1);
-		this.iScore = iNewInitScore; // TODO: more score?
-		this.bNewHighScore = false;
-		this.bNeedSaveScoreEvenIfCancel = false;
-
-		Timer.Task task = new Timer.Task () {
+	private void addNewTimerListener () {
+		TimerListener listener = new TimerListener() {
 			@Override
 			public void run () {
 				iScore--; // launched in the main loop (no need to use mutex)
 				iRemainingTime--;
 			}
+			
+			@Override
+			public void newTimer (int iTimer) {
+				iRemainingTime = iTimer;
+
+				iOldScore = iScore;
+				iNewInitScore = iScore + iInitScore + iInitScore / 4 * (iLevel - 1);
+				iScore = iNewInitScore;
+				bNewHighScore = false;
+				bNeedSaveScoreEvenIfCancel = false;
+				
+			}
 		};
-		timer = new Timer ();
-		timer.scheduleTask (task, 1, 1); // first time, time between
-		timer.stop (); // do not launch it immediately
-	}
 
-	public boolean isRunning () {
-		return (timer != null); // timer created
-	}
-
-	public void play () {
-		timer.start ();
-	}
-
-	public void pause () {
-		timer.stop ();
-	}
-	
-	public void stop () {
-		timer.stop ();
-		timer.clear (); // maybe not needed?
-		timer = null;
+		GlobalSettings.GAME.getTimer ().addTimerListener (listener);
 	}
 
 	/**
-	 * @return the 
+	 * @return the remaining time
 	 */
 	public int getRemainingTime () {
 		return iRemainingTime;
 	}
+
+	//__________ SCORE
 
 	/**
 	 * @return the current score
@@ -222,7 +199,7 @@ public class Profile {
 		if (bNeedSaveScoreEvenIfCancel)
 			saveScore ();
 		else
-			stop ();
+			GlobalSettings.GAME.getTimer ().stop ();
 	}
 
 	/**
@@ -264,7 +241,7 @@ public class Profile {
 	 * @return true if there is a new highscore
 	 */
 	public void saveScore () {
-		stop ();
+		GlobalSettings.GAME.getTimer ().stop ();
 		prefs.putInteger (SCORE_KEY, iScore);
 		prefs.flush ();
 	}

@@ -67,7 +67,6 @@ public class ScreenGame implements Screen {
 
 		camera = CameraHelper.GetCamera(APPWIDTH, APPHEIGHT);
 		game = new GameLoop(camera, true);
-		
 	}
 
 	@Override
@@ -80,7 +79,7 @@ public class ScreenGame implements Screen {
 
 		loopMusic.stop(); // to play at startup
 		game.start ();
-		GlobalSettings.PROFILE.createTimer (GraphicManager.TIME);
+		GlobalSettings.GAME.getTimer ().createNewTimer (GraphicManager.TIME);
 	}
 
 
@@ -96,7 +95,7 @@ public class ScreenGame implements Screen {
 		Gdx.app.log ("Matth", "Screen: DISPOSE");
 		if (game != null)
 			game.dispose();
-		GlobalSettings.PROFILE.stop ();
+		GlobalSettings.GAME.getTimer ().stop ();
 		loopMusic.dispose ();
 	}
 
@@ -108,12 +107,12 @@ public class ScreenGame implements Screen {
 	@Override
 	public void pause() {
 		//Gdx.app.log ("Matth", "Screen: PAUSE");
-		Gdx.app.log ("Matth", "Screen: PAUSE + pause status : "+bIsPause + " " + GlobalSettings.PROFILE.isRunning () + " " + game.getCountDown ().isLaunched ());
+		Gdx.app.log ("Matth", "Screen: PAUSE + pause status : "+bIsPause + " " + GlobalSettings.GAME.getTimer ().isRunning () + " " + game.getCountDown ().isLaunched ());
 		game.getCountDown ().reset (); // reset the countdown (if it's running)
-		if (bIsPause || ! GlobalSettings.PROFILE.isRunning ()) // already stopped... we start a new game?
+		if (bIsPause || ! GlobalSettings.GAME.getTimer ().isRunning ()) // already stopped... we start a new game?
 			return;
 		bIsPause = true;
-		GlobalSettings.PROFILE.pause ();
+		GlobalSettings.GAME.getTimer ().pause ();
 		loopMusic.pause ();
 		Gdx.app.log ("Matth", "Screen: PAUSE + pause status ok : "+bIsPause);
 	}
@@ -130,7 +129,7 @@ public class ScreenGame implements Screen {
 			show (); //must relaunch the game when the activity is not paused
 					 //and comes back from a menu or what ever
 		else if (bIsPause && game.getCountDown ().isLaunched ()) { // resume from CountDown
-			GlobalSettings.PROFILE.play ();
+			GlobalSettings.GAME.getTimer ().play ();
 			if (! GlobalSettings.SOUND_IS_MUTED)
 				loopMusic.play ();
 			bIsPause = false;
