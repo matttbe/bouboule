@@ -46,7 +46,8 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 public class GameLoop {
 
-	public  GraphicManager 		graphicManager;
+	private static  GraphicManager 		graphicManager;
+	public static int iBonus = -1;
 	private Box2DDebugRenderer 	debugRenderer;
 	private Matrix4 			debugMatrix;
 
@@ -58,7 +59,7 @@ public class GameLoop {
 	private SpriteBatch			batch;
 	private LevelLoader 		level;
 
-	private Random 				random;
+	private static Random 				random;
 
 
 
@@ -145,7 +146,7 @@ public class GameLoop {
 		graphicManager.update();
 
 		if (GraphicManager.ALLOW_BONUS == true)
-			bonus();
+			bonus(false);
 
 	}
 
@@ -199,14 +200,18 @@ public class GameLoop {
 	 * 
 	 *  private void bonus()
 	 */
-	private void bonus() {
+	public static void bonus (boolean bForce) {
 
-		if (random.nextInt(GraphicManager.BONUS_SPAWN_RATE) == 5) {
+		if (bForce || random.nextInt(GraphicManager.BONUS_SPAWN_RATE) == 5) {
 			// add a new bonus to get more lifes only if we have less than 3 lifes
-			int iNBonus = Entity.BonusType.values ().length;
-			int nextInt = GlobalSettings.PROFILE.getNbLifes () < GlobalSettings.MAX_LIFES ? iNBonus : iNBonus - 1;
+			int nextInt, iNBonus = Entity.BonusType.values ().length;
+			if (iBonus == -1)
+				nextInt = random.nextInt (GlobalSettings.PROFILE.getNbLifes ()
+						< GlobalSettings.MAX_LIFES ? iNBonus : iNBonus - 1);
+			else
+				nextInt = iBonus;
 
-			switch (random.nextInt(nextInt)) {
+			switch (nextInt) {
 			case 0:
 				Gdx.app.log("bonus", "new speed-created");
 				graphicManager.addBody(new Bonus( 0,

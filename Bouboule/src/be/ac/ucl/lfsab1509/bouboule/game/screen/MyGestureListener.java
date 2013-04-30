@@ -1,6 +1,8 @@
 package be.ac.ucl.lfsab1509.bouboule.game.screen;
 
+import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
@@ -16,11 +18,15 @@ public class MyGestureListener implements GestureListener {
 
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
+		if (GlobalSettings.PROFILE.getName().equals("Deville"))
+			GameLoop.bonus (true);
 		return false;
 	}
 
 	@Override
 	public boolean longPress(float x, float y) {
+		if (GlobalSettings.PROFILE.getName().equals("Deville"))
+			GameLoop.iBonus = (GameLoop.iBonus + 1) % Entity.BonusType.values ().length;
 		return false;
 	}
 
