@@ -85,7 +85,6 @@ public class GameLoop {
 		graphicManager = new GraphicManager();
 
 		level = new LevelLoader();
-		GlobalSettings.NBLEVELS = level.getNbLevels ();
 
 		//Load the font
 		fontOswald = new BitmapFont(Gdx.files.internal("fonts/Oswald/Oswald.fnt"),
@@ -102,7 +101,7 @@ public class GameLoop {
 		countDown = new CountDown(2, 2, 0.7f, "anim/countdown.png", true);
 		
 		//load the tuto
-		tutorial = new CountDown(1, 2, 2f, "anim/tuto.png",false);
+		tutorial = new CountDown(2, 1, 4f, "anim/tuto.png",false);
 
 		//new randomGenerator
 		random = new Random();
@@ -114,9 +113,6 @@ public class GameLoop {
 	public void start() {
 
 		Gdx.app.log("Matth","Dipose of the graphicManager");
-		
-		//kill the timer task set by the previous level
-		level.resetTimer();
 		
 		//Clear the graphic Manager for a new use.
 		graphicManager.dispose();

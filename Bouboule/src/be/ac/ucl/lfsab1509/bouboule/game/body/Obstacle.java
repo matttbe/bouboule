@@ -27,15 +27,19 @@ package be.ac.ucl.lfsab1509.bouboule.game.body;
  */
 
 
+import java.util.ArrayList;
+
 import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 /**
@@ -132,6 +136,17 @@ public class Obstacle extends GameBody{
 			this.entity.setAlive(false);
 			
 		super.update();
+	}
+
+	public void inverseBlink () {
+		Gdx.app.log("Obstacle", "reset Obstacle");
+		ArrayList<Fixture> fixt = getBody().getFixtureList();
+
+		for (Fixture fix : fixt ) {
+			fix.setSensor (! fix.isSensor());
+		}
+
+		getEntity().setAlive (! getEntity().isAlive());
 	}
 
 }

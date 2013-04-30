@@ -103,9 +103,10 @@ public class TimerMgr {
 		}
 	}
 
-	private void fireNewRemainingTime (final int iRemainingTime) {
+	protected void fireNewRemainingTime (final int iRemainingTime) {
 		for (TimerListener timerListener : timerListeners) {
 			timerListener.newTimer (iRemainingTime);
 		}
 	}
+
 }
