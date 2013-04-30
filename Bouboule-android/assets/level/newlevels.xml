@@ -4,7 +4,8 @@
     <Level1
         bonus="True"
         bonusrate="5432"
-        time="45" >
+        time="45"
+        bonusEnabled="star,life" >
 
         <Bouboule
             IALevel="6"
@@ -69,7 +70,8 @@
     <Level2
         bonus="True"
         bonusrate="5432"
-        time="45" >
+        time="45"
+        bonusEnabled="invincible,inverse,invisible" >
 
         <Bouboule
             IALevel="4"
