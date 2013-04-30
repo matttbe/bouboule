@@ -3,7 +3,7 @@
 
     <Level1
         bonus="True"
-        bonusrate="1500"
+        bonusrate="1700"
         time="60"
         bonusEnabled="star,life" >
 
@@ -66,9 +66,9 @@
 
     <Level2
         bonus="True"
-        bonusrate="5432"
-        time="45"
-        bonusEnabled="invincible,inverse,invisible" >
+        bonusrate="1650"
+        time="55"
+        bonusEnabled="star,life" >
 
         <Bouboule
             IALevel="4"
@@ -129,7 +129,7 @@
 
     <Level3
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -191,7 +191,7 @@
 
     <Level4
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -253,7 +253,7 @@
 
     <Level5
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -393,7 +393,7 @@
 
     <Level6
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -443,7 +443,7 @@
 
     <Level7
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -493,7 +493,7 @@
 
     <Level8
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -582,7 +582,7 @@
 
     <Level9
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -650,7 +650,7 @@
 
     <Level10
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -700,7 +700,7 @@
 
     <Level11
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -750,7 +750,7 @@
 
     <Level12
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -800,7 +800,7 @@
 
     <Level13
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -850,7 +850,7 @@
 
     <Level14
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -924,7 +924,7 @@
 
     <Level15
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -989,7 +989,7 @@
 
     <Level16
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -1039,7 +1039,7 @@
 
     <Level17
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -1136,7 +1136,7 @@
 
     <Level18
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -1201,7 +1201,7 @@
 
     <Level19
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
@@ -1280,7 +1280,7 @@
 
     <Level20
         bonus="True"
-        bonusrate="5432"
+        bonusrate="1650"
         time="45" >
 
         <Bouboule
