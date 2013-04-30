@@ -78,7 +78,7 @@ public class Profile {
 		iLevel = prefs.getInteger (LEVEL_KEY, GlobalSettings.INIT_LEVEL);
 		iBestLevel = prefs.getInteger (BEST_LEVEL_KEY, GlobalSettings.INIT_LEVEL);
 		iScore = prefs.getInteger (SCORE_KEY, 0);
-		iHighScore = prefs.getInteger (HIGHSCORE_KEY, 0);
+		iHighScore = prefs.getInteger (HIGHSCORE_KEY, Integer.MIN_VALUE);
 		cBoubName = prefs.getString (BOUB_NAME_KEY, GlobalSettings.DEFAULT_BOUB_NAME);
 
 		addNewTimerListener ();
