@@ -53,9 +53,9 @@ public class Entity {
 	private boolean isAlive;				//isAlive =)
 	private Fixture fixture;
 	
-	private static final int SPEED_MULT_VALUE = 2;
-	private static final int DEFAULT_MULT_VALUE = 2;
-	private static final int TIMER_DEFAULT_TIME = 10;
+	private static final float SPEED_MULT_VALUE = 2f;
+	private static final float DEFAULT_MULT_VALUE = 2f;
+	private static final int TIMER_DEFAULT_TIME = 5;
 
 	private Timer timer;
 
@@ -149,7 +149,7 @@ public class Entity {
 				
 				case INVERSE:
 					inverse ();
-					resetBonus (TIMER_DEFAULT_TIME);
+					resetBonus (TIMER_DEFAULT_TIME*2);
 					return true;
 
 				default:
@@ -199,7 +199,7 @@ public class Entity {
 				break;
 			case INVISIBLE:
 				invisible (true);
-				resetBonus (TIMER_DEFAULT_TIME/2);
+				resetBonus ((TIMER_DEFAULT_TIME+1)/2);
 				break;
 		}
 	}
@@ -299,7 +299,7 @@ public class Entity {
 		this.isAlive = isAlive;
 	}
 
-	private void increaseWeight (final int iMult) {
+	private void increaseWeight (final float iMult) {
 		Gdx.app.log ("bonus", "increase: " + iMult + " was: " + fixture.getDensity ());
 		fixture.setDensity (fixture.getDensity () * iMult);
 		fixture.getBody ().resetMassData ();
@@ -310,10 +310,10 @@ public class Entity {
 	}
 
 	private void lowerWeight () {
-		increaseWeight (1/DEFAULT_MULT_VALUE);
+		increaseWeight (1f/DEFAULT_MULT_VALUE);
 	}
 
-	private void increaseElasticity (final int iMult) {
+	private void increaseElasticity (final float iMult) {
 		fixture.setRestitution (fixture.getRestitution () * iMult);
 	}
 
@@ -322,7 +322,7 @@ public class Entity {
 	}
 
 	private void lowerElasticity () {
-		increaseElasticity (1/DEFAULT_MULT_VALUE);
+		increaseElasticity (1f/DEFAULT_MULT_VALUE);
 	}
 
 	private void invincible (boolean bInvincible) {
