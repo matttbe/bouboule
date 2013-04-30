@@ -36,31 +36,42 @@
 	        android:id="@+id/user_selectprofile_spin"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content" />
-	
-	    
+
 	    <TextView
 	        android:id="@+id/user_playerball_txt"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="@string/user_playerball"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	
-	    <Gallery
-	        android:id="@+id/user_playerball_gallery"
+	    
+	    <LinearLayout
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content" />
-	
-	    <TextView
-	        android:id="@+id/user_opponentball_txt"
-	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="@string/user_opponentball"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	        android:orientation="horizontal" >
+	        
+	        <ImageButton
+	            android:id="@+id/user_boub_left"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:src="@drawable/boub" />
+
+	        <ImageView
+	            android:id="@+id/user_boub"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="8" />
+	        
+	        <ImageButton
+	            android:id="@+id/user_boub_right"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:src="@drawable/boub" />
+	        
+	    </LinearLayout>
 	
-	    <Gallery
-	        android:id="@+id/user_oppenentball_galery"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content" />
+	    
 		 
 		 
 	</LinearLayout>

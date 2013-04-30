@@ -41,7 +41,7 @@ public class BoubImages {
 	public static final String BOUB_DIR_SMALL  = "boub/small/";
 
 	public static final String BOUB_JSON_EXT   = "boub.json";
-
+	public static final String BOUB_PATH = "android_asset/";
 	
 	
 	/**
@@ -52,4 +52,20 @@ public class BoubImages {
 
 		return new ArrayList<FileHandle>(Arrays.asList(pDir.list (".png")));
 	}
+	
+	public static ArrayList<FileHandle> getAllGiantBoub () {
+		FileHandle pDir = Gdx.files.internal(BOUB_DIR_GIANT);
+
+		return new ArrayList<FileHandle>(Arrays.asList(pDir.list (".png")));
+	}
+	
+	public static FileHandle getBoubFH(String name){
+		FileHandle pDir = Gdx.files.internal(BOUB_DIR_NORMAL);
+		return pDir.child(name + ".png");
+	}
+	
+	public static String getBoubS(FileHandle fileHandle){
+		return fileHandle.nameWithoutExtension();
+	}
+	
 }

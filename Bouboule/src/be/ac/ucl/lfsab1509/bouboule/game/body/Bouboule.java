@@ -31,6 +31,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -78,7 +79,7 @@ public class Bouboule extends GameBody{
 
 		
 		this.texture = new TextureRegion(new Texture(texRegionPath));
-
+		Gdx.app.log("LN"," texture "+texRegionPath);
 		this.sprite = new Sprite(texture);
 
 		MakeBody(0, 0, radius, bodyType, density, elasticity, false, pos, angle, jsonFile, jsonName,
