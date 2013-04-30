@@ -108,12 +108,17 @@ public class MainActivity extends AndroidApplication {
 				switch (resultCode) {
 					case R.id.PlayButton:
 						Log.i ("Matth", "Menu Activity finished: start game");
+						/*Intent intent = new Intent (MainActivity.this, ChoosingActivity.class);
+						startActivityForResult (intent, MainActivity.CODE_CHOOSE_ACTIVITY);*/
+						
 						// gameScreen.show (); // TODO: we should do nothing... we are now in the game, no?
 						break;
 					default:
 						break;
 				}
 				break;
+				
+
 			case CODE_END_GAME:
 				switch (resultCode) {
 					case R.id.VictoryMenuButton:

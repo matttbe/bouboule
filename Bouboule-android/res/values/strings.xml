@@ -10,6 +10,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_victory">VictoryActivity</string>
     <string name="title_activity_loosing">LoosingActivity</string>
+    <string name="title_activity_ChoosingActivity">Choosing Activity</string>
     
     <!-- Menu Parametre -->
     <string name="title_activiy_menuParametre">Settings</string>
@@ -48,7 +49,7 @@
     <string name="about_graphism">Graphisms :</string>
     <string name="about_graphism_txt">Van Wallendael Julien</string>
     <string name="about_music">Music :</string>
-    <string name="about_music_txt"></string>
+    <string name="about_music_txt">Paschal Adans</string>
     
     
     <!-- Menu Pause -->

@@ -179,10 +179,12 @@ public class Menu extends Activity {
 			switch (view.getId()) {
 				
 				case R.id.PlayButton :
-					mHandler.removeCallbacks(animationUpdate);
+					/*mHandler.removeCallbacks(animationUpdate);
 					mHandler.removeCallbacks(nameUpdate);
-					setResult(view.getId());
-					finish();
+					setResult(R.id.PlayButton);*/
+					startActivityForResult(new Intent(Menu.this,ChoosingActivity.class),0);
+
+					//finish();
 					break;
 					
 				case R.id.ParameterButton :
@@ -197,6 +199,18 @@ public class Menu extends Activity {
 			
 		}
 	};
+	
+	protected void onActivityResult(final int requestCode, final int resultCode,	final Intent data) {
+		Log.d("kamoulox","on activity");
+		if(requestCode == 0 && resultCode != -1) { // it's the id of the button
+			mHandler.removeCallbacks(animationUpdate);
+			mHandler.removeCallbacks(nameUpdate);
+			setResult(R.id.PlayButton);
+			finish();
+		}
+	}
+
+
 
 
 	@SuppressLint("SimpleDateFormat")
