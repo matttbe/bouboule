@@ -29,6 +29,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.level;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import be.ac.ucl.lfsab1509.bouboule.game.body.Arena;
@@ -104,6 +105,10 @@ public class LevelLoader {
 		// load settings about the level:
 		GraphicManager.ALLOW_BONUS = Boolean.parseBoolean(file.getAttribute("bonus","false"));
 		GraphicManager.BONUS_SPAWN_RATE = Integer.parseInt(file.getAttribute("bonusrate","0"));
+		String bonusEnabled = file.getAttribute ("bonusEnabled", null);
+		GraphicManager.BONUS_ENABLED = bonusEnabled != null
+				? new ArrayList<String>(Arrays.asList(bonusEnabled.split (",")))
+				: null;
 		GraphicManager.TIME = Integer.parseInt(file.getAttribute("time", "30"));
 		IA.FORCE_MAX_IA = Float.parseFloat(file.getAttribute("forcemaxia", "0.5f"));
 		IA.FORCE_MAX_PLAYER = Float.parseFloat(file.getAttribute("forcemaxplayer", "0.5f"));
@@ -255,7 +260,9 @@ public class LevelLoader {
 	 */
 	public void readLevelObstacles(GraphicManager graphicManager) {
 
-		Element obstaclesGroup = file.getChildByName("Obstacles");	
+		Element obstaclesGroup = file.getChildByName("Obstacles");
+		if (obstaclesGroup == null)
+			return;
 
 		Array<Element> obstaclesArray = obstaclesGroup.getChildrenByName("Obstacle");
 
