@@ -29,13 +29,17 @@ package be.ac.ucl.lfsab1509.bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import android.util.*;
 
@@ -51,6 +55,7 @@ public class MenuParametre_user extends Activity {
 	private ImageButton user_boub_left;
 	private ImageButton user_boub_right;
 	private ImageView user_boub;
+	private EditText user_newname;
 	
 	private ArrayList<String> listProfile;
 	
@@ -65,24 +70,31 @@ public class MenuParametre_user extends Activity {
 		// request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.activity_parametre_user);
+		setContentView(R.layout.activity_parametre_user);			
+		
 		
 		// find the different views
 		user_selectprofile_spin = (Spinner) findViewById(R.id.user_selectprofile_spin);
 		user_boub_left = (ImageButton) findViewById(R.id.user_boub_left);
 		user_boub_right = (ImageButton) findViewById(R.id.user_boub_right);
 		user_boub = (ImageView) findViewById(R.id.user_boub);
+		user_newname = ((EditText) findViewById(R.id.user_newname));
 		
 		// link the listeners
-		findViewById(R.id.button_user_create).setOnClickListener(clickListener);
 		user_boub_left.setOnClickListener(clickListener);
 		user_boub_right.setOnClickListener(clickListener);
 		user_selectprofile_spin.setOnItemSelectedListener(spinnerListener);
+		user_newname.setOnKeyListener (onkeyListener);
 		
 		// concern choice of bouboule
 		boub_str = BoubImages.getBoubName ();
 		BOUB_INDEX_MAX = boub_str.size();
 		
+		// change of type font
+		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
+		((TextView) findViewById(R.id.user_newUser_txt)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.user_activeUser_txt)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.user_playerball_txt)).setTypeface(myTypeface);
 	}
 	
 	@Override
@@ -112,34 +124,54 @@ public class MenuParametre_user extends Activity {
 		public void onNothingSelected (AdapterView<?> parent) {}
 	};
 	
+	private View.OnKeyListener onkeyListener = new View.OnKeyListener() {
+		
+		@Override
+		public boolean onKey (View v, int keyCode, KeyEvent event)
+		{
+			if (event.getAction() == KeyEvent.ACTION_DOWN) {
+	            Log.d("LN","key code : "+ keyCode) ; 
+				switch (keyCode) {
+	                  case KeyEvent.KEYCODE_DPAD_CENTER:
+	                  case KeyEvent.KEYCODE_ENTER:
+							// catch the name
+							String text = user_newname.getText().toString();
+							switch (testName(text)){
+								// treat the name following the case
+							case 0:
+								GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
+									onResume();
+									break;
+								case 1:
+									makeToast(getString (R.string.user_nameidenticalerror));
+									break;
+								case 2:
+									makeToast(getString (R.string.user_nameemptyerror));
+									break;
+								case 3:
+									makeToast(getString (R.string.user_namecharerror));
+									break;
+								default :
+									break; 
+							}
+							InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+				            imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
+				            break;
+	                  case KeyEvent.KEYCODE_BACK : 
+	                	  finish();
+	                	  break;
+	              }
+	          }
+	          return true;
+		}
+	};
+	
 	private View.OnClickListener clickListener = new View.OnClickListener() {
 		
 		@Override
 		public void onClick (View view)
 		{
 			switch (view.getId()) {
-				case R.id.button_user_create :
-					// catch the name
-					String text = ((EditText) findViewById(R.id.user_newname)).getText().toString();
-					switch (testName(text)){
-						// treat the name following the case
-						case 0:
-							GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
-							//finish (); // quit the view (there is no more option and we have to understand that it's done)
-							break;
-						case 1:
-							makeToast(getString (R.string.user_nameidenticalerror));
-							break;
-						case 2:
-							makeToast(getString (R.string.user_nameemptyerror));
-							break;
-						case 3:
-							makeToast(getString (R.string.user_namecharerror));
-							break;
-						default :
-							break;
-					}
-					break; 
 				case R.id.user_boub_left :
 					// go to the next bouboule
 					boub_index = getPrevIndex(boub_index);
@@ -252,7 +284,4 @@ public class MenuParametre_user extends Activity {
 	private int getNextIndex (int index) {
 		return ((boub_index + 1) % BOUB_INDEX_MAX);
 	}
-
-	
-	
 }

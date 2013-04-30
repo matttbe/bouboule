@@ -44,7 +44,7 @@
         <activity android:name="MenuParametre" android:label="@string/title_activiy_menuParametre" android:screenOrientation="portrait"></activity>
         <activity android:name="MenuParametre_about" android:label="@string/title_activiy_menuParametre" android:screenOrientation="portrait"></activity>
         <activity android:name="MenuParametre_global" android:label="@string/title_activiy_menuParametre" android:screenOrientation="portrait"></activity>
-        <activity android:name="MenuParametre_user" android:label="@string/title_activiy_menuParametre" android:screenOrientation="portrait"></activity>
+        <activity android:name="MenuParametre_user" android:label="@string/title_activiy_menuParametre" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>
