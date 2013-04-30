@@ -101,7 +101,7 @@ public class GameLoop {
 		countDown = new CountDown(2, 2, 0.7f, "anim/countdown.png", true);
 		
 		//load the tuto
-		tutorial = new CountDown(2, 1, 2f, "anim/tuto.png",false);
+		tutorial = new CountDown(2, 1, 4f, "anim/tuto.png",false);
 
 		//new randomGenerator
 		random = new Random();
