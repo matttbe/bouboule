@@ -40,13 +40,13 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
+import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerListener;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
@@ -58,9 +58,7 @@ public class LevelLoader {
 	private XmlReader 			reader;			//XML Reader
 	private Element 			root;			//root of the global levelfile
 	private Element 			file;			//current level
-	private int 				iNbLevels;		//Number of levels
-	public static Timer 				timer = new Timer (); 
-	private static Timer.Task			task;
+	private ArrayList<TimerListener> timerListenerArray; //Used to produce new objects
 
 	/**
 	 * Contructor of the xml loader
@@ -71,42 +69,17 @@ public class LevelLoader {
 	 * 	public LevelLoader()
 	 */
 	public LevelLoader() {
-
 		this.reader = new XmlReader();
 		try {
 			root = reader.parse( 
 					Gdx.files.internal("level/newlevels.xml")
 					);
-			this.iNbLevels = root.getChildCount ();
+			GlobalSettings.NBLEVELS = root.getChildCount ();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		timerListenerArray = new ArrayList<TimerListener> (2);
 
-	}
-
-
-	/**
-	 * 
-	 * Rest the timer used for the animated Obstacles
-	 */
-	public void resetTimer() {
-
-		if (task != null)
-			task.cancel();
-		timer.clear();
-		if (task != null)
-			Gdx.app.log("Timer", ""+task.isScheduled());
-	}
-
-
-
-	/**
-	 * Return the number of levels
-	 * 
-	 * 	public int getNbLevels ()
-	 */
-	public int getNbLevels () {
-		return iNbLevels;
 	}
 
 	/**
@@ -116,6 +89,13 @@ public class LevelLoader {
 	 * 	public void loadLevel(String level)
 	 */
 	public void loadLevel(String level) {
+		if (! timerListenerArray.isEmpty ()) { // can be used to produce new obstacles
+			for (TimerListener timerListener : timerListenerArray)
+				GlobalSettings.GAME.getTimer ().removeTimerListener (timerListener);
+			timerListenerArray.clear ();
+		}
+			
+
 		file = root.getChildByName(level);
 		if (file == null) {
 			Gdx.app.log("Matth", "Level not found");
@@ -338,43 +318,59 @@ public class LevelLoader {
 			final String texRegionPath, final String jsonFile, final String jsonName,
 			final float initAccX, final float initAccY) {
 
-		task = new Timer.Task () {
+		TimerListener timerListener = new TimerListener() {
+			int iTimerInc;
+
 			@Override
 			public void run () {
-				Gdx.app.log("Obstacle", "reset Obstacle");
-
-				Obstacle obs = new Obstacle(bodyType, density,
-						elasticity, px, py, angle,texRegionPath, 
-						jsonFile, jsonName, initAccX, initAccY);
-
-				graphicManager.addBody(obs);				
+				if (iTimerInc % time == 0)
+				{
+					Gdx.app.log("Obstacle", "reset Obstacle");
+	
+					Obstacle obs = new Obstacle(bodyType, density,
+							elasticity, px, py, angle,texRegionPath, 
+							jsonFile, jsonName, initAccX, initAccY);
+	
+					graphicManager.addBody(obs);
+				}
+				iTimerInc++;
 			}
 
+			@Override
+			public void newTimer (int iRemainingTime) {
+				iTimerInc = 0;
+			}
 		};
-
-		timer.scheduleTask (task, 0, time);
+		GlobalSettings.GAME.getTimer ().addTimerListener (timerListener);
+		timerListenerArray.add (timerListener);
 	}
 
 	private void setBlink(final Obstacle obs, final float time) {
+		TimerListener timerListener = new TimerListener() {
+		int iTimerInc;
 
-		task = new Timer.Task () {
 			@Override
 			public void run () {
-				Gdx.app.log("Obstacle", "blink Obstacle");
+				if (iTimerInc % time == 0)
+				{
+					Gdx.app.log("Obstacle", "reset Obstacle");
+					ArrayList<Fixture> fixt = obs.getBody().getFixtureList();
 
-				ArrayList<Fixture> fixt = obs.getBody().getFixtureList();
+					for (Fixture fix : fixt ) {
+						fix.setSensor (! fix.isSensor());
+					}
 
-				
-				for ( Fixture fix:fixt ) {
-					fix.setSensor(!fix.isSensor());
+					obs.getEntity().setAlive (! obs.getEntity().isAlive());
 				}
-				
-				
-				obs.getEntity().setAlive(!obs.getEntity().isAlive());	
+				iTimerInc++;
 			}
 
+			@Override
+			public void newTimer (int iRemainingTime) {
+				iTimerInc = 0;
+			}
 		};
-
-		timer.scheduleTask (task, 0, time);		
+		GlobalSettings.GAME.getTimer ().addTimerListener (timerListener);
+		timerListenerArray.add (timerListener);
 	}
 }

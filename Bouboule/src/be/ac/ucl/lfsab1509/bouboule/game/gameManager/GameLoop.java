@@ -85,7 +85,6 @@ public class GameLoop {
 		graphicManager = new GraphicManager();
 
 		level = new LevelLoader();
-		GlobalSettings.NBLEVELS = level.getNbLevels ();
 
 		//Load the font
 		fontOswald = new BitmapFont(Gdx.files.internal("fonts/Oswald/Oswald.fnt"),
@@ -114,9 +113,6 @@ public class GameLoop {
 	public void start() {
 
 		Gdx.app.log("Matth","Dipose of the graphicManager");
-		
-		//kill the timer task set by the previous level
-		level.resetTimer();
 		
 		//Clear the graphic Manager for a new use.
 		graphicManager.dispose();
