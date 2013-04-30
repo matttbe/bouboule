@@ -3,12 +3,12 @@
 
     <Level1
         bonus="True"
-        bonusrate="5432"
-        time="45"
+        bonusrate="1500"
+        time="60"
         bonusEnabled="star,life" >
 
         <Bouboule
-            IALevel="6"
+            IALevel="7"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -62,9 +62,6 @@
                 weight="3.7401f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level1>
 
     <Level2
@@ -128,9 +125,6 @@
                 weight="3.7401f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level2>
 
     <Level3
@@ -193,9 +187,6 @@
                 weight="3.7401f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level3>
 
     <Level4
@@ -258,9 +249,6 @@
                 weight="2.9408f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level4>
 
     <Level5
@@ -401,9 +389,6 @@
                 weight="1.2592f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level5>
 
     <Level6
@@ -454,9 +439,6 @@
                 weight="3.2862f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level6>
 
     <Level7
@@ -507,9 +489,6 @@
                 weight="3.2862f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level7>
 
     <Level8
@@ -667,9 +646,6 @@
                 weight="1.5296f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level9>
 
     <Level10
@@ -720,9 +696,6 @@
                 weight="2.8421f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level10>
 
     <Level11
@@ -773,9 +746,6 @@
                 weight="3.0099f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level11>
 
     <Level12
@@ -826,9 +796,6 @@
                 weight="3.2862f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level12>
 
     <Level13
@@ -879,9 +846,6 @@
                 weight="3.2862f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level13>
 
     <Level14
@@ -956,9 +920,6 @@
                 weight="0.58224f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level14>
 
     <Level15
@@ -1074,9 +1035,6 @@
                 weight="6.3651f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level16>
 
     <Level17
@@ -1368,9 +1326,6 @@
                 weight="6.3651f" >
             </NodeAllow>
         </MapNodes>
-
-        <Obstacles>
-        </Obstacles>
     </Level20>
 
 </Level>
