@@ -44,7 +44,6 @@ import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerListener;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader;
@@ -351,23 +350,15 @@ public class LevelLoader {
 
 			@Override
 			public void run () {
-				if (iTimerInc % time == 0)
-				{
-					Gdx.app.log("Obstacle", "reset Obstacle");
-					ArrayList<Fixture> fixt = obs.getBody().getFixtureList();
-
-					for (Fixture fix : fixt ) {
-						fix.setSensor (! fix.isSensor());
-					}
-
-					obs.getEntity().setAlive (! obs.getEntity().isAlive());
-				}
 				iTimerInc++;
+				if (iTimerInc % time == 0)
+					obs.inverseBlink ();
 			}
 
 			@Override
 			public void newTimer (int iRemainingTime) {
 				iTimerInc = 0;
+				obs.inverseBlink ();
 			}
 		};
 		GlobalSettings.GAME.getTimer ().addTimerListener (timerListener);
