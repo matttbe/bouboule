@@ -37,11 +37,6 @@ public interface TimerListener {
 	 */
 	public void newTimer (final int iRemainingTime);
 
-	/**
-	 * Called at the end of the timer
-	 */
-	public void end ();
-
 	/*public void play ();
 
 	public void pause ();*/
