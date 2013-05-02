@@ -28,6 +28,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -56,8 +57,8 @@ public class MenuParametre_global extends Activity {
 		sensitivity_seekbar = (SeekBar) findViewById(R.id.global_sensitivity_bar);
 		
 		// set the originals values
-		sound_switch.setChecked(GlobalSettings.SOUND_IS_MUTED);
-		rotate_switch.setChecked(GlobalSettings.FIXED_ROTATION);
+		sound_switch.setChecked(!GlobalSettings.SOUND_IS_MUTED);
+		rotate_switch.setChecked(!GlobalSettings.FIXED_ROTATION);
 		sensitivity_seekbar.setMax(GlobalSettings.SENSITIVITY_MAX);
 		sensitivity_seekbar.setProgress(GlobalSettings.SENSITIVITY);
 		
@@ -65,15 +66,23 @@ public class MenuParametre_global extends Activity {
 		sound_switch.setOnCheckedChangeListener(switchListener);
 		rotate_switch.setOnCheckedChangeListener(switchListener);
 		sensitivity_seekbar.setOnSeekBarChangeListener(seekBarListener);
+		
+		// change of type font
+		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
+		((TextView) findViewById(R.id.global_sound_txt)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.global_rotate_txt)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.global_sensitivity_txt)).setTypeface(myTypeface);
+		
+		
 	}
 	
 	// listener for the switchs
 	private CompoundButton.OnCheckedChangeListener switchListener = new CompoundButton.OnCheckedChangeListener() {
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			if (buttonView == sound_switch){
-				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSoundSettings(sound_switch.isChecked());
+				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSoundSettings(!sound_switch.isChecked());
 			} else if (buttonView == rotate_switch){
-				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeFixedRotation(rotate_switch.isChecked());
+				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeFixedRotation(!rotate_switch.isChecked());
 			}
 		}
 	};

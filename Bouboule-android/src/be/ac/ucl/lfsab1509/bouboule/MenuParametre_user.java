@@ -78,7 +78,7 @@ public class MenuParametre_user extends Activity {
 		user_boub_left = (ImageButton) findViewById(R.id.user_boub_left);
 		user_boub_right = (ImageButton) findViewById(R.id.user_boub_right);
 		user_boub = (ImageView) findViewById(R.id.user_boub);
-		user_newname = ((EditText) findViewById(R.id.user_newname));
+		user_newname = (EditText) findViewById(R.id.user_newname);
 		
 		// link the listeners
 		user_boub_left.setOnClickListener(clickListener);
@@ -95,10 +95,11 @@ public class MenuParametre_user extends Activity {
 		((TextView) findViewById(R.id.user_newUser_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_activeUser_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_playerball_txt)).setTypeface(myTypeface);
+		refreshScreen();
 	}
 	
 	@Override
-	protected void onResume(){ // used as refresh of the view
+	protected void onResume(){ 
 		super.onResume();
 		// set the list into the spinner
 		listProfile = GlobalSettings.PROFILE_MGR.getAllProfilesAL();
@@ -112,13 +113,32 @@ public class MenuParametre_user extends Activity {
 		openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
 		openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
 		openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
-	    
 	}
+	
+	private void refreshScreen(){
+		// set the list into the spinner
+		listProfile = GlobalSettings.PROFILE_MGR.getAllProfilesAL();
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listProfile);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		user_selectprofile_spin.setAdapter(adapter);
+		// set the selected item on the spinner
+		user_selectprofile_spin.setSelection (listProfile.indexOf(GlobalSettings.PROFILE.getName())); // select the current user
+		boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
+		// update the pictures of the bouboules for the selection
+		openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
+		openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
+		openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
+}
 	
 	private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
 		@Override
 		public void onItemSelected (AdapterView<?> parent, View view, int position, long id){
 			GlobalSettings.PROFILE_MGR.changeProfile (listProfile.get((int) id));
+			boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
+			// update the pictures of the bouboules for the selection
+			openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
+			openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
+			openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
 		}
 		@Override
 		public void onNothingSelected (AdapterView<?> parent) {}
@@ -140,19 +160,20 @@ public class MenuParametre_user extends Activity {
 								// treat the name following the case
 							case 0:
 								GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
-									onResume();
-									break;
-								case 1:
-									makeToast(getString (R.string.user_nameidenticalerror));
-									break;
-								case 2:
-									makeToast(getString (R.string.user_nameemptyerror));
-									break;
-								case 3:
-									makeToast(getString (R.string.user_namecharerror));
-									break;
-								default :
-									break; 
+								makeToast(getString (R.string.user_namenewuser));
+								onResume();
+								break;
+							case 1:
+								makeToast(getString (R.string.user_nameidenticalerror));
+								break;
+							case 2:
+								makeToast(getString (R.string.user_nameemptyerror));
+								break;
+							case 3:
+								makeToast(getString (R.string.user_namecharerror));
+								break;
+							default :
+								break; 
 							}
 							InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 				            imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);

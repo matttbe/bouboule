@@ -5,96 +5,91 @@
         android:layout_height="fill_parent"
         android:background="@drawable/settings_blanc"
         tools:context=".MenuParametre_user" >
-	
-	<LinearLayout 
+        
+	<ScrollView
+	    android:id="@+id/user_scrollView"
 	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:layout_margin="50dp"
-	    android:orientation="vertical" >
-	
+	    android:layout_height="match_parent" >
 	    
-	    <TextView
-	        android:id="@+id/user_newUser_txt"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/user_newUser"
-	        android:layout_weight = "1"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	    
-	    <EditText
-	        android:id="@+id/user_newname"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:ems="12"
-	        android:inputType="text" 
-	        android:layout_weight = "1" >
-	    </EditText>
-	    
-	
-	    
-	    <Space 
-	        android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-	        android:layout_weight = "1"
-	        />
-	
-	    <TextView
-	        android:id="@+id/user_activeUser_txt"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/user_activeUser"
-	        android:layout_weight = "1"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	    <Spinner
-	        android:id="@+id/user_selectprofile_spin"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_weight = "1" />
+		<LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_margin="50dp"
+		    android:orientation="vertical" >
 		
-		<Space 
-	        android:layout_weight = "1"
-	        android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-	        />
-	    
-	    <TextView
-	        android:id="@+id/user_playerball_txt"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/user_playerball"
-	        android:layout_weight = "1"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	    
-	    <LinearLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="4"
-	        android:gravity="center"
-	        android:orientation="horizontal" >
-	        
-	        <ImageButton
-	            android:id="@+id/user_boub_left"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1" />
+		    
+		    
+		    
+		
+		    <TextView
+		        android:id="@+id/user_activeUser_txt"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/user_activeUser"
+		        android:layout_marginTop="20dp"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+		    
+		    <Spinner
+		        android:id="@+id/user_selectprofile_spin"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="20dp" />
 
-	        <ImageView
-	            android:id="@+id/user_boub"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="8" />
-	        
-	        <ImageButton
-	            android:id="@+id/user_boub_right"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1" />
-	        
-	    </LinearLayout>
+		    <TextView
+		        android:id="@+id/user_newUser_txt"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/user_newUser"
+		        android:layout_marginTop="20dp"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+		    
+		    <EditText
+		        android:id="@+id/user_newname"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="12"
+		        android:inputType="text" 
+		        android:layout_marginBottom="20dp" />
+		    
+		    <TextView
+		        android:id="@+id/user_playerball_txt"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/user_playerball"
+		        android:layout_marginTop="20dp"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+		    
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="20dp"
+		        android:gravity="center"
+		        android:orientation="horizontal" >
+		        
+		        <ImageButton
+		            android:id="@+id/user_boub_left"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1" />
 	
-	    
-		 
-		 
-	</LinearLayout>
+		        <ImageView
+		            android:id="@+id/user_boub"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="8" />
+		        
+		        <ImageButton
+		            android:id="@+id/user_boub_right"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1" />
+		        
+		    </LinearLayout>
+		
+		    
+			 
+			 
+		</LinearLayout>
+	</ScrollView>
 </FrameLayout>
     

@@ -27,9 +27,11 @@ package be.ac.ucl.lfsab1509.bouboule;
  */
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 public class MenuParametre_about extends Activity{
 
@@ -42,6 +44,15 @@ public class MenuParametre_about extends Activity{
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_parametre_about);
 		
+		// change of type font
+		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
+		((TextView) findViewById(R.id.about_nameapp)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.about_authors)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.about_graphism)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.about_music)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.about_licence)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.about_version)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.about_date)).setTypeface(myTypeface);
 	}
 	
 	

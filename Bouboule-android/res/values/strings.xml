@@ -19,20 +19,21 @@
     <string name="about">About</string>
     
     <!-- Menu user settings -->
-    <string name="user_newUser">Create new user</string>
-    <string name="user_activeUser">Change selected user</string>
-    <string name="user_playerball">Chose your bouboule !</string>
+    <string name="user_newUser">Create new user :</string>
+    <string name="user_activeUser">Change selected user :</string>
+    <string name="user_playerball">Chose your bouboule :</string>
+    <string name="user_namenewuser">New user created !</string>
     <string name="user_namecharerror">The username can\'t contains special characters.</string>
     <string name="user_nameidenticalerror">The username can\'t be the same as one existing player.</string>
     <string name="user_nameemptyerror">The username can\'t be empty, \".\" or \"..\".</string>
     
     <!-- Menu global settings -->
     <string name="global_sound">Sound :</string>
-    <string name="global_sound_on">Mute</string>
-    <string name="global_sound_off">Music on</string>
+    <string name="global_sound_off">Mute</string>
+    <string name="global_sound_on">Music on</string>
     <string name="global_rotate">Rotation of the ball :</string>
-    <string name="global_rotate_on">No rotation</string>
-    <string name="global_rotate_off">Rotation on</string>
+    <string name="global_rotate_off">No rotation</string>
+    <string name="global_rotate_on">Rotation on</string>
     <string name="global_sensitivity">Sensitivity :</string>
     
     <!-- Menu Parametre_about -->
