@@ -1,29 +1,37 @@
 package be.ac.ucl.lfsab1509.bouboule;
 
+import com.badlogic.gdx.Gdx;
+
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.profile.Profile;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class ChoosingActivity extends Activity {
 
 
-	private static ImageButton buttonprev;
-	private static ImageButton buttonnext;
-	private static Button buttongogogo;
+	private static ImageView buttonprev;
+	private static ImageView buttonnext;
+	private static ImageView buttonmid;
+	//private static Button buttongogogo;
 	private static ImageView currentmap;
 	private static TextView textlevel;
 	private static int maxlevel;
 	private static int currentlevel;
 
 	private static int image [];
+	private static int imagelock;
 
 	protected void onCreate(final Bundle savedInstanceState) {
 
@@ -37,12 +45,14 @@ public class ChoosingActivity extends Activity {
 
 		maxlevel=GlobalSettings.PROFILE.getBestLevel();
 		image= new int[20];
-		buttonprev = (ImageButton) findViewById(R.id.choose_lvl_left);
-		buttonnext = (ImageButton) findViewById(R.id.choose_lvl_right);
-		buttongogogo = (Button) findViewById(R.id.choose_lvl_button1);
-		currentmap = (ImageView) findViewById(R.id.choose_lvl_mid);
+		buttonprev = (ImageView) findViewById(R.id.choose_lvl_left);
+		buttonnext = (ImageView) findViewById(R.id.choose_lvl_right);
+		//buttongogogo = (Button) findViewById(R.id.choose_lvl_button1);
+		buttonmid = (ImageView) findViewById(R.id.choose_lvl);
+		currentmap = (ImageView) findViewById(R.id.choose_lvl_lock);
 		textlevel = (TextView) findViewById(R.id.textView2);
 
+		
 		image[0] = R.drawable.mini1;
 		image[1] = R.drawable.mini2;
 		image[2] = R.drawable.mini3;
@@ -63,14 +73,18 @@ public class ChoosingActivity extends Activity {
 		image[17] = R.drawable.mini2;
 		image[18] = R.drawable.mini3;
 		image[19] = R.drawable.mini4;
+		imagelock = R.drawable.minilock;
 
 		currentlevel=0;
 
 		updateimage();
+		currentmap.setImageResource(imagelock);
 
-		buttongogogo.setOnClickListener(clickListener);
+		//buttongogogo.setOnClickListener(clickListener);
 		buttonprev.setOnClickListener(clickListener);
 		buttonnext.setOnClickListener(clickListener);
+		//buttonmid.setOnClickListener(clickListener);
+		currentmap.setOnClickListener(clickListener);
 
 
 
@@ -79,7 +93,12 @@ public class ChoosingActivity extends Activity {
 	private View.OnClickListener clickListener = new View.OnClickListener() {
 		public void onClick(View view) {
 			switch (view.getId()) {
-			case R.id.choose_lvl_button1:{
+			//case R.id.choose_lvl_button1:
+			case R.id.choose_lvl_lock:{
+				
+				
+				if(currentlevel + 1 > maxlevel)
+					return;
 				
 				if(GlobalSettings.GAME.getScreen() != null)
 				EndGameListener.resetGame();
@@ -93,8 +112,8 @@ public class ChoosingActivity extends Activity {
 				break;
 			}
 			case R.id.choose_lvl_left:{
-				currentlevel += maxlevel -1;
-				currentlevel %= maxlevel;
+				currentlevel += 20-1;
+				currentlevel %= 20;
 				
 				updateimage();
 				
@@ -103,7 +122,7 @@ public class ChoosingActivity extends Activity {
 			}
 			case R.id.choose_lvl_right:{
 				currentlevel += 1;
-				currentlevel %= maxlevel;
+				currentlevel %= 20;
 				
 				updateimage();
 				
@@ -118,25 +137,19 @@ public class ChoosingActivity extends Activity {
 	private void updateimage(){
 		buttonprev.setImageResource(image[(currentlevel+19)%20]);
 		buttonnext.setImageResource(image[(currentlevel+1)%20]);
-		currentmap.setImageResource(image[(currentlevel)%20]);
+		buttonmid.setImageResource(image[(currentlevel)%20]);
 
+		if(currentlevel +1 > maxlevel){
+			currentmap.setAlpha(255);
+		}else{
+			currentmap.setAlpha(0);
+		}
+		
 	}
 
 	public void onBackPressed() {
 		setResult(-1);
 		finish ();
-	}
-	
-	@Override
-	protected void onPause () {
-		super.onPause ();
-		MyAndroidMenus.onPauseMusic ();
-	}
-
-	@Override
-	protected void onResume () {
-		super.onResume ();
-		MyAndroidMenus.onResumeMusic ();
 	}
 
 }

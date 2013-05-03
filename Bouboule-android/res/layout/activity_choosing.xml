@@ -11,6 +11,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.75" />
+
         <TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
@@ -19,43 +24,72 @@
             android:text="Choose your level"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <ImageView
-            android:id="@+id/choose_lvl_mid"
-            android:layout_width="fill_parent"
-            android:layout_height="100dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.75" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/choose_lvl"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/mini1" />
+
+            <ImageView
+                android:id="@+id/choose_lvl_lock"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/minilock" />
+        </FrameLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.75" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:text="Level 1"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.75" />
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.1"
             android:orientation="horizontal" >
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/choose_lvl_left"
                 android:layout_width="fill_parent"
-                android:layout_height="100dp"
-                android:layout_weight="1" />
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:src="@drawable/mini2" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/choose_lvl_right"
                 android:layout_width="fill_parent"
-                android:layout_height="100dp"
-                android:layout_weight="1" />
-
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:src="@drawable/mini4" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/choose_lvl_button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Go Go Go" />
-
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.75" />
     </LinearLayout>
 
 </FrameLayout>
