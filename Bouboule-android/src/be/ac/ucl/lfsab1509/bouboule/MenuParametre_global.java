@@ -97,7 +97,19 @@ public class MenuParametre_global extends Activity {
 		public void onStartTrackingTouch (SeekBar seekBar) {}
 		public void onStopTrackingTouch (SeekBar seekBar){}
 	};
+
 	
+	@Override
+	protected void onPause () {
+		super.onPause ();
+		MyAndroidMenus.onPauseMusic ();
+	}
+
+	@Override
+	protected void onResume () {
+		super.onResume ();
+		MyAndroidMenus.onResumeMusic ();
+	}
 	
 	
 }

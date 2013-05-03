@@ -102,10 +102,15 @@ public class MenuParametre_user extends Activity {
 	}
 	
 	@Override
-	protected void onResume(){ 
-		super.onResume();
-		Log.d("LN","onResume");
-		
+	protected void onPause () {
+		super.onPause ();
+		MyAndroidMenus.onPauseMusic ();
+	}
+
+	@Override
+	protected void onResume () {
+		super.onResume ();
+		MyAndroidMenus.onResumeMusic ();
 	}
 	
 	private void refreshScreen(){

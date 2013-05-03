@@ -452,6 +452,6 @@ public class Menu extends Activity {
 	@Override
 	protected void onResume () {
 		super.onResume ();
-		MyAndroidMenus.onResumeMusic (this);
+		MyAndroidMenus.onResumeMusic ();
 	}
 }

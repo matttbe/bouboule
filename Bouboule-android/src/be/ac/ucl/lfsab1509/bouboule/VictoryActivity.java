@@ -105,4 +105,16 @@ public class VictoryActivity extends Activity {
 	public void onBackPressed() {
 		MyAndroidMenus.onBackPressedGeneric (this, R.id.VictoryMenuButton);
 	}
+	
+	@Override
+	protected void onPause () {
+		super.onPause ();
+		MyAndroidMenus.onPauseMusic ();
+	}
+
+	@Override
+	protected void onResume () {
+		super.onResume ();
+		MyAndroidMenus.onResumeMusic ();
+	}
 }
