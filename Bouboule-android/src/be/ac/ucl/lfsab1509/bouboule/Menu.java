@@ -108,14 +108,9 @@ public class Menu extends Activity {
 					animationSetCaseD		= new AnimationSet(true);
 
 
-
-	private BackgroundSound menuMusic;
-
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		menuMusic = new BackgroundSound ("menu", R.raw.menu);
 		
 		//Request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -451,13 +446,12 @@ public class Menu extends Activity {
 	@Override
 	protected void onPause () {
 		super.onPause ();
-		menuMusic.stop ();
+		MyAndroidMenus.onPauseMusic ();
 	}
 
 	@Override
 	protected void onResume () {
 		super.onResume ();
-		if (! GlobalSettings.SOUND_IS_MUTED)
-			menuMusic.play (this);
+		MyAndroidMenus.onResumeMusic (this);
 	}
 }
