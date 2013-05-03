@@ -74,10 +74,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="ChoosingActivity"
-            android:label="@string/title_activity_ChoosingActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+			android:name="ChoosingActivity"
+			android:label="@string/title_activity_ChoosingActivity"
+			android:screenOrientation="portrait" >
+		</activity>
     </application>
 
 </manifest>
