@@ -31,11 +31,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 import be.ac.ucl.lfsab1509.bouboule.game.menu.Menus;
+import be.ac.ucl.lfsab1509.bouboule.sound.BackgroundSound;
 
 public class MyAndroidMenus implements Menus {
 
@@ -45,6 +45,8 @@ public class MyAndroidMenus implements Menus {
 	public MyAndroidMenus (AndroidApplication app) {
 		this.app = app;
 		menuMusic = new BackgroundSound ("menu", R.raw.menu);
+		menuMusic.create (app);
+		menuMusic.pause ();
 	}
 
 	@Override
@@ -104,12 +106,12 @@ public class MyAndroidMenus implements Menus {
 		return true; // prevent double calls
 	}
 
-	public static void onResumeMusic (Context context) {
+	public static void onResumeMusic () {
 		if (! GlobalSettings.SOUND_IS_MUTED)
-			menuMusic.play (context);
+			menuMusic.play ();
 	}
 
 	public static void onPauseMusic () {
-		menuMusic.stop ();
+		menuMusic.pause ();
 	}
 }

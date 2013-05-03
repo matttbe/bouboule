@@ -3,7 +3,6 @@ package be.ac.ucl.lfsab1509.bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -126,6 +125,18 @@ public class ChoosingActivity extends Activity {
 	public void onBackPressed() {
 		setResult(-1);
 		finish ();
+	}
+	
+	@Override
+	protected void onPause () {
+		super.onPause ();
+		MyAndroidMenus.onPauseMusic ();
+	}
+
+	@Override
+	protected void onResume () {
+		super.onResume ();
+		MyAndroidMenus.onResumeMusic ();
 	}
 
 }

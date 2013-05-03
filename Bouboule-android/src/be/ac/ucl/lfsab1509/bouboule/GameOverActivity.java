@@ -72,4 +72,16 @@ public class GameOverActivity extends Activity {
 	public void onBackPressed() {
 		MyAndroidMenus.onBackPressedGeneric (this, R.id.GameOverMenuButton);
 	}
+	
+	@Override
+	protected void onPause () {
+		super.onPause ();
+		MyAndroidMenus.onPauseMusic ();
+	}
+
+	@Override
+	protected void onResume () {
+		super.onResume ();
+		MyAndroidMenus.onResumeMusic ();
+	}
 }

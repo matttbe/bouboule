@@ -71,5 +71,17 @@ public class MenuParametre_about extends Activity{
 		
 	}
 	
+	@Override
+	protected void onPause () {
+		super.onPause ();
+		MyAndroidMenus.onPauseMusic ();
+	}
+
+	@Override
+	protected void onResume () {
+		super.onResume ();
+		MyAndroidMenus.onResumeMusic ();
+	}
+	
 	
 }

@@ -24,10 +24,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package be.ac.ucl.lfsab1509.bouboule;
+package be.ac.ucl.lfsab1509.bouboule.sound;
 
 import android.content.Context;
-import android.media.AsyncPlayer;
 import android.media.AudioManager;
 import android.net.Uri;
 
@@ -44,7 +43,15 @@ public class BackgroundSound {
 		player.stop ();
 	}
 	
-	public void play (Context context) {
+	public void pause () {
+		player.pause ();
+	}
+	
+	public void play () {
+		player.play ();
+	}
+	
+	public void create (Context context) {
 		player.play (context, file, true, AudioManager.STREAM_MUSIC);
 	}
 
