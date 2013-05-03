@@ -257,7 +257,7 @@
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            IALevel="8"
             angle="0"
             density="1"
             elasticity="1.1f"

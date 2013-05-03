@@ -6,6 +6,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.Profile;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -41,7 +42,7 @@ public class ChoosingActivity extends Activity {
 		setContentView(R.layout.activity_choosing);
 
 		maxlevel=GlobalSettings.PROFILE.getBestLevel();
-		image= new int[4];
+		image= new int[20];
 		buttonprev = (ImageButton) findViewById(R.id.choose_lvl_left);
 		buttonnext = (ImageButton) findViewById(R.id.choose_lvl_right);
 		buttongogogo = (Button) findViewById(R.id.choose_lvl_button1);
@@ -52,12 +53,26 @@ public class ChoosingActivity extends Activity {
 		image[1] = R.drawable.mini2;
 		image[2] = R.drawable.mini3;
 		image[3] = R.drawable.mini4;
+		image[4] = R.drawable.mini1;
+		image[5] = R.drawable.mini2;
+		image[6] = R.drawable.mini3;
+		image[7] = R.drawable.mini4;
+		image[8] = R.drawable.mini1;
+		image[9] = R.drawable.mini2;
+		image[10] = R.drawable.mini3;
+		image[11] = R.drawable.mini4;
+		image[12] = R.drawable.mini1;
+		image[13] = R.drawable.mini2;
+		image[14] = R.drawable.mini3;
+		image[15] = R.drawable.mini4;
+		image[16] = R.drawable.mini1;
+		image[17] = R.drawable.mini2;
+		image[18] = R.drawable.mini3;
+		image[19] = R.drawable.mini4;
 
 		currentlevel=0;
 
-		buttonprev.setImageResource(image[(currentlevel+3)%4]);
-		buttonnext.setImageResource(image[(currentlevel+1)%4]);
-		currentmap.setImageResource(image[(currentlevel)%4]);
+		updateimage();
 
 		buttongogogo.setOnClickListener(clickListener);
 		buttonprev.setOnClickListener(clickListener);
@@ -71,7 +86,14 @@ public class ChoosingActivity extends Activity {
 		public void onClick(View view) {
 			switch (view.getId()) {
 			case R.id.choose_lvl_button1:{
+				
+				if(GlobalSettings.GAME.getScreen() != null)
+				EndGameListener.resetGame();
+				
 				GlobalSettings.PROFILE.setLevel(currentlevel+1);
+				
+				
+				
 				setResult(currentlevel);
 				finish();
 				break;
@@ -80,9 +102,8 @@ public class ChoosingActivity extends Activity {
 				currentlevel += maxlevel -1;
 				currentlevel %= maxlevel;
 				
-				buttonprev.setImageResource(image[(currentlevel+3)%4]);
-				buttonnext.setImageResource(image[(currentlevel+1)%4]);
-				currentmap.setImageResource(image[(currentlevel)%4]);
+				updateimage();
+				
 				textlevel.setText("Level " + (currentlevel+1));
 				break;
 			}
@@ -90,9 +111,8 @@ public class ChoosingActivity extends Activity {
 				currentlevel += 1;
 				currentlevel %= maxlevel;
 				
-				buttonprev.setImageResource(image[(currentlevel+3)%4]);
-				buttonnext.setImageResource(image[(currentlevel+1)%4]);
-				currentmap.setImageResource(image[(currentlevel)%4]);
+				updateimage();
+				
 				textlevel.setText("Level " + (currentlevel+1));
 				break;
 			}
@@ -100,6 +120,13 @@ public class ChoosingActivity extends Activity {
 
 		}
 	};
+	
+	private void updateimage(){
+		buttonprev.setImageResource(image[(currentlevel+19)%20]);
+		buttonnext.setImageResource(image[(currentlevel+1)%20]);
+		currentmap.setImageResource(image[(currentlevel)%20]);
+
+	}
 
 	public void onBackPressed() {
 		setResult(-1);
