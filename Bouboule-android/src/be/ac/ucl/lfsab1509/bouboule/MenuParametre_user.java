@@ -105,18 +105,7 @@ public class MenuParametre_user extends Activity {
 	protected void onResume(){ 
 		super.onResume();
 		Log.d("LN","onResume");
-		// set the list into the spinner
-		listProfile = GlobalSettings.PROFILE_MGR.getAllProfilesAL();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listProfile);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		user_selectprofile_spin.setAdapter(adapter);
-		// set the selected item on the spinner
-		user_selectprofile_spin.setSelection (listProfile.indexOf(GlobalSettings.PROFILE.getName())); // select the current user
-		boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
-		// update the pictures of the bouboules for the selection
-		openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
-		openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
-		openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
+		
 	}
 	
 	private void refreshScreen(){
@@ -132,17 +121,20 @@ public class MenuParametre_user extends Activity {
 		openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
 		openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
 		openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
-}
+	}
 	
 	private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
 		@Override
 		public void onItemSelected (AdapterView<?> parent, View view, int position, long id){
-			GlobalSettings.PROFILE_MGR.changeProfile (listProfile.get((int) id));
-			boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
-			// update the pictures of the bouboules for the selection
-			openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
-			openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
-			openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
+			if (!GlobalSettings.PROFILE.getName().equals(listProfile.get((int) id))) {
+				Log.d("LN","change of user : " + GlobalSettings.PROFILE.getName() + " - " + listProfile.get((int) id));
+				GlobalSettings.PROFILE_MGR.changeProfile (listProfile.get((int) id));
+				boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
+				// update the pictures of the bouboules for the selection
+				openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
+				openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
+				openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
+			}
 		}
 		@Override
 		public void onNothingSelected (AdapterView<?> parent) {}
@@ -165,7 +157,7 @@ public class MenuParametre_user extends Activity {
 							case 0:
 								GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
 								makeToast(getString (R.string.user_namenewuser));
-								onResume();
+								refreshScreen();
 								break;
 							case 1:
 								makeToast(getString (R.string.user_nameidenticalerror));

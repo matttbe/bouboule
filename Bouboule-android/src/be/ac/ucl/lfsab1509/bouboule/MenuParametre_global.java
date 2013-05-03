@@ -60,7 +60,7 @@ public class MenuParametre_global extends Activity {
 		sound_switch.setChecked(!GlobalSettings.SOUND_IS_MUTED);
 		rotate_switch.setChecked(!GlobalSettings.FIXED_ROTATION);
 		sensitivity_seekbar.setMax(GlobalSettings.SENSITIVITY_MAX);
-		sensitivity_seekbar.setProgress(GlobalSettings.SENSITIVITY);
+		sensitivity_seekbar.setProgress(GlobalSettings.SENSITIVITY - GlobalSettings.SENSITIVITY_MIN);
 		
 		// set the listeners
 		sound_switch.setOnCheckedChangeListener(switchListener);
@@ -91,7 +91,7 @@ public class MenuParametre_global extends Activity {
 	private SeekBar.OnSeekBarChangeListener seekBarListener = new SeekBar.OnSeekBarChangeListener() {
 		public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
 			if (seekBar == sensitivity_seekbar) {
-				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSensibilitySettings(sensitivity_seekbar.getProgress());
+				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSensibilitySettings(sensitivity_seekbar.getProgress() + GlobalSettings.SENSITIVITY_MIN);
 			}
 		}
 		public void onStartTrackingTouch (SeekBar seekBar) {}

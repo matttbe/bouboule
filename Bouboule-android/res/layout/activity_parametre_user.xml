@@ -16,11 +16,7 @@
 		    android:layout_height="wrap_content"
 		    android:layout_margin="50dp"
 		    android:orientation="vertical" >
-		
-		    
-		    
-		    
-		
+
 		    <TextView
 		        android:id="@+id/user_activeUser_txt"
 		        android:layout_width="wrap_content"
