@@ -29,6 +29,8 @@ package be.ac.ucl.lfsab1509.bouboule.game.ia;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import sun.util.logging.resources.logging;
+
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
@@ -118,6 +120,9 @@ public class IA {
 			Vector2 slow = new Vector2(VelocityIA).nor().mul(.3f);
 			Acc.sub(slow);
 			break;
+		case 8:
+			Acc = multipoint(IA,VelocityIA,LocalEnemi,VelocityEnemi);
+			break;
 		default:
 			break;
 		}
@@ -142,6 +147,56 @@ public class IA {
 		Acc.mul(3.0f);
 		
 		return Acc;
+	}
+
+
+	private static Vector2 multipoint(Vector2 iA, Vector2 velocityIA,Vector2 localEnemi, Vector2 velocityEnemi) {
+		
+		MapNode close=getClosestCentre2(iA, localEnemi);
+		//search next node
+		if(close==null){
+			//Gdx.app.log("ia","multipoint:crosspoint");
+			MapNode temp = getnextnode(iA,localEnemi);
+			close=getClosestCentre(iA);
+			Vector2 dirmid = middeler(iA, close);
+			if(velocityIA.len2()*1.75 + dirmid.len() > close.getWeight()+0.3f){
+				// Gdx.app.log ("Player","IA:defence slow");
+				return stopMid(iA, velocityIA);
+			}
+			return middeler(iA, temp);
+		}
+		
+		//attack!
+		return aggretion(iA, velocityIA, localEnemi, velocityEnemi);
+		
+		
+		
+		//return null;
+	}
+	
+	private static MapNode getnextnode(Vector2 IA,Vector2 localEnemi){
+		
+		ArrayList<MapNode> tabNode = GlobalSettings.ARENAWAYPOINTALLOW;
+		MapNode tempNode;
+		float distance = 100;
+		int closest = -1;
+		float angle = angleCentre(IA, localEnemi);
+		float tempdist;
+		for(int i=0;i<tabNode.size();i++){
+			tempNode=tabNode.get(i);
+			float angletemp = angleCentre(IA, tempNode.getVector());
+			if((angle - angletemp) < 45 && (angle - angletemp) > -45){
+				tempdist = tempNode.getVector().dst(IA);
+				if(distance > tempdist){
+					distance = tempdist;
+					closest = i;
+				}
+			}
+		}
+		if(closest !=-1)
+			return tabNode.get(closest);
+		return getClosestCentre(localEnemi);
+		
 	}
 
 
@@ -347,6 +402,31 @@ public class IA {
 			}
 		}
 		return tabNode.get(max);
+	}
+	
+	private static MapNode getClosestCentre2(Vector2 position1,Vector2 position2){
+		
+		MapNode noeud1,noeud2;
+		noeud1= getClosestCentre(position1);
+		noeud2= getClosestCentre(position2);
+		boolean temp=false;
+		
+		if(position2.dst(noeud1.getVector())-noeud1.getWeight() < 0){
+			temp=true;
+		}
+		
+		if(position1.dst(noeud2.getVector())-noeud2.getWeight() < 0){
+			if(temp){
+				if(noeud1.getWeight()>noeud2.getWeight())
+					return noeud1;
+				return noeud2;
+			}else{
+				return noeud2;
+			}
+		}
+		if(temp)
+			return noeud1;
+		return null;
 	}
 
 }
