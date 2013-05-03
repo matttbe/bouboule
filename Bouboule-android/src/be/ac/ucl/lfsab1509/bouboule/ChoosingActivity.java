@@ -1,5 +1,6 @@
 package be.ac.ucl.lfsab1509.bouboule;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.app.Activity;
 import android.graphics.Color;

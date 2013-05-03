@@ -81,9 +81,21 @@
 		            android:layout_weight="1" />
 		        
 		    </LinearLayout>
-		
+
+		    <TextView
+		        android:id="@+id/user_resetgame_txt"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/user_resetgame"
+		        android:layout_marginTop="20dp"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
 		    
-			 
+		    <Button
+		        android:id="@+id/user_resetgame_button"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="20dp"
+		        android:text="@string/user_resetgame_button" />
 			 
 		</LinearLayout>
 	</ScrollView>

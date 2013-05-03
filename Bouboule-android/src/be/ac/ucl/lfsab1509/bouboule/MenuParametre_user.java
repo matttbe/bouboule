@@ -26,6 +26,7 @@ package be.ac.ucl.lfsab1509.bouboule;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
 import android.app.Activity;
@@ -56,6 +57,7 @@ public class MenuParametre_user extends Activity {
 	private ImageButton user_boub_right;
 	private ImageView user_boub;
 	private EditText user_newname;
+	private Button user_reset;
 	
 	private ArrayList<String> listProfile;
 	
@@ -79,12 +81,14 @@ public class MenuParametre_user extends Activity {
 		user_boub_right = (ImageButton) findViewById(R.id.user_boub_right);
 		user_boub = (ImageView) findViewById(R.id.user_boub);
 		user_newname = (EditText) findViewById(R.id.user_newname);
+		user_reset = (Button) findViewById (R.id.user_resetgame_button);
 		
 		// link the listeners
 		user_boub_left.setOnClickListener(clickListener);
 		user_boub_right.setOnClickListener(clickListener);
 		user_selectprofile_spin.setOnItemSelectedListener(spinnerListener);
 		user_newname.setOnKeyListener (onkeyListener);
+		user_reset.setOnClickListener (clickListener);
 		
 		// concern choice of bouboule
 		boub_str = BoubImages.getBoubName ();
@@ -95,6 +99,8 @@ public class MenuParametre_user extends Activity {
 		((TextView) findViewById(R.id.user_newUser_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_activeUser_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_playerball_txt)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.user_resetgame_txt)).setTypeface (myTypeface);
+		
 		refreshScreen();
 		
 		// hide the keyboard
@@ -208,6 +214,11 @@ public class MenuParametre_user extends Activity {
 					openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
 					openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
 					openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
+					break;
+				case R.id.user_resetgame_button :
+					EndGameListener.resetGame ();
+					makeToast(getString(R.string.user_resetgame_notif));
+					//need refresh of balls
 					break;
 				default :
 					break;
