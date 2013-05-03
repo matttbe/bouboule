@@ -27,6 +27,9 @@ package be.ac.ucl.lfsab1509.bouboule;
  */
 
 import android.app.Activity;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Window;
@@ -53,6 +56,19 @@ public class MenuParametre_about extends Activity{
 		((TextView) findViewById(R.id.about_licence)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.about_version)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.about_date)).setTypeface(myTypeface);
+		
+		
+		// Get the version number direct from the Manifest
+		PackageInfo pInfo = null;
+		try{
+			pInfo = getPackageManager().getPackageInfo("be.ac.ucl.lfsab1509.bouboule",PackageManager.GET_META_DATA);
+		} catch (NameNotFoundException e) {
+			pInfo = null;
+		}
+		if(pInfo != null) {
+			((TextView) findViewById(R.id.about_version_txt)).setText(getString(R.string.about_version_txt) + " " + pInfo.versionCode);
+		}
+		
 	}
 	
 	

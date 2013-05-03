@@ -96,11 +96,15 @@ public class MenuParametre_user extends Activity {
 		((TextView) findViewById(R.id.user_activeUser_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_playerball_txt)).setTypeface(myTypeface);
 		refreshScreen();
+		
+		// hide the keyboard
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 	}
 	
 	@Override
 	protected void onResume(){ 
 		super.onResume();
+		Log.d("LN","onResume");
 		// set the list into the spinner
 		listProfile = GlobalSettings.PROFILE_MGR.getAllProfilesAL();
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listProfile);
