@@ -225,19 +225,23 @@ public class Menu extends Activity {
 			if (info == null)
 				break;
 
-			String cTitle = getString (R.string.Score) + " " + info.getScore () + "\t"
+			/*String cTitle = getString (R.string.Score) + " " + info.getScore () + "\t"
 					+ getString (R.string.by_someone) + " " + info.getName () + "\t"
 					+ getString (R.string.at_level_x) + " " + info.getLevel () + "\t("
 					+ dateFormat.format (info.getDate ()) + ")";// info.getDate ()
+			String cTitleCondensed = getString (R.string.Score) + " "
+					+ info.getScore () + " "
+					+ getString (R.string.by_someone) + " " + info.getName ();*/
+
+			String cTitle = info.getName () + ":\t" + info.getScore ()
+					+ " (lvl. " + info.getLevel () + " "
+					+ dateFormat.format (info.getDate ()) + ")";
 
 			if (i == 0 && highscores[1] == null) // only one highscore => only used spaces
 				cTitle = cTitle.replaceAll ("\t", " ");
 
-			String cTitleCondensed = getString (R.string.Score) + " "
-					+ info.getScore () + " "
-					+ getString (R.string.by_someone) + " " + info.getName ();
-
-			menu.add (cTitle).setTitleCondensed (cTitleCondensed); // for smaller screens
+			menu.add (0, i, android.view.Menu.NONE, cTitle);
+			//.setTitleCondensed (cTitleCondensed); // for smaller screens => doesn't work...
 		}
 	}
 
@@ -250,9 +254,15 @@ public class Menu extends Activity {
 		// TODO: find a way to have an horizontal scroll
 	}
 
-	@Override  
+	@Override
 	public boolean onContextItemSelected (MenuItem item) {
-		String cTitle = ((String) item.getTitle ()).replaceAll ("\t", " ");
+		// String cTitle = ((String) item.getTitle ()).replaceAll ("\t", " ");
+		HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (false);
+		HighScoreInfo info = highscores[item.getItemId ()];
+		String cTitle = getString (R.string.Score) + " " + info.getScore () + " "
+				+ getString (R.string.by_someone) + " " + info.getName () + " "
+				+ getString (R.string.at_level_x) + " " + info.getLevel () + " ("
+				+ info.getDate ()+ ")";
 		Toast.makeText (this, cTitle, Toast.LENGTH_LONG).show ();
 		return true;
 	}
