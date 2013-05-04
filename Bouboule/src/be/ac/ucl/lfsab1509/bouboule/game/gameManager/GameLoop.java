@@ -303,12 +303,16 @@ public class GameLoop {
 		}
 	}
 
+	private CharSequence getTimerCharFromInt (int iNumber) {
+		if (iNumber == 0)
+			return "00";
+		else
+			return Integer.toString(iNumber);
+	}
 	/**
 	 * Write the lives/levels/score and Timer text on the screen
-	 * 
-	 * public void writeText()
 	 */
-	public void writeText() {
+	private void writeText() {
 		if (! GlobalSettings.GAME.getTimer ().isRunning()) // avoid displaying the wrong level at the end of the game and crashes
 			return;
 
@@ -324,13 +328,15 @@ public class GameLoop {
 			return;
 		}
 
-		CharSequence timerM= Integer.toString((timer/60)); 
-		CharSequence timerS= Integer.toString(timer%60);
+		CharSequence timerM = Integer.toString (timer / 60);
+		CharSequence timerS = getTimerCharFromInt (timer % 60);
 
 		if (timer < 6) // last 5 seconds
-			fontOsakaRed.draw(batch, timerM+"' "+timerS+"''" , 630, 1122);
+			fontOsakaRed.draw(batch, timerS + "''" , 630, 1122);
+		else if (timer < 60)
+			fontOsaka.draw(batch, timerS + "''" , 630, 1122);
 		else
-			fontOsaka.draw(batch, timerM+"' "+timerS+"''" , 630, 1122);
+			fontOsaka.draw(batch, timerM + "' "+timerS+"''" , 630, 1122);
 		
 		fontOsaka .draw(batch, lives , 630, 1167);
 		fontOsaka .draw(batch, score , 630, 1205);
