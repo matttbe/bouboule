@@ -195,7 +195,7 @@
         time="45" >
 
         <Bouboule
-            IALevel="4"
+            IALevel="9"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -421,7 +421,7 @@
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            IALevel="10"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -471,7 +471,7 @@
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            IALevel="10"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -521,7 +521,7 @@
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            IALevel="10"
             angle="0"
             density="1"
             elasticity="1f"
@@ -555,28 +555,25 @@
             texRegionPath="terrain/Sushi/sushi.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="sushi" >
 
-            <MapNodes terrain="sushi" >
+            <NodeAllow
+                px="4.221002f"
+                py="6.951188f"
+                weight="2.300000f" >
+            </NodeAllow>
 
-                <NodeAllow
-                    px="4.221002f"
-                    py="6.951188f"
-                    weight="2.300000f" >
-                </NodeAllow>
+            <NodeAllow
+                px="2.525488f"
+                py="4.883388f"
+                weight="2.300000f" >
+            </NodeAllow>
 
-                <NodeAllow
-                    px="2.525488f"
-                    py="4.883388f"
-                    weight="2.300000f" >
-                </NodeAllow>
-
-                <NodeAllow
-                    px="4.332018f"
-                    py="2.825529f"
-                    weight="2.180000f" >
-                </NodeAllow>
-            </MapNodes>
+            <NodeAllow
+                px="4.332018f"
+                py="2.825529f"
+                weight="2.180000f" >
+            </NodeAllow>
         </MapNodes>
 
         <Obstacles>
@@ -613,7 +610,7 @@
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            IALevel="10"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -658,7 +655,7 @@
             <NodeAllow
                 px="4.937559f"
                 py="0.399841f"
-                weight="3.640000f" >
+                weight="2.120000f" >
             </NodeAllow>
 
             <NodeAllow
@@ -821,7 +818,6 @@
             texRegionPath="terrain/Rock/rock.jpg" >
         </Arena>
 
-        <MapNodes>
 
             <MapNodes terrain="rock" >
 
@@ -831,7 +827,6 @@
                     weight="6.740000f" >
                 </NodeAllow>
             </MapNodes>
-        </MapNodes>
     </Level12>
 
     <Level13
