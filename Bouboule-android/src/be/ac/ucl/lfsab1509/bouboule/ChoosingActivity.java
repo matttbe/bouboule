@@ -1,21 +1,14 @@
 package be.ac.ucl.lfsab1509.bouboule;
 
-import com.badlogic.gdx.Gdx;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
-import be.ac.ucl.lfsab1509.bouboule.game.profile.Profile;
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class ChoosingActivity extends Activity {
@@ -134,6 +127,7 @@ public class ChoosingActivity extends Activity {
 		}
 	};
 	
+	@SuppressWarnings("deprecation")
 	private void updateimage(){
 		buttonprev.setImageResource(image[(currentlevel+19)%20]);
 		buttonnext.setImageResource(image[(currentlevel+1)%20]);
@@ -151,5 +145,22 @@ public class ChoosingActivity extends Activity {
 		setResult(-1);
 		finish ();
 	}
+	
+		@Override
+		protected void onPause ()
+		{
+			super.onPause ();
+			MyAndroidMenus.onPauseMusic ();
+		}
+	
+		@Override
+	protected void onResume ()
+		{
+			super.onResume ();
+			MyAndroidMenus.onResumeMusic ();
+		}
+
+
+	
 
 }
