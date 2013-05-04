@@ -149,7 +149,8 @@ public class EndGameListener implements ContactListener{
 
 	private static void endGame (boolean bWithMenu) {
 		Gdx.app.log ("KILL", "EndGame: hide + launch menu");
-		GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
+		if (GlobalSettings.GAME.getScreen () != null) // if the screen is not launched (at startup)
+			GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
 
 		if (bWithMenu)
 			GlobalSettings.MENUS.launchEndGameMenu ();
