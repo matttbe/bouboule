@@ -234,7 +234,7 @@ public class Menu extends Activity {
 					+ getString (R.string.by_someone) + " " + info.getName ();*/
 
 			String cTitle = info.getName () + ":\t" + info.getScore ()
-					+ " (lvl. " + info.getLevel () + " "
+					+ " (lvl. " + info.getLevel () + " - "
 					+ dateFormat.format (info.getDate ()) + ")";
 
 			if (i == 0 && highscores[1] == null) // only one highscore => only used spaces
