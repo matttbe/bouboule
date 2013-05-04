@@ -54,10 +54,13 @@ public class IA {
 	//level 1 => go mid
 	//level 2 => troll
 	//level 3 => arret mid
-	//level 4 => aggresif
+	//level 4 => aggresif attenticipe
 	//level 5 => defencif
-	//level 6 => hybrid aggresif/defencif
-	//level 7 => attenticipe
+	//level 6 => hybrid aggresif/defencif anticipation
+	//level 7 => go mid + slow
+	//level 8 => multipoint
+	//level 9 => aggresif sans anticipation
+	//level 10 => hybrid sans anticipation
 
 	public static Vector2 compute(int IALevel, Bouboule bouboule) {
 
@@ -110,13 +113,13 @@ public class IA {
 			Acc = stopMid(IA, VelocityIA);
 			break;
 		case 4:
-			Acc = aggretion(IA,VelocityIA,LocalEnemi,VelocityEnemi);
+			Acc = aggretion(IA,VelocityIA,LocalEnemi,VelocityEnemi,true);
 			break;
 		case 5:
 			Acc = defence(IA,VelocityIA,LocalEnemi);
 			break;
 		case 6:
-			Acc = hybrid(IA,VelocityIA,LocalEnemi,VelocityEnemi);
+			Acc = hybrid(IA,VelocityIA,LocalEnemi,VelocityEnemi,true);
 			break;
 		case 7:
 			Acc = middeler (IA,1);
@@ -125,6 +128,12 @@ public class IA {
 			break;
 		case 8:
 			Acc = multipoint(IA,VelocityIA,LocalEnemi,VelocityEnemi);
+			break;
+		case 9:
+			Acc = aggretion(IA,VelocityIA,LocalEnemi,VelocityEnemi,false);
+			break;
+		case 10:
+			Acc = hybrid(IA,VelocityIA,LocalEnemi,VelocityEnemi,false);
 			break;
 		default:
 			break;
@@ -171,7 +180,7 @@ public class IA {
 		}
 		
 		//attack!
-		return aggretion(iA, velocityIA, localEnemi, velocityEnemi);
+		return aggretion(iA, velocityIA, localEnemi, velocityEnemi,true);
 		
 		
 		
@@ -204,7 +213,7 @@ public class IA {
 	}
 
 
-	private static Vector2 hybrid(Vector2 IA, Vector2 velocityIA,Vector2 localEnemi,Vector2 VelocityEnemi) {
+	private static Vector2 hybrid(Vector2 IA, Vector2 velocityIA,Vector2 localEnemi,Vector2 VelocityEnemi,boolean predict) {
 		
 		MapNode close = getClosestCentre(IA);
 		float anglerelatif = angleCentre(IA, close.getVector()) - angleCentre(localEnemi, close.getVector());
@@ -217,13 +226,13 @@ public class IA {
 		//Gdx.app.log("batman", "count frame"+countframe);
 		if(countframe < 150){
 			
-			return aggretion(IA, velocityIA, localEnemi, VelocityEnemi);
+			return aggretion(IA, velocityIA, localEnemi, VelocityEnemi,predict);
 		}
 		
 		if(anglerelatif < 45 && anglerelatif > -45 && distIA > distEnemi){
 			return defence(IA, velocityIA, localEnemi);
 		}else{
-			return aggretion(IA, velocityIA, localEnemi, VelocityEnemi);
+			return aggretion(IA, velocityIA, localEnemi, VelocityEnemi,predict);
 		}
 
 	}
@@ -255,7 +264,7 @@ public class IA {
 	}
 
 
-	private static Vector2 aggretion(Vector2 position, Vector2 velocity,Vector2 localEnemi, Vector2 VelocityEnemi) {
+	private static Vector2 aggretion(Vector2 position, Vector2 velocity,Vector2 localEnemi, Vector2 VelocityEnemi,boolean predict) {
 		//variable de calcul
 		Vector2 vtempcal;
 		float angletemp;
@@ -269,20 +278,24 @@ public class IA {
 		//calcul de la position fictive de l'IA
 		fictposition = new Vector2(position);
 		//fictposition.add(new Vector2(velocity).rotate(position.angle()).set(0, velocity.y).rotate(0-position.angle()).mul(1));
-		angletemp=angleCentre(position, localEnemi) - 90f;
-		vtempcal =  new Vector2(velocity).rotate(-angletemp);
-		vtempcal.y=0;
-		vtempcal.rotate(angletemp);
-		fictposition.add(vtempcal);
+		if(predict){
+			angletemp=angleCentre(position, localEnemi) - 90f;
+			vtempcal =  new Vector2(velocity).rotate(-angletemp);
+			vtempcal.y=0;
+			vtempcal.rotate(angletemp);
+			fictposition.add(vtempcal);
+		}
 		
 		//calcul de la position fictive de l'ennemi
 		directionenemi = new Vector2(localEnemi);
 		//directionenemi.add(new Vector2(VelocityEnemi).rotate(localEnemi.angle()).set(0, VelocityEnemi.y).rotate(0-localEnemi.angle()).mul(1));
-		angletemp = -angletemp;
-		vtempcal =  new Vector2(VelocityEnemi).rotate(-angletemp);
-		vtempcal.y=0;
-		vtempcal.rotate(angletemp);
-		directionenemi.add(vtempcal);
+		if(predict){
+			angletemp = angleCentre(localEnemi,position) - 90f;;
+			vtempcal =  new Vector2(VelocityEnemi).rotate(-angletemp);
+			vtempcal.y=0;
+			vtempcal.rotate(angletemp);
+			directionenemi.add(vtempcal);
+		}
 		directionenemi.sub(fictposition).nor();
 		
 		
