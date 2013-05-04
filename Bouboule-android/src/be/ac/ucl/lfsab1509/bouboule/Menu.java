@@ -210,7 +210,7 @@ public class Menu extends Activity {
 
 	@SuppressLint("SimpleDateFormat")
 	private void addScoreInMenu (android.view.Menu menu) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat ("dd/MM/yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat ("dd/MM"); ///yyyy");
 		HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (false);
 
 		// no highscore: display a message even if there is no high scores
