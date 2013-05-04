@@ -174,12 +174,9 @@ public class Menu extends Activity {
 			switch (view.getId()) {
 				
 				case R.id.PlayButton :
-					/*mHandler.removeCallbacks(animationUpdate);
-					mHandler.removeCallbacks(nameUpdate);
-					setResult(R.id.PlayButton);*/
-					startActivityForResult(new Intent(Menu.this,ChoosingActivity.class),0);
+					// startActivityForResult(new Intent(Menu.this,ChoosingActivity.class), 0); // TODO: improve ChoosingActivity first
+					onActivityResult (0, 0, null);
 
-					//finish();
 					break;
 					
 				case R.id.ParameterButton :
@@ -195,7 +192,8 @@ public class Menu extends Activity {
 		}
 	};
 	
-	protected void onActivityResult(final int requestCode, final int resultCode,	final Intent data) {
+	protected void onActivityResult(final int requestCode, final int resultCode,
+			final Intent data) {
 		Log.d("kamoulox","on activity");
 		if(requestCode == 0 && resultCode != -1) { // it's the id of the button
 			mHandler.removeCallbacks(animationUpdate);
