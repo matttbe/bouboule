@@ -107,7 +107,7 @@ public class MyAndroidMenus implements Menus {
 	}
 
 	public static void onResumeMusic (Context context) {
-		if (! GlobalSettings.SOUND_IS_MUTED)
+		if (! GlobalSettings.SOUND_IS_MUTED && menuMusic != null)
 			menuMusic.play (context);
 	}
 
