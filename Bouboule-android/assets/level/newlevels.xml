@@ -3,9 +3,9 @@
 
     <Level1
         bonus="True"
-        bonusrate="1700"
-        time="60"
-        bonusEnabled="star,life" >
+        bonusEnabled="star,life"
+        bonusrate="7"
+        time="60" >
 
         <Bouboule
             IALevel="7"
@@ -42,33 +42,33 @@
             texRegionPath="terrain/Arena/arena.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="arena" >
 
             <NodeAllow
-                px="3.7401f"
-                py="5.3783f"
-                weight="3.7401f" >
+                px="3.3934f"
+                py="4.8933f"
+                weight="3.8000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.7401f"
-                py="6.7303f"
-                weight="3.7401f" >
+                px="3.3732f"
+                py="6.2056f"
+                weight="3.8000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.7401f"
-                py="8.0724f"
-                weight="3.7401f" >
+                px="3.3732f"
+                py="3.5811"
+                weight="3.8000f" >
             </NodeAllow>
         </MapNodes>
     </Level1>
 
     <Level2
         bonus="True"
+        bonusEnabled="star,life"
         bonusrate="1650"
-        time="55"
-        bonusEnabled="star,life" >
+        time="55" >
 
         <Bouboule
             IALevel="4"
@@ -105,24 +105,24 @@
             texRegionPath="terrain/Arena/arena.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="arena" >
 
             <NodeAllow
-                px="3.7401f"
-                py="5.3783f"
-                weight="3.7401f" >
+                px="3.3934f"
+                py="4.8933f"
+                weight="3.8000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.7401f"
-                py="6.7303f"
-                weight="3.7401f" >
+                px="3.3732f"
+                py="6.2056f"
+                weight="3.8000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.7401f"
-                py="8.0724f"
-                weight="3.7401f" >
+                px="3.3732f"
+                py="3.5811"
+                weight="3.8000f" >
             </NodeAllow>
         </MapNodes>
     </Level2>
@@ -167,24 +167,24 @@
             texRegionPath="terrain/Arena/arena.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="arena" >
 
             <NodeAllow
-                px="3.7401f"
-                py="5.3783f"
-                weight="3.7401f" >
+                px="3.3934f"
+                py="4.8933f"
+                weight="3.8000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.7401f"
-                py="6.7303f"
-                weight="3.7401f" >
+                px="3.3732f"
+                py="6.2056f"
+                weight="3.8000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.7401f"
-                py="8.0724f"
-                weight="3.7401f" >
+                px="3.3732f"
+                py="3.5811"
+                weight="3.8000f" >
             </NodeAllow>
         </MapNodes>
     </Level3>
@@ -229,24 +229,24 @@
             texRegionPath="terrain/Eggroll/eggroll.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="Eggroll" >
 
             <NodeAllow
-                px="3.7303f"
-                py="4.9854f"
-                weight="3.7204f" >
+                px="3.383338f"
+                py="4.883388f"
+                weight="3.820000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.7500f"
-                py="7.1024f"
-                weight="2.9211f" >
+                px="3.393430f"
+                py="7.020777f"
+                weight="2.970000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.7401f"
-                py="2.8976f"
-                weight="2.9408f" >
+                px="3.383338f"
+                py="2.696292f"
+                weight="2.930000f" >
             </NodeAllow>
         </MapNodes>
     </Level4>
@@ -291,102 +291,126 @@
             texRegionPath="terrain/DoubleHoles/doubleholes.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="Doubleholes" >
 
             <NodeAllow
-                px="1.65789f"
-                py="8.36098f"
-                weight="1.35789f" >
+                px="1.243760f"
+                py="8.323094f"
+                weight="1.680000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="1.77138f"
-                py="5.71220f"
-                weight="1.47138f" >
+                px="1.304314f"
+                py="5.688637f"
+                weight="1.820000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.76480f"
-                py="5.02927f"
-                weight="0.63257f" >
+                px="0.698774f"
+                py="4.426086f"
+                weight="1.150000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="5.30921f"
-                py="1.55122f"
-                weight="1.23947f" >
+                px="0.466650f"
+                py="3.451834f"
+                weight="0.910000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="5.82730f"
-                py="4.34634f"
-                weight="1.37270f" >
+                px="0.365726f"
+                py="2.596878f"
+                weight="0.830000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="0.93750f"
-                py="3.70732f"
-                weight="0.63750f" >
+                px="0.572619f"
+                py="1.239885f"
+                weight="1.025000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="0.81414f"
-                py="2.36585f"
-                weight="0.51414f" >
+                px="0.718958f"
+                py="0.906850f"
+                weight="1.160000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="1.13487f"
-                py="1.07317f"
-                weight="0.83487f" >
+                px="1.869486f"
+                py="0.558902f"
+                weight="0.760000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="2.61513f"
-                py="0.71220f"
-                weight="0.39079f" >
+                px="2.914043f"
+                py="0.474401f"
+                weight="0.685000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.89803f"
-                py="3.70732f"
-                weight="0.39079f" >
+                px="4.205864f"
+                py="0.703052f"
+                weight="0.915000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="6.46382f"
-                py="8.97561f"
-                weight="0.73618f" >
+                px="5.638977f"
+                py="1.389005f"
+                weight="1.585000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.54276f"
-                py="9.22927f"
-                weight="0.47961f" >
+                px="5.538053f"
+                py="4.262054f"
+                weight="1.715000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="4.88487f"
-                py="9.31707f"
-                weight="0.39079f" >
+                px="3.403522f"
+                py="4.903271f"
+                weight="0.950000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="6.85855f"
-                py="7.46341f"
-                weight="0.34145f" >
+                px="6.411041f"
+                py="6.245352f"
+                weight="0.780000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="6.71053f"
-                py="6.34146f"
-                weight="0.44013f" >
+                px="6.390856f"
+                py="6.205587f"
+                weight="0.820000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="1.5592f"
-                py="7.2390f"
-                weight="1.2592f" >
+                px="6.491780f"
+                py="7.458197f"
+                weight="0.710000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.123409f"
+                py="8.934487f"
+                weight="1.075000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.750850f"
+                py="9.312258f"
+                weight="0.685000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="2.868628f"
+                py="9.078636f"
+                weight="0.890000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.812262f"
+                py="9.332140f"
+                weight="0.675000f" >
             </NodeAllow>
         </MapNodes>
     </Level5>
@@ -431,12 +455,12 @@
             texRegionPath="terrain/Ice/ice.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="Ice" >
 
             <NodeAllow
-                px="3.7303f"
-                py="5.0146f"
-                weight="3.2862f" >
+                px="3.353061f"
+                py="4.883388f"
+                weight="3.430000f" >
             </NodeAllow>
         </MapNodes>
     </Level6>
@@ -481,12 +505,12 @@
             texRegionPath="terrain/Lava/lava.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="Lava" >
 
             <NodeAllow
-                px="3.7303f"
-                py="5.0146f"
-                weight="3.2862f" >
+                px="3.413615f"
+                py="4.903271f"
+                weight="2.710000f" >
             </NodeAllow>
         </MapNodes>
     </Level7>
@@ -533,23 +557,26 @@
 
         <MapNodes>
 
-            <NodeAllow
-                px="3.7599f"
-                py="6.1854f"
-                weight="3.1086f" >
-            </NodeAllow>
+            <MapNodes terrain="sushi" >
 
-            <NodeAllow
-                px="3.7599f"
-                py="5.1415f"
-                weight="3.1086f" >
-            </NodeAllow>
+                <NodeAllow
+                    px="4.221002f"
+                    py="6.951188f"
+                    weight="2.300000f" >
+                </NodeAllow>
 
-            <NodeAllow
-                px="3.7599f"
-                py="3.8537f"
-                weight="3.1086f" >
-            </NodeAllow>
+                <NodeAllow
+                    px="2.525488f"
+                    py="4.883388f"
+                    weight="2.300000f" >
+                </NodeAllow>
+
+                <NodeAllow
+                    px="4.332018f"
+                    py="2.825529f"
+                    weight="2.180000f" >
+                </NodeAllow>
+            </MapNodes>
         </MapNodes>
 
         <Obstacles>
@@ -620,30 +647,36 @@
             texRegionPath="terrain/Schrink/schrink.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="schrink" >
 
             <NodeAllow
-                px="3.7599f"
-                py="7.9610f"
-                weight="2.0822f" >
+                px="3.363153f"
+                py="7.895616f"
+                weight="2.120000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.7500f"
-                py="2.0878f"
-                weight="2.0724f" >
+                px="4.937559f"
+                py="0.399841f"
+                weight="3.640000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.7303f"
-                py="5.5707f"
-                weight="1.5197f" >
+                px="3.373245f"
+                py="4.903271f"
+                weight="1.530000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.7204f"
-                py="4.4000f"
-                weight="1.5296f" >
+                px="3.363153f"
+                py="6.066408f"
+                weight="1.620000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.373245f"
+                py="3.690426f"
+                weight="1.610000f" >
             </NodeAllow>
         </MapNodes>
     </Level9>
@@ -688,12 +721,12 @@
             texRegionPath="terrain/Tatami/tatami.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="tatami" >
 
             <NodeAllow
-                px="3.2566f"
-                py="5.5122f"
-                weight="2.8421f" >
+                px="3.383338f"
+                py="4.913212f"
+                weight="3.380000f" >
             </NodeAllow>
         </MapNodes>
     </Level10>
@@ -738,12 +771,12 @@
             texRegionPath="terrain/Skyline/sky.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="sky" >
 
             <NodeAllow
-                px="3.7303f"
-                py="5.0244f"
-                weight="3.0099f" >
+                px="3.403522f"
+                py="4.893329f"
+                weight="3.040000f" >
             </NodeAllow>
         </MapNodes>
     </Level11>
@@ -790,11 +823,14 @@
 
         <MapNodes>
 
-            <NodeAllow
-                px="3.7401f"
-                py="4.9756f"
-                weight="3.2862f" >
-            </NodeAllow>
+            <MapNodes terrain="rock" >
+
+                <NodeAllow
+                    px="3.534723f"
+                    py="7.975147f"
+                    weight="6.740000f" >
+                </NodeAllow>
+            </MapNodes>
         </MapNodes>
     </Level12>
 
@@ -838,12 +874,42 @@
             texRegionPath="terrain/YinYang/yinyang.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="yingyang" >
 
             <NodeAllow
-                px="3.7303f"
-                py="5.0146f"
-                weight="3.2862f" >
+                px="3.342968f"
+                py="6.444179f"
+                weight="1.800000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.363153f"
+                py="3.362362f"
+                weight="1.780000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="1.748378f"
+                py="3.322597f"
+                weight="1.120000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.957743f"
+                py="3.342479f"
+                weight="1.120000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.998113f"
+                py="6.483945f"
+                weight="1.120000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="1.687824f"
+                py="6.424297f"
+                weight="1.120000f" >
             </NodeAllow>
         </MapNodes>
     </Level13>
@@ -888,36 +954,114 @@
             texRegionPath="terrain/Cheesy/cheesy.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="cheesy" >
 
             <NodeAllow
-                px="2.7730f"
-                py="6.9268f"
-                weight="2.27961f" >
+                px="2.404380f"
+                py="6.871657f"
+                weight="2.290000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="4.3224f"
-                py="5.7854f"
-                weight="2.01316f" >
+                px="3.050290f"
+                py="8.233622f"
+                weight="1.430000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="5.4671f"
-                py="5.6195f"
-                weight="1.89474f" >
+                px="4.069617f"
+                py="8.969281f"
+                weight="0.670000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="3.2566f"
-                py="2.8585f"
-                weight="0.98684f" >
+                px="4.796266f"
+                py="9.217815f"
+                weight="0.420000f" >
             </NodeAllow>
 
             <NodeAllow
-                px="1.0263f"
-                py="4.7707f"
-                weight="0.58224f" >
+                px="5.351345f"
+                py="9.237698f"
+                weight="0.410000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.320210f"
+                py="8.919575f"
+                weight="0.750000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.481687f"
+                py="7.975147f"
+                weight="0.590000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.320210f"
+                py="7.786261f"
+                weight="0.730000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.179775f"
+                py="5.569341f"
+                weight="1.880000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.817308f"
+                py="5.738344f"
+                weight="2.090000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.977070f"
+                py="3.700368f"
+                weight="0.960000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="2.979644f"
+                py="2.875236f"
+                weight="1.130000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.779513f"
+                py="5.092156f"
+                weight="0.820000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.507019f"
+                py="3.938960f"
+                weight="0.580000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.860251f"
+                py="3.173476f"
+                weight="0.540000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="1.556623f"
+                py="2.696292f"
+                weight="0.590000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.170540f"
+                py="2.119694f"
+                weight="0.560000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.159590f"
+                py="2.487524f"
+                weight="0.580000f" >
             </NodeAllow>
         </MapNodes>
     </Level14>
@@ -962,12 +1106,12 @@
             texRegionPath="terrain/OneWay/oneway.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="Oneway" >
 
             <NodeAllow
-                px="3.7993f"
-                py="8.1756f"
-                weight="6.3651f" >
+                px="3.433799f"
+                py="8.233622f"
+                weight="6.650000f" >
             </NodeAllow>
         </MapNodes>
 
@@ -1027,12 +1171,12 @@
             texRegionPath="terrain/CherryBlossom/cherryblossom.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="cherryBlossom" >
 
             <NodeAllow
-                px="3.7993f"
-                py="8.1756f"
-                weight="6.3651f" >
+                px="3.393430f"
+                py="4.933095f"
+                weight="3.350000f" >
             </NodeAllow>
         </MapNodes>
     </Level16>
@@ -1077,12 +1221,12 @@
             texRegionPath="terrain/Ship/ship.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="ship" >
 
             <NodeAllow
-                px="3.7993f"
-                py="8.1756f"
-                weight="6.3651f" >
+                px="3.342968f"
+                py="4.525500f"
+                weight="3.100000f" >
             </NodeAllow>
         </MapNodes>
 
@@ -1174,12 +1318,18 @@
             texRegionPath="terrain/Sailor/sailor.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="sailor" >
 
             <NodeAllow
-                px="3.7993f"
-                py="8.1756f"
-                weight="6.3651f" >
+                px="3.342968f"
+                py="9.446466f"
+                weight="8.660000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.363153f"
+                py="1.831395f"
+                weight="3.740000f" >
             </NodeAllow>
         </MapNodes>
 
@@ -1239,12 +1389,12 @@
             texRegionPath="terrain/Lazer/lazer.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="Lazer" >
 
             <NodeAllow
-                px="3.7993f"
-                py="8.1756f"
-                weight="6.3651f" >
+                px="3.363153f"
+                py="4.913212f"
+                weight="3.060000f" >
             </NodeAllow>
         </MapNodes>
 
@@ -1318,12 +1468,12 @@
             texRegionPath="terrain/SpaceShip/spaceship.jpg" >
         </Arena>
 
-        <MapNodes>
+        <MapNodes terrain="spaceship" >
 
             <NodeAllow
-                px="3.7993f"
-                py="8.1756f"
-                weight="6.3651f" >
+                px="3.312691f"
+                py="4.426086f"
+                weight="2.190000f" >
             </NodeAllow>
         </MapNodes>
     </Level20>
