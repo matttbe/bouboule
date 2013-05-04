@@ -59,11 +59,16 @@ public class MapNode {
 	
 	public float xToPixel() {
 		
-		return 20 + 304/3 *vector.x;
+		return 64.762f + 99.085f *vector.x;
 	}
 	
 	public float yToPixel() {
 		
-		return (float) (102.5 *vector.y);
+		return (float) (55.784+100.588*vector.y);
+	}
+	
+	public float weightToPixel(){
+		
+		return 100*weight;
 	}
 }

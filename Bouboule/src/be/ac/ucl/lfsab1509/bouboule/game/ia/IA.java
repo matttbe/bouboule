@@ -100,6 +100,11 @@ public class IA {
 			//Acc = hybrid(LocalEnemi,VelocityEnemi,IA,VelocityIA);
 			//Acc = stopMid(LocalEnemi, VelocityEnemi);
 			//Gdx.app.log ("Player","player"+LocalEnemi.x+"speed"+VelocityEnemi.x+"acc"+Acc.x);
+			
+			/*Acc = middeler (LocalEnemi,2);
+			Vector2 slowi = new Vector2(VelocityEnemi).mul(2f);
+			Acc.sub(slowi);*/
+			
 			break;
 
 		case 1:
@@ -123,7 +128,7 @@ public class IA {
 			break;
 		case 7:
 			Acc = middeler (IA,1);
-			Vector2 slow = new Vector2(VelocityIA).nor().mul(.3f);
+			Vector2 slow = new Vector2(VelocityIA).mul(2f);
 			Acc.sub(slow);
 			break;
 		case 8:
