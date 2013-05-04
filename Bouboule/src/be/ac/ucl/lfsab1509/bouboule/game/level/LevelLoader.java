@@ -44,6 +44,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
 import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerListener;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -102,21 +103,28 @@ public class LevelLoader {
 			throw new GdxRuntimeException ("Level not found");
 		}
 
-		// load settings about the level:
+		readLevelSettings (file);
+	}
+
+	private void readLevelSettings (Element file2) {
+		// Bonus
 		GraphicManager.ALLOW_BONUS = Boolean.parseBoolean(file.getAttribute("bonus","false"));
 		GraphicManager.BONUS_SPAWN_RATE = Integer.parseInt(file.getAttribute("bonusrate","0"));
 		String bonusEnabled = file.getAttribute ("bonusEnabled", null);
 		GraphicManager.BONUS_ENABLED = bonusEnabled != null
 				? new ArrayList<String>(Arrays.asList(bonusEnabled.split (",")))
 				: null;
+
+		// Level
 		GraphicManager.TIME = Integer.parseInt(file.getAttribute("time", "30"));
-		IA.FORCE_MAX_IA = Float.parseFloat(file.getAttribute("forcemaxia", "0.5f"));
-		IA.FORCE_MAX_PLAYER = Float.parseFloat(file.getAttribute("forcemaxplayer", "0.5f"));
-		IA.countframe = 0;
 		GlobalSettings.GAME.setNewLoopMusic (file.getAttribute ("music", null)); // e.g. klez.mp3
 
-		Gdx.app.log("Settings", "Bonus ="+GraphicManager.ALLOW_BONUS);	
+		// IA
+		IA.FORCE_MAX_IA = Float.parseFloat(file.getAttribute("forcemaxia", "0.5f")); // not used
+		IA.FORCE_MAX_PLAYER = Float.parseFloat(file.getAttribute("forcemaxplayer", "0.5f")); // not used
+		IA.countframe = 0;
 
+		Gdx.app.log("Settings", "Bonus ="+GraphicManager.ALLOW_BONUS);	
 	}
 
 	/**
@@ -143,6 +151,7 @@ public class LevelLoader {
 			float angle				= Float.parseFloat(boub.getAttribute("angle"));
 			int IALevel				= Integer.parseInt(boub.getAttribute("IALevel"));
 			short entity			= Short.parseShort(boub.getAttribute("entity"));
+			boolean inverted		= Boolean.parseBoolean (boub.getAttribute ("inverted", "False"));
 
 			String texRegionPath;			
 			String type				= boub.getAttribute("type");
@@ -178,16 +187,16 @@ public class LevelLoader {
 							IALevel
 					);
 
-			graphicManager.addBody( new Bouboule(radius, bodyType, density,
+			Bouboule body = new Bouboule(radius, bodyType, density,
 					elasticity, px, py, angle,texRegionPath, 
-					jsonFile, "boub_"+type, entity, IALevel));
+					jsonFile, "boub_"+type, entity, IALevel);
+			graphicManager.addBody(body);
 
-
-
-
-
-
-
+			if (inverted) {
+				((Sprite) body.getBody ().getFixtureList ().get (0).getUserData ()).rotate90 (true);
+				((Sprite) body.getBody ().getFixtureList ().get (0).getUserData ()).rotate90 (true);
+				IA.AXE_POSITION *= -1;
+			}
 		}
 	}
 
