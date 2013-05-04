@@ -1,6 +1,5 @@
 package be.ac.ucl.lfsab1509.bouboule;
 
-
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.app.Activity;
@@ -127,14 +126,14 @@ public class ChoosingActivity extends Activity {
 		}
 	};
 	
-	@SuppressWarnings("deprecation")
+	// @SuppressWarnings("deprecation")
 	private void updateimage(){
 		buttonprev.setImageResource(image[(currentlevel+19)%20]);
 		buttonnext.setImageResource(image[(currentlevel+1)%20]);
 		buttonmid.setImageResource(image[(currentlevel)%20]);
 
 		if(currentlevel +1 > maxlevel){
-			currentmap.setAlpha(255);
+			currentmap.setAlpha(255); // TODO: deprecated
 		}else{
 			currentmap.setAlpha(0);
 		}
@@ -146,21 +145,15 @@ public class ChoosingActivity extends Activity {
 		finish ();
 	}
 	
-		@Override
-		protected void onPause ()
-		{
-			super.onPause ();
-			MyAndroidMenus.onPauseMusic ();
-		}
-	
-		@Override
-	protected void onResume ()
-		{
-			super.onResume ();
-			MyAndroidMenus.onResumeMusic ();
-		}
+	protected void onStop () {
+		super.onStop ();
+		MyAndroidMenus.onStopMusic (this);
+	}
 
-
-	
+	@Override
+	protected void onResume () {
+		super.onResume ();
+		MyAndroidMenus.onResumeMusic (this);
+	}
 
 }

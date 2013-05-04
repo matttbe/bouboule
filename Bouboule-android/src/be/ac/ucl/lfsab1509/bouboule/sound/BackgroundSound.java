@@ -39,20 +39,16 @@ public class BackgroundSound {
 		player = new AsyncPlayer (cTag);
 	}
 	
-	public void stop () {
-		player.stop ();
+	public void stop (Context context) {
+		player.stop (context);
 	}
 	
-	public void pause () {
-		player.pause ();
-	}
-	
-	public void play () {
-		player.play ();
+	public void play (Context context) {
+		player.play (context, file, true, AudioManager.STREAM_MUSIC);
 	}
 	
 	public void create (Context context) {
-		player.play (context, file, true, AudioManager.STREAM_MUSIC);
+		player.create (context, file, true, AudioManager.STREAM_MUSIC, false);
 	}
 
 }

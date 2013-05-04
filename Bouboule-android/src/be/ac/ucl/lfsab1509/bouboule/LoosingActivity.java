@@ -106,15 +106,14 @@ public class LoosingActivity extends Activity {
 		MyAndroidMenus.onBackPressedGeneric (this, R.id.LoosingMenuButton);
 	}
 	
-	@Override
-	protected void onPause () {
-		super.onPause ();
-		MyAndroidMenus.onPauseMusic ();
+	protected void onStop () {
+		super.onStop ();
+		MyAndroidMenus.onStopMusic (this);
 	}
 
 	@Override
 	protected void onResume () {
 		super.onResume ();
-		MyAndroidMenus.onResumeMusic ();
+		MyAndroidMenus.onResumeMusic (this);
 	}
 }

@@ -315,4 +315,15 @@ public class MenuPause extends Activity {
 		animationSetCaseD.addAnimation(g1);
 
 	}
+
+	protected void onStop () {
+		super.onStop ();
+		MyAndroidMenus.onStopMusic (this);
+	}
+
+	@Override
+	protected void onResume () {
+		super.onResume ();
+		MyAndroidMenus.onResumeMusic (this);
+	}
 }

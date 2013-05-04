@@ -47,6 +47,7 @@ public class AsyncPlayer {
 		boolean looping;
 		int stream;
 		long requestTime;
+		boolean play = false;
 
 		OnErrorListener errorListener;
 		OnBufferingUpdateListener bufferingUpdateListener;
@@ -74,7 +75,8 @@ public class AsyncPlayer {
 			player.setOnBufferingUpdateListener(cmd.bufferingUpdateListener);
 			player.setOnCompletionListener(cmd.completionListener);
 			player.prepare();
-			player.start();
+			if (cmd.play)
+				player.start();
 			if (mPlayer != null) {
 				mPlayer.release();
 			}
@@ -122,8 +124,8 @@ public class AsyncPlayer {
 							Log.w(mTag, "STOP command without a player");
 						}
 						break;
-					case PAUSE:
-						if (mDebug) Log.d(mTag, "PAUSE");
+					/*case PAUSE:
+						if (mDebug) Log.d(mTag, "PAUSE " + (mPlayer != null));
 						if (mPlayer != null) {
 							long delay = SystemClock.uptimeMillis() - cmd.requestTime;
 							if (delay > 1000) {
@@ -133,7 +135,7 @@ public class AsyncPlayer {
 						} else {
 							Log.w(mTag, "PAUSE command without a player");
 						}
-						break;
+						break;*/
 				}
 
 				synchronized (mCmdQueue) {
@@ -159,6 +161,7 @@ public class AsyncPlayer {
 	// The current state according to the caller.  Reality lags behind
 	// because of the asynchronous nature of this class.
 	private int mState = STOP;
+	private Context context;
 
 	/**
 	 * Construct an AsyncPlayer object.
@@ -185,18 +188,22 @@ public class AsyncPlayer {
 	 *          (see {@link MediaPlayer#setLooping(boolean)})
 	 * @param stream the AudioStream to use.
 	 *          (see {@link MediaPlayer#setAudioStreamType(int)})
+	 * @param play start playing directly or stay in pause
 	 */
-	public void play(Context context, Uri uri, boolean looping, int stream) {
+	public void create (Context context, Uri uri, boolean looping, int stream, boolean play) {
+		this.context = context;
+
 		Command cmd = new Command();
 		cmd.requestTime = SystemClock.uptimeMillis();
-		cmd.code = PLAY;
+		cmd.code = PLAY; // create new
+		cmd.play = play;
 		cmd.context = context;
 		cmd.uri = uri;
 		cmd.looping = looping;
 		cmd.stream = stream;
 		synchronized (mCmdQueue) {
 			enqueueLocked(cmd);
-			mState = PLAY;
+			mState = play ? PLAY : PAUSE; // but real state is pause
 		}
 	}
 
@@ -204,11 +211,11 @@ public class AsyncPlayer {
 	 * Stop a previously played sound.  It can't be played again or unpaused
 	 * at this point.  Calling this multiple times has no ill effects.
 	 */
-	public void stop() {
+	public void stop(Context context) {
 		synchronized (mCmdQueue) {
 			// This check allows stop to be called multiple times without starting
 			// a thread that ends up doing nothing.
-			if (mState != STOP) {
+			if (mState != STOP && this.context == context) {
 				Command cmd = new Command();
 				cmd.requestTime = SystemClock.uptimeMillis();
 				cmd.code = STOP;
@@ -219,24 +226,25 @@ public class AsyncPlayer {
 	}
 
 	public void pause() {
-		synchronized (mCmdQueue) {
-			if (mState == PLAY) {
-				Command cmd = new Command();
-				cmd.requestTime = SystemClock.uptimeMillis();
-				cmd.code = PAUSE;
-				enqueueLocked(cmd);
-				mState = PAUSE;
-			}
+		if (mDebug) Log.d ("Sound", "Pause? " + mState);
+		if (mState != STOP && mPlayer != null) {
+			mPlayer.pause ();
+			mState = PAUSE;
 		}
 	}
 
-	public void play() {
-		synchronized (mCmdQueue) {
-			if (mState == PAUSE) {
-				if (mPlayer != null) {
-					mPlayer.start();
-				}
-			}
+	/**
+	 * It will restart the current player or create a new one like the previous one
+	 * @param context, the current context that will launch the sound
+	 */
+	public void play (Context context, Uri uri, boolean looping, int stream) {
+		if (mDebug) Log.d ("Sound", "replay? " + mState + " " + (mPlayer != null));
+		this.context = context;
+		if (mState != PLAY) {
+			if (mPlayer != null) // pause
+				mPlayer.start ();
+			else // stop
+				create (context, uri, looping, stream, true);
 		}
 	}
 

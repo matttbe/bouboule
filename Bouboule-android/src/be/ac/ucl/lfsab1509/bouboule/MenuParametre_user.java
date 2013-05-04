@@ -107,18 +107,6 @@ public class MenuParametre_user extends Activity {
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 	}
 	
-	@Override
-	protected void onPause () {
-		super.onPause ();
-		MyAndroidMenus.onPauseMusic ();
-	}
-
-	@Override
-	protected void onResume () {
-		super.onResume ();
-		MyAndroidMenus.onResumeMusic ();
-	}
-	
 	private void refreshScreen(){
 		// set the list into the spinner
 		listProfile = GlobalSettings.PROFILE_MGR.getAllProfilesAL();
@@ -316,5 +304,16 @@ public class MenuParametre_user extends Activity {
 	 */
 	private int getNextIndex (int index) {
 		return ((boub_index + 1) % BOUB_INDEX_MAX);
+	}
+
+	protected void onStop () {
+		super.onStop ();
+		MyAndroidMenus.onStopMusic (this);
+	}
+
+	@Override
+	protected void onResume () {
+		super.onResume ();
+		MyAndroidMenus.onResumeMusic (this);
 	}
 }

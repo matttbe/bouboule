@@ -31,6 +31,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
@@ -44,9 +45,8 @@ public class MyAndroidMenus implements Menus {
 
 	public MyAndroidMenus (AndroidApplication app) {
 		this.app = app;
-		menuMusic = new BackgroundSound ("menu", R.raw.menu);
+		menuMusic = new BackgroundSound ("Sound", R.raw.menu);
 		menuMusic.create (app);
-		menuMusic.pause ();
 	}
 
 	@Override
@@ -106,12 +106,18 @@ public class MyAndroidMenus implements Menus {
 		return true; // prevent double calls
 	}
 
-	public static void onResumeMusic () {
+	public static void onResumeMusic (Context context) {
 		if (! GlobalSettings.SOUND_IS_MUTED)
-			menuMusic.play ();
+			menuMusic.play (context);
 	}
 
-	public static void onPauseMusic () {
-		menuMusic.pause ();
+	/**
+	 * onStop signal is send when the current view (context) is no longer
+	 * visible. This method will stop the music only if it has been launched or
+	 * resumed from the same context
+	 * @param context
+	 */
+	public static void onStopMusic (Context context) {
+		menuMusic.stop (context);
 	}
 }

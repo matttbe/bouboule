@@ -442,16 +442,16 @@ public class Menu extends Activity {
 		animationSetCaseD.addAnimation(g1);
 		
 	}
-	
-	@Override
-	protected void onPause () {
-		super.onPause ();
-		MyAndroidMenus.onPauseMusic ();
+
+	protected void onStop () {
+		super.onStop ();
+		Gdx.app.log ("Sound", "Menu: STOP");
+		MyAndroidMenus.onStopMusic (this);
 	}
 
 	@Override
 	protected void onResume () {
 		super.onResume ();
-		MyAndroidMenus.onResumeMusic ();
+		MyAndroidMenus.onResumeMusic (this);
 	}
 }
