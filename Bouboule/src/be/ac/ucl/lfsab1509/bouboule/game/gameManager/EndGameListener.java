@@ -125,7 +125,7 @@ public class EndGameListener implements ContactListener{
 			else if (entity1 == Entity.MONSTER 
 					| entity2 == Entity.MONSTER){
 				if (isAliveMonster > 1) {
-					Gdx.app.log("Alive", "MONSTER est VIVANT =)"+(isAliveMonster-1));
+					/// Gdx.app.log("Alive", "MONSTER is alive " + (isAliveMonster-1));
 					//DO NOTHING
 					isAliveMonster --;
 				}
@@ -162,7 +162,7 @@ public class EndGameListener implements ContactListener{
 	}
 
 	public static void looseGame () {
-		Gdx.app.log("KILL", "Bouboule est MORT =/");
+		Gdx.app.log("KILL", "Bouboule is dead!");
 		
 		if (bIsEnding.compareAndSet (false, true)) {
 			// avoid the case where both bouboules loose (go away at the "same" time)
@@ -184,7 +184,7 @@ public class EndGameListener implements ContactListener{
 	}
 
 	public static void winGame () {
-		Gdx.app.log("KILL", "Bouboule a gagné =P");
+		Gdx.app.log("KILL", "Bouboule win!");
 
 		if (bIsEnding.compareAndSet (false, true)) {
 			// avoid the case where both bouboules loose (go away at the "same" time)
