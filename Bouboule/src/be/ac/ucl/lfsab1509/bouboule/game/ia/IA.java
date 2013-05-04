@@ -110,7 +110,6 @@ public class IA {
 		case 1:
 			Acc = middeler(IA,0);
 			break;
-
 		case 2:
 			Acc = troll2(IA, VelocityIA);
 			break;
@@ -144,15 +143,16 @@ public class IA {
 			break;
 		}
 
-		
 
 		// Vector2 slow;
 		if(IALevel != 0){
 			Acc=Acc.limit(FORCE_MAX_IA);
 			//slow = new Vector2(VelocityIA).nor().mul(0.02f);
+			//Acc.set(0, 0);
 			countframe++;
 		}else{
 			Acc=Acc.limit(FORCE_MAX_PLAYER);
+			
 			//slow = new Vector2(VelocityEnemi).nor().mul(0.02f);
 			//slow = new Vector2(0, 0);
 		}
