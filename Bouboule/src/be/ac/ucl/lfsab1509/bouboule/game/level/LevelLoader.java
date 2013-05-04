@@ -112,6 +112,7 @@ public class LevelLoader {
 		GraphicManager.TIME = Integer.parseInt(file.getAttribute("time", "30"));
 		IA.FORCE_MAX_IA = Float.parseFloat(file.getAttribute("forcemaxia", "0.5f"));
 		IA.FORCE_MAX_PLAYER = Float.parseFloat(file.getAttribute("forcemaxplayer", "0.5f"));
+		IA.countframe = 0;
 		GlobalSettings.GAME.setNewLoopMusic (file.getAttribute ("music", null)); // e.g. klez.mp3
 
 		Gdx.app.log("Settings", "Bonus ="+GraphicManager.ALLOW_BONUS);	

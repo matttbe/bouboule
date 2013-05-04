@@ -29,7 +29,6 @@ package be.ac.ucl.lfsab1509.bouboule.game.ia;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import sun.util.logging.resources.logging;
 
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
@@ -46,6 +45,10 @@ public class IA {
 	public static float FORCE_MAX_PLAYER;
 	public static float AXE_POSITION = -1;
 	private static float SENSIBILITY_DEFAULT = .15f;
+	
+	
+	//initialiser la variable en début de niveau
+	public static int countframe=0;
 	
 	//level 0 => gyroscope
 	//level 1 => go mid
@@ -133,6 +136,7 @@ public class IA {
 		if(IALevel != 0){
 			Acc=Acc.limit(FORCE_MAX_IA);
 			//slow = new Vector2(VelocityIA).nor().mul(0.02f);
+			countframe++;
 		}else{
 			Acc=Acc.limit(FORCE_MAX_PLAYER);
 			//slow = new Vector2(VelocityEnemi).nor().mul(0.02f);
@@ -201,6 +205,7 @@ public class IA {
 
 
 	private static Vector2 hybrid(Vector2 IA, Vector2 velocityIA,Vector2 localEnemi,Vector2 VelocityEnemi) {
+		
 		MapNode close = getClosestCentre(IA);
 		float anglerelatif = angleCentre(IA, close.getVector()) - angleCentre(localEnemi, close.getVector());
 		anglerelatif=casteangle(anglerelatif);
@@ -208,6 +213,13 @@ public class IA {
 		distIA = close.getVector().dst(IA);
 		distEnemi = close.getVector().dst(localEnemi);
 
+		
+		//Gdx.app.log("batman", "count frame"+countframe);
+		if(countframe < 150){
+			
+			return aggretion(IA, velocityIA, localEnemi, VelocityEnemi);
+		}
+		
 		if(anglerelatif < 45 && anglerelatif > -45 && distIA > distEnemi){
 			return defence(IA, velocityIA, localEnemi);
 		}else{
@@ -244,14 +256,35 @@ public class IA {
 
 
 	private static Vector2 aggretion(Vector2 position, Vector2 velocity,Vector2 localEnemi, Vector2 VelocityEnemi) {
+		//variable de calcul
+		Vector2 vtempcal;
+		float angletemp;
+		
+		
 		Vector2 directionenemi , dirmid , fictposition;
 		MapNode centreIA = getClosestCentre(position);
 		dirmid = middeler(position, centreIA);
 		//dirmid.nor();
+		
+		//calcul de la position fictive de l'IA
 		fictposition = new Vector2(position);
-		fictposition.add(new Vector2(velocity).rotate(position.angle()).set(0, velocity.y).rotate(0-position.angle()).mul(1));
+		//fictposition.add(new Vector2(velocity).rotate(position.angle()).set(0, velocity.y).rotate(0-position.angle()).mul(1));
+		angletemp=angleCentre(position, localEnemi) - 90f;
+		vtempcal =  new Vector2(velocity).rotate(-angletemp);
+		vtempcal.y=0;
+		vtempcal.rotate(angletemp);
+		fictposition.add(vtempcal);
+		
+		//calcul de la position fictive de l'ennemi
 		directionenemi = new Vector2(localEnemi);
-		directionenemi.add(new Vector2(VelocityEnemi).rotate(localEnemi.angle()).set(0, VelocityEnemi.y).rotate(0-localEnemi.angle()).mul(1)).sub(fictposition).nor();
+		//directionenemi.add(new Vector2(VelocityEnemi).rotate(localEnemi.angle()).set(0, VelocityEnemi.y).rotate(0-localEnemi.angle()).mul(1));
+		angletemp = -angletemp;
+		vtempcal =  new Vector2(VelocityEnemi).rotate(-angletemp);
+		vtempcal.y=0;
+		vtempcal.rotate(angletemp);
+		directionenemi.add(vtempcal);
+		directionenemi.sub(fictposition).nor();
+		
 		
 		if(!(Math.abs(angleCentre(fictposition, centreIA.getVector())-angleCentre(localEnemi,centreIA.getVector())) < 15 &&
 				centreIA == getClosestCentre(localEnemi)))
