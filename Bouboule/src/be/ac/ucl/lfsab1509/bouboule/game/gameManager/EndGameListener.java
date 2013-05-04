@@ -26,6 +26,8 @@ package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 
@@ -43,6 +45,9 @@ public class EndGameListener implements ContactListener{
 
 	private static int isAlivePlayer 	= 0;
 	private static int isAliveMonster	= 0;
+	
+	 // it's maybe not needed to use that if all actions are launched in the mainloop but is it?
+	private static AtomicBoolean bIsEnding = new AtomicBoolean();
 
 	@Override
 	public void beginContact(final Contact contact) {
@@ -158,33 +163,45 @@ public class EndGameListener implements ContactListener{
 
 	public static void looseGame () {
 		Gdx.app.log("KILL", "Bouboule est MORT =/");
+		
+		if (bIsEnding.compareAndSet (false, true)) {
+			// avoid the case where both bouboules loose (go away at the "same" time)
 
-		GlobalSettings.PROFILE.addScorePermanent (- GlobalSettings.INIT_SCORE / 2);
-		GlobalSettings.PROFILE.cancelNewScore ();
-		if (GlobalSettings.PROFILE.addLifes (-1))
-			GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
-		else {
-			GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
-			GlobalSettings.PROFILE.checkHighScoreAndResetProfile ();
+			GlobalSettings.PROFILE.addScorePermanent (- GlobalSettings.INIT_SCORE / 2);
+			GlobalSettings.PROFILE.cancelNewScore ();
+			if (GlobalSettings.PROFILE.addLifes (-1))
+				GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
+			else {
+				GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
+				GlobalSettings.PROFILE.checkHighScoreAndResetProfile ();
+			}
+	
+			GlobalSettings.GAME.looseSound ();
+			endGame (true);
+
+			bIsEnding.set (false);
 		}
-
-		GlobalSettings.GAME.looseSound ();
-		endGame (true);
 	}
 
 	public static void winGame () {
 		Gdx.app.log("KILL", "Bouboule a gagné =P");
 
-		GlobalSettings.PROFILE.saveScore ();
-		if (GlobalSettings.PROFILE.LevelUp ())
-			GlobalSettings.GAME_EXIT = GameExitStatus.WIN;
-		else { // no more level: end game
-			GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
-			GlobalSettings.PROFILE.checkHighScoreAndResetProfile ();
-		}
+		if (bIsEnding.compareAndSet (false, true)) {
+			// avoid the case where both bouboules loose (go away at the "same" time)
 
-		GlobalSettings.GAME.winSound ();
-		endGame (true);
+			GlobalSettings.PROFILE.saveScore ();
+			if (GlobalSettings.PROFILE.LevelUp ())
+				GlobalSettings.GAME_EXIT = GameExitStatus.WIN;
+			else { // no more level: end game
+				GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
+				GlobalSettings.PROFILE.checkHighScoreAndResetProfile ();
+			}
+	
+			GlobalSettings.GAME.winSound ();
+			endGame (true);
+
+			bIsEnding.set (false);
+		}
 	}
 
 	public static void cancelGame () {
