@@ -19,41 +19,41 @@
     <string name="about">About</string>
     
     <!-- Menu user settings -->
-    <string name="user_newUser">Create new user :</string>
-    <string name="user_activeUser">Change selected user :</string>
-    <string name="user_playerball">Chose your bouboule :</string>
-    <string name="user_namenewuser">New user created !</string>
-    <string name="user_namecharerror">The username can\'t contains special characters.</string>
-    <string name="user_nameidenticalerror">The username can\'t be the same as one existing player.</string>
+    <string name="user_newUser">Create new user:</string>
+    <string name="user_activeUser">Select user:</string>
+    <string name="user_playerball">Choose your Bouboule:</string>
+    <string name="user_namenewuser">New user created!</string>
+    <string name="user_namecharerror">The username can\'t contain special characters.</string>
+    <string name="user_nameidenticalerror">This username already exists!</string>
     <string name="user_nameemptyerror">The username can\'t be empty, \".\" or \"..\".</string>
-    <string name="user_resetgame">Reset your game :</string>
-    <string name="user_resetgame_button">Reset !</string>
-    <string name="user_resetgame_notif">Your game has been reseted !</string>
+    <string name="user_resetgame">Reset your game:</string>
+    <string name="user_resetgame_button">Reset!</string>
+    <string name="user_resetgame_notif">Your game has been reset!</string>
     
     <!-- Menu global settings -->
-    <string name="global_sound">Sound :</string>
+    <string name="global_sound">Sound:</string>
     <string name="global_sound_off">Mute</string>
     <string name="global_sound_on">Music on</string>
-    <string name="global_rotate">Rotation of the ball :</string>
+    <string name="global_rotate">Rotation of the balls:</string>
     <string name="global_rotate_off">No rotation</string>
     <string name="global_rotate_on">Rotation on</string>
-    <string name="global_sensitivity">Sensitivity :</string>
+    <string name="global_sensitivity">Sensitivity:</string>
     
     <!-- Menu Parametre_about -->
-    <string name="about_nameapp">App\'s name :</string>
+    <string name="about_nameapp">App\'s name:</string>
     <string name="about_nameapp_txt">Bouboule</string>
-    <string name="about_authors">Authors : </string>
+    <string name="about_authors">Authors:</string>
     <string name="about_authors_txt">Baerts Matthieu, Remy Baptiste, Van Wallendael Nicolas and Verhaeghe Hélène</string>
-    <string name="about_licence">Licence :</string>
-    <string name="about_licence_txt">Open source licence GPL3</string>
-    <string name="about_version">Version :</string>
+    <string name="about_licence">License:</string>
+    <string name="about_licence_txt">Open source GPL3 license:</string>
+    <string name="about_version">Version:</string>
     <string name="about_version_txt">Version </string>
-    <string name="about_date">Date :</string>
+    <string name="about_date">Date:</string>
     <string name="about_date_txt">2013</string>
-    <string name="about_graphism">Graphisms :</string>
+    <string name="about_graphism">Graphisms:</string>
     <string name="about_graphism_txt">Van Wallendael Julien</string>
-    <string name="about_music">Music :</string>
-    <string name="about_music_txt">Paschal Adans</string>
+    <string name="about_music">Music and sounds:</string>
+    <string name="about_music_txt">Adans Paschal</string>
     
     
     <!-- Menu Pause -->
