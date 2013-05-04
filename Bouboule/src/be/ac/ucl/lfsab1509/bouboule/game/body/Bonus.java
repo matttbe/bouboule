@@ -75,7 +75,7 @@ public class Bonus extends GameBody{
 		MapNode node = GlobalSettings.ARENAWAYPOINTALLOW.get(random.nextInt(size));
 
 		Vector2 pos	= new Vector2(node.xToPixel()-32, node.yToPixel()-32);
-		Vector2 radius = new Vector2(node.weightToPixel(),0);
+		Vector2 radius = new Vector2(node.weightToPixel()*random.nextFloat(),0);
 		radius.rotate(random.nextInt(359));
 		pos.add(radius);
 
