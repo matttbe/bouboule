@@ -46,7 +46,7 @@ public class Entity {
 	//Bonus options
 	public static enum BonusType {LIVE_UP, SPEED_HIGH, SPEED_LOW, POINT,
 		WEIGHT_HIGH, WEIGHT_LOW, ELASTICITY_HIGH, ELASTICITY_LOW,
-		INVINCIBLE, INVISIBLE, INVERSE};
+		INVINCIBLE, INVISIBLE, INVERSE, TIME_UP, TIME_DOWN};
 
 	private short 	entity;					//Store the Constant of the Generic Body's
 	private BonusType 	bonus;					//Store the bonus option
@@ -56,6 +56,7 @@ public class Entity {
 	private static final float SPEED_MULT_VALUE = 2f;
 	private static final float DEFAULT_MULT_VALUE = 2f;
 	private static final int TIMER_DEFAULT_TIME = 5;
+	private static final int ADD_TIME_DEFAULT = 15;
 
 	private Timer timer;
 
@@ -150,6 +151,14 @@ public class Entity {
 				case INVERSE:
 					inverse ();
 					resetBonus (TIMER_DEFAULT_TIME*2);
+					return true;
+
+				case TIME_UP:
+					GlobalSettings.PROFILE.addRemainingTime (ADD_TIME_DEFAULT);
+					return true;
+
+				case TIME_DOWN:
+					GlobalSettings.PROFILE.addRemainingTime (ADD_TIME_DEFAULT * -1);
 					return true;
 
 				default:

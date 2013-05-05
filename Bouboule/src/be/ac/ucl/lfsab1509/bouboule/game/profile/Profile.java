@@ -162,6 +162,10 @@ public class Profile {
 		return iRemainingTime;
 	}
 
+	public void addRemainingTime (int iAddTime) {
+		iRemainingTime += iAddTime;
+	}
+
 	//__________ SCORE
 
 	/**
