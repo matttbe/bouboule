@@ -68,12 +68,13 @@
         bonus="True"
         bonusEnabled="star,life"
         bonusrate="1650"
-        time="55" >
+        time="55" 
+        accmaxia="0.1f">
 
         <Bouboule
             IALevel="4"
             angle="0"
-            density="1"
+            density="0.8"
             elasticity="1.1f"
             entity="-1"
             px="350"
@@ -130,7 +131,7 @@
     <Level3
         bonus="True"
         bonusrate="1650"
-        accmaxia="0.45f"
+        accmaxia="0.425f"
         accmaxplayer="0.5f"
         time="45" >
 
@@ -197,10 +198,10 @@
         time="45" >
 
         <Bouboule
-            IALevel="10"
+            IALevel="9"
             angle="0"
-            density="1"
-            elasticity="0.8f"
+            density="0.9f"
+            elasticity="0.9f"
             entity="-1"
             px="350"
             py="620"
@@ -213,7 +214,7 @@
             IALevel="0"
             angle="0"
             density="1"
-            elasticity="0.8f"
+            elasticity="0.9f"
             entity="1"
             px="350"
             py="380"
@@ -244,13 +245,13 @@
     <Level5
         bonus="True"
         bonusrate="1650"
-        accmaxia="0.5f"
+        accmaxia="0.3f"
         time="45" >
 
         <Bouboule
             IALevel="8"
             angle="0"
-            density="5"
+            density="3"
             elasticity="1.0f"
             entity="-1"
             px="100"
@@ -409,7 +410,8 @@
     <Level6
         bonus="True"
         bonusrate="1650"
-        time="45" >
+        time="45" 
+        accmaxia="0.48f">
 
         <Bouboule
             IALevel="9"
@@ -458,7 +460,8 @@
 
     <Level7
         bonus="True"
-        bonusrate="1650"
+        bonusEnabled="star"
+        bonusrate="700"
         time="45" >
 
         <Bouboule
@@ -685,7 +688,7 @@
     <Level9
         bonus="True"
         bonusrate="1650"
-        accmaxia="0.6f"
+        accmaxia="0.55f"
         time="45" >
 
         <Bouboule
@@ -994,8 +997,8 @@
             density="1"
             elasticity="0.9f"
             entity="-1"
-            px="260"
-            py="440"
+            px="220"
+            py="760"
             radius="0"
             texRegionPath="boub_sailor.png"
             type="normal" >
@@ -1007,8 +1010,8 @@
             density="1"
             elasticity="0.9f"
             entity="1"
-            px="515"
-            py="440"
+            px="465"
+            py="760"
             radius="0"
             type="normal" >
         </Bouboule>
@@ -1138,6 +1141,7 @@
         bonusEnabled="star"
         bonusrate="1700"
         time="60" >
+        accmaxia="1.0f"
 
         <Bouboule
             IALevel="6"
@@ -1330,12 +1334,12 @@
     <Level18
         bonus="True"
         bonusrate="1650"
-        time="45" >
+        time="60" >
 
         <Bouboule
             IALevel="4"
             angle="0"
-            density="1"
+            density="0.9f"
             elasticity="1f"
             entity="-1"
             px="350"
@@ -1401,7 +1405,7 @@
         <Bouboule
             IALevel="6"
             angle="0"
-            density="1.25"
+            density="1.05"
             elasticity="1f"
             entity="-1"
             px="350"
@@ -1501,8 +1505,8 @@
             density="1"
             elasticity="0.9f"
             entity="-1"
-            px="260"
-            py="440"
+            px="220"
+            py="760"
             radius="0"
             texRegionPath="boub_sailor.png"
             type="small" >
@@ -1514,8 +1518,8 @@
             density="1"
             elasticity="0.9f"
             entity="1"
-            px="515"
-            py="440"
+            px="465"
+            py="760"
             radius="0"
             type="normal" >
         </Bouboule>
@@ -1621,7 +1625,7 @@
         <Bouboule
             IALevel="6"
             angle="0"
-            density="1.2"
+            density="1.1"
             elasticity="1.1f"
             entity="-1"
             px="350"
@@ -1666,14 +1670,14 @@
     <Level23
         bonus="True"
         bonusrate="1650"
-        accmaxia="0.6f"
+        accmaxia="0.55f"
         time="45" >
 
         <Bouboule
             IALevel="6"
             angle="0"
             density="1.2"
-            elasticity="1.1f"
+            elasticity="1.15f"
             entity="-1"
             px="600"
             py="750"
@@ -1723,7 +1727,7 @@
         <Bouboule
             IALevel="6"
             angle="0"
-            density="1.25"
+            density="1.2"
             elasticity="1f"
             entity="-1"
             px="350"
@@ -1815,7 +1819,7 @@
     <Level25
         bonus="True"
         bonusrate="1650"
-        accmaxia="0.65f"
+        accmaxia="0.5f"
         time="45" >
 
         <Bouboule
@@ -1917,7 +1921,7 @@
     <Level27
         bonus="True"
         bonusrate="1650"
-        accmaxia="0.60f"
+        accmaxia="0.55f"
         accmaxplayer="0.4f"
         time="45" >
 
@@ -1937,7 +1941,7 @@
         <Bouboule
             IALevel="0"
             angle="0"
-            density="0.75"
+            density="0.7"
             elasticity="1f"
             entity="1"
             px="350"
@@ -1972,7 +1976,7 @@
     <Level28
         bonus="True"
         bonusrate="1650"
-        accmaxia="0.65f"
+        accmaxia="0.55f"
         accmaxplayer="0.5f"
         time="45" >
 
@@ -2115,7 +2119,7 @@
     <Level30
         bonus="True"
         bonusrate="1650"
-        accmaxia="0.70f"
+        accmaxia="0.55f"
         time="45" >
 
         <Bouboule
