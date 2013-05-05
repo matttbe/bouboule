@@ -43,6 +43,8 @@ public class IA {
 
 	public static float FORCE_MAX_IA;
 	public static float FORCE_MAX_PLAYER;
+	public static float ACC_MAX_IA;
+
 	public static float AXE_POSITION = -1;
 	private static float SENSIBILITY_DEFAULT = .15f;
 	

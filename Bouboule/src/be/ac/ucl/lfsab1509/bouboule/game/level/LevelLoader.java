@@ -169,6 +169,7 @@ public class LevelLoader {
 						+ BoubImages.BOUB_EXTENTION;
 
 			} else {
+				IA.ACC_MAX_IA=IA.FORCE_MAX_IA/density;
 				texRegionPath 		= directory + boub.getAttribute("texRegionPath");
 			}
 
