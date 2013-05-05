@@ -26,6 +26,9 @@
     <string name="user_namecharerror">The username can\'t contain special characters.</string>
     <string name="user_nameidenticalerror">This username already exists!</string>
     <string name="user_nameemptyerror">The username can\'t be empty, \".\" or \"..\".</string>
+    <string name="user_choose_level_txt">Choose the level to start with:</string>
+    <string name="user_choose_level_current">Current level: </string>
+    <string name="user_choose_level_max">max: </string>
     <string name="user_resetgame">Reset your game:</string>
     <string name="user_resetgame_button">Reset!</string>
     <string name="user_resetgame_notif">Your game has been reset!</string>

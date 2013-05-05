@@ -42,6 +42,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
+import android.text.InputFilter;
 import android.util.*;
 
 import java.io.IOException;
@@ -57,6 +58,7 @@ public class MenuParametre_user extends Activity {
 	private ImageButton user_boub_right;
 	private ImageView user_boub;
 	private EditText user_newname;
+	private EditText user_choose_level;
 	private Button user_reset;
 	
 	private ArrayList<String> listProfile;
@@ -81,6 +83,7 @@ public class MenuParametre_user extends Activity {
 		user_boub_right = (ImageButton) findViewById(R.id.user_boub_right);
 		user_boub = (ImageView) findViewById(R.id.user_boub);
 		user_newname = (EditText) findViewById(R.id.user_newname);
+		user_choose_level = (EditText) findViewById (R.id.user_choose_level);
 		user_reset = (Button) findViewById (R.id.user_resetgame_button);
 		
 		// link the listeners
@@ -88,6 +91,7 @@ public class MenuParametre_user extends Activity {
 		user_boub_right.setOnClickListener(clickListener);
 		user_selectprofile_spin.setOnItemSelectedListener(spinnerListener);
 		user_newname.setOnKeyListener (onkeyListener);
+		user_choose_level.setOnKeyListener (onkeyListener);
 		user_reset.setOnClickListener (clickListener);
 		
 		// concern choice of bouboule
@@ -99,6 +103,7 @@ public class MenuParametre_user extends Activity {
 		((TextView) findViewById(R.id.user_newUser_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_activeUser_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_playerball_txt)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.user_choose_level_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_resetgame_txt)).setTypeface (myTypeface);
 		
 		refreshScreen();
@@ -113,13 +118,23 @@ public class MenuParametre_user extends Activity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listProfile);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		user_selectprofile_spin.setAdapter(adapter);
+
 		// set the selected item on the spinner
 		user_selectprofile_spin.setSelection (listProfile.indexOf(GlobalSettings.PROFILE.getName())); // select the current user
 		boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
+
 		// update the pictures of the bouboules for the selection
 		openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
 		openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
 		openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
+
+		// set the current and max levels
+		user_choose_level.setHint (getString (R.string.user_choose_level_current)
+				+ GlobalSettings.PROFILE.getLevel () + " ("
+				+ getString (R.string.user_choose_level_max)
+				+ GlobalSettings.PROFILE.getBestLevel () + ")");
+		user_choose_level.setFilters (new InputFilter[] {
+				new InputFilterMinMax (1, GlobalSettings.PROFILE.getBestLevel ())});
 	}
 	
 	private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
@@ -144,41 +159,66 @@ public class MenuParametre_user extends Activity {
 		@Override
 		public boolean onKey (View v, int keyCode, KeyEvent event)
 		{
-			if (event.getAction() == KeyEvent.ACTION_DOWN) {
-	            Log.d("LN","key code : "+ keyCode) ; 
-				switch (keyCode) {
-	                  case KeyEvent.KEYCODE_DPAD_CENTER:
-	                  case KeyEvent.KEYCODE_ENTER:
+			Log.d ("Matth", "Key" + keyCode);
+			if (v.getId () == R.id.user_newname) {
+				if (event.getAction() == KeyEvent.ACTION_DOWN) {
+					Log.d("LN","key code : "+ keyCode) ; 
+					switch (keyCode) {
+						case KeyEvent.KEYCODE_DPAD_CENTER:
+						case KeyEvent.KEYCODE_ENTER:
 							// catch the name
 							String text = user_newname.getText().toString();
 							switch (testName(text)){
 								// treat the name following the case
-							case 0:
-								GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
-								makeToast(getString (R.string.user_namenewuser));
-								refreshScreen();
-								break;
-							case 1:
-								makeToast(getString (R.string.user_nameidenticalerror));
-								break;
-							case 2:
-								makeToast(getString (R.string.user_nameemptyerror));
-								break;
-							case 3:
-								makeToast(getString (R.string.user_namecharerror));
-								break;
-							default :
-								break; 
+								case 0:
+									GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
+									makeToast(getString (R.string.user_namenewuser));
+									refreshScreen();
+									break;
+								case 1:
+									makeToast(getString (R.string.user_nameidenticalerror));
+									break;
+								case 2:
+									makeToast(getString (R.string.user_nameemptyerror));
+									break;
+								case 3:
+									makeToast(getString (R.string.user_namecharerror));
+									break;
+								default :
+									break; 
 							}
 							InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-				            imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
-				            break;
-	                  case KeyEvent.KEYCODE_BACK : 
-	                	  finish();
-	                	  break;
-	              }
-	          }
-	          return true;
+							imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
+							break;
+						case KeyEvent.KEYCODE_BACK : 
+							finish();
+							break;
+					}
+				}
+				return true;
+			}
+			else if (v.getId () == R.id.user_choose_level) {
+				if (event.getAction() == KeyEvent.ACTION_DOWN) {
+					switch (keyCode) {
+						case KeyEvent.KEYCODE_DPAD_CENTER:
+						case KeyEvent.KEYCODE_ENTER:
+							String cInputText = user_choose_level.getText ().toString ();
+							if (cInputText == null || cInputText.isEmpty ())
+								return false;
+							int iNewLevel = Integer.parseInt (cInputText);
+							if (iNewLevel != GlobalSettings.PROFILE.getLevel ()) {
+								EndGameListener.resetGame ();
+								GlobalSettings.PROFILE.setLevel (iNewLevel);
+								makeToast (getString(R.string.user_resetgame_notif));
+							}
+							return true;
+						case KeyEvent.KEYCODE_BACK : 
+							finish();
+							break;
+					}
+				}
+			}
+			return false;
 		}
 	};
 	
