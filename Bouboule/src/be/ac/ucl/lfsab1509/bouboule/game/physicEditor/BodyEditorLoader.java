@@ -65,14 +65,16 @@ public class BodyEditorLoader {
 	// -------------------------------------------------------------------------
 
 	public BodyEditorLoader(final FileHandle file) {
-		if (file == null) 
+		if (file == null) {
 			throw new NullPointerException("file is null");
+		}
 		model = readJson(file.readString());
 	}
 
 	public BodyEditorLoader(final String str) {
-		if (str == null) 
+		if (str == null) {
 			throw new NullPointerException("str is null");
+		}
 		model = readJson(str);
 	}
 
@@ -108,8 +110,9 @@ public class BodyEditorLoader {
 			final FixtureDef fd, final float scale) {
 		
 		RigidBodyModel rbModel = model.rigidBodies.get(name);
-		if (rbModel == null)
+		if (rbModel == null) {
 			throw new RuntimeException("Name '" + name + "' was not found.");
+		}
 
 		Vector2 origin = vec.set(rbModel.origin).mul(scale);
 
@@ -150,8 +153,9 @@ public class BodyEditorLoader {
 	 */
 	public String getImagePath(final String name) {
 		RigidBodyModel rbModel = model.rigidBodies.get(name);
-		if (rbModel == null) 
+		if (rbModel == null) { 
 			throw new RuntimeException("Name '" + name + "' was not found.");
+		}
 
 		return rbModel.imagePath;
 	}
@@ -164,8 +168,9 @@ public class BodyEditorLoader {
 	 */
 	public Vector2 getOrigin(final String name, final float scale) {
 		RigidBodyModel rbModel = model.rigidBodies.get(name);
-		if (rbModel == null) 
+		if (rbModel == null) {
 			throw new RuntimeException("Name '" + name + "' was not found.");
+		}
 
 		return vec.set(rbModel.origin).mul(scale);
 	}
@@ -210,13 +215,13 @@ public class BodyEditorLoader {
 	// -------------------------------------------------------------------------
 
 	@SuppressWarnings("unchecked")
-	private Model readJson(String str) {
+	private Model readJson(final String str) {
 		Model m = new Model();
 		OrderedMap<String,?> rootElem = (OrderedMap<String,?>) new JsonReader().parse(str);
 
 		Array<?> bodiesElems = (Array<?>) rootElem.get("rigidBodies");
 
-		for (int i=0; i<bodiesElems.size; i++) {
+		for (int i = 0; i < bodiesElems.size; i++) {
 			OrderedMap<String,?> bodyElem = (OrderedMap<String,?>) bodiesElems.get(i);
 			RigidBodyModel rbModel = readRigidBody(bodyElem);
 			m.rigidBodies.put(rbModel.name, rbModel);
@@ -239,12 +244,12 @@ public class BodyEditorLoader {
 
 		Array<?> polygonsElem = (Array<?>) bodyElem.get("polygons");
 
-		for (int i=0; i<polygonsElem.size; i++) {
+		for (int i = 0; i < polygonsElem.size; i++) {
 			PolygonModel polygon = new PolygonModel();
 			rbModel.polygons.add(polygon);
 
 			Array<?> verticesElem = (Array<?>) polygonsElem.get(i);
-			for (int ii=0; ii<verticesElem.size; ii++) {
+			for (int ii = 0; ii < verticesElem.size; ii++) {
 				OrderedMap<String,?> vertexElem = (OrderedMap<String,?>) verticesElem.get(ii);
 				float x = (Float) vertexElem.get("x");
 				float y = (Float) vertexElem.get("y");
@@ -258,7 +263,7 @@ public class BodyEditorLoader {
 
 		Array<?> circlesElem = (Array<?>) bodyElem.get("circles");
 
-		for (int i=0; i<circlesElem.size; i++) {
+		for (int i = 0; i < circlesElem.size; i++) {
 			CircleModel circle = new CircleModel();
 			rbModel.circles.add(circle);
 

@@ -38,74 +38,74 @@ public class TimerMgr {
 	
 	private final Collection<TimerListener> timerListeners = new ArrayList<TimerListener>();
 	
-	public TimerMgr (int iDelay, int iInterval) {
+	public TimerMgr(int iDelay, int iInterval) {
 		this.iDelay = iDelay;
 		this.iInterval = iInterval;
 	}
 
 	//_____________ TIMER
 	/**
-	 * Create a new timer which should be launch with {@link #play()}
+	 * Create a new timer which should be launch with {@link #play()}.
 	 */
-	public void createNewTimer (final int iRemainingTime) {
+	public void createNewTimer(final int iRemainingTime) {
 		if (timer != null) { // stop the previous timer
-			this.stop ();
+			this.stop();
 		}
 
-		fireNewRemainingTime (iRemainingTime);
+		fireNewRemainingTime(iRemainingTime);
 
-		Timer.Task task = new Timer.Task () {
+		Timer.Task task = new Timer.Task() {
 			@Override
-			public void run () {
-				fireRun ();
+			public void run() {
+				fireRun();
 			}
 		};
-		timer = new Timer ();
-		timer.scheduleTask (task, iDelay, iInterval); // first time, time between
-		timer.stop (); // do not launch it immediately
+		timer = new Timer();
+		timer.scheduleTask(task, iDelay, iInterval); // first time, time between
+		timer.stop(); // do not launch it immediately
 	}
 
-	public boolean isRunning () {
+	public boolean isRunning() {
 		return (timer != null); // timer created
 	}
 
-	public void play () {
-		timer.start ();
+	public void play() {
+		timer.start();
 	}
 
-	public void pause () {
-		timer.stop ();
+	public void pause() {
+		timer.stop();
 	}
 	
-	public void stop () {
-		timer.stop ();
-		timer.clear (); // maybe not needed?
+	public void stop() {
+		timer.stop();
+		timer.clear(); // maybe not needed?
 		timer = null;
 	}
 
 	//_______________ LISTENER
 	//_______ Management
-	public void addTimerListener (TimerListener listener) {
-		timerListeners.add (listener);
+	public void addTimerListener(final TimerListener listener) {
+		timerListeners.add(listener);
 	}
 
-	public void removeTimerListener (TimerListener listener) {
-		timerListeners.remove (listener);
+	public void removeTimerListener(final TimerListener listener) {
+		timerListeners.remove(listener);
 	}
 
 	//_______ Actions
 	/**
-	 * Launch 
+	 * Launch.
 	 */
-	protected void fireRun () {
+	protected void fireRun() {
 		for (TimerListener timerListener : timerListeners) {
-			timerListener.run ();
+			timerListener.run();
 		}
 	}
 
-	protected void fireNewRemainingTime (final int iRemainingTime) {
+	protected void fireNewRemainingTime(final int iRemainingTime) {
 		for (TimerListener timerListener : timerListeners) {
-			timerListener.newTimer (iRemainingTime);
+			timerListener.newTimer(iRemainingTime);
 		}
 	}
 

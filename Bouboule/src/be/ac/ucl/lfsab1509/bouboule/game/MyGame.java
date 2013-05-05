@@ -51,68 +51,73 @@ public class MyGame extends Game {
 	 * This class should be the first one which is called after having
 	 * initialized GDX
 	 */
-	public void init () {
+	public void init() {
 		GlobalSettings.GAME = this;
-		timer = new TimerMgr (1, 1);
-		GlobalSettings.PROFILE_MGR = new ProfileMgr ();
+		timer = new TimerMgr(1, 1);
+		GlobalSettings.PROFILE_MGR = new ProfileMgr();
 	}
 
 	@Override
-	public void create () {
-		Gdx.app.log ("Matth", "Game: Create");
+	public void create() {
+		Gdx.app.log("Matth", "Game: Create");
 		hitSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3")); // TODO: find sound and use parameters?
 		winSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 		looseSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
 
-		if (GlobalSettings.GAME == null) // should not happen!!!
-			init ();
-
-		screenGame = new ScreenGame();
-		setScreen (screenGame); // 
+		if (GlobalSettings.GAME == null) { // should not happen!!!
+			init();
+		}
 		
-		Gdx.input.setInputProcessor( new GestureDetector(new MyGestureListener()));
+		screenGame = new ScreenGame();
+		setScreen(screenGame); // 
+		
+		Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener()));
 	}
 
 	@Override
-	public void dispose () {
-		super.dispose ();
-		hitSound.dispose ();
-		winSound.dispose ();
-		looseSound.dispose ();
+	public void dispose() {
+		super.dispose();
+		hitSound.dispose();
+		winSound.dispose();
+		looseSound.dispose();
 	}
 	
-	public void hitSound () {
-		if (! GlobalSettings.SOUND_IS_MUTED)
-			hitSound.play ();
+	public void hitSound() {
+		if (!GlobalSettings.SOUND_IS_MUTED) {
+			hitSound.play();
+		}
 	}
 	
-	public void winSound () {
-		if (! GlobalSettings.SOUND_IS_MUTED)
-			winSound.play ();
+	public void winSound() {
+		if (!GlobalSettings.SOUND_IS_MUTED) {
+			winSound.play();
+		}
 	}
 	
-	public void looseSound () {
-		if (! GlobalSettings.SOUND_IS_MUTED)
-			looseSound.play ();
+	public void looseSound() {
+		if (!GlobalSettings.SOUND_IS_MUTED) {
+			looseSound.play();
+		}
 	}
 
 	/**
 	 * @param cNewMusic should be a file that can be read by GDX in 'music'
 	 */
-	public void setNewLoopMusic (String cNewMusic) {
-		if (screenGame == null) // not loaded yet.
+	public void setNewLoopMusic(final String cNewMusic) {
+		if (screenGame == null) { // not loaded yet.
 			return;
+		}
 		if (cNewMusic != null) {
-			FileHandle pMusicFile = Gdx.files.internal ("music/" + cNewMusic);
-			if (pMusicFile.exists ()) {
-				screenGame.setNewLoopMusic (pMusicFile);
+			FileHandle pMusicFile = Gdx.files.internal("music/" + cNewMusic);
+			if (pMusicFile.exists()) {
+				screenGame.setNewLoopMusic(pMusicFile);
 				return;
 			}
-		}// load the default one (if it's not currently playing)
-		screenGame.setDefaultLoopMusicPath ();
+		} // load the default one (if it's not currently playing)
+		screenGame.setDefaultLoopMusicPath();
 	}
 
-	public TimerMgr getTimer () {
+	public TimerMgr getTimer() {
 		return timer;
 	}
 }

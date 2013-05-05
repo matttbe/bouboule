@@ -54,7 +54,7 @@ public abstract class GameBody {
 
 
 	/**
-	 * Default constructor that set the object to living and initialise
+	 * Default constructor that set the object to living and initialise.
 	 * the position vector
 	 * 
 	 * GameBody()
@@ -66,7 +66,7 @@ public abstract class GameBody {
 
 
 	/**
-	 * Generical constructor for bodies ( circle, rectangle or jsonFiled )
+	 * Generical constructor for bodies. ( circle, rectangle or jsonFiled )
 	 * Arguments :
 	 * - width 		: width of a rectangle object
 	 * - height		: height of a rectangle object
@@ -130,7 +130,7 @@ public abstract class GameBody {
 	}
 
 	/**
-	 * return the position vector of the body
+	 * return the position vector of the body.
 	 * 
 	 * getPositionVector()
 	 */
@@ -140,7 +140,7 @@ public abstract class GameBody {
 	}
 
 	/**
-	 * Make a rectangle object with the constructor argument MakeBody
+	 * Make a rectangle object with the constructor argument MakeBody.
 	 * 
 	 * makeRectBody(float width,float height,BodyDef.BodyType bodyType,
 	 * 	float density,float elasticity, Vector2 pos,float angle)
@@ -156,7 +156,7 @@ public abstract class GameBody {
 
 
 	/**
-	 * Make a circle object with the constructor argument MakeBody
+	 * Make a circle object with the constructor argument MakeBody.
 	 * 
 	 * makeCircleBody(float radius,BodyDef.BodyType bodyType,
 	 * 	float density,float elasticity, Vector2 pos,float angle)
@@ -182,7 +182,7 @@ public abstract class GameBody {
 
 
 	/**
-	 * Make a json object with the constructor argument MakeBody
+	 * Make a json object with the constructor argument MakeBody.
 	 * 
 	 * makeJsonBody(BodyDef.BodyType bodyType, float density,
 	 * 	float elasticity, Vector2 pos,float angle, String jsonFile, String jsonName, float size)
@@ -207,7 +207,7 @@ public abstract class GameBody {
 	}
 
 	/**
-	 * Destroy the body if needed
+	 * Destroy the body if needed.
 	 * 
 	 * DestroyBody()
 	 */
@@ -222,7 +222,7 @@ public abstract class GameBody {
 	}
 
 	/**
-	 * Update the vector position of the object by getting the world status
+	 * Update the vector position of the object by getting the world status.
 	 * 
 	 * updatePositionVector()
 	 */
@@ -263,7 +263,7 @@ public abstract class GameBody {
 
 	/**
 	 * Set the body to a specific position but don't change the angle 
-	 * with a x/y coordinate
+	 * with a x/y coordinate.
 	 * 
 	 * SetPosition(float px,float py)
 	 */
@@ -279,7 +279,7 @@ public abstract class GameBody {
 
 	/**
 	 * Set the body to a specific position but don't change the angle 
-	 * with a position coordinate
+	 * with a position coordinate.
 	 * 
 	 * SetPosition(Vector2 v)
 	 */
@@ -288,7 +288,7 @@ public abstract class GameBody {
 	}
 
 	/**
-	 * Launch the specific draw of the object
+	 * Launch the specific draw of the object.
 	 * 
 	 * draw(SpriteBatch batch)
 	 */
@@ -296,7 +296,7 @@ public abstract class GameBody {
 
 
 	/**
-	 * Update in dt time of the vectorPosition after a world frame
+	 * Update in dt time of the vectorPosition after a world frame.
 	 * 
 	 * update(float dt)
 	 */
@@ -308,7 +308,7 @@ public abstract class GameBody {
 	}
 
 	/**
-	 * Get the Entity of the designed body
+	 * Get the Entity of the designed body.
 	 * @return GameBody entity
 	 */
 	public Entity getEntity() {

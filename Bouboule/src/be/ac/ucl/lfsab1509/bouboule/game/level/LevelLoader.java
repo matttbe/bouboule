@@ -62,7 +62,7 @@ public class LevelLoader {
 	private ArrayList<TimerListener> timerListenerArray; //Used to produce new objects
 
 	/**
-	 * Contructor of the xml loader
+	 * Contructor of the xml loader.
 	 * Automatically load the file : level/newlevels.xml
 	 * 
 	 * @catch : ParseException
@@ -72,67 +72,68 @@ public class LevelLoader {
 	public LevelLoader() {
 		this.reader = new XmlReader();
 		try {
-			root = reader.parse( 
+			root = reader.parse(
 					Gdx.files.internal("level/newlevels.xml")
 					);
-			GlobalSettings.NBLEVELS = root.getChildCount ();
+			GlobalSettings.NBLEVELS = root.getChildCount();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		timerListenerArray = new ArrayList<TimerListener> (2);
+		timerListenerArray = new ArrayList<TimerListener>(2);
 
 	}
 
 	/**
-	 * Load the 'level' in the Element file
+	 * Load the 'level' in the Element file.
 	 * Update the bonus option
 	 * 
 	 * 	public void loadLevel(String level)
 	 */
-	public void loadLevel(String level) {
-		if (! timerListenerArray.isEmpty ()) { // can be used to produce new obstacles
-			for (TimerListener timerListener : timerListenerArray)
-				GlobalSettings.GAME.getTimer ().removeTimerListener (timerListener);
-			timerListenerArray.clear ();
+	public void loadLevel(final String level) {
+		if (!timerListenerArray.isEmpty()) { // can be used to produce new obstacles
+			for (TimerListener timerListener : timerListenerArray) {
+				GlobalSettings.GAME.getTimer().removeTimerListener (timerListener);
+			}
+			timerListenerArray.clear();
 		}
-			
+
 
 		file = root.getChildByName(level);
 		if (file == null) {
 			Gdx.app.log("Matth", "Level not found");
-			throw new GdxRuntimeException ("Level not found");
+			throw new GdxRuntimeException("Level not found");
 		}
 
-		readLevelSettings (file);
+		readLevelSettings(file);
 	}
 
-	private void readLevelSettings (Element file2) {
+	private void readLevelSettings(final Element file2) {
 		// Bonus
-		GraphicManager.ALLOW_BONUS = Boolean.parseBoolean(file.getAttribute("bonus","false"));
-		GraphicManager.BONUS_SPAWN_RATE = Integer.parseInt(file.getAttribute("bonusrate","0"));
-		String bonusEnabled = file.getAttribute ("bonusEnabled", null);
+		GraphicManager.ALLOW_BONUS = Boolean.parseBoolean(file.getAttribute("bonus", "false"));
+		GraphicManager.BONUS_SPAWN_RATE = Integer.parseInt(file.getAttribute("bonusrate", "0"));
+		String bonusEnabled = file.getAttribute("bonusEnabled", null);
 		GraphicManager.BONUS_ENABLED = bonusEnabled != null
-				? new ArrayList<String>(Arrays.asList(bonusEnabled.split (",")))
-				: null;
+				? new ArrayList<String>(Arrays.asList(bonusEnabled.split(",")))
+						: null;
 
-		// Level
-		GraphicManager.TIME = Integer.parseInt(file.getAttribute("time", "30"));
-		GlobalSettings.GAME.setNewLoopMusic (file.getAttribute ("music", null)); // e.g. klez.mp3
+				// Level
+				GraphicManager.TIME = Integer.parseInt(file.getAttribute("time", "30"));
+				GlobalSettings.GAME.setNewLoopMusic(file.getAttribute ("music", null)); // e.g. klez.mp3
 
-		// IA
-		IA.FORCE_MAX_IA = Float.parseFloat(file.getAttribute("forcemaxia", "0.5f")); // not used
-		IA.FORCE_MAX_PLAYER = Float.parseFloat(file.getAttribute("forcemaxplayer", "0.5f")); // not used
-		IA.countframe = 0;
+				// IA
+				IA.FORCE_MAX_IA = Float.parseFloat(file.getAttribute("forcemaxia", "0.5f")); // not used
+				IA.FORCE_MAX_PLAYER = Float.parseFloat(file.getAttribute("forcemaxplayer", "0.5f")); //same
+				IA.countframe = 0;
 
-		Gdx.app.log("Settings", "Bonus ="+GraphicManager.ALLOW_BONUS);	
+				Gdx.app.log("Settings", "Bonus =" + GraphicManager.ALLOW_BONUS);	
 	}
 
 	/**
-	 * Load all the Bouboule containt in the 'file' level
+	 * Load all the Bouboule contained in the 'file' level.
 	 * 
 	 * 	public void readLevelBouboule(GraphicManager graphicManager)
 	 */
-	public void readLevelBouboule(GraphicManager graphicManager) {
+	public void readLevelBouboule(final GraphicManager graphicManager) {
 
 
 		Array<Element> maps = file.getChildrenByName("Bouboule");
@@ -151,7 +152,7 @@ public class LevelLoader {
 			float angle				= Float.parseFloat(boub.getAttribute("angle"));
 			int IALevel				= Integer.parseInt(boub.getAttribute("IALevel"));
 			short entity			= Short.parseShort(boub.getAttribute("entity"));
-			boolean inverted		= Boolean.parseBoolean (boub.getAttribute ("inverted", "False"));
+			boolean inverted		= Boolean.parseBoolean(boub.getAttribute("inverted", "False"));
 
 			String texRegionPath;			
 			String type				= boub.getAttribute("type");
@@ -159,61 +160,49 @@ public class LevelLoader {
 					BoubImages.BOUB_DIR_NORMAL : (type.equals("small")) ?
 							BoubImages.BOUB_DIR_SMALL : BoubImages.BOUB_DIR_GIANT;
 
-			String jsonFile			= directory+BoubImages.BOUB_JSON_EXT;
+			String jsonFile			= directory + BoubImages.BOUB_JSON_EXT;
 
 
-			if (entity == Entity.PLAYER)
+			if (entity == Entity.PLAYER) {
 
-				texRegionPath = directory+GlobalSettings.PROFILE.getBoubName ()+BoubImages.BOUB_EXTENTION;
+				texRegionPath = directory + GlobalSettings.PROFILE.getBoubName()
+						+ BoubImages.BOUB_EXTENTION;
 
-			else
-				texRegionPath 		= directory+boub.getAttribute("texRegionPath");
+			} else {
+				texRegionPath 		= directory + boub.getAttribute("texRegionPath");
+			}
 
 
-			Gdx.app.log("XML",
-
-					"radius :"+
-							radius			+" bodyType :"+
-							bodyType		+" density :"+
-							density			+" elasticity:"+
-							elasticity		+" px:"+
-							px				+" py :"+
-							py				+" angle :"+
-							angle				+" tex :"+
-							texRegionPath 	+" jsonFile :"+
-							jsonFile 		+ "jsonName :"+
-							"boub_"+type    +" entity :"+
-							entity			+" IA :"+
-							IALevel
-					);
 
 			Bouboule body = new Bouboule(radius, bodyType, density,
-					elasticity, px, py, angle,texRegionPath, 
-					jsonFile, "boub_"+type, entity, IALevel);
+					elasticity, px, py, angle, texRegionPath, 
+					jsonFile, "boub_" + type, entity, IALevel);
 			graphicManager.addBody(body);
 
 			if (inverted) {
-				((Sprite) body.getBody ().getFixtureList ().get (0).getUserData ()).rotate90 (true);
-				((Sprite) body.getBody ().getFixtureList ().get (0).getUserData ()).rotate90 (true);
-				if (IA.AXE_POSITION < 0) 
+				((Sprite) body.getBody().getFixtureList().get(0).getUserData()).rotate90(true);
+				((Sprite) body.getBody().getFixtureList().get(0).getUserData()).rotate90(true);
+				if (IA.AXE_POSITION < 0) {
 					IA.AXE_POSITION *= -1;
-			}
-			else if (IA.AXE_POSITION > 0) // revert axe if it's inverted
+				}
+
+			} else if (IA.AXE_POSITION > 0) { // revert axe if it's inverted
 				IA.AXE_POSITION *= -1;
+			}
 		}
 	}
 
-	private static String extractJSonName (String jsonFile) {
-		return jsonFile.substring (jsonFile.lastIndexOf ('/') + 1,
-				jsonFile.lastIndexOf ('.'));
+	private static String extractJSonName(final String jsonFile) {
+		return jsonFile.substring(jsonFile.lastIndexOf('/') + 1,
+				jsonFile.lastIndexOf('.'));
 	}
 
 	/**
-	 * Load the arena of the 'file' level
+	 * Load the arena of the 'file' level.
 	 * 
 	 * 	public void readLevelArena(GraphicManager graphicManager)
 	 */
-	public void readLevelArena(GraphicManager graphicManager) {
+	public void readLevelArena(final GraphicManager graphicManager) {
 
 		Element aren = file.getChildByName("Arena");	
 
@@ -224,17 +213,17 @@ public class LevelLoader {
 		float angle				= Float.parseFloat(aren.getAttribute("angle"));
 		String texRegionPath 	= aren.getAttribute("texRegionPath");
 		String jsonFile 		= aren.getAttribute("jsonFile");
-		String jsonName 		= extractJSonName (jsonFile);
+		String jsonName 		= extractJSonName(jsonFile);
 
-		graphicManager.addBody(new Arena( radius, px, py,  angle, texRegionPath, 
+		graphicManager.addBody(new Arena(radius, px, py,  angle, texRegionPath, 
 				jsonFile,  jsonName));
 
-		Gdx.app.log("XML","Arena Loaded :"+jsonName);
+		Gdx.app.log("XML", "Arena Loaded :" + jsonName);
 
 	}
 
 	/**
-	 * Load the nodes for the IA
+	 * Load the nodes for the IA.
 	 * 
 	 * public void readLevelMapNodes()
 	 */
@@ -267,15 +256,16 @@ public class LevelLoader {
 	}
 
 	/**
-	 * Load the obstacles of the 'file' level
+	 * Load the obstacles of the 'file' level.
 	 * 
 	 * 	public void readLevelObstacles(GraphicManager graphicManager)
 	 */
-	public void readLevelObstacles(GraphicManager graphicManager) {
+	public void readLevelObstacles(final GraphicManager graphicManager) {
 
 		Element obstaclesGroup = file.getChildByName("Obstacles");
-		if (obstaclesGroup == null)
+		if (obstaclesGroup == null) {
 			return;
+		}
 
 		Array<Element> obstaclesArray = obstaclesGroup.getChildrenByName("Obstacle");
 
@@ -294,94 +284,99 @@ public class LevelLoader {
 			float px				= Float.parseFloat(newobstacle.getAttribute("px"));
 			float py				= Float.parseFloat(newobstacle.getAttribute("py"));
 			float angle				= Float.parseFloat(newobstacle.getAttribute("angle"));
-			float initAccX			= Float.parseFloat(newobstacle.getAttribute("accx","0"));
-			float initAccY			= Float.parseFloat(newobstacle.getAttribute("accy","0"));
-			float time				= Float.parseFloat(newobstacle.getAttribute("time","0"));
+			float initAccX			= Float.parseFloat(newobstacle.getAttribute("accx", "0"));
+			float initAccY			= Float.parseFloat(newobstacle.getAttribute("accy", "0"));
+			float time				= Float.parseFloat(newobstacle.getAttribute("time", "0"));
 			String texRegionPath 	= newobstacle.getAttribute("texRegionPath");
 			String jsonFile 		= newobstacle.getAttribute("jsonFile");
-			String jsonName 		= extractJSonName (jsonFile);
-			Boolean produce 		= Boolean.parseBoolean(newobstacle.getAttribute("produce","false"));
-			Boolean blink	 		= Boolean.parseBoolean(newobstacle.getAttribute("blink","false"));
+			String jsonName 		= extractJSonName(jsonFile);
+			Boolean produce 		= Boolean.parseBoolean(newobstacle.getAttribute("produce",
+					"false"));
+			Boolean blink	 		= Boolean.parseBoolean(newobstacle.getAttribute("blink",
+					"false"));
 
 
 			/*Obstacle obs = new Obstacle(bodyType, density,
 					elasticity, px, py, angle,texRegionPath, 
 					jsonFile, jsonName, initAccX, initAccY);*/
 
-			if (produce)
-				addContinuousObstacle (graphicManager, time,
+			if (produce) {
+				addContinuousObstacle(graphicManager, time,
 						bodyType, density,
-						elasticity, px, py, angle,texRegionPath, 
+						elasticity, px, py, angle, texRegionPath, 
 						jsonFile, jsonName, initAccX, initAccY);
 
-			else {
+			} else {
 
-				Obstacle Obs = new Obstacle(bodyType, density,
-						elasticity, px, py, angle,texRegionPath, 
+				Obstacle obs = new Obstacle(bodyType, density,
+						elasticity, px, py, angle, texRegionPath, 
 						jsonFile, jsonName, initAccX, initAccY);
 
-				graphicManager.addBody(Obs);
+				graphicManager.addBody(obs);
 
-				if (blink)
-					setBlink( Obs , time);
+				if (blink) {
+					setBlink(obs , time);
+				}
 
 			}
 
-			Gdx.app.log("XML", "Obstacle loaded : "+ produce +jsonName + bodyType.toString()+ time);
+			Gdx.app.log("XML", "Obstacle loaded : " 
+						+ produce + jsonName + bodyType.toString() + time);
 		}
 	}
 
-	private void addContinuousObstacle (final GraphicManager graphicManager, final float time,
+	private void addContinuousObstacle(final GraphicManager graphicManager, final float time,
 			final BodyType bodyType, final float density,
 			final float elasticity, final float px, final float py, final float angle,
 			final String texRegionPath, final String jsonFile, final String jsonName,
 			final float initAccX, final float initAccY) {
 
 		TimerListener timerListener = new TimerListener() {
-			int iTimerInc;
+			private int iTimerInc;
 
 			@Override
-			public void run () {
-				if (iTimerInc % time == 0)
-				{
+			public void run() {
+				if (iTimerInc % time == 0) {
+					
 					Gdx.app.log("Obstacle", "reset Obstacle");
-	
+
 					Obstacle obs = new Obstacle(bodyType, density,
-							elasticity, px, py, angle,texRegionPath, 
+							elasticity, px, py, angle, texRegionPath, 
 							jsonFile, jsonName, initAccX, initAccY);
-	
+
 					graphicManager.addBody(obs);
 				}
 				iTimerInc++;
 			}
 
 			@Override
-			public void newTimer (int iRemainingTime) {
+			public void newTimer(final int iRemainingTime) {
 				iTimerInc = 0;
 			}
 		};
-		GlobalSettings.GAME.getTimer ().addTimerListener (timerListener);
-		timerListenerArray.add (timerListener);
+		GlobalSettings.GAME.getTimer().addTimerListener(timerListener);
+		timerListenerArray.add(timerListener);
 	}
 
 	private void setBlink(final Obstacle obs, final float time) {
 		TimerListener timerListener = new TimerListener() {
-		int iTimerInc;
+			int iTimerInc;
 
 			@Override
-			public void run () {
+			public void run() {
 				iTimerInc++;
-				if (iTimerInc % time == 0)
-					obs.inverseBlink ();
+				if (iTimerInc % time == 0) {
+					obs.inverseBlink();
+				}
 			}
 
 			@Override
-			public void newTimer (int iRemainingTime) {
+			public void newTimer(final int iRemainingTime) {
 				iTimerInc = 0;
-				obs.inverseBlink ();
+				obs.inverseBlink();
 			}
 		};
-		GlobalSettings.GAME.getTimer ().addTimerListener (timerListener);
-		timerListenerArray.add (timerListener);
+		GlobalSettings.GAME.getTimer().addTimerListener(timerListener);
+		timerListenerArray.add(timerListener);
 	}
 }

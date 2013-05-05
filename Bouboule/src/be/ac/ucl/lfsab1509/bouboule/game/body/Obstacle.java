@@ -43,10 +43,10 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 /**
- * Load obstacle and draw it on the screen 
+ * Load obstacle and draw it on the screen.
  *
  */
-public class Obstacle extends GameBody{
+public class Obstacle extends GameBody {
 
 	private TextureRegion 	texture;		//Texture of the Obstacle
 	private Sprite 			sprite;			//Sprite to draw the Obstacle
@@ -54,7 +54,7 @@ public class Obstacle extends GameBody{
 
 
 	/**
-	 * Constructor for a Obstacle object 
+	 * Constructor for a Obstacle object .
 	 * - Bodytype 	: Dynamic or Static 
 	 * - density 	: Mass in [kg] of the obstacle 
 	 * - elasticity : define the elastical property of Bouboul [0..1]f
@@ -83,15 +83,15 @@ public class Obstacle extends GameBody{
 
 		this.sprite = new Sprite(texture);
 
-		MakeBody(0, 0, 0, bodyType, density, elasticity, false, initialPos, angle, jsonFile, jsonName,
-				GraphicManager.convertToGame(texture.getRegionWidth()));
+		MakeBody(0, 0, 0, bodyType, density, elasticity, false, initialPos, angle, jsonFile, 
+				jsonName, GraphicManager.convertToGame(texture.getRegionWidth()));
 
 		//Ensure that the object don't rotate.
 		//body.setFixedRotation(true);
 
 		//Add Initail Velocity
 
-		body.applyForceToCenter(new Vector2(initAccX,initAccY));
+		body.applyForceToCenter(new Vector2(initAccX, initAccY));
 
 
 		this.entity = new Entity(Entity.OBSTACLE, true);
@@ -99,7 +99,7 @@ public class Obstacle extends GameBody{
 	}
 
 	/**
-	 * (non-Javadoc)
+	 * (non-Javadoc).
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#
 	 * draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)
 	 */
@@ -126,27 +126,28 @@ public class Obstacle extends GameBody{
 	}
 
 	/**
-	 * (non-Javadoc)
+	 * (non-Javadoc).
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#update(float)
 	 */
 	public void update() {
 
-		if ( positionVector.x > 1000 | positionVector.x < -200 | 
-				positionVector.y > 2000 | positionVector.y < -200)
+		if (positionVector.x > 1000 | positionVector.x < -200 
+				| positionVector.y > 2000 | positionVector.y < -200) {
 			this.entity.setAlive(false);
-			
+		}
+		
 		super.update();
 	}
 
-	public void inverseBlink () {
+	public void inverseBlink() {
 		Gdx.app.log("Obstacle", "reset Obstacle");
 		ArrayList<Fixture> fixt = getBody().getFixtureList();
 
-		for (Fixture fix : fixt ) {
-			fix.setSensor (! fix.isSensor());
+		for (Fixture fix : fixt) {
+			fix.setSensor(!fix.isSensor());
 		}
 
-		getEntity().setAlive (! getEntity().isAlive());
+		getEntity().setAlive(!getEntity().isAlive());
 	}
 
 }

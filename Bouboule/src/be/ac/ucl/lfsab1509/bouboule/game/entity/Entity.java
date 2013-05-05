@@ -36,23 +36,25 @@ import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 
 public class Entity {
 
-	//Constant for all the Generic Body's
-	public static final short PLAYER 	=  1;
-	public static final short MONSTER 	= -1;
-	public static final short SCENERY 	=  0;
-	public static final short OBSTACLE 	= -2;
-	public static final short BONUS 	= -3;
+	// Constant for all the Generic Body's
+	public static final short PLAYER = 1;
+	public static final short MONSTER = -1;
+	public static final short SCENERY = 0;
+	public static final short OBSTACLE = -2;
+	public static final short BONUS = -3;
 
-	//Bonus options
-	public static enum BonusType {LIVE_UP, SPEED_HIGH, SPEED_LOW, POINT,
-		WEIGHT_HIGH, WEIGHT_LOW, ELASTICITY_HIGH, ELASTICITY_LOW,
-		INVINCIBLE, INVISIBLE, INVERSE, TIME_UP, TIME_DOWN};
+	// Bonus options
+	public static enum BonusType {
+		LIVE_UP, SPEED_HIGH, SPEED_LOW, POINT, WEIGHT_HIGH, WEIGHT_LOW,
+		ELASTICITY_HIGH, ELASTICITY_LOW, INVINCIBLE, INVISIBLE, INVERSE,
+		TIME_UP, TIME_DOWN
+	};
 
-	private short 	entity;					//Store the Constant of the Generic Body's
-	private BonusType 	bonus;					//Store the bonus option
-	private boolean isAlive;				//isAlive =)
+	private short entity; // Store the Constant of the Generic Body's
+	private BonusType bonus; // Store the bonus option
+	private boolean isAlive; // isAlive =)
 	private Fixture fixture;
-	
+
 	private static final float SPEED_MULT_VALUE = 2f;
 	private static final float DEFAULT_MULT_VALUE = 2f;
 	private static final int TIMER_DEFAULT_TIME = 5;
@@ -63,42 +65,49 @@ public class Entity {
 	/**
 	 * Constructor for a Bonus Entity
 	 * 
-	 * @param type = Constant of the Generic Body's
-	 * @param live = Is the body alive
-	 * @param bonusType = Bonus Option
+	 * @param type
+	 *            = Constant of the Generic Body's
+	 * @param live
+	 *            = Is the body alive
+	 * @param bonusType
+	 *            = Bonus Option
 	 * 
-	 * 	public Entity (final short type, final boolean live, final short bonusType)
+	 *            public Entity (final short type, final boolean live, final
+	 *            short bonusType)
 	 */
-	public Entity (final short type, final boolean live, BonusType bonusType) {
+	public Entity(final short type, final boolean live,
+			final BonusType bonusType) {
 
 		this.entity = type;
-		this.bonus  = bonusType; 
-		this.isAlive= live;
+		this.bonus = bonusType;
+		this.isAlive = live;
 	}
 
 	/**
 	 * Constructor for a Bouboule Object
 	 * 
-	 * @param type = Constant of the Generic Body's
-	 * @param live = Is the body alive
+	 * @param type
+	 *            = Constant of the Generic Body's
+	 * @param live
+	 *            = Is the body alive
 	 * 
-	 * 	public Entity (final short type, final boolean live) 
+	 *            public Entity (final short type, final boolean live)
 	 */
-	public Entity (final short type, final boolean live) {
+	public Entity(final short type, final boolean live) {
 
 		this.entity = type;
-		this.isAlive= live;
+		this.isAlive = live;
 	}
-
 
 	/**
 	 * Constructor for a Arena Object
 	 * 
-	 * @param type = Constant of the Generic Body's
+	 * @param type
+	 *            = Constant of the Generic Body's
 	 * 
-	 * public Entity (final short type ) {
+	 *            public Entity (final short type ) {
 	 */
-	public Entity (final short type ) {
+	public Entity(final short type) {
 
 		this.entity = type;
 	}
@@ -106,10 +115,11 @@ public class Entity {
 	/**
 	 * Launch the right bonus
 	 * 
-	 * @param type = Type of the object
+	 * @param type
+	 *            = Type of the object
 	 * 
-	 * public void attributeBonus(final short type)
-	 * @param fixture 
+	 *            public void attributeBonus(final short type)
+	 * @param fixture
 	 */
 	public void attributeBonus(final short type, Fixture fixture) {
 
@@ -120,114 +130,115 @@ public class Entity {
 			Gdx.app.log("bonus", bonus + " " + (type == PLAYER));
 
 			// some bonus have differents effects if it's the AI or the player
-			if (attributeBonusSpecialsCases (type))
+			if (attributeBonusSpecialsCases(type))
 				return;
 
-			attributeBonusForAll ();
+			attributeBonusForAll();
 		}
 	}
-	
-	private boolean attributeBonusSpecialsCases (final short type) {
+
+	private boolean attributeBonusSpecialsCases(final short type) {
 
 		if (type == PLAYER) {
 			switch (this.bonus) {
-				case LIVE_UP:
-					GlobalSettings.PROFILE.addLifes(1);
-					return true;
-				case POINT:
-					GlobalSettings.PROFILE.addScorePermanent (GlobalSettings.SCORE_BONUS);
-					return true;
+			case LIVE_UP:
+				GlobalSettings.PROFILE.addLifes(1);
+				return true;
+			case POINT:
+				GlobalSettings.PROFILE
+						.addScorePermanent(GlobalSettings.SCORE_BONUS);
+				return true;
 
-				case SPEED_HIGH:
-					IA.FORCE_MAX_PLAYER *= SPEED_MULT_VALUE;
-					resetSpeedBonus (type, TIMER_DEFAULT_TIME);
-					return true;
+			case SPEED_HIGH:
+				IA.FORCE_MAX_PLAYER *= SPEED_MULT_VALUE;
+				resetSpeedBonus(type, TIMER_DEFAULT_TIME);
+				return true;
 
-				case SPEED_LOW:
-					IA.FORCE_MAX_PLAYER /= SPEED_MULT_VALUE;
-					resetSpeedBonus (type, TIMER_DEFAULT_TIME);
-					return true;
-				
-				case INVERSE:
-					inverse ();
-					resetBonus (TIMER_DEFAULT_TIME*2);
-					return true;
+			case SPEED_LOW:
+				IA.FORCE_MAX_PLAYER /= SPEED_MULT_VALUE;
+				resetSpeedBonus(type, TIMER_DEFAULT_TIME);
+				return true;
 
-				case TIME_UP:
-					GlobalSettings.PROFILE.addRemainingTime (ADD_TIME_DEFAULT);
-					return true;
+			case INVERSE:
+				inverse();
+				resetBonus(TIMER_DEFAULT_TIME * 2);
+				return true;
 
-				case TIME_DOWN:
-					GlobalSettings.PROFILE.addRemainingTime (ADD_TIME_DEFAULT * -1);
-					return true;
+			case TIME_UP:
+				GlobalSettings.PROFILE.addRemainingTime(ADD_TIME_DEFAULT);
+				return true;
 
-				default:
-					break;
+			case TIME_DOWN:
+				GlobalSettings.PROFILE.addRemainingTime(ADD_TIME_DEFAULT * -1);
+				return true;
+
+			default:
+				break;
 			}
-		}
-		else { // IA
+		} else { // IA
 			switch (this.bonus) {
-				case SPEED_HIGH:
-					IA.FORCE_MAX_IA *= SPEED_MULT_VALUE;
-					resetSpeedBonus (type, TIMER_DEFAULT_TIME);
-					return true;
+			case SPEED_HIGH:
+				IA.FORCE_MAX_IA *= SPEED_MULT_VALUE;
+				resetSpeedBonus(type, TIMER_DEFAULT_TIME);
+				return true;
 
-				case SPEED_LOW:
-					IA.FORCE_MAX_IA /= SPEED_MULT_VALUE;
-					resetSpeedBonus (type, TIMER_DEFAULT_TIME);
-					return true;
+			case SPEED_LOW:
+				IA.FORCE_MAX_IA /= SPEED_MULT_VALUE;
+				resetSpeedBonus(type, TIMER_DEFAULT_TIME);
+				return true;
 
-				default:
-					break;
+			default:
+				break;
 			}
 		}
 		return false;
 	}
 
-	private void attributeBonusForAll () {
+	private void attributeBonusForAll() {
 		switch (this.bonus) {
-			case WEIGHT_HIGH:
-				biggerWeight ();
-				resetBonus (TIMER_DEFAULT_TIME);
-				break;
-			case WEIGHT_LOW:
-				lowerWeight ();
-				resetBonus (TIMER_DEFAULT_TIME);
-				break;
-			case ELASTICITY_HIGH:
-				biggerElasticity ();
-				resetBonus (TIMER_DEFAULT_TIME);
-				break;
-			case ELASTICITY_LOW:
-				lowerElasticity ();
-				resetBonus (TIMER_DEFAULT_TIME);
-				break;
-			case INVINCIBLE:
-				invincible (true);
-				resetBonus (TIMER_DEFAULT_TIME);
-				break;
-			case INVISIBLE:
-				invisible (true);
-				resetBonus ((TIMER_DEFAULT_TIME+1)/2);
-				break;
+		case WEIGHT_HIGH:
+			biggerWeight();
+			resetBonus(TIMER_DEFAULT_TIME);
+			break;
+		case WEIGHT_LOW:
+			lowerWeight();
+			resetBonus(TIMER_DEFAULT_TIME);
+			break;
+		case ELASTICITY_HIGH:
+			biggerElasticity();
+			resetBonus(TIMER_DEFAULT_TIME);
+			break;
+		case ELASTICITY_LOW:
+			lowerElasticity();
+			resetBonus(TIMER_DEFAULT_TIME);
+			break;
+		case INVINCIBLE:
+			invincible(true);
+			resetBonus(TIMER_DEFAULT_TIME);
+			break;
+		case INVISIBLE:
+			invisible(true);
+			resetBonus((TIMER_DEFAULT_TIME + 1) / 2);
+			break;
+		default:
+			break;
 		}
 	}
 
-	private void resetSpeedBonus (final short type, final int time) {
-		Timer.Task task = new Timer.Task () {
+	private void resetSpeedBonus(final short type, final int time) {
+		Timer.Task task = new Timer.Task() {
 			@Override
-			public void run () {
+			public void run() {
 				Gdx.app.log("bonus", "reset " + bonus + " " + type);
 
-				if (type==PLAYER) {
+				if (type == PLAYER) {
 					if (bonus == BonusType.SPEED_HIGH) {
 						IA.FORCE_MAX_PLAYER /= SPEED_MULT_VALUE;
 
 					} else {
 						IA.FORCE_MAX_PLAYER *= SPEED_MULT_VALUE;
 					}
-				}
-				else {
+				} else {
 					if (bonus == BonusType.SPEED_HIGH) {
 						IA.FORCE_MAX_IA /= SPEED_MULT_VALUE;
 
@@ -237,55 +248,55 @@ public class Entity {
 				}
 			}
 
-		};//Program a task to reset the Speed to initial value;
+		};// Program a task to reset the Speed to initial value;
 
-		timer = new Timer ();
-		timer.scheduleTask (task, time);
+		timer = new Timer();
+		timer.scheduleTask(task, time);
 	}
 
-	private void resetBonus (int time) {
-		Timer.Task task = new Timer.Task () {
+	private void resetBonus(final int time) {
+		Timer.Task task = new Timer.Task() {
 			@Override
-			public void run () {
+			public void run() {
 				Gdx.app.log("bonus", "reset " + bonus);
 				switch (bonus) {
-					case WEIGHT_HIGH:
-						lowerWeight ();
-						break;
-					case WEIGHT_LOW:
-						biggerWeight ();
-						break;
-					case ELASTICITY_HIGH:
-						biggerElasticity ();
-						break;
-					case ELASTICITY_LOW:
-						lowerElasticity ();
-						break;
-					case INVINCIBLE:
-						invincible (false);
-						break;
-					case INVISIBLE:
-						invisible (false);
-						break;
-					case INVERSE:
-						inverse ();
+				case WEIGHT_HIGH:
+					lowerWeight();
+					break;
+				case WEIGHT_LOW:
+					biggerWeight();
+					break;
+				case ELASTICITY_HIGH:
+					biggerElasticity();
+					break;
+				case ELASTICITY_LOW:
+					lowerElasticity();
+					break;
+				case INVINCIBLE:
+					invincible(false);
+					break;
+				case INVISIBLE:
+					invisible(false);
+					break;
+				case INVERSE:
+					inverse();
 
-					default:
-						break;
+				default:
+					break;
 				}
 			}
 
-		};//Program a task to reset the Speed to initial value;
+		};// Program a task to reset the Speed to initial value;
 
-		timer = new Timer ();
-		timer.scheduleTask (task, time);
+		timer = new Timer();
+		timer.scheduleTask(task, time);
 	}
 
 	public void stopTask() {
 
 		if (this.timer != null)
 			this.timer.clear();
-		
+
 		if (IA.AXE_POSITION > 0) // revert axe if it's inverted
 			IA.AXE_POSITION *= -1;
 
@@ -296,7 +307,7 @@ public class Entity {
 		return entity;
 	}
 
-	public void setEntity(short entity) {
+	public void setEntity(final short entity) {
 		this.entity = entity;
 	}
 
@@ -304,49 +315,52 @@ public class Entity {
 		return isAlive;
 	}
 
-	public void setAlive(boolean isAlive) {
+	public void setAlive(final boolean isAlive) {
 		this.isAlive = isAlive;
 	}
 
-	private void increaseWeight (final float iMult) {
-		Gdx.app.log ("bonus", "increase: " + iMult + " was: " + fixture.getDensity ());
-		fixture.setDensity (fixture.getDensity () * iMult);
-		fixture.getBody ().resetMassData ();
+	private void increaseWeight(final float iMult) {
+		Gdx.app.log("bonus",
+				"increase: " + iMult + " was: " + fixture.getDensity());
+		fixture.setDensity(fixture.getDensity() * iMult);
+		fixture.getBody().resetMassData();
 	}
 
-	private void biggerWeight () {
-		increaseWeight (DEFAULT_MULT_VALUE);
+	private void biggerWeight() {
+		increaseWeight(DEFAULT_MULT_VALUE);
 	}
 
-	private void lowerWeight () {
-		increaseWeight (1f/DEFAULT_MULT_VALUE);
+	private void lowerWeight() {
+		increaseWeight(1f / DEFAULT_MULT_VALUE);
 	}
 
-	private void increaseElasticity (final float iMult) {
-		fixture.setRestitution (fixture.getRestitution () * iMult);
+	private void increaseElasticity(final float iMult) {
+		fixture.setRestitution(fixture.getRestitution() * iMult);
 	}
 
-	private void biggerElasticity () {
-		increaseElasticity (DEFAULT_MULT_VALUE);
+	private void biggerElasticity() {
+		increaseElasticity(DEFAULT_MULT_VALUE);
 	}
 
-	private void lowerElasticity () {
-		increaseElasticity (1f/DEFAULT_MULT_VALUE);
+	private void lowerElasticity() {
+		increaseElasticity(1f / DEFAULT_MULT_VALUE);
 	}
 
-	private void invincible (boolean bInvincible) {
+	private void invincible(final boolean bInvincible) {
 		// TODO: maybe change something else?
-		Gdx.app.log ("bonus", "Invincible: " + bInvincible + " " + fixture.isSensor ());
-		fixture.setSensor (bInvincible);
+		Gdx.app.log("bonus",
+				"Invincible: " + bInvincible + " " + fixture.isSensor());
+		fixture.setSensor(bInvincible);
 	}
 
-	private void invisible (boolean bInvisible) {
-		((Sprite) fixture.getUserData ()).setColor (1f, 1f, 1f, bInvisible ? .025f : 1f);
+	private void invisible(final boolean bInvisible) {
+		((Sprite) fixture.getUserData()).setColor(1f, 1f, 1f,
+				bInvisible ? .025f : 1f);
 	}
 
-	private void inverse () {
-		((Sprite) fixture.getUserData ()).rotate90 (true);
-		((Sprite) fixture.getUserData ()).rotate90 (true);
+	private void inverse() {
+		((Sprite) fixture.getUserData()).rotate90(true);
+		((Sprite) fixture.getUserData()).rotate90(true);
 		IA.AXE_POSITION *= -1;
 	}
 }

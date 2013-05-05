@@ -66,13 +66,13 @@ public class CountDown {
 		
 		FRAME_COLS = col;
 		FRAME_ROWS = row;
-		N_FRAME	   = col*row;
+		N_FRAME	   = col * row;
 		STEPTIME   = time;
 		RESUME_AFTER_END = resume;
 		
 		countDownSheet = new Texture(path);
-		TextureRegion[][] tmp = TextureRegion.split(countDownSheet, countDownSheet.getWidth() / 
-				FRAME_COLS, countDownSheet.getHeight() / FRAME_ROWS);
+		TextureRegion[][] tmp = TextureRegion.split(countDownSheet, countDownSheet.getWidth() 
+				/ FRAME_COLS, countDownSheet.getHeight() / FRAME_ROWS);
 		countDownFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
 		int index = 0;
 		for (int i = 0; i < FRAME_ROWS; i++) {
@@ -84,40 +84,42 @@ public class CountDown {
 		stateTime = 0f;
 	}
 
-	public void reset () {
+	public void reset() {
 		stateTime = 0f;
 		bFirstTime = true;
 	}
 
 	/**
-	 * Return the status of the pause => true = pause
+	 * Return the status of the pause => true = pause.
 	 */
-	public boolean draw(SpriteBatch batch, float delta) {
-		if (bFirstTime)
-		{
+	public boolean draw(final SpriteBatch batch, final float delta) {
+		if (bFirstTime) {
 			bFirstTime = false;
 			return true; // skip the first render, it's ok
 		}
 		
 		//we are not in the pause menu		
-		if ( delta < 1f )
+		if (delta < 1f) {
 			stateTime += delta;
+		}
 		
 		currentFrame = countDownAnimation.getKeyFrame(stateTime, true);
-		batch.draw(currentFrame,400-currentFrame.getRegionWidth()/2,625-currentFrame.getRegionHeight()/2);
+		batch.draw(currentFrame, 400 - currentFrame.getRegionWidth() / 2,
+				625 - currentFrame.getRegionHeight() / 2);
 		
-		if (stateTime > N_FRAME*STEPTIME - 0.1f)
-		{
-			if (RESUME_AFTER_END)
-				GlobalSettings.GAME.getScreen ().resume ();
-			reset ();
+		if (stateTime > N_FRAME * STEPTIME - 0.1f) {
+			if (RESUME_AFTER_END) {
+				GlobalSettings.GAME.getScreen().resume();
+			}
+			
+			reset();
 			return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * Remove used memory
+	 * Remove used memory.
 	 */
 	public void dispose() {
 		countDownSheet.dispose();
@@ -127,7 +129,7 @@ public class CountDown {
 	 * 
 	 * @return launch status
 	 */
-	public boolean isLaunched () {
+	public boolean isLaunched() {
 		return !bFirstTime;
 	}
 }

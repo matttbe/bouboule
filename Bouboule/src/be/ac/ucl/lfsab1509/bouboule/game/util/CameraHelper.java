@@ -40,7 +40,7 @@ public class CameraHelper {
 	 * 	float virtualHeight)
 	 */
 	
-	public static OrthographicCamera GetCamera(final float virtualWidth,
+	public static OrthographicCamera getCamera(final float virtualWidth,
 			final float virtualHeight) {
 		float viewportWidth = virtualWidth;
 		float viewportHeight = virtualHeight;

@@ -38,11 +38,11 @@ public interface Menus {
 	 * Launch the init menu: to play a new game, change parameters, see
 	 * highscores, etc.
 	 */
-	public void launchInitMenu ();
+	public void launchInitMenu();
 	
 	/**
 	 * Launch the right menu at the end of a game: when winning, loosing or when
 	 * the game is over.
 	 */
-	public void launchEndGameMenu ();
+	public void launchEndGameMenu();
 }

@@ -53,22 +53,22 @@ public class MapNode {
 		return weight;
 	}
 
-	public String toString(){
-		return "px :"+this.vector.x+" py :"+this.vector.y+" weigth :"+ this.weight;
+	public String toString() {
+		return "px :" + this.vector.x + " py :" + this.vector.y + " weigth :" + this.weight;
 	}
 	
 	public float xToPixel() {
 		
-		return 64.762f + 99.085f *vector.x;
+		return 64.762f + 99.085f * vector.x;
 	}
 	
 	public float yToPixel() {
 		
-		return (float) (55.784+100.588*vector.y);
+		return (float) (55.784+100.588 * vector.y);
 	}
 	
-	public float weightToPixel(){
+	public float weightToPixel() {
 		
-		return 100*weight;
+		return 100 * weight;
 	}
 }

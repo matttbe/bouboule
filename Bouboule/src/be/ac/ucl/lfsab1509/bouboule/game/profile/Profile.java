@@ -37,13 +37,13 @@ public class Profile {
 	private String cName;
 	private String cBoubName;
 	private Preferences prefs;
-	private final static String INIT_SCORE_KEY = "InitScore";
-	private final static String LIFES_KEY = "Lifes";
-	private final static String LEVEL_KEY = "Level";
-	private final static String BEST_LEVEL_KEY = "BestLevel";
-	private final static String SCORE_KEY = "Score";
-	private final static String HIGHSCORE_KEY = "HighScore";
-	private final static String BOUB_NAME_KEY = "BoubName";
+	private static final String INIT_SCORE_KEY = "InitScore";
+	private static final String LIFES_KEY = "Lifes";
+	private static final String LEVEL_KEY = "Level";
+	private static final String BEST_LEVEL_KEY = "BestLevel";
+	private static final String SCORE_KEY = "Score";
+	private static final String HIGHSCORE_KEY = "HighScore";
+	private static final String BOUB_NAME_KEY = "BoubName";
 
 	// score
 	private int iScore;
@@ -68,40 +68,40 @@ public class Profile {
 	// tutorial
 	private boolean bNeedTuto = false;
 	
-	public Profile (String cName)
-	{
-		this.cName = cName;
-		prefs = Gdx.app.getPreferences (cName);
+	public Profile(final String cname) {
+		
+		this.cName = cname;
+		prefs = Gdx.app.getPreferences(cName);
 
-		iInitScore = prefs.getInteger (INIT_SCORE_KEY, GlobalSettings.INIT_SCORE);
-		iLifes = prefs.getInteger (LIFES_KEY, GlobalSettings.INIT_LIFES);
-		iLevel = prefs.getInteger (LEVEL_KEY, GlobalSettings.INIT_LEVEL);
-		iBestLevel = prefs.getInteger (BEST_LEVEL_KEY, GlobalSettings.INIT_LEVEL);
-		iScore = prefs.getInteger (SCORE_KEY, 0);
-		iHighScore = prefs.getInteger (HIGHSCORE_KEY, Integer.MIN_VALUE);
-		cBoubName = prefs.getString (BOUB_NAME_KEY, GlobalSettings.DEFAULT_BOUB_NAME);
+		iInitScore = prefs.getInteger(INIT_SCORE_KEY, GlobalSettings.INIT_SCORE);
+		iLifes = prefs.getInteger(LIFES_KEY, GlobalSettings.INIT_LIFES);
+		iLevel = prefs.getInteger(LEVEL_KEY, GlobalSettings.INIT_LEVEL);
+		iBestLevel = prefs.getInteger(BEST_LEVEL_KEY, GlobalSettings.INIT_LEVEL);
+		iScore = prefs.getInteger(SCORE_KEY, 0);
+		iHighScore = prefs.getInteger(HIGHSCORE_KEY, Integer.MIN_VALUE);
+		cBoubName = prefs.getString(BOUB_NAME_KEY, GlobalSettings.DEFAULT_BOUB_NAME);
 
-		addNewTimerListener ();
+		addNewTimerListener();
 	}
 
 	/**
-	 * Check if there is a new high score (for this profile and for all profiles)
-	 * Reset all data about the score (init score, lifes, level, current score)
+	 * Check if there is a new high score (for this profile and for all profiles).
+	 * Reset all data about the score (init score, lifes, level, current score).
 	 * @return true if there is a new highscore global (for all profiles)
 	 */
-	public boolean checkHighScoreAndResetProfile () {
-		boolean bNewHighScoreGlobal = checkHighScore ();
+	public boolean checkHighScoreAndResetProfile() {
+		boolean bNewHighScoreGlobal = checkHighScore();
 
 		iInitScore = GlobalSettings.INIT_SCORE;
-		prefs.putInteger (INIT_SCORE_KEY, iInitScore);
+		prefs.putInteger(INIT_SCORE_KEY, iInitScore);
 		iLifes = GlobalSettings.INIT_LIFES;
-		prefs.putInteger (LIFES_KEY, iLifes);
+		prefs.putInteger(LIFES_KEY, iLifes);
 		iLevel = GlobalSettings.INIT_LEVEL;
-		prefs.putInteger (LEVEL_KEY, iLevel);
+		prefs.putInteger(LEVEL_KEY, iLevel);
 		iEndGameScore = iScore;
 		iScore = 0;
-		prefs.putInteger (SCORE_KEY, iScore);
-		prefs.flush (); // Makes sure the preferences are persisted.
+		prefs.putInteger(SCORE_KEY, iScore);
+		prefs.flush(); // Makes sure the preferences are persisted.
 		// don't reset the highscore...
 
 		return bNewHighScoreGlobal;
@@ -109,38 +109,38 @@ public class Profile {
 
 	//__________ NAME and IMAGE
 
-	public String getName () {
+	public String getName() {
 		return cName;
 	}
 
 	/**
 	 * @return the name of the image (ex: boub -> boub.png, boub.json)
 	 */
-	public String getBoubName () {
+	public String getBoubName() {
 		return cBoubName;
 	}
 
 	/**
-	 * Set a new name for the bouboube (image)
+	 * Set a new name for the bouboube (image).
 	 * @param cBoubName, the name of the image (ex: boub -> boub.png, boub.json)
 	 */
-	public void setBoubName (String cBoubName) {
-		this.cBoubName = cBoubName;
-		prefs.putString (BOUB_NAME_KEY, cBoubName);
-		prefs.flush ();
+	public void setBoubName(final String cBoubname) {
+		this.cBoubName = cBoubname;
+		prefs.putString(BOUB_NAME_KEY, cBoubName);
+		prefs.flush();
 	}
 
 	//__________ TIMER
-	private void addNewTimerListener () {
+	private void addNewTimerListener() {
 		TimerListener listener = new TimerListener() {
 			@Override
-			public void run () {
+			public void run() {
 				iScore--; // launched in the main loop (no need to use mutex)
 				iRemainingTime--;
 			}
 			
 			@Override
-			public void newTimer (int iTimer) {
+			public void newTimer(final int iTimer) {
 				iRemainingTime = iTimer;
 
 				iOldScore = iScore;
@@ -152,13 +152,13 @@ public class Profile {
 			}
 		};
 
-		GlobalSettings.GAME.getTimer ().addTimerListener (listener);
+		GlobalSettings.GAME.getTimer().addTimerListener(listener);
 	}
 
 	/**
 	 * @return the remaining time
 	 */
-	public int getRemainingTime () {
+	public int getRemainingTime() {
 		return iRemainingTime;
 	}
 
@@ -171,88 +171,88 @@ public class Profile {
 	/**
 	 * @return the current score
 	 */
-	public int getScore () {
+	public int getScore() {
 		return iScore;
 	}
 
 	/**
-	 * Add score: bonus (will only be saved if the player wins the current level)
+	 * Add score: bonus (will only be saved if the player wins the current level).
 	 * @param iNewScore, the new bonus
 	 */
-	public void addScore (int iNewScore) {
+	public void addScore(final int iNewScore) {
 		iScore += iNewScore;
 	}
 
 	/**
-	 * Add score: bonus (will be saved even if the player looses the current level)
+	 * Add score: bonus (will be saved even if the player looses the current level).
 	 * @param iNewScore, the new bonus
 	 */
-	public void addScorePermanent (int iNewScore) {
+	public void addScorePermanent(final int iNewScore) {
 		iScore += iNewScore;
 		iOldScore += iNewScore;
 		bNeedSaveScoreEvenIfCancel = true;
 	}
 
 	/**
-	 * Stop the timer and revert the score
+	 * Stop the timer and revert the score.
 	 * @return true if there is a new highscore
 	 * (e.g. if the user get permanent bonus {@link #addScorePermanent(int)})
 	 */
-	public void cancelNewScore () {
+	public void cancelNewScore() {
 		iScore = iOldScore;
-		if (bNeedSaveScoreEvenIfCancel)
-			saveScore ();
-		else
-			GlobalSettings.GAME.getTimer ().stop ();
+		if (bNeedSaveScoreEvenIfCancel) {
+			saveScore();
+		} else {
+			GlobalSettings.GAME.getTimer().stop();
+		}
 	}
 
 	/**
 	 * @return the score at the beginning of the current game
 	 */
-	public int getNewInitScore () {
+	public int getNewInitScore() {
 		return iNewInitScore;
 	}
 
 	/**
 	 * @return the score that the user had just before the reset
 	 */
-	public int getEndGameScore () {
+	public int getEndGameScore() {
 		return iEndGameScore;
 	}
 
-	public int getHighScore () {
+	public int getHighScore() {
 		return iHighScore;
 	}
 
-	public boolean isNewHighScore () {
+	public boolean isNewHighScore() {
 		return bNewHighScore;
 	}
 
-	private boolean checkHighScore () {
+	private boolean checkHighScore() {
 		bNewHighScore = false;
-		if (iScore > iHighScore)
-		{
+		if (iScore > iHighScore) {
 			iHighScore = iScore;
-			prefs.putInteger (HIGHSCORE_KEY, iHighScore);
-			prefs.flush ();
+			prefs.putInteger(HIGHSCORE_KEY, iHighScore);
+			prefs.flush();
 			bNewHighScore = true;
 		}
-		return GlobalSettings.PROFILE_MGR.getProfileGlobal ().checkHighScoreGlobal ();
+		return GlobalSettings.PROFILE_MGR.getProfileGlobal().checkHighScoreGlobal();
 	}
 
 	/**
-	 * Stop the timer, check if there is a new highscore and save the scores
+	 * Stop the timer, check if there is a new highscore and save the scores.
 	 * @return true if there is a new highscore
 	 */
-	public void saveScore () {
-		GlobalSettings.GAME.getTimer ().stop ();
-		prefs.putInteger (SCORE_KEY, iScore);
-		prefs.flush ();
+	public void saveScore() {
+		GlobalSettings.GAME.getTimer().stop();
+		prefs.putInteger(SCORE_KEY, iScore);
+		prefs.flush();
 	}
 
 	//__________ LIFES
 
-	public int getNbLifes () {
+	public int getNbLifes() {
 		return iLifes;
 	}
 
@@ -261,16 +261,18 @@ public class Profile {
 	 * @param iNewLifes, the new life(s) (can be negative)
 	 * @return false if there is no more life.
 	 */
-	public boolean addLifes (int iNewLifes) {
+	public boolean addLifes(final int iNewLifes) {
 		int iNewLifesTmp = iLifes + iNewLifes;
-		if (iNewLifesTmp <= GlobalSettings.MAX_LIFES) // we can't add more than 3 lifes
+		if (iNewLifesTmp <= GlobalSettings.MAX_LIFES) { // we can't add more than 3 lifes
 			iLifes = iNewLifesTmp;
+		}
 
-		if (iLifes <= 0) // no more life
+		if (iLifes <= 0) { // no more life
 			return false;
+		}
 
-		this.prefs.putInteger (LIFES_KEY, iLifes);
-		prefs.flush ();
+		this.prefs.putInteger(LIFES_KEY, iLifes);
+		prefs.flush();
 		return true;
 	}
 
@@ -279,49 +281,50 @@ public class Profile {
 	/**
 	 * @return true if there is no more level
 	 */
-	public boolean LevelUp () {
-		if (iLevel >= GlobalSettings.NBLEVELS) // we are already on the last level
+	public boolean levelUp() {
+		if (iLevel >= GlobalSettings.NBLEVELS) { // we are already on the last level
 			return false;
+		}
 
-		setLevel (iLevel + 1);
+		setLevel(iLevel + 1);
 		return true;
 	}
 
 	/**
-	 * Set the new level
+	 * Set the new level.
 	 * @pre iNewLevel < GlobalSettings.NBLEVELS
 	 */
-	public void setLevel (int iNewLevel) {
+	public void setLevel(final int iNewLevel) {
 		iLevel = iNewLevel;
-		checkBestLevel ();
-		this.prefs.putInteger (LEVEL_KEY, iLevel);
-		prefs.flush ();
+		checkBestLevel();
+		this.prefs.putInteger(LEVEL_KEY, iLevel);
+		prefs.flush();
 	}
 
-	public int getLevel () {
+	public int getLevel() {
 		return iLevel;
 	}
 
-	private void checkBestLevel () {
+	private void checkBestLevel() {
 		if (iLevel > iBestLevel) {
 			iBestLevel = iLevel; // no need to flush
-			this.prefs.putInteger (BEST_LEVEL_KEY, iBestLevel);
+			this.prefs.putInteger(BEST_LEVEL_KEY, iBestLevel);
 		}
 	}
 
 	/**
 	 * @return the best level that has already been played
 	 */
-	public int getBestLevel () {
+	public int getBestLevel() {
 		return iBestLevel;
 	}
 
 	//__________ TUTORIAL
-	public boolean needTutorial () {
+	public boolean needTutorial() {
 		return bNeedTuto;
 	}
 
-	public void setNeedTutorial (boolean bNeedTuto) {
-		this.bNeedTuto = bNeedTuto;
+	public void setNeedTutorial(final boolean bNeedtuto) {
+		this.bNeedTuto = bNeedtuto;
 	}
 }

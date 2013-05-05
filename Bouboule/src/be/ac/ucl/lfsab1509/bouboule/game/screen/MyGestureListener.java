@@ -14,49 +14,54 @@ public class MyGestureListener implements GestureListener {
 	private static final String CHEATER_NAME = "Deville";
 
 	@Override
-	public boolean touchDown(float x, float y, int pointer, int button) {
+	public boolean touchDown(final float x, final float y, final int pointer, final int button) {
 		return false;
 	}
 
 	@Override
-	public boolean tap(float x, float y, int count, int button) {
-		if (GlobalSettings.PROFILE.getName().equals(CHEATER_NAME))
-			GameLoop.bonus (true);
+	public boolean tap(final float x, final float y, final int count, final int button) {
+		if (GlobalSettings.PROFILE.getName().equals(CHEATER_NAME)) {
+			GameLoop.bonus(true);
+		}
 		return false;
 	}
 
 	@Override
-	public boolean longPress(float x, float y) {
-		if (GlobalSettings.PROFILE.getName().equals(CHEATER_NAME))
-			GameLoop.iBonus = (GameLoop.iBonus + 1) % Entity.BonusType.values ().length;
+	public boolean longPress(final float x, final float y) {
+		if (GlobalSettings.PROFILE.getName().equals(CHEATER_NAME)) {
+			GameLoop.iBonus = (GameLoop.iBonus + 1) % Entity.BonusType.values().length;
+		}
 		return false;
 	}
 
 	@Override
-	public boolean fling(float velocityX, float velocityY, int button) {	
+	public boolean fling(final float velocityX, final float velocityY, final int button) {	
 		return false;
 	}
 
 	@Override
-	public boolean pan(float x, float y, float deltaX, float deltaY) {
+	public boolean pan(final float x, final float y, final float deltaX, final float deltaY) {
 		return false;
 	}
 
 	@Override
-	public boolean zoom(float initialDistance, float distance) {	
+	public boolean zoom(final float initialDistance, final float distance) {	
 		return false;
 	}
 
 	@Override
-	public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2,
-			Vector2 pointer1, Vector2 pointer2) {
+	public boolean pinch(final Vector2 initialPointer1, final Vector2 initialPointer2,
+			final Vector2 pointer1, final Vector2 pointer2) {
 		
-		Gdx.app.log("Touch","Pinch event " + GlobalSettings.GAME.getTimer ().isRunning ());
+		Gdx.app.log("Touch", "Pinch event " + GlobalSettings.GAME.getTimer().isRunning());
 		
 		if (GlobalSettings.PROFILE.getName().equals(CHEATER_NAME)
-				&& GlobalSettings.GAME.getTimer ().isRunning () // prevent double stop, double level up, etc.
-				&& GlobalSettings.PROFILE.getScore () < GlobalSettings.PROFILE.getNewInitScore ()) { // it seems this method is called just after the resume... wait at least one second before cheating ;)
-			EndGameListener.winGame (); // cheater!!!!
+				&& GlobalSettings.GAME.getTimer().isRunning() 
+				// prevent double stop, double level up, etc.
+				&& GlobalSettings.PROFILE.getScore() < GlobalSettings.PROFILE.getNewInitScore()) { 
+			// it seems this method is called just after the resume... 
+			// wait at least one second before cheating ;)
+			EndGameListener.winGame(); // cheater!!!!
 		}
 			
 		return false;

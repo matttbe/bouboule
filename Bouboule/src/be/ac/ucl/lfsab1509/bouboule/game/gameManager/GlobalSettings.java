@@ -43,8 +43,8 @@ public class GlobalSettings {
  	
  	public static final float LIMITACC	= 0.5f;
  	
- 	
- 	public static ArrayList<MapNode> ARENAWAYPOINTALLOW = new ArrayList<MapNode>(); //TODO: A mettre dasn IA
+ 	//TODO: A mettre dasn IA
+ 	public static ArrayList<MapNode> ARENAWAYPOINTALLOW = new ArrayList<MapNode>(); 
  	
  	public static enum GameExitStatus {NONE, WIN, LOOSE, GAMEOVER};
  	public static GameExitStatus 	GAME_EXIT	= GameExitStatus.NONE;

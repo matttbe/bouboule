@@ -60,43 +60,45 @@ public class ScreenGame implements Screen {
 	private boolean bNewGame = true;
 
 	// INIT => on create
-	public ScreenGame () {
+	public ScreenGame() {
 		loopMusicDefaultFile = loopMusicFile = Gdx.files.internal("music/klez.mp3");
 		loopMusic = Gdx.audio.newMusic(loopMusicFile);
 		loopMusic.setLooping(true);
 
-		camera = CameraHelper.GetCamera(APPWIDTH, APPHEIGHT);
+		camera = CameraHelper.getCamera(APPWIDTH, APPHEIGHT);
 		game = new GameLoop(camera, true);
 	}
 
 	@Override
 	public void show() {
-		Gdx.app.log ("Matth", "Screen: SHOW");
+		Gdx.app.log("Matth", "Screen: SHOW");
 
 		bIsPause = true; // show the countdown at startup
-		game.getCountDown ().reset ();
+		game.getCountDown().reset();
 		bNewGame = false;
 
 		loopMusic.stop(); // to play at startup
-		game.start ();
-		GlobalSettings.GAME.getTimer ().createNewTimer (GraphicManager.TIME);
+		game.start();
+		GlobalSettings.GAME.getTimer().createNewTimer(GraphicManager.TIME);
 	}
 
 
 	@Override
-	public void render (float delta) {
-		if (!bIsPause)
+	public void render(final float delta) {
+		if (!bIsPause) {
 			game.update();
+		}
 		bIsPause = game.render(bIsPause, delta);
 	}
 
 	@Override
 	public void dispose() {
-		Gdx.app.log ("Matth", "Screen: DISPOSE");
-		if (game != null)
+		Gdx.app.log("Matth", "Screen: DISPOSE");
+		if (game != null) {
 			game.dispose();
-		GlobalSettings.GAME.getTimer ().stop ();
-		loopMusic.dispose ();
+		}
+		GlobalSettings.GAME.getTimer().stop();
+		loopMusic.dispose();
 	}
 
 	@Override
@@ -107,40 +109,50 @@ public class ScreenGame implements Screen {
 	@Override
 	public void pause() {
 		//Gdx.app.log ("Matth", "Screen: PAUSE");
-		Gdx.app.log ("Matth", "Screen: PAUSE + pause status : "+bIsPause + " " + GlobalSettings.GAME.getTimer ().isRunning () + " " + game.getCountDown ().isLaunched ());
-		game.getCountDown ().reset (); // reset the countdown (if it's running)
-		if (bIsPause || ! GlobalSettings.GAME.getTimer ().isRunning ()) // already stopped... we start a new game?
+		Gdx.app.log("Matth", "Screen: PAUSE + pause status : " + bIsPause 
+				+ " " + GlobalSettings.GAME.getTimer().isRunning() + " " 
+				+ game.getCountDown().isLaunched());
+		
+		game.getCountDown().reset(); // reset the countdown (if it's running)
+		if (bIsPause || !GlobalSettings.GAME.getTimer().isRunning()) {
+			// already stopped... we start a new game?
 			return;
+		}
+		
 		bIsPause = true;
-		GlobalSettings.GAME.getTimer ().pause ();
-		loopMusic.pause ();
-		Gdx.app.log ("Matth", "Screen: PAUSE + pause status ok : "+bIsPause);
+		GlobalSettings.GAME.getTimer().pause();
+		loopMusic.pause();
+		Gdx.app.log("Matth", "Screen: PAUSE + pause status ok : " + bIsPause);
 	}
 
 	/**
 	 * Will be launch when resuming after the pause but we have to skip that
-	 * because it will be use a second time when the countdown is over
+	 * because it will be use a second time when the countdown is over.
 	 */
 	@Override
 	public void resume() {
-		Gdx.app.log ("Matth", "Screen: RESUME + pause status : " + bIsPause + " Count " + game.getCountDown ().isLaunched () + " " + bNewGame);
+		Gdx.app.log("Matth", "Screen: RESUME + pause status : " + bIsPause + " Count " 
+	+ game.getCountDown().isLaunched() + " " + bNewGame);
 		
-		if (bNewGame)
-			show (); //must relaunch the game when the activity is not paused
+		if (bNewGame) {
+			show(); //must relaunch the game when the activity is not paused
 					 //and comes back from a menu or what ever
-		else if (bIsPause && game.getCountDown ().isLaunched ()) { // resume from CountDown
-			GlobalSettings.GAME.getTimer ().play ();
-			if (! GlobalSettings.SOUND_IS_MUTED)
-				loopMusic.play ();
+			
+		} else if (bIsPause && game.getCountDown().isLaunched()) { // resume from CountDown
+			GlobalSettings.GAME.getTimer().play();
+			if (!GlobalSettings.SOUND_IS_MUTED) {
+				loopMusic.play();
+			}
+			
 			bIsPause = false;
 		}
 		// else: nothing to do, we are waiting for the signal from the countdown
 	}
 
 	@Override
-	public void hide () {
-		Gdx.app.log ("Matth", "Screen: HIDE + pause " + bIsPause);
-		Gdx.app.log ("Matth", "Screen: HIDE + exit: " + GlobalSettings.GAME_EXIT);
+	public void hide() {
+		Gdx.app.log("Matth", "Screen: HIDE + pause " + bIsPause);
+		Gdx.app.log("Matth", "Screen: HIDE + exit: " + GlobalSettings.GAME_EXIT);
 		
 		bNewGame = GlobalSettings.GAME_EXIT != GameExitStatus.NONE; // a new game is needed?
 	}
@@ -148,22 +160,24 @@ public class ScreenGame implements Screen {
 	/**
 	 * @param cNewMusic should be a file that can be read by GDX
 	 */
-	public void setNewLoopMusic (FileHandle pNewMusicFile) {
-		if (pNewMusicFile.equals (loopMusicFile))
+	public void setNewLoopMusic(final FileHandle pNewMusicFile) {
+		if (pNewMusicFile.equals(loopMusicFile)) {
 			return;
+		}
 
-		boolean bWasPlaying = loopMusic.isPlaying ();
-		loopMusic.stop ();
+		boolean bWasPlaying = loopMusic.isPlaying();
+		loopMusic.stop();
 
 		loopMusicFile = pNewMusicFile;
 		loopMusic = Gdx.audio.newMusic(pNewMusicFile);
 		loopMusic.setLooping(true);
 
-		if (bWasPlaying)
-			loopMusic.play ();
+		if (bWasPlaying) {
+			loopMusic.play();
+		}
 	}
 
-	public void setDefaultLoopMusicPath () {
-		setNewLoopMusic (loopMusicDefaultFile);
+	public void setDefaultLoopMusicPath() {
+		setNewLoopMusic(loopMusicDefaultFile);
 	}
 }
