@@ -41,10 +41,11 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 public class IA {
 
-	public static float FORCE_MAX_IA;
-	public static float FORCE_MAX_PLAYER;
-	public static float ACC_MAX_IA;
-
+	public static float FORCE_MAX_IA=0;
+	public static float FORCE_MAX_PLAYER=0;
+	public static float ACC_MAX_IA=0;
+	public static float ACC_MAX_PLAYER=0;
+	public static boolean IS_INIT;
 	public static float AXE_POSITION = -1;
 	private static float SENSIBILITY_DEFAULT = .15f;
 	
@@ -64,6 +65,14 @@ public class IA {
 	//level 9 => aggresif sans anticipation
 	//level 10 => hybrid sans anticipation
 
+	private static void init(Body bodyia,Body bodyplayer){
+		if(bodyia != null)
+		FORCE_MAX_IA=ACC_MAX_IA*bodyia.getMass();
+		if(bodyplayer != null)
+		FORCE_MAX_PLAYER=ACC_MAX_PLAYER*bodyplayer.getMass();
+		IS_INIT=true;
+	}
+	
 	public static Vector2 compute(int IALevel, Bouboule bouboule) {
 
 
@@ -74,19 +83,26 @@ public class IA {
 
 		Iterator<Body> iter = GraphicManager.getWorld().getBodies();
 
-		Body bodytemp;
+		Body bodytemp,bodytempia=null,bodytempplayer=null;
 
 		while(iter.hasNext()){
 			bodytemp = iter.next();
-			if( ((Entity) bodytemp.getUserData()).getEntity()  == Entity.PLAYER){ 
+			if( ((Entity) bodytemp.getUserData()).getEntity()  == Entity.PLAYER){
+				bodytempplayer=bodytemp;
 				LocalEnemi = bodytemp.getPosition();
 				VelocityEnemi = bodytemp.getLinearVelocity();
 			}else if( ((Entity) bodytemp.getUserData()).getEntity() == Entity.MONSTER){
+				bodytempia=bodytemp;
 				IA =  bodytemp.getPosition();
 				VelocityIA  = bodytemp.getLinearVelocity();
+				
 			}/*else{
 				arena = bodytemp;
 			}*/
+		}
+		
+		if(!IS_INIT){
+			init(bodytempia,bodytempplayer);
 		}
 
 

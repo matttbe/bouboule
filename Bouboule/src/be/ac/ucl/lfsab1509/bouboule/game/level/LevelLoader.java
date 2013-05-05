@@ -121,9 +121,10 @@ public class LevelLoader {
 				GlobalSettings.GAME.setNewLoopMusic(file.getAttribute ("music", null)); // e.g. klez.mp3
 
 				// IA
-				IA.FORCE_MAX_IA = Float.parseFloat(file.getAttribute("forcemaxia", "0.5f")); // not used
-				IA.FORCE_MAX_PLAYER = Float.parseFloat(file.getAttribute("forcemaxplayer", "0.5f")); //same
+				IA.ACC_MAX_IA = Float.parseFloat(file.getAttribute("accmaxia", "0.5f")); 
+				IA.ACC_MAX_PLAYER = Float.parseFloat(file.getAttribute("accmaxplayer", "0.5f"));
 				IA.countframe = 0;
+				IA.IS_INIT=false;
 
 				Gdx.app.log("Settings", "Bonus =" + GraphicManager.ALLOW_BONUS);	
 	}
@@ -169,7 +170,7 @@ public class LevelLoader {
 						+ BoubImages.BOUB_EXTENTION;
 
 			} else {
-				IA.ACC_MAX_IA=IA.FORCE_MAX_IA/density;
+				
 				texRegionPath 		= directory + boub.getAttribute("texRegionPath");
 			}
 
