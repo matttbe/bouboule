@@ -130,8 +130,8 @@
     <Level3
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.45f"
-        forcemaxplayer="0.5f"
+        accmaxia="0.45f"
+        accmaxplayer="0.5f"
         time="45" >
 
         <Bouboule
@@ -244,7 +244,7 @@
     <Level5
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.5f"
+        accmaxia="0.5f"
         time="45" >
 
         <Bouboule
@@ -685,7 +685,7 @@
     <Level9
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.6f"
+        accmaxia="0.6f"
         time="45" >
 
         <Bouboule
@@ -776,7 +776,7 @@
         bonus="False"
         bonusEnabled="star,life"
         bonusrate="1700"
-        forcemaxia="0.4f"
+        accmaxia="0.4f"
         time="60" >
 
         <Bouboule
@@ -1249,7 +1249,7 @@
     <Level17
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.55f"
+        accmaxia="0.55f"
         time="45" >
 
         <Bouboule
@@ -1395,7 +1395,7 @@
     <Level19
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.55f"
+        accmaxia="0.55f"
         time="45" >
 
         <Bouboule
@@ -1564,7 +1564,7 @@
     <Level21
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.55f"
+        accmaxia="0.55f"
         time="45" >
 
         <Bouboule
@@ -1615,7 +1615,7 @@
     <Level22
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.55f"
+        accmaxia="0.55f"
         time="45" >
 
         <Bouboule
@@ -1666,7 +1666,7 @@
     <Level23
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.6f"
+        accmaxia="0.6f"
         time="45" >
 
         <Bouboule
@@ -1717,7 +1717,7 @@
     <Level24
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.55f"
+        accmaxia="0.55f"
         time="45" >
 
         <Bouboule
@@ -1815,7 +1815,7 @@
     <Level25
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.65f"
+        accmaxia="0.65f"
         time="45" >
 
         <Bouboule
@@ -1864,24 +1864,22 @@
     </Level25>
 
     <Level26
-        angle="0"
+
         bonus="True"
         bonusrate="1650"
-        density="1.1"
-        elasticity="1.1f"
-        entity="-1"
-        forcemaxia="0.55f>
+        accmaxia="0.55f">
 
-        &lt;Bouboule
-            IALevel="
-        px="350"
-        py="800"
-        radius="0"
-        texRegionPath="boub_inuit.png"
-        time="45"
-        type="normal" >
-
-        <Bouboule>
+        <Bouboule
+            IALevel="6"
+            angle="0"
+            density="1.2"
+            elasticity="1.1f"
+            entity="-1"
+            px="350"
+            py="800"
+            radius="0"
+            texRegionPath="boub_inuit.png"
+            type="normal" >
         </Bouboule>
 
         <Bouboule
@@ -1919,8 +1917,8 @@
     <Level27
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.60f"
-        forcemaxplayer="0.4f"
+        accmaxia="0.60f"
+        accmaxplayer="0.4f"
         time="45" >
 
         <Bouboule
@@ -1974,8 +1972,8 @@
     <Level28
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.65f"
-        forcemaxplayer="0.5f"
+        accmaxia="0.65f"
+        accmaxplayer="0.5f"
         time="45" >
 
         <Bouboule
@@ -2117,7 +2115,7 @@
     <Level30
         bonus="True"
         bonusrate="1650"
-        forcemaxia="0.70f"
+        accmaxia="0.70f"
         time="45" >
 
         <Bouboule
