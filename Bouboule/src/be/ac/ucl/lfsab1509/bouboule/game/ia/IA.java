@@ -48,6 +48,7 @@ public class IA {
 	public static boolean IS_INIT;
 	public static float AXE_POSITION = -1;
 	private static float SENSIBILITY_DEFAULT = .15f;
+	public static float K_ACC = 6.0f;
 	
 	
 	//initialiser la variable en début de niveau
@@ -67,9 +68,9 @@ public class IA {
 
 	private static void init(Body bodyia,Body bodyplayer){
 		if(bodyia != null)
-		FORCE_MAX_IA=ACC_MAX_IA*bodyia.getMass();
+		FORCE_MAX_IA = ACC_MAX_IA*bodyia.getMass();
 		if(bodyplayer != null)
-		FORCE_MAX_PLAYER=ACC_MAX_PLAYER*bodyplayer.getMass();
+		FORCE_MAX_PLAYER = ACC_MAX_PLAYER*bodyplayer.getMass();
 		IS_INIT=true;
 	}
 	
@@ -126,7 +127,7 @@ public class IA {
 			break;
 
 		case 1:
-			Acc = middeler(IA,0);
+			Acc = middeler(IA,getClosestCentre(IA));
 			break;
 		case 2:
 			Acc = troll2(IA, VelocityIA);
@@ -144,7 +145,7 @@ public class IA {
 			Acc = hybrid(IA,VelocityIA,LocalEnemi,VelocityEnemi,true);
 			break;
 		case 7:
-			Acc = middeler (IA,1);
+			Acc = middeler (IA,getClosestCentre(IA));
 			Vector2 slow = new Vector2(VelocityIA).mul(2f);
 			Acc.sub(slow);
 			break;
@@ -161,6 +162,8 @@ public class IA {
 			break;
 		}
 
+		
+
 
 		// Vector2 slow;
 		if(IALevel != 0){
@@ -169,10 +172,20 @@ public class IA {
 			//Acc.set(0, 0);
 			countframe++;
 		}else{
+			
+			MapNode testtemp = getClosestCentre(LocalEnemi);
+			/*Vector2 dirmid = middeler(LocalEnemi, testtemp);
+			if(dirmid.dot(VelocityEnemi) < 0.0f && VelocityEnemi.len2()/(ACC_MAX_PLAYER*2*K_ACC) + dirmid.len() > testtemp.getWeight()){
+				// Gdx.app.log ("Player","IA:defence slow");
+				Acc = stopMid(LocalEnemi, VelocityEnemi);
+			}*/
+			
+			
 			Acc=Acc.limit(FORCE_MAX_PLAYER);
 			
 			//slow = new Vector2(VelocityEnemi).nor().mul(0.02f);
 			//slow = new Vector2(0, 0);
+			
 		}
 		//Acc.sub(slow);
 		
@@ -180,7 +193,9 @@ public class IA {
 			Gdx.app.log ("Player","playerx"+LocalEnemi.x+"y"+LocalEnemi.y+"speed2"+VelocityEnemi.len2()+"acc"+Acc.len());
 		}*/
 		
-		Acc.mul(3.0f);
+		Acc.mul(K_ACC);
+		
+		
 		
 		return Acc;
 	}
@@ -193,9 +208,9 @@ public class IA {
 		if(close==null){
 			//Gdx.app.log("ia","multipoint:crosspoint");
 			MapNode temp = getnextnode(iA,localEnemi);
-			close=getClosestCentre(iA);
-			Vector2 dirmid = middeler(iA, close);
-			if(velocityIA.len2()*1.75 + dirmid.len() > close.getWeight()+0.3f){
+			//close=getClosestCentre(iA);
+			Vector2 dirmid = middeler(iA, temp);
+			if(velocityIA.len2()/(ACC_MAX_IA*2*K_ACC) + dirmid.len() > temp.getWeight()){
 				// Gdx.app.log ("Player","IA:defence slow");
 				return stopMid(iA, velocityIA);
 			}
@@ -277,7 +292,7 @@ public class IA {
 		}
 
 		Vector2 dirmid = middeler(IA, close);
-		if(dirmid.dot(velocityIA) < 0.25f && velocityIA.len2()+dirmid.len() > close.getWeight()){
+		if(dirmid.dot(velocityIA) < 0.25f && velocityIA.len2()/(ACC_MAX_IA*2*K_ACC) +dirmid.len() > close.getWeight()){
 			//évitement des bords
 			// Gdx.app.log ("Player","IA:defence slow");
 			return stopMid(IA, velocityIA);
@@ -324,7 +339,7 @@ public class IA {
 		
 		if(!(Math.abs(angleCentre(fictposition, centreIA.getVector())-angleCentre(localEnemi,centreIA.getVector())) < 15 &&
 				centreIA == getClosestCentre(localEnemi)))
-		if(dirmid.dot(velocity) < 0.0f && velocity.len2()*1.75 + dirmid.len() > centreIA.getWeight()){
+		if(dirmid.dot(velocity) < 0.0f && velocity.len2()/(ACC_MAX_IA*2*K_ACC) + dirmid.len() > centreIA.getWeight()){
 			//Gdx.app.log ("Player","IA:attaque slow");
 			//évitement des bords
 			return stopMid(position, velocity);
@@ -345,6 +360,9 @@ public class IA {
 		//accelX=0;
 		//accelY=0;
 		//Gdx.app.log ("IA","gyroscope"+ Acc.len());
+		
+
+		
 
 		return Acc;
 	}
@@ -374,7 +392,7 @@ public class IA {
 		Acc = new Vector2(dirmid).sub(vitesse).nor();
 
 		if(dirmid.dot(vitesse) > 0 &&
-				getClosestCentre(position).getVector().dst(position) < vitesse.dot(dirmid)*vitesse.dot(dirmid)/(2*FORCE_MAX_IA)){
+				getClosestCentre(position).getVector().dst(position) < vitesse.dot(dirmid)*vitesse.dot(dirmid)/(ACC_MAX_IA*2*K_ACC)){
 			//Acc.rotate(180);
 		}else{
 		}
