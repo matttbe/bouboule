@@ -37,7 +37,8 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 public class ProfileGlobal {
 	private String SEPARATOR;
 	private String HIGHSCORE_DEFAULT_VALUE;
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat ("dd MM yyyy HH:mm:ss Z");
+	private static final SimpleDateFormat dateFormat 
+										= new SimpleDateFormat("dd MM yyyy HH:mm:ss Z");
 
 	private static final int iMaxNbHighScore = 5;
 	
@@ -48,7 +49,7 @@ public class ProfileGlobal {
 
 	private Preferences prefs;
 	
-	public ProfileGlobal (Preferences prefs, String SEPARATOR) {
+	public ProfileGlobal(Preferences prefs, String SEPARATOR) {
 		this.prefs = prefs;
 		this.SEPARATOR = SEPARATOR;
 		this.HIGHSCORE_DEFAULT_VALUE = 0 + SEPARATOR // score
@@ -58,31 +59,31 @@ public class ProfileGlobal {
 	}
 
 	/**
-	 * Load settings that can be saved between sessions
+	 * Load settings that can be saved between sessions.
 	 */
-	public void loadDefaultSettings () {
-		GlobalSettings.SOUND_IS_MUTED = prefs.getBoolean (MUTE_SOUND_KEY, false);
-		GlobalSettings.SENSITIVITY = prefs.getInteger (SENSITIVITY_KEY, 500);
-		GlobalSettings.FIXED_ROTATION = prefs.getBoolean (FIXED_ROTATIONS_KEY, true);
+	public void loadDefaultSettings() {
+		GlobalSettings.SOUND_IS_MUTED = prefs.getBoolean(MUTE_SOUND_KEY, false);
+		GlobalSettings.SENSITIVITY = prefs.getInteger(SENSITIVITY_KEY, 500);
+		GlobalSettings.FIXED_ROTATION = prefs.getBoolean(FIXED_ROTATIONS_KEY, true);
 	}
 
 	//_________________ SAVE SETTINGS THAT CAN BE CHANGED FROM THE CONFIG PANEL
-	public void changeSoundSettings (boolean newSoundIsMuted){
+	public void changeSoundSettings(final boolean newSoundIsMuted) {
 		GlobalSettings.SOUND_IS_MUTED = newSoundIsMuted;
-		prefs.putBoolean (MUTE_SOUND_KEY, GlobalSettings.SOUND_IS_MUTED);
-		prefs.flush ();
+		prefs.putBoolean(MUTE_SOUND_KEY, GlobalSettings.SOUND_IS_MUTED);
+		prefs.flush();
 	}
 
-	public void changeSensibilitySettings (int newSensitivity) {
+	public void changeSensibilitySettings(final int newSensitivity) {
 		GlobalSettings.SENSITIVITY = newSensitivity;
 		prefs.putInteger(SENSITIVITY_KEY, newSensitivity);
 		prefs.flush();
 	}
 
-	public void changeFixedRotation (boolean bFixedRotation) {
+	public void changeFixedRotation(final boolean bFixedRotation) {
 		GlobalSettings.FIXED_ROTATION = bFixedRotation;
-		prefs.putBoolean (FIXED_ROTATIONS_KEY, bFixedRotation);
-		prefs.flush ();
+		prefs.putBoolean(FIXED_ROTATIONS_KEY, bFixedRotation);
+		prefs.flush();
 	}
 
 	//_______________ HighScore Mgr
@@ -91,18 +92,20 @@ public class ProfileGlobal {
 	 * @param iScore, the new score
 	 * @return true if there is a new highscore
 	 */
-	public boolean checkHighScoreGlobal () {
+	public boolean checkHighScoreGlobal() {
 		boolean bNewHighScore = false;
-		int iNewScore = GlobalSettings.PROFILE.getScore ();
+		int iNewScore = GlobalSettings.PROFILE.getScore();
 
 		String cCurrInfo, cPrevInfo = null;
 		for (int i = 0; i < iMaxNbHighScore; i++) {
-			cCurrInfo = prefs.getString (HIGHSCORE_KEY + i, null);
+			cCurrInfo = prefs.getString(HIGHSCORE_KEY + i, null);
 			if (bNewHighScore) { // move the other highscore
-				if (cPrevInfo != null)
-					prefs.putString (HIGHSCORE_KEY + i, cPrevInfo);
-				if (cCurrInfo == null) // no need to continue
+				if (cPrevInfo != null) {
+					prefs.putString(HIGHSCORE_KEY + i, cPrevInfo);
+				}
+				if (cCurrInfo == null) { // no need to continue
 					break;
+				}
 				cPrevInfo = cCurrInfo;
 				continue;
 			}
@@ -110,26 +113,30 @@ public class ProfileGlobal {
 			int iCurrScore = Integer.MIN_VALUE;
 			if (cCurrInfo != null) {
 				cPrevInfo = cCurrInfo; // save the older string
-				cCurrInfo = cCurrInfo.substring (0, cCurrInfo.indexOf (SEPARATOR)); // get the score
+				cCurrInfo = cCurrInfo.substring(0, cCurrInfo.indexOf(SEPARATOR)); // get the score
 				try {
-					iCurrScore = Integer.parseInt (cCurrInfo);
+					iCurrScore = Integer.parseInt(cCurrInfo);
 				} catch (NumberFormatException e) {
 					iCurrScore = Integer.MIN_VALUE;
 				}
-			}
-			else
+			
+			} else {
 				cPrevInfo = null;
+			}
+			
 			if (iNewScore > iCurrScore) { // new high score!
 				cCurrInfo = iNewScore + SEPARATOR // Score
-						+ GlobalSettings.PROFILE.getName () + SEPARATOR // name
-						+ GlobalSettings.PROFILE.getLevel () + SEPARATOR // level
-						+ dateFormat.format (new Date ()).toString (); // date
-				prefs.putString (HIGHSCORE_KEY + i, cCurrInfo); // save the new score here
+						+ GlobalSettings.PROFILE.getName() + SEPARATOR // name
+						+ GlobalSettings.PROFILE.getLevel() + SEPARATOR // level
+						+ dateFormat.format(new Date()).toString(); // date
+				prefs.putString(HIGHSCORE_KEY + i, cCurrInfo); // save the new score here
 				bNewHighScore = true;
 			}
 		}
-		if (bNewHighScore)
-			prefs.flush ();
+		
+		if (bNewHighScore) {
+			prefs.flush();
+		}
 
 		return bNewHighScore;
 	}
@@ -139,33 +146,37 @@ public class ProfileGlobal {
 	 * value if no highscore is saved for this id.
 	 * @return all HighScore as an array (fill with default values if needed)
 	 */
-	public HighScoreInfo[] getAllHighScores (boolean bFillWithDefaultValues) {
-		HighScoreInfo highScores[] = new HighScoreInfo[iMaxNbHighScore];
+	public HighScoreInfo[] getAllHighScores(final boolean bFillWithDefaultValues) {
+		
+		HighScoreInfo[] highScores = new HighScoreInfo[iMaxNbHighScore];
+		
 		for (int i = 0; i < highScores.length; i++) {
-			String infos[];
-			if (bFillWithDefaultValues)
-				infos = prefs.getString (HIGHSCORE_KEY + i,
-						HIGHSCORE_DEFAULT_VALUE).split (SEPARATOR);
-			else {
-				String info = prefs.getString (HIGHSCORE_KEY + i, null);
-				if (info == null)
+			String[] infos;
+			if (bFillWithDefaultValues) {
+				infos = prefs.getString(HIGHSCORE_KEY + i,
+						HIGHSCORE_DEFAULT_VALUE).split(SEPARATOR);
+			} else {
+				String info = prefs.getString(HIGHSCORE_KEY + i, null);
+				if (info == null) {
 					break;
-				infos = info.split (SEPARATOR);
+				}
+				
+				infos = info.split(SEPARATOR);
 			}
 			String cName = infos[1];
 			int iScore;
 			int iLevel;
 			Date pDate;
 			try {
-				iScore = Integer.parseInt (infos[0]);
-				iLevel = Integer.parseInt (infos[2]);
-				pDate = dateFormat.parse (infos[3]);
+				iScore = Integer.parseInt(infos[0]);
+				iLevel = Integer.parseInt(infos[2]);
+				pDate = dateFormat.parse(infos[3]);
 			} catch (Exception e) { // should not happen...
 				iScore = 0;
 				iLevel = 0;
-				pDate = new Date ();
+				pDate = new Date();
 			}
-			highScores[i] = new HighScoreInfo (cName, iScore, iLevel, pDate);
+			highScores[i] = new HighScoreInfo(cName, iScore, iLevel, pDate);
 		}
 		return highScores;
 	}

@@ -45,20 +45,20 @@ public class ProfileMgr {
 	private static final String PROFILES_KEY = "profiles";
 
 	/**
-	 * Create PREFS_GLOBAL, PROFILE and load default settings
+	 * Create PREFS_GLOBAL, PROFILE and load default settings.
 	 */
-	public ProfileMgr () {
-		prefs = Gdx.app.getPreferences (GlobalSettings.PREFS_GLOBAL);
-		loadDefaultProfile ();
-		profileGlobal = new ProfileGlobal (prefs, SEPARATOR);
-		profileGlobal.loadDefaultSettings ();
+	public ProfileMgr() {
+		prefs = Gdx.app.getPreferences(GlobalSettings.PREFS_GLOBAL);
+		loadDefaultProfile();
+		profileGlobal = new ProfileGlobal(prefs, SEPARATOR);
+		profileGlobal.loadDefaultSettings();
 	}
 
 	/**
 	 * @return get the last profile name or null if we need the default one.
 	 */
-	public String getDefaultProfileName () {
-		return prefs.getString (LAST_PROFILE_KEY, null);
+	public String getDefaultProfileName() {
+		return prefs.getString(LAST_PROFILE_KEY, null);
 	}
 
 	/**
@@ -66,39 +66,40 @@ public class ProfileMgr {
 	 * @pre this profile should have been created with {@link #createAndLoadNewProfile(String)}
 	 * @param cName, the profile name
 	 */
-	public void loadProfile (final String cName) {
-		GlobalSettings.PROFILE = new Profile (cName);
-		prefs.putString (LAST_PROFILE_KEY, cName);
-		prefs.flush ();
+	public void loadProfile(final String cName) {
+		GlobalSettings.PROFILE = new Profile(cName);
+		prefs.putString(LAST_PROFILE_KEY, cName);
+		prefs.flush();
 	}
 
 	/**
-	 * Load the default profile (the last profile that has been used or
+	 * Load the default profile (the last profile that has been used or.
 	 * DEFAULT_PROFILE_NAME)
 	 */
-	public void loadDefaultProfile () {
+	public void loadDefaultProfile() {
 		String profileName = getDefaultProfileName();
 		if (profileName == null) {
-			loadProfile (GlobalSettings.DEFAULT_PROFILE_NAME);
-			GlobalSettings.PROFILE.setNeedTutorial (true); // display the tutorial the first time
+			loadProfile(GlobalSettings.DEFAULT_PROFILE_NAME);
+			GlobalSettings.PROFILE.setNeedTutorial(true); // display the tutorial the first time
+		
+		} else {
+			loadProfile(profileName);
 		}
-		else
-			loadProfile (profileName);
 	}
 
-	private String getAllProfilesAsString () {
-		return prefs.getString (PROFILES_KEY, GlobalSettings.DEFAULT_PROFILE_NAME);
+	private String getAllProfilesAsString() {
+		return prefs.getString(PROFILES_KEY, GlobalSettings.DEFAULT_PROFILE_NAME);
 	}
 
 	/**
 	 * @return an array with all profiles' name
 	 */
-	public String[] getAllProfiles () {
-		return getAllProfilesAsString ().split (SEPARATOR);
+	public String[] getAllProfiles() {
+		return getAllProfilesAsString().split(SEPARATOR);
 	}
 	
-	public ArrayList<String> getAllProfilesAL () {
-		ArrayList<String> profiles = new ArrayList<String> (Arrays.asList(getAllProfiles ()));
+	public ArrayList<String> getAllProfilesAL() {
+		ArrayList<String> profiles = new ArrayList<String>(Arrays.asList(getAllProfiles()));
 		return profiles;
 	}
 
@@ -106,38 +107,38 @@ public class ProfileMgr {
 	 * @return an arraylist with all profiles that can't be used when creating
 	 * a new one
 	 */
-	public ArrayList<String> getAllProfilesAndExceptions () {
-		ArrayList<String> profiles = new ArrayList<String> (Arrays.asList(getAllProfiles ()));
-		profiles.add (GlobalSettings.PREFS_GLOBAL); // we can't use a profile name with this name
+	public ArrayList<String> getAllProfilesAndExceptions() {
+		ArrayList<String> profiles = new ArrayList<String>(Arrays.asList(getAllProfiles()));
+		profiles.add(GlobalSettings.PREFS_GLOBAL); // we can't use a profile name with this name
 		return profiles;
 	}
 
 	/**
-	 * Change the current profile
+	 * Change the current profile.
 	 * @param cName the profile that already exists.
 	 */
-	public void changeProfile (final String cName) {
-		Gdx.app.log ("LN", "Load: " + cName);
-		EndGameListener.cancelGame ();
-		loadProfile (cName);
+	public void changeProfile(final String cName) {
+		Gdx.app.log("LN", "Load: " + cName);
+		EndGameListener.cancelGame();
+		loadProfile(cName);
 	}
 
 	/**
-	 * Create and load a new profile
+	 * Create and load a new profile.
 	 * @pre: cName should not be included in PROFILES_KEY and can't contain invalid char:
 	 *  => String.IndexOfAny (System.IO.Path.GetInvalidPathChars ()) == 0
 	 * @param cName: the new profile name
 	 */
-	public void createAndLoadNewProfile (final String cName) {
-		EndGameListener.cancelGame ();
-		String profiles = getAllProfilesAsString ();
+	public void createAndLoadNewProfile(final String cName) {
+		EndGameListener.cancelGame();
+		String profiles = getAllProfilesAsString();
 		profiles += SEPARATOR + cName; // should at least contain Bouboule (default)
-		prefs.putString (PROFILES_KEY, profiles); // no need to flush => done in loadProfile
-		loadProfile (cName);
-		GlobalSettings.PROFILE.setNeedTutorial (true); // display the tutorial the first time
+		prefs.putString(PROFILES_KEY, profiles); // no need to flush => done in loadProfile
+		loadProfile(cName);
+		GlobalSettings.PROFILE.setNeedTutorial(true); // display the tutorial the first time
 	}
 	
-	public ProfileGlobal getProfileGlobal () {
+	public ProfileGlobal getProfileGlobal() {
 		return this.profileGlobal;
 	}
 }

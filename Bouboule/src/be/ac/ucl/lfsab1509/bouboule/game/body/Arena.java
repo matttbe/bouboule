@@ -43,7 +43,7 @@ public class Arena extends GameBody {
 	private Sprite 			sprite;			//Sprite to draw the Arena
 
 	/**
-	 * Constructor for a Arena object 
+	 * Constructor for a Arena object.
 	 * - radius 	: radius of Arena for a shape like body
 	 * - Bodytype 	: Dynamic or Static 
 	 * - density 	: Mass in [kg] of Arena 
@@ -78,7 +78,7 @@ public class Arena extends GameBody {
 	}
 	
 	/**
-	 * draw the Arena object (bg drawing > Disable Blending)
+	 * draw the Arena object. (bg drawing > Disable Blending)
 	 * 
 	 * 	public void draw(final SpriteBatch sp) {
 	 */

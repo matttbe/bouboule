@@ -49,7 +49,7 @@ public class GraphicManager {
 	public static int				TIME = 30;
 	
 	//Store all the body of the game
-	public ArrayList<GameBody> bodies;
+	private ArrayList<GameBody> bodies;
 	
 	/*
 	 * Create the world, the body container and define the game as notPaused

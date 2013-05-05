@@ -43,10 +43,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 /**
- * Class that define bonus that can be found on the board
+ * Class that define bonus that can be found on the board.
  *
  */
-public class Bonus extends GameBody{
+public class Bonus extends GameBody {
 
 	private TextureRegion 	texture;		//Texture of the Bonus
 	private Sprite 			sprite;			//Sprite to draw the Bonus
@@ -66,16 +66,16 @@ public class Bonus extends GameBody{
 	 *		final float angle, final String texRegionPath, 
 	 *		final String jsonFile, final String jsonName, final short bonusType)
 	 */
-	public Bonus( final float angle, final String texRegionPath, 
-			final String jsonFile, final String jsonName, Entity.BonusType bonusType) {
+	public Bonus(final float angle, final String texRegionPath, 
+			final String jsonFile, final String jsonName, final Entity.BonusType bonusType) {
 
 		super();
 
 		int size = GlobalSettings.ARENAWAYPOINTALLOW.size();
 		MapNode node = GlobalSettings.ARENAWAYPOINTALLOW.get(random.nextInt(size));
 
-		Vector2 pos	= new Vector2(node.xToPixel()-32, node.yToPixel()-32);
-		Vector2 radius = new Vector2(node.weightToPixel()*random.nextFloat(),0);
+		Vector2 pos	= new Vector2(node.xToPixel() - 32, node.yToPixel()-32);
+		Vector2 radius = new Vector2(node.weightToPixel() * random.nextFloat(), 0);
 		radius.rotate(random.nextInt(359));
 		pos.add(radius);
 
@@ -96,7 +96,7 @@ public class Bonus extends GameBody{
 	}
 
 	/**
-	 * (non-Javadoc)
+	 * (non-Javadoc).
 	 * @see be.ac.ucl.lfsab1509.bouboule.game.body.GameBody#
 	 * draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)
 	 */

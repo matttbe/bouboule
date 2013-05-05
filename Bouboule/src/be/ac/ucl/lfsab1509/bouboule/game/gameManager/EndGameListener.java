@@ -45,8 +45,8 @@ public class EndGameListener implements ContactListener{
 
 	private static int isAlivePlayer 	= 0;
 	private static int isAliveMonster	= 0;
-	
-	 // it's maybe not needed to use that if all actions are launched in the mainloop but is it?
+
+	// it's maybe not needed to use that if all actions are launched in the mainloop but is it?
 	private static AtomicBoolean bIsEnding = new AtomicBoolean();
 
 	@Override
@@ -69,29 +69,31 @@ public class EndGameListener implements ContactListener{
 				if (entity1 == Entity.PLAYER 
 						| entity2 == Entity.PLAYER) {
 
-					isAlivePlayer ++;
+					isAlivePlayer++;
 					// Gdx.app.log("Alive", "Begin Contact = "+isAlivePlayer);
 
 				} else if (entity1 == Entity.MONSTER 
 						| entity2 == Entity.MONSTER) {
 
-					isAliveMonster ++;
+					isAliveMonster++;
 				}
 
 			}
 
-		} else if((entity1 == Entity.PLAYER  && entity2 == Entity.MONSTER) |
-				(entity1 == Entity.MONSTER && entity2 == Entity.PLAYER) ) {
+		} else if ((entity1 == Entity.PLAYER  && entity2 == Entity.MONSTER) 
+				| (entity1 == Entity.MONSTER && entity2 == Entity.PLAYER)) {
 
 			// Gdx.app.log("Chocs de Bouboules", "CHOCS || CHOCS");
-			GlobalSettings.GAME.hitSound ();
+			GlobalSettings.GAME.hitSound();
 
-		}
-		else if(entity1 == Entity.BONUS) {
-			((Entity) contact.getFixtureA().getBody().getUserData()).attributeBonus(entity2, contact.getFixtureB());
-		}
-		else if(entity2 == Entity.BONUS) {
-			((Entity) contact.getFixtureB().getBody().getUserData()).attributeBonus(entity1, contact.getFixtureA());
+		
+		} else if (entity1 == Entity.BONUS) {
+			((Entity) contact.getFixtureA().getBody().getUserData()).attributeBonus(entity2, 
+					contact.getFixtureB());
+		
+		} else if (entity2 == Entity.BONUS) {
+			((Entity) contact.getFixtureB().getBody().getUserData()).attributeBonus(entity1, 
+					contact.getFixtureA());
 		}
 
 	}
@@ -112,25 +114,27 @@ public class EndGameListener implements ContactListener{
 
 				if (isAlivePlayer > 1) {
 					//DO NOTHING =)
-					isAlivePlayer --;
+					isAlivePlayer--;
 					// Gdx.app.log("Alive", "End Contact = "+isAlivePlayer);
 					//DO NOTHING =)
 
-				}
-				else if (GlobalSettings.GAME_EXIT == GameExitStatus.NONE) { // we can loose and win the game at the same time!!
-					looseGame ();
+				
+				} else if (GlobalSettings.GAME_EXIT == GameExitStatus.NONE) { 
+					// we can loose and win the game at the same time!!
+					looseGame();
 					//Gdx.app.exit();
 				}
-			}
-			else if (entity1 == Entity.MONSTER 
-					| entity2 == Entity.MONSTER){
+				
+			} else if (entity1 == Entity.MONSTER 
+					| entity2 == Entity.MONSTER) {
 				if (isAliveMonster > 1) {
 					/// Gdx.app.log("Alive", "MONSTER is alive " + (isAliveMonster-1));
 					//DO NOTHING
-					isAliveMonster --;
-				}
-				else if (GlobalSettings.GAME_EXIT == GameExitStatus.NONE) { // we can loose and win the game at the same time!!
-					winGame ();
+					isAliveMonster--;
+				
+				} else if (GlobalSettings.GAME_EXIT == GameExitStatus.NONE) { 
+					// we can loose and win the game at the same time!!
+					winGame();
 				}
 
 			}
@@ -152,75 +156,81 @@ public class EndGameListener implements ContactListener{
 		isAliveMonster	= 0;
 	}
 
-	private static void endGame (boolean bWithMenu) {
-		Gdx.app.log ("KILL", "EndGame: hide + launch menu");
-		if (GlobalSettings.GAME.getScreen () != null) // if the screen is not launched (at startup)
-			GlobalSettings.GAME.getScreen ().hide (); // notify the screen that we'll need a new game
+	private static void endGame(final boolean bWithMenu) {
+		Gdx.app.log("KILL", "EndGame: hide + launch menu");
+		if (GlobalSettings.GAME.getScreen() != null) { // if the screen is not launched (at startup)
+			GlobalSettings.GAME.getScreen().hide(); // notify the screen that we'll need a new game
+		}
 
-		if (bWithMenu)
-			GlobalSettings.MENUS.launchEndGameMenu ();
-	}
-
-	public static void looseGame () {
-		Gdx.app.log("KILL", "Bouboule is dead!");
-		
-		if (bIsEnding.compareAndSet (false, true)) {
-			// avoid the case where both bouboules loose (go away at the "same" time)
-
-			GlobalSettings.PROFILE.addScorePermanent (- GlobalSettings.INIT_SCORE / 2);
-			GlobalSettings.PROFILE.cancelNewScore ();
-			if (GlobalSettings.PROFILE.addLifes (-1))
-				GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
-			else {
-				GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
-				GlobalSettings.PROFILE.checkHighScoreAndResetProfile ();
-			}
-	
-			GlobalSettings.GAME.looseSound ();
-			endGame (true);
-
-			bIsEnding.set (false);
+		if (bWithMenu) {
+			GlobalSettings.MENUS.launchEndGameMenu();
 		}
 	}
 
-	public static void winGame () {
+	public static void looseGame() {
+		Gdx.app.log("KILL", "Bouboule is dead!");
+
+		if (bIsEnding.compareAndSet(false, true)) {
+			// avoid the case where both bouboules loose (go away at the "same" time)
+
+			GlobalSettings.PROFILE.addScorePermanent(-GlobalSettings.INIT_SCORE / 2);
+			GlobalSettings.PROFILE.cancelNewScore();
+			if (GlobalSettings.PROFILE.addLifes(-1)) {
+				GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
+			
+			} else {
+				GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
+				GlobalSettings.PROFILE.checkHighScoreAndResetProfile();
+			}
+
+			GlobalSettings.GAME.looseSound();
+			endGame(true);
+
+			bIsEnding.set(false);
+		}
+	}
+
+	public static void winGame() {
 		Gdx.app.log("KILL", "Bouboule win!");
 
-		if (bIsEnding.compareAndSet (false, true)) {
+		if (bIsEnding.compareAndSet(false, true)) {
 			// avoid the case where both bouboules loose (go away at the "same" time)
 
-			GlobalSettings.PROFILE.saveScore ();
-			if (GlobalSettings.PROFILE.LevelUp ())
+			GlobalSettings.PROFILE.saveScore();
+			if (GlobalSettings.PROFILE.levelUp()) {
 				GlobalSettings.GAME_EXIT = GameExitStatus.WIN;
-			else { // no more level: end game
+			
+			} else { // no more level: end game
+				
 				GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
-				GlobalSettings.PROFILE.checkHighScoreAndResetProfile ();
+				GlobalSettings.PROFILE.checkHighScoreAndResetProfile();
 			}
-	
-			GlobalSettings.GAME.winSound ();
-			endGame (true);
 
-			bIsEnding.set (false);
+			GlobalSettings.GAME.winSound();
+			endGame(true);
+
+			bIsEnding.set(false);
 		}
 	}
 
-	public static void cancelGame () {
+	public static void cancelGame() {
 		Gdx.app.log("KILL", "Cancel Game!");
-		if (GlobalSettings.GAME.getTimer ().isRunning ()) {
-			GlobalSettings.PROFILE.cancelNewScore ();
+		if (GlobalSettings.GAME.getTimer().isRunning()) {
+			GlobalSettings.PROFILE.cancelNewScore();
 			GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER; // we need a new game
-			endGame (false);
+			endGame(false);
 			GlobalSettings.GAME_EXIT = GameExitStatus.NONE; // we need a new game
 		}
 	}
 
-	public static void resetGame () {
+	public static void resetGame() {
 		Gdx.app.log("KILL", "Reset Game!");
-		if (GlobalSettings.GAME.getTimer ().isRunning ())
-			GlobalSettings.PROFILE.cancelNewScore ();
+		if (GlobalSettings.GAME.getTimer().isRunning()) {
+			GlobalSettings.PROFILE.cancelNewScore();
+		}
 		GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER; // we need a new game
-		endGame (false);
-		GlobalSettings.PROFILE.checkHighScoreAndResetProfile (); // reset profile
+		endGame(false);
+		GlobalSettings.PROFILE.checkHighScoreAndResetProfile(); // reset profile
 		GlobalSettings.GAME_EXIT = GameExitStatus.NONE;
 	}
 

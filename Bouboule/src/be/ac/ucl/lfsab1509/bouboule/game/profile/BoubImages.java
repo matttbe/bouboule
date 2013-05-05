@@ -47,19 +47,19 @@ public class BoubImages {
 	/**
 	 * @return a list of files all bouboules images which have a normal size
 	 */
-	public static ArrayList<FileHandle> getAllNormalBoub () {
+	public static ArrayList<FileHandle> getAllNormalBoub() {
 		FileHandle pDir = Gdx.files.internal(BOUB_DIR_NORMAL);
 
-		return new ArrayList<FileHandle>(Arrays.asList(pDir.list (".png")));
+		return new ArrayList<FileHandle>(Arrays.asList(pDir.list(".png")));
 	}
 	
 	/**
 	 * @return a list of String, each is the name of a bouboule
 	 */
-	public static ArrayList<String> getBoubName (){
+	public static ArrayList<String> getBoubName() {
 		ArrayList<FileHandle> fh = getAllNormalBoub();
 		ArrayList<String> str = new ArrayList<String>();
-		while (fh.size() != 0){
+		while (fh.size() != 0) {
 			FileHandle tempFH = fh.remove(0);
 			str.add(tempFH.nameWithoutExtension());
 		}

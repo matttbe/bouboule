@@ -35,26 +35,26 @@ public class HighScoreInfo {
 	private int iLevel;
 	private Date pDate;
 
-	public HighScoreInfo (String cName, int iScore, int iLevel, Date pDate) {
+	public HighScoreInfo(String cName, int iScore, int iLevel, Date pDate) {
 		this.cName = cName;
 		this.iScore = iScore;
 		this.iLevel = iLevel;
 		this.pDate = pDate;
 	}
 
-	public String getName () {
+	public String getName() {
 		return cName;
 	}
 
-	public int getScore () {
+	public int getScore() {
 		return iScore;
 	}
 
-	public int getLevel () {
+	public int getLevel() {
 		return iLevel;
 	}
 
-	public Date getDate () {
+	public Date getDate() {
 		return pDate;
 	}
 

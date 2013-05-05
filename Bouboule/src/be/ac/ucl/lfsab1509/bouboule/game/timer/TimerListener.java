@@ -28,14 +28,14 @@ package be.ac.ucl.lfsab1509.bouboule.game.timer;
 
 public interface TimerListener {
 	/**
-	 * Launch during each iteration
+	 * Launch during each iteration.
 	 */
-	public void run ();
+	public void run();
 
 	/**
-	 * Called just before the creation of a timer
+	 * Called just before the creation of a timer.
 	 */
-	public void newTimer (final int iRemainingTime);
+	public void newTimer(final int iRemainingTime);
 
 	/*public void play ();
 

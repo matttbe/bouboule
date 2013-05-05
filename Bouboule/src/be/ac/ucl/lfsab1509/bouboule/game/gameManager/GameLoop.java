@@ -47,7 +47,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 public class GameLoop {
 
 	private static  GraphicManager 		graphicManager;
-	public static int iBonus = -1;
+	public static int 			iBonus = -1;
 	private Box2DDebugRenderer 	debugRenderer;
 	private Matrix4 			debugMatrix;
 
@@ -96,11 +96,11 @@ public class GameLoop {
 
 		fontOsakaRed = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
 				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
-		fontOsakaRed.setColor (.95f, .05f, .05f, 1f);
+		fontOsakaRed.setColor(.95f, .05f, .05f, 1f);
 
 		//load the counter 
 		countDown = new CountDown(2, 2, 0.7f, "anim/countdown.png", true);
-		
+
 		//load the tuto
 		tutorial = new CountDown(2, 1, 4f, "anim/tuto.png",false);
 
@@ -109,12 +109,12 @@ public class GameLoop {
 	}
 
 	/** 
-	 * Used to (re)start a new game
+	 * Used to (re)start a new game.
 	 */
 	public void start() {
 
-		Gdx.app.log("Matth","Dipose of the graphicManager");
-		
+		Gdx.app.log("Matth", "Dipose of the graphicManager");
+
 		//Clear the graphic Manager for a new use.
 		graphicManager.dispose();
 
@@ -124,20 +124,20 @@ public class GameLoop {
 		//load level
 		int iLevel = GlobalSettings.PROFILE.getLevel();
 		try {
-			level.loadLevel ("Level" + iLevel);
+			level.loadLevel("Level" + iLevel);
 		} catch (GdxRuntimeException e) {
-			level.loadLevel ("Level1"); // TODO: should not happen...
+			level.loadLevel("Level1"); // TODO: should not happen...
 		}
 		level.readLevelArena	(graphicManager);
 		level.readLevelBouboule (graphicManager);
 		level.readLevelObstacles(graphicManager);
-		level.readLevelMapNodes ();
+		level.readLevelMapNodes();
 
 	}
 
 
 	/**
-	 * Update the ball position thanks to the accelerometer and
+	 * Update the ball position thanks to the accelerometer and.
 	 * launch the physical update function of dt the time between 2 frames
 	 * 
 	 * update(float dt)
@@ -145,17 +145,18 @@ public class GameLoop {
 	public void update() {
 		graphicManager.update();
 
-		if (GraphicManager.ALLOW_BONUS == true)
+		if (GraphicManager.ALLOW_BONUS) {
 			bonus(false);
+		}
 
 	}
 
 	/**
-	 * Draw all the needed bodies of the game
+	 * Draw all the needed bodies of the game.
 	 * 
 	 * render(final boolean pause, float delta)
 	 */
-	public boolean render(final boolean pause, float delta) {
+	public boolean render(final boolean pause, final float delta) {
 
 		boolean status = false;
 
@@ -176,13 +177,14 @@ public class GameLoop {
 		writeText();
 
 		if (pause) { // draw the countdown or tuto
-			
-			
+
+
 			if (GlobalSettings.PROFILE.needTutorial()) {
 				GlobalSettings.PROFILE.setNeedTutorial(tutorial.draw(batch, delta));
 				status 	= true;
-			} else 
+			} else {
 				status 	= countDown.draw(batch,  delta);
+			}
 		}
 
 		batch.end();
@@ -195,149 +197,162 @@ public class GameLoop {
 		return status;
 	}
 
-	private static boolean canEnabledBonus (String cBonus) {
+	private static boolean canEnabledBonus(final String cBonus) {
 		return (GraphicManager.BONUS_ENABLED == null
-				|| GraphicManager.BONUS_ENABLED.contains (cBonus));
+				|| GraphicManager.BONUS_ENABLED.contains(cBonus));
 	}
 
 	/**
-	 * Create a Bonus instance in the GraphicManager if the spawn rate is reached
+	 * Create a Bonus instance in the GraphicManager if the spawn rate is reached.
 	 * 
 	 *  private void bonus()
 	 */
-	public static void bonus (boolean bForce) {
+	public static void bonus(final boolean bForce) {
 
 		if (bForce || random.nextInt(GraphicManager.BONUS_SPAWN_RATE) == 5) {
 			// add a new bonus to get more lifes only if we have less than 3 lifes
-			int nextInt, iNBonus = Entity.BonusType.values ().length;
-			if (iBonus == -1)
-				nextInt = random.nextInt (iNBonus + 1);
-			else
+			int nextInt, iNBonus = Entity.BonusType.values().length;
+			if (iBonus == -1) {
+				nextInt = random.nextInt(iNBonus + 1);
+			} else {
 				nextInt = iBonus;
+			}
 
 			switch (nextInt) {
-				case 0:
-					if (canEnabledBonus ("speed")) {
-						Gdx.app.log("bonus", "new speed-created");
-						graphicManager.addBody(new Bonus( 0,
-								"bonus/speed/speed_low.png", "bonus/speed/speed_low.json", "speed_low", Entity.BonusType.SPEED_LOW));
-						break;
-					}
-				case 1:
-					if (canEnabledBonus ("invincible")) {
-						Gdx.app.log("bonus", "new invincible created");
-						graphicManager.addBody(new Bonus( 0,
-								"bonus/invincible/invincible.png", "bonus/invincible/invincible.json", "invincible", Entity.BonusType.INVINCIBLE));
-						break;
-					}
+			case 0:
+				if (canEnabledBonus("speed")) {
+					Gdx.app.log("bonus", "new speed-created");
+					graphicManager.addBody(new Bonus(0, "bonus/speed/speed_low.png", 
+							"bonus/speed/speed_low.json", "speed_low", Entity.BonusType.SPEED_LOW));
+					break;
+				}
+			case 1:
+				if (canEnabledBonus("invincible")) {
+					Gdx.app.log("bonus", "new invincible created");
+					graphicManager.addBody(new Bonus(0, "bonus/invincible/invincible.png", 
+							"bonus/invincible/invincible.json", "invincible", 
+							Entity.BonusType.INVINCIBLE));
+					break;
+				}
 
-				case 2:
-					if (canEnabledBonus ("elast")) {
-						Gdx.app.log("bonus", "new elasticity+ created");
-						graphicManager.addBody(new Bonus( 0,
-								"bonus/elasticity/elasticity_high.png", "bonus/elasticity/elasticity_high.json", "elasticity_high", Entity.BonusType.ELASTICITY_HIGH));
-						break;
-					}
-				case 3:
-					if (canEnabledBonus ("weight")) {
-						Gdx.app.log("bonus", "new weight+ created");
-						graphicManager.addBody(new Bonus( 0,
-								"bonus/weight/weight_high.png", "bonus/weight/weight_high.json", "weight_high", Entity.BonusType.WEIGHT_HIGH));
-						break;
-					}
+			case 2:
+				if (canEnabledBonus("elast")) {
+					Gdx.app.log("bonus", "new elasticity+ created");
+					graphicManager.addBody(new Bonus(0, "bonus/elasticity/elasticity_high.png", 
+							"bonus/elasticity/elasticity_high.json", "elasticity_high", 
+							Entity.BonusType.ELASTICITY_HIGH));
+					break;
+				}
+			case 3:
+				if (canEnabledBonus("weight")) {
+					Gdx.app.log("bonus", "new weight+ created");
+					graphicManager.addBody(new Bonus(0, "bonus/weight/weight_high.png", 
+							"bonus/weight/weight_high.json", "weight_high", 
+							Entity.BonusType.WEIGHT_HIGH));
+					break;
+				}
 
-				case 4:
-					if (canEnabledBonus ("weight")) {
-						Gdx.app.log("bonus", "new weight- created");
-						graphicManager.addBody(new Bonus( 0,
-								"bonus/weight/weight_low.png", "bonus/weight/weight_low.json", "weight_low", Entity.BonusType.WEIGHT_LOW));
-						break;
-					}
+			case 4:
+				if (canEnabledBonus("weight")) {
+					Gdx.app.log("bonus", "new weight- created");
+					graphicManager.addBody(new Bonus(0, "bonus/weight/weight_low.png", 
+							"bonus/weight/weight_low.json", "weight_low", 
+							Entity.BonusType.WEIGHT_LOW));
+					break;
+				}
 
-				case 5:
-					if (GlobalSettings.PROFILE.getNbLifes () < GlobalSettings.MAX_LIFES
-							&& canEnabledBonus ("life")) {
-						Gdx.app.log("bonus", "new heart created");
-						graphicManager.addBody(new Bonus( 0,
-								"bonus/heart/heart.png", "bonus/heart/heart.json", "heart", Entity.BonusType.LIVE_UP));
-						break;
-					}
+			case 5:
+				if (GlobalSettings.PROFILE.getNbLifes() < GlobalSettings.MAX_LIFES
+						&& canEnabledBonus("life")) {
+					Gdx.app.log("bonus", "new heart created");
+					graphicManager.addBody(new Bonus(0, "bonus/heart/heart.png", 
+							"bonus/heart/heart.json", "heart", Entity.BonusType.LIVE_UP));
+					break;
+				}
 
-				case 6:
-					if (canEnabledBonus ("elast")) {
-						Gdx.app.log("bonus", "new elasticity- created");
-						graphicManager.addBody(new Bonus( 0,
-								"bonus/elasticity/elasticity_low.png", "bonus/elasticity/elasticity_low.json", "elasticity_low", Entity.BonusType.ELASTICITY_LOW));
-						break;
-					}
+			case 6:
+				if (canEnabledBonus("elast")) {
+					Gdx.app.log("bonus", "new elasticity- created");
+					graphicManager.addBody(new Bonus(0, "bonus/elasticity/elasticity_low.png", 
+							"bonus/elasticity/elasticity_low.json", "elasticity_low", 
+							Entity.BonusType.ELASTICITY_LOW));
+					break;
+				}
 
-				case 7:
-					if (canEnabledBonus ("speed")) {
-						Gdx.app.log("bonus", "new speed+created");
-						graphicManager.addBody(new Bonus( 0,
-								"bonus/speed/speed_high.png", "bonus/speed/speed_high.json", "speed_high", Entity.BonusType.SPEED_HIGH));
-						break;
-					}
-				case 8:
-					if (canEnabledBonus ("invisible")) {
-						Gdx.app.log("bonus", "new invisible created");
-						graphicManager.addBody(new Bonus( 0,
-								"bonus/invisible/invisible.png", "bonus/invisible/invisible.json", "invisible", Entity.BonusType.INVISIBLE));
-						break;
-					}
-				case 9:
-					if (canEnabledBonus ("inverse")) {
-						Gdx.app.log("bonus", "new inverse created");
-						graphicManager.addBody(new Bonus( 0,
-								"bonus/inverse/inverse.png", "bonus/inverse/inverse.json", "inverse", Entity.BonusType.INVERSE));
-						break;
-					}
-				default:
-					if (canEnabledBonus ("star")) {
-						Gdx.app.log("bonus", "new star created");
-						graphicManager.addBody(new Bonus( 0,
-								"bonus/star/star.png", "bonus/star/star.json", "star", Entity.BonusType.POINT));
-						break;
-					}
+			case 7:
+				if (canEnabledBonus("speed")) {
+					Gdx.app.log("bonus", "new speed+created");
+					graphicManager.addBody(new Bonus(0, "bonus/speed/speed_high.png", 
+							"bonus/speed/speed_high.json", "speed_high", 
+							Entity.BonusType.SPEED_HIGH));
+					break;
+				}
+			case 8:
+				if (canEnabledBonus("invisible")) {
+					Gdx.app.log("bonus", "new invisible created");
+					graphicManager.addBody(new Bonus(0, "bonus/invisible/invisible.png", 
+							"bonus/invisible/invisible.json", "invisible", 
+							Entity.BonusType.INVISIBLE));
+					break;
+				}
+			case 9:
+				if (canEnabledBonus("inverse")) {
+					Gdx.app.log("bonus", "new inverse created");
+					graphicManager.addBody(new Bonus(0,	"bonus/inverse/inverse.png", 
+							"bonus/inverse/inverse.json", "inverse", Entity.BonusType.INVERSE));
+					break;
+				}
+			default:
+				if (canEnabledBonus("star")) {
+					Gdx.app.log("bonus", "new star created");
+					graphicManager.addBody(new Bonus(0, "bonus/star/star.png", 
+							"bonus/star/star.json", "star", Entity.BonusType.POINT));
+					break;
+				}
 			}
 		}
 	}
 
-	private CharSequence getTimerCharFromInt (int iNumber) {
-		if (iNumber == 0)
+	private CharSequence getTimerCharFromInt(final int iNumber) {
+		if (iNumber == 0) {
 			return "00";
-		else
+		} else {
 			return Integer.toString(iNumber);
+		}
 	}
 	/**
-	 * Write the lives/levels/score and Timer text on the screen
+	 * Write the lives/levels/score and Timer text on the screen.
 	 */
 	private void writeText() {
-		if (! GlobalSettings.GAME.getTimer ().isRunning()) // avoid displaying the wrong level at the end of the game and crashes
+		if (!GlobalSettings.GAME.getTimer().isRunning()) {
+			// avoid displaying the wrong level at the end of the game and crashes
 			return;
+		}
+			
 
-		CharSequence lives = Integer.toString(GlobalSettings.PROFILE.getNbLifes ());
-		CharSequence levelD= Integer.toString(GlobalSettings.PROFILE.getLevel   ()/10);
-		CharSequence levelU= Integer.toString(GlobalSettings.PROFILE.getLevel   ()%10);
-		CharSequence score = Integer.toString(GlobalSettings.PROFILE.getScore());
+		CharSequence lives  = Integer.toString(GlobalSettings.PROFILE.getNbLifes ());
+		CharSequence levelD = Integer.toString(GlobalSettings.PROFILE.getLevel   ()/10);
+		CharSequence levelU = Integer.toString(GlobalSettings.PROFILE.getLevel   ()%10);
+		CharSequence score  = Integer.toString(GlobalSettings.PROFILE.getScore());
 
-		int timer = GlobalSettings.PROFILE.getRemainingTime ();
-		
+		int timer = GlobalSettings.PROFILE.getRemainingTime();
+
 		if (timer < 0) {
-			EndGameListener.looseGame ();
+			EndGameListener.looseGame();
 			return;
 		}
 
-		CharSequence timerM = Integer.toString (timer / 60);
-		CharSequence timerS = getTimerCharFromInt (timer % 60);
+		CharSequence timerM = Integer.toString(timer / 60);
+		CharSequence timerS = getTimerCharFromInt(timer % 60);
 
-		if (timer < 6) // last 5 seconds
+		if (timer < 6) { // last 5 seconds
 			fontOsakaRed.draw(batch, timerS + "''" , 630, 1122);
-		else if (timer < 60)
+		} else if (timer < 60) {
 			fontOsaka.draw(batch, timerS + "''" , 630, 1122);
-		else
-			fontOsaka.draw(batch, timerM + "' "+timerS+"''" , 630, 1122);
-		
+		} else {
+			fontOsaka.draw(batch, timerM + "' " + timerS + "''" , 630, 1122);
+		}
+
 		fontOsaka .draw(batch, lives , 630, 1167);
 		fontOsaka .draw(batch, score , 630, 1205);
 		fontOswald.draw(batch, levelD, 285, 1180);
@@ -357,7 +372,7 @@ public class GameLoop {
 		countDown.dispose();
 	}
 
-	public CountDown getCountDown () {
+	public CountDown getCountDown() {
 		return countDown;
 	}
 
