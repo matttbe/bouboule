@@ -128,7 +128,10 @@ public class MenuParametre_user extends Activity {
 		openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
 		openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
 
+		user_newname.setText(""); // remove text
+
 		// set the current and max levels
+		user_choose_level.setText(""); // remove text
 		int iBestLevel = GlobalSettings.PROFILE.getName()
 				.compareTo(GlobalSettings.CHEATER_NAME) == 0
 				? GlobalSettings.NBLEVELS : GlobalSettings.PROFILE.getBestLevel();
