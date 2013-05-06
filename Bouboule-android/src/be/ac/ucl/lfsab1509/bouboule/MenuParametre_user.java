@@ -149,11 +149,7 @@ public class MenuParametre_user extends Activity {
 			if (!GlobalSettings.PROFILE.getName().equals(listProfile.get((int) id))) {
 				Log.d("LN","change of user : " + GlobalSettings.PROFILE.getName() + " - " + listProfile.get((int) id));
 				GlobalSettings.PROFILE_MGR.changeProfile (listProfile.get((int) id));
-				boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
-				// update the pictures of the bouboules for the selection
-				openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
-				openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
-				openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
+				refreshScreen();
 			}
 		}
 		@Override
