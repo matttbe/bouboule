@@ -118,7 +118,6 @@ public class LevelLoader {
 
 				// Level
 				GraphicManager.TIME = Integer.parseInt(file.getAttribute("time", "30"));
-				GlobalSettings.GAME.setNewLoopMusic(file.getAttribute ("music", null)); // e.g. klez.mp3
 
 				// IA
 				IA.ACC_MAX_IA = Float.parseFloat(file.getAttribute("accmaxia", "0.5f")); 
@@ -219,6 +218,8 @@ public class LevelLoader {
 
 		graphicManager.addBody(new Arena(radius, px, py,  angle, texRegionPath, 
 				jsonFile,  jsonName));
+
+		GlobalSettings.GAME.setNewLoopMusic(file.getAttribute ("music", null)); // e.g. klez.mp3
 
 		Gdx.app.log("XML", "Arena Loaded :" + jsonName);
 

@@ -26,6 +26,8 @@ package be.ac.ucl.lfsab1509.bouboule.game;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.util.Random;
+
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.MyGestureListener;
@@ -41,9 +43,11 @@ import com.badlogic.gdx.input.GestureDetector;
 public class MyGame extends Game {
 
 	private ScreenGame screenGame;
-	private Sound hitSound;
+	private Sound hitSounds[];
 	private Sound winSound;
 	private Sound looseSound;
+	private Sound countdownSound;
+	private Random rand;
 
 	private TimerMgr timer;
 
@@ -60,9 +64,17 @@ public class MyGame extends Game {
 	@Override
 	public void create() {
 		Gdx.app.log("Matth", "Game: Create");
-		hitSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3")); // TODO: find sound and use parameters?
-		winSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
-		looseSound = Gdx.audio.newSound(Gdx.files.internal("music/drop.mp3"));
+		hitSounds = new Sound[5];
+		hitSounds[0] = Gdx.audio.newSound(Gdx.files.internal("music/sounds/hit1.mp3"));
+		hitSounds[1] = Gdx.audio.newSound(Gdx.files.internal("music/sounds/hit2.mp3"));
+		hitSounds[2] = Gdx.audio.newSound(Gdx.files.internal("music/sounds/hit3.mp3"));
+		hitSounds[3] = Gdx.audio.newSound(Gdx.files.internal("music/sounds/hit4.mp3"));
+		hitSounds[4] = Gdx.audio.newSound(Gdx.files.internal("music/sounds/hit5.mp3"));
+		rand = new Random();
+
+		winSound = Gdx.audio.newSound(Gdx.files.internal("music/sounds/win.mp3"));
+		looseSound = Gdx.audio.newSound(Gdx.files.internal("music/sounds/loose.mp3"));
+		countdownSound = Gdx.audio.newSound(Gdx.files.internal("music/sounds/countdown.mp3"));
 
 		if (GlobalSettings.GAME == null) { // should not happen!!!
 			init();
@@ -77,14 +89,18 @@ public class MyGame extends Game {
 	@Override
 	public void dispose() {
 		super.dispose();
-		hitSound.dispose();
+		for (Sound hitSound : hitSounds) {
+			hitSound.dispose();
+		}
 		winSound.dispose();
 		looseSound.dispose();
+		countdownSound.dispose();
 	}
 	
 	public void hitSound() {
 		if (!GlobalSettings.SOUND_IS_MUTED) {
-			hitSound.play();
+			int index = rand.nextInt(hitSounds.length);
+			hitSounds[index].play();
 		}
 	}
 	
@@ -100,15 +116,22 @@ public class MyGame extends Game {
 		}
 	}
 
+	public void countdownSound() {
+		if (!GlobalSettings.SOUND_IS_MUTED) {
+			countdownSound.play();
+		}
+	}
+
 	/**
-	 * @param cNewMusic should be a file that can be read by GDX in 'music'
+	 * @param cNewMusic should be a file that can be read by GDX
+	 * in 'assets/music/levels'
 	 */
 	public void setNewLoopMusic(final String cNewMusic) {
 		if (screenGame == null) { // not loaded yet.
 			return;
 		}
 		if (cNewMusic != null) {
-			FileHandle pMusicFile = Gdx.files.internal("music/" + cNewMusic);
+			FileHandle pMusicFile = Gdx.files.internal("music/levels/" + cNewMusic);
 			if (pMusicFile.exists()) {
 				screenGame.setNewLoopMusic(pMusicFile);
 				return;

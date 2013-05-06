@@ -99,7 +99,7 @@ public class GameLoop {
 		fontOsakaRed.setColor(.95f, .05f, .05f, 1f);
 
 		// load the counter
-		countDown = new CountDown(2, 2, 0.7f, "anim/countdown.png", true);
+		countDown = new CountDown(2, 2, 1f, "anim/countdown.png", true); // 3 sec
 
 		// load the tuto
 		tutorial = new CountDown(2, 1, 4f, "anim/tuto.png", false);

@@ -39,7 +39,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Arena/arena.jpg" >
+            texRegionPath="terrain/Arena/arena.jpg"
+            music="Arena.mp3" >
         </Arena>
 
         <MapNodes terrain="arena" >
@@ -103,7 +104,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Arena/arena.jpg" >
+            texRegionPath="terrain/Arena/arena.jpg"
+            music="Arena.mp3" >
         </Arena>
 
         <MapNodes terrain="arena" >
@@ -167,7 +169,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Eggroll/eggroll.jpg" >
+            texRegionPath="terrain/Eggroll/eggroll.jpg"
+            music="Eggroll.mp3" >
         </Arena>
 
         <MapNodes terrain="Eggroll" >
@@ -280,7 +283,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/DoubleHoles/doubleholes.jpg" >
+            texRegionPath="terrain/DoubleHoles/doubleholes.jpg"
+            music="DoubleHoles.mp3" >
         </Arena>
 
         <MapNodes terrain="Doubleholes" >
@@ -445,7 +449,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Ice/ice.jpg" >
+            texRegionPath="terrain/Ice/ice.jpg"
+            music="Ice.mp3" >
         </Arena>
 
         <MapNodes terrain="Ice" >
@@ -496,7 +501,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Schrink/schrink.jpg" >
+            texRegionPath="terrain/Schrink/schrink.jpg"
+            music="Schrink.mp3" >
         </Arena>
 
         <MapNodes terrain="schrink" >
@@ -570,7 +576,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Cheesy/cheesy.jpg" >
+            texRegionPath="terrain/Cheesy/cheesy.jpg"
+            music="Cheesy.mp3" >
         </Arena>
 
         <MapNodes terrain="cheesy" >
@@ -723,7 +730,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Sushi/sushi.jpg" >
+            texRegionPath="terrain/Sushi/sushi.jpg"
+            music="Sushi.mp3" >
         </Arena>
 
         <MapNodes terrain="sushi" >
@@ -814,7 +822,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Arena/arena.jpg" >
+            texRegionPath="terrain/Arena/arena.jpg"
+            music="Arena.mp3" >
         </Arena>
 
         <MapNodes terrain="arena" >
@@ -876,7 +885,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Tatami/tatami.jpg" >
+            texRegionPath="terrain/Tatami/tatami.jpg"
+            music="Tatami.mp3" >
         </Arena>
 
         <MapNodes terrain="tatami" >
@@ -1175,7 +1185,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Arena/arena.jpg" >
+            texRegionPath="terrain/Arena/arena.jpg"
+            music="Arena.mp3" >
         </Arena>
 
         <MapNodes terrain="arena" >
@@ -1288,7 +1299,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/YinYang/yinyang.jpg" >
+            texRegionPath="terrain/YinYang/yinyang.jpg"
+            music="YinYang.mp3" >
         </Arena>
 
         <MapNodes terrain="yingyang" >
@@ -1368,7 +1380,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/OneWay/oneway.jpg" >
+            texRegionPath="terrain/OneWay/oneway.jpg"
+            music="OneWay.mp3" >
         </Arena>
 
         <MapNodes terrain="Oneway" >
@@ -1603,7 +1616,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Rock/rock.jpg" >
+            texRegionPath="terrain/Rock/rock.jpg"
+            music="Rock.mp3" >
         </Arena>
 
         <MapNodes terrain="rock" >
@@ -1654,7 +1668,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Skyline/sky.jpg" >
+            texRegionPath="terrain/Skyline/sky.jpg"
+            music="Skyline.mp3" >
         </Arena>
 
         <MapNodes terrain="sky" >
@@ -1705,7 +1720,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Tatami/tatami.jpg" >
+            texRegionPath="terrain/Tatami/tatami.jpg"
+            music="Tatami.mp3" >
         </Arena>
 
         <MapNodes terrain="tatami" >
@@ -1854,7 +1870,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Lava/lava.jpg" >
+            texRegionPath="terrain/Lava/lava.jpg"
+            music="Lava.mp3" >
         </Arena>
 
         <MapNodes terrain="Lava" >
@@ -1905,7 +1922,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Ice/ice.jpg" >
+            texRegionPath="terrain/Ice/ice.jpg"
+            music="Ice.mp3" >
         </Arena>
 
         <MapNodes terrain="Ice" >
@@ -2012,7 +2030,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Eggroll/eggroll.jpg" >
+            texRegionPath="terrain/Eggroll/eggroll.jpg"
+            music="Eggroll.mp3" >
         </Arena>
 
         <MapNodes terrain="Eggroll" >
@@ -2154,7 +2173,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Lava/lava.jpg" >
+            texRegionPath="terrain/Lava/lava.jpg"
+            music="Lava.mp3" >
         </Arena>
 
         <MapNodes terrain="Lava" >

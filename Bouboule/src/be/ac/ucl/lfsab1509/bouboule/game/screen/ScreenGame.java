@@ -61,7 +61,7 @@ public class ScreenGame implements Screen {
 
 	// INIT => on create
 	public ScreenGame() {
-		loopMusicDefaultFile = loopMusicFile = Gdx.files.internal("music/klez.mp3");
+		loopMusicDefaultFile = loopMusicFile = Gdx.files.internal("music/levels/klez.mp3");
 		loopMusic = Gdx.audio.newMusic(loopMusicFile);
 		loopMusic.setLooping(true);
 
@@ -146,7 +146,9 @@ public class ScreenGame implements Screen {
 			
 			bIsPause = false;
 		}
-		// else: nothing to do, we are waiting for the signal from the countdown
+		// nothing to do more, we are waiting for the signal from the countdown
+		else
+			GlobalSettings.GAME.countdownSound();
 	}
 
 	@Override
