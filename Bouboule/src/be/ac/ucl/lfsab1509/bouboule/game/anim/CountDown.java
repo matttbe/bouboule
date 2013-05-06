@@ -95,6 +95,7 @@ public class CountDown {
 	public boolean draw(final SpriteBatch batch, final float delta) {
 		if (bFirstTime) {
 			bFirstTime = false;
+			GlobalSettings.GAME.countdownSound();
 			return true; // skip the first render, it's ok
 		}
 		

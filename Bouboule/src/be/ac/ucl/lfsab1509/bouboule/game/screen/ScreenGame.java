@@ -146,9 +146,7 @@ public class ScreenGame implements Screen {
 			
 			bIsPause = false;
 		}
-		// nothing to do more, we are waiting for the signal from the countdown
-		else
-			GlobalSettings.GAME.countdownSound();
+		// else nothing to do more, we are waiting for the signal from the countdown
 	}
 
 	@Override
