@@ -81,6 +81,10 @@ public class MenuParametre_global extends Activity {
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			if (buttonView == sound_switch){
 				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSoundSettings(!sound_switch.isChecked());
+				if (GlobalSettings.SOUND_IS_MUTED)
+					MyAndroidMenus.onStopMusic(MenuParametre_global.this);
+				else
+					MyAndroidMenus.onResumeMusic(MenuParametre_global.this);
 			} else if (buttonView == rotate_switch){
 				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeFixedRotation(!rotate_switch.isChecked());
 			}
