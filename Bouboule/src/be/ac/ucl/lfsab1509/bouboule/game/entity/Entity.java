@@ -347,7 +347,6 @@ public class Entity {
 	}
 
 	private void invincible(final boolean bInvincible) {
-		// TODO: maybe change something else?
 		Gdx.app.log("bonus",
 				"Invincible: " + bInvincible + " " + fixture.isSensor());
 		fixture.setSensor(bInvincible);

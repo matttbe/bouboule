@@ -56,7 +56,6 @@ public class MyAndroidMenus implements Menus {
 	}
 
 
-	// TODO: remove this toast when the score will be displayed somewhere else
 	/*private void displayInfo () {
 		Context context = app.getApplicationContext ();
 		CharSequence text = "Score: " + GlobalSettings.PROFILE.getScore ()

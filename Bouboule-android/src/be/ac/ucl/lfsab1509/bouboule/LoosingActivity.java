@@ -79,7 +79,7 @@ public class LoosingActivity extends Activity {
 			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
 			findViewById(R.id.coeur3).setVisibility(View.INVISIBLE);
 		}
-		else { // TODO: more than 3 lifes?
+		else {
 			findViewById(R.id.coeur1).setVisibility(View.INVISIBLE);
 			findViewById(R.id.coeur2).setVisibility(View.INVISIBLE);
 		}

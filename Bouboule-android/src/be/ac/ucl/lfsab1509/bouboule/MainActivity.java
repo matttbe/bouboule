@@ -108,10 +108,7 @@ public class MainActivity extends AndroidApplication {
 				switch (resultCode) {
 					case R.id.PlayButton:
 						Log.i ("Matth", "Menu Activity finished: start game");
-						/*Intent intent = new Intent (MainActivity.this, ChoosingActivity.class);
-						startActivityForResult (intent, MainActivity.CODE_CHOOSE_ACTIVITY);*/
-						
-						// gameScreen.show (); // TODO: we should do nothing... we are now in the game, no?
+						// we should do nothing... we are now in the game
 						break;
 					default:
 						break;
@@ -124,7 +121,6 @@ public class MainActivity extends AndroidApplication {
 					case R.id.VictoryMenuButton:
 					case R.id.LoosingMenuButton:
 					case R.id.GameOverMenuButton:
-					// case R.id.GameOverMenuButton: // TODO
 						GlobalSettings.MENUS.launchInitMenu ();
 						break;
 					case R.id.VictoryNextLevelButton:
