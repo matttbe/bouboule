@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class MyGestureListener implements GestureListener {
 	
-	private static final String CHEATER_NAME = "Deville";
+	public static final String CHEATER_NAME = "Deville";
 
 	@Override
 	public boolean touchDown(final float x, final float y, final int pointer, final int button) {
