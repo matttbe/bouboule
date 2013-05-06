@@ -73,4 +73,5 @@ public class GlobalSettings {
 	public static Profile			PROFILE = null;
 	public static MyGame			GAME = null;
 	
+	public static final String CHEATER_NAME = "D3Vi113";
 }

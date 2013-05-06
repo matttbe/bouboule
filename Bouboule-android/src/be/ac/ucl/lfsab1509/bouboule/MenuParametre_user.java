@@ -29,7 +29,6 @@ package be.ac.ucl.lfsab1509.bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
-import be.ac.ucl.lfsab1509.bouboule.game.screen.MyGestureListener;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -131,7 +130,7 @@ public class MenuParametre_user extends Activity {
 
 		// set the current and max levels
 		int iBestLevel = GlobalSettings.PROFILE.getName()
-				.compareTo(MyGestureListener.CHEATER_NAME) == 0
+				.compareTo(GlobalSettings.CHEATER_NAME) == 0
 				? GlobalSettings.NBLEVELS : GlobalSettings.PROFILE.getBestLevel();
 		user_choose_level.setHint (getString (R.string.user_choose_level_current)
 				+ iBestLevel + " ("
