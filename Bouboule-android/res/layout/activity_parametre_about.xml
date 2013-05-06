@@ -33,6 +33,10 @@
 		        android:layout_marginBottom="10dp"
 		        android:text="@string/about_nameapp_txt"
 		        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		    <Space
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content" />
 		
 		    <TextView
 		        android:id="@+id/about_authors"
@@ -128,9 +132,16 @@
 		        android:layout_marginBottom="10dp"
 		        android:text="@string/about_date_txt"
 		        android:textAppearance="?android:attr/textAppearanceMedium" />
+		    
+		    <Space
+		        android:layout_width="match_parent"
+		        android:layout_height="50dp" />
+		    
 		
 		</LinearLayout>
  
+		
+		
 	</ScrollView>
 
 </FrameLayout>

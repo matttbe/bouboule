@@ -113,6 +113,10 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginBottom="20dp"
 		        android:text="@string/user_resetgame_button" />
+		    
+		    <Space
+		        android:layout_width="match_parent"
+		        android:layout_height="50dp" />
 			 
 		</LinearLayout>
 	</ScrollView>
