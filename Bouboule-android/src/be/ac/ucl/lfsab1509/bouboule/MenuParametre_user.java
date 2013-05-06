@@ -134,9 +134,11 @@ public class MenuParametre_user extends Activity {
 		user_choose_level.setText(""); // remove text
 		int iBestLevel = GlobalSettings.PROFILE.getName()
 				.compareTo(GlobalSettings.CHEATER_NAME) == 0
-				? GlobalSettings.NBLEVELS : GlobalSettings.PROFILE.getBestLevel();
+				? GlobalSettings.NBLEVELS > 0 // at startup, the xml is not loaded
+						? GlobalSettings.NBLEVELS : GlobalSettings.PROFILE.getBestLevel()
+						: GlobalSettings.PROFILE.getBestLevel();
 		user_choose_level.setHint (getString (R.string.user_choose_level_current)
-				+ iBestLevel + " ("
+				+ GlobalSettings.PROFILE.getLevel() + " ("
 				+ getString (R.string.user_choose_level_max)
 				+ iBestLevel + ")");
 		user_choose_level.setFilters (new InputFilter[] {
