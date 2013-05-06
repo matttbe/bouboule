@@ -211,12 +211,21 @@ public class GameLoop {
 			// lifes
 			int nextInt, iNBonus = Entity.BonusType.values().length;
 			if (iBonus == -1)
-				nextInt = random.nextInt(iNBonus + 1);
+				nextInt = random.nextInt(iNBonus + 2); // 2 lifes
 			else
 				nextInt = iBonus;
 
 			switch (nextInt) {
 			case 0:
+				if (GlobalSettings.PROFILE.getNbLifes() < GlobalSettings.MAX_LIFES
+						&& canEnabledBonus("life")) {
+					Gdx.app.log("bonus", "new heart created");
+					graphicManager.addBody(new Bonus(0,
+							"bonus/heart/heart.png", "bonus/heart/heart.json",
+							"heart", Entity.BonusType.LIVE_UP));
+					break;
+				}
+			case 1:
 				if (canEnabledBonus("speed")) {
 					Gdx.app.log("bonus", "new speed-created");
 					graphicManager.addBody(new Bonus(0,
@@ -225,7 +234,7 @@ public class GameLoop {
 							Entity.BonusType.SPEED_LOW));
 					break;
 				}
-			case 1:
+			case 2:
 				if (canEnabledBonus("invincible")) {
 					Gdx.app.log("bonus", "new invincible created");
 					graphicManager.addBody(new Bonus(0,
@@ -234,7 +243,7 @@ public class GameLoop {
 							Entity.BonusType.INVINCIBLE));
 					break;
 				}
-			case 2:
+			case 3:
 				if (canEnabledBonus("elast")) {
 					Gdx.app.log("bonus", "new elasticity+ created");
 					graphicManager
@@ -245,7 +254,7 @@ public class GameLoop {
 									Entity.BonusType.ELASTICITY_HIGH));
 					break;
 				}
-			case 3:
+			case 4:
 				if (canEnabledBonus("weight")) {
 					Gdx.app.log("bonus", "new weight+ created");
 					graphicManager.addBody(new Bonus(0,
@@ -254,7 +263,7 @@ public class GameLoop {
 							Entity.BonusType.WEIGHT_HIGH));
 					break;
 				}
-			case 4:
+			case 5:
 				if (canEnabledBonus("timedown")) {
 					Gdx.app.log("bonus", "new timedown created");
 					graphicManager.addBody(new Bonus(0,
@@ -263,7 +272,7 @@ public class GameLoop {
 							Entity.BonusType.TIME_DOWN));
 					break;
 				}
-			case 5:
+			case 6:
 				if (canEnabledBonus("weight")) {
 					Gdx.app.log("bonus", "new weight- created");
 					graphicManager.addBody(new Bonus(0,
@@ -272,7 +281,7 @@ public class GameLoop {
 							Entity.BonusType.WEIGHT_LOW));
 					break;
 				}
-			case 6:
+			case 7:
 				if (GlobalSettings.PROFILE.getNbLifes() < GlobalSettings.MAX_LIFES
 						&& canEnabledBonus("life")) {
 					Gdx.app.log("bonus", "new heart created");
@@ -281,7 +290,7 @@ public class GameLoop {
 							"heart", Entity.BonusType.LIVE_UP));
 					break;
 				}
-			case 7:
+			case 8:
 				if (canEnabledBonus("elast")) {
 					Gdx.app.log("bonus", "new elasticity- created");
 					graphicManager.addBody(new Bonus(0,
@@ -290,7 +299,7 @@ public class GameLoop {
 							"elasticity_low", Entity.BonusType.ELASTICITY_LOW));
 					break;
 				}
-			case 8:
+			case 9:
 				if (canEnabledBonus("speed")) {
 					Gdx.app.log("bonus", "new speed+created");
 					graphicManager.addBody(new Bonus(0,
@@ -299,7 +308,7 @@ public class GameLoop {
 							Entity.BonusType.SPEED_HIGH));
 					break;
 				}
-			case 9:
+			case 10:
 				if (canEnabledBonus("invisible")) {
 					Gdx.app.log("bonus", "new invisible created");
 					graphicManager.addBody(new Bonus(0,
@@ -308,7 +317,7 @@ public class GameLoop {
 							Entity.BonusType.INVISIBLE));
 					break;
 				}
-			case 10:
+			case 11:
 				if (canEnabledBonus("timeup")) {
 					Gdx.app.log("bonus", "new invisible created");
 					graphicManager.addBody(new Bonus(0,
@@ -316,7 +325,7 @@ public class GameLoop {
 							"timeup", Entity.BonusType.TIME_UP));
 					break;
 				}
-			case 11:
+			case 12:
 				if (canEnabledBonus("inverse")) {
 					Gdx.app.log("bonus", "new inverse created");
 					graphicManager.addBody(new Bonus(0,

@@ -29,7 +29,7 @@ public class MyGestureListener implements GestureListener {
 	@Override
 	public boolean longPress(final float x, final float y) {
 		if (GlobalSettings.PROFILE.getName().equals(CHEATER_NAME)) {
-			GameLoop.iBonus = (GameLoop.iBonus + 1) % Entity.BonusType.values().length;
+			GameLoop.iBonus = (GameLoop.iBonus + 1) % (Entity.BonusType.values().length + 2);
 		}
 		return false;
 	}
