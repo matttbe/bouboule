@@ -116,16 +116,16 @@ public class LevelLoader {
 				? new ArrayList<String>(Arrays.asList(bonusEnabled.split(",")))
 						: null;
 
-				// Level
-				GraphicManager.TIME = Integer.parseInt(file.getAttribute("time", "30"));
+		// Level
+		GraphicManager.TIME = Integer.parseInt(file.getAttribute("time", "30"));
 
-				// IA
-				IA.ACC_MAX_IA = Float.parseFloat(file.getAttribute("accmaxia", "0.5f")); 
-				IA.ACC_MAX_PLAYER = Float.parseFloat(file.getAttribute("accmaxplayer", "0.5f"));
-				IA.countframe = 0;
-				IA.IS_INIT=false;
+		// IA
+		IA.ACC_MAX_IA = Float.parseFloat(file.getAttribute("accmaxia", "0.5f")); 
+		IA.ACC_MAX_PLAYER = Float.parseFloat(file.getAttribute("accmaxplayer", "0.5f"));
+		IA.countframe = 0;
+		IA.IS_INIT=false;
 
-				Gdx.app.log("Settings", "Bonus =" + GraphicManager.ALLOW_BONUS);	
+		Gdx.app.log("Settings", "Bonus =" + GraphicManager.ALLOW_BONUS);	
 	}
 
 	/**
@@ -215,11 +215,12 @@ public class LevelLoader {
 		String texRegionPath 	= aren.getAttribute("texRegionPath");
 		String jsonFile 		= aren.getAttribute("jsonFile");
 		String jsonName 		= extractJSonName(jsonFile);
+		String cMusicName 		= aren.getAttribute ("music", null);
 
 		graphicManager.addBody(new Arena(radius, px, py,  angle, texRegionPath, 
 				jsonFile,  jsonName));
 
-		GlobalSettings.GAME.setNewLoopMusic(file.getAttribute ("music", null)); // e.g. klez.mp3
+		GlobalSettings.GAME.setNewLoopMusic(cMusicName); // e.g. klez.mp3
 
 		Gdx.app.log("XML", "Arena Loaded :" + jsonName);
 
