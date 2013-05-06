@@ -176,7 +176,7 @@ public class Menu extends Activity {
 			switch (view.getId()) {
 				
 				case R.id.PlayButton :
-					// startActivityForResult(new Intent(Menu.this,ChoosingActivity.class), 0); // TODO: improve ChoosingActivity first
+					startActivityForResult(new Intent(Menu.this,CopyOfChoosingActivity.class), 0); // TODO: improve ChoosingActivity first
 					onActivityResult (0, 0, null);
 
 					break;

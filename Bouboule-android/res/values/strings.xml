@@ -11,6 +11,7 @@
     <string name="title_activity_victory">VictoryActivity</string>
     <string name="title_activity_loosing">LoosingActivity</string>
     <string name="title_activity_ChoosingActivity">Choosing Activity</string>
+    <string name="title_activity_CopyOfChoosingActivity">Copy Of Choosing Activity</string>
     
     <!-- Menu Parametre -->
     <string name="title_activiy_menuParametre">Settings</string>
@@ -77,6 +78,7 @@
     <string name="at_level_x">at level</string>
     <string name="Score">Score:</string>
     <string name="no_highscore">No high score yet</string>
+    <string name="Level">level</string>
     
     
     
