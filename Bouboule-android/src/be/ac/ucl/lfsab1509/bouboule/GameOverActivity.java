@@ -72,7 +72,7 @@ public class GameOverActivity extends Activity {
 	public void onBackPressed() {
 		MyAndroidMenus.onBackPressedGeneric (this, R.id.GameOverMenuButton);
 	}
-	
+/*
 	protected void onStop () {
 		super.onStop ();
 		MyAndroidMenus.onStopMusic (this);
@@ -83,4 +83,5 @@ public class GameOverActivity extends Activity {
 		super.onResume ();
 		MyAndroidMenus.onResumeMusic (this);
 	}
+*/
 }
