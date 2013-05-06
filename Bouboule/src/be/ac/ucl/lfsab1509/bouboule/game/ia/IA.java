@@ -173,8 +173,8 @@ public class IA {
 			countframe++;
 		}else{
 			
-			MapNode testtemp = getClosestCentre(LocalEnemi);
-			/*Vector2 dirmid = middeler(LocalEnemi, testtemp);
+			/* MapNode testtemp = getClosestCentre(LocalEnemi);
+			Vector2 dirmid = middeler(LocalEnemi, testtemp);
 			if(dirmid.dot(VelocityEnemi) < 0.0f && VelocityEnemi.len2()/(ACC_MAX_PLAYER*2*K_ACC) + dirmid.len() > testtemp.getWeight()){
 				// Gdx.app.log ("Player","IA:defence slow");
 				Acc = stopMid(LocalEnemi, VelocityEnemi);

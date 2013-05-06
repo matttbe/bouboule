@@ -126,7 +126,7 @@ public class GameLoop {
 		try {
 			level.loadLevel("Level" + iLevel);
 		} catch (GdxRuntimeException e) {
-			level.loadLevel("Level1"); // TODO: should not happen...
+			level.loadLevel("Level1"); // should not happen...
 		}
 		level.readLevelArena(graphicManager);
 		level.readLevelBouboule(graphicManager);
