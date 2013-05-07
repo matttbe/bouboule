@@ -1,69 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Level>
 
-<Level0
-        bonus="True"
-        bonusEnabled="star,life"
-        bonusrate="700"
-        time="60" >
-
-        <Bouboule
-            IALevel="2"
-            angle="0"
-            density="1"
-            elasticity="1.1f"
-            entity="-1"
-            px="350"
-            py="620"
-            radius="0"
-            texRegionPath="boub_basic.png"
-            type="normal" >
-        </Bouboule>
-
-        <Bouboule
-            IALevel="0"
-            angle="0"
-            density="1"
-            elasticity="1.1f"
-            entity="1"
-            px="350"
-            py="380"
-            radius="0"
-            type="normal" >
-        </Bouboule>
-
-        <Arena
-            angle="0"
-            entity="0"
-            jsonFile="terrain/Arena/arena.json"
-            px="0"
-            py="0"
-            radius="500"
-            texRegionPath="terrain/Arena/arena.jpg"
-            music="Arena.mp3" >
-        </Arena>
-
-        <MapNodes terrain="arena" >
-
-            <NodeAllow
-                px="3.3934f"
-                py="4.8933f"
-                weight="3.8000f" >
-            </NodeAllow>
-
-            <NodeAllow
-                px="3.3732f"
-                py="6.2056f"
-                weight="3.8000f" >
-            </NodeAllow>
-
-            <NodeAllow
-                px="3.3732f"
-                py="3.5811"
-                weight="3.8000f" >
-            </NodeAllow>
-        </MapNodes>
-    </Level0>
 
     <Level1
         bonus="True"
@@ -196,7 +133,8 @@
 
     <Level3
         bonus="True"
-        bonusrate="1650"
+        bonusrate="650"
+        bonusEnabled="star,life,invisible"
         accmaxia="0.425f"
         accmaxplayer="0.5f"
         time="45" >
@@ -261,7 +199,8 @@
 
     <Level4
         bonus="True"
-        bonusrate="1650"
+        bonusrate="1000"
+        bonusEnabled="star,life,invisible,speed"
         time="45" >
 
         <Bouboule
@@ -311,7 +250,8 @@
 
     <Level5
         bonus="True"
-        bonusrate="1650"
+        bonusrate="1000"
+        bonusEnabled="star,life,invisible,speed"
         accmaxia="0.3f"
         time="90" >
 
@@ -477,7 +417,8 @@
 
     <Level6
         bonus="True"
-        bonusrate="1650"
+        bonusrate="1000"
+        bonusEnabled="star,life,invisible,speed,elast"
         time="45" 
         accmaxia="1f"
         accmaxplayer="1f">
@@ -608,7 +549,8 @@
 
     <Level8
         bonus="True"
-        bonusrate="650"
+        bonusrate="1000"
+        bonusEnabled="star,life,invisible,speed,elast,inverse"
         time="30" 
         accmaxplayer="0.5f">
 
@@ -762,7 +704,7 @@
 
     <Level9
         bonus="True"
-        bonusrate="650"
+        bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
         accmaxia="0.55f"
         time="45" >
@@ -855,6 +797,7 @@
     <Level10
         bonus="TRUE"
         bonusrate="700"
+        bonusEnabled="star,life,invisible,speed,elast,inverse"
         accmaxia="0.5f"
         time="60" >
 
@@ -918,7 +861,7 @@
 
     <Level11
         bonus="True"
-        bonusrate="1650"
+        bonusrate="1000"
         time="45" >
 
         <Bouboule
@@ -969,7 +912,7 @@
 
     <Level12
         bonus="True"
-        bonusrate="650"
+        bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
         time="45" >
 
@@ -1139,7 +1082,7 @@
 
     <Level14
         bonus="True"
-        bonusrate="650"
+        bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
         time="45" >
 
@@ -1416,8 +1359,8 @@
     </Level17>
 
     <Level18
-        bonus="True"
-        bonusrate="1650"
+        bonus="False"
+        bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
         time="60" >
 
@@ -1484,7 +1427,7 @@
 
     <Level19
         bonus="True"
-        bonusrate="650"
+        bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
         accmaxia="0.55f"
         time="45" >
@@ -1583,7 +1526,7 @@
 
     <Level20
         bonus="False"
-        bonusrate="650"
+        bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
         time="45" >
 
@@ -1656,8 +1599,8 @@
     </Level20>
 
     <Level21
-        bonus="True"
-        bonusrate="650"
+        bonus="False"
+        bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
         accmaxia="0.55f"
         time="45" >
@@ -1725,7 +1668,7 @@
 
     <Level22
         bonus="True"
-        bonusrate="650"
+        bonusrate="1000"
         accmaxia="0.55f"
         time="45" >
 
@@ -1829,7 +1772,7 @@
 
     <Level24
         bonus="True"
-        bonusrate="650"
+        bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
         accmaxia="0.55f"
         time="45" >
@@ -1928,7 +1871,7 @@
 
     <Level25
         bonus="True"
-        bonusrate="1650"
+        bonusrate="1000"
         accmaxia="0.5f"
         time="45" >
 
@@ -1981,7 +1924,7 @@
     <Level26
 
         bonus="True"
-        bonusrate="650"
+        bonusrate="1000"
         accmaxia="0.55f">
 
         <Bouboule
@@ -2032,7 +1975,7 @@
 
     <Level27
         bonus="True"
-        bonusrate="650"
+        bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
         accmaxia="0.45f"
         accmaxplayer="0.55f"
@@ -2088,7 +2031,7 @@
 
     <Level28
         bonus="True"
-        bonusrate="650"
+        bonusrate="1000"
         accmaxia="0.55f"
         accmaxplayer="0.5f"
         time="45" >
@@ -2153,7 +2096,7 @@
 
     <Level29
         bonus="True"
-        bonusrate="650"
+        bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
         time="45" 
         accmaxplayer="0.60f">
@@ -2234,7 +2177,7 @@
 
     <Level30
         bonus="True"
-        bonusrate="650"
+        bonusrate="1000"
         accmaxia="0.55f"
         time="45" >
 

@@ -358,10 +358,13 @@ public class IA {
 
 
 	public static Vector2 gyroscope(){
-		float sensibility = SENSIBILITY_DEFAULT * GlobalSettings.SENSITIVITY * 2 / GlobalSettings.SENSITIVITY_MAX;
-		float accelX = AXE_POSITION * sensibility * Gdx.input.getAccelerometerX();
-		float accelY = AXE_POSITION * sensibility * Gdx.input.getAccelerometerY();
+		//float sensibility = SENSIBILITY_DEFAULT * GlobalSettings.SENSITIVITY * 2 / GlobalSettings.SENSITIVITY_MAX;
+		float accelX = -Gdx.input.getAccelerometerX();
+		float accelY = -Gdx.input.getAccelerometerY();
+		Gdx.app.log ("IA","gyroscope"+accelX + " " +accelY);
 		Vector2 Acc= new Vector2(accelX, accelY);
+		Acc.limit(GlobalSettings.SENSITIVITY/100).div(GlobalSettings.SENSITIVITY/100).mul(ACC_MAX_PLAYER);
+		
 		/*
 		 * Uniquement pour mes tests
 		 */
