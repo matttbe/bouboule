@@ -26,6 +26,7 @@
 
 package be.ac.ucl.lfsab1509.bouboule.sound;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 import android.content.Context;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -43,12 +44,13 @@ public class BackgroundSound {
 		player.stop (context);
 	}
 	
-	public void play (Context context) {
-		player.play (context, file, true, AudioManager.STREAM_MUSIC);
+	public void play (Context context, GameExitStatus exitStatus) {
+		player.play (context, file, true, AudioManager.STREAM_MUSIC, exitStatus);
 	}
 	
 	public void create (Context context) {
-		player.create (context, file, true, AudioManager.STREAM_MUSIC, false);
+		player.create (context, file, true, AudioManager.STREAM_MUSIC, false,
+				GameExitStatus.NONE);
 	}
 
 }
