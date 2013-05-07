@@ -44,15 +44,16 @@ public class CountDown {
 	private int						FRAME_ROWS;				//Number of Rows in the Atlas file
 	private int						N_FRAME;
 
-	private Animation				countDownAnimation; 		//The animation of the countDown
-	private Texture					countDownSheet;				//Initial big file of the countDown
-	private TextureRegion[]			countDownFrames;			//Tab that contains all the frames
-	private TextureRegion			currentFrame;				//Current image displayed
+	private Animation				countDownAnimation; 	//The animation of the countDown
+	private Texture					countDownSheet;			//Initial big file of the countDown
+	private TextureRegion[]			countDownFrames;		//Tab that contains all the frames
+	private TextureRegion			currentFrame;			//Current image displayed
 
-	private float					STEPTIME;					//Step time between 2 frames
-	private float					stateTime;					//Current time of the animation
-	private boolean					bFirstTime = true;			//first time the anim is display
+	private float					STEPTIME;				//Step time between 2 frames
+	private float					stateTime;				//Current time of the animation
+	private int						iFirstFrames;	//we need to skip the first render (can be launched when switching menus)
 	private boolean					RESUME_AFTER_END;
+	private static final int		WAIT_FRAME = 10;		//wait 20 frames before playing a sound
 
 	/**
 	 * Constructor for a CountDown Object 
@@ -86,17 +87,20 @@ public class CountDown {
 
 	public void reset() {
 		stateTime = 0f;
-		bFirstTime = true;
+		iFirstFrames = 0;
 	}
 
 	/**
 	 * Return the status of the pause => true = pause.
 	 */
 	public boolean draw(final SpriteBatch batch, final float delta) {
-		if (bFirstTime) {
-			bFirstTime = false;
+		if(!isLaunched()) { // skip frames before playing a sound
+			iFirstFrames++;
+			return true;
+		}
+		else if(iFirstFrames == WAIT_FRAME) {
+			iFirstFrames++; // stop playing something next frames
 			GlobalSettings.GAME.countdownSound();
-			return true; // skip the first render, it's ok
 		}
 		
 		//we are not in the pause menu		
@@ -131,6 +135,6 @@ public class CountDown {
 	 * @return launch status
 	 */
 	public boolean isLaunched() {
-		return !bFirstTime;
+		return iFirstFrames >= WAIT_FRAME;
 	}
 }
