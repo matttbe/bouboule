@@ -29,9 +29,16 @@ package be.ac.ucl.lfsab1509.bouboule.game.profile;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import sun.awt.GlobalCursorManager;
+
+
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.XmlReader.Element;
 
 public class BoubImages {
 
@@ -57,13 +64,27 @@ public class BoubImages {
 	 * @return a list of String, each is the name of a bouboule
 	 */
 	public static ArrayList<String> getBoubName() {
-		ArrayList<FileHandle> fh = getAllNormalBoub();
 		ArrayList<String> str = new ArrayList<String>();
-		while (fh.size() != 0) {
-			FileHandle tempFH = fh.remove(0);
-			str.add(tempFH.nameWithoutExtension());
+		str.add(GlobalSettings.DEFAULT_BOUB_NAME);
+		LevelLoader levelXML = GlobalSettings.GAME.getLevel();
+		for (int i = 1; i < GlobalSettings.PROFILE.getBestLevel(); i++) {
+			String levelName = "Level" + i;
+			Element elementLevel = levelXML.getRoot().getChildByName(levelName); // <LevelX>
+			if (elementLevel == null)
+				continue;// should not happen, only if missing level
+			Array<Element> mapsBouboule = elementLevel.getChildrenByName("Bouboule"); // <Bouboule>
+			for (Element elementBouboule : mapsBouboule) {
+				short entity = Short.parseShort(elementBouboule.getAttribute("entity")); // 1 for the user
+				if (entity == -1){
+					String temp = elementBouboule.getAttribute("texRegionPath");
+					str.add(temp.substring(0, temp.lastIndexOf('.')));
+					break; // only one bouboule to parse
+				}
+			}
 		}
 		return str;
 	}
+	
+	
 	
 }

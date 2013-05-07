@@ -29,6 +29,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
+import be.ac.ucl.lfsab1509.bouboule.game.profile.Profile;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.*;
@@ -101,9 +102,7 @@ public class MenuParametre_user extends Activity {
 		user_reset.setOnClickListener (clickListener);
 		user_tuto.setOnClickListener (clickListener);
 		
-		// concern choice of bouboule
-		boub_str = BoubImages.getBoubName ();
-		BOUB_INDEX_MAX = boub_str.size();
+		
 		
 		// change of type font
 		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
@@ -128,10 +127,19 @@ public class MenuParametre_user extends Activity {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		user_selectprofile_spin.setAdapter(adapter);
 
+		
 		// set the selected item on the spinner
 		user_selectprofile_spin.setSelection (listProfile.indexOf(GlobalSettings.PROFILE.getName())); // select the current user
+		
+		// concern choice of bouboule
+		boub_str = BoubImages.getBoubName ();
+		BOUB_INDEX_MAX = boub_str.size();
 		boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
-
+		Log.d("LN", "Boub name : " + GlobalSettings.PROFILE.getBoubName());
+		if (boub_index == -1){ // if the precedent selected ball no more takable, set the default
+			GlobalSettings.PROFILE.setBoubName(GlobalSettings.DEFAULT_BOUB_NAME);
+			boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
+		}
 		// update the pictures of the bouboules for the selection
 		openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
 		openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);

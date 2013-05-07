@@ -383,4 +383,8 @@ public class LevelLoader {
 		GlobalSettings.GAME.getTimer().addTimerListener(timerListener);
 		timerListenerArray.add(timerListener);
 	}
+	
+	public Element getRoot() {
+		return root;
+	}
 }
