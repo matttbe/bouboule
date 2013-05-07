@@ -106,8 +106,12 @@ public class MyAndroidMenus implements Menus {
 	}
 
 	public static void onResumeMusic (Context context) {
+		onResumeMusic(context, GameExitStatus.NONE);
+	}
+
+	public static void onResumeMusic (Context context, GameExitStatus exitStatus) {
 		if (! GlobalSettings.SOUND_IS_MUTED && menuMusic != null)
-			menuMusic.play (context);
+			menuMusic.play (context, exitStatus);
 	}
 
 	/**

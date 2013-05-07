@@ -45,8 +45,8 @@ public class MyGame extends Game {
 
 	private ScreenGame screenGame;
 	private Sound hitSounds[];
-	private Sound winSound;
-	private Sound looseSound;
+	// private Sound winSound; // not used
+	// private Sound looseSound;
 	private Sound countdownSound;
 	private Random rand;
 	private LevelLoader level;
@@ -75,8 +75,8 @@ public class MyGame extends Game {
 		hitSounds[4] = Gdx.audio.newSound(Gdx.files.internal("music/sounds/hit5.mp3"));
 		rand = new Random();
 
-		winSound = Gdx.audio.newSound(Gdx.files.internal("music/sounds/win.mp3"));
-		looseSound = Gdx.audio.newSound(Gdx.files.internal("music/sounds/loose.mp3"));
+		// winSound = Gdx.audio.newSound(Gdx.files.internal("music/sounds/win.mp3"));
+		// looseSound = Gdx.audio.newSound(Gdx.files.internal("music/sounds/loose.mp3"));
 		countdownSound = Gdx.audio.newSound(Gdx.files.internal("music/sounds/countdown.mp3"));
 
 		if (GlobalSettings.GAME == null) { // should not happen!!!
@@ -95,8 +95,8 @@ public class MyGame extends Game {
 		for (Sound hitSound : hitSounds) {
 			hitSound.dispose();
 		}
-		winSound.dispose();
-		looseSound.dispose();
+		// winSound.dispose();
+		// looseSound.dispose();
 		countdownSound.dispose();
 	}
 	
@@ -106,7 +106,7 @@ public class MyGame extends Game {
 			hitSounds[index].play();
 		}
 	}
-	
+/*
 	public void winSound() {
 		if (!GlobalSettings.SOUND_IS_MUTED) {
 			winSound.play();
@@ -118,7 +118,7 @@ public class MyGame extends Game {
 			looseSound.play();
 		}
 	}
-
+*/
 	public void countdownSound() {
 		if (!GlobalSettings.SOUND_IS_MUTED) {
 			countdownSound.play();

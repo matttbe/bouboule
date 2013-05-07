@@ -27,6 +27,8 @@ import android.net.Uri;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.Log;
+import be.ac.ucl.lfsab1509.bouboule.R;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 
 import java.util.LinkedList;
 
@@ -48,6 +50,7 @@ public class AsyncPlayer {
 		int stream;
 		long requestTime;
 		boolean play = false;
+		GameExitStatus exitStatus;
 
 		OnErrorListener errorListener;
 		OnBufferingUpdateListener bufferingUpdateListener;
@@ -61,26 +64,74 @@ public class AsyncPlayer {
 
 	private LinkedList<Command> mCmdQueue = new LinkedList<Command>();
 
+	private MediaPlayer getMediaPlayer (int stream, Context context, Uri uri,
+			boolean looping, OnErrorListener errorListener,
+			OnBufferingUpdateListener bufferingUpdateListener,
+			OnCompletionListener completionListener) throws Exception {
+		MediaPlayer player = new MediaPlayer();
+		player.setAudioStreamType(stream);
+		player.setDataSource(context, uri);
+		player.setLooping(looping);
+		player.setOnErrorListener(errorListener);
+		player.setOnBufferingUpdateListener(bufferingUpdateListener);
+		player.setOnCompletionListener(completionListener);
+		player.prepare();
+		return player;
+	}
+
+	private OnCompletionListener getCompletionListener (final Command cmd) {
+		return new OnCompletionListener() {
+			
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				mp.release();
+				if (mState == PLAY) { // only if the menu has not been stopped before
+					cmd.exitStatus = GameExitStatus.NONE; // start menu sound
+					cmd.requestTime = SystemClock.uptimeMillis(); // avoid warnings
+					startSound(cmd);
+				}
+			}
+		};
+	}
+
 	private void startSound(Command cmd) {
 		// Preparing can be slow, so if there is something else
 		// is playing, let it continue until we're done, so there
 		// is less of a glitch.
 		try {
 			if (mDebug) Log.d(mTag, "Starting playback");
-			MediaPlayer player = new MediaPlayer();
-			player.setAudioStreamType(cmd.stream);
-			player.setDataSource(cmd.context, cmd.uri);
-			player.setLooping(cmd.looping);
-			player.setOnErrorListener(cmd.errorListener);
-			player.setOnBufferingUpdateListener(cmd.bufferingUpdateListener);
-			player.setOnCompletionListener(cmd.completionListener);
-			player.prepare();
-			if (cmd.play)
-				player.start();
-			if (mPlayer != null) {
-				mPlayer.release();
+			switch (cmd.exitStatus) { // launch a sound before
+			case WIN:
+				Uri uriWin = Uri.parse("android.resource://be.ac.ucl.lfsab1509.bouboule/" + R.raw.win);
+				MediaPlayer playerWin = getMediaPlayer(cmd.stream, cmd.context, uriWin,
+						false, cmd.errorListener, cmd.bufferingUpdateListener,
+						cmd.completionListener);
+				playerWin.setOnCompletionListener(getCompletionListener(cmd));
+				playerWin.start();
+				break;
+			case LOOSE:
+			case GAMEOVER:
+				Log.d(mTag, "Starting gameover sound");
+				Uri uriLoose = Uri.parse("android.resource://be.ac.ucl.lfsab1509.bouboule/" + R.raw.loose);
+				MediaPlayer playerLoose = getMediaPlayer(cmd.stream, cmd.context, uriLoose,
+						false, cmd.errorListener, cmd.bufferingUpdateListener,
+						cmd.completionListener);
+				playerLoose.setOnCompletionListener(getCompletionListener(cmd));
+				playerLoose.start();
+				break;
+			default:
+				MediaPlayer player = new MediaPlayer();
+				player = getMediaPlayer(cmd.stream, cmd.context, cmd.uri,
+						cmd.looping, cmd.errorListener, cmd.bufferingUpdateListener,
+						cmd.completionListener);
+				if (cmd.play)
+					player.start();
+				if (mPlayer != null) {
+					mPlayer.release();
+				}
+				mPlayer = player;
+				break;
 			}
-			mPlayer = player;
 			long delay = SystemClock.uptimeMillis() - cmd.requestTime;
 			if (delay > 1000) {
 				Log.w(mTag, "Notification sound delayed by " + delay + "msecs");
@@ -189,8 +240,11 @@ public class AsyncPlayer {
 	 * @param stream the AudioStream to use.
 	 *          (see {@link MediaPlayer#setAudioStreamType(int)})
 	 * @param play start playing directly or stay in pause
+	 * @param exitStatus NONE to launch the music of the menu and another to
+	 *          play a sound just before (win/loose/gameover).
 	 */
-	public void create (Context context, Uri uri, boolean looping, int stream, boolean play) {
+	public void create (Context context, Uri uri, boolean looping, int stream,
+			boolean play, GameExitStatus exitStatus) {
 		this.context = context;
 
 		Command cmd = new Command();
@@ -201,6 +255,7 @@ public class AsyncPlayer {
 		cmd.uri = uri;
 		cmd.looping = looping;
 		cmd.stream = stream;
+		cmd.exitStatus = exitStatus;
 		synchronized (mCmdQueue) {
 			enqueueLocked(cmd);
 			mState = play ? PLAY : PAUSE; // but real state is pause
@@ -235,16 +290,18 @@ public class AsyncPlayer {
 
 	/**
 	 * It will restart the current player or create a new one like the previous one
+	 * @param exitStatus 
 	 * @param context, the current context that will launch the sound
 	 */
-	public void play (Context context, Uri uri, boolean looping, int stream) {
+	public void play (Context context, Uri uri, boolean looping, int stream, GameExitStatus exitStatus) {
 		if (mDebug) Log.d ("Sound", "replay? " + mState + " " + (mPlayer != null));
 		this.context = context;
 		if (mState != PLAY) {
 			if (mPlayer != null) // pause
 				mPlayer.start ();
 			else // stop
-				create (context, uri, looping, stream, true);
+				create (context, uri, looping, stream, true, exitStatus);
+				// exist status is only needed when starting a new song => win / loose / gameover
 		}
 	}
 

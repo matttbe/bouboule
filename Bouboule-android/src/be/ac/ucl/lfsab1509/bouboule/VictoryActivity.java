@@ -28,6 +28,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 import android.os.Bundle;
 import android.app.Activity;
@@ -105,7 +106,7 @@ public class VictoryActivity extends Activity {
 	public void onBackPressed() {
 		MyAndroidMenus.onBackPressedGeneric (this, R.id.VictoryMenuButton);
 	}
-/*
+
 	protected void onStop () {
 		super.onStop ();
 		MyAndroidMenus.onStopMusic (this);
@@ -114,7 +115,6 @@ public class VictoryActivity extends Activity {
 	@Override
 	protected void onResume () {
 		super.onResume ();
-		MyAndroidMenus.onResumeMusic (this);
+		MyAndroidMenus.onResumeMusic (this, GameExitStatus.WIN);
 	}
-*/
 }

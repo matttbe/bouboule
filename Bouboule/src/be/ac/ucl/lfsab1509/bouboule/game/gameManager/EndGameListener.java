@@ -185,7 +185,7 @@ public class EndGameListener implements ContactListener{
 				GlobalSettings.PROFILE.checkHighScoreAndResetProfile();
 			}
 
-			GlobalSettings.GAME.looseSound();
+			// GlobalSettings.GAME.looseSound(); // done in menus
 			endGame(true);
 
 			bIsEnding.set(false);
@@ -208,7 +208,7 @@ public class EndGameListener implements ContactListener{
 				GlobalSettings.PROFILE.checkHighScoreAndResetProfile();
 			}
 
-			GlobalSettings.GAME.winSound();
+			// GlobalSettings.GAME.winSound(); // done in menus
 			endGame(true);
 
 			bIsEnding.set(false);

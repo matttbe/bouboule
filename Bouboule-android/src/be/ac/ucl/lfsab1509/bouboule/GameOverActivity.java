@@ -28,6 +28,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Typeface;
@@ -72,7 +73,7 @@ public class GameOverActivity extends Activity {
 	public void onBackPressed() {
 		MyAndroidMenus.onBackPressedGeneric (this, R.id.GameOverMenuButton);
 	}
-/*
+
 	protected void onStop () {
 		super.onStop ();
 		MyAndroidMenus.onStopMusic (this);
@@ -81,7 +82,6 @@ public class GameOverActivity extends Activity {
 	@Override
 	protected void onResume () {
 		super.onResume ();
-		MyAndroidMenus.onResumeMusic (this);
+		MyAndroidMenus.onResumeMusic (this, GameExitStatus.GAMEOVER);
 	}
-*/
 }
