@@ -50,16 +50,6 @@ public class BoubImages {
 
 	public static final String BOUB_JSON_EXT   = "boub.json";
 	
-	
-	/**
-	 * @return a list of files all bouboules images which have a normal size
-	 */
-	public static ArrayList<FileHandle> getAllNormalBoub() {
-		FileHandle pDir = Gdx.files.internal(BOUB_DIR_NORMAL);
-
-		return new ArrayList<FileHandle>(Arrays.asList(pDir.list(".png")));
-	}
-	
 	/**
 	 * @return a list of String, each is the name of a bouboule
 	 */

@@ -58,7 +58,7 @@ public class MenuParametre_about extends Activity{
 		((TextView) findViewById(R.id.about_date)).setTypeface(myTypeface);
 		
 		
-		// Get the version number direct from the Manifest
+		// get the version number direct from the Manifest
 		PackageInfo pInfo = null;
 		try{
 			pInfo = getPackageManager().getPackageInfo("be.ac.ucl.lfsab1509.bouboule",PackageManager.GET_META_DATA);

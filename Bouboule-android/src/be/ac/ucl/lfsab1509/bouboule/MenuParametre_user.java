@@ -29,14 +29,14 @@ package be.ac.ucl.lfsab1509.bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
-import be.ac.ucl.lfsab1509.bouboule.game.profile.Profile;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.*;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -65,6 +65,8 @@ public class MenuParametre_user extends Activity {
 	private EditText user_choose_level;
 	private Button user_reset;
 	private Button user_tuto;
+	private AlertDialog user_alert_reset;
+	private AlertDialog user_alert_tuto;
 	
 	private ArrayList<String> listProfile;
 	
@@ -81,7 +83,6 @@ public class MenuParametre_user extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_parametre_user);			
-		
 		
 		// find the different views
 		user_selectprofile_spin = (Spinner) findViewById(R.id.user_selectprofile_spin);
@@ -102,8 +103,6 @@ public class MenuParametre_user extends Activity {
 		user_reset.setOnClickListener (clickListener);
 		user_tuto.setOnClickListener (clickListener);
 		
-		
-		
 		// change of type font
 		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
 		((TextView) findViewById(R.id.user_newUser_txt)).setTypeface(myTypeface);
@@ -113,41 +112,52 @@ public class MenuParametre_user extends Activity {
 		user_reset.setTypeface(myTypeface);
 		user_tuto.setTypeface(myTypeface);
 		
-		refreshScreen();
-		
 		// hide the keyboard
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		
+		refreshScreen();
 	}
 	
+	/**
+	 * Method to refresh all the informations on the screen
+	 */
 	private void refreshScreen(){
-		Log.d("LN","refresh");
-		// set the list into the spinner
+		
+		Log.d("LN","USER SETTINGS : refresh in progress");
+		
+		// refresh the user selected
 		listProfile = GlobalSettings.PROFILE_MGR.getAllProfilesAL();
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listProfile);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		user_selectprofile_spin.setAdapter(adapter);
-
-		
-		// set the selected item on the spinner
 		user_selectprofile_spin.setSelection (listProfile.indexOf(GlobalSettings.PROFILE.getName())); // select the current user
 		
-		// concern choice of bouboule
+		// refresh the choice of bouboule
 		boub_str = BoubImages.getBoubName ();
 		BOUB_INDEX_MAX = boub_str.size();
 		boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
-		Log.d("LN", "Boub name : " + GlobalSettings.PROFILE.getBoubName());
-		if (boub_index == -1){ // if the precedent selected ball no more takable, set the default
+		if (boub_index == -1){ // if the precedent selected ball no more takable, set the default, must not happen
+			Log.d("LN","USER SETTINGS : choice of bouboule: require access to unaccessible bouboule (must not happen)");
 			GlobalSettings.PROFILE.setBoubName(GlobalSettings.DEFAULT_BOUB_NAME);
 			boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
 		}
-		// update the pictures of the bouboules for the selection
-		openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
-		openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
-		openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
-
+		if (BOUB_INDEX_MAX == 1){ // disable buttons if only one bouboule choice
+			user_boub_left.setColorFilter(new LightingColorFilter(Color.DKGRAY, 1));
+			user_boub_left.setEnabled(false);
+			user_boub_right.setColorFilter(new LightingColorFilter(Color.DKGRAY, 1));
+			user_boub_right.setEnabled(false);
+		} else {
+			user_boub_left.setColorFilter(null);
+			user_boub_left.setEnabled(true);
+			user_boub_right.setColorFilter(null);
+			user_boub_right.setEnabled(true);
+		}
+		updateBouboule();
+		
+		// refresh the new user edittext
 		user_newname.setText(""); // remove text
 
-		// set the current and max levels
+		// refresh the curent level edittext
 		user_choose_level.setText(""); // remove text
 		int iBestLevel = GlobalSettings.PROFILE.getBestLevel();
 		user_choose_level.setHint (getString (R.string.user_choose_level_current)
@@ -156,172 +166,53 @@ public class MenuParametre_user extends Activity {
 				+ iBestLevel + ")");
 		user_choose_level.setFilters (new InputFilter[] {
 				new InputFilterMinMax (1, iBestLevel)});
-		Log.d("LN","refresh done");
+		
+		Log.d("LN","USER SETTINGS : refresh done");
 	}
 	
-	private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
-		@Override
-		public void onItemSelected (AdapterView<?> parent, View view, int position, long id){
-			if (!GlobalSettings.PROFILE.getName().equals(listProfile.get((int) id))) {
-				Log.d("LN","change of user : " + GlobalSettings.PROFILE.getName() + " - " + listProfile.get((int) id));
-				GlobalSettings.PROFILE_MGR.changeProfile (listProfile.get((int) id));
-				refreshScreen();
-			}
-		}
-		@Override
-		public void onNothingSelected (AdapterView<?> parent) {}
-	};
-	
-	private View.OnKeyListener onkeyListener = new View.OnKeyListener() {
-		
-		@Override
-		public boolean onKey (View v, int keyCode, KeyEvent event)
-		{
-			Log.d ("Matth", "Key" + keyCode);
-			if (v.getId () == R.id.user_newname) {
-				if (event.getAction() == KeyEvent.ACTION_DOWN) {
-					Log.d("LN","key code : "+ keyCode) ; 
-					switch (keyCode) {
-						case KeyEvent.KEYCODE_DPAD_CENTER:
-						case KeyEvent.KEYCODE_ENTER:
-							// catch the name
-							String text = user_newname.getText().toString();
-							switch (testName(text)){
-								// treat the name following the case
-								case 0:
-									GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
-									makeToast(getString (R.string.user_namenewuser));
-									refreshScreen();
-									break;
-								case 1:
-									makeToast(getString (R.string.user_nameidenticalerror));
-									break;
-								case 2:
-									makeToast(getString (R.string.user_nameemptyerror));
-									break;
-								case 3:
-									makeToast(getString (R.string.user_namecharerror));
-									break;
-								default :
-									break; 
-							}
-							InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-							imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
-							break;
-						case KeyEvent.KEYCODE_BACK : 
-							finish();
-							break;
-					}
-				}
-				return true;
-			}
-			else if (v.getId () == R.id.user_choose_level) {
-				if (event.getAction() == KeyEvent.ACTION_DOWN) {
-					switch (keyCode) {
-						case KeyEvent.KEYCODE_DPAD_CENTER:
-						case KeyEvent.KEYCODE_ENTER:
-							String cInputText = user_choose_level.getText ().toString ();
-							if (cInputText == null || cInputText.isEmpty ())
-								return false;
-							int iNewLevel = Integer.parseInt (cInputText);
-							if (iNewLevel != GlobalSettings.PROFILE.getLevel ()) {
-								EndGameListener.resetGame ();
-								GlobalSettings.PROFILE.setLevel (iNewLevel);
-								makeToast (getString(R.string.user_resetgame_notif));
-							}
-							return true;
-						case KeyEvent.KEYCODE_BACK : 
-							finish();
-							break;
-					}
-				}
-			}
-			return false;
-		}
-	};
-	
-	private View.OnClickListener clickListener = new View.OnClickListener() {
-		
-		@Override
-		public void onClick (View view)
-		{
-			switch (view.getId()) {
-				case R.id.user_boub_left :
-					// go to the next bouboule
-					boub_index = getPrevIndex(boub_index);
-					// save it
-					GlobalSettings.PROFILE.setBoubName(boub_str.get(boub_index));
-					// update pictures
-					openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
-					openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
-					openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
-					break;
-				case R.id.user_boub_right :
-					// go to the previous bouboule
-					boub_index = getNextIndex(boub_index);
-					// save it
-					GlobalSettings.PROFILE.setBoubName(boub_str.get(boub_index));
-					// update pictures
-					openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
-					openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
-					openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
-					break;
-				case R.id.user_resetgame_button :
-					DialogInterface.OnClickListener DIResetclicklistener = new DialogInterface.OnClickListener() { // définition de la callback pour la réponse Oui
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							Log.d("LN", "code DI reset : "+ which);
-							switch (which){
-							case -1 : // yes button
-								EndGameListener.resetGame ();
-								makeToast(getString(R.string.user_resetgame_notif));
-								refreshScreen();
-								break;
-							case -2 : // no button
-								break;
-							default :
-								break;
-							}
-						}
-					};
-					AlertDialog.Builder builderReset = new AlertDialog.Builder(view.getContext());
-					builderReset.setMessage(getString(R.string.user_continuereset));
-					builderReset.setPositiveButton(R.string.user_yes, DIResetclicklistener); 
-					builderReset.setNegativeButton(R.string.user_no, DIResetclicklistener);
-					builderReset.show();
-					break;
-				case R.id.user_tuto_button :
-					DialogInterface.OnClickListener DITutoclicklistener = new DialogInterface.OnClickListener() { // définition de la callback pour la réponse Oui
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							Log.d("LN", "code DI tuto : "+ which);
-							switch (which){
-							case -1 : // yes button
-								EndGameListener.resetGame ();
-								GlobalSettings.PROFILE.setNeedTutorial(true);
-								makeToast(getString(R.string.user_tuto_notif));
-								refreshScreen();
-								break;
-							case -2 : // no button
-								break;
-							default :
-								break;
-							}
-						}
-					};
-					AlertDialog.Builder builderTuto = new AlertDialog.Builder(view.getContext());
-					builderTuto.setMessage(getString(R.string.user_continuetuto));
-					builderTuto.setPositiveButton(R.string.user_yes, DITutoclicklistener); 
-					builderTuto.setNegativeButton(R.string.user_no, DITutoclicklistener);
-					builderTuto.show();
-				default :
-					break;
-			}
-		}
-	};
+	/**
+	 * Method to refresh the bouboule selector on the screen
+	 */
+	private void updateBouboule(){
+		openPictureFromAssets(user_boub,boub_str.get (boub_index),true);
+		openPictureFromAssets(user_boub_left,boub_str.get (getPrevIndex(boub_index)),false);
+		openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
+	}
 	
 	/**
-	 * set a Toast centered verticaly on the screen
+	 * Open the picture of bouboule asked from the asset direcory
+	 * @param view : the ImageView where it has to be set
+	 * @param name : name of the bouboule chosen
+	 * @param big : if true, uses big bouboule, if false, uses small ones
+	 */
+	private void openPictureFromAssets (ImageView view, String name, boolean big){
+		String size;
+		if (big)
+			size = "giant";
+		else
+			size = "small";
+		
+		InputStream bitmap=null;
+
+		try {
+		    bitmap=getAssets().open("boub/" + size + "/" + name + ".png");
+		    Bitmap bit=BitmapFactory.decodeStream(bitmap);
+		    view.setImageBitmap(bit);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} finally {
+		    if(bitmap!=null)
+				try {
+					bitmap.close();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+		}
+	}
+	
+	/**
+	 * Set a Toast centered verticaly on the screen
 	 * @param s : string to set on the Toast
 	 */
 	private void makeToast(String s){
@@ -358,40 +249,6 @@ public class MenuParametre_user extends Activity {
 	}
 
 	/**
-	 * Open the picture of bouboule asked from the asset direcory
-	 * @param view : the ImageView where it has to be set
-	 * @param name : name of the bouboule chosen
-	 * @param big : if true, uses big bouboule, if false, uses small ones
-	 */
-	private void openPictureFromAssets (ImageView view, String name, boolean big){
-		String size;
-		if (big)
-			size = "giant";
-		else
-			size = "small";
-		
-		InputStream bitmap=null;
-
-		try {
-		    bitmap=getAssets().open("boub/" + size + "/" + name + ".png");
-		    Bitmap bit=BitmapFactory.decodeStream(bitmap);
-		    view.setImageBitmap(bit);
-		} catch (IOException e) {
-		    e.printStackTrace();
-		} finally {
-		    if(bitmap!=null)
-				try
-				{
-					bitmap.close();
-				} catch (IOException e)
-				{
-					
-					e.printStackTrace();
-				}
-		}
-	}
-	
-	/**
 	 * @param index : current index
 	 * @return previous index, if index == 0 then previous is MAX - 1
 	 */
@@ -417,4 +274,142 @@ public class MenuParametre_user extends Activity {
 		super.onResume ();
 		MyAndroidMenus.onResumeMusic (this);
 	}
+	
+	/*
+	 * Different listeners needed
+	 */
+	
+	// listener for the spinners
+	private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
+		@Override
+		public void onItemSelected (AdapterView<?> parent, View view, int position, long id){
+			if (!GlobalSettings.PROFILE.getName().equals(listProfile.get((int) id))) {
+				Log.d("LN","USER SETTINGS : change of user : previous : " + GlobalSettings.PROFILE.getName() + " - new : " + listProfile.get((int) id));
+				GlobalSettings.PROFILE_MGR.changeProfile (listProfile.get((int) id));
+				refreshScreen();
+			}
+		}
+		@Override
+		public void onNothingSelected (AdapterView<?> parent) {}
+	};
+	
+	// listener for the edittexts
+	private View.OnKeyListener onkeyListener = new View.OnKeyListener() {
+		@Override
+		public boolean onKey (View v, int keyCode, KeyEvent event)
+		{
+			if (event.getAction() == KeyEvent.ACTION_DOWN) {
+				switch (keyCode) {
+					case KeyEvent.KEYCODE_DPAD_CENTER:
+					case KeyEvent.KEYCODE_ENTER:
+						if (v.getId () == R.id.user_newname) {
+							// catch the name
+							String text = user_newname.getText().toString();
+							switch (testName(text)){
+								// treat the name following the case
+								case 0:
+									GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
+									Log.d("LN","USER SETTINGS : change of user : created new user : " + text);
+									makeToast(getString (R.string.user_namenewuser));
+									refreshScreen();
+									break;
+								case 1:
+									makeToast(getString (R.string.user_nameidenticalerror));
+									break;
+								case 2:
+									makeToast(getString (R.string.user_nameemptyerror));
+									break;
+								case 3:
+									makeToast(getString (R.string.user_namecharerror));
+									break;
+								default :
+									break; 
+							}
+							InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+							imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
+							return true;
+						} else if (v.getId () == R.id.user_choose_level) {
+							String cInputText = user_choose_level.getText ().toString ();
+							if (cInputText == null || cInputText.isEmpty ())
+								return false;
+							int iNewLevel = Integer.parseInt (cInputText);
+							if (iNewLevel != GlobalSettings.PROFILE.getLevel ()) {
+								Log.d("LN","USER SETTINGS : change of level : " + iNewLevel);
+								EndGameListener.resetGame ();
+								GlobalSettings.PROFILE.setLevel (iNewLevel);
+								makeToast (getString(R.string.user_resetgame_notif));
+							}
+							return true;
+						}
+					case KeyEvent.KEYCODE_BACK : 
+						finish();
+						break;
+				}
+			}
+			return false;
+		}
+	};
+	
+	// listener for buttons
+	private View.OnClickListener clickListener = new View.OnClickListener() {
+		@Override
+		public void onClick (View view)
+		{
+			switch (view.getId()) {
+				case R.id.user_boub_left :
+					boub_index = getPrevIndex(boub_index);
+					GlobalSettings.PROFILE.setBoubName(boub_str.get(boub_index));
+					Log.d("LN","USER SETTINGS : change of boub : left - new index " + boub_index);
+					updateBouboule();
+					break;
+				case R.id.user_boub_right :
+					boub_index = getNextIndex(boub_index);
+					GlobalSettings.PROFILE.setBoubName(boub_str.get(boub_index));
+					Log.d("LN","USER SETTINGS : change of boub : right - new index " + boub_index);
+					updateBouboule();
+					break;
+				case R.id.user_resetgame_button :
+					AlertDialog.Builder builderReset = new AlertDialog.Builder(view.getContext());
+					builderReset.setMessage(getString(R.string.user_continuereset));
+					builderReset.setPositiveButton(R.string.user_yes, dialoglistener); 
+					builderReset.setNegativeButton(R.string.user_no, dialoglistener);
+					user_alert_reset = builderReset.show();
+					break;
+				case R.id.user_tuto_button :
+					AlertDialog.Builder builderTuto = new AlertDialog.Builder(view.getContext());
+					builderTuto.setMessage(getString(R.string.user_continuetuto));
+					builderTuto.setPositiveButton(R.string.user_yes, dialoglistener); 
+					builderTuto.setNegativeButton(R.string.user_no, dialoglistener);
+					builderTuto.show();
+				default :
+					break;
+			}
+		}
+	};
+	
+	// listener for dialog interfaces
+	DialogInterface.OnClickListener dialoglistener = new DialogInterface.OnClickListener() { 
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			switch (which){
+			case -1 : // yes button
+				EndGameListener.resetGame ();
+				if (dialog == user_alert_tuto){
+					GlobalSettings.PROFILE.setNeedTutorial(true);
+					makeToast(getString(R.string.user_tuto_notif));
+					Log.d("LN","USER SETTINGS : game reset + new tuto");
+				} else if (dialog == user_alert_reset) {
+					makeToast(getString(R.string.user_resetgame_notif));
+					Log.d("LN","USER SETTINGS : game reset");
+				}
+				refreshScreen();
+				break;
+			case -2 : // no button
+				break;
+			default :
+				break;
+			}
+		}
+	};
+
 }
