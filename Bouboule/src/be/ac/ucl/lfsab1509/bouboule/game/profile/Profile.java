@@ -68,15 +68,18 @@ public class Profile {
 	// tutorial
 	private boolean bNeedTuto = false;
 	
-	public Profile(final String cname) {
+	public Profile(final String cName) {
 		
-		this.cName = cname;
+		this.cName = cName;
 		prefs = Gdx.app.getPreferences(cName);
 
 		iInitScore = prefs.getInteger(INIT_SCORE_KEY, GlobalSettings.INIT_SCORE);
 		iLifes = prefs.getInteger(LIFES_KEY, GlobalSettings.INIT_LIFES);
 		iLevel = prefs.getInteger(LEVEL_KEY, GlobalSettings.INIT_LEVEL);
-		iBestLevel = prefs.getInteger(BEST_LEVEL_KEY, GlobalSettings.INIT_LEVEL);
+		if (cName.compareTo(GlobalSettings.CHEATER_NAME) == 0)
+			iBestLevel = GlobalSettings.NBLEVELS;
+		else
+			iBestLevel = prefs.getInteger(BEST_LEVEL_KEY, GlobalSettings.INIT_LEVEL);
 		iScore = prefs.getInteger(SCORE_KEY, 0);
 		iHighScore = prefs.getInteger(HIGHSCORE_KEY, Integer.MIN_VALUE);
 		cBoubName = prefs.getString(BOUB_NAME_KEY, GlobalSettings.DEFAULT_BOUB_NAME);

@@ -29,6 +29,7 @@ package be.ac.ucl.lfsab1509.bouboule.game;
 import java.util.Random;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.MyGestureListener;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
@@ -48,6 +49,7 @@ public class MyGame extends Game {
 	private Sound looseSound;
 	private Sound countdownSound;
 	private Random rand;
+	private LevelLoader level;
 
 	private TimerMgr timer;
 
@@ -57,8 +59,9 @@ public class MyGame extends Game {
 	 */
 	public void init() {
 		GlobalSettings.GAME = this;
-		timer = new TimerMgr(1, 1);
-		GlobalSettings.PROFILE_MGR = new ProfileMgr();
+		timer = new TimerMgr(1, 1); // needed by some classes: listener
+		level = new LevelLoader(); // load the XML now: needed to know how many levels are available
+		GlobalSettings.PROFILE_MGR = new ProfileMgr(); // loaded the profile now: needed by menus, etc.
 	}
 
 	@Override
@@ -142,5 +145,9 @@ public class MyGame extends Game {
 
 	public TimerMgr getTimer() {
 		return timer;
+	}
+	
+	public LevelLoader getLevel() {
+		return level;
 	}
 }

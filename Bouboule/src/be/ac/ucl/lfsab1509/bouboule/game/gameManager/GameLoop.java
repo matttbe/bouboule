@@ -55,7 +55,6 @@ public class GameLoop {
 	private BitmapFont fontOsaka;
 	private BitmapFont fontOsakaRed;
 	private SpriteBatch batch;
-	private LevelLoader level;
 
 	private static Random random;
 
@@ -82,8 +81,6 @@ public class GameLoop {
 
 		// Create only once the graphicManager
 		graphicManager = new GraphicManager();
-
-		level = new LevelLoader();
 
 		// Load the font
 		fontOswald = new BitmapFont(
@@ -123,6 +120,7 @@ public class GameLoop {
 
 		// load level
 		int iLevel = GlobalSettings.PROFILE.getLevel();
+		LevelLoader level = GlobalSettings.GAME.getLevel();
 		try {
 			level.loadLevel("Level" + iLevel);
 		} catch (GdxRuntimeException e) {
