@@ -167,6 +167,7 @@ public class ScreenGame implements Screen {
 
 		boolean bWasPlaying = loopMusic.isPlaying();
 		loopMusic.stop();
+		loopMusic.dispose();
 
 		loopMusicFile = pNewMusicFile;
 		loopMusic = Gdx.audio.newMusic(pNewMusicFile);
