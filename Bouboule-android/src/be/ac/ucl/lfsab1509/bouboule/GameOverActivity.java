@@ -40,6 +40,7 @@ import android.widget.TextView;
 
 public class GameOverActivity extends Activity {
 
+	public static GameExitStatus exitStatus = GameExitStatus.NONE;
 	
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -82,6 +83,6 @@ public class GameOverActivity extends Activity {
 	@Override
 	protected void onResume () {
 		super.onResume ();
-		MyAndroidMenus.onResumeMusic (this, GameExitStatus.GAMEOVER);
+		MyAndroidMenus.onResumeMusic (this, exitStatus);
 	}
 }
