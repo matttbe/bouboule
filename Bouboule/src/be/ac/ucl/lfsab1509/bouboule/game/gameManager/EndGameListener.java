@@ -181,12 +181,13 @@ public class EndGameListener implements ContactListener{
 				GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
 			
 			} else {
-				GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
+				GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER_LOOSE;
 				GlobalSettings.PROFILE.checkHighScoreAndResetProfile();
 			}
 
 			// GlobalSettings.GAME.looseSound(); // done in menus
 			endGame(true);
+			GlobalSettings.GAME_EXIT = GameExitStatus.NONE;
 
 			bIsEnding.set(false);
 		}
@@ -204,12 +205,13 @@ public class EndGameListener implements ContactListener{
 			
 			} else { // no more level: end game
 				
-				GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER;
+				GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER_END;
 				GlobalSettings.PROFILE.checkHighScoreAndResetProfile();
 			}
 
 			// GlobalSettings.GAME.winSound(); // done in menus
 			endGame(true);
+			GlobalSettings.GAME_EXIT = GameExitStatus.NONE;
 
 			bIsEnding.set(false);
 		}
@@ -219,7 +221,7 @@ public class EndGameListener implements ContactListener{
 		Gdx.app.log("KILL", "Cancel Game!");
 		if (GlobalSettings.GAME.getTimer().isRunning()) {
 			GlobalSettings.PROFILE.cancelNewScore();
-			GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER; // we need a new game
+			GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER_LOOSE; // we just need a new game
 			endGame(false);
 			GlobalSettings.GAME_EXIT = GameExitStatus.NONE; // we need a new game
 		}
@@ -230,7 +232,7 @@ public class EndGameListener implements ContactListener{
 		if (GlobalSettings.GAME.getTimer().isRunning()) {
 			GlobalSettings.PROFILE.cancelNewScore();
 		}
-		GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER; // we need a new game
+		GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER_LOOSE; // we need a new game
 		endGame(false);
 		GlobalSettings.PROFILE.checkHighScoreAndResetProfile(); // reset profile
 		GlobalSettings.GAME_EXIT = GameExitStatus.NONE;
