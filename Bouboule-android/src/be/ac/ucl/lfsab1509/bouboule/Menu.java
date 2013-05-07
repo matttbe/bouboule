@@ -63,7 +63,10 @@ import android.widget.Toast;
 
 public class Menu extends Activity {
 
-
+	private final int MENU_CHOOSING_LEVEL = 0; 
+	public static final int RETURN_MENU = 1; 
+	public static final int PLAY_GAME = 2; 
+	
 	// Need handler for callback to the UI thread
 	private final Handler mHandler = new Handler();
 
@@ -176,7 +179,8 @@ public class Menu extends Activity {
 			switch (view.getId()) {
 				
 				case R.id.PlayButton :
-					startActivityForResult(new Intent(Menu.this,CopyOfChoosingActivity.class), 0); // TODO: improve ChoosingActivity first
+					startActivityForResult(new Intent(Menu.this,CopyOfChoosingActivity.class), 
+							MENU_CHOOSING_LEVEL); // TODO: improve ChoosingActivity first
 					onActivityResult (0, 0, null);
 
 					break;
@@ -197,11 +201,26 @@ public class Menu extends Activity {
 	protected void onActivityResult(final int requestCode, final int resultCode,
 			final Intent data) {
 		Log.d("kamoulox","on activity");
-		if(requestCode == 0 && resultCode != -1) { // it's the id of the button
-			mHandler.removeCallbacks(animationUpdate);
-			mHandler.removeCallbacks(nameUpdate);
-			setResult(R.id.PlayButton);
-			finish();
+		if(requestCode == MENU_CHOOSING_LEVEL) { // it's the id of the button
+			
+			switch (resultCode) {
+			case RETURN_MENU:
+				// Nothing to to, we stay here 
+				break;
+
+			case PLAY_GAME:
+				
+				mHandler.removeCallbacks(animationUpdate);
+				mHandler.removeCallbacks(nameUpdate);
+				setResult(R.id.PlayButton);
+				finish();
+				break;
+				
+			default:
+				break;
+			}
+			
+			
 		}
 	}
 
