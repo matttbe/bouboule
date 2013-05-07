@@ -158,6 +158,9 @@ public class IA {
 		case 10:
 			Acc = hybrid(IA,VelocityIA,LocalEnemi,VelocityEnemi,false);
 			break;
+		case 11:
+			Acc = hybrid(IA,VelocityIA,LocalEnemi,VelocityEnemi,true);
+			break;
 		default:
 			break;
 		}
@@ -192,6 +195,11 @@ public class IA {
 		/*if(IALevel == 0){
 			Gdx.app.log ("Player","playerx"+LocalEnemi.x+"y"+LocalEnemi.y+"speed2"+VelocityEnemi.len2()+"acc"+Acc.len());
 		}*/
+		
+		if(IALevel==11){
+			Vector2 slow = new Vector2(VelocityIA).mul(0.1f);
+			Acc.sub(slow);
+		}
 		
 		Acc.mul(K_ACC);
 		
