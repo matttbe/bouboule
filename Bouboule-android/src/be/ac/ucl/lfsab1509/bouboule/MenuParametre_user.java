@@ -30,7 +30,10 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.*;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -60,12 +63,14 @@ public class MenuParametre_user extends Activity {
 	private EditText user_newname;
 	private EditText user_choose_level;
 	private Button user_reset;
+	private Button user_tuto;
 	
 	private ArrayList<String> listProfile;
 	
 	private ArrayList<String> boub_str;
 	private int boub_index;
 	private int BOUB_INDEX_MAX;
+	
 	
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -85,6 +90,7 @@ public class MenuParametre_user extends Activity {
 		user_newname = (EditText) findViewById(R.id.user_newname);
 		user_choose_level = (EditText) findViewById (R.id.user_choose_level);
 		user_reset = (Button) findViewById (R.id.user_resetgame_button);
+		user_tuto = (Button) findViewById (R.id.user_tuto_button);
 		
 		// link the listeners
 		user_boub_left.setOnClickListener(clickListener);
@@ -93,6 +99,7 @@ public class MenuParametre_user extends Activity {
 		user_newname.setOnKeyListener (onkeyListener);
 		user_choose_level.setOnKeyListener (onkeyListener);
 		user_reset.setOnClickListener (clickListener);
+		user_tuto.setOnClickListener (clickListener);
 		
 		// concern choice of bouboule
 		boub_str = BoubImages.getBoubName ();
@@ -104,7 +111,6 @@ public class MenuParametre_user extends Activity {
 		((TextView) findViewById(R.id.user_activeUser_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_playerball_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_choose_level_txt)).setTypeface(myTypeface);
-		((TextView) findViewById(R.id.user_resetgame_txt)).setTypeface (myTypeface);
 		
 		refreshScreen();
 		
@@ -113,6 +119,7 @@ public class MenuParametre_user extends Activity {
 	}
 	
 	private void refreshScreen(){
+		Log.d("LN","refresh");
 		// set the list into the spinner
 		listProfile = GlobalSettings.PROFILE_MGR.getAllProfilesAL();
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listProfile);
@@ -139,6 +146,7 @@ public class MenuParametre_user extends Activity {
 				+ iBestLevel + ")");
 		user_choose_level.setFilters (new InputFilter[] {
 				new InputFilterMinMax (1, iBestLevel)});
+		Log.d("LN","refresh done");
 	}
 	
 	private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
@@ -249,10 +257,53 @@ public class MenuParametre_user extends Activity {
 					openPictureFromAssets(user_boub_right,boub_str.get (getNextIndex(boub_index)),false);
 					break;
 				case R.id.user_resetgame_button :
-					EndGameListener.resetGame ();
-					makeToast(getString(R.string.user_resetgame_notif));
-					//need refresh of balls
+					DialogInterface.OnClickListener DIResetclicklistener = new DialogInterface.OnClickListener() { // définition de la callback pour la réponse Oui
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							Log.d("LN", "code DI reset : "+ which);
+							switch (which){
+							case -1 : // yes button
+								EndGameListener.resetGame ();
+								makeToast(getString(R.string.user_resetgame_notif));
+								refreshScreen();
+								break;
+							case -2 : // no button
+								break;
+							default :
+								break;
+							}
+						}
+					};
+					AlertDialog.Builder builderReset = new AlertDialog.Builder(view.getContext());
+					builderReset.setMessage(getString(R.string.user_continuereset));
+					builderReset.setPositiveButton(R.string.user_yes, DIResetclicklistener); 
+					builderReset.setNegativeButton(R.string.user_no, DIResetclicklistener);
+					builderReset.show();
 					break;
+				case R.id.user_tuto_button :
+					DialogInterface.OnClickListener DITutoclicklistener = new DialogInterface.OnClickListener() { // définition de la callback pour la réponse Oui
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							Log.d("LN", "code DI tuto : "+ which);
+							switch (which){
+							case -1 : // yes button
+								EndGameListener.resetGame ();
+								GlobalSettings.PROFILE.setNeedTutorial(true);
+								makeToast(getString(R.string.user_tuto_notif));
+								refreshScreen();
+								break;
+							case -2 : // no button
+								break;
+							default :
+								break;
+							}
+						}
+					};
+					AlertDialog.Builder builderTuto = new AlertDialog.Builder(view.getContext());
+					builderTuto.setMessage(getString(R.string.user_continuetuto));
+					builderTuto.setPositiveButton(R.string.user_yes, DITutoclicklistener); 
+					builderTuto.setNegativeButton(R.string.user_no, DITutoclicklistener);
+					builderTuto.show();
 				default :
 					break;
 			}
