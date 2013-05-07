@@ -75,7 +75,6 @@ public class Menu extends Activity {
 		@Override
 		public void run() {
 			updateAnimationOnUI();
-			Log.i("Run", "finish runnable updateAnimation");
 		}
 	};
 
@@ -84,7 +83,6 @@ public class Menu extends Activity {
 		@Override
 		public void run() {
 			startFunWithUi();
-			Log.i("Run", "finish runnable nameUpdate");
 		}
 	};
 	
@@ -92,15 +90,16 @@ public class Menu extends Activity {
 	private final Runnable boubouleUpdate = new Runnable() {
 		@Override
 		public void run() {
-			Log.d("Run", "START BOUBOULE UPDATE");
+			mHandler.removeCallbacks(this);
+			//Hide the bouboules until the animation begin 
 			animateBouboules();
-			Log.i("Run", "finish animate boubouleAnim");
 		}
 	};
 
 	//String animated
 	private String 	nameToShow;
 	private int 	whatToShow	= 0;
+	private Random rand = new Random();
 	
 	
 	//Animation containers
@@ -138,16 +137,21 @@ public class Menu extends Activity {
 		//Incline the blue text
 		contentView.setRotation(-15);
 
+		// relaunch the animations on click
+		contentView.setOnClickListener(clickListener);
+		findViewById(R.id.boubleft) .setOnClickListener(clickListener);
+		findViewById(R.id.boubright).setOnClickListener(clickListener);
+
+		//Hide the bouboules until the animation begin 
+		findViewById(R.id.boubleft) .setVisibility(View.INVISIBLE);
+		findViewById(R.id.boubright).setVisibility(View.INVISIBLE);
+
 		//Listeners for the Game Launcher
 		findViewById(R.id.PlayButton).setOnClickListener(clickListener);
 		findViewById(R.id.ParameterButton).setOnClickListener(clickListener);
 		
 		// HighScoreContextMenu: long click
 		registerForContextMenu (findViewById(R.id.HighScoreButton));
-		
-		//Hide the bouboules until the animation begin 
-		findViewById(R.id.boubleft) .setVisibility(View.INVISIBLE);
-		findViewById(R.id.boubright).setVisibility(View.INVISIBLE);
 
 		setAllTheAnimationAtOnce();
 
@@ -182,14 +186,20 @@ public class Menu extends Activity {
 					startActivityForResult(new Intent(Menu.this,CopyOfChoosingActivity.class), 
 							MENU_CHOOSING_LEVEL); // TODO: improve ChoosingActivity first
 					onActivityResult (0, 0, null);
-
 					break;
 					
 				case R.id.ParameterButton :
 					Intent intent = new Intent(Menu.this, MenuParametre.class);
 					startActivity(intent);
 					break;
-					
+				
+				case R.id.fullscreen_content : // title
+					startFunWithUi();
+					break;
+				case R.id.boubleft :
+				case R.id.boubright : // bouboules
+					boubouleUpdate.run();
+					break;
 				default :
 					
 					break;
@@ -308,17 +318,25 @@ public class Menu extends Activity {
 	 */
 	@SuppressLint("DefaultLocale")
 	protected void startFunWithUi() {
-		
-		if (whatToShow == 0) {
+		mHandler.removeCallbacks(animationUpdate);
+		switch (whatToShow) {
+		case 0:
 			nameToShow = "BOUBOULE";
-			whatToShow = 1;
-
-		} else {
-			String cProfileName = GlobalSettings.PROFILE.getName ();
-			nameToShow = "HELLO\n" + cProfileName.toUpperCase ();
-			whatToShow = 0;
-
+			
+			break;
+		case 1:
+			nameToShow = getString(R.string.hello) + "\n"
+					+ GlobalSettings.PROFILE.getName ().toUpperCase ();
+			break;
+		case 2:
+			nameToShow = getString(R.string.be_with_your);
+			break;
+		case 3:
+			nameToShow = GlobalSettings.PROFILE.getName ().toUpperCase () + "\n"
+					+ getString(R.string.you_best);
+			break;
 		}
+		whatToShow = (whatToShow + 1) % 4;
 
 		//Get the text and update the name
 		TextView myTextView = (TextView) findViewById(R.id.fullscreen_content);
@@ -343,9 +361,6 @@ public class Menu extends Activity {
 		TextView myTextView = (TextView) findViewById(R.id.fullscreen_content);
 
 		//Animation Launcher
-
-		Random rand = new Random();
-
 		switch (rand.nextInt(5)) {
 		//Fire the right animation
 		case 1:  
