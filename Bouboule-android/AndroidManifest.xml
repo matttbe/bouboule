@@ -78,7 +78,6 @@
 			android:label="@string/title_activity_ChoosingActivity"
 			android:screenOrientation="portrait" >
 		</activity>
-		
         <activity
             android:name="CopyOfChoosingActivity"
             android:label="@string/title_activity_CopyOfChoosingActivity"

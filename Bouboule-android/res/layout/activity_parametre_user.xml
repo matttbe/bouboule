@@ -64,6 +64,7 @@
 		        
 		        <ImageButton
 		            android:id="@+id/user_boub_left"
+		            android:background="@drawable/settingsbutton"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:layout_weight="1" />
@@ -76,6 +77,7 @@
 		        
 		        <ImageButton
 		            android:id="@+id/user_boub_right"
+		            android:background="@drawable/settingsbutton"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:layout_weight="1" />
@@ -101,6 +103,7 @@
 		    
 		    <Button
 		        android:id="@+id/user_resetgame_button"
+		        android:background="@drawable/settingsbutton"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dp"
@@ -109,6 +112,7 @@
 		    
 		    <Button
 		        android:id="@+id/user_tuto_button"
+		        android:background="@drawable/settingsbutton"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dp"
