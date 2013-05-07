@@ -111,6 +111,8 @@ public class MenuParametre_user extends Activity {
 		((TextView) findViewById(R.id.user_activeUser_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_playerball_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_choose_level_txt)).setTypeface(myTypeface);
+		user_reset.setTypeface(myTypeface);
+		user_tuto.setTypeface(myTypeface);
 		
 		refreshScreen();
 		

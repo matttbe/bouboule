@@ -34,6 +34,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -65,7 +66,13 @@ public class VictoryActivity extends Activity {
 				"osaka-re.ttf");
 		TextView pScoreView = (TextView) findViewById (R.id.VictoryScore);
 
-		pScoreView.setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
+		String score= null;
+		try {
+			score = Integer.toString (GlobalSettings.PROFILE.getScore ());
+			pScoreView.setText (score);
+		} catch (NullPointerException e) {
+			Log.e ("KILL", "Crash in VictoryActivity with Score: " + score + " " + e.getMessage());
+		}
 		pScoreView.setTypeface (myFontBout);
 		pScoreView.setTextSize(TypedValue.COMPLEX_UNIT_PX,35*ratio);
 		
