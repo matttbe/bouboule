@@ -125,6 +125,10 @@ public class MyGame extends Game {
 		}
 	}
 
+	public void stopCountdownSound() {
+		countdownSound.stop();
+	}
+
 	/**
 	 * @param cNewMusic should be a file that can be read by GDX
 	 * in 'assets/music/levels'
