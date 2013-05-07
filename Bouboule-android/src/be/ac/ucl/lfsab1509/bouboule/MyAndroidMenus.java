@@ -83,7 +83,9 @@ public class MyAndroidMenus implements Menus {
 			case LOOSE :
 				intent = new Intent (app, LoosingActivity.class);
 				break;
-			case GAMEOVER :
+			case GAMEOVER_LOOSE :
+			case GAMEOVER_END :
+				GameOverActivity.exitStatus = GlobalSettings.GAME_EXIT;
 				intent = new Intent (app, GameOverActivity.class);
 				break;
 		}
@@ -91,7 +93,6 @@ public class MyAndroidMenus implements Menus {
 		app.startActivityForResult (intent, MainActivity.CODE_END_GAME);
 		app.overridePendingTransition (android.R.anim.fade_in,
 				android.R.anim.fade_out);
-		GlobalSettings.GAME_EXIT = GameExitStatus.NONE;
 	}
 
 	public static void onBackPressedGeneric (Activity activity, int iButtonId) {

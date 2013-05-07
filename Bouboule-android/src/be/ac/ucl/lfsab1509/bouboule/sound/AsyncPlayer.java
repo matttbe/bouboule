@@ -102,6 +102,7 @@ public class AsyncPlayer {
 			if (mDebug) Log.d(mTag, "Starting playback");
 			switch (cmd.exitStatus) { // launch a sound before
 			case WIN:
+			case GAMEOVER_END:
 				Uri uriWin = Uri.parse("android.resource://be.ac.ucl.lfsab1509.bouboule/" + R.raw.win);
 				MediaPlayer playerWin = getMediaPlayer(cmd.stream, cmd.context, uriWin,
 						false, cmd.errorListener, cmd.bufferingUpdateListener,
@@ -110,7 +111,7 @@ public class AsyncPlayer {
 				playerWin.start();
 				break;
 			case LOOSE:
-			case GAMEOVER:
+			case GAMEOVER_LOOSE:
 				Log.d(mTag, "Starting gameover sound");
 				Uri uriLoose = Uri.parse("android.resource://be.ac.ucl.lfsab1509.bouboule/" + R.raw.loose);
 				MediaPlayer playerLoose = getMediaPlayer(cmd.stream, cmd.context, uriLoose,

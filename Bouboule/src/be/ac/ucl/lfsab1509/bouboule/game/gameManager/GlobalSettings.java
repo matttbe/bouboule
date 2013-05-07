@@ -46,7 +46,7 @@ public class GlobalSettings {
  	//TODO: A mettre dasn IA
  	public static ArrayList<MapNode> ARENAWAYPOINTALLOW = new ArrayList<MapNode>(); 
  	
- 	public static enum GameExitStatus {NONE, WIN, LOOSE, GAMEOVER};
+ 	public static enum GameExitStatus {NONE, WIN, LOOSE, GAMEOVER_LOOSE, GAMEOVER_END};
  	public static GameExitStatus 	GAME_EXIT	= GameExitStatus.NONE;
 
 	public final static int 		INIT_LEVEL = 1;

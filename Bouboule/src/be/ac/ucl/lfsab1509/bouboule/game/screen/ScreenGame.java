@@ -114,11 +114,12 @@ public class ScreenGame implements Screen {
 				+ game.getCountDown().isLaunched());
 		
 		game.getCountDown().reset(); // reset the countdown (if it's running)
-		if (bIsPause || !GlobalSettings.GAME.getTimer().isRunning()) {
+		if (!GlobalSettings.GAME.getTimer().isRunning()) {
 			// already stopped... we start a new game?
 			return;
 		}
-		
+
+		GlobalSettings.GAME.stopCountdownSound(); // stop the sound if any
 		bIsPause = true;
 		GlobalSettings.GAME.getTimer().pause();
 		loopMusic.pause();
