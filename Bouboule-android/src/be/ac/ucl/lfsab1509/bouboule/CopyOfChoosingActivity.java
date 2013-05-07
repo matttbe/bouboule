@@ -1,5 +1,6 @@
 package be.ac.ucl.lfsab1509.bouboule;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -29,9 +30,9 @@ public class CopyOfChoosingActivity extends FragmentActivity {
 
 		/** Setting the pagerAdapter to the pager object */
 		pager.setAdapter(pagerAdapter);
-		
-		
-		//TODO : THE ACTIVITY SHOULD FINISH IF THE GAME IS ALREADY LANCHED !
+
+		/** Select the current level */
+		pager.setCurrentItem(GlobalSettings.PROFILE.getLevel() - 1);
 
 	}
 

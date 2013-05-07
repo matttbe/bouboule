@@ -21,7 +21,7 @@ public class MyLevelFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 
 		/** Setting max level **/
-		maxlevel=GlobalSettings.PROFILE.getBestLevel();
+		maxlevel = GlobalSettings.PROFILE.getBestLevel();
 		
 		/** Getting the arguments to the Bundle object */
 		Bundle data = getArguments();
@@ -65,7 +65,7 @@ public class MyLevelFragment extends Fragment {
 			Log.d("Level","Clic button on page : "+ mCurrentPage);
 			
 			if(GlobalSettings.GAME.getScreen() != null)
-			EndGameListener.resetGame();
+				EndGameListener.resetGame();
 			
 			GlobalSettings.PROFILE.setLevel(mCurrentPage);
 			
