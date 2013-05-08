@@ -358,14 +358,18 @@ public class Entity {
 	}
 
 	private void invisible(final boolean bInvisible) {
-		((Sprite) fixture.getUserData()).setColor(1f, 1f, 1f,
-				bInvisible ? .025f : 1f);
+		Sprite userData = (Sprite) fixture.getUserData();
+		if (userData != null) // check if the game has been stopped
+			userData.setColor(1f, 1f, 1f, bInvisible ? .025f : 1f);
 	}
 
 	private void inverse(boolean bInverseAxe) {
-		((Sprite) fixture.getUserData()).rotate90(true);
-		((Sprite) fixture.getUserData()).rotate90(true);
-		if (bInverseAxe)
-			IA.inverse();
+		Sprite userData = (Sprite) fixture.getUserData();
+		if (userData != null) {
+			((Sprite) fixture.getUserData()).rotate90(true);
+			((Sprite) fixture.getUserData()).rotate90(true);
+			if (bInverseAxe)
+				IA.inverse();
+		}
 	}
 }
