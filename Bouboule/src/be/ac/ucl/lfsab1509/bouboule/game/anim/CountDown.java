@@ -98,7 +98,7 @@ public class CountDown {
 			iFirstFrames++;
 			return true;
 		}
-		else if(iFirstFrames == WAIT_FRAME) {
+		else if(iFirstFrames == WAIT_FRAME && RESUME_AFTER_END) { // RESUME_AFTER_END true only for the countdown
 			iFirstFrames++; // stop playing something next frames
 			GlobalSettings.GAME.countdownSound();
 		}
