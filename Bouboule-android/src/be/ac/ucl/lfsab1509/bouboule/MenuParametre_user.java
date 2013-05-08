@@ -380,7 +380,7 @@ public class MenuParametre_user extends Activity {
 					builderTuto.setMessage(getString(R.string.user_continuetuto));
 					builderTuto.setPositiveButton(R.string.user_yes, dialoglistener); 
 					builderTuto.setNegativeButton(R.string.user_no, dialoglistener);
-					builderTuto.show();
+					user_alert_tuto = builderTuto.show();
 				default :
 					break;
 			}
