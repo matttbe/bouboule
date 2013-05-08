@@ -133,7 +133,7 @@ public class Entity {
 			if (attributeBonusSpecialsCases(type))
 				return;
 
-			attributeBonusForAll();
+			attributeBonusForAll(type);
 		}
 	}
 
@@ -160,8 +160,8 @@ public class Entity {
 				return true;
 
 			case INVERSE:
-				inverse();
-				resetBonus(TIMER_DEFAULT_TIME * 2);
+				inverse(true);
+				resetBonus(type, TIMER_DEFAULT_TIME * 2);
 				return true;
 
 			case TIME_UP:
@@ -187,6 +187,11 @@ public class Entity {
 				resetSpeedBonus(type, TIMER_DEFAULT_TIME);
 				return true;
 
+			case INVERSE:
+				inverse(false);
+				resetBonus(type, TIMER_DEFAULT_TIME * 2);
+				return true;
+
 			default:
 				break;
 			}
@@ -194,31 +199,31 @@ public class Entity {
 		return false;
 	}
 
-	private void attributeBonusForAll() {
+	private void attributeBonusForAll(final short type) {
 		switch (this.bonus) {
 		case WEIGHT_HIGH:
 			biggerWeight();
-			resetBonus(TIMER_DEFAULT_TIME);
+			resetBonus(type, TIMER_DEFAULT_TIME);
 			break;
 		case WEIGHT_LOW:
 			lowerWeight();
-			resetBonus(TIMER_DEFAULT_TIME);
+			resetBonus(type, TIMER_DEFAULT_TIME);
 			break;
 		case ELASTICITY_HIGH:
 			biggerElasticity();
-			resetBonus(TIMER_DEFAULT_TIME);
+			resetBonus(type, TIMER_DEFAULT_TIME);
 			break;
 		case ELASTICITY_LOW:
 			lowerElasticity();
-			resetBonus(TIMER_DEFAULT_TIME);
+			resetBonus(type, TIMER_DEFAULT_TIME);
 			break;
 		case INVINCIBLE:
 			invincible(true);
-			resetBonus(TIMER_DEFAULT_TIME);
+			resetBonus(type, TIMER_DEFAULT_TIME);
 			break;
 		case INVISIBLE:
 			invisible(true);
-			resetBonus((TIMER_DEFAULT_TIME + 1) / 2);
+			resetBonus(type, (TIMER_DEFAULT_TIME + 1) / 2);
 			break;
 		default:
 			break;
@@ -254,7 +259,7 @@ public class Entity {
 		timer.scheduleTask(task, time);
 	}
 
-	private void resetBonus(final int time) {
+	private void resetBonus(final short type, final int time) {
 		Timer.Task task = new Timer.Task() {
 			@Override
 			public void run() {
@@ -279,7 +284,7 @@ public class Entity {
 					invisible(false);
 					break;
 				case INVERSE:
-					inverse();
+					inverse(true);
 
 				default:
 					break;
@@ -297,8 +302,8 @@ public class Entity {
 		if (this.timer != null)
 			this.timer.clear();
 
-		if (IA.AXE_POSITION > 0) // revert axe if it's inverted
-			IA.AXE_POSITION *= -1;
+		// revert axe if it's inverted
+		IA.setNormalOrientation();
 
 		Gdx.app.log("Timer", "Stopped the Timer if needed");
 	}
@@ -357,9 +362,10 @@ public class Entity {
 				bInvisible ? .025f : 1f);
 	}
 
-	private void inverse() {
+	private void inverse(boolean bInverseAxe) {
 		((Sprite) fixture.getUserData()).rotate90(true);
 		((Sprite) fixture.getUserData()).rotate90(true);
-		IA.AXE_POSITION *= -1;
+		if (bInverseAxe)
+			IA.inverse();
 	}
 }

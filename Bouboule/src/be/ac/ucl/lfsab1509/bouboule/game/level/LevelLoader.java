@@ -183,13 +183,11 @@ public class LevelLoader {
 			if (inverted) {
 				((Sprite) body.getBody().getFixtureList().get(0).getUserData()).rotate90(true);
 				((Sprite) body.getBody().getFixtureList().get(0).getUserData()).rotate90(true);
-				if (IA.AXE_POSITION < 0) {
-					IA.AXE_POSITION *= -1;
-				}
+				IA.setInvertedOrientation();
 
-			} else if (IA.AXE_POSITION > 0) { // revert axe if it's inverted
-				IA.AXE_POSITION *= -1;
 			}
+			else // revert axe if it's inverted
+				IA.setNormalOrientation();
 		}
 	}
 
