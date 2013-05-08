@@ -1,12 +1,7 @@
 --------------------------------------------
 * Promotional text of the App : max 80 car *
 --------------------------------------------
-
-
-
-
-
-
+Bouboule is a game of sumo in which you need to push the enemy outside the ring
 
 -----------------------------------------
 * Description of the App : max 4000 car *
@@ -16,5 +11,12 @@
 * Belgium), 2012-2013. & GPL3 license
 -----------------------------------------
 
+Bouboule is a game of sumo in which you need to push the enemy outside the ring.
 
+You controle one sumo "Bouboule" which you can move by tilting the smartphone or the tablet. You will face many enemy, each one more power full tant the previous from the geisha to the buisnessman. The fight will ocure in many different arena.
 
+During the battle, you will receive many bonus which will have a good or bad influance on the game.
+
+this application was made in the course FSAB1509 - Projet informatique(Yves Deville, Université catholique de Louvain, Belgium), 2012-2013.
+
+this application is under the GPL3 license.
