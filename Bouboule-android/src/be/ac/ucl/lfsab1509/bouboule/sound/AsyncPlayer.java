@@ -84,7 +84,6 @@ public class AsyncPlayer {
 			
 			@Override
 			public void onCompletion(MediaPlayer mp) {
-				mp.release();
 				if (mState == PLAY) { // only if the menu has not been stopped before
 					cmd.exitStatus = GameExitStatus.NONE; // start menu sound
 					cmd.requestTime = SystemClock.uptimeMillis(); // avoid warnings
@@ -100,39 +99,40 @@ public class AsyncPlayer {
 		// is less of a glitch.
 		try {
 			if (mDebug) Log.d(mTag, "Starting playback");
+			MediaPlayer player;
 			switch (cmd.exitStatus) { // launch a sound before
 			case WIN:
 			case GAMEOVER_END:
 				Uri uriWin = Uri.parse("android.resource://be.ac.ucl.lfsab1509.bouboule/" + R.raw.win);
-				MediaPlayer playerWin = getMediaPlayer(cmd.stream, cmd.context, uriWin,
+				player = getMediaPlayer(cmd.stream, cmd.context, uriWin,
 						false, cmd.errorListener, cmd.bufferingUpdateListener,
 						cmd.completionListener);
-				playerWin.setOnCompletionListener(getCompletionListener(cmd));
-				playerWin.start();
+				player.setOnCompletionListener(getCompletionListener(cmd));
+				player.start();
 				break;
 			case LOOSE:
 			case GAMEOVER_LOOSE:
 				Log.d(mTag, "Starting gameover sound");
 				Uri uriLoose = Uri.parse("android.resource://be.ac.ucl.lfsab1509.bouboule/" + R.raw.loose);
-				MediaPlayer playerLoose = getMediaPlayer(cmd.stream, cmd.context, uriLoose,
+				player = getMediaPlayer(cmd.stream, cmd.context, uriLoose,
 						false, cmd.errorListener, cmd.bufferingUpdateListener,
 						cmd.completionListener);
-				playerLoose.setOnCompletionListener(getCompletionListener(cmd));
-				playerLoose.start();
+				player.setOnCompletionListener(getCompletionListener(cmd));
+				player.start();
 				break;
 			default:
-				MediaPlayer player = new MediaPlayer();
 				player = getMediaPlayer(cmd.stream, cmd.context, cmd.uri,
 						cmd.looping, cmd.errorListener, cmd.bufferingUpdateListener,
 						cmd.completionListener);
 				if (cmd.play)
 					player.start();
-				if (mPlayer != null) {
-					mPlayer.release();
-				}
-				mPlayer = player;
 				break;
 			}
+			// release the previous player if any
+			if (mPlayer != null) {
+				mPlayer.release();
+			}
+			mPlayer = player;
 			long delay = SystemClock.uptimeMillis() - cmd.requestTime;
 			if (delay > 1000) {
 				Log.w(mTag, "Notification sound delayed by " + delay + "msecs");
