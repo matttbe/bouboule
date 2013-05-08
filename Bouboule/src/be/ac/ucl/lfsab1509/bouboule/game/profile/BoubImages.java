@@ -27,16 +27,10 @@ package be.ac.ucl.lfsab1509.bouboule.game.profile;
  */
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import sun.awt.GlobalCursorManager;
-
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader.Element;
 

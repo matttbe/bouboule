@@ -47,7 +47,6 @@ public class IA {
 	public static float ACC_MAX_PLAYER=0;
 	public static boolean IS_INIT;
 	public static float AXE_POSITION = -1;
-	private static float SENSIBILITY_DEFAULT = .15f;
 	public static float K_ACC = 6.0f;
 	
 	

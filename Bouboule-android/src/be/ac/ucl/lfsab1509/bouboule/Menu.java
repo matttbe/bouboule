@@ -189,7 +189,7 @@ public class Menu extends Activity {
 								!= GlobalSettings.PROFILE.getScore()) // and not started
 						onActivityResult (MENU_CHOOSING_LEVEL, PLAY_GAME, null);
 					else
-						startActivityForResult(new Intent(Menu.this,CopyOfChoosingActivity.class), 
+						startActivityForResult(new Intent(Menu.this,ChoosingActivity.class), 
 								MENU_CHOOSING_LEVEL); // TODO: improve ChoosingActivity first
 					break;
 					
