@@ -101,6 +101,21 @@
 		        android:layout_marginBottom="20dp" >
 		    </EditText>
 		    
+		    <TextView
+		        android:id="@+id/user_tuto_txt"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/user_tuto"
+		        android:layout_marginTop="20dp"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+		    
+		    <Switch
+			    android:id="@+id/user_tuto_switch"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:textOff="@string/user_tuto_off"
+			    android:textOn="@string/user_tuto_on"
+		        android:layout_marginBottom="20dp" />
 		    
 			<Button
 		        android:id="@+id/user_resetgame_button"
@@ -111,17 +126,7 @@
 		        android:layout_marginBottom="20dp"
 		        android:layout_gravity="center"
 		        android:text="@string/user_resetgame" />
-			    
-		    
-		    <Button
-		        android:id="@+id/user_tuto_button"
-		        android:background="@drawable/settingsbutton"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="20dp"
-		        android:layout_marginBottom="20dp"
-		        android:layout_gravity="center"
-		        android:text="@string/user_tuto" />
+			   
 		    
 		    <Space
 		        android:layout_width="match_parent"

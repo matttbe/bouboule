@@ -64,11 +64,12 @@ public class MenuParametre_user extends Activity {
 	private EditText user_newname;
 	private EditText user_choose_level;
 	private Button user_reset;
-	private Button user_tuto;
 	private AlertDialog user_alert_reset;
 	private AlertDialog user_alert_tuto;
+	private Switch user_tuto_switch;
 	
 	private ArrayList<String> listProfile;
+	private boolean update;
 	
 	private ArrayList<String> boub_str;
 	private int boub_index;
@@ -92,7 +93,7 @@ public class MenuParametre_user extends Activity {
 		user_newname = (EditText) findViewById(R.id.user_newname);
 		user_choose_level = (EditText) findViewById (R.id.user_choose_level);
 		user_reset = (Button) findViewById (R.id.user_resetgame_button);
-		user_tuto = (Button) findViewById (R.id.user_tuto_button);
+		user_tuto_switch = (Switch) findViewById (R.id.user_tuto_switch);
 		
 		// link the listeners
 		user_boub_left.setOnClickListener(clickListener);
@@ -101,16 +102,16 @@ public class MenuParametre_user extends Activity {
 		user_newname.setOnKeyListener (onkeyListener);
 		user_choose_level.setOnKeyListener (onkeyListener);
 		user_reset.setOnClickListener (clickListener);
-		user_tuto.setOnClickListener (clickListener);
+		user_tuto_switch.setOnCheckedChangeListener(switchListener);
 		
 		// change of type font
 		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
 		((TextView) findViewById(R.id.user_newUser_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_activeUser_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_playerball_txt)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.user_tuto_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_choose_level_txt)).setTypeface(myTypeface);
 		user_reset.setTypeface(myTypeface);
-		user_tuto.setTypeface(myTypeface);
 		
 		// hide the keyboard
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -153,6 +154,12 @@ public class MenuParametre_user extends Activity {
 			user_boub_right.setEnabled(true);
 		}
 		updateBouboule();
+		
+		// switch
+		if (GlobalSettings.PROFILE.needTutorial() != user_tuto_switch.isChecked()){
+			update = true;
+			user_tuto_switch.setChecked(GlobalSettings.PROFILE.needTutorial());
+		}
 		
 		// refresh the new user edittext
 		user_newname.setText(""); // remove text
@@ -376,12 +383,6 @@ public class MenuParametre_user extends Activity {
 					builderReset.setNegativeButton(R.string.user_no, dialoglistener);
 					user_alert_reset = builderReset.show();
 					break;
-				case R.id.user_tuto_button :
-					AlertDialog.Builder builderTuto = new AlertDialog.Builder(view.getContext());
-					builderTuto.setMessage(getString(R.string.user_continuetuto));
-					builderTuto.setPositiveButton(R.string.user_yes, dialoglistener); 
-					builderTuto.setNegativeButton(R.string.user_no, dialoglistener);
-					user_alert_tuto = builderTuto.show();
 				default :
 					break;
 			}
@@ -406,9 +407,35 @@ public class MenuParametre_user extends Activity {
 				refreshScreen();
 				break;
 			case -2 : // no button
+				if (dialog == user_alert_tuto){
+					user_tuto_switch.setChecked(false);
+				}
 				break;
 			default :
 				break;
+			}
+		}
+	};
+	
+	// listener for switch
+	private CompoundButton.OnCheckedChangeListener switchListener = new CompoundButton.OnCheckedChangeListener() {
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			if (buttonView == user_tuto_switch){
+				if (update){
+					update = false;
+					return;
+				}
+				if (user_tuto_switch.isChecked()){
+					AlertDialog.Builder builderTuto = new AlertDialog.Builder(buttonView.getContext());
+					builderTuto.setMessage(getString(R.string.user_continuetuto));
+					builderTuto.setPositiveButton(R.string.user_yes, dialoglistener); 
+					builderTuto.setNegativeButton(R.string.user_no, dialoglistener);
+					user_alert_tuto = builderTuto.show();
+				} else {
+					GlobalSettings.PROFILE.setNeedTutorial(false);
+					Log.d("LN","USER SETTINGS : no tuto");
+				}
+				
 			}
 		}
 	};

@@ -13,6 +13,7 @@
     <string name="title_activity_victory">VictoryActivity</string>
     <string name="title_activity_loosing">LoosingActivity</string>
     <string name="title_activity_ChoosingActivity">Choosing Activity</string>
+    <string name="title_activity_CopyOfChoosingActivity">Copy Of Choosing Activity</string>
     
     <!-- Menu Parametre -->
     <string name="title_activiy_menuParametre">Settings</string>
@@ -31,22 +32,24 @@
     <string name="user_choose_level_txt">Choose the level to start with:</string>
     <string name="user_choose_level_current">Current level: </string>
     <string name="user_choose_level_max">max: </string>
-    <string name="user_resetgame">Reset your game!</string>
-    <string name="user_resetgame_notif">Your game has been reset!</string>
-    <string name="user_yes">Yes</string>
-    <string name="user_no">No</string>
-    <string name="user_continuereset">This will erase your progression.\nDo you want to continue?</string>
-    <string name="user_tuto">Show the tutorial!</string>
-    <string name="user_continuetuto">This will erase your progression and set the tutorial again.\nDo you want to continue?</string>
-    <string name="user_tuto_notif">Your game has been reset and the tutorial will be shown at first play!</string>
+    <string name="user_resetgame">Reset your game !</string>
+    <string name="user_resetgame_notif">Your game has been reseted !</string>
+    <string name="user_yes">yes</string>
+    <string name="user_no">no</string>
+    <string name="user_continuereset">This will erase your progression. Do you want to continue?</string>
+    <string name="user_tuto">Show the tutorial:</string>
+    <string name="user_continuetuto">This will erase your progression and set the tutorial again. Do you want to continue?</string>
+    <string name="user_tuto_notif">Your game has been reseted and the tutorial will be shown at first play !</string>
+    <string name="user_tuto_on">Yes</string>
+    <string name="user_tuto_off">No</string>
     
     <!-- Menu global settings -->
     <string name="global_sound">Sound:</string>
     <string name="global_sound_off">Mute</string>
-    <string name="global_sound_on">Music On</string>
+    <string name="global_sound_on">Music on</string>
     <string name="global_rotate">Rotation of the balls:</string>
     <string name="global_rotate_off">No rotation</string>
-    <string name="global_rotate_on">Rotation On</string>
+    <string name="global_rotate_on">Rotation on</string>
     <string name="global_sensitivity">Sensitivity:</string>
     
     <!-- Menu Parametre_about -->
@@ -63,7 +66,7 @@
     <string name="about_graphism">Graphisms:</string>
     <string name="about_graphism_txt">Van Wallendael Julien</string>
     <string name="about_music">Music and sounds:</string>
-    <string name="about_music_txt">Adans Paschal (adanspaschal@gmail.com)</string>
+    <string name="about_music_txt">Adans Paschal</string>
     
     
     <!-- Menu Pause -->
