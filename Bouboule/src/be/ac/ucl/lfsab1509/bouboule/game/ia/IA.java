@@ -46,24 +46,24 @@ public class IA {
 	public static float ACC_MAX_IA=0;
 	public static float ACC_MAX_PLAYER=0;
 	public static boolean IS_INIT;
-	public static float AXE_POSITION = -1;
-	public static float K_ACC = 6.0f;
+	private static float AXE_POSITION = -1;
+	private static float K_ACC = 6.0f;
 	
 	
-	//initialiser la variable en début de niveau
+	//init this variable at the beginning of each level
 	public static int countframe=0;
 	
 	//level 0 => gyroscope
 	//level 1 => go mid
 	//level 2 => troll
-	//level 3 => arret mid
-	//level 4 => aggresif attenticipe
-	//level 5 => defencif
-	//level 6 => hybrid aggresif/defencif anticipation
+	//level 3 => stop mid
+	//level 4 => aggressive anticipatory
+	//level 5 => defensive
+	//level 6 => hybrid aggressive/defensive anticipation
 	//level 7 => go mid + slow
-	//level 8 => multipoint
-	//level 9 => aggresif sans anticipation
-	//level 10 => hybrid sans anticipation
+	//level 8 => multipoints
+	//level 9 => aggressive without anticipation
+	//level 10 => hybrid without anticipation
 
 	private static void init(Body bodyia,Body bodyplayer){
 		if(bodyia != null)
@@ -112,17 +112,6 @@ public class IA {
 		switch (IALevel) {
 		case 0:
 			Acc = gyroscope();
-			//Acc = troll2(LocalEnemi, VelocityEnemi);
-			//Acc = middeler(LocalEnemi,0);
-			//Acc = aggretion(LocalEnemi, VelocityEnemi,IA,VelocityIA);
-			//Acc = hybrid(LocalEnemi,VelocityEnemi,IA,VelocityIA);
-			//Acc = stopMid(LocalEnemi, VelocityEnemi);
-			//Gdx.app.log ("Player","player"+LocalEnemi.x+"speed"+VelocityEnemi.x+"acc"+Acc.x);
-			
-			/*Acc = middeler (LocalEnemi,2);
-			Vector2 slowi = new Vector2(VelocityEnemi).mul(2f);
-			Acc.sub(slowi);*/
-			
 			break;
 
 		case 1:
@@ -355,29 +344,34 @@ public class IA {
 		return directionenemi;
 	}
 
+	public static boolean isInverted() {
+		return AXE_POSITION == 1;
+	}
 
-	public static Vector2 gyroscope(){
+	public static void inverse() {
+		AXE_POSITION *= -1;
+	}
+
+	public static void setInvertedOrientation() {
+		AXE_POSITION = 1;
+	}
+
+	public static void setNormalOrientation() {
+		AXE_POSITION = -1;
+	}
+
+	private static Vector2 gyroscope(){
 		//float sensibility = SENSIBILITY_DEFAULT * GlobalSettings.SENSITIVITY * 2 / GlobalSettings.SENSITIVITY_MAX;
-		float accelX = -Gdx.input.getAccelerometerX();
-		float accelY = -Gdx.input.getAccelerometerY();
+		float accelX = Gdx.input.getAccelerometerX() * AXE_POSITION;
+		float accelY = Gdx.input.getAccelerometerY() * AXE_POSITION;
 		Gdx.app.log ("IA","gyroscope"+accelX + " " +accelY);
 		Vector2 Acc= new Vector2(accelX, accelY);
 		Acc.limit(GlobalSettings.SENSITIVITY/100).div(GlobalSettings.SENSITIVITY/100).mul(ACC_MAX_PLAYER);
-		
-		/*
-		 * Uniquement pour mes tests
-		 */
-		//accelX=0;
-		//accelY=0;
-		//Gdx.app.log ("IA","gyroscope"+ Acc.len());
-		
-
-		
-
+	
 		return Acc;
 	}
 
-	public static Vector2 middeler(Vector2 IA,int centre){
+	private static Vector2 middeler(Vector2 IA,int centre){
 		
 		Vector2 Acc = new Vector2(GlobalSettings.ARENAWAYPOINTALLOW.get(centre).getVector());
 		Acc.sub(IA);
@@ -385,7 +379,7 @@ public class IA {
 		return Acc;
 	}
 	
-	public static Vector2 middeler(Vector2 IA,MapNode centre){
+	private static Vector2 middeler(Vector2 IA,MapNode centre){
 		
 		Vector2 Acc = new Vector2(centre.getVector());
 		Acc.sub(IA);
@@ -393,7 +387,7 @@ public class IA {
 		return Acc;
 	}
 
-	public static Vector2 stopMid(Vector2 position,Vector2 velocity){
+	private static Vector2 stopMid(Vector2 position,Vector2 velocity){
 		Vector2 vitesse , dirmid , Acc;
 
 		vitesse = new Vector2(velocity).nor().mul(0.9f);
@@ -412,7 +406,24 @@ public class IA {
 		return Acc;
 	}
 
-	public static Vector2 troll3(Vector2 position,Vector2 velocity){
+/*
+	private static Vector2 troll3(Vector2 position,Vector2 velocity){
+		Vector2 newAcc = new Vector2(middeler(position, 0));
+		Vector2 temp1 = new Vector2(newAcc).nor();
+		Vector2 temp2 = new Vector2(velocity).nor();
+
+		float angle = 90*temp1.dot(temp2);
+		if(angle > 0 ){
+			newAcc.rotate(angle-15);
+		}else{
+			newAcc.rotate(angle+15);
+		}
+
+		return newAcc;
+	}
+*/
+
+	private static Vector2 troll2(Vector2 position,Vector2 velocity){
 		Vector2 newAcc = new Vector2(middeler(position, 0));
 		Vector2 temp1 = new Vector2(newAcc).nor();
 		Vector2 temp2 = new Vector2(velocity).nor();
@@ -427,23 +438,8 @@ public class IA {
 		return newAcc;
 	}
 
-	public static Vector2 troll2(Vector2 position,Vector2 velocity){
-		Vector2 newAcc = new Vector2(middeler(position, 0));
-		Vector2 temp1 = new Vector2(newAcc).nor();
-		Vector2 temp2 = new Vector2(velocity).nor();
-
-		float angle = 90*temp1.dot(temp2);
-		if(angle > 0 ){
-			newAcc.rotate(angle-15);
-		}else{
-			newAcc.rotate(angle+15);
-		}
-
-		return newAcc;
-	}
-
-
-	public static Vector2 troll(Vector2 position,Vector2 velocity){
+/*
+	private static Vector2 troll(Vector2 position,Vector2 velocity){
 		Vector2 newAcc = new Vector2(middeler(position, 0));
 		Vector2 temp1 = new Vector2(newAcc).nor();
 		Vector2 temp2 = new Vector2(velocity).nor();
@@ -467,6 +463,7 @@ public class IA {
 
 		return newAcc;
 	}
+*/
 
 	/*
 	 * renvoi un angle entre ]-180;180[
