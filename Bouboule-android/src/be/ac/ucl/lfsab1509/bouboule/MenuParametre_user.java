@@ -156,6 +156,7 @@ public class MenuParametre_user extends Activity {
 		
 		// refresh the new user edittext
 		user_newname.setText(""); // remove text
+		user_newname.setHint(GlobalSettings.PROFILE.getName());
 
 		// refresh the curent level edittext
 		user_choose_level.setText(""); // remove text
