@@ -26,6 +26,7 @@
 
 package be.ac.ucl.lfsab1509.bouboule;
 
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 
@@ -316,12 +317,16 @@ public class Menu extends Activity {
 		finish ();
 	}
 
+	@SuppressLint("DefaultLocale")
+	private String normaliseTextForTitle(String text) {
+		return Normalizer.normalize(text, Normalizer.Form.NFD)
+				.replaceAll("\\p{InCombiningDiacriticalMarks}+", "").toUpperCase();
+	}
 
 	/**
 	 * Update the Animated String and add a 
 	 * bouncing animation
 	 */
-	@SuppressLint("DefaultLocale")
 	protected void startFunWithUi() {
 		mHandler.removeCallbacks(animationUpdate);
 		switch (whatToShow) {
@@ -331,13 +336,14 @@ public class Menu extends Activity {
 			break;
 		case 1:
 			nameToShow = getString(R.string.hello) + "\n"
-					+ GlobalSettings.PROFILE.getName ().toUpperCase ();
+					+ normaliseTextForTitle(GlobalSettings.PROFILE.getName ());
+			// for this font, we need only chars in capital letters and digits
 			break;
 		case 2:
 			nameToShow = getString(R.string.be_with_your);
 			break;
 		case 3:
-			nameToShow = GlobalSettings.PROFILE.getName ().toUpperCase () + "\n"
+			nameToShow = normaliseTextForTitle(GlobalSettings.PROFILE.getName ()) + "\n"
 					+ getString(R.string.you_best);
 			break;
 		}
