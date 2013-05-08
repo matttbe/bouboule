@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Level>
-
+ 
 
     <Level1
         bonus="True"
@@ -235,7 +235,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/CherryBlossom/cherryblossom.jpg" >
+            texRegionPath="terrain/CherryBlossom/cherryblossom.jpg" 
+            music="Eggroll.mp3">
         </Arena>
 
         <MapNodes terrain="cherryBlossom" >
@@ -948,7 +949,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Ship/ship.jpg" >
+            texRegionPath="terrain/Ship/ship.jpg" 
+            music="DoubleHoles.mp3">
         </Arena>
 
         <MapNodes terrain="ship" >
@@ -1046,7 +1048,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Sailor/sailor.jpg" >
+            texRegionPath="terrain/Sailor/sailor.jpg"
+            music="OneWay.mp3" >
         </Arena>
 
         <MapNodes terrain="sailor" >
@@ -1118,7 +1121,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Lazer/lazer.jpg" >
+            texRegionPath="terrain/Lazer/lazer.jpg"
+            music="Arena.mp3" >
         </Arena>
 
         <MapNodes terrain="Lazer" >
@@ -1263,7 +1267,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/SpaceShip/spaceship.jpg" >
+            texRegionPath="terrain/SpaceShip/spaceship.jpg" 
+            music="Arena">
         </Arena>
 
         <MapNodes terrain="spaceship" >
@@ -1464,7 +1469,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Ship/ship.jpg" >
+            texRegionPath="terrain/Ship/ship.jpg" 
+            music="DoubleHoles.mp3">
         </Arena>
 
         <MapNodes terrain="ship" >
@@ -1564,7 +1570,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Sailor/sailor.jpg" >
+            texRegionPath="terrain/Sailor/sailor.jpg" 
+            music="OneWay.mp3">
         </Arena>
 
         <MapNodes terrain="sailor" >
@@ -1809,7 +1816,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Ship/ship.jpg" >
+            texRegionPath="terrain/Ship/ship.jpg" 
+            music="DoubleHoles.mp3">
         </Arena>
 
         <MapNodes terrain="ship" >
@@ -2013,7 +2021,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/SpaceShip/spaceship.jpg" >
+            texRegionPath="terrain/SpaceShip/spaceship.jpg" 
+            music="Arena.mp3" >
         </Arena>
 
         <MapNodes terrain="spaceship" >
@@ -2133,7 +2142,8 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Lazer/lazer.jpg" >
+            texRegionPath="terrain/Lazer/lazer.jpg" 
+            music="Tatami.mp3">
         </Arena>
 
         <MapNodes terrain="Lazer" >
