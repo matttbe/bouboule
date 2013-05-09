@@ -26,9 +26,10 @@ Key features:
 ★ Outstanding graphics
 ★ Original sounds and soundtracks
 ★ Superpowers
-★ Free & Open Source Game
+★ Free & Open-Source Game
 ★ Android built-in Game
 ★ Advertisement free
+★ HD Graphics
 ★ Universal App (4.0+)
 
 
@@ -36,6 +37,6 @@ Key features:
 Bouboule was made for the course FSAB1509 - Project Informatique (Yves Deville, Catholic University 
 of Louvain, BELGIUM), 2012-2013.
 
-Developed with LibGdx Engine.
+Developed with LibGdx (Free and Open-Source game development framework).
 
-This application is under the GPL3 license.
+This application is under the GPL3 license. (Source code will be available soon!)
