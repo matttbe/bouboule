@@ -1,0 +1,34 @@
+--------------------------
+**
+CATCH : BOUBOULE - Kick them all !
+**
+--------------------------
+
+
+Bouboule, an addictive sumo game where you must push your enemy outside the ring.
+
+Bouboule is a sumo-ball controlled by tilting the device. 
+Through 30 stunning levels, Bouboule must face many enemies more and more powerful.
+The fight will occur in many different arena with various enemies.
+Many bonus may uncounted your fight, with some uncertain influence on the end of the battle !
+
+Defeat them All !
+
+
+***		***		***		***		***		***
+
+
+Key features:
+★ 30 levels
+★ Innovative physics gameplay
+★ Adorable characters
+★ Outstanding graphics
+★ Superpowers
+★ Universal App (4.0+)
+
+
+
+Bouboule was made in the course FSAB1509 - Project Informatique (Yves Deville, Catholic University 
+of Louvain, BELGIUM), 2012-2013.
+
+This application is under the GPL3 license.
