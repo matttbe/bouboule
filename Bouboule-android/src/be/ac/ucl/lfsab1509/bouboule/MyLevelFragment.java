@@ -20,13 +20,13 @@ public class MyLevelFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		/** Setting max level **/
+		/* Setting max level */
 		maxlevel = GlobalSettings.PROFILE.getBestLevel();
 		
-		/** Getting the arguments to the Bundle object */
+		/* Getting the arguments to the Bundle object */
 		Bundle data = getArguments();
 
-		/** Getting integer data of the key current_page from the bundle */
+		/* Getting integer data of the key current_page from the bundle */
 		mCurrentPage = data.getInt("current_page", 0);
 
 	}
