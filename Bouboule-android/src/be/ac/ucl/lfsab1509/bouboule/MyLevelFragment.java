@@ -89,8 +89,6 @@ public class MyLevelFragment extends Fragment {
 		@Override
 		public void onClick (View view)
 		{
-
-			//TODO launch CurrentPage level =)
 			Log.d("Level","Clic button on page : "+ mCurrentPage);
 			
 			if(GlobalSettings.GAME.getScreen() != null)
