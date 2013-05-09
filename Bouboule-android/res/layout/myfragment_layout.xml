@@ -6,9 +6,9 @@
 
     <ImageView
         android:id="@+id/levelimage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/level"
+        android:layout_centerInParent="True"
+        android:layout_width="300dp"
+        android:layout_height="473dp"
         android:contentDescription="@string/Level" >
 
         <!-- android:layout_centerInParent="true" -->
