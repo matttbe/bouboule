@@ -49,16 +49,16 @@ traduction Français
 ===================================================================
 --------------------------
 **
-CATCH : BOUBOULE - Jeu de sumo - Un pour les battre tous!
+CATCH : BOUBOULE - Jeu de sumo - Seul contre tous!
 **
 --------------------------
 
 Bouboule, un jeu de sumo addictif où vous devez pousser votre ennemi en dehors du ring.
 
-Bouboule est une bille-sumo controlée gracà à l'inclinaison de votre appareil.
-A travers 32 niveaux étonnants, regroupé en 8 mondes, Bouboule doit faire face à de nombreux ennemis de plus en plus puissant.
+Bouboule est une bille-sumo contrôlée grâce à l'inclinaison de votre appareil.
+À travers 32 niveaux étonnants, regroupés en 8 mondes, Bouboule doit faire face à de nombreux ennemis de plus en plus puissants.
 Les combats se déroulent dans des arènes diverses avec différents ennemis.
-De multiple bonus arriverons pendant votre combat, avec certain pouvant grandement influancer la fin du combat!
+De multiples bonus arriveront pendant votre combat, dont certains pouvant grandement influencer la fin du combat!
 
 Battez les tous!
 
@@ -74,15 +74,15 @@ Principales caractéristiques :
 * Graphismes époustouflants
 * Son et musiques originales
 * Super-pouvoirs
-* Jeu Libre et Open-Source
-* Jeu intégré à Android
+* Jeu Libre, gratuit et Open-Source
+* Jeu bien intégré à Android
 * Sans publicité
 * Graphique HD
 * Application universelle (4.0+)
 
 Bouboule à été développé dans le cadre du cours FSAB1509 - Projet Informatique (Yves Deville, Université Catholique de Louvain, BELGIQUE), 2012-2013
 
-Développé avec LibGdx (framework de développement libre et open-source)
+Développé avec LibGdx (framework de développement Libre et Open-Source)
 
 Cette application est sous licence GPL3. (Le code source sera très bientôt disponible!)
 
