@@ -47,7 +47,8 @@ public class IA {
 	public static float ACC_MAX_PLAYER=0;
 	public static boolean IS_INIT;
 	private static float AXE_POSITION = -1;
-	private static float K_ACC = 6.0f;
+	private static final float K_ACC_DEFAULT = 6f;
+	private static float K_ACC = K_ACC_DEFAULT;
 	
 	
 	//init this variable at the beginning of each level
@@ -67,12 +68,20 @@ public class IA {
 
 	private static void init(Body bodyia,Body bodyplayer){
 		if(bodyia != null)
-		FORCE_MAX_IA = ACC_MAX_IA*bodyia.getMass();
+			FORCE_MAX_IA = ACC_MAX_IA * bodyia.getMass();
 		if(bodyplayer != null)
-		FORCE_MAX_PLAYER = ACC_MAX_PLAYER*bodyplayer.getMass();
-		IS_INIT=true;
+			FORCE_MAX_PLAYER = ACC_MAX_PLAYER * bodyplayer.getMass();
+		IS_INIT = true;
+		setNewSensitivity();
 	}
-	
+
+	public static void setNewSensitivity () {
+		float fSensDefault = ((float) GlobalSettings.SENSITIVITY_MIN + (float) GlobalSettings.SENSITIVITY_MAX) / 2f; // 500
+		float fSens = (float) GlobalSettings.SENSITIVITY / fSensDefault; // => .7 -> 1.3
+		Gdx.app.log("Matth", "Sens: " + fSens + " " + GlobalSettings.SENSITIVITY);
+		K_ACC = K_ACC_DEFAULT * fSens;
+	}
+
 	public static Vector2 compute(int IALevel, Bouboule bouboule) {
 
 
@@ -365,10 +374,10 @@ public class IA {
 		float accelX = Gdx.input.getAccelerometerX() * AXE_POSITION;
 		float accelY = Gdx.input.getAccelerometerY() * AXE_POSITION;
 		Vector2 Acc= new Vector2(accelX, accelY);
-		float div = (GlobalSettings.SENSITIVITY_MAX +
-				GlobalSettings.SENSITIVITY_MIN * 2 -
+		float div = (GlobalSettings.SENSITIVITY_MAX + // old: 1200 - 500 = 750 ; new: 650+350 - 500 = 500, ok?
+				GlobalSettings.SENSITIVITY_MIN -
 				GlobalSettings.SENSITIVITY) / 100;
-		float limit = 1; // ((float) GlobalSettings.SENSITIVITY) / 500f;
+		float limit = 1;
 		Acc.div(div).limit(limit).mul(ACC_MAX_PLAYER);
 	
 		return Acc;

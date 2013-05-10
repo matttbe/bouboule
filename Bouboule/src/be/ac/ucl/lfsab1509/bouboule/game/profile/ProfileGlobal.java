@@ -33,6 +33,7 @@ import java.util.Date;
 import com.badlogic.gdx.Preferences;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 
 public class ProfileGlobal {
 	private String SEPARATOR;
@@ -63,7 +64,8 @@ public class ProfileGlobal {
 	 */
 	public void loadDefaultSettings() {
 		GlobalSettings.SOUND_IS_MUTED = prefs.getBoolean(MUTE_SOUND_KEY, false);
-		GlobalSettings.SENSITIVITY = prefs.getInteger(SENSITIVITY_KEY, 500);
+		GlobalSettings.SENSITIVITY = prefs.getInteger(SENSITIVITY_KEY,
+				(GlobalSettings.SENSITIVITY_MAX + GlobalSettings.SENSITIVITY_MIN) / 2);
 		GlobalSettings.FIXED_ROTATION = prefs.getBoolean(FIXED_ROTATIONS_KEY, true);
 	}
 
@@ -76,6 +78,7 @@ public class ProfileGlobal {
 
 	public void changeSensibilitySettings(final int newSensitivity) {
 		GlobalSettings.SENSITIVITY = newSensitivity;
+		IA.setNewSensitivity ();
 		prefs.putInteger(SENSITIVITY_KEY, newSensitivity);
 		prefs.flush();
 	}
