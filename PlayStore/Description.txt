@@ -21,7 +21,6 @@ Key features:
 ★ 32 levels
 ★ Innovative physics gameplay
 ★ Adorable characters
-★ Multi-size Bouboules
 ★ Outstanding graphics
 ★ Original sounds and soundtracks
 ★ Superpowers
@@ -41,6 +40,7 @@ Developed with LibGdx (Free and Open-Source game development framework).
 This application is under the GPL3 license. (Source code will be available soon!)
 
 
+
 ----------------------------------
 Description : Version Française :
 ----------------------------------
@@ -48,7 +48,7 @@ Description : Version Française :
 
 Bouboule, un jeu de sumo addictif où vous devez pousser votre ennemi en dehors du ring.
 
-Bouboule est une bille-sumo contrôlée grâce à l'inclinaison de votre appareil.
+Bouboule est une sumo-bille contrôlée grâce à l'inclinaison de votre appareil.
 À travers 32 niveaux étonnants, regroupés en 8 mondes, Bouboule doit faire face à de nombreux ennemis de plus en plus puissants.
 Les combats se déroulent dans des arènes diverses avec différents ennemis.
 De multiples bonus arriveront pendant votre combat, dont certains pouvant grandement influencer la fin du combat!
