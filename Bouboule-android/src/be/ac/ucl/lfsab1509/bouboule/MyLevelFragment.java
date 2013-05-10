@@ -7,8 +7,6 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.LightingColorFilter;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -50,28 +48,7 @@ public class MyLevelFragment extends Fragment {
 		
 		InputStream bitmap = null;
 		
-		try {
-			bitmap = getActivity().getAssets().open("level_image/world" + mCurrentPage + ".jpg");
-			Bitmap bit = BitmapFactory.decodeStream(bitmap);
 
-			((ImageView) v.findViewById(R.id.levelimage)).setImageBitmap(bit);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if(bitmap != null)
-				try {
-					bitmap.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		}	
-		
-		/* Hack to set the right size on small devices */
-		
-		ImageView imageLvl = (ImageView) v.findViewById(R.id.levelimage);
-		LayoutParams params = (LayoutParams) imageLvl.getLayoutParams();
-		params.width = getDisplayVector().x/2;
-		imageLvl.setLayoutParams(params);
 
 		
 		/* Set the locks and co */
@@ -79,7 +56,32 @@ public class MyLevelFragment extends Fragment {
 		
 		if ( mCurrentPage <= lastUnlockedWorld) {
 			
+			try {
+				bitmap = getActivity().getAssets().open("level_image/world" + mCurrentPage + ".jpg");
+				Bitmap bit = BitmapFactory.decodeStream(bitmap);
+
+				((ImageView) v.findViewById(R.id.levelimage)).setImageBitmap(bit);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				if(bitmap != null)
+					try {
+						bitmap.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+			}	
+			
+			/* Hack to set the right size on small devices */
+			
+			ImageView imageLvl = (ImageView) v.findViewById(R.id.levelimage);
+			LayoutParams params = (LayoutParams) imageLvl.getLayoutParams();
+			params.width = getDisplayVector().x/2;
+			imageLvl.setLayoutParams(params);
+			
 			ImageButton play = (ImageButton) v.findViewById(R.id.play);
+			
+			/* Activate the play and desactiavte the lock */
 
 			play.setOnClickListener(clickListener);
 			
@@ -90,7 +92,7 @@ public class MyLevelFragment extends Fragment {
 			ImageButton play = (ImageButton) v.findViewById(R.id.play);
 			play.setVisibility(View.INVISIBLE);
 			
-			imageLvl.setColorFilter(new LightingColorFilter(Color.GRAY, 1));
+			//imageLvl.setColorFilter(new LightingColorFilter(Color.GRAY, 1));
 		}
 
 

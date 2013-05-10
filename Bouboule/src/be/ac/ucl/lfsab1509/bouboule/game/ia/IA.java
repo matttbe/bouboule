@@ -68,7 +68,7 @@ public class IA {
 	//level 8 => multipoints
 	//level 9 => aggressive without anticipation
 	//level 10 => hybrid without anticipation
-	//level 11 => hybrid plus frein
+	//level 11 => hybrid with break
 	//level 12 => gyroscope inverse
 
 	//compute the maximal force for player and IA according to the acceleration max

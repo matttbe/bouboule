@@ -8,7 +8,7 @@ CATCH : BOUBOULE - A Sumo Game - One to Kick them All!
 Bouboule, an addictive sumo game where you must push your enemy outside the ring.
 
 Bouboule is a sumo-ball controlled by tilting the device. 
-Through 30 stunning levels, Bouboule must face many enemies more and more powerful.
+Through 32 stunning levels across 8 worlds, Bouboule must face many enemies more and more powerful.
 The fight will occur in many different arena with various enemies.
 Many bonus may encounter your fight, with some uncertain influences on the end of the battle!
 
