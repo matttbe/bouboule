@@ -32,7 +32,7 @@ public class ChoosingActivity extends FragmentActivity {
 		pager.setAdapter(pagerAdapter);
 
 		/** Select the current level */
-		int iWorld = GlobalSettings.PROFILE.getBestLevel()/4 + 1; // split in 4, we start with 1
+		int iWorld = GlobalSettings.PROFILE.getBestLevel()/4; // split in 4, we start with 0
 		pager.setCurrentItem(iWorld);
 
 	}

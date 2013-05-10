@@ -11,7 +11,6 @@ import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +48,6 @@ public class MyLevelFragment extends Fragment {
 		InputStream bitmap = null;
 		
 		try {
-			Log.d("Matth", "image: " + mCurrentPage);
 			bitmap = getActivity().getAssets().open("level_image/world" + mCurrentPage + ".jpg");
 			Bitmap bit = BitmapFactory.decodeStream(bitmap);
 
@@ -92,10 +90,7 @@ public class MyLevelFragment extends Fragment {
 	private View.OnClickListener clickListener = new View.OnClickListener() {
 
 		@Override
-		public void onClick (View view)
-		{
-			Log.d("Level","Clic button on page : "+ mCurrentPage);
-			
+		public void onClick (View view) {
 			if(GlobalSettings.GAME.getScreen() != null)
 				EndGameListener.resetGame();
 			
