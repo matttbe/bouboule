@@ -43,6 +43,7 @@ public class MainActivity extends AndroidApplication {
 	public static final int CODE_PAUSE_ACTIVITY = 1;
 	public static final int CODE_MENU_ACTIVITY 	= 2;
 	public static final int CODE_END_GAME 		= 3;
+	public static final int CODE_CHOOSING_LEVEL	= 4;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -125,10 +126,23 @@ public class MainActivity extends AndroidApplication {
 						break;
 					case R.id.VictoryNextLevelButton:
 					case R.id.LoosingNextLevelButton:
-					case R.id.GameOverRestartButton:
 					default:
 						// return to the screen, nothing to do...
 						break;
+					case R.id.GameOverRestartButton:
+						startActivityForResult(new Intent(this, ChoosingActivity.class), 
+							CODE_CHOOSING_LEVEL);
+						break;
+				}
+			case CODE_CHOOSING_LEVEL:
+				switch (resultCode) {
+				case Menu.RETURN_MENU:
+					GlobalSettings.MENUS.launchInitMenu ();
+					break;
+				case Menu.PLAY_GAME:
+				default:
+					// return to the screen, nothing to do...
+					break;
 				}
 			default:
 				break;

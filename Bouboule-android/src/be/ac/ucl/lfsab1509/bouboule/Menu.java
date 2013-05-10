@@ -191,7 +191,7 @@ public class Menu extends Activity {
 						onActivityResult (MENU_CHOOSING_LEVEL, PLAY_GAME, null);
 					else
 						startActivityForResult(new Intent(Menu.this,ChoosingActivity.class), 
-								MENU_CHOOSING_LEVEL); // TODO: improve ChoosingActivity first
+								MENU_CHOOSING_LEVEL);
 					break;
 					
 				case R.id.ParameterButton :
