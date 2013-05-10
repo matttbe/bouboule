@@ -23,7 +23,6 @@ Key features:
 ★ 32 levels
 ★ Innovative physics gameplay
 ★ Adorable characters
-★ Multi-size Bouboules
 ★ Outstanding graphics
 ★ Original sounds and soundtracks
 ★ Superpowers
@@ -55,7 +54,7 @@ CATCH : BOUBOULE - Jeu de sumo - Seul contre tous!
 
 Bouboule, un jeu de sumo addictif où vous devez pousser votre ennemi en dehors du ring.
 
-Bouboule est une bille-sumo contrôlée grâce à l'inclinaison de votre appareil.
+Bouboule est une sumo-bille contrôlée grâce à l'inclinaison de votre appareil.
 À travers 32 niveaux étonnants, regroupés en 8 mondes, Bouboule doit faire face à de nombreux ennemis de plus en plus puissants.
 Les combats se déroulent dans des arènes diverses avec différents ennemis.
 De multiples bonus arriveront pendant votre combat, dont certains pouvant grandement influencer la fin du combat!
@@ -68,17 +67,17 @@ Battez les tous!
 
 Principales caractéristiques :
 
-* 32 niveaux
-* Gameplay physique innovant
-* Personnages adorables
-* Graphismes époustouflants
-* Son et musiques originales
-* Super-pouvoirs
-* Jeu Libre, gratuit et Open-Source
-* Jeu bien intégré à Android
-* Sans publicité
-* Graphique HD
-* Application universelle (4.0+)
+★ 32 niveaux
+★ Gameplay physique innovant
+★ Personnages adorables
+★ Graphismes époustouflants
+★ Son et musiques originales
+★ Super-pouvoirs
+★ Jeu Libre, gratuit et Open-Source
+★ Jeu bien intégré à Android
+★ Sans publicité
+★ Graphique HD
+★ Application universelle (4.0+)
 
 Bouboule à été développé dans le cadre du cours FSAB1509 - Projet Informatique (Yves Deville, Université Catholique de Louvain, BELGIQUE), 2012-2013
 
