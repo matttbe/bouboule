@@ -2102,8 +2102,87 @@
             </NodeAllow>
         </MapNodes>
     </Level28>
-
+    
     <Level29
+        bonus="True"
+        bonusEnabled="inverse"
+        bonusrate="100"
+        time="45"
+        accmaxia="0.55f"
+		>
+
+        <Bouboule
+            IALevel="6"
+            angle="0"
+            density="1.3"
+            elasticity="0.8f"
+            entity="-1"
+            px="350"
+            py="900"
+            radius="0"
+            texRegionPath="boub_nuage.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            IALevel="0"
+            angle="0"
+            density="1"
+            elasticity="0.8f"
+            entity="1"
+            px="350"
+            py="100"
+            radius="0"
+            type="normal" 
+            inverted="True">
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            jsonFile="terrain/Schrink/schrink.json"
+            px="0"
+            py="0"
+            radius="500"
+            texRegionPath="terrain/Schrink/schrink.jpg"
+            music="Schrink.mp3" >
+        </Arena>
+
+        <MapNodes terrain="schrink" >
+
+            <NodeAllow
+                px="3.363153f"
+                py="7.895616f"
+                weight="2.120000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.937559f"
+                py="0.399841f"
+                weight="2.120000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.373245f"
+                py="4.903271f"
+                weight="1.530000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.363153f"
+                py="6.066408f"
+                weight="1.620000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.373245f"
+                py="3.690426f"
+                weight="1.610000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level29>
+
+    <Level30
         bonus="True"
         bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
@@ -2183,9 +2262,175 @@
                 time="3" >
             </Obstacle>
         </Obstacles>
-    </Level29>
+    </Level30>
 
-    <Level30
+	<Level31
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="life,timedown,invisible,timeup,star,inverse"
+        time="90" >
+
+        <Bouboule
+            IALevel="12"
+            angle="0"
+            density="1.1f"
+            elasticity="1f"
+            entity="-1"
+            px="100"
+            py="900"
+            radius="0"
+            texRegionPath="boub_samurai.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            IALevel="0"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="1"
+            px="600"
+            py="100"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            jsonFile="terrain/DoubleHoles/doubleholes.json"
+            px="0"
+            py="0"
+            radius="500"
+            texRegionPath="terrain/DoubleHoles/doubleholes.jpg"
+            music="DoubleHoles.mp3" >
+        </Arena>
+
+        <MapNodes terrain="Doubleholes" >
+
+            <NodeAllow
+                px="1.243760f"
+                py="8.323094f"
+                weight="1.680000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="1.304314f"
+                py="5.688637f"
+                weight="1.820000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.698774f"
+                py="4.426086f"
+                weight="1.150000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.466650f"
+                py="3.451834f"
+                weight="0.910000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.365726f"
+                py="2.596878f"
+                weight="0.830000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.572619f"
+                py="1.239885f"
+                weight="1.025000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.718958f"
+                py="0.906850f"
+                weight="1.160000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="1.869486f"
+                py="0.558902f"
+                weight="0.760000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="2.914043f"
+                py="0.474401f"
+                weight="0.685000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.205864f"
+                py="0.703052f"
+                weight="0.915000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.638977f"
+                py="1.389005f"
+                weight="1.585000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.538053f"
+                py="4.262054f"
+                weight="1.715000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.403522f"
+                py="4.903271f"
+                weight="0.950000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.411041f"
+                py="6.245352f"
+                weight="0.780000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.390856f"
+                py="6.205587f"
+                weight="0.820000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.491780f"
+                py="7.458197f"
+                weight="0.710000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.123409f"
+                py="8.934487f"
+                weight="1.075000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.750850f"
+                py="9.312258f"
+                weight="0.685000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="2.868628f"
+                py="9.078636f"
+                weight="0.890000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.812262f"
+                py="9.332140f"
+                weight="0.675000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level31>
+
+    <Level32
         bonus="True"
         bonusrate="1000"
         accmaxia="0.55f"
@@ -2235,6 +2480,6 @@
                 weight="2.710000f" >
             </NodeAllow>
         </MapNodes>
-    </Level30>
+    </Level32>
 
 </Level>
