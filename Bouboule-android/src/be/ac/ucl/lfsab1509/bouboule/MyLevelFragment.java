@@ -12,7 +12,6 @@ import android.graphics.LightingColorFilter;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,13 +33,13 @@ public class MyLevelFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 
 		/* Setting max level */
-		lastUnlockedWorld = GlobalSettings.PROFILE.getBestLevel() / 4 + 1;
+		lastUnlockedWorld = (GlobalSettings.PROFILE.getBestLevel() - 1) / 4 + 1; // 1 -> 4 => 1
 		
 		/* Getting the arguments to the Bundle object */
 		Bundle data = getArguments();
 
 		/* Getting integer data of the key current_page from the bundle */
-		mCurrentPage = data.getInt("current_page", 1);
+		mCurrentPage = data.getInt("current_page", 1); // start from 1
 
 	}
 
@@ -52,7 +51,6 @@ public class MyLevelFragment extends Fragment {
 		InputStream bitmap = null;
 		
 		try {
-			Log.d("Matth", "image: " + mCurrentPage);
 			bitmap = getActivity().getAssets().open("level_image/world" + mCurrentPage + ".jpg");
 			Bitmap bit = BitmapFactory.decodeStream(bitmap);
 
