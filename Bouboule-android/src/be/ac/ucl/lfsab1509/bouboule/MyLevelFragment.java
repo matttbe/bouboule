@@ -24,14 +24,14 @@ import android.widget.ImageView;
 public class MyLevelFragment extends Fragment {
 
 	int mCurrentPage;
-	int maxlevel;
+	int lastUnlockedWorld;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		/* Setting max level */
-		maxlevel = GlobalSettings.PROFILE.getBestLevel();
+		lastUnlockedWorld = GlobalSettings.PROFILE.getBestLevel() / 4 + 1;
 		
 		/* Getting the arguments to the Bundle object */
 		Bundle data = getArguments();
@@ -66,7 +66,7 @@ public class MyLevelFragment extends Fragment {
 		}	
 
 		
-		if ( mCurrentPage <= maxlevel) {
+		if ( mCurrentPage <= lastUnlockedWorld) {
 			
 			ImageButton play = (ImageButton) v.findViewById(R.id.play);
 
@@ -80,7 +80,7 @@ public class MyLevelFragment extends Fragment {
 			play.setVisibility(View.INVISIBLE);
 			
 			ImageView imageLvl = (ImageView) v.findViewById(R.id.levelimage);
-			// imageLvl.setColorFilter(new LightingColorFilter(Color.DKGRAY, 1));
+			imageLvl.setColorFilter(new LightingColorFilter(Color.DKGRAY, 1));
 		}
 
 
