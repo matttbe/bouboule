@@ -41,15 +41,18 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 public class IA {
 
+	//physical constant
 	public static float FORCE_MAX_IA=0;
 	public static float FORCE_MAX_PLAYER=0;
 	public static float ACC_MAX_IA=0;
 	public static float ACC_MAX_PLAYER=0;
+	//boolean for init constant by level
 	public static boolean IS_INIT;
+	//invert Axes
 	private static float AXE_POSITION = -1;
+	//Acceleration constant (speed of game)
 	private static final float K_ACC_DEFAULT = 6f;
 	private static float K_ACC = K_ACC_DEFAULT;
-	
 	
 	//init this variable at the beginning of each level
 	public static int countframe=0;
@@ -65,7 +68,10 @@ public class IA {
 	//level 8 => multipoints
 	//level 9 => aggressive without anticipation
 	//level 10 => hybrid without anticipation
+	//level 11 => hybrid plus frein
+	//level 12 => gyroscope inverse
 
+	//compute the maximal force for player and IA according to the acceleration max
 	private static void init(Body bodyia,Body bodyplayer){
 		if(bodyia != null)
 			FORCE_MAX_IA = ACC_MAX_IA * bodyia.getMass();
@@ -157,6 +163,9 @@ public class IA {
 			break;
 		case 11:
 			Acc = hybrid(IA,VelocityIA,LocalEnemi,VelocityEnemi,true);
+			break;
+		case 12:
+			Acc = gyroscope().mul(-1);
 			break;
 		default:
 			break;
