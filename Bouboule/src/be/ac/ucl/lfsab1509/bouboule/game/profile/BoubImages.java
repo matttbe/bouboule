@@ -45,21 +45,29 @@ public class BoubImages {
 	public static final String BOUB_JSON_EXT   = "boub.json";
 	
 	/**
-	 * @return a list of String, each is the name of a bouboule
+	 * @return a list of String, each is the name of a bouboule that can be used for the current player
 	 */
 	public static ArrayList<String> getBoubName() {
+		
 		ArrayList<String> str = new ArrayList<String>();
+		
+		// default must always be available
 		str.add(GlobalSettings.DEFAULT_BOUB_NAME);
+		
+		// check all the levels up to the last win
 		LevelLoader levelXML = GlobalSettings.GAME.getLevel();
 		for (int i = 1; i < GlobalSettings.PROFILE.getBestLevel(); i++) {
 			String levelName = "Level" + i;
 			Element elementLevel = levelXML.getRoot().getChildByName(levelName); // <LevelX>
 			if (elementLevel == null)
 				continue;// should not happen, only if missing level
+			
+			// check all the bouboule in the level
 			Array<Element> mapsBouboule = elementLevel.getChildrenByName("Bouboule"); // <Bouboule>
 			for (Element elementBouboule : mapsBouboule) {
 				short entity = Short.parseShort(elementBouboule.getAttribute("entity")); // 1 for the user
-				if (entity == -1){
+				
+				if (entity == -1){ // check if it is the other bouboule
 					String temp = elementBouboule.getAttribute("texRegionPath");
 					str.add(temp.substring(0, temp.lastIndexOf('.')));
 					break; // only one bouboule to parse

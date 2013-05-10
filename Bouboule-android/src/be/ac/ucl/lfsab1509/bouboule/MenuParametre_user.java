@@ -307,6 +307,7 @@ public class MenuParametre_user extends Activity {
 		public boolean onKey (View v, int keyCode, KeyEvent event)
 		{
 			if (event.getAction() == KeyEvent.ACTION_DOWN) {
+				
 				switch (keyCode) {
 					case KeyEvent.KEYCODE_DPAD_CENTER:
 					case KeyEvent.KEYCODE_ENTER:
@@ -349,7 +350,7 @@ public class MenuParametre_user extends Activity {
 							}
 							return true;
 						}
-					case KeyEvent.KEYCODE_BACK : 
+					case KeyEvent.KEYCODE_BACK : // on back pressed 
 						finish();
 						break;
 				}

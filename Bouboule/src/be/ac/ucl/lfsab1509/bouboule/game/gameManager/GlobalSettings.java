@@ -37,11 +37,11 @@ import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 public class GlobalSettings {
 	
 	//Definition for the time step properties
-	public static final float BOX_STEP			= 1 / 60f;
-	public static final int VELOCITY_ITERATIONS	= 8;
-	public static final int POSITION_ITERATIONS	= 3;
+	public static final float 	BOX_STEP			= 1 / 60f;
+	public static final int 		VELOCITY_ITERATIONS	= 8;
+	public static final int 		POSITION_ITERATIONS	= 3;
  	
- 	public static final float LIMITACC	= 0.5f;
+ 	public static final float 	LIMITACC	= 0.5f;
  	
  	//TODO: A mettre dasn IA
  	public static ArrayList<MapNode> ARENAWAYPOINTALLOW = new ArrayList<MapNode>(); 
@@ -62,13 +62,13 @@ public class GlobalSettings {
 
 	// Settings that can be changed from ProfileGlobal
 	public static boolean			SOUND_IS_MUTED = false; // false = sound on
-	public static int				SENSITIVITY = (SENSITIVITY_MAX + SENSITIVITY_MIN) / 2; // from 0 to 1000
+	public static int				SENSITIVITY = (SENSITIVITY_MAX + SENSITIVITY_MIN) / 2; 
 	public static boolean			FIXED_ROTATION = true; // fix the rotation of the bouboules
 
 	// Profiles
- 	public final static String		DEFAULT_PROFILE_NAME = "Bouboule";
-	public static final String		DEFAULT_BOUB_NAME = "boub"; // can be used to load the image of the bouboule (boub.png, boub.json, etc.)
-	public final static String		PREFS_GLOBAL = "_GLOBAL_SETTINGS_";
+ 	public final static String	DEFAULT_PROFILE_NAME = "Bouboule";
+	public static final String	DEFAULT_BOUB_NAME = "boub"; // can be used to load the image of the bouboule (boub.png, boub.json, etc.)
+	public final static String	PREFS_GLOBAL = "_GLOBAL_SETTINGS_";
 	public static ProfileMgr		PROFILE_MGR = null;
 	public static Profile			PROFILE = null;
 	public static MyGame			GAME = null;
