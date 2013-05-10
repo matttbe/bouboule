@@ -68,7 +68,7 @@ public class IA {
 	//level 8 => multipoints
 	//level 9 => aggressive without anticipation
 	//level 10 => hybrid without anticipation
-	//level 11 => hybrid plus frein
+	//level 11 => hybrid with break
 	//level 12 => gyroscope inverse
 
 	//compute the maximal force for player and IA according to the acceleration max
@@ -307,17 +307,16 @@ public class IA {
 
 		Vector2 dirmid = middeler(IA, close);
 		if(dirmid.dot(velocityIA) < 0.25f && velocityIA.len2()/(ACC_MAX_IA*2*K_ACC) +dirmid.len() > close.getWeight()){
-			//évitement des bords
-			// Gdx.app.log ("Player","IA:defence slow");
+			//swap holes
+			// Gdx.app.log ("Player","IA:defense slow");
 			return stopMid(IA, velocityIA);
 		}
-		// Gdx.app.log ("Player","IA:defence normal");
+		// Gdx.app.log ("Player","IA:defense normal");
 		return acc;
 	}
 
 
 	private static Vector2 aggretion(Vector2 position, Vector2 velocity,Vector2 localEnemi, Vector2 VelocityEnemi,boolean predict) {
-		//variable de calcul
 		Vector2 vtempcal;
 		float angletemp;
 		
@@ -327,7 +326,7 @@ public class IA {
 		dirmid = middeler(position, centreIA);
 		//dirmid.nor();
 		
-		//calcul de la position fictive de l'IA
+		//compute the fictitious position of AI
 		fictposition = new Vector2(position);
 		//fictposition.add(new Vector2(velocity).rotate(position.angle()).set(0, velocity.y).rotate(0-position.angle()).mul(1));
 		if(predict){
@@ -338,7 +337,7 @@ public class IA {
 			fictposition.add(vtempcal);
 		}
 		
-		//calcul de la position fictive de l'ennemi
+		//compute the fictitious position of the enemy
 		directionenemi = new Vector2(localEnemi);
 		//directionenemi.add(new Vector2(VelocityEnemi).rotate(localEnemi.angle()).set(0, VelocityEnemi.y).rotate(0-localEnemi.angle()).mul(1));
 		if(predict){
@@ -354,11 +353,11 @@ public class IA {
 		if(!(Math.abs(angleCentre(fictposition, centreIA.getVector())-angleCentre(localEnemi,centreIA.getVector())) < 15 &&
 				centreIA == getClosestCentre(localEnemi)))
 		if(dirmid.dot(velocity) < 0.0f && velocity.len2()/(ACC_MAX_IA*2*K_ACC) + dirmid.len() > centreIA.getWeight()){
-			//Gdx.app.log ("Player","IA:attaque slow");
-			//évitement des bords
+			//Gdx.app.log ("Player","IA:attack slow");
+			// swap holes
 			return stopMid(position, velocity);
 		}
-		// Gdx.app.log ("Player","IA:attaque normal");
+		// Gdx.app.log ("Player","IA:attack normal");
 		return directionenemi;
 	}
 
@@ -487,7 +486,7 @@ public class IA {
 */
 
 	/*
-	 * renvoi un angle entre ]-180;180[
+	 * get an angle between ]-180;180[
 	 */
 	private static float angleCentre(Vector2 position,Vector2 centre){
 		Vector2 temp = new Vector2(position);
@@ -496,7 +495,7 @@ public class IA {
 	}
 
 	/*
-	 * remet l'angle entre ]-180;180[
+	 * set an angle between ]-180;180[
 	 */
 	private static float casteangle(float angle){
 		return ((angle + 180)% 360 - 180);
