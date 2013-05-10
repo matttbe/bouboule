@@ -27,7 +27,7 @@ public class MyLevelPagerAdapter extends FragmentPagerAdapter{
 	/** Returns the number of pages */
 	@Override
 	public int getCount() {
-		return GlobalSettings.NBLEVELS%4;
+		return GlobalSettings.NBLEVELS / 4;
 	}
 	
 	@Override

@@ -19,7 +19,7 @@ public class ChoosingActivity extends FragmentActivity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main);
 
-		/** Getting a reference to the ViewPager defined the layout file */        
+		/** Getting a reference to the ViewPager defined the layout file */
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 
 		/** Getting fragment manager */
@@ -32,7 +32,8 @@ public class ChoosingActivity extends FragmentActivity {
 		pager.setAdapter(pagerAdapter);
 
 		/** Select the current level */
-		pager.setCurrentItem(GlobalSettings.PROFILE.getLevel()%4);
+		int iWorld = GlobalSettings.PROFILE.getBestLevel()/4 + 1; // split in 4, we start with 1
+		pager.setCurrentItem(iWorld);
 
 	}
 

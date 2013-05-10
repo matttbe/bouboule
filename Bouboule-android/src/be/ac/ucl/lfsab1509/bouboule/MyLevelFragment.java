@@ -7,6 +7,8 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -35,30 +37,30 @@ public class MyLevelFragment extends Fragment {
 		Bundle data = getArguments();
 
 		/* Getting integer data of the key current_page from the bundle */
-		mCurrentPage = data.getInt("current_page", 0);
+		mCurrentPage = data.getInt("current_page", 1);
 
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		View v = inflater.inflate(R.layout.myfragment_layout, container,false);				
+		View v = inflater.inflate(R.layout.myfragment_layout, container,false);
 		
-		InputStream bitmap=null;
+		InputStream bitmap = null;
 		
 		try {
-		    bitmap=getActivity().getAssets().open("level_image/world"+mCurrentPage+".jpg");
-		    Bitmap bit=BitmapFactory.decodeStream(bitmap);
-		    
-		    ((ImageView) v.findViewById(R.id.levelimage)).setImageBitmap(bit);
+			Log.d("Matth", "image: " + mCurrentPage);
+			bitmap = getActivity().getAssets().open("level_image/world" + mCurrentPage + ".jpg");
+			Bitmap bit = BitmapFactory.decodeStream(bitmap);
+
+			((ImageView) v.findViewById(R.id.levelimage)).setImageBitmap(bit);
 		} catch (IOException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		} finally {
-		    if(bitmap!=null)
+			if(bitmap != null)
 				try {
 					bitmap.close();
 				} catch (IOException e) {
-					
 					e.printStackTrace();
 				}
 		}	
@@ -78,7 +80,7 @@ public class MyLevelFragment extends Fragment {
 			play.setVisibility(View.INVISIBLE);
 			
 			ImageView imageLvl = (ImageView) v.findViewById(R.id.levelimage);
-			//TODO : SET ALPHA !!
+			// imageLvl.setColorFilter(new LightingColorFilter(Color.DKGRAY, 1));
 		}
 
 
@@ -97,7 +99,7 @@ public class MyLevelFragment extends Fragment {
 			if(GlobalSettings.GAME.getScreen() != null)
 				EndGameListener.resetGame();
 			
-			GlobalSettings.PROFILE.setLevel((mCurrentPage-1)*4);
+			GlobalSettings.PROFILE.setLevel((mCurrentPage-1) * 4 + 1);
 			
 			getActivity().setResult(Menu.PLAY_GAME);
 			
