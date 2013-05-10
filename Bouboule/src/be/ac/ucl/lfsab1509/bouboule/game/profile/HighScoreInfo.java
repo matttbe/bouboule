@@ -1,7 +1,5 @@
 package be.ac.ucl.lfsab1509.bouboule.game.profile;
 
-import java.util.Date;
-
 /*
  * This file is part of Bouboule.
  * 
@@ -27,6 +25,8 @@ import java.util.Date;
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+
+import java.util.Date;
 
 public class HighScoreInfo {
 
