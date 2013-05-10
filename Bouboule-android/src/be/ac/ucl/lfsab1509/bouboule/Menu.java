@@ -162,7 +162,10 @@ public class Menu extends Activity {
 
 	}
 	
-	
+	/**
+	 * Function to get the screen size
+	 * @return a Point that contains the screen size in px
+	 */
 	private Point getDisplayVector() {
 		Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();

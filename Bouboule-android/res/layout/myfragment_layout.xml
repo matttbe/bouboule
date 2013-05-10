@@ -8,7 +8,7 @@
         android:id="@+id/levelimage"
         android:layout_centerInParent="True"
         android:layout_width="300dp"
-        android:layout_height="473dp"
+        android:layout_height="468dp"
         android:contentDescription="@string/Level" >
     </ImageView>
 

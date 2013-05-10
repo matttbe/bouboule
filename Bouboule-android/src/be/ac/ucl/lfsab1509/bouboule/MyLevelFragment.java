@@ -9,11 +9,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -48,6 +52,7 @@ public class MyLevelFragment extends Fragment {
 		InputStream bitmap = null;
 		
 		try {
+			Log.d("Matth", "image: " + mCurrentPage);
 			bitmap = getActivity().getAssets().open("level_image/world" + mCurrentPage + ".jpg");
 			Bitmap bit = BitmapFactory.decodeStream(bitmap);
 
@@ -62,6 +67,16 @@ public class MyLevelFragment extends Fragment {
 					e.printStackTrace();
 				}
 		}	
+		
+		/* Hack to set the right size on small devices */
+		
+		ImageView imageLvl = (ImageView) v.findViewById(R.id.levelimage);
+		LayoutParams params = (LayoutParams) imageLvl.getLayoutParams();
+		params.width = getDisplayVector().x/2;
+		imageLvl.setLayoutParams(params);
+
+		
+		/* Set the locks and co */
 
 		
 		if ( mCurrentPage <= lastUnlockedWorld) {
@@ -77,7 +92,6 @@ public class MyLevelFragment extends Fragment {
 			ImageButton play = (ImageButton) v.findViewById(R.id.play);
 			play.setVisibility(View.INVISIBLE);
 			
-			ImageView imageLvl = (ImageView) v.findViewById(R.id.levelimage);
 			imageLvl.setColorFilter(new LightingColorFilter(Color.GRAY, 1));
 		}
 
@@ -102,4 +116,13 @@ public class MyLevelFragment extends Fragment {
 
 		}
 	};
+	
+	
+	private Point getDisplayVector() {
+		Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        
+        return size;
+	}
 }
