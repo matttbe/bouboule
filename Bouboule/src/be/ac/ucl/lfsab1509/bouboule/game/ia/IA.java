@@ -365,8 +365,11 @@ public class IA {
 		float accelX = Gdx.input.getAccelerometerX() * AXE_POSITION;
 		float accelY = Gdx.input.getAccelerometerY() * AXE_POSITION;
 		Vector2 Acc= new Vector2(accelX, accelY);
-		Acc.div((1200-GlobalSettings.SENSITIVITY)/100).limit(1).mul(ACC_MAX_PLAYER);
-		//Gdx.app.log("IA", "Petit mouvement"+ Acc.len());
+		float div = (GlobalSettings.SENSITIVITY_MAX +
+				GlobalSettings.SENSITIVITY_MIN * 2 -
+				GlobalSettings.SENSITIVITY) / 100;
+		float limit = 1; // ((float) GlobalSettings.SENSITIVITY) / 500f;
+		Acc.div(div).limit(limit).mul(ACC_MAX_PLAYER);
 	
 		return Acc;
 	}
