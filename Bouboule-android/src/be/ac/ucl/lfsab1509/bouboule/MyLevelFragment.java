@@ -46,24 +46,25 @@ public class MyLevelFragment extends Fragment {
 		
 		InputStream bitmap=null;
 		
+		try {
+		    bitmap=getActivity().getAssets().open("level_image/world"+mCurrentPage+".jpg");
+		    Bitmap bit=BitmapFactory.decodeStream(bitmap);
+		    
+		    ((ImageView) v.findViewById(R.id.levelimage)).setImageBitmap(bit);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} finally {
+		    if(bitmap!=null)
+				try {
+					bitmap.close();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+		}	
+
+		
 		if ( mCurrentPage <= maxlevel) {
-			
-			try {
-			    bitmap=getActivity().getAssets().open("level_image/lvl"+mCurrentPage+".jpg");
-			    Bitmap bit=BitmapFactory.decodeStream(bitmap);
-			    
-			    ((ImageView) v.findViewById(R.id.levelimage)).setImageBitmap(bit);
-			} catch (IOException e) {
-			    e.printStackTrace();
-			} finally {
-			    if(bitmap!=null)
-					try {
-						bitmap.close();
-					} catch (IOException e) {
-						
-						e.printStackTrace();
-					}
-			}	
 			
 			ImageButton play = (ImageButton) v.findViewById(R.id.play);
 
@@ -76,6 +77,8 @@ public class MyLevelFragment extends Fragment {
 			ImageButton play = (ImageButton) v.findViewById(R.id.play);
 			play.setVisibility(View.INVISIBLE);
 			
+			ImageView imageLvl = (ImageView) v.findViewById(R.id.levelimage);
+			//TODO : SET ALPHA !!
 		}
 
 
@@ -94,7 +97,7 @@ public class MyLevelFragment extends Fragment {
 			if(GlobalSettings.GAME.getScreen() != null)
 				EndGameListener.resetGame();
 			
-			GlobalSettings.PROFILE.setLevel(mCurrentPage);
+			GlobalSettings.PROFILE.setLevel((mCurrentPage-1)*4);
 			
 			getActivity().setResult(Menu.PLAY_GAME);
 			

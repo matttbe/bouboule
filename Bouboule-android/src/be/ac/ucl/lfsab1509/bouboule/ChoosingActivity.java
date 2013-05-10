@@ -32,7 +32,7 @@ public class ChoosingActivity extends FragmentActivity {
 		pager.setAdapter(pagerAdapter);
 
 		/** Select the current level */
-		pager.setCurrentItem(GlobalSettings.PROFILE.getLevel() - 1);
+		pager.setCurrentItem(GlobalSettings.PROFILE.getLevel()%4);
 
 	}
 

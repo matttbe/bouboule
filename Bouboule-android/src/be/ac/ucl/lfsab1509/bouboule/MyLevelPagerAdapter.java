@@ -27,12 +27,12 @@ public class MyLevelPagerAdapter extends FragmentPagerAdapter{
 	/** Returns the number of pages */
 	@Override
 	public int getCount() {
-		return GlobalSettings.NBLEVELS;
+		return GlobalSettings.NBLEVELS%4;
 	}
 	
 	@Override
 	public CharSequence getPageTitle(int position) {		
-		return "    Level " + ( position + 1 ) + "    ";
+		return "    WORLD " + ( position + 1 ) + "    ";
 	}
 	
 	
