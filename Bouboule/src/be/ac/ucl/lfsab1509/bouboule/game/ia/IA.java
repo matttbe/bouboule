@@ -68,7 +68,7 @@ public class IA {
 	//level 8 => multipoints
 	//level 9 => aggressive without anticipation
 	//level 10 => hybrid without anticipation
-	//level 11 => hybrid with break
+	//level 11 => hybrid plus frein
 	//level 12 => gyroscope inverse
 
 	//compute the maximal force for player and IA according to the acceleration max
@@ -88,16 +88,16 @@ public class IA {
 		K_ACC = K_ACC_DEFAULT * fSens;
 	}
 
+	
+	//main fonction of IA,
 	public static Vector2 compute(int IALevel, Bouboule bouboule) {
 
 
-		Vector2 IA = null, VelocityIA =null, LocalEnemi=null, VelocityEnemi = null;
-		//Body arena = null;
+		//init variable
+		Vector2 IA = null, VelocityIA =null, LocalEnemi=null, VelocityEnemi = null, Acc = null;
 
-		Vector2 Acc = null;
-
+		//search the position and speed of the 2 bouboules
 		Iterator<Body> iter = GraphicManager.getWorld().getBodies();
-
 		Body bodytemp,bodytempia=null,bodytempplayer=null;
 
 		while(iter.hasNext()){
@@ -111,11 +111,10 @@ public class IA {
 				IA =  bodytemp.getPosition();
 				VelocityIA  = bodytemp.getLinearVelocity();
 				
-			}/*else{
-				arena = bodytemp;
-			}*/
+			}
 		}
 		
+		//compute the maximum force for the 2 player
 		if(!IS_INIT){
 			init(bodytempia,bodytempplayer);
 		}
@@ -123,7 +122,7 @@ public class IA {
 
 
 
-
+		//launch the correct fonction for the IA
 		switch (IALevel) {
 		case 0:
 			Acc = gyroscope();
@@ -174,14 +173,15 @@ public class IA {
 		
 
 
-		// Vector2 slow;
+		// limite the Force for the player and IA
 		if(IALevel != 0){
 			Acc=Acc.limit(FORCE_MAX_IA);
-			//slow = new Vector2(VelocityIA).nor().mul(0.02f);
-			//Acc.set(0, 0);
+			
+			//count the frame to know how many time is passe for the game
 			countframe++;
 		}else{
 			
+			//security for player (unuse)
 			/* MapNode testtemp = getClosestCentre(LocalEnemi);
 			Vector2 dirmid = middeler(LocalEnemi, testtemp);
 			if(dirmid.dot(VelocityEnemi) < 0.0f && VelocityEnemi.len2()/(ACC_MAX_PLAYER*2*K_ACC) + dirmid.len() > testtemp.getWeight()){
@@ -192,21 +192,21 @@ public class IA {
 			
 			Acc=Acc.limit(FORCE_MAX_PLAYER);
 			
-			//slow = new Vector2(VelocityEnemi).nor().mul(0.02f);
-			//slow = new Vector2(0, 0);
 			
 		}
-		//Acc.sub(slow);
 		
+		//mesure arena and speed.
 		/*if(IALevel == 0){
 			Gdx.app.log ("Player","playerx"+LocalEnemi.x+"y"+LocalEnemi.y+"speed2"+VelocityEnemi.len2()+"acc"+Acc.len());
 		}*/
 		
+		//upgrade the maniability for a IA
 		if(IALevel==11){
 			Vector2 slow = new Vector2(VelocityIA).mul(0.1f);
 			Acc.sub(slow);
 		}
 		
+		//make the game a bit faster
 		Acc.mul(K_ACC);
 		
 		
@@ -215,14 +215,16 @@ public class IA {
 	}
 
 
+	//special IA for world with lot of waypoints
 	private static Vector2 multipoint(Vector2 iA, Vector2 velocityIA,Vector2 localEnemi, Vector2 velocityEnemi) {
 		
+		//search if there is a point beetween the to bouboule and return the closest
 		MapNode close=getClosestCentre2(iA, localEnemi);
 		//search next node
 		if(close==null){
-			//Gdx.app.log("ia","multipoint:crosspoint");
+			
+			//send the bouboule on a point near him but closer to his enemi
 			MapNode temp = getnextnode(iA,localEnemi);
-			//close=getClosestCentre(iA);
 			Vector2 dirmid = middeler(iA, temp);
 			if(velocityIA.len2()/(ACC_MAX_IA*2*K_ACC) + dirmid.len() > temp.getWeight()){
 				// Gdx.app.log ("Player","IA:defence slow");
@@ -231,14 +233,12 @@ public class IA {
 			return middeler(iA, temp);
 		}
 		
-		//attack!
+		//when the 2 bouboule are close enought he attack
 		return aggretion(iA, velocityIA, localEnemi, velocityEnemi,true);
 		
-		
-		
-		//return null;
 	}
 	
+	//search for a the next node to join the enemi
 	private static MapNode getnextnode(Vector2 IA,Vector2 localEnemi){
 		
 		ArrayList<MapNode> tabNode = GlobalSettings.ARENAWAYPOINTALLOW;
@@ -266,21 +266,22 @@ public class IA {
 
 
 	private static Vector2 hybrid(Vector2 IA, Vector2 velocityIA,Vector2 localEnemi,Vector2 VelocityEnemi,boolean predict) {
-		
+		//save closest waypoint for the IA
 		MapNode close = getClosestCentre(IA);
+		
+		//get some data about the position and game
 		float anglerelatif = angleCentre(IA, close.getVector()) - angleCentre(localEnemi, close.getVector());
 		anglerelatif=casteangle(anglerelatif);
 		float distIA,distEnemi;
 		distIA = close.getVector().dst(IA);
 		distEnemi = close.getVector().dst(localEnemi);
 
-		
-		//Gdx.app.log("batman", "count frame"+countframe);
+		//set the IA aggressive for the first seconde
 		if(countframe < 150){
-			
 			return aggretion(IA, velocityIA, localEnemi, VelocityEnemi,predict);
 		}
 		
+		//check if the IA is in a good position or if he need to fled
 		if(anglerelatif < 45 && anglerelatif > -45 && distIA > distEnemi){
 			return defence(IA, velocityIA, localEnemi);
 		}else{
@@ -299,24 +300,26 @@ public class IA {
 
 		angleEnemi = casteangle(angleEnemi);
 		direction = casteangle(direction);
+		//look for the direction the avoid the enemi on the good side
 		if(angleEnemi>0 == direction<0){
 			acc.rotate(75);
 		}else{
 			acc.rotate(-75);
 		}
 
+		
 		Vector2 dirmid = middeler(IA, close);
+		
+		//avoid going out by fledings
 		if(dirmid.dot(velocityIA) < 0.25f && velocityIA.len2()/(ACC_MAX_IA*2*K_ACC) +dirmid.len() > close.getWeight()){
-			//swap holes
-			// Gdx.app.log ("Player","IA:defense slow");
 			return stopMid(IA, velocityIA);
 		}
-		// Gdx.app.log ("Player","IA:defense normal");
 		return acc;
 	}
 
 
 	private static Vector2 aggretion(Vector2 position, Vector2 velocity,Vector2 localEnemi, Vector2 VelocityEnemi,boolean predict) {
+		//variable de calcul
 		Vector2 vtempcal;
 		float angletemp;
 		
@@ -326,9 +329,8 @@ public class IA {
 		dirmid = middeler(position, centreIA);
 		//dirmid.nor();
 		
-		//compute the fictitious position of AI
+		//compute a fictif position of him self if needed (predict)
 		fictposition = new Vector2(position);
-		//fictposition.add(new Vector2(velocity).rotate(position.angle()).set(0, velocity.y).rotate(0-position.angle()).mul(1));
 		if(predict){
 			angletemp=angleCentre(position, localEnemi) - 90f;
 			vtempcal =  new Vector2(velocity).rotate(-angletemp);
@@ -337,9 +339,8 @@ public class IA {
 			fictposition.add(vtempcal);
 		}
 		
-		//compute the fictitious position of the enemy
+		//compute the fictive position of the enemi
 		directionenemi = new Vector2(localEnemi);
-		//directionenemi.add(new Vector2(VelocityEnemi).rotate(localEnemi.angle()).set(0, VelocityEnemi.y).rotate(0-localEnemi.angle()).mul(1));
 		if(predict){
 			angletemp = angleCentre(localEnemi,position) - 90f;;
 			vtempcal =  new Vector2(VelocityEnemi).rotate(-angletemp);
@@ -347,24 +348,26 @@ public class IA {
 			vtempcal.rotate(angletemp);
 			directionenemi.add(vtempcal);
 		}
+		
+		//check the acc need to touch the enemi
 		directionenemi.sub(fictposition).nor();
 		
-		
+		//avoid too big acceleration and going out
 		if(!(Math.abs(angleCentre(fictposition, centreIA.getVector())-angleCentre(localEnemi,centreIA.getVector())) < 15 &&
 				centreIA == getClosestCentre(localEnemi)))
-		if(dirmid.dot(velocity) < 0.0f && velocity.len2()/(ACC_MAX_IA*2*K_ACC) + dirmid.len() > centreIA.getWeight()){
-			//Gdx.app.log ("Player","IA:attack slow");
-			// swap holes
-			return stopMid(position, velocity);
-		}
-		// Gdx.app.log ("Player","IA:attack normal");
+			if(dirmid.dot(velocity) < 0.0f && velocity.len2()/(ACC_MAX_IA*2*K_ACC) + dirmid.len() > centreIA.getWeight()){
+				return stopMid(position, velocity);
+			}
+
 		return directionenemi;
 	}
 
+	//check if the axe are inverted
 	public static boolean isInverted() {
 		return AXE_POSITION == 1;
 	}
 
+	//inverse axe
 	public static void inverse() {
 		AXE_POSITION *= -1;
 	}
@@ -377,20 +380,22 @@ public class IA {
 		AXE_POSITION = -1;
 	}
 
+	//compute the player movement
 	private static Vector2 gyroscope(){
-		//float sensibility = SENSIBILITY_DEFAULT * GlobalSettings.SENSITIVITY * 2 / GlobalSettings.SENSITIVITY_MAX;
 		float accelX = Gdx.input.getAccelerometerX() * AXE_POSITION;
 		float accelY = Gdx.input.getAccelerometerY() * AXE_POSITION;
 		Vector2 Acc= new Vector2(accelX, accelY);
 		float div = (GlobalSettings.SENSITIVITY_MAX + // old: 1200 - 500 = 750 ; new: 650+350 - 500 = 500, ok?
 				GlobalSettings.SENSITIVITY_MIN -
 				GlobalSettings.SENSITIVITY) / 100;
-		float limit = 1;
-		Acc.div(div).limit(limit).mul(ACC_MAX_PLAYER);
+		
+		//normalise the acceleration the to the max for the player.
+		Acc.div(div).limit(1).mul(ACC_MAX_PLAYER);
 	
 		return Acc;
 	}
 
+	//return a vector to the middle
 	private static Vector2 middeler(Vector2 IA,int centre){
 		
 		Vector2 Acc = new Vector2(GlobalSettings.ARENAWAYPOINTALLOW.get(centre).getVector());
@@ -407,11 +412,12 @@ public class IA {
 		return Acc;
 	}
 
+	//try to stop on the closest middle
 	private static Vector2 stopMid(Vector2 position,Vector2 velocity){
 		Vector2 vitesse , dirmid , Acc;
 
 		vitesse = new Vector2(velocity).nor().mul(0.9f);
-		dirmid = new Vector2(middeler(position, 0)).nor();
+		dirmid = new Vector2(middeler(position, getClosestCentre(position))).nor();
 
 		Acc = new Vector2(dirmid).sub(vitesse).nor();
 
@@ -442,7 +448,7 @@ public class IA {
 		return newAcc;
 	}
 */
-
+	//IA troll for testing other IA
 	private static Vector2 troll2(Vector2 position,Vector2 velocity){
 		Vector2 newAcc = new Vector2(middeler(position, 0));
 		Vector2 temp1 = new Vector2(newAcc).nor();
@@ -458,35 +464,10 @@ public class IA {
 		return newAcc;
 	}
 
-/*
-	private static Vector2 troll(Vector2 position,Vector2 velocity){
-		Vector2 newAcc = new Vector2(middeler(position, 0));
-		Vector2 temp1 = new Vector2(newAcc).nor();
-		Vector2 temp2 = new Vector2(velocity).nor();
 
-		float angle;
-
-		angle = ((temp2.angle() - temp1.angle()) + 360) % 360;
-		if(angle<85){
-			newAcc.rotate(angle-80);
-		}else if(angle < 180){
-			newAcc.rotate(angle-84);
-		}else if(angle < 275){
-			newAcc.rotate(angle+80);
-		}else{
-			newAcc.rotate(angle+84);
-		}
-
-		newAcc.nor();
-
-		//newAcc.add(middeler(position, 0)).nor();
-
-		return newAcc;
-	}
-*/
 
 	/*
-	 * get an angle between ]-180;180[
+	 * renvoi un angle entre ]-180;180[
 	 */
 	private static float angleCentre(Vector2 position,Vector2 centre){
 		Vector2 temp = new Vector2(position);
@@ -495,12 +476,13 @@ public class IA {
 	}
 
 	/*
-	 * set an angle between ]-180;180[
+	 * remet l'angle entre ]-180;180[
 	 */
 	private static float casteangle(float angle){
 		return ((angle + 180)% 360 - 180);
 	}
 	
+	//return the mapnode with the more influence on the point
 	private static MapNode getClosestCentre(Vector2 position){
 		ArrayList<MapNode> tabNode = GlobalSettings.ARENAWAYPOINTALLOW;
 		MapNode temp=tabNode.get(0);
@@ -518,6 +500,8 @@ public class IA {
 		return tabNode.get(max);
 	}
 	
+	//return the mapnode with the best influence on the two node.
+	//null if they are too distant
 	private static MapNode getClosestCentre2(Vector2 position1,Vector2 position2){
 		
 		MapNode noeud1,noeud2;
