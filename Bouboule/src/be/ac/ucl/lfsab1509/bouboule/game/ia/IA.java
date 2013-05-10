@@ -68,7 +68,7 @@ public class IA {
 	//level 8 => multipoints
 	//level 9 => aggressive without anticipation
 	//level 10 => hybrid without anticipation
-	//level 11 => hybrid with break
+	//level 11 => hybrid with breaks
 	//level 12 => gyroscope inverse
 
 	//compute the maximal force for player and IA according to the acceleration max
@@ -467,7 +467,7 @@ public class IA {
 
 
 	/*
-	 * renvoi un angle entre ]-180;180[
+	 * get an angle between ]-180;180[
 	 */
 	private static float angleCentre(Vector2 position,Vector2 centre){
 		Vector2 temp = new Vector2(position);
@@ -476,7 +476,7 @@ public class IA {
 	}
 
 	/*
-	 * remet l'angle entre ]-180;180[
+	 * set an angle between ]-180;180[
 	 */
 	private static float casteangle(float angle){
 		return ((angle + 180)% 360 - 180);
