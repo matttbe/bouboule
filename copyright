@@ -2,16 +2,16 @@ Files:	Bouboule-android/assets/chineyen.ttf Chineyen
 Copyright: Chinyen © (Neale Davidson). 2011. All Rights Reserved
 License: police Truetype
 
-Files:	Bouboule-android/assets/gov.ttf Gang of Three
-Copyright: 2007 Vic Fieger
-License: police Truetype
-
 Files:	Bouboule-android/assets/menu_font.ttf
 Copyright: Copyright ©  Imagex 2013
 License: police Truetype
 
-Files:	Bouboule-android/assets/images/boub.png
+Files:	Bouboule-android/assets/*.jpg Bouboule-android/assets/*.png
 Copyright: Copyright © 2013 Julien Van Wallendael
+License: GPLv3
+
+Files:	Bouboule-android/assets/*.mp3
+Copyright: Copyright © 2013 Paschal Adans
 License: GPLv3
 
 Files:	Misc/*.psd
@@ -19,7 +19,8 @@ Copyright: Copyright © 2013 Julien Van Wallendael
 License: GPLv3
 
 Files:	*
-Copyright: Copyright ©  2013 Group 7 - LFSAB1509
+Copyright: Copyright ©  2013 Group 7 - LFSAB1509 :
+	Baerts Matthieu, Remy Baptiste, Van Wallendael Nicolas, Verhaeghe Hélène
 License: GPLv3
 
 
