@@ -54,15 +54,15 @@ public class GlobalSettings {
 	public final static int 		INIT_LIFES = 3;
 	public final static int			MAX_LIFES  = INIT_LIFES;
 	public final static int			SCORE_BONUS = 100;
-	public final static int		SENSITIVITY_MIN = 100;
-	public final static int 		SENSITIVITY_MAX = 1000;
+	public final static int			SENSITIVITY_MIN = 350;
+	public final static int 		SENSITIVITY_MAX = 650;
 
 	public static int				NBLEVELS; 		// nb of levels in the current xml files
 	public static Menus 			MENUS; 			// interface to display menus
 
 	// Settings that can be changed from ProfileGlobal
 	public static boolean			SOUND_IS_MUTED = false; // false = sound on
-	public static int				SENSITIVITY = (int) (SENSITIVITY_MIN + ((SENSITIVITY_MAX - SENSITIVITY_MIN) / 2)); // from 0 to 1000
+	public static int				SENSITIVITY = (SENSITIVITY_MAX + SENSITIVITY_MIN) / 2; // from 0 to 1000
 	public static boolean			FIXED_ROTATION = true; // fix the rotation of the bouboules
 
 	// Profiles
