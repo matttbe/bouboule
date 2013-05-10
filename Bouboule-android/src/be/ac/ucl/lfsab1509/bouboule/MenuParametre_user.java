@@ -46,7 +46,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
-import android.text.InputFilter;
 import android.util.*;
 
 import java.io.IOException;
@@ -62,7 +61,7 @@ public class MenuParametre_user extends Activity {
 	private ImageButton user_boub_right;
 	private ImageView user_boub;
 	private EditText user_newname;
-	private EditText user_choose_level;
+	// private EditText user_choose_level;
 	private Button user_reset;
 	private AlertDialog user_alert_reset;
 	private AlertDialog user_alert_tuto;
@@ -91,7 +90,7 @@ public class MenuParametre_user extends Activity {
 		user_boub_right = (ImageButton) findViewById(R.id.user_boub_right);
 		user_boub = (ImageView) findViewById(R.id.user_boub);
 		user_newname = (EditText) findViewById(R.id.user_newname);
-		user_choose_level = (EditText) findViewById (R.id.user_choose_level);
+		// user_choose_level = (EditText) findViewById (R.id.user_choose_level);
 		user_reset = (Button) findViewById (R.id.user_resetgame_button);
 		user_tuto_switch = (Switch) findViewById (R.id.user_tuto_switch);
 		
@@ -100,7 +99,7 @@ public class MenuParametre_user extends Activity {
 		user_boub_right.setOnClickListener(clickListener);
 		user_selectprofile_spin.setOnItemSelectedListener(spinnerListener);
 		user_newname.setOnKeyListener (onkeyListener);
-		user_choose_level.setOnKeyListener (onkeyListener);
+		// user_choose_level.setOnKeyListener (onkeyListener);
 		user_reset.setOnClickListener (clickListener);
 		user_tuto_switch.setOnCheckedChangeListener(switchListener);
 		
@@ -110,7 +109,7 @@ public class MenuParametre_user extends Activity {
 		((TextView) findViewById(R.id.user_activeUser_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_playerball_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.user_tuto_txt)).setTypeface(myTypeface);
-		((TextView) findViewById(R.id.user_choose_level_txt)).setTypeface(myTypeface);
+		// ((TextView) findViewById(R.id.user_choose_level_txt)).setTypeface(myTypeface);
 		user_reset.setTypeface(myTypeface);
 		
 		// hide the keyboard
@@ -166,14 +165,14 @@ public class MenuParametre_user extends Activity {
 		user_newname.setHint(GlobalSettings.PROFILE.getName());
 
 		// refresh the curent level edittext
-		user_choose_level.setText(""); // remove text
+		/* user_choose_level.setText(""); // remove text
 		int iBestLevel = GlobalSettings.PROFILE.getBestLevel();
 		user_choose_level.setHint (getString (R.string.user_choose_level_current)
 				+ GlobalSettings.PROFILE.getLevel() + " ("
 				+ getString (R.string.user_choose_level_max)
 				+ iBestLevel + ")");
 		user_choose_level.setFilters (new InputFilter[] {
-				new InputFilterMinMax (1, iBestLevel)});
+				new InputFilterMinMax (1, iBestLevel)});*/
 		
 		Log.d("LN","USER SETTINGS : refresh done");
 	}
@@ -337,7 +336,7 @@ public class MenuParametre_user extends Activity {
 							InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 							imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
 							return true;
-						} else if (v.getId () == R.id.user_choose_level) {
+						} /*else if (v.getId () == R.id.user_choose_level) {
 							String cInputText = user_choose_level.getText ().toString ();
 							if (cInputText == null || cInputText.isEmpty ())
 								return false;
@@ -349,7 +348,7 @@ public class MenuParametre_user extends Activity {
 								makeToast (getString(R.string.user_resetgame_notif));
 							}
 							return true;
-						}
+						}*/
 					case KeyEvent.KEYCODE_BACK : // on back pressed 
 						finish();
 						break;
