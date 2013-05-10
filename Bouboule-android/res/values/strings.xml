@@ -56,8 +56,8 @@
     <string name="about_nameapp_txt">Bouboule</string>
     <string name="about_authors">Authors:</string>
     <string name="about_authors_txt">Baerts Matthieu, Remy Baptiste, Van Wallendael Nicolas and Verhaeghe Hélène</string>
-    <string name="about_licence">License:</string>
-    <string name="about_licence_txt">Open source GPL3 license:</string>
+    <string name="about_licence">Credits &amp; License:</string>
+    <string name="about_licence_txt">Bouboule was developed during the course FSAB1509 - Projet Informatique (Yves Deville, Université catholique de Louvain, Belgium), 2012&#8211;2013.\n\nOpen-Source GPL3 license.\n\nDeveloped with LibGDX (Free and Open-Source game development framework under Apache License 2.0).</string>
     <string name="about_version">Version:</string>
     <string name="about_version_txt">Version </string>
     <string name="about_date">Date:</string>
