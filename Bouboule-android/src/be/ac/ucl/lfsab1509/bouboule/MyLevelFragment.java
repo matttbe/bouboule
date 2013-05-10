@@ -78,7 +78,7 @@ public class MyLevelFragment extends Fragment {
 			play.setVisibility(View.INVISIBLE);
 			
 			ImageView imageLvl = (ImageView) v.findViewById(R.id.levelimage);
-			imageLvl.setColorFilter(new LightingColorFilter(Color.DKGRAY, 1));
+			imageLvl.setColorFilter(new LightingColorFilter(Color.GRAY, 1));
 		}
 
 
