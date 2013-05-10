@@ -59,7 +59,7 @@ public class MenuParametre_global extends Activity {
 		// set the originals values
 		sound_switch.setChecked(!GlobalSettings.SOUND_IS_MUTED);
 		rotate_switch.setChecked(!GlobalSettings.FIXED_ROTATION);
-		sensitivity_seekbar.setMax(GlobalSettings.SENSITIVITY_MAX);
+		sensitivity_seekbar.setMax(GlobalSettings.SENSITIVITY_MAX - GlobalSettings.SENSITIVITY_MIN);
 		sensitivity_seekbar.setProgress(GlobalSettings.SENSITIVITY - GlobalSettings.SENSITIVITY_MIN);
 		
 		// set the listeners
