@@ -55,14 +55,14 @@ public class Obstacle extends GameBody {
 
 	/**
 	 * Constructor for a Obstacle object .
-	 * - Bodytype 	: Dynamic or Static 
-	 * - density 	: Mass in [kg] of the obstacle 
-	 * - elasticity : define the elastical property of Bouboul [0..1]f
-	 * - px/py		: initial position
-	 * - angle		: initial rotation
-	 * - texRegionPath : Path to the image file
-	 * - jsonFile	: Path to the jsonFile if needed ( "" else)
-	 * - jsonName	: jsonName of the object ( must match the json file attribute )
+	 * @param Bodytype 	: Dynamic or Static 
+	 * @param density 	: Mass in [kg] of the obstacle 
+	 * @param elasticity : define the elastical property of Bouboul [0..1]f
+	 * @param px/py		: initial position
+	 * @param angle		: initial rotation
+	 * @param texRegionPath : Path to the image file
+	 * @param jsonFile	: Path to the jsonFile if needed ( "" else)
+	 * @param jsonName	: jsonName of the object ( must match the json file attribute )
 	 *
 	 * public Obstacle( final BodyType bodyType, final float density,
 	 * 	final float elasticity, final float px, final float py,
@@ -139,6 +139,12 @@ public class Obstacle extends GameBody {
 		super.update();
 	}
 
+	/**
+	 * Method that that remove/display the body from the screen and make it 
+	 * insensible/sensible to all chocks.
+	 * 
+	 * inverseBlink()
+	 */
 	public void inverseBlink() {
 		Gdx.app.log("Obstacle", "reset Obstacle");
 		ArrayList<Fixture> fixt = getBody().getFixtureList();

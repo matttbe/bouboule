@@ -38,7 +38,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 
-/*
+/**
  * Listener for detecting the end of the game.
  */
 public class EndGameListener implements ContactListener{

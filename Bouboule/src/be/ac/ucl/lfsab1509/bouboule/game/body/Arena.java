@@ -44,15 +44,15 @@ public class Arena extends GameBody {
 
 	/**
 	 * Constructor for a Arena object.
-	 * - radius 	: radius of Arena for a shape like body
-	 * - Bodytype 	: Dynamic or Static 
-	 * - density 	: Mass in [kg] of Arena 
-	 * - elasticity : define the elastical property of Arena [0..1]f
-	 * - px/py		: initial posistion
-	 * - angle		: initil rotation
-	 * - texRegionPath : Path to the image file
-	 * - jsonFile	: Path to the jsonFile if needed ( "" else)
-	 * - jsonName	: jsonName of the object ( must match the json file attribute )
+	 * @param radius 		: radius of Arena for a shape like body
+	 * @param Bodytype 		: Dynamic or Static 
+	 * @param density 		: Mass in [kg] of Arena 
+	 * @param elasticity	: define the elastical property of Arena [0..1]f
+	 * @param px/py			: initial posistion
+	 * @param angle			: initil rotation
+	 * @param texRegionPath : Path to the image file
+	 * @param jsonFile		: Path to the jsonFile if needed ( "" else)
+	 * @param jsonName		: jsonName of the object ( must match the json file attribute )
 	 *
 	 * public Arena(float radius, BodyType bodyType,float density,
 	 * 	float elasticity,float px,float py, float angle,String texRegionPath,
@@ -79,6 +79,7 @@ public class Arena extends GameBody {
 	
 	/**
 	 * draw the Arena object. (bg drawing > Disable Blending)
+	 * @param SpriteBatch sp to draw
 	 * 
 	 * 	public void draw(final SpriteBatch sp) {
 	 */

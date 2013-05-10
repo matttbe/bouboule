@@ -37,7 +37,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 public class GlobalSettings {
 	
 	//Definition for the time step properties
-	public static final float 	BOX_STEP			= 1 / 60f;
+	public static final float 		BOX_STEP			= 1 / 60f;
 	public static final int 		VELOCITY_ITERATIONS	= 8;
 	public static final int 		POSITION_ITERATIONS	= 3;
  	

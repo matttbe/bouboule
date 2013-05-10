@@ -62,6 +62,9 @@ public class GameLoop {
 	 * Launch the creation of the batch thanks to the camera. if debug == true,
 	 * set up the debugger matrix
 	 * 
+	 * @param cam 	: the OrthographicCamera of the game
+	 * @param debug : load the debugging matrix
+	 * 
 	 * GameLoop(OrthographicCamera cam, boolean debug)
 	 */
 	public GameLoop(final OrthographicCamera cam, final boolean debug) {
@@ -137,7 +140,7 @@ public class GameLoop {
 	 * Update the ball position thanks to the accelerometer and launch the
 	 * physical update function of dt the time between 2 frames
 	 * 
-	 * update(float dt)
+	 * update()
 	 */
 	public void update() {
 		graphicManager.update();
@@ -149,7 +152,9 @@ public class GameLoop {
 
 	/**
 	 * Draw all the needed bodies of the game
-	 * 
+	 * @param pause 	: pause the game refresh
+	 * @param delta		: delta time between 2 frames
+	 *  	
 	 * render(final boolean pause, float delta)
 	 */
 	public boolean render(final boolean pause, float delta) {
@@ -191,6 +196,12 @@ public class GameLoop {
 		return status;
 	}
 
+	/**
+	 * Check if the bonus is eligeable for the current level.
+	 * 
+	 * @param cBonus	: Bonus to be enabled
+	 * @return if the bonus can be used
+	 */
 	private static boolean canEnabledBonus(final String cBonus) {
 		return (GraphicManager.BONUS_ENABLED == null || GraphicManager.BONUS_ENABLED
 				.contains(cBonus));

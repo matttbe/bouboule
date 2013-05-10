@@ -51,7 +51,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
-/*
+/**
  * Class that create an XML reader to load all a level on the appropriate time.
  */
 public class LevelLoader {
@@ -298,10 +298,6 @@ public class LevelLoader {
 					"false"));
 
 
-			/*Obstacle obs = new Obstacle(bodyType, density,
-					elasticity, px, py, angle,texRegionPath, 
-					jsonFile, jsonName, initAccX, initAccY);*/
-
 			if (produce) {
 				addContinuousObstacle(graphicManager, time,
 						bodyType, density,
@@ -327,6 +323,27 @@ public class LevelLoader {
 		}
 	}
 
+	
+	/**
+	 * Generate constantly obstacles : eg. CanonBalls
+	 * 
+	 * @param graphicManager	: The GraphicManager
+	 * @param time				: dt before each generation
+	 * @param bodyType			: BodyType
+	 * 
+	 * 	Parameters of the Obstacle object created
+	 * 
+	 * @param density 			
+	 * @param elasticity		 
+	 * @param px
+	 * @param py
+	 * @param angle
+	 * @param texRegionPath
+	 * @param jsonFile
+	 * @param jsonName
+	 * @param initAccX
+	 * @param initAccY
+	 */
 	private void addContinuousObstacle(final GraphicManager graphicManager, final float time,
 			final BodyType bodyType, final float density,
 			final float elasticity, final float px, final float py, final float angle,
@@ -360,6 +377,13 @@ public class LevelLoader {
 		timerListenerArray.add(timerListener);
 	}
 
+	/**
+	 * Make an obstacle blink
+	 * @param obs	: Obstacle to blink
+	 * @param time	: blink dt
+	 * 
+	 * setBlink(final Obstacle obs, final float time)
+	 */
 	private void setBlink(final Obstacle obs, final float time) {
 		TimerListener timerListener = new TimerListener() {
 			int iTimerInc;
@@ -382,6 +406,10 @@ public class LevelLoader {
 		timerListenerArray.add(timerListener);
 	}
 	
+	/**
+	 * 
+	 * @return The root of the XML
+	 */
 	public Element getRoot() {
 		return root;
 	}

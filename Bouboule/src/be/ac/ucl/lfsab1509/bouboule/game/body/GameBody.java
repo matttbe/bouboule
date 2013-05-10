@@ -39,6 +39,12 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
+/**
+ * 
+ * Generic class to create bodies from .json files thanks fixture
+ * or from general settings with circles/rectangles generic objects
+ *
+ */
 public abstract class GameBody {
 
 	protected Body body;
@@ -68,18 +74,18 @@ public abstract class GameBody {
 	/**
 	 * Generical constructor for bodies. ( circle, rectangle or jsonFiled )
 	 * Arguments :
-	 * - width 		: width of a rectangle object
-	 * - height		: height of a rectangle object
-	 * - radius		: radius of a circle object
-	 * - bodyType	: Static or Dynamic
-	 * - density	: Mass in [kg] of the body
-	 * - elasticity	: define the elastical property of Bouboul [0..1]f
-	 * - sensor		: true/false
-	 * - pos		: initial position
-	 * - angle		: initial rotated angle
-	 * - jsonFile	: path to the jsonFile
-	 * - jsonName	: name of the jsonFile (must match the json file attribute) 
-	 * - size		: size in pixel of the image to match the object
+	 * @param width 		: width of a rectangle object
+	 * @param height		: height of a rectangle object
+	 * @param radius		: radius of a circle object
+	 * @param bodyType		: Static or Dynamic
+	 * @param density		: Mass in [kg] of the body
+	 * @param elasticity	: define the elastical property of Bouboul [0..1]f
+	 * @param sensor		: true/false
+	 * @param pos			: initial position
+	 * @param angle			: initial rotated angle
+	 * @param jsonFile		: path to the jsonFile
+	 * @param jsonName		: name of the jsonFile (must match the json file attribute) 
+	 * @param size			: size in pixel of the image to match the object
 	 * 
 	 * 
 	 * MakeBody(float width, float height,float radius,BodyDef.BodyType bodyType,

@@ -35,7 +35,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
-
+/**
+ * 
+ * Class that manage all the graphics from the application.
+ *
+ */
 public class GraphicManager {
 	
 	private static World world;
@@ -51,13 +55,11 @@ public class GraphicManager {
 	//Store all the body of the game
 	private ArrayList<GameBody> bodies;
 	
-	/*
+	/**
 	 * Create the world, the body container and define the game as notPaused
 	 * 
-	 * GraphicManager
+	 * GraphicManager()
 	 */
-	
-
 	public GraphicManager() {
 		world = new World(new Vector2(0, 0), true);
 		
@@ -66,7 +68,7 @@ public class GraphicManager {
 		bodies	 = new ArrayList<GameBody>();
 	}
 	
-	/*
+	/**
 	 * Return the world
 	 * 
 	 * World getWorld()
@@ -75,8 +77,9 @@ public class GraphicManager {
 		return world;
 	}
 
-	/*
+	/**
 	 * Static function that convert the value to the game reality (for distances)
+	 * @param x : value to convert 
 	 * 
 	 * convertToGame(float x)
 	 */
@@ -84,8 +87,9 @@ public class GraphicManager {
 		return x * WORLD_TO_GAME;
 	}
 	
-	/*
+	/**
 	 * Static function that convert the value to the world reality (for distances) 
+	 * @param x : value to convert 
 	 * 
 	 * convertToWorld(float x)
 	 */
@@ -93,7 +97,7 @@ public class GraphicManager {
 		return x * GAME_TO_WORLD;
 	}
 	
-	/*
+	/**
 	 * Remove all the stored bodies and delete the container
 	 * 
 	 * dispose()
@@ -106,9 +110,11 @@ public class GraphicManager {
 	}
 	
 	
-	/*
+	/**
 	 * Add the specified body to the graphical container to be used
 	 * in the generated world
+	 * 
+	 * @param body : the GameBody to add 
 	 * 
 	 * addBody(GameBody body)
 	 */
@@ -117,11 +123,11 @@ public class GraphicManager {
 	}
 	
 	
-	/*
+	/**
 	 * Update all the bodies definition after a timeStep of the world of dt 
 	 * (the timeStep is done in the function)
 	 * 
-	 * update(float dt)
+	 * update()
 	 */
 	public void update() {
 		
@@ -142,8 +148,9 @@ public class GraphicManager {
 		return WORLD_TO_GAME;
 	}
 
-	/*
+	/**
 	 * Draw all the bodies definition
+	 * @param sp : SpriteBatch to draw to
 	 * 
 	 * draw(SpriteBatch batch)
 	 */

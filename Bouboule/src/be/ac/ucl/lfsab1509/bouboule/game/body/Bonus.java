@@ -56,11 +56,11 @@ public class Bonus extends GameBody {
 
 	/**
 	 * Constructor for a Bonus object 
-	 * - px/py		: initial position
-	 * - angle		: initial rotation
-	 * - texRegionPath : Path to the image file
-	 * - jsonFile	: Path to the jsonFile if needed ( "" else)
-	 * - jsonName	: jsonName of the object ( must match the json file attribute )
+	 * @param px/py			: initial position
+	 * @param angle			: initial rotation
+	 * @param texRegionPath : Path to the image file
+	 * @param jsonFile		: Path to the jsonFile if needed ( "" else)
+	 * @param jsonName		: jsonName of the object ( must match the json file attribute )
 	 *
 	 * public Bonus( final float px, final float py, 
 	 *		final float angle, final String texRegionPath, 
