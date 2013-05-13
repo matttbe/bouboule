@@ -296,13 +296,18 @@ public class Menu extends Activity {
 
 	@Override
 	public boolean onContextItemSelected (MenuItem item) {
-		// String cTitle = ((String) item.getTitle ()).replaceAll ("\t", " ");
+		String cTitle;
 		HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (false);
-		HighScoreInfo info = highscores[item.getItemId ()];
-		String cTitle = getString (R.string.Score) + " " + info.getScore () + " "
-				+ getString (R.string.by_someone) + " " + info.getName () + " "
-				+ getString (R.string.at_level_x) + " " + info.getLevel () + " ("
-				+ info.getDate ()+ ")";
+
+		if (highscores.length == 0 || highscores[0] == null) // no high score yet
+			cTitle = (String) item.getTitle ();
+		else {
+			HighScoreInfo info = highscores[item.getItemId ()];
+			cTitle = getString (R.string.Score) + " " + info.getScore () + " "
+					+ getString (R.string.by_someone) + " " + info.getName () + " "
+					+ getString (R.string.at_level_x) + " " + info.getLevel () + " ("
+					+ info.getDate ()+ ")";
+		}
 		Toast.makeText (this, cTitle, Toast.LENGTH_LONG).show ();
 		return true;
 	}
