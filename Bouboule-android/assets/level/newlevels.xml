@@ -259,7 +259,7 @@
         <Bouboule
             IALevel="6"
             angle="0"
-            density="3f"
+            density="2f"
             elasticity="0.7f"
             entity="-1"
             px="100"
