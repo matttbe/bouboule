@@ -68,9 +68,11 @@ public class BoubImages {
 				short entity = Short.parseShort(elementBouboule.getAttribute("entity")); // 1 for the user
 				
 				if (entity == -1){ // check if it is the other bouboule
-					String temp = elementBouboule.getAttribute("texRegionPath");
-					str.add(temp.substring(0, temp.lastIndexOf('.')));
-					break; // only one bouboule to parse
+					String cRegionPath = elementBouboule.getAttribute("texRegionPath");
+					String cBoubName = cRegionPath.substring(0, cRegionPath.lastIndexOf('.'));
+					if (! str.contains(cBoubName))
+						str.add(cBoubName);
+					break; // only one bouboule to parse in the current level
 				}
 			}
 		}
