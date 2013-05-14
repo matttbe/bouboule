@@ -480,7 +480,7 @@
         <Bouboule
             IALevel="6"
             angle="0"
-            density="1.1"
+            density="0.9f"
             elasticity="0.8f"
             entity="-1"
             px="350"
