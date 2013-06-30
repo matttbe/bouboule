@@ -9,6 +9,9 @@ gen/**
 *.orig
 .DS_Store
 docs/
+Bouboule-ios/bin
+Bouboule-ios/obj
+Bouboule-ios/target
 syntax: regexp 
 ^bin/classes\.dex$ 
 ^bin/resources\.ap_$

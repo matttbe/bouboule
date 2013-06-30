@@ -35,13 +35,14 @@ import be.ac.ucl.lfsab1509.bouboule.game.screen.MyGestureListener;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerMgr;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.input.GestureDetector;
 
-public class MyGame extends Game {
+public class MyGame extends Game implements ApplicationListener {
 
 	private ScreenGame screenGame;
 	private Sound hitSounds[];
