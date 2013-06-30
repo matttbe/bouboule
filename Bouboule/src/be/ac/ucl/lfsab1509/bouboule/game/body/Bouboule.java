@@ -131,7 +131,7 @@ public class Bouboule extends GameBody {
 	public void update() {
 		if (entity.isAlive()) {
 			Vector2 acceleration = IA.compute(IALevel, this);
-			body.applyForceToCenter(acceleration);
+			body.applyForceToCenter(acceleration, true);
 			super.update();
 
 		}

@@ -91,7 +91,7 @@ public class Obstacle extends GameBody {
 
 		//Add Initail Velocity
 
-		body.applyForceToCenter(new Vector2(initAccX, initAccY));
+		body.applyForceToCenter(new Vector2(initAccX, initAccY), true);
 
 
 		this.entity = new Entity(Entity.OBSTACLE, true);
