@@ -45,7 +45,7 @@ public class MyAndroidMenus implements Menus {
 
 	public MyAndroidMenus (AndroidApplication app) {
 		this.app = app;
-		menuMusic = new BackgroundSound ("Sound", R.raw.menu);
+		menuMusic = new BackgroundSound ("Sound", "menu.mp3");
 		menuMusic.create (app);
 	}
 
