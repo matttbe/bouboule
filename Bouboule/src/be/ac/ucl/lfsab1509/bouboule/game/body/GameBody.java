@@ -31,6 +31,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 import be.ac.ucl.lfsab1509.bouboule.game.physicEditor.BodyEditorLoader;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -206,7 +207,8 @@ public abstract class GameBody {
 		fixtureDef.isSensor		= sensor;
 
 		//Load the json Loader
-		BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(jsonFile));
+		FileHandle json = Gdx.files.internal(jsonFile);
+		BodyEditorLoader loader = new BodyEditorLoader(json);
 
 		loader.attachFixture(body, jsonName, fixtureDef, size);
 		origin = loader.getOrigin(jsonName, size).cpy();

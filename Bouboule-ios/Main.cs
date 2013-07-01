@@ -19,8 +19,8 @@ namespace be.ac.ucl.lfsab1509.bouboule.game
 
 			internal static IOSApplicationConfiguration getConfig() {
 				IOSApplicationConfiguration config = new IOSApplicationConfiguration();
-				config.orientationLandscape = true;
-				config.orientationPortrait = false;
+				config.orientationLandscape = false;
+				config.orientationPortrait = true;
 				config.useAccelerometer = true;
 				config.useMonotouchOpenTK = true;
 				config.useObjectAL = true;
