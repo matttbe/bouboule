@@ -30,6 +30,7 @@ import java.util.Random;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
+import be.ac.ucl.lfsab1509.bouboule.game.menu.GdxMenus;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.MyGestureListener;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
@@ -83,6 +84,9 @@ public class MyGame extends Game implements ApplicationListener {
 		if (GlobalSettings.GAME == null) { // should not happen!!!
 			init();
 		}
+
+		if (GlobalSettings.MENUS == null)
+			GlobalSettings.MENUS = new GdxMenus();
 		
 		screenGame = new ScreenGame();
 		setScreen(screenGame); // 
