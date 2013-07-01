@@ -45,6 +45,8 @@ public class MainActivity extends AndroidApplication {
 	public static final int CODE_END_GAME 		= 3;
 	public static final int CODE_CHOOSING_LEVEL	= 4;
 
+	private static final boolean bAndroidMenu = false; // TODO: prod => android menus
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		
@@ -59,7 +61,8 @@ public class MainActivity extends AndroidApplication {
 
 		getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON); // to not lock the screen
 
-		GlobalSettings.MENUS = new MyAndroidMenus (this);
+		if (bAndroidMenu)
+			GlobalSettings.MENUS = new MyAndroidMenus (this);
 
 		game = new MyGame ();
 
@@ -69,7 +72,8 @@ public class MainActivity extends AndroidApplication {
 
 		game.init ();
 
-		GlobalSettings.MENUS.launchInitMenu ();
+		if (bAndroidMenu)
+			GlobalSettings.MENUS.launchInitMenu ();
 	}
 
 	@Override
