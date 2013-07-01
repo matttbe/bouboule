@@ -45,7 +45,7 @@ public class MainActivity extends AndroidApplication {
 	public static final int CODE_END_GAME 		= 3;
 	public static final int CODE_CHOOSING_LEVEL	= 4;
 
-	private static final boolean bAndroidMenus = true; // TODO: prod => android menus
+	private static final boolean bAndroidMenus = false; // TODO: prod => android menus
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
