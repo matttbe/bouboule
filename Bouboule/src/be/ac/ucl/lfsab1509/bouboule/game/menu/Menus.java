@@ -28,8 +28,9 @@ package be.ac.ucl.lfsab1509.bouboule.game.menu;
 
 /**
  * Interface needed to interact with menus.
- * Menus are (currently) not created with GDX
- * (mainly because Android Menu are really nice and easy to do and maintain :) )
+ * Menus can be created without Gdx (e.g. see Android implementation)
+ * (mainly because Android Menu are really nice and easy to do and maintain :) 
+ *  and because we had to do that in Android for the course :) )
  *
  */
 public interface Menus {
@@ -45,4 +46,10 @@ public interface Menus {
 	 * the game is over.
 	 */
 	public void launchEndGameMenu();
+	
+	/**
+	 * Launch the pause menu. Then the user can continue the game, return to
+	 * the main menu and quit the game
+	 */
+	public void launchPauseMenu();
 }

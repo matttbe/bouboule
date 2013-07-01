@@ -124,4 +124,11 @@ public class MyAndroidMenus implements Menus {
 	public static void onStopMusic (Context context) {
 		menuMusic.stop (context);
 	}
+
+	@Override
+	public void launchPauseMenu() {
+		Intent intent = new Intent(app, MenuPause.class);
+		app.startActivityForResult(intent, MainActivity.CODE_PAUSE_ACTIVITY);
+		app.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+	}
 }

@@ -45,7 +45,7 @@ public class MainActivity extends AndroidApplication {
 	public static final int CODE_END_GAME 		= 3;
 	public static final int CODE_CHOOSING_LEVEL	= 4;
 
-	private static final boolean bAndroidMenu = false; // TODO: prod => android menus
+	private static final boolean bAndroidMenus = true; // TODO: prod => android menus
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class MainActivity extends AndroidApplication {
 
 		getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON); // to not lock the screen
 
-		if (bAndroidMenu)
+		if (bAndroidMenus)
 			GlobalSettings.MENUS = new MyAndroidMenus (this);
 
 		game = new MyGame ();
@@ -70,7 +70,7 @@ public class MainActivity extends AndroidApplication {
 		initialize (game, cfg);
 		Log.d ("Matth","initialized");
 
-		if (bAndroidMenu)
+		if (bAndroidMenus)
 		{
 			game.init (false);
 
@@ -82,10 +82,7 @@ public class MainActivity extends AndroidApplication {
 	public void onBackPressed() {
 		// game.getScreen ().pause(); // will do that automatically
 		Gdx.app.log("Matth","Game should pause now !");
-		Intent intent = new Intent(MainActivity.this, MenuPause.class);
-		startActivityForResult(intent, CODE_PAUSE_ACTIVITY);
-		overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-		
+		GlobalSettings.MENUS.launchPauseMenu();
 	}
 
 	@Override

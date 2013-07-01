@@ -40,4 +40,10 @@ public class GdxMenus implements Menus {
 
 	}
 
+	@Override
+	public void launchPauseMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
