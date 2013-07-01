@@ -29,14 +29,13 @@ package be.ac.ucl.lfsab1509.bouboule.sound;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 import android.content.Context;
 import android.media.AudioManager;
-import android.net.Uri;
 
 public class BackgroundSound {
-	private Uri file;
+	private String filePath;
 	private AsyncPlayer player;
 	
-	public BackgroundSound (String cTag, int iResId) {
-		file = Uri.parse("android.resource://be.ac.ucl.lfsab1509.bouboule/" + iResId);
+	public BackgroundSound (String cTag, String cMenuSound) {
+		filePath = ("music/sounds/" + cMenuSound);
 		player = new AsyncPlayer (cTag);
 	}
 	
@@ -45,11 +44,11 @@ public class BackgroundSound {
 	}
 	
 	public void play (Context context, GameExitStatus exitStatus) {
-		player.play (context, file, true, AudioManager.STREAM_MUSIC, exitStatus);
+		player.play (context, filePath, true, AudioManager.STREAM_MUSIC, exitStatus);
 	}
 	
 	public void create (Context context) {
-		player.create (context, file, true, AudioManager.STREAM_MUSIC, false,
+		player.create (context, filePath, true, AudioManager.STREAM_MUSIC, false,
 				GameExitStatus.NONE);
 	}
 

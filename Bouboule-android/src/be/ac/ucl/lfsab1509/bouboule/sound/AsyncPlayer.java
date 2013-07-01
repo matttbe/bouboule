@@ -19,15 +19,14 @@
 package be.ac.ucl.lfsab1509.bouboule.sound;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
-import android.net.Uri;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.Log;
-import be.ac.ucl.lfsab1509.bouboule.R;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 
 import java.util.LinkedList;
@@ -45,8 +44,8 @@ public class AsyncPlayer {
 	private static final class Command {
 		int code;
 		Context context;
-		Uri uri;
 		boolean looping;
+		public String filePath;
 		int stream;
 		long requestTime;
 		boolean play = false;
@@ -58,19 +57,25 @@ public class AsyncPlayer {
 
 		public String toString() {
 			return "{ code=" + code + " looping=" + looping + " stream=" + stream
-					+ " uri=" + uri + " }";
+					+ " uri=" + filePath + " }";
 		}
 	}
 
 	private LinkedList<Command> mCmdQueue = new LinkedList<Command>();
 
-	private MediaPlayer getMediaPlayer (int stream, Context context, Uri uri,
-			boolean looping, OnErrorListener errorListener,
+	private MediaPlayer getMediaPlayer (int stream, Context context,
+			String filePath, boolean looping, OnErrorListener errorListener,
 			OnBufferingUpdateListener bufferingUpdateListener,
 			OnCompletionListener completionListener) throws Exception {
 		MediaPlayer player = new MediaPlayer();
 		player.setAudioStreamType(stream);
-		player.setDataSource(context, uri);
+
+		AssetFileDescriptor fd = context.getAssets().openFd(filePath);
+		player.setDataSource(fd.getFileDescriptor(),
+				fd.getStartOffset(),
+				fd.getLength());
+		fd.close();
+
 		player.setLooping(looping);
 		player.setOnErrorListener(errorListener);
 		player.setOnBufferingUpdateListener(bufferingUpdateListener);
@@ -103,27 +108,25 @@ public class AsyncPlayer {
 			switch (cmd.exitStatus) { // launch a sound before
 			case WIN:
 			case GAMEOVER_END:
-				Uri uriWin = Uri.parse("android.resource://be.ac.ucl.lfsab1509.bouboule/" + R.raw.win);
-				player = getMediaPlayer(cmd.stream, cmd.context, uriWin,
-						false, cmd.errorListener, cmd.bufferingUpdateListener,
-						cmd.completionListener);
+				player = getMediaPlayer(cmd.stream, cmd.context,
+						"music/sounds/win.mp3", false, cmd.errorListener,
+						cmd.bufferingUpdateListener, cmd.completionListener);
 				player.setOnCompletionListener(getCompletionListener(cmd));
 				player.start();
 				break;
 			case LOOSE:
 			case GAMEOVER_LOOSE:
 				Log.d(mTag, "Starting gameover sound");
-				Uri uriLoose = Uri.parse("android.resource://be.ac.ucl.lfsab1509.bouboule/" + R.raw.loose);
-				player = getMediaPlayer(cmd.stream, cmd.context, uriLoose,
-						false, cmd.errorListener, cmd.bufferingUpdateListener,
-						cmd.completionListener);
+				player = getMediaPlayer(cmd.stream, cmd.context,
+						"music/sounds/loose.mp3", false, cmd.errorListener,
+						cmd.bufferingUpdateListener, cmd.completionListener);
 				player.setOnCompletionListener(getCompletionListener(cmd));
 				player.start();
 				break;
 			default:
-				player = getMediaPlayer(cmd.stream, cmd.context, cmd.uri,
-						cmd.looping, cmd.errorListener, cmd.bufferingUpdateListener,
-						cmd.completionListener);
+				player = getMediaPlayer(cmd.stream, cmd.context, cmd.filePath,
+						cmd.looping, cmd.errorListener,
+						cmd.bufferingUpdateListener, cmd.completionListener);
 				if (cmd.play)
 					player.start();
 				break;
@@ -139,7 +142,7 @@ public class AsyncPlayer {
 			}
 		}
 		catch (Exception e) {
-			Log.w(mTag, "error loading sound for " + cmd.uri, e);
+			Log.w(mTag, "error loading sound for " + cmd.filePath, e);
 		}
 	}
 
@@ -235,7 +238,7 @@ public class AsyncPlayer {
 	 * that one and start the new one.
 	 *
 	 * @param context Your application's context.
-	 * @param uri The URI to play.  (see {@link MediaPlayer#setDataSource(Context, Uri)})
+	 * @param filePath A path to the music in 'assets' dir
 	 * @param looping Whether the audio should loop forever.  
 	 *          (see {@link MediaPlayer#setLooping(boolean)})
 	 * @param stream the AudioStream to use.
@@ -244,7 +247,7 @@ public class AsyncPlayer {
 	 * @param exitStatus NONE to launch the music of the menu and another to
 	 *          play a sound just before (win/loose/gameover).
 	 */
-	public void create (Context context, Uri uri, boolean looping, int stream,
+	public void create (Context context, String filePath, boolean looping, int stream,
 			boolean play, GameExitStatus exitStatus) {
 		this.context = context;
 
@@ -253,7 +256,7 @@ public class AsyncPlayer {
 		cmd.code = PLAY; // create new
 		cmd.play = play;
 		cmd.context = context;
-		cmd.uri = uri;
+		cmd.filePath = filePath;
 		cmd.looping = looping;
 		cmd.stream = stream;
 		cmd.exitStatus = exitStatus;
@@ -294,14 +297,14 @@ public class AsyncPlayer {
 	 * @param exitStatus 
 	 * @param context, the current context that will launch the sound
 	 */
-	public void play (Context context, Uri uri, boolean looping, int stream, GameExitStatus exitStatus) {
+	public void play (Context context, String filePath, boolean looping, int stream, GameExitStatus exitStatus) {
 		if (mDebug) Log.d ("Sound", "replay? " + mState + " " + (mPlayer != null));
 		this.context = context;
 		if (mState != PLAY) {
 			if (mPlayer != null) // pause
 				mPlayer.start ();
 			else // stop
-				create (context, uri, looping, stream, true, exitStatus);
+				create (context, filePath, looping, stream, true, exitStatus);
 				// exist status is only needed when starting a new song => win / loose / gameover
 		}
 	}
