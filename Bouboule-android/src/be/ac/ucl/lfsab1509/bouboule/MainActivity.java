@@ -70,10 +70,12 @@ public class MainActivity extends AndroidApplication {
 		initialize (game, cfg);
 		Log.d ("Matth","initialized");
 
-		game.init ();
-
 		if (bAndroidMenu)
+		{
+			game.init (false);
+
 			GlobalSettings.MENUS.launchInitMenu ();
+		}
 	}
 
 	@Override
