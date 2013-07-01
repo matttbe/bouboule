@@ -54,6 +54,9 @@ public class HighScoreInfo {
 		return iLevel;
 	}
 
+	/**
+	 * @return the current date (which can be NULL => iOS)
+	 */
 	public Date getDate() {
 		return pDate;
 	}

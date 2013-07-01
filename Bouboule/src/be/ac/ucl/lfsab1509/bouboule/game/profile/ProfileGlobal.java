@@ -54,9 +54,8 @@ public class ProfileGlobal {
 
 	public ProfileGlobal(Preferences prefs, String SEPARATOR) {
 
-		if (Gdx.app.getType() != ApplicationType.iOS) {
-			this.dateFormat =  new SimpleDateFormat("dd MM yyyy HH:mm:ss Z");
-		} 
+		if (Gdx.app.getType() != ApplicationType.iOS)
+			this.dateFormat = new SimpleDateFormat("dd MM yyyy HH:mm:ss Z");
 		
 		this.prefs = prefs;
 		this.SEPARATOR = SEPARATOR;
@@ -137,8 +136,10 @@ public class ProfileGlobal {
 			if (iNewScore > iCurrScore) { // new high score!
 				cCurrInfo = iNewScore + SEPARATOR // Score
 						+ GlobalSettings.PROFILE.getName() + SEPARATOR // name
-						+ GlobalSettings.PROFILE.getLevel() + SEPARATOR; // level
-						//+ dateFormat.format(new Date()).toString(); // date TODO:IOS
+						+ GlobalSettings.PROFILE.getLevel(); // level
+				if (Gdx.app.getType() != ApplicationType.iOS)
+					cCurrInfo += SEPARATOR // level
+						+ dateFormat.format(new Date()).toString(); // date TODO:iOS => no date
 				prefs.putString(HIGHSCORE_KEY + i, cCurrInfo); // save the new score here
 				bNewHighScore = true;
 			}
@@ -180,7 +181,10 @@ public class ProfileGlobal {
 			try {
 				iScore = Integer.parseInt(infos[0]);
 				iLevel = Integer.parseInt(infos[2]);
-				pDate = new Date(); //dateFormat.parse(infos[3]); TODO:IOS
+				if (Gdx.app.getType() != ApplicationType.iOS)
+					pDate = dateFormat.parse(infos[3]);
+				else
+					pDate = new Date(); // TODO:iOS
 			} catch (Exception e) { // should not happen...
 				iScore = 0;
 				iLevel = 0;
