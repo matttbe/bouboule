@@ -30,6 +30,8 @@ package be.ac.ucl.lfsab1509.bouboule.game.profile;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
@@ -38,19 +40,24 @@ import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 public class ProfileGlobal {
 	private String SEPARATOR;
 	private String HIGHSCORE_DEFAULT_VALUE;
-	private static final SimpleDateFormat dateFormat 
-										= new SimpleDateFormat("dd MM yyyy HH:mm:ss Z");
+
+	private  SimpleDateFormat dateFormat;
 
 	private static final int iMaxNbHighScore = 5;
-	
+
 	private static final String MUTE_SOUND_KEY = "mute_sound";
 	private static final String HIGHSCORE_KEY = "highscore"; // score + name + level + date
 	private static final String SENSITIVITY_KEY = "sensitivity";
 	private static final String FIXED_ROTATIONS_KEY = "fixed_rotations";
 
 	private Preferences prefs;
-	
+
 	public ProfileGlobal(Preferences prefs, String SEPARATOR) {
+
+		if (Gdx.app.getType() != ApplicationType.iOS) {
+			this.dateFormat =  new SimpleDateFormat("dd MM yyyy HH:mm:ss Z");
+		} 
+		
 		this.prefs = prefs;
 		this.SEPARATOR = SEPARATOR;
 		this.HIGHSCORE_DEFAULT_VALUE = 0 + SEPARATOR // score
@@ -122,21 +129,21 @@ public class ProfileGlobal {
 				} catch (NumberFormatException e) {
 					iCurrScore = Integer.MIN_VALUE;
 				}
-			
+
 			} else {
 				cPrevInfo = null;
 			}
-			
+
 			if (iNewScore > iCurrScore) { // new high score!
 				cCurrInfo = iNewScore + SEPARATOR // Score
 						+ GlobalSettings.PROFILE.getName() + SEPARATOR // name
-						+ GlobalSettings.PROFILE.getLevel() + SEPARATOR // level
-						+ dateFormat.format(new Date()).toString(); // date
+						+ GlobalSettings.PROFILE.getLevel() + SEPARATOR; // level
+						//+ dateFormat.format(new Date()).toString(); // date TODO:IOS
 				prefs.putString(HIGHSCORE_KEY + i, cCurrInfo); // save the new score here
 				bNewHighScore = true;
 			}
 		}
-		
+
 		if (bNewHighScore) {
 			prefs.flush();
 		}
@@ -150,9 +157,9 @@ public class ProfileGlobal {
 	 * @return all HighScore as an array (fill with default values if needed)
 	 */
 	public HighScoreInfo[] getAllHighScores(final boolean bFillWithDefaultValues) {
-		
+
 		HighScoreInfo[] highScores = new HighScoreInfo[iMaxNbHighScore];
-		
+
 		for (int i = 0; i < highScores.length; i++) {
 			String[] infos;
 			if (bFillWithDefaultValues) {
@@ -163,7 +170,7 @@ public class ProfileGlobal {
 				if (info == null) {
 					break;
 				}
-				
+
 				infos = info.split(SEPARATOR);
 			}
 			String cName = infos[1];
@@ -173,7 +180,7 @@ public class ProfileGlobal {
 			try {
 				iScore = Integer.parseInt(infos[0]);
 				iLevel = Integer.parseInt(infos[2]);
-				pDate = dateFormat.parse(infos[3]);
+				pDate = new Date(); //dateFormat.parse(infos[3]); TODO:IOS
 			} catch (Exception e) { // should not happen...
 				iScore = 0;
 				iLevel = 0;
