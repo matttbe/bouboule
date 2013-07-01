@@ -26,9 +26,9 @@
 
 package be.ac.ucl.lfsab1509.bouboule.game.body;
 
-import aurelienribon.bodyeditor.BodyEditorLoader;
 import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
+import be.ac.ucl.lfsab1509.bouboule.game.physicEditor.BodyEditorLoader;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
