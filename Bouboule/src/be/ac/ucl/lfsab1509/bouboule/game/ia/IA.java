@@ -148,7 +148,7 @@ public class IA {
 			break;
 		case 7:
 			Acc = middeler (IA,getClosestCentre(IA));
-			Vector2 slow = new Vector2(VelocityIA).mul(2f);
+			Vector2 slow = new Vector2(VelocityIA).scl(2f);
 			Acc.sub(slow);
 			break;
 		case 8:
@@ -164,7 +164,7 @@ public class IA {
 			Acc = hybrid(IA,VelocityIA,LocalEnemi,VelocityEnemi,true);
 			break;
 		case 12:
-			Acc = gyroscope().mul(-1);
+			Acc = gyroscope().scl(-1);
 			break;
 		default:
 			break;
@@ -202,12 +202,12 @@ public class IA {
 		
 		//upgrade the maniability for a IA
 		if(IALevel==11){
-			Vector2 slow = new Vector2(VelocityIA).mul(0.1f);
+			Vector2 slow = new Vector2(VelocityIA).scl(0.1f);
 			Acc.sub(slow);
 		}
 		
 		//make the game a bit faster
-		Acc.mul(K_ACC);
+		Acc.scl(K_ACC);
 		
 		
 		
@@ -390,7 +390,7 @@ public class IA {
 				GlobalSettings.SENSITIVITY) / 100;
 		
 		//normalise the acceleration the to the max for the player.
-		Acc.div(div).limit(1).mul(ACC_MAX_PLAYER);
+		Acc.div(div).limit(1).scl(ACC_MAX_PLAYER);
 	
 		return Acc;
 	}
@@ -416,7 +416,7 @@ public class IA {
 	private static Vector2 stopMid(Vector2 position,Vector2 velocity){
 		Vector2 vitesse , dirmid , Acc;
 
-		vitesse = new Vector2(velocity).nor().mul(0.9f);
+		vitesse = new Vector2(velocity).nor().scl(0.9f);
 		dirmid = new Vector2(middeler(position, getClosestCentre(position))).nor();
 
 		Acc = new Vector2(dirmid).sub(vitesse).nor();
@@ -427,7 +427,7 @@ public class IA {
 		}else{
 		}
 
-		//newAcc.sub(velocity.mul(1.5f*position.dst(GlobalSettings.ARENAWAYPOINTALLOW.get(1).getVector()))).mul(1.5f);
+		//newAcc.sub(velocity.scl(1.5f*position.dst(GlobalSettings.ARENAWAYPOINTALLOW.get(1).getVector()))).scl(1.5f);
 
 		return Acc;
 	}
