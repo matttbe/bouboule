@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 // inspired by tuto in steigert.blogspot.com
 
@@ -17,9 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  * The base class for all game screens.
  */
 public abstract class AbstractScreen implements Screen {
-	// the fixed viewport dimensions (ratio: 1.6)
-	
-
 	protected final Stage stage;
 
 	private BitmapFont font;
@@ -28,7 +27,11 @@ public abstract class AbstractScreen implements Screen {
 	private TextureAtlas atlas;
 	private Music music;
 
-	public AbstractScreen() {
+	private Timer timerMusic;
+	private boolean bMusicNeedsDelay;
+
+	public AbstractScreen(boolean bMusicNeedsDelay) {
+		this.bMusicNeedsDelay = bMusicNeedsDelay;
 		this.stage = new Stage(ScreenGame.APPWIDTH, ScreenGame.APPHEIGHT, true);
 	}
 
@@ -76,6 +79,21 @@ public abstract class AbstractScreen implements Screen {
 		return music;
 	}
 
+	protected void playMusicWithDelay (float seconds) {
+		if (timerMusic != null) {
+			timerMusic.clear();
+		}
+		timerMusic = new Timer();
+		Task task = new Timer.Task() {
+			
+			@Override
+			public void run() {
+				getMusic().play();
+			}
+		};
+		timerMusic.scheduleTask(task, seconds);
+	}
+
 	// Screen implementation
 
 	@Override
@@ -83,7 +101,10 @@ public abstract class AbstractScreen implements Screen {
 		Gdx.app.log("SCREEN", "Showing screen: " + getName());
 		// set the stage as the input processor
 		Gdx.input.setInputProcessor(stage);
-		getMusic().play();
+		if (bMusicNeedsDelay)
+			playMusicWithDelay(2);
+		else
+			getMusic().play();
 	}
 
 	@Override

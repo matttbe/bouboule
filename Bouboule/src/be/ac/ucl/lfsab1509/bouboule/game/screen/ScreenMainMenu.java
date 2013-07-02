@@ -5,6 +5,11 @@ import com.badlogic.gdx.Gdx;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 public class ScreenMainMenu extends AbstractScreen {
+	
+	public ScreenMainMenu() {
+		super(false);
+	}
+
 	@Override
 	public void show() {
 		super.show();

@@ -16,14 +16,12 @@ public class MenuScreen extends AbstractScreen {
 	
 	private Table table;
 
-	public MenuScreen()
-	{
-		super();
+	public MenuScreen(boolean bMusicNeedsDelay) {
+		super(bMusicNeedsDelay);
 	}
 
 	@Override
-	public void show()
-	{
+	public void show() {
 		super.show();
 
 		// retrieve the custom skin for our 2D widgets

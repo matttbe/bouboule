@@ -61,7 +61,7 @@ public class GdxMenus implements Menus {
 				GlobalSettings.GAME.winSound();
 				break;
 		}
-		GlobalSettings.GAME.setScreen(new MenuScreen());
+		GlobalSettings.GAME.setScreen(new MenuScreen(true));
 	}
 
 	@Override
