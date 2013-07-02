@@ -2,6 +2,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,33 +18,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  */
 public abstract class AbstractScreen implements Screen {
 	// the fixed viewport dimensions (ratio: 1.6)
-	protected static final int GAME_VIEWPORT_WIDTH = 400,
-			GAME_VIEWPORT_HEIGHT = 240;
-	protected static final int MENU_VIEWPORT_WIDTH = 800,
-			MENU_VIEWPORT_HEIGHT = 480;
+	
 
-	// protected final Tyrian game;
 	protected final Stage stage;
 
 	private BitmapFont font;
 	private SpriteBatch batch;
 	private Skin skin;
 	private TextureAtlas atlas;
+	private Music music;
 
 	public AbstractScreen() {
-		// this.game = game;
-		int width = isGameScreen() ? GAME_VIEWPORT_WIDTH : MENU_VIEWPORT_WIDTH;
-		int height = isGameScreen() ? GAME_VIEWPORT_HEIGHT
-				: MENU_VIEWPORT_HEIGHT;
-		this.stage = new Stage(width, height, true);
+		this.stage = new Stage(ScreenGame.APPWIDTH, ScreenGame.APPHEIGHT, true);
 	}
 
 	protected String getName() {
 		return getClass().getSimpleName();
-	}
-
-	protected boolean isGameScreen() {
-		return false;
 	}
 
 	// Lazily loaded collaborators
@@ -73,30 +63,32 @@ public abstract class AbstractScreen implements Screen {
 	protected Skin getSkin() {
 		if (skin == null) {
 			FileHandle skinFile = Gdx.files.internal("skin/uiskin.json");
-			// TextureAtlas textureFile = Gdx.files.internal( "skin/uiskin.png"
-			// );
 			skin = new Skin(skinFile);
-
-			// Skin skin = new Skin();
-			// skin.add("logo", new Texture("logo.png"));
 		}
 		return skin;
+	}
+
+	protected Music getMusic() {
+		if (music == null) {
+			music = Gdx.audio.newMusic(Gdx.files.internal("music/sounds/menu.mp3"));
+			music.setLooping(true);
+		}
+		return music;
 	}
 
 	// Screen implementation
 
 	@Override
 	public void show() {
-		// Gdx.app.log( Tyrian.LOG, "Showing screen: " + getName() );
-
+		Gdx.app.log("SCREEN", "Showing screen: " + getName());
 		// set the stage as the input processor
 		Gdx.input.setInputProcessor(stage);
+		getMusic().play();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		// Gdx.app.log( Tyrian.LOG, "Resizing screen: " + getName() + " to: " +
-		// width + " x " + height );
+		Gdx.app.log("SCREEN", "Resizing screen: " + getName());
 	}
 
 	@Override
@@ -118,7 +110,7 @@ public abstract class AbstractScreen implements Screen {
 
 	@Override
 	public void hide() {
-		// Gdx.app.log( Tyrian.LOG, "Hiding screen: " + getName() );
+		Gdx.app.log("SCREEN", "Hiding screen: " + getName());
 
 		// dispose the screen when leaving the screen;
 		// note that the dipose() method is not called automatically by the
@@ -128,17 +120,19 @@ public abstract class AbstractScreen implements Screen {
 
 	@Override
 	public void pause() {
-		// Gdx.app.log( Tyrian.LOG, "Pausing screen: " + getName() );
+		Gdx.app.log("SCREEN", "Pausing screen: " + getName());
+		getMusic().pause();
 	}
 
 	@Override
 	public void resume() {
-		// Gdx.app.log( Tyrian.LOG, "Resuming screen: " + getName() );
+		Gdx.app.log("SCREEN", "Resuming screen: " + getName());
+		getMusic().play();
 	}
 
 	@Override
 	public void dispose() {
-		// Gdx.app.log( Tyrian.LOG, "Disposing screen: " + getName() );
+		Gdx.app.log("SCREEN", "Disposing screen: " + getName());
 
 		// as the collaborators are lazily loaded, they may be null
 		if (font != null)
@@ -149,5 +143,7 @@ public abstract class AbstractScreen implements Screen {
 			skin.dispose();
 		if (atlas != null)
 			atlas.dispose();
+		if (music != null)
+			music.dispose();
 	}
 }
