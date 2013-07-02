@@ -15,6 +15,7 @@ public class MyGame implements ApplicationListener {
 	private SpriteBatch batch;
 	private Texture texture;
 	private Sprite sprite;
+	private MenuScreen menu;
 	
 	@Override
 	public void create() {		
@@ -33,6 +34,10 @@ public class MyGame implements ApplicationListener {
 		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
+		
+		menu = new MenuScreen();
+		
+		
 	}
 
 	@Override
@@ -43,13 +48,17 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void render() {		
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		//Gdx.gl.glClearColor(1, 1, 1, 1);
+		//Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		sprite.draw(batch);
-		batch.end();
+		//batch.setProjectionMatrix(camera.combined);
+		//batch.begin();
+		//sprite.draw(batch);
+		
+		//batch.end();
+
+    	menu.show();
+		menu.render((float) 0.1);
 	}
 
 	@Override
