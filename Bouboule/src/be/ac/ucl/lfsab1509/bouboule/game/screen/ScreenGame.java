@@ -156,6 +156,7 @@ public class ScreenGame implements Screen {
 		Gdx.app.log("Matth", "Screen: HIDE + exit: " + GlobalSettings.GAME_EXIT);
 		
 		bNewGame = GlobalSettings.GAME_EXIT != GameExitStatus.NONE; // a new game is needed?
+		loopMusic.pause();
 	}
 
 	/**

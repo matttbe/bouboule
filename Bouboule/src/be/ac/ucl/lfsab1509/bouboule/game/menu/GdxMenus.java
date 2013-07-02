@@ -1,5 +1,11 @@
 package be.ac.ucl.lfsab1509.bouboule.game.menu;
 
+import com.badlogic.gdx.Gdx;
+
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.screen.MenuScreen;
+import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenMainMenu;
+
 /*
  * This file is part of Bouboule.
  * 
@@ -30,20 +36,38 @@ public class GdxMenus implements Menus {
 
 	@Override
 	public void launchInitMenu() {
-		// TODO Auto-generated method stub
-
+		Gdx.app.log ("Matth", "GdxMenus: InitMenu: " + GlobalSettings.GAME_EXIT);
+		GlobalSettings.GAME.setScreen(new ScreenMainMenu());
 	}
 
 	@Override
 	public void launchEndGameMenu() {
-		// TODO Auto-generated method stub
-
+		Gdx.app.log ("Matth", "GdxMenus: EndGameMenu: " + GlobalSettings.GAME_EXIT);
+		GlobalSettings.GAME.setScreenGamePause();
+		switch (GlobalSettings.GAME_EXIT)
+		{
+			case NONE :
+				return;
+			case WIN :
+				GlobalSettings.GAME.winSound();
+				break;
+			case LOOSE :
+				GlobalSettings.GAME.looseSound();
+				break;
+			case GAMEOVER_LOOSE :
+				GlobalSettings.GAME.looseSound();
+				break;
+			case GAMEOVER_END :
+				GlobalSettings.GAME.winSound();
+				break;
+		}
+		GlobalSettings.GAME.setScreen(new MenuScreen());
 	}
 
 	@Override
 	public void launchPauseMenu() {
-		// TODO Auto-generated method stub
-		
+		Gdx.app.log ("Matth", "GdxMenus: PauseMenu: " + GlobalSettings.GAME_EXIT);
+		GlobalSettings.GAME.setScreen(new ScreenMainMenu());
 	}
 
 }
