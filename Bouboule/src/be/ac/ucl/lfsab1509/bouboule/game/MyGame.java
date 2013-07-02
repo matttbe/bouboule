@@ -89,11 +89,12 @@ public class MyGame extends Game implements ApplicationListener {
 			looseSound = Gdx.audio.newSound(Gdx.files.internal("music/sounds/loose.mp3"));
 		}
 
-		if (GlobalSettings.MENUS == null)
+		if (GlobalSettings.MENUS == null) {
 			GlobalSettings.MENUS = new GdxMenus();
-
-		screenGame = new ScreenGame();
-		setScreen(screenGame); // 
+			GlobalSettings.MENUS.launchInitMenu();
+		}
+		else // e.g. Android => there is only one screen: Screen Game
+			setScreenGame();
 		
 		Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener()));
 	}
@@ -145,6 +146,7 @@ public class MyGame extends Game implements ApplicationListener {
 	 * in 'assets/music/levels'
 	 */
 	public void setNewLoopMusic(final String cNewMusic) {
+		Gdx.app.log("SCREEN", "New music: " + cNewMusic + " " + (screenGame == null));
 		if (screenGame == null) { // not loaded yet.
 			return;
 		}
@@ -164,5 +166,26 @@ public class MyGame extends Game implements ApplicationListener {
 	
 	public LevelLoader getLevel() {
 		return level;
+	}
+
+	public void setScreenGame () {
+		if (screenGame == null)
+			screenGame = new ScreenGame();
+		setScreen(screenGame);
+	}
+
+	public void setScreenGameHide () {
+		if (screenGame != null)
+			screenGame.hide();
+	}
+
+	public void setScreenGamePause () {
+		if (screenGame != null)
+			screenGame.pause();
+	}
+
+	public void setScreenGameResume () {
+		if (screenGame != null)
+			screenGame.resume();
 	}
 }

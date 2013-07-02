@@ -114,7 +114,7 @@ public class CountDown {
 		
 		if (stateTime > N_FRAME * STEPTIME - 0.1f) {
 			if (RESUME_AFTER_END) {
-				GlobalSettings.GAME.getScreen().resume();
+				GlobalSettings.GAME.setScreenGameResume(); // end of countdown => start the game by launching 'resuming' method
 			}
 			
 			reset();
