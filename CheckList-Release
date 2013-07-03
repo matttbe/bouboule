@@ -1,0 +1,8 @@
+CheckList for release:
+
+For Android:
+ * Check if bAndroidMenus (MainActivity.java:48)  is set to TRUE
+ * Move Bouboule-android/assets/drawable-xhdpi => Bouboule-android/res/drawable-xhdpi
+
+For iOS:
+ * Version HD (for Retina) and NHD
