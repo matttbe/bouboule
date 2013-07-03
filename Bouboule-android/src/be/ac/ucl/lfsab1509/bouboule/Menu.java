@@ -167,10 +167,10 @@ public class Menu extends Activity {
 	 */
 	private Point getDisplayVector() {
 		Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        
-        return size;
+		Point size = new Point();
+		display.getSize(size);
+
+		return size;
 	}
 
 
