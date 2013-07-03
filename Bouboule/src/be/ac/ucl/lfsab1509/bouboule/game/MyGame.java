@@ -101,6 +101,8 @@ public class MyGame extends Game implements ApplicationListener {
 		camera = CameraHelper.getCamera(GlobalSettings.APPWIDTH,
 				GlobalSettings.APPHEIGHT);
 
+		Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener()));
+
 		if (GlobalSettings.MENUS == null) {
 			bGdxMenus = true;
 			GlobalSettings.MENUS = new GdxMenus();
@@ -108,8 +110,6 @@ public class MyGame extends Game implements ApplicationListener {
 		}
 		else // e.g. Android => there is only one screen: Screen Game
 			setScreenGame();
-		
-		Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener()));
 	}
 
 	@Override
