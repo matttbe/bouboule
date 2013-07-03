@@ -29,7 +29,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 import java.util.ArrayList;
 
 import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
-import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
+import be.ac.ucl.lfsab1509.bouboule.game.ai.MapNode;
 import be.ac.ucl.lfsab1509.bouboule.game.menu.Menus;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.Profile;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;

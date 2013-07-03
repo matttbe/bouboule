@@ -9,7 +9,7 @@
         time="60" >
 
         <Bouboule
-            IALevel="7"
+            AILevel="7"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -22,7 +22,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -71,10 +71,10 @@
         bonusEnabled="star,life"
         bonusrate="1650"
         time="55" 
-        accmaxia="0.1f">
+        accmaxai="0.1f">
 
         <Bouboule
-            IALevel="4"
+            AILevel="4"
             angle="0"
             density="0.8"
             elasticity="1.1f"
@@ -87,7 +87,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1.10f"
@@ -135,12 +135,12 @@
         bonus="True"
         bonusrate="650"
         bonusEnabled="star,life,invisible"
-        accmaxia="0.425f"
+        accmaxai="0.425f"
         accmaxplayer="0.5f"
         time="45" >
 
         <Bouboule
-            IALevel="9"
+            AILevel="9"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -153,7 +153,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1.10f"
@@ -204,7 +204,7 @@
         time="45" >
 
         <Bouboule
-            IALevel="9"
+            AILevel="9"
             angle="0"
             density="0.9f"
             elasticity="0.9f"
@@ -217,7 +217,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -253,11 +253,11 @@
         bonus="True"
         bonusrate="1000"
         bonusEnabled="star,life,invisible,speed"
-        accmaxia="0.3f"
+        accmaxai="0.3f"
         time="90" >
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="2f"
             elasticity="0.7f"
@@ -270,7 +270,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -421,11 +421,11 @@
         bonusrate="1000"
         bonusEnabled="star,life,invisible,speed,elast"
         time="45" 
-        accmaxia="1f"
+        accmaxai="1f"
         accmaxplayer="1f">
 
         <Bouboule
-            IALevel="9"
+            AILevel="9"
             angle="0"
             density="0.1f"
             elasticity="0.5f"
@@ -438,7 +438,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="0.1f"
             elasticity="0.5f"
@@ -478,7 +478,7 @@
 		>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="0.9f"
             elasticity="0.8f"
@@ -491,7 +491,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -556,7 +556,7 @@
         accmaxplayer="0.5f">
 
         <Bouboule
-            IALevel="8"
+            AILevel="8"
             angle="0"
             density="1"
             elasticity="0.5f"
@@ -569,7 +569,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.5f"
@@ -707,11 +707,11 @@
         bonus="True"
         bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
-        accmaxia="0.55f"
+        accmaxai="0.55f"
         time="45" >
 
         <Bouboule
-            IALevel="10"
+            AILevel="10"
             angle="0"
             density="0.9"
             elasticity="1f"
@@ -724,7 +724,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1f"
@@ -799,11 +799,11 @@
         bonus="TRUE"
         bonusrate="700"
         bonusEnabled="star,life,invisible,speed,elast,inverse"
-        accmaxia="0.5f"
+        accmaxai="0.5f"
         time="60" >
 
         <Bouboule
-            IALevel="10"
+            AILevel="10"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -816,7 +816,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1.10f"
@@ -866,7 +866,7 @@
         time="45" >
 
         <Bouboule
-            IALevel="10"
+            AILevel="10"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -879,7 +879,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1.10f"
@@ -918,7 +918,7 @@
         time="45" >
 
         <Bouboule
-            IALevel="10"
+            AILevel="10"
             angle="0"
             density="3"
             elasticity="1f"
@@ -931,7 +931,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="3"
             elasticity="1f"
@@ -1017,7 +1017,7 @@
         time="60" >
 
         <Bouboule
-            IALevel="9"
+            AILevel="9"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -1030,7 +1030,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -1090,7 +1090,7 @@
         time="45" >
 
         <Bouboule
-            IALevel="10"
+            AILevel="10"
             angle="0"
             density="1"
             elasticity="1f"
@@ -1103,7 +1103,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1f"
@@ -1168,11 +1168,11 @@
         bonus="True"
         bonusrate="700"
         time="60"
-        accmaxia="1.0f"
+        accmaxai="1.0f"
         accmaxplayer="1.0f">
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -1185,7 +1185,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1.10f"
@@ -1233,10 +1233,10 @@
         bonus="True"
         bonusrate="1650"
         time="45" 
-        accmaxia="0.5f">
+        accmaxai="0.5f">
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="1.05f"
@@ -1249,7 +1249,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1.05f"
@@ -1284,11 +1284,11 @@
     <Level17
         bonus="True"
         bonusrate="1650"
-        accmaxia="0.55f"
+        accmaxai="0.55f"
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="1f"
@@ -1301,7 +1301,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1f"
@@ -1370,7 +1370,7 @@
         time="60" >
 
         <Bouboule
-            IALevel="4"
+            AILevel="4"
             angle="0"
             density="1f"
             elasticity="1f"
@@ -1383,7 +1383,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1f"
@@ -1434,11 +1434,11 @@
         bonus="True"
         bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
-        accmaxia="0.55f"
+        accmaxai="0.55f"
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1.1"
             elasticity="1f"
@@ -1451,7 +1451,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1f"
@@ -1537,7 +1537,7 @@
         time="45" >
 
         <Bouboule
-            IALevel="9"
+            AILevel="9"
             angle="0"
             density="1"
             elasticity="0.5f"
@@ -1552,7 +1552,7 @@
         
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.5f"
@@ -1609,11 +1609,11 @@
         bonus="False"
         bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
-        accmaxia="0.55f"
+        accmaxai="0.55f"
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="1.1f"
@@ -1626,7 +1626,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1.10f"
@@ -1676,11 +1676,11 @@
     <Level22
         bonus="True"
         bonusrate="1000"
-        accmaxia="0.55f"
+        accmaxai="0.55f"
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1.1"
             elasticity="1.1f"
@@ -1693,7 +1693,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1.10f"
@@ -1728,11 +1728,11 @@
     <Level23
         bonus="True"
         bonusrate="650"
-        accmaxia="0.55f"
+        accmaxai="0.55f"
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1.2"
             elasticity="1f"
@@ -1745,7 +1745,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1f"
@@ -1781,11 +1781,11 @@
         bonus="True"
         bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
-        accmaxia="0.55f"
+        accmaxai="0.55f"
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="0.2"
             elasticity="1f"
@@ -1798,7 +1798,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="0.2"
             elasticity="1f"
@@ -1880,11 +1880,11 @@
     <Level25
         bonus="True"
         bonusrate="1000"
-        accmaxia="0.5f"
+        accmaxai="0.5f"
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1.5"
             elasticity="1.1f"
@@ -1897,7 +1897,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1.10f"
@@ -1933,10 +1933,10 @@
 
         bonus="True"
         bonusrate="1000"
-        accmaxia="0.55f">
+        accmaxai="0.55f">
 
         <Bouboule
-            IALevel="11"
+            AILevel="11"
             angle="0"
             density="1.2"
             elasticity="1.1f"
@@ -1949,7 +1949,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1.10f"
@@ -1985,12 +1985,12 @@
         bonus="True"
         bonusrate="1000"
         bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
-        accmaxia="0.45f"
+        accmaxai="0.45f"
         accmaxplayer="0.55f"
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1.2"
             elasticity="1f"
@@ -2003,7 +2003,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1f"
@@ -2041,12 +2041,12 @@
     <Level28
         bonus="True"
         bonusrate="1000"
-        accmaxia="0.55f"
+        accmaxai="0.55f"
         accmaxplayer="0.5f"
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1.2"
             elasticity="0.8f"
@@ -2059,7 +2059,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -2108,11 +2108,11 @@
         bonusEnabled="inverse"
         bonusrate="100"
         time="45"
-        accmaxia="0.55f"
+        accmaxai="0.55f"
 		>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1.3"
             elasticity="0.8f"
@@ -2125,7 +2125,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -2190,7 +2190,7 @@
         accmaxplayer="0.60f">
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1.25f"
             elasticity="1f"
@@ -2203,7 +2203,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1f"
@@ -2271,7 +2271,7 @@
         time="90" >
 
         <Bouboule
-            IALevel="12"
+            AILevel="12"
             angle="0"
             density="1.1f"
             elasticity="1f"
@@ -2284,7 +2284,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1f"
@@ -2433,11 +2433,11 @@
     <Level32
         bonus="True"
         bonusrate="1000"
-        accmaxia="0.55f"
+        accmaxai="0.55f"
         time="45" >
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="0.75"
             elasticity="1.f"
@@ -2450,7 +2450,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="1.f"

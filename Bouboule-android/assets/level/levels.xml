@@ -5,7 +5,7 @@
 
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -57,7 +57,7 @@
     <Level2>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -71,7 +71,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -123,7 +123,7 @@
     <Level3>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -137,7 +137,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -202,7 +202,7 @@
     <Level4>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -216,7 +216,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -268,7 +268,7 @@
     <Level5>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -282,7 +282,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -334,7 +334,7 @@
     <Level6>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -348,7 +348,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -400,7 +400,7 @@
     <Level7>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -414,7 +414,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -467,7 +467,7 @@
     <Level8>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -481,7 +481,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -533,7 +533,7 @@
     <Level9>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -547,7 +547,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -599,7 +599,7 @@
     <Level10>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -613,7 +613,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -665,7 +665,7 @@
     <Level11>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -679,7 +679,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"
@@ -731,7 +731,7 @@
     <Level12>
 
         <Bouboule
-            IALevel="6"
+            AILevel="6"
             angle="0"
             density="1"
             elasticity="0.8f"
@@ -745,7 +745,7 @@
         </Bouboule>
 
         <Bouboule
-            IALevel="0"
+            AILevel="0"
             angle="0"
             density="1"
             elasticity="0.9f"

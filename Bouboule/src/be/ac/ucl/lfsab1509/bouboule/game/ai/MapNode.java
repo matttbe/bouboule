@@ -1,4 +1,4 @@
-package be.ac.ucl.lfsab1509.bouboule.game.ia;
+package be.ac.ucl.lfsab1509.bouboule.game.ai;
 
 /*
  * This file is part of Bouboule.

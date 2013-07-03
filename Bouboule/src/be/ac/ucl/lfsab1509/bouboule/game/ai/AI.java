@@ -1,4 +1,4 @@
-package be.ac.ucl.lfsab1509.bouboule.game.ia;
+package be.ac.ucl.lfsab1509.bouboule.game.ai;
 
 /*
  * This file is part of Bouboule.
@@ -39,12 +39,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
-public class IA {
+public class AI {
 
 	//physical constant
-	public static float FORCE_MAX_IA=0;
+	public static float FORCE_MAX_AI=0;
 	public static float FORCE_MAX_PLAYER=0;
-	public static float ACC_MAX_IA=0;
+	public static float ACC_MAX_AI=0;
 	public static float ACC_MAX_PLAYER=0;
 	//boolean for init constant by level
 	public static boolean IS_INIT;
@@ -71,10 +71,10 @@ public class IA {
 	//level 11 => hybrid with breaks
 	//level 12 => gyroscope inverse
 
-	//compute the maximal force for player and IA according to the acceleration max
-	private static void init(Body bodyia,Body bodyplayer){
-		if(bodyia != null)
-			FORCE_MAX_IA = ACC_MAX_IA * bodyia.getMass();
+	//compute the maximal force for player and AI according to the acceleration max
+	private static void init(Body bodyai,Body bodyplayer){
+		if(bodyai != null)
+			FORCE_MAX_AI = ACC_MAX_AI * bodyai.getMass();
 		if(bodyplayer != null)
 			FORCE_MAX_PLAYER = ACC_MAX_PLAYER * bodyplayer.getMass();
 		IS_INIT = true;
@@ -89,12 +89,12 @@ public class IA {
 	}
 
 	
-	//main fonction of IA,
-	public static Vector2 compute(int IALevel, Bouboule bouboule) {
+	//main fonction of AI,
+	public static Vector2 compute(int AILevel, Bouboule bouboule) {
 
 
 		//init variable
-		Vector2 IA = null, VelocityIA =null, LocalEnemi=null, VelocityEnemi = null, Acc = null;
+		Vector2 AI = null, VelocityAI =null, LocalEnemi=null, VelocityEnemi = null, Acc = null;
 
 		//search the position and speed of the 2 bouboules
 		Iterator<Body> iter = GraphicManager.getWorld().getBodies();
@@ -108,8 +108,8 @@ public class IA {
 				VelocityEnemi = bodytemp.getLinearVelocity();
 			}else if( ((Entity) bodytemp.getUserData()).getEntity() == Entity.MONSTER){
 				bodytempia=bodytemp;
-				IA =  bodytemp.getPosition();
-				VelocityIA  = bodytemp.getLinearVelocity();
+				AI =  bodytemp.getPosition();
+				VelocityAI  = bodytemp.getLinearVelocity();
 				
 			}
 		}
@@ -122,46 +122,46 @@ public class IA {
 
 
 
-		//launch the correct fonction for the IA
-		switch (IALevel) {
+		//launch the correct fonction for the AI
+		switch (AILevel) {
 		case 0:
 			Acc = gyroscope();
 			break;
 
 		case 1:
-			Acc = middeler(IA,getClosestCentre(IA));
+			Acc = middeler(AI,getClosestCentre(AI));
 			break;
 		case 2:
-			Acc = troll2(IA, VelocityIA);
+			Acc = troll2(AI, VelocityAI);
 			break;
 		case 3:
-			Acc = stopMid(IA, VelocityIA);
+			Acc = stopMid(AI, VelocityAI);
 			break;
 		case 4:
-			Acc = aggretion(IA,VelocityIA,LocalEnemi,VelocityEnemi,true);
+			Acc = aggretion(AI,VelocityAI,LocalEnemi,VelocityEnemi,true);
 			break;
 		case 5:
-			Acc = defence(IA,VelocityIA,LocalEnemi);
+			Acc = defence(AI,VelocityAI,LocalEnemi);
 			break;
 		case 6:
-			Acc = hybrid(IA,VelocityIA,LocalEnemi,VelocityEnemi,true);
+			Acc = hybrid(AI,VelocityAI,LocalEnemi,VelocityEnemi,true);
 			break;
 		case 7:
-			Acc = middeler (IA,getClosestCentre(IA));
-			Vector2 slow = new Vector2(VelocityIA).scl(2f);
+			Acc = middeler (AI,getClosestCentre(AI));
+			Vector2 slow = new Vector2(VelocityAI).scl(2f);
 			Acc.sub(slow);
 			break;
 		case 8:
-			Acc = multipoint(IA,VelocityIA,LocalEnemi,VelocityEnemi);
+			Acc = multipoint(AI,VelocityAI,LocalEnemi,VelocityEnemi);
 			break;
 		case 9:
-			Acc = aggretion(IA,VelocityIA,LocalEnemi,VelocityEnemi,false);
+			Acc = aggretion(AI,VelocityAI,LocalEnemi,VelocityEnemi,false);
 			break;
 		case 10:
-			Acc = hybrid(IA,VelocityIA,LocalEnemi,VelocityEnemi,false);
+			Acc = hybrid(AI,VelocityAI,LocalEnemi,VelocityEnemi,false);
 			break;
 		case 11:
-			Acc = hybrid(IA,VelocityIA,LocalEnemi,VelocityEnemi,true);
+			Acc = hybrid(AI,VelocityAI,LocalEnemi,VelocityEnemi,true);
 			break;
 		case 12:
 			Acc = gyroscope().scl(-1);
@@ -173,9 +173,9 @@ public class IA {
 		
 
 
-		// limite the Force for the player and IA
-		if(IALevel != 0){
-			Acc=Acc.limit(FORCE_MAX_IA);
+		// limite the Force for the player and AI
+		if(AILevel != 0){
+			Acc=Acc.limit(FORCE_MAX_AI);
 			
 			//count the frame to know how many time is passe for the game
 			countframe++;
@@ -185,7 +185,7 @@ public class IA {
 			/* MapNode testtemp = getClosestCentre(LocalEnemi);
 			Vector2 dirmid = middeler(LocalEnemi, testtemp);
 			if(dirmid.dot(VelocityEnemi) < 0.0f && VelocityEnemi.len2()/(ACC_MAX_PLAYER*2*K_ACC) + dirmid.len() > testtemp.getWeight()){
-				// Gdx.app.log ("Player","IA:defence slow");
+				// Gdx.app.log ("Player","AI:defence slow");
 				Acc = stopMid(LocalEnemi, VelocityEnemi);
 			}*/
 			
@@ -196,13 +196,13 @@ public class IA {
 		}
 		
 		//mesure arena and speed.
-		/*if(IALevel == 0){
+		/*if(AILevel == 0){
 			Gdx.app.log ("Player","playerx"+LocalEnemi.x+"y"+LocalEnemi.y+"speed2"+VelocityEnemi.len2()+"acc"+Acc.len());
 		}*/
 		
-		//upgrade the maniability for a IA
-		if(IALevel==11){
-			Vector2 slow = new Vector2(VelocityIA).scl(0.1f);
+		//upgrade the maniability for a AI
+		if(AILevel==11){
+			Vector2 slow = new Vector2(VelocityAI).scl(0.1f);
 			Acc.sub(slow);
 		}
 		
@@ -215,8 +215,8 @@ public class IA {
 	}
 
 
-	//special IA for world with lot of waypoints
-	private static Vector2 multipoint(Vector2 iA, Vector2 velocityIA,Vector2 localEnemi, Vector2 velocityEnemi) {
+	//special AI for world with lot of waypoints
+	private static Vector2 multipoint(Vector2 iA, Vector2 velocityAI,Vector2 localEnemi, Vector2 velocityEnemi) {
 		
 		//search if there is a point beetween the to bouboule and return the closest
 		MapNode close=getClosestCentre2(iA, localEnemi);
@@ -226,32 +226,32 @@ public class IA {
 			//send the bouboule on a point near him but closer to his enemi
 			MapNode temp = getnextnode(iA,localEnemi);
 			Vector2 dirmid = middeler(iA, temp);
-			if(velocityIA.len2()/(ACC_MAX_IA*2*K_ACC) + dirmid.len() > temp.getWeight()){
-				// Gdx.app.log ("Player","IA:defence slow");
-				return stopMid(iA, velocityIA);
+			if(velocityAI.len2()/(ACC_MAX_AI*2*K_ACC) + dirmid.len() > temp.getWeight()){
+				// Gdx.app.log ("Player","AI:defence slow");
+				return stopMid(iA, velocityAI);
 			}
 			return middeler(iA, temp);
 		}
 		
 		//when the 2 bouboule are close enought he attack
-		return aggretion(iA, velocityIA, localEnemi, velocityEnemi,true);
+		return aggretion(iA, velocityAI, localEnemi, velocityEnemi,true);
 		
 	}
 	
 	//search for a the next node to join the enemi
-	private static MapNode getnextnode(Vector2 IA,Vector2 localEnemi){
+	private static MapNode getnextnode(Vector2 AI,Vector2 localEnemi){
 		
 		ArrayList<MapNode> tabNode = GlobalSettings.ARENAWAYPOINTALLOW;
 		MapNode tempNode;
 		float distance = 100;
 		int closest = -1;
-		float angle = angleCentre(IA, localEnemi);
+		float angle = angleCentre(AI, localEnemi);
 		float tempdist;
 		for(int i=0;i<tabNode.size();i++){
 			tempNode=tabNode.get(i);
-			float angletemp = angleCentre(IA, tempNode.getVector());
+			float angletemp = angleCentre(AI, tempNode.getVector());
 			if((angle - angletemp) < 45 && (angle - angletemp) > -45){
-				tempdist = tempNode.getVector().dst(IA);
+				tempdist = tempNode.getVector().dst(AI);
 				if(distance > tempdist){
 					distance = tempdist;
 					closest = i;
@@ -265,38 +265,38 @@ public class IA {
 	}
 
 
-	private static Vector2 hybrid(Vector2 IA, Vector2 velocityIA,Vector2 localEnemi,Vector2 VelocityEnemi,boolean predict) {
-		//save closest waypoint for the IA
-		MapNode close = getClosestCentre(IA);
+	private static Vector2 hybrid(Vector2 AI, Vector2 velocityAI,Vector2 localEnemi,Vector2 VelocityEnemi,boolean predict) {
+		//save closest waypoint for the AI
+		MapNode close = getClosestCentre(AI);
 		
 		//get some data about the position and game
-		float anglerelatif = angleCentre(IA, close.getVector()) - angleCentre(localEnemi, close.getVector());
+		float anglerelatif = angleCentre(AI, close.getVector()) - angleCentre(localEnemi, close.getVector());
 		anglerelatif=casteangle(anglerelatif);
-		float distIA,distEnemi;
-		distIA = close.getVector().dst(IA);
+		float distAI,distEnemi;
+		distAI = close.getVector().dst(AI);
 		distEnemi = close.getVector().dst(localEnemi);
 
-		//set the IA aggressive for the first seconde
+		//set the AI aggressive for the first seconde
 		if(countframe < 150){
-			return aggretion(IA, velocityIA, localEnemi, VelocityEnemi,predict);
+			return aggretion(AI, velocityAI, localEnemi, VelocityEnemi,predict);
 		}
 		
-		//check if the IA is in a good position or if he need to fled
-		if(anglerelatif < 45 && anglerelatif > -45 && distIA > distEnemi){
-			return defence(IA, velocityIA, localEnemi);
+		//check if the AI is in a good position or if he need to fled
+		if(anglerelatif < 45 && anglerelatif > -45 && distAI > distEnemi){
+			return defence(AI, velocityAI, localEnemi);
 		}else{
-			return aggretion(IA, velocityIA, localEnemi, VelocityEnemi,predict);
+			return aggretion(AI, velocityAI, localEnemi, VelocityEnemi,predict);
 		}
 
 	}
 
 
-	private static Vector2 defence(Vector2 IA, Vector2 velocityIA,Vector2 localEnemi) {
-		MapNode close =getClosestCentre(IA);
+	private static Vector2 defence(Vector2 AI, Vector2 velocityAI,Vector2 localEnemi) {
+		MapNode close =getClosestCentre(AI);
 		Vector2 vClose = close.getVector();
-		Vector2 acc = new Vector2(middeler(IA, close)).nor();
-		float angleEnemi = angleCentre(localEnemi, vClose) - angleCentre(IA, vClose);
-		float direction = angleCentre(IA, vClose) - velocityIA.angle();
+		Vector2 acc = new Vector2(middeler(AI, close)).nor();
+		float angleEnemi = angleCentre(localEnemi, vClose) - angleCentre(AI, vClose);
+		float direction = angleCentre(AI, vClose) - velocityAI.angle();
 
 		angleEnemi = casteangle(angleEnemi);
 		direction = casteangle(direction);
@@ -308,11 +308,11 @@ public class IA {
 		}
 
 		
-		Vector2 dirmid = middeler(IA, close);
+		Vector2 dirmid = middeler(AI, close);
 		
 		//avoid going out by fledings
-		if(dirmid.dot(velocityIA) < 0.25f && velocityIA.len2()/(ACC_MAX_IA*2*K_ACC) +dirmid.len() > close.getWeight()){
-			return stopMid(IA, velocityIA);
+		if(dirmid.dot(velocityAI) < 0.25f && velocityAI.len2()/(ACC_MAX_AI*2*K_ACC) +dirmid.len() > close.getWeight()){
+			return stopMid(AI, velocityAI);
 		}
 		return acc;
 	}
@@ -325,8 +325,8 @@ public class IA {
 		
 		
 		Vector2 directionenemi , dirmid , fictposition;
-		MapNode centreIA = getClosestCentre(position);
-		dirmid = middeler(position, centreIA);
+		MapNode centreAI = getClosestCentre(position);
+		dirmid = middeler(position, centreAI);
 		//dirmid.nor();
 		
 		//compute a fictif position of him self if needed (predict)
@@ -353,9 +353,9 @@ public class IA {
 		directionenemi.sub(fictposition).nor();
 		
 		//avoid too big acceleration and going out
-		if(!(Math.abs(angleCentre(fictposition, centreIA.getVector())-angleCentre(localEnemi,centreIA.getVector())) < 15 &&
-				centreIA == getClosestCentre(localEnemi)))
-			if(dirmid.dot(velocity) < 0.0f && velocity.len2()/(ACC_MAX_IA*2*K_ACC) + dirmid.len() > centreIA.getWeight()){
+		if(!(Math.abs(angleCentre(fictposition, centreAI.getVector())-angleCentre(localEnemi,centreAI.getVector())) < 15 &&
+				centreAI == getClosestCentre(localEnemi)))
+			if(dirmid.dot(velocity) < 0.0f && velocity.len2()/(ACC_MAX_AI*2*K_ACC) + dirmid.len() > centreAI.getWeight()){
 				return stopMid(position, velocity);
 			}
 
@@ -396,18 +396,18 @@ public class IA {
 	}
 
 	//return a vector to the middle
-	private static Vector2 middeler(Vector2 IA,int centre){
+	private static Vector2 middeler(Vector2 AI,int centre){
 		
 		Vector2 Acc = new Vector2(GlobalSettings.ARENAWAYPOINTALLOW.get(centre).getVector());
-		Acc.sub(IA);
+		Acc.sub(AI);
 		
 		return Acc;
 	}
 	
-	private static Vector2 middeler(Vector2 IA,MapNode centre){
+	private static Vector2 middeler(Vector2 AI,MapNode centre){
 		
 		Vector2 Acc = new Vector2(centre.getVector());
-		Acc.sub(IA);
+		Acc.sub(AI);
 		
 		return Acc;
 	}
@@ -422,7 +422,7 @@ public class IA {
 		Acc = new Vector2(dirmid).sub(vitesse).nor();
 
 		if(dirmid.dot(vitesse) > 0 &&
-				getClosestCentre(position).getVector().dst(position) < vitesse.dot(dirmid)*vitesse.dot(dirmid)/(ACC_MAX_IA*2*K_ACC)){
+				getClosestCentre(position).getVector().dst(position) < vitesse.dot(dirmid)*vitesse.dot(dirmid)/(ACC_MAX_AI*2*K_ACC)){
 			//Acc.rotate(180);
 		}else{
 		}
@@ -448,7 +448,7 @@ public class IA {
 		return newAcc;
 	}
 */
-	//IA troll for testing other IA
+	//AI troll for testing other AI
 	private static Vector2 troll2(Vector2 position,Vector2 velocity){
 		Vector2 newAcc = new Vector2(middeler(position, 0));
 		Vector2 temp1 = new Vector2(newAcc).nor();

@@ -32,14 +32,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import be.ac.ucl.lfsab1509.bouboule.game.ai.AI;
+import be.ac.ucl.lfsab1509.bouboule.game.ai.MapNode;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Arena;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bouboule;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Obstacle;
 import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
-import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
-import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
 import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerListener;
 
@@ -119,11 +119,11 @@ public class LevelLoader {
 		// Level
 		GraphicManager.TIME = Integer.parseInt(file.getAttribute("time", "30"));
 
-		// IA
-		IA.ACC_MAX_IA = Float.parseFloat(file.getAttribute("accmaxia", "0.5f")); 
-		IA.ACC_MAX_PLAYER = Float.parseFloat(file.getAttribute("accmaxplayer", "0.5f"));
-		IA.countframe = 0;
-		IA.IS_INIT=false;
+		// AI
+		AI.ACC_MAX_AI = Float.parseFloat(file.getAttribute("accmaxai", "0.5f")); 
+		AI.ACC_MAX_PLAYER = Float.parseFloat(file.getAttribute("accmaxplayer", "0.5f"));
+		AI.countframe = 0;
+		AI.IS_INIT=false;
 
 		Gdx.app.log("Settings", "Bonus =" + GraphicManager.ALLOW_BONUS);	
 	}
@@ -150,7 +150,7 @@ public class LevelLoader {
 			float px				= Float.parseFloat(boub.getAttribute("px"));
 			float py				= Float.parseFloat(boub.getAttribute("py"));
 			float angle				= Float.parseFloat(boub.getAttribute("angle"));
-			int IALevel				= Integer.parseInt(boub.getAttribute("IALevel"));
+			int AILevel				= Integer.parseInt(boub.getAttribute("AILevel"));
 			short entity			= Short.parseShort(boub.getAttribute("entity"));
 			boolean inverted		= Boolean.parseBoolean(boub.getAttribute("inverted", "False"));
 
@@ -177,17 +177,17 @@ public class LevelLoader {
 
 			Bouboule body = new Bouboule(radius, bodyType, density,
 					elasticity, px, py, angle, texRegionPath, 
-					jsonFile, "boub_" + type, entity, IALevel);
+					jsonFile, "boub_" + type, entity, AILevel);
 			graphicManager.addBody(body);
 
 			if (inverted) {
 				((Sprite) body.getBody().getFixtureList().get(0).getUserData()).rotate90(true);
 				((Sprite) body.getBody().getFixtureList().get(0).getUserData()).rotate90(true);
-				IA.setInvertedOrientation();
+				AI.setInvertedOrientation();
 
 			}
 			else // revert axe if it's inverted
-				IA.setNormalOrientation();
+				AI.setNormalOrientation();
 		}
 	}
 
@@ -225,7 +225,7 @@ public class LevelLoader {
 	}
 
 	/**
-	 * Load the nodes for the IA.
+	 * Load the nodes for the AI.
 	 * 
 	 * public void readLevelMapNodes()
 	 */

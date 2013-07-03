@@ -34,8 +34,8 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
+import be.ac.ucl.lfsab1509.bouboule.game.ai.AI;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
-import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 
 public class ProfileGlobal {
 	private String SEPARATOR;
@@ -84,7 +84,7 @@ public class ProfileGlobal {
 
 	public void changeSensibilitySettings(final int newSensitivity) {
 		GlobalSettings.SENSITIVITY = newSensitivity;
-		IA.setNewSensitivity ();
+		AI.setNewSensitivity ();
 		prefs.putInteger(SENSITIVITY_KEY, newSensitivity);
 		prefs.flush();
 	}

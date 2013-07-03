@@ -29,10 +29,10 @@ package be.ac.ucl.lfsab1509.bouboule.game.body;
 
 import java.util.Random;
 
+import be.ac.ucl.lfsab1509.bouboule.game.ai.MapNode;
 import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
-import be.ac.ucl.lfsab1509.bouboule.game.ia.MapNode;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;

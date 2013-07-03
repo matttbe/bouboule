@@ -26,10 +26,10 @@
 
 package be.ac.ucl.lfsab1509.bouboule.game.body;
 
+import be.ac.ucl.lfsab1509.bouboule.game.ai.AI;
 import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
-import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -48,7 +48,7 @@ public class Bouboule extends GameBody {
 	private final TextureRegion 	texture;		//Texture of the Bouboule
 	private final Sprite			sprite;			//Sprite to draw the Bouboule
 
-	private final int				IALevel;		//Level of the IA or controller
+	private final int				AILevel;		//Level of the AI or controller
 	
 	
 	/**
@@ -70,11 +70,11 @@ public class Bouboule extends GameBody {
 	public Bouboule(final float radius, final BodyType bodyType, final float density,
 			final float elasticity, final float px, final float py, 
 			final float angle, final String texRegionPath, 
-			final String jsonFile, final String jsonName, final short type, final int IALevel) {
+			final String jsonFile, final String jsonName, final short type, final int AILevel) {
 
 		super();
 
-		this.IALevel = IALevel;
+		this.AILevel = AILevel;
 		Vector2 pos	= new Vector2(px, py);
 
 		
@@ -130,7 +130,7 @@ public class Bouboule extends GameBody {
 	 */
 	public void update() {
 		if (entity.isAlive()) {
-			Vector2 acceleration = IA.compute(IALevel, this);
+			Vector2 acceleration = AI.compute(AILevel, this);
 			body.applyForceToCenter(acceleration, true);
 			super.update();
 

@@ -31,8 +31,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.Timer;
 
+import be.ac.ucl.lfsab1509.bouboule.game.ai.AI;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
-import be.ac.ucl.lfsab1509.bouboule.game.ia.IA;
 
 public class Entity {
 
@@ -150,12 +150,12 @@ public class Entity {
 				return true;
 
 			case SPEED_HIGH:
-				IA.FORCE_MAX_PLAYER *= SPEED_MULT_VALUE;
+				AI.FORCE_MAX_PLAYER *= SPEED_MULT_VALUE;
 				resetSpeedBonus(type, TIMER_DEFAULT_TIME);
 				return true;
 
 			case SPEED_LOW:
-				IA.FORCE_MAX_PLAYER /= SPEED_MULT_VALUE;
+				AI.FORCE_MAX_PLAYER /= SPEED_MULT_VALUE;
 				resetSpeedBonus(type, TIMER_DEFAULT_TIME);
 				return true;
 
@@ -175,15 +175,15 @@ public class Entity {
 			default:
 				break;
 			}
-		} else { // IA
+		} else { // AI
 			switch (this.bonus) {
 			case SPEED_HIGH:
-				IA.FORCE_MAX_IA *= SPEED_MULT_VALUE;
+				AI.FORCE_MAX_AI *= SPEED_MULT_VALUE;
 				resetSpeedBonus(type, TIMER_DEFAULT_TIME);
 				return true;
 
 			case SPEED_LOW:
-				IA.FORCE_MAX_IA /= SPEED_MULT_VALUE;
+				AI.FORCE_MAX_AI /= SPEED_MULT_VALUE;
 				resetSpeedBonus(type, TIMER_DEFAULT_TIME);
 				return true;
 
@@ -238,17 +238,17 @@ public class Entity {
 
 				if (type == PLAYER) {
 					if (bonus == BonusType.SPEED_HIGH) {
-						IA.FORCE_MAX_PLAYER /= SPEED_MULT_VALUE;
+						AI.FORCE_MAX_PLAYER /= SPEED_MULT_VALUE;
 
 					} else {
-						IA.FORCE_MAX_PLAYER *= SPEED_MULT_VALUE;
+						AI.FORCE_MAX_PLAYER *= SPEED_MULT_VALUE;
 					}
 				} else {
 					if (bonus == BonusType.SPEED_HIGH) {
-						IA.FORCE_MAX_IA /= SPEED_MULT_VALUE;
+						AI.FORCE_MAX_AI /= SPEED_MULT_VALUE;
 
 					} else {
-						IA.FORCE_MAX_IA *= SPEED_MULT_VALUE;
+						AI.FORCE_MAX_AI *= SPEED_MULT_VALUE;
 					}
 				}
 			}
@@ -303,7 +303,7 @@ public class Entity {
 			this.timer.clear();
 
 		// revert axe if it's inverted
-		IA.setNormalOrientation();
+		AI.setNormalOrientation();
 
 		Gdx.app.log("Timer", "Stopped the Timer if needed");
 	}
@@ -369,7 +369,7 @@ public class Entity {
 			((Sprite) fixture.getUserData()).rotate90(true);
 			((Sprite) fixture.getUserData()).rotate90(true);
 			if (bInverseAxe)
-				IA.inverse();
+				AI.inverse();
 		}
 	}
 }
