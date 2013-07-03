@@ -29,6 +29,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -89,16 +90,10 @@ public class WinScreen extends AbstractScreen {
 				GlobalSettings.MENUS.launchInitMenu();
 			}
 		});
-	}
 
-	@Override
-	public void render(float delta) {
-		super.render(delta);
-
-		getBatch().begin();
-		fontOsaka.draw(getBatch(),
-				Integer.toString(GlobalSettings.PROFILE.getScore()), 200, 745);
-		getBatch().end();
+		// Set Font
+		addLabel(Integer.toString(GlobalSettings.PROFILE.getScore()),
+				"osaka-font", new Color(0f, 0f, 0f, 0.85f), 200, 750);
 
 	}
 }

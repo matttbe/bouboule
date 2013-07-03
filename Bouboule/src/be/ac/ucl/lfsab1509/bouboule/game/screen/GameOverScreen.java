@@ -29,13 +29,13 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class GameOverScreen extends AbstractScreen {
-	
 
 	public GameOverScreen() {
 		super(true);
@@ -45,31 +45,37 @@ public class GameOverScreen extends AbstractScreen {
 	public void show() {
 		super.show();
 
-		//Set Background
-		
+		// Set Background
+
 		addBackGround("drawable-xhdpi/gameover.jpg");
-		
-		//Create all Buttons - Play Button
-		
-		Button restartButton  = createButton("transparent", 290, 90, 63, 497);
+
+		// Create all Buttons - Play Button
+
+		Button restartButton = createButton("transparent", 290, 90, 63, 497);
 		Button menuButton = createButton("transparent", 290, 90, 448, 497);
-		
-		
-		
-		restartButton.addListener( new ClickListener() {
-			public void clicked (InputEvent event, float x, float y) {
-				Gdx.app.log ("SCREEN", "clickStart " + x + ", " + y);
+
+		restartButton.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				Gdx.app.log("SCREEN", "clickStart " + x + ", " + y);
 				GlobalSettings.GAME.setScreenGame();
 			}
 		});
-		
-		menuButton.addListener( new ClickListener() {
-			public void clicked (InputEvent event, float x, float y) {
-				Gdx.app.log ("SCREEN", "clickParam " + x + ", " + y);
+
+		menuButton.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				Gdx.app.log("SCREEN", "clickParam " + x + ", " + y);
 				GlobalSettings.MENUS.launchInitMenu();
 			}
 		});
 
+		// Set Font for end Score
+
+		Label label = addLabel(
+				Integer.toString(GlobalSettings.PROFILE.getEndGameScore()),
+				"osaka-font", new Color(1f, 1f, 1f, 1f), 0, 700);
+
+		label.setX(GlobalSettings.APPWIDTH / 2f - 
+				label.getTextBounds().width / 2f);
 
 	}
 }

@@ -10,7 +10,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  *    Matthieu Baerts <matthieu.baerts@student.uclouvain.be>
  *    Baptiste Remy <baptiste.remy@student.uclouvain.be>
  *    Nicolas Van Wallendael <nicolas.vanwallendael@student.uclouvain.be>
- *    Hélène Verhaeghe <helene.verhaeghe@student.uclouvain.be>
+ *    H��l��ne Verhaeghe <helene.verhaeghe@student.uclouvain.be>
  * 
  * Bouboule is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -39,6 +40,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
@@ -93,40 +95,53 @@ public abstract class AbstractScreen implements Screen {
 		}
 		return skin;
 	}
-	
-	protected Button createButton(String skinType, int sizeX, int sizeY, int x, int y) {
+
+	protected Label addLabel(String text, String fontName, Color color, int x,
+			int y) {
+
+		Label label = new Label(text, getSkin(), fontName, color);
+		label.setX(x);
+		label.setY(y);
+		stage.addActor(label);
 		
-		Button button = new Button(getSkin(), skinType );
+		return label;
+	}
+
+	protected Button createButton(String skinType, int sizeX, int sizeY, int x,
+			int y) {
+
+		Button button = new Button(getSkin(), skinType);
 		button.setSize(sizeX, sizeY);
 		button.setX(x);
 		button.setY(y);
-		
+
 		this.stage.addActor(button);
-		
+
 		return button;
 	}
-	
+
 	protected void addBackGround(String imagePath) {
 		Image img = new Image(new Texture(imagePath));
 		this.stage.addActor(img);
-		
+
 	}
 
 	protected Music getMusic() {
 		return GlobalSettings.GAME.getMenusMusic();
 	}
 
-	protected void playMusicWithDelay (float seconds) {
+	protected void playMusicWithDelay(float seconds) {
 		if (timerMusic != null) {
 			timerMusic.clear();
 		}
 		timerMusic = new Timer();
 		Task task = new Timer.Task() {
-			
+
 			@Override
 			public void run() {
-				// handle the case where we already return to the screen game (we have to be quick!)
-				if (! GlobalSettings.GAME.isGameScreen())
+				// handle the case where we already return to the screen game
+				// (we have to be quick!)
+				if (!GlobalSettings.GAME.isGameScreen())
 					getMusic().play();
 			}
 		};
