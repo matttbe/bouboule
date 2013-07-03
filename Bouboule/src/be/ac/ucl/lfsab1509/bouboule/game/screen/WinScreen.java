@@ -29,13 +29,14 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 
-
 public class WinScreen extends AbstractScreen {
-	
+
+	private BitmapFont fontOsaka;
 
 	public WinScreen() {
 		super(true);
@@ -44,13 +45,18 @@ public class WinScreen extends AbstractScreen {
 	@Override
 	public void show() {
 		super.show();
+		// Set Font
 
-		//Set Background
-		
+		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
+				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
+
+		fontOsaka.setColor(0f, 0f, 0f, 0.85f);
+		// Set Background
+
 		addBackGround("drawable-xhdpi/you_win.jpg");
-		
-		//Set Lives
-		switch (GlobalSettings.PROFILE.getNbLifes ()) {
+
+		// Set Lives
+		switch (GlobalSettings.PROFILE.getNbLifes()) {
 		case 3:
 			addBackGround("drawable-xhdpi/coeur3.png");
 			break;
@@ -64,26 +70,35 @@ public class WinScreen extends AbstractScreen {
 		default:
 			break;
 		}
-		
-		//Create all Buttons - Play Button
-		
-		Button nextButton  = createButton("transparent", 290, 90, 63, 608);
+
+		// Create all Buttons - Play Button
+
+		Button nextButton = createButton("transparent", 290, 90, 63, 608);
 		Button menuButton = createButton("transparent", 290, 90, 448, 608);
-		
-		
-		nextButton.addListener( new ClickListener() {
-			public void clicked (InputEvent event, float x, float y) {
-				Gdx.app.log ("SCREEN", "clickNext " + x + ", " + y);
+
+		nextButton.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				Gdx.app.log("SCREEN", "clickNext " + x + ", " + y);
 				GlobalSettings.GAME.setScreenGame();
 			}
 		});
-		
-		menuButton.addListener( new ClickListener() {
-			public void clicked (InputEvent event, float x, float y) {
-				Gdx.app.log ("SCREEN", "clickParam " + x + ", " + y);
+
+		menuButton.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				Gdx.app.log("SCREEN", "clickParam " + x + ", " + y);
 				GlobalSettings.MENUS.launchInitMenu();
 			}
 		});
-		
+	}
+
+	@Override
+	public void render(float delta) {
+		super.render(delta);
+
+		getBatch().begin();
+		fontOsaka.draw(getBatch(),
+				Integer.toString(GlobalSettings.PROFILE.getScore()), 200, 745);
+		getBatch().end();
+
 	}
 }
