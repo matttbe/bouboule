@@ -62,6 +62,8 @@ public abstract class AbstractScreen implements Screen {
 		this.bMusicNeedsDelay = bMusicNeedsDelay;
 		this.stage = new Stage(GlobalSettings.APPWIDTH,
 				GlobalSettings.APPHEIGHT, true);
+		// Added the camera to enter the screen (black borders on each side)
+		this.stage.setCamera(GlobalSettings.GAME.getCamera());
 	}
 
 	protected String getName() {
