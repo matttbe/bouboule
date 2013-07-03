@@ -45,7 +45,7 @@ public class MenuParameters_about extends Activity{
 		// request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.activity_parametre_about);
+		setContentView(R.layout.activity_parameters_about);
 		
 		// change of type font
 		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");

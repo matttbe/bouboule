@@ -14,8 +14,8 @@
     <string name="title_activity_loosing">LoosingActivity</string>
     <string name="title_activity_ChoosingActivity">Choosing Activity</string>
     
-    <!-- Menu Parametre -->
-    <string name="title_activiy_menuParametre">Settings</string>
+    <!-- Menu Parameters -->
+    <string name="title_activiy_menuParameters">Settings</string>
     <string name="user">User settings</string>
     <string name="global">Global settings</string>
     <string name="about">About</string>
@@ -51,7 +51,7 @@
     <string name="global_rotate_on">Rotation On</string>
     <string name="global_sensitivity">Sensitivity:</string>
     
-    <!-- Menu Parametre_about -->
+    <!-- Menu Parameters_about -->
     <string name="about_nameapp">App\'s name:</string>
     <string name="about_nameapp_txt">Bouboule</string>
     <string name="about_authors">Authors:</string>

@@ -48,7 +48,7 @@ public class MenuParameters_global extends Activity {
 		// request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.activity_parametre_global);
+		setContentView(R.layout.activity_parameters_global);
 		
 		
 		// find the different views

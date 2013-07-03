@@ -54,23 +54,23 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="MenuParametre"
-            android:label="@string/title_activiy_menuParametre"
+            android:name="MenuParameters"
+            android:label="@string/title_activiy_menuParameters"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="MenuParametre_about"
-            android:label="@string/title_activiy_menuParametre"
+            android:name="MenuParameters_about"
+            android:label="@string/title_activiy_menuParameters"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="MenuParametre_global"
-            android:label="@string/title_activiy_menuParametre"
+            android:name="MenuParameters_global"
+            android:label="@string/title_activiy_menuParameters"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="MenuParametre_user"
-            android:label="@string/title_activiy_menuParametre"
+            android:name="MenuParameters_user"
+            android:label="@string/title_activiy_menuParameters"
             android:screenOrientation="portrait" >
         </activity>
         <activity

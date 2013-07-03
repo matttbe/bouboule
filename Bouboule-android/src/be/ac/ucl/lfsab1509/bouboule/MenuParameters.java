@@ -43,7 +43,7 @@ public class MenuParameters extends Activity {
 		// request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.activity_parametre_menu);
+		setContentView(R.layout.activity_parameters_menu);
 		
 		// add listeners on buttons
 		findViewById(R.id.button_param_user).setOnClickListener(clickListener);
@@ -62,7 +62,7 @@ public class MenuParameters extends Activity {
 			switch (view.getId()) {
 				// start the activities according to the button pressed
 				case R.id.button_param_user :
-					intent = new Intent(MenuParameters.this, MenuParametre_user.class);
+					intent = new Intent(MenuParameters.this, MenuParameters_user.class);
 					startActivity(intent);
 					break;
 				case R.id.button_param_global :

@@ -54,7 +54,7 @@ import java.util.ArrayList;
 
 
 
-public class MenuParametre_user extends Activity {
+public class MenuParameters_user extends Activity {
 
 	private Spinner user_selectprofile_spin;
 	private ImageButton user_boub_left;
@@ -82,7 +82,7 @@ public class MenuParametre_user extends Activity {
 		// request the fullScreen for the Main Screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.activity_parametre_user);			
+		setContentView(R.layout.activity_parameters_user);			
 		
 		// find the different views
 		user_selectprofile_spin = (Spinner) findViewById(R.id.user_selectprofile_spin);
