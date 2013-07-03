@@ -26,6 +26,9 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -55,24 +58,23 @@ public class MenuScreen extends AbstractScreen {
 		
 		playButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
-				System.out.println("clickPlay " + x + ", " + y);
-				//START NEW GAME;
+				GlobalSettings.GAME.setScreenGame();
 			}
-		});	
+		});
 		
 		paramButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
-				System.out.println("clickParam " + x + ", " + y);
-				//START NEW GAME;
+				Gdx.app.log ("SCREEN", "clickParam " + x + ", " + y);
+				//TODO: setScreen(new ParamScreen());
 			}
-		});	
+		});
 		
 		scoreButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
-				System.out.println("clickScore " + x + ", " + y);
-				//START NEW GAME;
+				Gdx.app.log ("SCREEN", "clickScore " + x + ", " + y);
+				//TODO: setScreen(new HighScreen()); // or something else
 			}
-		});	
-				
+		});
+
 	}
 }

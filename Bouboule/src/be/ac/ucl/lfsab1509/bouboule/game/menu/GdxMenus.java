@@ -37,7 +37,7 @@ public class GdxMenus implements Menus {
 	@Override
 	public void launchInitMenu() {
 		Gdx.app.log ("Matth", "GdxMenus: InitMenu: " + GlobalSettings.GAME_EXIT);
-		GlobalSettings.GAME.setScreen(new ScreenMainMenu());
+		GlobalSettings.GAME.setScreen(new MenuScreen(false));
 	}
 
 	@Override
