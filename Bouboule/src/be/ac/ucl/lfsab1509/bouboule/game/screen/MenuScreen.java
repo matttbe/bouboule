@@ -113,22 +113,22 @@ public class MenuScreen extends AbstractScreen {
 		private float position;
 		private boolean right;
 		public ActionBouboul(boolean right) {
-			position = -400;
+			init();
 			this.right=right;
 		}
 		public boolean act(float delta) {
-			position+= delta*550;
-			if(position>=800)position=800;
+			position+= delta*1000f;
+			if(position>=800f)position=800f;
 			if(right){
-				actor.setPosition(800-position, 800-position);
+				actor.setPosition(800f-position, (800f-position)/3.5f);
 			}else{
-				actor.setPosition(-800+position, 800-position);
+				actor.setPosition(-800f+position, (800f-position)/3.5f);
 			}
 			return false;
 		}
 		
 		public void init(){
-			position = -400;
+			position = 0f;
 		}
 		
 	}
