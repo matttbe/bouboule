@@ -34,7 +34,8 @@ public abstract class AbstractScreen implements Screen {
 
 	public AbstractScreen(boolean bMusicNeedsDelay) {
 		this.bMusicNeedsDelay = bMusicNeedsDelay;
-		this.stage = new Stage(ScreenGame.APPWIDTH, ScreenGame.APPHEIGHT, true);
+		this.stage = new Stage(GlobalSettings.APPWIDTH,
+				GlobalSettings.APPHEIGHT, true);
 	}
 
 	protected String getName() {

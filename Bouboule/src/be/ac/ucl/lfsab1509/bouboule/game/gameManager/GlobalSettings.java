@@ -35,15 +35,17 @@ import be.ac.ucl.lfsab1509.bouboule.game.profile.Profile;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 
 public class GlobalSettings {
-	
+
+	public static final float APPWIDTH  = 800f;
+	public static final float APPHEIGHT = 1250f;
+
 	//Definition for the time step properties
 	public static final float 		BOX_STEP			= 1 / 60f;
 	public static final int 		VELOCITY_ITERATIONS	= 8;
 	public static final int 		POSITION_ITERATIONS	= 3;
- 	
+ 
  	public static final float 	LIMITACC	= 0.5f;
- 	
- 	//TODO: A mettre dasn IA
+ 
  	public static ArrayList<MapNode> ARENAWAYPOINTALLOW = new ArrayList<MapNode>(); 
  	
  	public static enum GameExitStatus {NONE, WIN, LOOSE, GAMEOVER_LOOSE, GAMEOVER_END};

@@ -27,7 +27,6 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  */
 
 
-import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
@@ -37,20 +36,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 
 
 public class ScreenGame implements Screen {
 
-	public static final float APPWIDTH 	= 800f;
-	public static final float APPHEIGHT = 1250f;
-	
-	//Test Update
-
-
-	private OrthographicCamera      		camera;
-
-	private GameLoop 						game;
+	private GameLoop game;
 	private FileHandle loopMusicFile;
 	private FileHandle loopMusicDefaultFile;
 	private Music loopMusic;
@@ -65,8 +55,7 @@ public class ScreenGame implements Screen {
 		loopMusic = Gdx.audio.newMusic(loopMusicFile);
 		loopMusic.setLooping(true);
 
-		camera = CameraHelper.getCamera(APPWIDTH, APPHEIGHT);
-		game = new GameLoop(camera, true);
+		game = new GameLoop(GlobalSettings.GAME.getCamera(), true);
 	}
 
 	@Override

@@ -35,6 +35,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.MyGestureListener;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerMgr;
+import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
@@ -42,12 +43,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 
 public class MyGame extends Game implements ApplicationListener {
 
 	private ScreenGame screenGame;
 	private boolean bGdxMenus;
+
+	private OrthographicCamera camera;
 
 	private Sound hitSounds[];
 	private boolean bNeedEndSounds;
@@ -94,6 +98,9 @@ public class MyGame extends Game implements ApplicationListener {
 			looseSound = Gdx.audio.newSound(Gdx.files.internal("music/sounds/loose.mp3"));
 		}
 
+		camera = CameraHelper.getCamera(GlobalSettings.APPWIDTH,
+				GlobalSettings.APPHEIGHT);
+
 		if (GlobalSettings.MENUS == null) {
 			bGdxMenus = true;
 			GlobalSettings.MENUS = new GdxMenus();
@@ -119,7 +126,11 @@ public class MyGame extends Game implements ApplicationListener {
 			menusMusic.dispose();
 		countdownSound.dispose();
 	}
-	
+
+	public OrthographicCamera getCamera() {
+		return camera;
+	}
+
 	public void hitSound() {
 		if (!GlobalSettings.SOUND_IS_MUTED) {
 			int index = rand.nextInt(hitSounds.length);

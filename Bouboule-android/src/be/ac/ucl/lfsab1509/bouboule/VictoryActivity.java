@@ -29,7 +29,6 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
-import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Point;
@@ -54,7 +53,7 @@ public class VictoryActivity extends Activity {
 							 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_victory);
 
-		float ratio = getDisplayVector().y/ScreenGame.APPHEIGHT;
+		float ratio = getDisplayVector().y / GlobalSettings.APPHEIGHT;
 
 		// Listeners for the Game Launcher
 		findViewById(R.id.VictoryMenuButton).setOnTouchListener(

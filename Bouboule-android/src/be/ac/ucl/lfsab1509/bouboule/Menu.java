@@ -34,7 +34,6 @@ import com.badlogic.gdx.Gdx;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.HighScoreInfo;
-import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -130,7 +129,7 @@ public class Menu extends Activity {
 		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
 		((TextView) contentView).setTypeface(myTypeface);
 		
-		float ratio = getDisplayVector().y /ScreenGame.APPHEIGHT;
+		float ratio = getDisplayVector().y / GlobalSettings.APPHEIGHT;
 		
 		((TextView) contentView).setTextSize(TypedValue.COMPLEX_UNIT_PX,  
 				45*ratio);

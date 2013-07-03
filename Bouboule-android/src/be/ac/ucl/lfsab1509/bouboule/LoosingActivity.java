@@ -29,7 +29,6 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
-import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Point;
@@ -64,7 +63,7 @@ public class LoosingActivity extends Activity {
 				"osaka-re.ttf");
 		TextView pScoreView = (TextView) findViewById (R.id.LoosingScore);
 		
-		float ratio = getDisplayVector().y/ScreenGame.APPHEIGHT;
+		float ratio = getDisplayVector().y / GlobalSettings.APPHEIGHT;
 
 		pScoreView.setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
 		pScoreView.setTypeface (myFontBout);

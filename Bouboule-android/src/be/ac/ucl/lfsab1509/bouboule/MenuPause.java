@@ -28,7 +28,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import java.util.Random;
 
-import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import android.app.Activity;
 import android.graphics.Point;
@@ -97,7 +97,7 @@ public class MenuPause extends Activity {
 		setContentView(R.layout.activity_pause_menu);
 
 		//size of the font
-		float ratio = 45*getDisplayVector().y/ScreenGame.APPHEIGHT;
+		float ratio = 45 * getDisplayVector().y / GlobalSettings.APPHEIGHT;
 		
 		final View contentView = findViewById(R.id.fullscreen_content_pause);
 
