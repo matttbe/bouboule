@@ -1,20 +1,17 @@
 package be.ac.ucl.lfsab1509.bouboule.game;
 
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-//import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.TableLayout;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+
 
 public class MenuScreen extends AbstractScreen {
-	
-	private Table table;
+
+	//private Table table;
 
 	public MenuScreen()
 	{
@@ -26,42 +23,67 @@ public class MenuScreen extends AbstractScreen {
 	{
 		super.show();
 
-		// retrieve the custom skin for our 2D widgets
-		Skin skin = super.getSkin();
+		//Create all Buttons - Play Button
 
-		// create the table actor and add it to the stage
-		table = new Table( skin );
-		table.setWidth(stage.getWidth());
-		table.setHeight(stage.getHeight());
-		stage.addActor( table );
+		Button startGameButton = new Button(getSkin(), "transparent" );
 
-		// retrieve the table's layout
-		//TableLayout layout = table.getTableLayout();
-
-		// register the button "start game"
-		//TextButton startGameButton = new TextButton( "Start game", getSkin() );
-		
-		TextButton startGameButton = new TextButton( "transparent", getSkin(), "transparent" );
-		startGameButton.setWidth(400);
-		startGameButton.setHeight(400);
-		
-		
 		startGameButton.addListener( new ClickListener() {
+			public void clicked (InputEvent event, float x, float y) {
+				System.out.println("click " + x + ", " + y);
+				//START NEW GAME;
+			}
+		});			
+
+
+		//Parameter Button 
+
+		Button startGameButton2 = new Button(getSkin(), "transparent" );
+
+		startGameButton2.addListener( new ClickListener() {
+			public void clicked (InputEvent event, float x, float y) {
+				System.out.println("click " + x + ", " + y);
+				//START NEW GAME;
+			}
+		});
+
+
+		//HighScoreButton
+
+		Button startGameButton3 = new Button(getSkin(), "transparent" );
+
+		startGameButton3.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
 				System.out.println("click " + x + ", " + y);
 				//START NEW GAME;
 			}
 		});
 		
-		//startGameButton.setHeight(100);
-		//startGameButton.setPosition(100, 100);
-
-
-		startGameButton.setColor(Color.RED);
+		//Create Image for BackGround
 		
-		table.add(startGameButton);
+		Image img = new Image(new Texture("skin/bgmenu.png"));
 
-		//layout.register( "startGameButton", startGameButton );
+		//Set Buttons Position
+		//1
+		startGameButton.setSize(430, 160);
+		startGameButton.setX(200);
+		startGameButton.setY(725);
+		//2
+		startGameButton2.setSize(430, 160);
+		startGameButton2.setX(200);
+		startGameButton2.setY(555);
+		//3
+		startGameButton3.setSize(430, 160);
+		startGameButton3.setX(200);
+		startGameButton3.setY(385);
 		
+		
+
+		//Setting all the Buttons;
+		stage.addActor( img);
+		stage.addActor( startGameButton);
+		stage.addActor( startGameButton2);
+		stage.addActor( startGameButton3);
+
+
 	}
 }
