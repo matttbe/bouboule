@@ -27,14 +27,16 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  */
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 
 public class MenuScreen extends AbstractScreen {
@@ -70,6 +72,10 @@ public class MenuScreen extends AbstractScreen {
 		final ActionBouboul actionbouR = new ActionBouboul(true);
 		this.stage.addAction(actionbouR);
 		actionbouR.setActor(imgBoubouleR);
+		
+		Label titre = new Label("BouBoule",getSkin());
+		this.stage.addActor(titre);
+		titre.setFontScale(5);
 		
 		
 		Button playButton  		= createButton("transparent", 430, 160, 200, 725);
@@ -114,10 +120,11 @@ public class MenuScreen extends AbstractScreen {
 		private boolean right;
 		public ActionBouboul(boolean right) {
 			init();
+			position=-850f;
 			this.right=right;
 		}
 		public boolean act(float delta) {
-			position+= delta*1000f;
+			position+= delta*1100f;
 			if(position>=800f)position=800f;
 			if(right){
 				actor.setPosition(800f-position, (800f-position)/3.5f);
@@ -129,6 +136,23 @@ public class MenuScreen extends AbstractScreen {
 		
 		public void init(){
 			position = 0f;
+		}
+		
+	}
+	
+	private class ActionTitle extends Action{
+		private float timer;
+		
+		public ActionTitle(){
+			init();
+		}
+		public boolean act(float delta) {
+			timer = timer + delta;
+			return false;
+		}
+		
+		public void init(){
+			timer=0;
 		}
 		
 	}
