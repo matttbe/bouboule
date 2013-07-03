@@ -82,7 +82,8 @@ public class MainActivity extends AndroidApplication {
 	public void onBackPressed() {
 		// game.getScreen ().pause(); // will do that automatically
 		Gdx.app.log("Matth","Game should pause now !");
-		GlobalSettings.MENUS.launchPauseMenu();
+		if (GlobalSettings.GAME.isGameScreen())
+			GlobalSettings.MENUS.launchPauseMenu();
 	}
 
 	@Override
