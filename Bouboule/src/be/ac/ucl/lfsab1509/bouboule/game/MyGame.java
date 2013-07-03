@@ -220,6 +220,10 @@ public class MyGame extends Game implements ApplicationListener {
 			screenGame.resume();
 	}
 
+	public boolean isGameScreen() {
+		return getScreen() == screenGame;
+	}
+
 	/**
 	 * @return the music for the menu (create a new one if it doesn't exist)
 	 */

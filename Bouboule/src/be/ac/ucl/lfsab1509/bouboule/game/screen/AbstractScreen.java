@@ -85,7 +85,9 @@ public abstract class AbstractScreen implements Screen {
 			
 			@Override
 			public void run() {
-				getMusic().play();
+				// handle the case where we already return to the screen game (we have to be quick!)
+				if (! GlobalSettings.GAME.isGameScreen())
+					getMusic().play();
 			}
 		};
 		timerMusic.scheduleTask(task, seconds);
