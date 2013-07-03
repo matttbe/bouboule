@@ -7,8 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class ParamScreen extends AbstractScreen {
 
-	public ParamScreen(boolean bMusicNeedsDelay) {
-		super(bMusicNeedsDelay);
+	public ParamScreen() {
+		super(false); // without music delay
 	}
 
 	@Override

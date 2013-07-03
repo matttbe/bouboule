@@ -66,7 +66,7 @@ public class MenuScreen extends AbstractScreen {
 		paramButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
 				Gdx.app.log ("SCREEN", "clickParam " + x + ", " + y);
-				//TODO: setScreen(new ParamScreen());
+				GlobalSettings.GAME.setScreen(new ParamScreen());
 			}
 		});
 		
