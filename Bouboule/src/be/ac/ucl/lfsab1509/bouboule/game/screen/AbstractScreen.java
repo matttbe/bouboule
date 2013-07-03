@@ -7,10 +7,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
@@ -26,7 +28,6 @@ public abstract class AbstractScreen implements Screen {
 	private BitmapFont font;
 	private SpriteBatch batch;
 	private Skin skin;
-	private TextureAtlas atlas;
 
 	private Timer timerMusic;
 	private boolean bMusicNeedsDelay;
@@ -56,20 +57,30 @@ public abstract class AbstractScreen implements Screen {
 		return batch;
 	}
 
-	public TextureAtlas getAtlas() {
-		if (atlas == null) {
-			atlas = new TextureAtlas(
-					Gdx.files.internal("image-atlases/pages-info"));
-		}
-		return atlas;
-	}
-
 	protected Skin getSkin() {
 		if (skin == null) {
 			FileHandle skinFile = Gdx.files.internal("skin/uiskin.json");
 			skin = new Skin(skinFile);
 		}
 		return skin;
+	}
+	
+	protected Button createButton(String skinType, int sizeX, int sizeY, int x, int y) {
+		
+		Button button = new Button(getSkin(), skinType );
+		button.setSize(sizeX, sizeY);
+		button.setX(x);
+		button.setY(y);
+		
+		this.stage.addActor(button);
+		
+		return button;
+	}
+	
+	protected void addBackGround(String imagePath) {
+		Image img = new Image(new Texture(imagePath));
+		this.stage.addActor(img);
+		
 	}
 
 	protected Music getMusic() {
@@ -161,7 +172,5 @@ public abstract class AbstractScreen implements Screen {
 			batch.dispose();
 		if (skin != null)
 			skin.dispose();
-		if (atlas != null)
-			atlas.dispose();
 	}
 }
