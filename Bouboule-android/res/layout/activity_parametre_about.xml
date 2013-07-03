@@ -4,7 +4,7 @@
     style="@style/FullscreenTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuParametre_about"     
+    tools:context=".MenuParameters_about"     
     android:background="@drawable/settings_blanc" >
 	
     <ScrollView

@@ -199,7 +199,7 @@ public class Menu extends Activity {
 					break;
 					
 				case R.id.ParameterButton :
-					Intent intent = new Intent(Menu.this, MenuParametre.class);
+					Intent intent = new Intent(Menu.this, MenuParameters.class);
 					startActivity(intent);
 					break;
 				

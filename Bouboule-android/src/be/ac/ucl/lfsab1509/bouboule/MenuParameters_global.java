@@ -34,7 +34,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.*;
 
-public class MenuParametre_global extends Activity {
+public class MenuParameters_global extends Activity {
 
 	
 	private static Switch sound_switch;
@@ -82,9 +82,9 @@ public class MenuParametre_global extends Activity {
 			if (buttonView == sound_switch){
 				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeSoundSettings(!sound_switch.isChecked());
 				if (GlobalSettings.SOUND_IS_MUTED)
-					MyAndroidMenus.onStopMusic(MenuParametre_global.this);
+					MyAndroidMenus.onStopMusic(MenuParameters_global.this);
 				else
-					MyAndroidMenus.onResumeMusic(MenuParametre_global.this);
+					MyAndroidMenus.onResumeMusic(MenuParameters_global.this);
 			} else if (buttonView == rotate_switch){
 				GlobalSettings.PROFILE_MGR.getProfileGlobal ().changeFixedRotation(!rotate_switch.isChecked());
 			}

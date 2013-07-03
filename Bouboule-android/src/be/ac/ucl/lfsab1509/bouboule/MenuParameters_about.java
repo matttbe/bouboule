@@ -36,7 +36,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-public class MenuParametre_about extends Activity{
+public class MenuParameters_about extends Activity{
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {

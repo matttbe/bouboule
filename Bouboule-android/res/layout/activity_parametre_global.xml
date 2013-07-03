@@ -3,7 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        tools:context=".MenuParametre_global"     
+        tools:context=".MenuParameters_global"     
     	android:background="@drawable/settings_blanc" >
 	<ScrollView
 	    android:id="@+id/global_scrollView"

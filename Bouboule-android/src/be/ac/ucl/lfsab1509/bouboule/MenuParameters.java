@@ -34,7 +34,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class MenuParametre extends Activity {
+public class MenuParameters extends Activity {
 	
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -62,15 +62,15 @@ public class MenuParametre extends Activity {
 			switch (view.getId()) {
 				// start the activities according to the button pressed
 				case R.id.button_param_user :
-					intent = new Intent(MenuParametre.this, MenuParametre_user.class);
+					intent = new Intent(MenuParameters.this, MenuParametre_user.class);
 					startActivity(intent);
 					break;
 				case R.id.button_param_global :
-					intent = new Intent(MenuParametre.this, MenuParametre_global.class);
+					intent = new Intent(MenuParameters.this, MenuParameters_global.class);
 					startActivity(intent);
 					break;
 				case R.id.button_param_about :
-					intent = new Intent(MenuParametre.this, MenuParametre_about.class);
+					intent = new Intent(MenuParameters.this, MenuParameters_about.class);
 					startActivity(intent);
 					break;
 				default :
