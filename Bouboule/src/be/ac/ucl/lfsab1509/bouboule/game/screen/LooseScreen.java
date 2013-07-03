@@ -35,7 +35,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 
 
 public class LooseScreen extends AbstractScreen {
-	
+
 
 	public LooseScreen() {
 		super(true);
@@ -46,28 +46,46 @@ public class LooseScreen extends AbstractScreen {
 		super.show();
 
 		//Set Background
-		
+
 		addBackGround("drawable-xhdpi/you_lose.jpg");
+
 		
+		//Set Lives 
+		
+		switch (GlobalSettings.PROFILE.getNbLifes ()) {
+		case 3:
+			addBackGround("drawable-xhdpi/coeur3.png");
+			break;
+		case 2:
+			addBackGround("drawable-xhdpi/coeur2.png");
+			break;
+		case 1:
+			addBackGround("drawable-xhdpi/coeur1.png");
+			break;
+
+		default:
+			break;
+		}
+
 		//Create all Buttons - Play Button
-		
+
 		Button retryButton  = createButton("transparent", 290, 90, 63, 608);
 		Button menuButton = createButton("transparent", 290, 90, 448, 608);
-		
-		
+
+
 		retryButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
 				Gdx.app.log ("SCREEN", "clickStart " + x + ", " + y);
 				GlobalSettings.GAME.setScreenGame();
 			}
 		});
-		
+
 		menuButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
 				Gdx.app.log ("SCREEN", "clickParam " + x + ", " + y);
 				GlobalSettings.MENUS.launchInitMenu();
 			}
 		});
-		
+
 	}
 }

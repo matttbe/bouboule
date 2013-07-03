@@ -49,6 +49,22 @@ public class WinScreen extends AbstractScreen {
 		
 		addBackGround("drawable-xhdpi/you_win.jpg");
 		
+		//Set Lives
+		switch (GlobalSettings.PROFILE.getNbLifes ()) {
+		case 3:
+			addBackGround("drawable-xhdpi/coeur3.png");
+			break;
+		case 2:
+			addBackGround("drawable-xhdpi/coeur2.png");
+			break;
+		case 1:
+			addBackGround("drawable-xhdpi/coeur1.png");
+			break;
+
+		default:
+			break;
+		}
+		
 		//Create all Buttons - Play Button
 		
 		Button nextButton  = createButton("transparent", 290, 90, 63, 608);
