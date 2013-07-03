@@ -46,6 +46,7 @@ import com.badlogic.gdx.input.GestureDetector;
 public class MyGame extends Game implements ApplicationListener {
 
 	private ScreenGame screenGame;
+	private boolean bGdxMenus;
 	private Sound hitSounds[];
 	private boolean bNeedEndSounds;
 	private Sound winSound; // not used on Android
@@ -90,6 +91,7 @@ public class MyGame extends Game implements ApplicationListener {
 		}
 
 		if (GlobalSettings.MENUS == null) {
+			bGdxMenus = true;
 			GlobalSettings.MENUS = new GdxMenus();
 			GlobalSettings.MENUS.launchInitMenu();
 		}
@@ -171,7 +173,20 @@ public class MyGame extends Game implements ApplicationListener {
 	public void setScreenGame () {
 		if (screenGame == null)
 			screenGame = new ScreenGame();
-		setScreen(screenGame);
+		/*
+		 * We have to follow the same way when using Gdx and Android menus
+		 * This is what we have in ScreenGame when using Android menus:
+		 *  First Game: Show ; Resume ; (... countdown ...) ; Resume ; 
+		 *              (... end of the game ...) ; Hide ; Pause
+		 *  New Game:   Resume ; (then => @First Game)
+		 */
+		if (bGdxMenus) {
+			setScreenGameResume();
+			setScreen(screenGame);
+			setScreenGameResume();
+		}
+		else
+			setScreen(screenGame);
 	}
 
 	public void setScreenGameHide () {

@@ -47,9 +47,7 @@ public class MenuScreen extends AbstractScreen {
 		startGameButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "click " + x + ", " + y);
-				GlobalSettings.GAME.setScreenGameResume();
 				GlobalSettings.GAME.setScreenGame();
-				GlobalSettings.GAME.setScreenGameResume();
 			}
 		});
 		

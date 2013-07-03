@@ -14,8 +14,6 @@ public class ScreenMainMenu extends AbstractScreen {
 	public void show() {
 		super.show();
 		Gdx.app.log("SCREEN", "Main => GAME");
-		GlobalSettings.GAME.setScreenGameResume();
 		GlobalSettings.GAME.setScreenGame();
-		GlobalSettings.GAME.setScreenGameResume();
 	}
 }
