@@ -1,5 +1,7 @@
 package be.ac.ucl.lfsab1509.bouboule.game.screen;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
@@ -25,7 +27,6 @@ public abstract class AbstractScreen implements Screen {
 	private SpriteBatch batch;
 	private Skin skin;
 	private TextureAtlas atlas;
-	private Music music;
 
 	private Timer timerMusic;
 	private boolean bMusicNeedsDelay;
@@ -72,11 +73,7 @@ public abstract class AbstractScreen implements Screen {
 	}
 
 	protected Music getMusic() {
-		if (music == null) {
-			music = Gdx.audio.newMusic(Gdx.files.internal("music/sounds/menu.mp3"));
-			music.setLooping(true);
-		}
-		return music;
+		return GlobalSettings.GAME.getMenusMusic();
 	}
 
 	protected void playMusicWithDelay (float seconds) {
@@ -164,7 +161,5 @@ public abstract class AbstractScreen implements Screen {
 			skin.dispose();
 		if (atlas != null)
 			atlas.dispose();
-		if (music != null)
-			music.dispose();
 	}
 }

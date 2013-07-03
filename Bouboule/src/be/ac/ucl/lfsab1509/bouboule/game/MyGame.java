@@ -39,6 +39,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerMgr;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.input.GestureDetector;
@@ -47,11 +48,14 @@ public class MyGame extends Game implements ApplicationListener {
 
 	private ScreenGame screenGame;
 	private boolean bGdxMenus;
+
 	private Sound hitSounds[];
 	private boolean bNeedEndSounds;
 	private Sound winSound; // not used on Android
-	private Sound looseSound;
+	private Sound looseSound; // not used on Android
+	private Music menusMusic; // not used on Android
 	private Sound countdownSound;
+
 	private Random rand;
 	private LevelLoader level;
 
@@ -111,6 +115,8 @@ public class MyGame extends Game implements ApplicationListener {
 			winSound.dispose();
 			looseSound.dispose();
 		}
+		if (menusMusic != null)
+			menusMusic.dispose();
 		countdownSound.dispose();
 	}
 	
@@ -170,6 +176,12 @@ public class MyGame extends Game implements ApplicationListener {
 		return level;
 	}
 
+	/**
+	 * Switch to our 'Game' screen. Create it if it's the first time that we
+	 * use it.
+	 * If GdxMenus are used, stop the music (for the menus) first and send
+	 *  'Resume' signal to correctly use screenGame
+	 */
 	public void setScreenGame () {
 		if (screenGame == null)
 			screenGame = new ScreenGame();
@@ -181,6 +193,10 @@ public class MyGame extends Game implements ApplicationListener {
 		 *  New Game:   Resume ; (then => @First Game)
 		 */
 		if (bGdxMenus) {
+			if (menusMusic != null) { // stop the music and free the allocated memory
+				menusMusic.dispose();
+				menusMusic = null;
+			}
 			setScreenGameResume();
 			setScreen(screenGame);
 			setScreenGameResume();
@@ -202,5 +218,16 @@ public class MyGame extends Game implements ApplicationListener {
 	public void setScreenGameResume () {
 		if (screenGame != null)
 			screenGame.resume();
+	}
+
+	/**
+	 * @return the music for the menu (create a new one if it doesn't exist)
+	 */
+	public Music getMenusMusic () {
+		if (menusMusic == null) {
+			menusMusic = Gdx.audio.newMusic(Gdx.files.internal("music/sounds/menu.mp3"));
+			menusMusic.setLooping(true);
+		}
+		return menusMusic;
 	}
 }
