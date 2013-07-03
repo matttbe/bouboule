@@ -75,8 +75,12 @@ public class MenuScreen extends AbstractScreen {
 		
 		Label titre = new Label("BouBoule",getSkin());
 		this.stage.addActor(titre);
-		titre.setFontScale(5);
+		titre.setFontScale(4f);
+		titre.setPosition(100, 1000);
 		
+		final ActionTitle actiontitre = new ActionTitle();
+		this.stage.addAction(actiontitre);
+		actiontitre.setActor(titre);
 		
 		Button playButton  		= createButton("transparent", 430, 160, 200, 725);
 		Button paramButton 		= createButton("transparent", 430, 160, 200, 555);
@@ -142,12 +146,20 @@ public class MenuScreen extends AbstractScreen {
 	
 	private class ActionTitle extends Action{
 		private float timer;
-		
 		public ActionTitle(){
 			init();
 		}
 		public boolean act(float delta) {
+			Label temp = (Label) actor;
 			timer = timer + delta;
+			if(timer < 1){
+				temp.setFontScale(4.0f+timer*0.5f);
+			}else if(timer < 2){
+				temp.setFontScale(5.0f-timer*0.5f);
+			}else if(timer < 2.5f){
+			}else{
+				timer=0;
+			}
 			return false;
 		}
 		
