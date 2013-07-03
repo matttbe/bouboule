@@ -37,8 +37,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 public class LooseScreen extends AbstractScreen {
 	
 
-	public LooseScreen(boolean bMusicNeedsDelay) {
-		super(bMusicNeedsDelay);
+	public LooseScreen() {
+		super(true);
 	}
 
 	@Override

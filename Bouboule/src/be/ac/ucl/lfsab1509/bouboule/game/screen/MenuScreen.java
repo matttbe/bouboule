@@ -37,8 +37,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 public class MenuScreen extends AbstractScreen {
 	
 
-	public MenuScreen(boolean bMusicNeedsDelay) {
-		super(bMusicNeedsDelay);
+	public MenuScreen() {
+		super(false);
 	}
 
 	@Override

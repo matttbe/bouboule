@@ -37,8 +37,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 public class GameOverScreen extends AbstractScreen {
 	
 
-	public GameOverScreen(boolean bMusicNeedsDelay) {
-		super(bMusicNeedsDelay);
+	public GameOverScreen() {
+		super(true);
 	}
 
 	@Override

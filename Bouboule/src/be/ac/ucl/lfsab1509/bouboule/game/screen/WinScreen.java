@@ -37,8 +37,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 public class WinScreen extends AbstractScreen {
 	
 
-	public WinScreen(boolean bMusicNeedsDelay) {
-		super(bMusicNeedsDelay);
+	public WinScreen() {
+		super(true);
 	}
 
 	@Override

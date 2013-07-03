@@ -40,7 +40,7 @@ public class GdxMenus implements Menus {
 	@Override
 	public void launchInitMenu() {
 		Gdx.app.log ("Matth", "GdxMenus: InitMenu: " + GlobalSettings.GAME_EXIT);
-		GlobalSettings.GAME.setScreen(new MenuScreen(false));
+		GlobalSettings.GAME.setScreen(new MenuScreen());
 	}
 
 	@Override
@@ -54,19 +54,19 @@ public class GdxMenus implements Menus {
 				return;
 			case WIN :
 				GlobalSettings.GAME.winSound();
-				GlobalSettings.GAME.setScreen(new WinScreen(true));
+				GlobalSettings.GAME.setScreen(new WinScreen());
 				break;
 			case LOOSE :
 				GlobalSettings.GAME.looseSound();
-				GlobalSettings.GAME.setScreen(new LooseScreen(true));
+				GlobalSettings.GAME.setScreen(new LooseScreen());
 				break;
 			case GAMEOVER_LOOSE :
 				GlobalSettings.GAME.looseSound();
-				GlobalSettings.GAME.setScreen(new GameOverScreen(true));
+				GlobalSettings.GAME.setScreen(new GameOverScreen());
 				break;
 			case GAMEOVER_END :
 				GlobalSettings.GAME.winSound();
-				GlobalSettings.GAME.setScreen(new GameOverScreen(true));
+				GlobalSettings.GAME.setScreen(new GameOverScreen());
 				break;
 		}
 	}
