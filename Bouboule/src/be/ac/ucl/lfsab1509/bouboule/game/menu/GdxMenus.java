@@ -3,8 +3,11 @@ package be.ac.ucl.lfsab1509.bouboule.game.menu;
 import com.badlogic.gdx.Gdx;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.screen.GameOverScreen;
+import be.ac.ucl.lfsab1509.bouboule.game.screen.LooseScreen;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.MenuScreen;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenMainMenu;
+import be.ac.ucl.lfsab1509.bouboule.game.screen.WinScreen;
 
 /*
  * This file is part of Bouboule.
@@ -43,6 +46,7 @@ public class GdxMenus implements Menus {
 	@Override
 	public void launchEndGameMenu() {
 		Gdx.app.log ("Matth", "GdxMenus: EndGameMenu: " + GlobalSettings.GAME_EXIT);
+		// we need a pause to call the same methods that when using Android menus
 		GlobalSettings.GAME.setScreenGamePause();
 		switch (GlobalSettings.GAME_EXIT)
 		{
@@ -50,18 +54,21 @@ public class GdxMenus implements Menus {
 				return;
 			case WIN :
 				GlobalSettings.GAME.winSound();
+				GlobalSettings.GAME.setScreen(new WinScreen(true));
 				break;
 			case LOOSE :
 				GlobalSettings.GAME.looseSound();
+				GlobalSettings.GAME.setScreen(new LooseScreen(true));
 				break;
 			case GAMEOVER_LOOSE :
 				GlobalSettings.GAME.looseSound();
+				GlobalSettings.GAME.setScreen(new GameOverScreen(true));
 				break;
 			case GAMEOVER_END :
 				GlobalSettings.GAME.winSound();
+				GlobalSettings.GAME.setScreen(new GameOverScreen(true));
 				break;
 		}
-		GlobalSettings.GAME.setScreen(new MenuScreen(true));
 	}
 
 	@Override
