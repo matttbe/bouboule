@@ -50,6 +50,7 @@ public class AI {
 	public static boolean IS_INIT;
 	//invert Axes
 	private static float AXE_POSITION = -1;
+	public static float INIT_ORIENTATION = 1;
 	//Acceleration constant (speed of game)
 	private static final float K_ACC_DEFAULT = 6f;
 	private static float K_ACC = K_ACC_DEFAULT;
@@ -382,8 +383,8 @@ public class AI {
 
 	//compute the player movement
 	private static Vector2 gyroscope(){
-		float accelX = Gdx.input.getAccelerometerX() * AXE_POSITION;
-		float accelY = Gdx.input.getAccelerometerY() * AXE_POSITION;
+		float accelX = Gdx.input.getAccelerometerX() * AXE_POSITION * INIT_ORIENTATION;
+		float accelY = Gdx.input.getAccelerometerY() * AXE_POSITION * INIT_ORIENTATION;
 		Vector2 Acc= new Vector2(accelX, accelY);
 		float div = (GlobalSettings.SENSITIVITY_MAX + // old: 1200 - 500 = 750 ; new: 650+350 - 500 = 500, ok?
 				GlobalSettings.SENSITIVITY_MIN -

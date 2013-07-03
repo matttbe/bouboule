@@ -27,11 +27,13 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  */
 
 
+import be.ac.ucl.lfsab1509.bouboule.game.ai.AI;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
@@ -56,6 +58,8 @@ public class ScreenGame implements Screen {
 		loopMusic.setLooping(true);
 
 		game = new GameLoop(GlobalSettings.GAME.getCamera(), true);
+		if (Gdx.app.getType() == ApplicationType.iOS) // axes are inverted in iOS!
+			AI.INIT_ORIENTATION = -1;
 	}
 
 	@Override
