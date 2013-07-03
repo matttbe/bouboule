@@ -29,9 +29,12 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 
 public class MenuScreen extends AbstractScreen {
@@ -51,9 +54,28 @@ public class MenuScreen extends AbstractScreen {
 		
 		//Create all Buttons - Play Button
 		
-		Button playButton  = createButton("transparent", 430, 160, 200, 725);
-		Button paramButton = createButton("transparent", 430, 160, 200, 555);
-		Button scoreButton = createButton("transparent", 430, 160, 200, 385);
+		
+		
+		Image imgBoubouleR = new Image(new Texture("drawable-xhdpi/boubouleright.png"));
+		Image imgBoubouleL = new Image(new Texture("drawable-xhdpi/boubouleleft.png"));
+		this.stage.addActor(imgBoubouleR);
+		this.stage.addActor(imgBoubouleL);
+		imgBoubouleL.setPosition(-800, 0);
+		imgBoubouleR.setPosition(800, 0);
+		
+		final ActionBouboul actionbouL = new ActionBouboul(false);
+		this.stage.addAction(actionbouL);
+		actionbouL.setActor(imgBoubouleL);
+		
+		final ActionBouboul actionbouR = new ActionBouboul(true);
+		this.stage.addAction(actionbouR);
+		actionbouR.setActor(imgBoubouleR);
+		
+		
+		Button playButton  		= createButton("transparent", 430, 160, 200, 725);
+		Button paramButton 		= createButton("transparent", 430, 160, 200, 555);
+		Button scoreButton 		= createButton("transparent", 430, 160, 200, 385);
+		Button boubouleButton	= createButton("transparent", 500, 350, 200, 0);
 		
 		
 		playButton.addListener( new ClickListener() {
@@ -66,7 +88,7 @@ public class MenuScreen extends AbstractScreen {
 		paramButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
 				Gdx.app.log ("SCREEN", "clickParam " + x + ", " + y);
-				GlobalSettings.GAME.setScreen(new ParamScreen());
+				//TODO: setScreen(new ParamScreen());
 			}
 		});
 		
@@ -76,6 +98,38 @@ public class MenuScreen extends AbstractScreen {
 				//TODO: setScreen(new HighScreen()); // or something else
 			}
 		});
+		
+		boubouleButton.addListener( new ClickListener() {
+			public void clicked (InputEvent event, float x, float y) {
+				Gdx.app.log ("SCREEN", "clickBouboule " + x + ", " + y);
+				actionbouL.init();
+				actionbouR.init();
+			}
+		});
 
+	}
+	
+	private class ActionBouboul extends Action {
+		private float position;
+		private boolean right;
+		public ActionBouboul(boolean right) {
+			position = -400;
+			this.right=right;
+		}
+		public boolean act(float delta) {
+			position+= delta*550;
+			if(position>=800)position=800;
+			if(right){
+				actor.setPosition(800-position, 800-position);
+			}else{
+				actor.setPosition(-800+position, 800-position);
+			}
+			return false;
+		}
+		
+		public void init(){
+			position = -400;
+		}
+		
 	}
 }
