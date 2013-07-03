@@ -51,31 +51,23 @@ public class LooseScreen extends AbstractScreen {
 		
 		//Create all Buttons - Play Button
 		
-		Button playButton  = createButton("transparent", 430, 160, 200, 725);
-		Button paramButton = createButton("transparent", 430, 160, 200, 555);
-		Button scoreButton = createButton("transparent", 430, 160, 200, 385);
+		Button retryButton  = createButton("transparent", 290, 90, 63, 608);
+		Button menuButton = createButton("transparent", 290, 90, 448, 608);
 		
 		
-		playButton.addListener( new ClickListener() {
+		retryButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
 				Gdx.app.log ("SCREEN", "clickStart " + x + ", " + y);
 				GlobalSettings.GAME.setScreenGame();
 			}
 		});
 		
-		paramButton.addListener( new ClickListener() {
+		menuButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
 				Gdx.app.log ("SCREEN", "clickParam " + x + ", " + y);
-				//TODO: setScreen(new ParamScreen());
+				GlobalSettings.MENUS.launchInitMenu();
 			}
 		});
 		
-		scoreButton.addListener( new ClickListener() {
-			public void clicked (InputEvent event, float x, float y) {
-				Gdx.app.log ("SCREEN", "clickScore " + x + ", " + y);
-				//TODO: setScreen(new HighScreen()); // or something else
-			}
-		});
-
 	}
 }
