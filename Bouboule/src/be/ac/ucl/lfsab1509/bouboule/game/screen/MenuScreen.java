@@ -30,6 +30,8 @@ import java.text.Normalizer;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.HighScoreInfo;
+import be.ac.ucl.lfsab1509.bouboule.game.profile.Profile;
+import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileGlobal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -230,9 +232,17 @@ public class MenuScreen extends AbstractScreen {
 			} else {
 				//4)restart
 				timer = timer-5.0f;
+				
+				String name;
+				if(MathUtils.random(2)==0){
+					name="BOUBOULE";
+				}else{
+					name=normaliseTextForTitle(GlobalSettings.PROFILE.getName());
+				}
+				
 				switch (MathUtils.random(7)) {
 				case 0:
-					temp.setText("HELLO\n BOUBOULE");
+					temp.setText("HELLO\n"+name);
 					break;
 				case 1:
 					temp.setText("MAY THE\nBOUBOULE BE\nWITH YOU");
@@ -244,10 +254,10 @@ public class MenuScreen extends AbstractScreen {
 					temp.setText("KICK THEM\n ALL!");
 					break;
 				case 4:
-					temp.setText("WELCOME TO\n BOUBOULE");
+					temp.setText("WELCOME TO\n" + name);
 					break;
 				case 5:
-					temp.setText("BOUBOULE\nIS GREAT");
+					temp.setText(""+name+"\nIS GREAT");
 					break;
 				default:
 					temp.setText("BOUBOULE");
@@ -257,6 +267,11 @@ public class MenuScreen extends AbstractScreen {
 			
 			//center the title
 			temp.setPosition(GlobalSettings.APPWIDTH/2.0f-temp.getTextBounds().width/2, 950);
+
+
+			//wrapper.setTransform(true);
+			//wrapper.setOrigin(wrapper.getPrefWidth() / 2, wrapper.getPrefHeight() / 2);
+			//wrapper.setRotation(45);
 			return false;
 		}
 
