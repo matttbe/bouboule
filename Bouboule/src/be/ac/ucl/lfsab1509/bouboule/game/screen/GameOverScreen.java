@@ -72,7 +72,7 @@ public class GameOverScreen extends AbstractScreen {
 
 		Label label = addLabel(
 				Integer.toString(GlobalSettings.PROFILE.getEndGameScore()),
-				"osaka-font", new Color(1f, 1f, 1f, 1f), 0, 700);
+				"chinyen-font", 0.7f, new Color(1f, 1f, 1f, 1f), 0, 625);
 
 		label.setX(GlobalSettings.APPWIDTH / 2f - 
 				label.getTextBounds().width / 2f);

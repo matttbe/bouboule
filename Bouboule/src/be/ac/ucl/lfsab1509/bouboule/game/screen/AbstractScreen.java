@@ -98,14 +98,15 @@ public abstract class AbstractScreen implements Screen {
 		return skin;
 	}
 
-	protected Label addLabel(String text, String fontName, Color color, int x,
-			int y) {
+	protected Label addLabel(String text, String fontName, float scale,
+			Color color, int x, int y) {
 
 		Label label = new Label(text, getSkin(), fontName, color);
 		label.setX(x);
 		label.setY(y);
+		label.setFontScale(scale);
 		stage.addActor(label);
-		
+
 		return label;
 	}
 
@@ -166,10 +167,16 @@ public abstract class AbstractScreen implements Screen {
 		});
 	}
 
-	protected void addBackGround(String imagePath) {
-		Image img = new Image(new Texture(imagePath));
-		this.stage.addActor(img);
+	protected Image addBackGround(String imagePath) {
+		return addImage(imagePath, 0, 0);
 
+	}
+	
+	protected Image addImage(String imagePath, int x, int y) {
+		Image img = new Image(new Texture(imagePath));
+		img.setPosition(x, y);
+		this.stage.addActor(img);
+		return img;
 	}
 
 	protected Music getMusic() {

@@ -29,8 +29,6 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -52,16 +50,10 @@ public class MenuScreen extends AbstractScreen {
 
 		addBackGround("drawable-xhdpi/bgmenu.jpg");
 
-		// Create the 2 bouboules out of the screen
+		// Create the 2 Bouboules out of the screen
 
-		Image imgBoubouleR = new Image(new Texture(
-				"drawable-xhdpi/boubouleright.png"));
-		Image imgBoubouleL = new Image(new Texture(
-				"drawable-xhdpi/boubouleleft.png"));
-		this.stage.addActor(imgBoubouleR);
-		this.stage.addActor(imgBoubouleL);
-		imgBoubouleL.setPosition(-800, 0);
-		imgBoubouleR.setPosition(800, 0);
+		Image imgBoubouleR = addImage("drawable-xhdpi/boubouleright.png",800,0);
+		Image imgBoubouleL = addImage("drawable-xhdpi/boubouleleft.png",-800,0);
 
 		
 		//add action on the bouboule
@@ -74,15 +66,15 @@ public class MenuScreen extends AbstractScreen {
 		actionbouR.setActor(imgBoubouleR);
 
 		//add the title
-		Label title = new Label("BouBoule", getSkin());
-		this.stage.addActor(title);
-		title.setFontScale(4f);
-		title.setPosition(100, 1000);
+		Label title = 
+				addLabel("BOUBOULE", "darktimes-font", 1f, Color.WHITE,
+				100, 1000);
 
-		//add action on the title
+		/*add action on the title
 		final ActionTitle actiontitre = new ActionTitle();
 		this.stage.addAction(actiontitre);
 		actiontitre.setActor(title);
+		TODO: UPDATE THE ANIMATION*/
 
 		//Add 5 button transparent
 		Button playButton = createButton("transparent", 430, 160, 200, 725);
@@ -124,7 +116,7 @@ public class MenuScreen extends AbstractScreen {
 		titleButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickBouboule " + x + ", " + y);
-				actiontitre.init();
+				/*actiontitre.init();  TODO:UPDAZTE THE ANAMATION*/
 			}
 		});
 
@@ -134,12 +126,12 @@ public class MenuScreen extends AbstractScreen {
 		private float position;
 		private boolean right;
 
-		//contructor of Action
+		//Constructor of Action
 		public ActionBouboul(boolean right) {
 			init();
 			//initial position
 			position = -850f;
-			//true if it's the action for the right bouboule 
+			//true if it's the action for the right Bouboule 
 			this.right = right;
 		}
 
@@ -148,7 +140,7 @@ public class MenuScreen extends AbstractScreen {
 			//max position 800f
 			if (position >= 800f)
 				position = 800f;
-			// set position for the right and left bouboule
+			// set position for the right and left Bouboule
 			if (right) {
 				actor.setPosition(800f - position, (800f - position) / 3.5f);
 			} else {
@@ -158,14 +150,14 @@ public class MenuScreen extends AbstractScreen {
 		}
 
 		
-		//reset the position when the player push on the bouboule
+		//reset the position when the player push on the Bouboule
 		public void init() {
 			position = 0f;
 		}
 
 	}
 
-	private class ActionTitle extends Action {
+	/*private class ActionTitle extends Action {
 		private float timer;
 
 		public ActionTitle() {
@@ -175,7 +167,7 @@ public class MenuScreen extends AbstractScreen {
 		public boolean act(float delta) {
 			Label temp = (Label) actor;
 			timer = timer + delta;
-			//variable qui exprime la durée depuis la période
+			//var witch set the time since the period
 			float temptimer;
 			
 			if (timer < 1.0f) {
@@ -200,7 +192,7 @@ public class MenuScreen extends AbstractScreen {
 				//change the title randomly.
 			}
 			
-			//centre the title
+			//center the title
 			temp.setPosition(GlobalSettings.APPWIDTH/2.0f-temp.getTextBounds().width/2, 1000);
 			return false;
 		}
@@ -210,5 +202,5 @@ public class MenuScreen extends AbstractScreen {
 			timer = 0.0f;
 		}
 
-	}
+	}*/
 }

@@ -93,7 +93,8 @@ public class WinScreen extends AbstractScreen {
 
 		// Set Font
 		addLabel(Integer.toString(GlobalSettings.PROFILE.getScore()),
-				"osaka-font", new Color(0f, 0f, 0f, 0.85f), 200, 750);
+				"osakaBig-font", 0.27f, new Color(0.2f, 0.188f, 0.094f, 1f),
+				200, 703);
 
 	}
 }
