@@ -33,6 +33,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.profile.HighScoreInfo;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -75,11 +76,10 @@ public class MenuScreen extends AbstractScreen {
 				addLabel("BOUBOULE", "darktimes-font", 1f, Color.WHITE,
 				100, 1000);
 
-		/*add action on the title
+		//add action on the title
 		final ActionTitle actiontitre = new ActionTitle();
 		this.stage.addAction(actiontitre);
 		actiontitre.setActor(title);
-		TODO: @Baptiste: UPDATE THE ANIMATION*/
 
 		//Add 5 button transparent
 		Button playButton = createButton("transparent", 430, 160, 200, 725);
@@ -124,7 +124,7 @@ public class MenuScreen extends AbstractScreen {
 		titleButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickBouboule " + x + ", " + y);
-				/*actiontitre.init();  TODO: @BAPTISTE: UPDATE THE ANIMATION*/
+				actiontitre.init();
 			}
 		});
 
@@ -198,7 +198,7 @@ public class MenuScreen extends AbstractScreen {
 
 	}
 
-	/*private class ActionTitle extends Action {
+	private class ActionTitle extends Action {
 		private float timer;
 
 		public ActionTitle() {
@@ -214,7 +214,7 @@ public class MenuScreen extends AbstractScreen {
 			if (timer < 1.0f) {
 				//1) emergence during 1sec
 				temptimer=timer;
-				temp.setFontScale(0.5f + temptimer * 3.5f);
+				temp.setFontScale(0.0f + temptimer * 0.6f);
 			} else if (timer < 4.0f) {
 				//2)beat during 3 sec
 				temptimer=timer % 1.0f;
@@ -222,19 +222,41 @@ public class MenuScreen extends AbstractScreen {
 				}else{
 					temptimer = 1f-temptimer;
 				}
-				temp.setFontScale(4.0f + temptimer * 0.5f);
+				temp.setFontScale(0.6f + temptimer * 0.1f);
 			} else if (timer < 5.0f) {
 				//3) extinction during 1sec
 				temptimer=timer-4.0f;
-				temp.setFontScale(4.0f - temptimer * 3.5f);
+				temp.setFontScale(0.6f - temptimer * 0.6f);
 			} else {
 				//4)restart
 				timer = timer-5.0f;
-				//change the title randomly.
+				switch (MathUtils.random(7)) {
+				case 0:
+					temp.setText("HELLO\n BOUBOULE");
+					break;
+				case 1:
+					temp.setText("MAY THE\nBOUBOULE BE\nWITH YOU");
+					break;
+				case 2:
+					temp.setText("BIG BOUBOULE\nIS WATCHING\n YOU");
+					break;
+				case 3:
+					temp.setText("KICK THEM\n ALL!");
+					break;
+				case 4:
+					temp.setText("WELCOME TO\n BOUBOULE");
+					break;
+				case 5:
+					temp.setText("BOUBOULE\nIS GREAT");
+					break;
+				default:
+					temp.setText("BOUBOULE");
+					break;
+				}
 			}
 			
 			//center the title
-			temp.setPosition(GlobalSettings.APPWIDTH/2.0f-temp.getTextBounds().width/2, 1000);
+			temp.setPosition(GlobalSettings.APPWIDTH/2.0f-temp.getTextBounds().width/2, 950);
 			return false;
 		}
 
@@ -243,5 +265,5 @@ public class MenuScreen extends AbstractScreen {
 			timer = 0.0f;
 		}
 
-	}*/
+	}
 }
