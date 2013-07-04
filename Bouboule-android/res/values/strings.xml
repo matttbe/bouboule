@@ -50,6 +50,7 @@
     <string name="global_rotate_off">No rotation</string>
     <string name="global_rotate_on">Rotation On</string>
     <string name="global_sensitivity">Sensitivity:</string>
+    <string name="global_bonus">Bonus:</string>
     
     <!-- Menu Parameters_about -->
     <string name="about_nameapp">App\'s name:</string>

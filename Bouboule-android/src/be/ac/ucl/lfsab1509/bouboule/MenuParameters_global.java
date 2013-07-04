@@ -26,21 +26,55 @@ package be.ac.ucl.lfsab1509.bouboule;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.MotionEvent;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
 import android.widget.*;
+import android.widget.ViewSwitcher.ViewFactory;
 
-public class MenuParameters_global extends Activity {
+public class MenuParameters_global extends Activity implements ViewFactory {
 
 	
-	private static Switch sound_switch;
-	private static Switch rotate_switch;
-	private static SeekBar sensitivity_seekbar;
+	private Switch sound_switch;
+	private Switch rotate_switch;
+	private SeekBar sensitivity_seekbar;
+	private ImageSwitcher switcherBonus;
+	private TextView bonusDescription;
+
+	private String[][] bonusInfo = {
+			{"bonus/elasticity/elasticity_high.png", "Collision are more elastic"},
+			{"bonus/elasticity/elasticity_low.png",  "Collision are less elastic"},
+			{"bonus/heart/heart.png", "One more life"},
+			{"bonus/inverse/inverse.png", "The axes are inverted"},
+			{"bonus/invincible/invincible.png", "Bouboule is invincible"},
+			{"bonus/invisible/invisible.png", "Bouboule is invisible"},
+			{"bonus/speed/speed_high.png", "Bouboule runs faster"},
+			{"bonus/speed/speed_low.png", "Bouboule runs slower"},
+			{"bonus/star/star.png", "More points"},
+			{"bonus/time/timeup.png", "More time before the end of the game"},
+			{"bonus/time/timedown.png", "Less time before the end of the game"},
+			{"bonus/weight/weight_high.png", "Bouboule is heavier"},
+			{"bonus/weight/weight_low.png", "Bouboule is lighter"}
+		};
 	
+	private int currId = 0, downX, upX; // needed for the switcherBonus
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,8 +106,57 @@ public class MenuParameters_global extends Activity {
 		((TextView) findViewById(R.id.global_sound_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.global_rotate_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.global_sensitivity_txt)).setTypeface(myTypeface);
+		((TextView) findViewById(R.id.global_bonus_txt)).setTypeface(myTypeface);
+
+		bonusDescription = ((TextView) findViewById(R.id.global_bonus_description));
 		
-		
+		// Bonus: imageview
+		switcherBonus = (ImageSwitcher) findViewById(R.id.imageSwitcher);
+		switcherBonus.setFactory((ViewFactory) this);
+		switcherBonus.setInAnimation(AnimationUtils.loadAnimation(this,
+				android.R.anim.fade_in));
+		switcherBonus.setOutAnimation(AnimationUtils.loadAnimation(this,
+				android.R.anim.fade_out));
+		switcherBonus.setImageDrawable(getDrawableBonus(0)); // set first image
+		setTextBonus();
+
+		switcherBonus.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					downX = (int) event.getX();
+					Log.d("Matth", " downX " + downX);
+					return true;
+				}
+				else if (event.getAction() == MotionEvent.ACTION_UP) {
+					upX = (int) event.getX();
+					Log.i("Matth", " upX " + upX);
+
+					if (upX - downX > 100) {
+						// curIndex current image index in array viewed by user
+						currId--;
+						if (currId < 0) {
+							currId = bonusInfo.length - 1;
+						}
+
+						switcherBonus.setImageDrawable(getDrawableBonus(currId));
+						setTextBonus();
+					}
+
+					else if (downX - upX > -100) {
+
+						currId++;
+						if (currId > 4) {
+							currId = 0;
+						}
+						switcherBonus.setImageDrawable(getDrawableBonus(currId));
+						setTextBonus();
+					}
+					return true;
+				}
+				return false;
+			}
+		});
 	}
 	
 	// listener for the switchs
@@ -111,5 +194,40 @@ public class MenuParameters_global extends Activity {
 	protected void onResume () {
 		super.onResume ();
 		MyAndroidMenus.onResumeMusic (this);
+	}
+
+	// BONUS
+
+	private Drawable getDrawableBonus (int id) {
+		InputStream inputStream = null;
+		Drawable drawable = null;
+		try {
+			inputStream = getAssets().open(bonusInfo[id][0]);
+			Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+			drawable = new BitmapDrawable(this.getResources(), bitmap);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (inputStream != null)
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+		return drawable;
+	}
+
+	public void setTextBonus() {
+		bonusDescription.setText(bonusInfo[currId][1]);
+	}
+
+	@Override
+	public View makeView() {
+		ImageView iView = new ImageView(this);
+		iView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		iView.setLayoutParams(new ImageSwitcher.LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		return iView;
 	}
 }

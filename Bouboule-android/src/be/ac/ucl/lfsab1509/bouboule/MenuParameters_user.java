@@ -199,20 +199,19 @@ public class MenuParameters_user extends Activity {
 		else
 			size = "small";
 		
-		InputStream bitmap=null;
+		InputStream bitmap = null;
 
 		try {
-		    bitmap=getAssets().open("boub/" + size + "/" + name + ".png");
-		    Bitmap bit=BitmapFactory.decodeStream(bitmap);
-		    view.setImageBitmap(bit);
+			bitmap = getAssets().open("boub/" + size + "/" + name + ".png");
+			Bitmap bit = BitmapFactory.decodeStream(bitmap);
+			view.setImageBitmap(bit);
 		} catch (IOException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		} finally {
-		    if(bitmap!=null)
+			if (bitmap != null)
 				try {
 					bitmap.close();
 				} catch (IOException e) {
-					
 					e.printStackTrace();
 				}
 		}
