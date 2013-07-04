@@ -33,6 +33,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -145,6 +146,7 @@ public class MenuParameters_global extends Activity {
 			TextView descriptionView = new TextView(this); // a description
 			descriptionView.setLayoutParams(rowParams);
 			descriptionView.setText(bonus[1]);
+			descriptionView.setShadowLayer(1, 1, 1, Color.BLACK);
 			row.addView(descriptionView);
 
 			table.addView(row);
