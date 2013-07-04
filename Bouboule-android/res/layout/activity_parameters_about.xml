@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MenuParameters_about"     
-    android:background="@drawable/settings_blanc" >
+    android:background="@drawable/settings_blank" >
 	
     <ScrollView
 	    android:id="@+id/about_scrollView"
