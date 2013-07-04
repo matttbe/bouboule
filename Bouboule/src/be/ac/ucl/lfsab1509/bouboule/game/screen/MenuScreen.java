@@ -76,6 +76,8 @@ public class MenuScreen extends AbstractScreen {
 				0, 950);
 		title.setAlignment(Align.center); // center
 		title.setWidth(GlobalSettings.APPWIDTH);
+		title.setColor(.388f, .733f, .984f, 1f); // menu color
+		// title.setColor(.2f, .7098f, .898f, 1f);  // android color
 
 		// add action on the title
 		final ActionTitle actiontitle = new ActionTitle();
