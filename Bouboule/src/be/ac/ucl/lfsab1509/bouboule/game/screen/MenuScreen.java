@@ -133,8 +133,7 @@ public class MenuScreen extends AbstractScreen {
 	}
 
 	/**
-	 * @param text
-	 *            Text to be nomalise
+	 * @param text Text to be nomalise
 	 * @return a 'normalised' text (without special chars)
 	 */
 	private String normaliseTextForTitle(String text) {
@@ -207,6 +206,7 @@ public class MenuScreen extends AbstractScreen {
 
 	private class ActionTitle extends Action {
 		private float timer;
+		private int oldRand = 0; // to not display the same name twice, we start with Bouboule
 
 		public ActionTitle() {
 			init();
@@ -260,11 +260,15 @@ public class MenuScreen extends AbstractScreen {
 
 		private void changeName() {
 			Label label = (Label) actor;
-			String name;
 
-			switch (MathUtils.random(8)) {
+			int newRand;
+			while ((newRand = MathUtils.random(8)) == oldRand); // we need a new number
+
+			oldRand = newRand;
+			switch (newRand) {
 			case 0:
-				name = normaliseTextForTitle(GlobalSettings.PROFILE.getName().toUpperCase());
+				String name = normaliseTextForTitle(
+						GlobalSettings.PROFILE.getName().toUpperCase());
 				label.setText("HELLO\n" + name);
 				break;
 			case 1:
@@ -278,10 +282,6 @@ public class MenuScreen extends AbstractScreen {
 				break;
 			case 4:
 				label.setText("WELCOME TO\nBOUBOULE");
-				break;
-			case 5:
-				name = normaliseTextForTitle(GlobalSettings.PROFILE.getName().toUpperCase());
-				label.setText(name + "\nWELCOME");
 				break;
 			case 6:
 				label.setText("BOUBOULE\nIS GREAT");
