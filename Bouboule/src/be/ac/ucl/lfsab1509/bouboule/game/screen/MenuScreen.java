@@ -26,13 +26,18 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.text.Normalizer;
+
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.profile.HighScoreInfo;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
@@ -74,7 +79,7 @@ public class MenuScreen extends AbstractScreen {
 		final ActionTitle actiontitre = new ActionTitle();
 		this.stage.addAction(actiontitre);
 		actiontitre.setActor(title);
-		TODO: UPDATE THE ANIMATION*/
+		TODO: @Baptiste: UPDATE THE ANIMATION*/
 
 		//Add 5 button transparent
 		Button playButton = createButton("transparent", 430, 160, 200, 725);
@@ -101,7 +106,10 @@ public class MenuScreen extends AbstractScreen {
 		scoreButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickScore " + x + ", " + y);
-				// TODO: setScreen(new HighScreen()); // or something else
+
+				new Dialog("HighScore", getSkin(), "default") { // TODO: improved default
+					// protected void result(Object object) {} // Just hide the dialog
+				}.text(getHighScoreText()).button("Close", null).show(stage);
 			}
 		});
 
@@ -116,10 +124,43 @@ public class MenuScreen extends AbstractScreen {
 		titleButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickBouboule " + x + ", " + y);
-				/*actiontitre.init();  TODO:UPDAZTE THE ANAMATION*/
+				/*actiontitre.init();  TODO: @BAPTISTE: UPDATE THE ANIMATION*/
 			}
 		});
 
+	}
+
+	/**
+	 * @param text Text to be nomalise
+	 * @return a 'normalised' text (without special chars)
+	 */
+	private String normaliseTextForTitle(String text) {
+		return Normalizer.normalize(text, Normalizer.Form.NFD)
+			.replaceAll("\\p{InCombiningDiacriticalMarks}+", "").toUpperCase();
+	}
+
+	private String getHighScoreText () {
+		HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (false);
+
+		// no highscore: display a message even if there is no high scores
+		if (highscores.length == 0 || highscores[0] == null) { // the first time, we receive only one elem which is null
+			return "No high score yet";
+		}
+
+		String cText = "";
+		int i;
+		for (i = 0; i < highscores.length; i++) {
+			HighScoreInfo info = highscores[i];
+
+			if (info == null)
+				break;
+
+			// note: we have to used only chars that are available in the font
+			cText += normaliseTextForTitle(info.getName()) + " - Score "
+					+ info.getScore() + " - Level " + info.getLevel() + "\n";
+		}
+
+		return cText;
 	}
 
 	private class ActionBouboul extends Action {
