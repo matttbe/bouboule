@@ -37,11 +37,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -118,6 +120,50 @@ public abstract class AbstractScreen implements Screen {
 		this.stage.addActor(button);
 
 		return button;
+	}
+
+	/**
+	 * Display a 'back button'
+	 * @param bReturnToInitMenu true => init menu ; false => ParamScreen
+	 */
+	protected void addBackButton(final boolean bReturnToInitMenu) {
+
+		Button backButton = new Button(getSkin(), "default");
+		backButton.setColor(1, 0, 0, 1);
+		backButton.setSize(100, 100);
+		backButton.setX(10);
+		backButton.setY(10);
+
+		// TODO: custom, an image?
+
+		this.stage.addActor(backButton);
+
+		backButton.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				Gdx.app.log("SCREEN", "clickBack " + x + ", " + y);
+				if (bReturnToInitMenu)
+					GlobalSettings.MENUS.launchInitMenu();
+				else
+					GlobalSettings.GAME.setScreen(new ParamScreen());
+
+				/* => to launch the right screen by given its name
+				 *    e.g. "MenuScreen".
+				 *    But we only need to return to the InitMenu or ParamScreen
+				 */
+				/*
+				try {
+					GlobalSettings.GAME.setScreen((Screen) Class.forName(
+							this.getClass().getPackage().getName() + "."
+									+ screenName).newInstance());
+				} catch (InstantiationException e) {
+					Gdx.app.error("SCREEN", "error instantiation " + screenName);
+				} catch (IllegalAccessException e) {
+					Gdx.app.error("SCREEN", "error illegalaccess " + screenName);
+				} catch (ClassNotFoundException e) {
+					Gdx.app.error("SCREEN", "class not found " + screenName);
+				}*/
+			}
+		});
 	}
 
 	protected void addBackGround(String imagePath) {

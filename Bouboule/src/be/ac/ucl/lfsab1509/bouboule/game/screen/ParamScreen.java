@@ -44,5 +44,6 @@ public class ParamScreen extends AbstractScreen {
 			}
 		});
 
+		addBackButton(true);
 	}
 }
