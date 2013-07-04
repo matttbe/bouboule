@@ -66,16 +66,11 @@
             android:text="@string/global_bonus"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <ImageSwitcher
-            android:id="@+id/imageSwitcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </ImageSwitcher>
-
-        <TextView
-            android:id="@+id/global_bonus_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TableLayout
+            android:id="@+id/global_bonus_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical" />
 
         <Space
             android:layout_width="match_parent"

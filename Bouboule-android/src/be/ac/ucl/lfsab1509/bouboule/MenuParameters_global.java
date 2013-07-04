@@ -34,28 +34,26 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnTouchListener;
-import android.view.MotionEvent;
+import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AnimationUtils;
-import android.widget.*;
-import android.widget.ViewSwitcher.ViewFactory;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.Switch;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
-public class MenuParameters_global extends Activity implements ViewFactory {
+public class MenuParameters_global extends Activity {
 
 	
 	private Switch sound_switch;
 	private Switch rotate_switch;
 	private SeekBar sensitivity_seekbar;
-	private ImageSwitcher switcherBonus;
-	private TextView bonusDescription;
 
 	private String[][] bonusInfo = {
 			{"bonus/elasticity/elasticity_high.png", "Collision are more elastic"},
@@ -72,8 +70,6 @@ public class MenuParameters_global extends Activity implements ViewFactory {
 			{"bonus/weight/weight_high.png", "Bouboule is heavier"},
 			{"bonus/weight/weight_low.png", "Bouboule is lighter"}
 		};
-	
-	private int currId = 0, downX, upX; // needed for the switcherBonus
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -108,57 +104,53 @@ public class MenuParameters_global extends Activity implements ViewFactory {
 		((TextView) findViewById(R.id.global_sensitivity_txt)).setTypeface(myTypeface);
 		((TextView) findViewById(R.id.global_bonus_txt)).setTypeface(myTypeface);
 
-		bonusDescription = ((TextView) findViewById(R.id.global_bonus_description));
-		
-		// Bonus: imageview
-		switcherBonus = (ImageSwitcher) findViewById(R.id.imageSwitcher);
-		switcherBonus.setFactory((ViewFactory) this);
-		switcherBonus.setInAnimation(AnimationUtils.loadAnimation(this,
-				android.R.anim.fade_in));
-		switcherBonus.setOutAnimation(AnimationUtils.loadAnimation(this,
-				android.R.anim.fade_out));
-		switcherBonus.setImageDrawable(getDrawableBonus(0)); // set first image
-		setTextBonus();
-
-		switcherBonus.setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_DOWN) {
-					downX = (int) event.getX();
-					Log.d("Matth", " downX " + downX);
-					return true;
-				}
-				else if (event.getAction() == MotionEvent.ACTION_UP) {
-					upX = (int) event.getX();
-					Log.i("Matth", " upX " + upX);
-
-					if (upX - downX > 100) {
-						// curIndex current image index in array viewed by user
-						currId--;
-						if (currId < 0) {
-							currId = bonusInfo.length - 1;
-						}
-
-						switcherBonus.setImageDrawable(getDrawableBonus(currId));
-						setTextBonus();
-					}
-
-					else if (downX - upX > -100) {
-
-						currId++;
-						if (currId > 4) {
-							currId = 0;
-						}
-						switcherBonus.setImageDrawable(getDrawableBonus(currId));
-						setTextBonus();
-					}
-					return true;
-				}
-				return false;
-			}
-		});
+		addBonusInTable();
 	}
 	
+	private void addBonusInTable() {
+		TableLayout table = (TableLayout) findViewById(R.id.global_bonus_table);
+
+		LayoutParams tableParams = new LinearLayout.LayoutParams( // for each row
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		android.widget.TableRow.LayoutParams rowParams = new TableRow.LayoutParams(
+				android.widget.TableRow.LayoutParams.WRAP_CONTENT, // for each elem in a row
+				android.widget.TableRow.LayoutParams.WRAP_CONTENT);
+
+		for (String[] bonus : bonusInfo) {
+			TableRow row = new TableRow(this); // a new row
+			row.setLayoutParams(tableParams);
+			row.setGravity(Gravity.CENTER_VERTICAL);
+
+			ImageView imageView = new ImageView(this); // an image
+			imageView.setLayoutParams(rowParams);
+			row.addView(imageView);
+
+			// add the bitmap
+			InputStream inputStream = null;
+			try {
+				inputStream = getAssets().open(bonus[0]);
+				Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+				imageView.setImageBitmap(bitmap);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				if (inputStream != null)
+					try {
+						inputStream.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+			}
+
+			TextView descriptionView = new TextView(this); // a description
+			descriptionView.setLayoutParams(rowParams);
+			descriptionView.setText(bonus[1]);
+			row.addView(descriptionView);
+
+			table.addView(row);
+		}
+	}
+
 	// listener for the switchs
 	private CompoundButton.OnCheckedChangeListener switchListener = new CompoundButton.OnCheckedChangeListener() {
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -194,40 +186,5 @@ public class MenuParameters_global extends Activity implements ViewFactory {
 	protected void onResume () {
 		super.onResume ();
 		MyAndroidMenus.onResumeMusic (this);
-	}
-
-	// BONUS
-
-	private Drawable getDrawableBonus (int id) {
-		InputStream inputStream = null;
-		Drawable drawable = null;
-		try {
-			inputStream = getAssets().open(bonusInfo[id][0]);
-			Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-			drawable = new BitmapDrawable(this.getResources(), bitmap);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (inputStream != null)
-				try {
-					inputStream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		}
-		return drawable;
-	}
-
-	public void setTextBonus() {
-		bonusDescription.setText(bonusInfo[currId][1]);
-	}
-
-	@Override
-	public View makeView() {
-		ImageView iView = new ImageView(this);
-		iView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-		iView.setLayoutParams(new ImageSwitcher.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-		return iView;
 	}
 }
