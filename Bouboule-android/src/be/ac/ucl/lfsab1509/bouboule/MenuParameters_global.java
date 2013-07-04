@@ -29,6 +29,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 import java.io.IOException;
 import java.io.InputStream;
 
+import be.ac.ucl.lfsab1509.bouboule.game.body.Bonus;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -55,22 +56,6 @@ public class MenuParameters_global extends Activity {
 	private Switch sound_switch;
 	private Switch rotate_switch;
 	private SeekBar sensitivity_seekbar;
-
-	private String[][] bonusInfo = {
-			{"bonus/elasticity/elasticity_high.png", "Collision are more elastic"},
-			{"bonus/elasticity/elasticity_low.png",  "Collision are less elastic"},
-			{"bonus/heart/heart.png", "One more life"},
-			{"bonus/inverse/inverse.png", "The axes are inverted"},
-			{"bonus/invincible/invincible.png", "Bouboule is invincible"},
-			{"bonus/invisible/invisible.png", "Bouboule is invisible"},
-			{"bonus/speed/speed_high.png", "Bouboule runs faster"},
-			{"bonus/speed/speed_low.png", "Bouboule runs slower"},
-			{"bonus/star/star.png", "More points"},
-			{"bonus/time/timeup.png", "More time before the end of the game"},
-			{"bonus/time/timedown.png", "Less time before the end of the game"},
-			{"bonus/weight/weight_high.png", "Bouboule is heavier"},
-			{"bonus/weight/weight_low.png", "Bouboule is lighter"}
-		};
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -117,7 +102,7 @@ public class MenuParameters_global extends Activity {
 				android.widget.TableRow.LayoutParams.WRAP_CONTENT, // for each elem in a row
 				android.widget.TableRow.LayoutParams.WRAP_CONTENT);
 
-		for (String[] bonus : bonusInfo) {
+		for (String[] bonus : Bonus.bonusInfo) {
 			TableRow row = new TableRow(this); // a new row
 			row.setLayoutParams(tableParams);
 			row.setGravity(Gravity.CENTER_VERTICAL);

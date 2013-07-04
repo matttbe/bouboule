@@ -30,8 +30,6 @@ import java.text.Normalizer;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.HighScoreInfo;
-import be.ac.ucl.lfsab1509.bouboule.game.profile.Profile;
-import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileGlobal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

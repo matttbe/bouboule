@@ -53,6 +53,21 @@ public class Bonus extends GameBody {
 
 	private static final Random			random = new Random();
 
+	public static String[][] bonusInfo = {
+			{"bonus/elasticity/elasticity_high.png", "Collision are more elastic"},
+			{"bonus/elasticity/elasticity_low.png",  "Collision are less elastic"},
+			{"bonus/heart/heart.png", "One more life"},
+			{"bonus/inverse/inverse.png", "The axes are inverted"},
+			{"bonus/invincible/invincible.png", "Bouboule is invincible"},
+			{"bonus/invisible/invisible.png", "Bouboule is invisible"},
+			{"bonus/speed/speed_high.png", "Bouboule runs faster"},
+			{"bonus/speed/speed_low.png", "Bouboule runs slower"},
+			{"bonus/star/star.png", "More points"},
+			{"bonus/time/timeup.png", "More time before the end of the game"},
+			{"bonus/time/timedown.png", "Less time before the end of the game"},
+			{"bonus/weight/weight_high.png", "Bouboule is heavier"},
+			{"bonus/weight/weight_low.png", "Bouboule is lighter"}
+		};
 
 	/**
 	 * Constructor for a Bonus object 
