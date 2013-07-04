@@ -36,6 +36,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -58,11 +59,10 @@ public class MenuScreen extends AbstractScreen {
 
 		// Create the 2 Bouboules out of the screen
 
-		Image imgBoubouleR = addImage("drawable-xhdpi/boubouleright.png",800,0);
-		Image imgBoubouleL = addImage("drawable-xhdpi/boubouleleft.png",-800,0);
+		Image imgBoubouleR = addImage("drawable-xhdpi/boubouleright.png", 800, 0);
+		Image imgBoubouleL = addImage("drawable-xhdpi/boubouleleft.png", -800, 0);
 
-		
-		//add action on the bouboule
+		// add action on the bouboule
 		final ActionBouboul actionbouL = new ActionBouboul(false);
 		this.stage.addAction(actionbouL);
 		actionbouL.setActor(imgBoubouleL);
@@ -71,24 +71,25 @@ public class MenuScreen extends AbstractScreen {
 		this.stage.addAction(actionbouR);
 		actionbouR.setActor(imgBoubouleR);
 
-		//add the title
-		Label title = 
-				addLabel("BOUBOULE", "darktimes-font", 1f, Color.WHITE,
-				100, 1000);
+		// add the title
+		Label title = addLabel("BOUBOULE", "darktimes-font", 1f, Color.WHITE,
+				0, 950);
+		title.setAlignment(Align.center); // center
+		title.setWidth(GlobalSettings.APPWIDTH);
 
-		//add action on the title
-		final ActionTitle actiontitre = new ActionTitle();
-		this.stage.addAction(actiontitre);
-		actiontitre.setActor(title);
+		// add action on the title
+		final ActionTitle actiontitle = new ActionTitle();
+		this.stage.addAction(actiontitle);
+		actiontitle.setActor(title);
 
-		//Add 5 button transparent
+		// Add 5 button transparent
 		Button playButton = createButton("transparent", 430, 160, 200, 725);
 		Button paramButton = createButton("transparent", 430, 160, 200, 555);
 		Button scoreButton = createButton("transparent", 430, 160, 200, 385);
 		Button boubouleButton = createButton("transparent", 500, 350, 200, 0);
 		Button titleButton = createButton("transparent", 500, 500, 200, 885);
-		
-		//Listener for the button
+
+		// Listener for the button
 		playButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickStart " + x + ", " + y);
@@ -107,7 +108,8 @@ public class MenuScreen extends AbstractScreen {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickScore " + x + ", " + y);
 
-				new Dialog("HighScore", getSkin(), "default") { // TODO: improved default
+				new Dialog("HighScore", getSkin(), "default") {
+					// TODO: improved default skin
 					// protected void result(Object object) {} // Just hide the dialog
 				}.text(getHighScoreText()).button("Close", null).show(stage);
 			}
@@ -120,30 +122,34 @@ public class MenuScreen extends AbstractScreen {
 				actionbouR.init();
 			}
 		});
-		
+
 		titleButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickBouboule " + x + ", " + y);
-				actiontitre.init();
+				actiontitle.switchName();
 			}
 		});
 
 	}
 
 	/**
-	 * @param text Text to be nomalise
+	 * @param text
+	 *            Text to be nomalise
 	 * @return a 'normalised' text (without special chars)
 	 */
 	private String normaliseTextForTitle(String text) {
 		return Normalizer.normalize(text, Normalizer.Form.NFD)
-			.replaceAll("\\p{InCombiningDiacriticalMarks}+", "").toUpperCase();
+				.replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+				.toUpperCase();
 	}
 
-	private String getHighScoreText () {
-		HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR.getProfileGlobal ().getAllHighScores (false);
+	private String getHighScoreText() {
+		HighScoreInfo highscores[] = GlobalSettings.PROFILE_MGR
+				.getProfileGlobal().getAllHighScores(false);
 
 		// no highscore: display a message even if there is no high scores
-		if (highscores.length == 0 || highscores[0] == null) { // the first time, we receive only one elem which is null
+		if (highscores.length == 0 || highscores[0] == null) {
+			// the first time, we receive only one elem which is null
 			return "No high score yet";
 		}
 
@@ -167,31 +173,32 @@ public class MenuScreen extends AbstractScreen {
 		private float position;
 		private boolean right;
 
-		//Constructor of Action
+		// Constructor of Action
 		public ActionBouboul(boolean right) {
 			init();
-			//initial position
+			// initial position
 			position = -850f;
-			//true if it's the action for the right Bouboule 
+			// true if it's the action for the right Bouboule
 			this.right = right;
 		}
 
 		public boolean act(float delta) {
 			position += delta * 1100f;
-			//max position 800f
+
+			// max position 800f
 			if (position >= 800f)
 				position = 800f;
+
 			// set position for the right and left Bouboule
-			if (right) {
+			if (right)
 				actor.setPosition(800f - position, (800f - position) / 3.5f);
-			} else {
+			else
 				actor.setPosition(-800f + position, (800f - position) / 3.5f);
-			}
+
 			return false;
 		}
 
-		
-		//reset the position when the player push on the Bouboule
+		// reset the position when the player push on the Bouboule
 		public void init() {
 			position = 0f;
 		}
@@ -206,77 +213,83 @@ public class MenuScreen extends AbstractScreen {
 		}
 
 		public boolean act(float delta) {
-			Label temp = (Label) actor;
+			Label label = (Label) actor;
 			timer = timer + delta;
-			//var witch set the time since the period
+			// var witch set the time since the period
 			float temptimer;
-			
+
 			if (timer < 1.0f) {
-				//1) emergence during 1sec
-				temptimer=timer;
-				temp.setFontScale(0.0f + temptimer * 0.6f);
-			} else if (timer < 4.0f) {
-				//2)beat during 3 sec
-				temptimer=timer % 1.0f;
-				if(temptimer < 0.5f){
-				}else{
-					temptimer = 1f-temptimer;
-				}
-				temp.setFontScale(0.6f + temptimer * 0.1f);
-			} else if (timer < 5.0f) {
-				//3) extinction during 1sec
-				temptimer=timer-4.0f;
-				temp.setFontScale(0.6f - temptimer * 0.6f);
-			} else {
-				//4)restart
-				timer = timer-5.0f;
-				
-				String name;
-				if(MathUtils.random(2)==0){
-					name="BOUBOULE";
-				}else{
-					name=normaliseTextForTitle(GlobalSettings.PROFILE.getName());
-				}
-				
-				switch (MathUtils.random(7)) {
-				case 0:
-					temp.setText("HELLO\n"+name);
-					break;
-				case 1:
-					temp.setText("MAY THE\nBOUBOULE BE\nWITH YOU");
-					break;
-				case 2:
-					temp.setText("BIG BOUBOULE\nIS WATCHING\n YOU");
-					break;
-				case 3:
-					temp.setText("KICK THEM\n ALL!");
-					break;
-				case 4:
-					temp.setText("WELCOME TO\n" + name);
-					break;
-				case 5:
-					temp.setText(""+name+"\nIS GREAT");
-					break;
-				default:
-					temp.setText("BOUBOULE");
-					break;
-				}
+				// 1) emergence during 1sec
+				temptimer = timer;
+				label.setFontScale(0.0f + temptimer * 0.6f);
 			}
-			
-			//center the title
-			temp.setPosition(GlobalSettings.APPWIDTH/2.0f-temp.getTextBounds().width/2, 950);
+			else if (timer < 4.0f) {
+				// 2)beat during 3 sec
+				temptimer = timer % 1.0f;
+				if (temptimer >= 0.5f)
+					temptimer = 1f - temptimer;
+				label.setFontScale(0.6f + temptimer * 0.1f);
+			}
+			else if (timer < 5.0f) {
+				// 3) extinction during 1sec
+				temptimer = timer - 4.0f;
+				label.setFontScale(0.6f - temptimer * 0.6f);
+			}
+			else {
+				// 4)restart
+				timer = timer - 5.0f;
+				changeName();
+			}
 
-
-			//wrapper.setTransform(true);
-			//wrapper.setOrigin(wrapper.getPrefWidth() / 2, wrapper.getPrefHeight() / 2);
-			//wrapper.setRotation(45);
+			// wrapper.setTransform(true);
+			// wrapper.setOrigin(wrapper.getPrefWidth() / 2,
+			// wrapper.getPrefHeight() / 2);
+			// wrapper.setRotation(45);
 			return false;
 		}
 
-		//rest the time when the player push on the title
+		// rest the time when the player push on the title
 		public void init() {
 			timer = 0.0f;
 		}
 
+		public void switchName() {
+			init();
+			changeName();
+		}
+
+		private void changeName() {
+			Label label = (Label) actor;
+			String name;
+
+			switch (MathUtils.random(8)) {
+			case 0:
+				name = normaliseTextForTitle(GlobalSettings.PROFILE.getName().toUpperCase());
+				label.setText("HELLO\n" + name);
+				break;
+			case 1:
+				label.setText("MAY THE\nBOUBOULE BE\nWITH YOU");
+				break;
+			case 2:
+				label.setText("BIG BOUBOULE\nIS WATCHING\n YOU");
+				break;
+			case 3:
+				label.setText("KICK THEM\n ALL!");
+				break;
+			case 4:
+				label.setText("WELCOME TO\nBOUBOULE");
+				break;
+			case 5:
+				name = normaliseTextForTitle(GlobalSettings.PROFILE.getName().toUpperCase());
+				label.setText(name + "\nWELCOME");
+				break;
+			case 6:
+				label.setText("BOUBOULE\nIS GREAT");
+				break;
+			default:
+				label.setText("BOUBOULE");
+				break;
+			}
+		}
 	}
 }
