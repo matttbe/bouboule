@@ -68,7 +68,7 @@ public class ScreenGame implements Screen {
 		Gdx.app.log("Matth", "Screen: SHOW");
 
 		bIsPause = true; // show the countdown at startup
-		game.getCountDown().reset();
+		game.resumeGame();
 		bNewGame = false;
 
 		loopMusic.stop(); // to play at startup
@@ -107,9 +107,9 @@ public class ScreenGame implements Screen {
 		//Gdx.app.log ("Matth", "Screen: PAUSE");
 		Gdx.app.log("Matth", "Screen: PAUSE + pause status : " + bIsPause 
 				+ " " + GlobalSettings.GAME.getTimer().isRunning() + " " 
-				+ game.getCountDown().isLaunched());
+				+ game.isCountDownLaunched());
 		
-		game.getCountDown().reset(); // reset the countdown (if it's running)
+		game.resumeGame(); // reset the countdown (if it's running)
 		if (!GlobalSettings.GAME.getTimer().isRunning()) {
 			// already stopped... we start a new game?
 			return;
@@ -129,13 +129,14 @@ public class ScreenGame implements Screen {
 	@Override
 	public void resume() {
 		Gdx.app.log("Matth", "Screen: RESUME + pause status : " + bIsPause + " Count " 
-	+ game.getCountDown().isLaunched() + " " + bNewGame);
+	+ game.isCountDownLaunched() + " " + bNewGame);
 		
 		if (bNewGame) {
 			show(); //must relaunch the game when the activity is not paused
 					 //and comes back from a menu or what ever
 			
-		} else if (bIsPause && game.getCountDown().isLaunched()) { // resume from CountDown
+		}
+		else if (bIsPause && game.isCountDownLaunched()) { // resume from CountDown
 			GlobalSettings.GAME.getTimer().play();
 			if (!GlobalSettings.SOUND_IS_MUTED) {
 				loopMusic.play();

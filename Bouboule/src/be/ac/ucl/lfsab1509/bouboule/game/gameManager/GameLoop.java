@@ -36,8 +36,11 @@ import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
@@ -58,6 +61,8 @@ public class GameLoop {
 	private BitmapFont fontOsakaRed;
 	private BitmapFont fontPause;
 	private TextureRegion textureRegionPause;
+	private float fadePause;
+	private Sprite spriteFade;
 	private SpriteBatch batch;
 
 	private static Random random;
@@ -109,6 +114,9 @@ public class GameLoop {
 					Gdx.files.internal("fonts/Osaka2/Osaka2.png"), false);
 			fontPause.setColor(.95f, .05f, .05f, 1f);
 			textureRegionPause = new TextureRegion(new Texture("bonus/star/star.png")); // TODO: another picture
+			spriteFade = new Sprite(new Texture(new Pixmap(1, 1, Format.RGB888)));
+			spriteFade.setColor(0, 0, 0, 0);
+			spriteFade.setSize(GlobalSettings.APPWIDTH, GlobalSettings.APPHEIGHT);
 		}
 
 		// load the counter
@@ -200,8 +208,12 @@ public class GameLoop {
 				displayPause();
 				status = true;
 			}
-			else
-				status = countDown.draw(batch, delta);
+			else {
+				if (removingPause())
+					status = true;
+				else
+					status = countDown.draw(batch, delta);
+			}
 		}
 
 		batch.end();
@@ -214,10 +226,33 @@ public class GameLoop {
 		return status;
 	}
 
+	private void displayBackground() {
+		spriteFade.setColor(spriteFade.getColor().r, spriteFade.getColor().g,
+				spriteFade.getColor().b, fadePause);
+		spriteFade.draw(batch);
+	}
 	// only for GdxMenus
 	private void displayPause() {
-		fontPause.draw(batch, "PAUSE", 190, 600);
-		batch.draw(textureRegionPause, 10, 10);
+		// background => fade to .5 alpha
+		if (fadePause < .5f)
+			fadePause = Math.min(fadePause + Gdx.graphics.getDeltaTime(), .5f);
+		displayBackground();
+
+		fontPause.draw(batch, "PAUSE", 190, 600); // text
+		batch.draw(textureRegionPause, 10, 10); // home button
+	}
+
+	/**
+	 * @return true if the pause background is being removed
+	 */
+	private boolean removingPause() {
+		if (fadePause <= 0)
+			return false;
+
+		fadePause = Math.max(fadePause - Gdx.graphics.getDeltaTime(), 0f);
+		displayBackground();
+
+		return true;
 	}
 
 	/**
@@ -447,8 +482,16 @@ public class GameLoop {
 		batch.dispose();
 	}
 
-	public CountDown getCountDown() {
-		return countDown;
+	public boolean isCountDownLaunched() {
+		return countDown.isLaunched();
+	}
+
+	/**
+	 * Reset the timer and remove the black background if any
+	 */
+	public void resumeGame() {
+		countDown.reset();
+		fadePause = 0;
 	}
 
 }
