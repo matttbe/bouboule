@@ -32,7 +32,6 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 import be.ac.ucl.lfsab1509.bouboule.game.menu.GdxMenus;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
-import be.ac.ucl.lfsab1509.bouboule.game.screen.MyGestureListener;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerMgr;
 import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
@@ -44,7 +43,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.input.GestureDetector;
 
 public class MyGame extends Game implements ApplicationListener {
 
@@ -100,8 +98,6 @@ public class MyGame extends Game implements ApplicationListener {
 
 		camera = CameraHelper.getCamera(GlobalSettings.APPWIDTH,
 				GlobalSettings.APPHEIGHT);
-
-		Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener()));
 
 		if (GlobalSettings.MENUS == null) {
 			bGdxMenus = true;
