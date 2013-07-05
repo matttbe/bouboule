@@ -252,4 +252,8 @@ public class MyGame extends Game implements ApplicationListener {
 	public void toogleGeneralPause() {
 		bGeneralPause = ! bGeneralPause;
 	}
+
+	public boolean isGdxMenus() {
+		return bGdxMenus;
+	}
 }

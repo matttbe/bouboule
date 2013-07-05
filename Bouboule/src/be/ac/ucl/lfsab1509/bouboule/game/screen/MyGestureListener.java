@@ -47,9 +47,14 @@ public class MyGestureListener implements GestureListener {
 		if (GlobalSettings.PROFILE.getName().equals(GlobalSettings.CHEATER_NAME)) {
 			GameLoop.bonus(true);
 		}
-		else {
+		else if (GlobalSettings.GAME.isGdxMenus()) {
 			// if (y < 150) // the top of the screen
-			GlobalSettings.MENUS.launchPauseMenu();
+			Gdx.app.log("SCREEN", "click: " + x + "x" + y);
+			if (GlobalSettings.GAME.isGeneralPause() // pause and clicking on 'menu' icon
+					&& x < 100 && y > (Gdx.graphics.getHeight() - 100))
+				GlobalSettings.MENUS.launchInitMenu();
+			else
+				GlobalSettings.MENUS.launchPauseMenu();
 			return true;
 		}
 		return false;

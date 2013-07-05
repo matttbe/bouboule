@@ -36,8 +36,10 @@ import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -55,6 +57,7 @@ public class GameLoop {
 	private BitmapFont fontOsaka;
 	private BitmapFont fontOsakaRed;
 	private BitmapFont fontPause;
+	private TextureRegion textureRegionPause;
 	private SpriteBatch batch;
 
 	private static Random random;
@@ -99,10 +102,14 @@ public class GameLoop {
 				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
 		fontOsakaRed.setColor(.95f, .05f, .05f, 1f);
 
-		fontPause = new BitmapFont(
-				Gdx.files.internal("fonts/Osaka2/Osaka2.fnt"),
-				Gdx.files.internal("fonts/Osaka2/Osaka2.png"), false);
-		fontPause.setColor(.95f, .05f, .05f, 1f);
+		// Pause
+		if (GlobalSettings.GAME.isGdxMenus()) {
+			fontPause = new BitmapFont(
+					Gdx.files.internal("fonts/Osaka2/Osaka2.fnt"),
+					Gdx.files.internal("fonts/Osaka2/Osaka2.png"), false);
+			fontPause.setColor(.95f, .05f, .05f, 1f);
+			textureRegionPause = new TextureRegion(new Texture("bonus/star/star.png")); // TODO: another picture
+		}
 
 		// load the counter
 		countDown = new CountDown(2, 2, 1f, "anim/countdown.png", true); // 3 sec
@@ -189,8 +196,8 @@ public class GameLoop {
 						delta));
 				status = true;
 			}
-			else if (GlobalSettings.GAME.isGeneralPause()) {
-				fontPause.draw(batch, "PAUSE", 190, 600);
+			else if (GlobalSettings.GAME.isGeneralPause()) { // only for GdxMenus
+				displayPause();
 				status = true;
 			}
 			else
@@ -205,6 +212,12 @@ public class GameLoop {
 		 * batch.end();
 		 */
 		return status;
+	}
+
+	// only for GdxMenus
+	private void displayPause() {
+		fontPause.draw(batch, "PAUSE", 190, 600);
+		batch.draw(textureRegionPause, 10, 10);
 	}
 
 	/**
@@ -429,7 +442,8 @@ public class GameLoop {
 		fontOsaka.dispose();
 		fontOsakaRed.dispose();
 		fontOswald.dispose();
-		fontPause.dispose();
+		if (fontPause != null) // can be null => Android menus
+			fontPause.dispose();
 		batch.dispose();
 	}
 
