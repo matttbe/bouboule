@@ -42,8 +42,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class MenuScreen extends AbstractScreen {
+
+	private Label title;
 
 	public MenuScreen() {
 		super(false);
@@ -72,17 +75,27 @@ public class MenuScreen extends AbstractScreen {
 		actionbouR.setActor(imgBoubouleR);
 
 		// add the title
-		Label title = addLabel("BOUBOULE", "darktimes-font", 1f, Color.WHITE,
-				0, 950);
+		title = new Label("BOUBOULE", getSkin(), "darktimes-font", new Color(.388f, .733f, .984f, 1f));
 		title.setAlignment(Align.center); // center
 		title.setWidth(GlobalSettings.APPWIDTH);
 		title.setColor(.388f, .733f, .984f, 1f); // menu color
 		// title.setColor(.2f, .7098f, .898f, 1f);  // android color
 
+		// add the title in a table in order to rotate it.
+		Table tableTitle = new Table();
+		tableTitle.add(title);
+		tableTitle.setTransform(true);
+		tableTitle.setWidth(GlobalSettings.APPWIDTH); // all the width
+		tableTitle.setX(0);
+		tableTitle.setY(1050);
+		tableTitle.setOrigin(GlobalSettings.APPWIDTH / 2,
+				tableTitle.getHeight() / 2); // at the center
+		stage.addActor(tableTitle);
+
 		// add action on the title
 		final ActionTitle actiontitle = new ActionTitle();
 		this.stage.addAction(actiontitle);
-		actiontitle.setActor(title);
+		actiontitle.setActor(tableTitle);
 
 		// Add 5 button transparent
 		Button playButton = createButton("transparent", 430, 160, 200, 725);
@@ -131,7 +144,6 @@ public class MenuScreen extends AbstractScreen {
 				actiontitle.switchName();
 			}
 		});
-
 	}
 
 	/**
@@ -209,44 +221,46 @@ public class MenuScreen extends AbstractScreen {
 	private class ActionTitle extends Action {
 		private float timer;
 		private int oldRand = 0; // to not display the same name twice, we start with Bouboule
+		private float degreeRot = 1f;
 
 		public ActionTitle() {
 			init();
 		}
 
 		public boolean act(float delta) {
-			Label label = (Label) actor;
+			Table tableTitle = (Table) actor;
 			timer = timer + delta;
+
+			tableTitle.setRotation(timer * 5f * degreeRot); // rotate the text
+
 			// var witch set the time since the period
 			float temptimer;
-
 			if (timer < 1.0f) {
 				// 1) emergence during 1sec
 				temptimer = timer;
-				label.setFontScale(0.0f + temptimer * 0.6f);
+				tableTitle.setScale(0.0f + temptimer * 0.6f);
 			}
 			else if (timer < 4.0f) {
 				// 2)beat during 3 sec
 				temptimer = timer % 1.0f;
 				if (temptimer >= 0.5f)
 					temptimer = 1f - temptimer;
-				label.setFontScale(0.6f + temptimer * 0.1f);
+				tableTitle.setScale(0.6f + temptimer * 0.1f);
 			}
 			else if (timer < 5.0f) {
 				// 3) extinction during 1sec
 				temptimer = timer - 4.0f;
-				label.setFontScale(0.6f - temptimer * 0.6f);
+				tableTitle.setScale(0.6f - temptimer * 0.6f);
 			}
 			else {
 				// 4)restart
 				timer = timer - 5.0f;
+				getNewRotation();
 				changeName();
 			}
+			tableTitle.setOrigin(GlobalSettings.APPWIDTH / 2,
+					tableTitle.getHeight() / 2);
 
-			// wrapper.setTransform(true);
-			// wrapper.setOrigin(wrapper.getPrefWidth() / 2,
-			// wrapper.getPrefHeight() / 2);
-			// wrapper.setRotation(45);
 			return false;
 		}
 
@@ -257,12 +271,11 @@ public class MenuScreen extends AbstractScreen {
 
 		public void switchName() {
 			init();
+			getNewRotation();
 			changeName();
 		}
 
 		private void changeName() {
-			Label label = (Label) actor;
-
 			int newRand;
 			while ((newRand = MathUtils.random(8)) == oldRand); // we need a new number
 
@@ -271,27 +284,54 @@ public class MenuScreen extends AbstractScreen {
 			case 0:
 				String name = normaliseTextForTitle(
 						GlobalSettings.PROFILE.getName().toUpperCase());
-				label.setText("HELLO\n" + name);
+				title.setText("HELLO\n" + name);
 				break;
 			case 1:
-				label.setText("MAY THE\nBOUBOULE BE\nWITH YOU");
+				title.setText("MAY THE\nBOUBOULE BE\nWITH YOU");
 				break;
 			case 2:
-				label.setText("BIG BOUBOULE\nIS WATCHING\n YOU");
+				title.setText("BIG BOUBOULE\nIS WATCHING\n YOU");
 				break;
 			case 3:
-				label.setText("KICK THEM\n ALL!");
+				title.setText("KICK THEM\n ALL!");
 				break;
 			case 4:
-				label.setText("WELCOME TO\nBOUBOULE");
+				title.setText("WELCOME TO\nBOUBOULE");
 				break;
 			case 6:
-				label.setText("BOUBOULE\nIS GREAT");
+				title.setText("BOUBOULE\nIS GREAT");
 				break;
 			default:
-				label.setText("BOUBOULE");
+				title.setText("BOUBOULE");
 				break;
 			}
+		}
+
+		private void getNewRotation() {
+			switch (MathUtils.random(7)) {
+			case 0:
+				degreeRot = 1f;
+				break;
+			case 1:
+				degreeRot = -1f;
+				break;
+			case 2:
+				degreeRot = 1.5f;
+				break;
+			case 3:
+				degreeRot = -1.5f;
+				break;
+			case 4:
+				degreeRot = -.5f;
+				break;
+			case 5:
+				degreeRot = -.5f;
+				break;
+			default:
+				degreeRot = 0f;
+				break;
+			}
+			// Gdx.app.log("SCREEN", "Rotation: " + degreeRot);
 		}
 	}
 }
