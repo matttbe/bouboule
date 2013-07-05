@@ -47,6 +47,11 @@ public class MyGestureListener implements GestureListener {
 		if (GlobalSettings.PROFILE.getName().equals(GlobalSettings.CHEATER_NAME)) {
 			GameLoop.bonus(true);
 		}
+		else {
+			// if (y < 150) // the top of the screen
+			GlobalSettings.MENUS.launchPauseMenu();
+			return true;
+		}
 		return false;
 	}
 

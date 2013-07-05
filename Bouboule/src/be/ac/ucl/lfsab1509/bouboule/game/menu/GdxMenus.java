@@ -6,7 +6,6 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.GameOverScreen;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.LooseScreen;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.MenuScreen;
-import be.ac.ucl.lfsab1509.bouboule.game.screen.PauseScreen;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.WinScreen;
 
 /*
@@ -74,7 +73,11 @@ public class GdxMenus implements Menus {
 	@Override
 	public void launchPauseMenu() {
 		Gdx.app.log ("Matth", "GdxMenus: PauseMenu: " + GlobalSettings.GAME_EXIT);
-		GlobalSettings.GAME.setScreen(new PauseScreen());
+		if (GlobalSettings.GAME.isGameScreen()) {
+			GlobalSettings.GAME.toogleGeneralPause();
+			if (GlobalSettings.GAME.isGeneralPause())
+				GlobalSettings.GAME.getScreen().pause();
+		}
 	}
 
 }

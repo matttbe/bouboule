@@ -54,6 +54,7 @@ public class GameLoop {
 	private BitmapFont fontOswald;
 	private BitmapFont fontOsaka;
 	private BitmapFont fontOsakaRed;
+	private BitmapFont fontPause;
 	private SpriteBatch batch;
 
 	private static Random random;
@@ -97,6 +98,11 @@ public class GameLoop {
 				Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
 				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
 		fontOsakaRed.setColor(.95f, .05f, .05f, 1f);
+
+		fontPause = new BitmapFont(
+				Gdx.files.internal("fonts/Osaka2/Osaka2.fnt"),
+				Gdx.files.internal("fonts/Osaka2/Osaka2.png"), false);
+		fontPause.setColor(.95f, .05f, .05f, 1f);
 
 		// load the counter
 		countDown = new CountDown(2, 2, 1f, "anim/countdown.png", true); // 3 sec
@@ -182,7 +188,12 @@ public class GameLoop {
 				GlobalSettings.PROFILE.setNeedTutorial(tutorial.draw(batch,
 						delta));
 				status = true;
-			} else
+			}
+			else if (GlobalSettings.GAME.isGeneralPause()) {
+				fontPause.draw(batch, "PAUSE", 190, 600);
+				status = true;
+			}
+			else
 				status = countDown.draw(batch, delta);
 		}
 
@@ -366,10 +377,8 @@ public class GameLoop {
 	 * Write the lives/levels/score and Timer text on the screen
 	 */
 	private void writeText() {
-		if (!GlobalSettings.GAME.getTimer().isRunning()) // avoid displaying the
-															// wrong level at
-															// the end of the
-															// game and crashes
+		// avoid crashes and displaying the wrong level at the end of the game
+		if (!GlobalSettings.GAME.getTimer().isRunning())
 			return;
 
 		CharSequence lives = Integer.toString(GlobalSettings.PROFILE
@@ -412,9 +421,16 @@ public class GameLoop {
 	 */
 	public void dispose() {
 		// Remove the memory of the managed object and the debug matrix
-		debugRenderer.dispose();
+		if (debugRenderer != null)
+			debugRenderer.dispose();
 		graphicManager.dispose();
 		countDown.dispose();
+		tutorial.dispose();
+		fontOsaka.dispose();
+		fontOsakaRed.dispose();
+		fontOswald.dispose();
+		fontPause.dispose();
+		batch.dispose();
 	}
 
 	public CountDown getCountDown() {

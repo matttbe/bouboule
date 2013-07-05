@@ -63,6 +63,8 @@ public class MyGame extends Game implements ApplicationListener {
 
 	private TimerMgr timer;
 
+	private boolean bGeneralPause = false; // not used on Android
+
 	/**
 	 * This class should be the first one which is called after having
 	 * initialized GDX
@@ -204,6 +206,7 @@ public class MyGame extends Game implements ApplicationListener {
 				menusMusic.dispose();
 				menusMusic = null;
 			}
+			bGeneralPause = false;
 			setScreenGameResume();
 			setScreen(screenGame);
 			setScreenGameResume();
@@ -240,5 +243,13 @@ public class MyGame extends Game implements ApplicationListener {
 			menusMusic.setLooping(true);
 		}
 		return menusMusic;
+	}
+
+	public boolean isGeneralPause() {
+		return bGeneralPause;
+	}
+
+	public void toogleGeneralPause() {
+		bGeneralPause = ! bGeneralPause;
 	}
 }
