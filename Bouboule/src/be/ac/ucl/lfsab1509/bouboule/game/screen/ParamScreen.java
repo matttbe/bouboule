@@ -40,7 +40,7 @@ public class ParamScreen extends AbstractScreen {
 		aboutButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
 				Gdx.app.log ("SCREEN", "clickAbout " + x + ", " + y);
-				//TODO: setScreen(new AboutScreen()); // or something else
+				setScreenWithFading(new AboutScreen());
 			}
 		});
 

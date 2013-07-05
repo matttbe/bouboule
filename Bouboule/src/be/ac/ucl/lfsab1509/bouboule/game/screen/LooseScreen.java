@@ -83,14 +83,14 @@ public class LooseScreen extends AbstractScreen {
 		retryButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickStart " + x + ", " + y);
-				GlobalSettings.GAME.setScreenGame();
+				setScreenWithFading(null);
 			}
 		});
 
 		menuButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickParam " + x + ", " + y);
-				GlobalSettings.MENUS.launchInitMenu();
+				setScreenWithFading(new MenuScreen());
 			}
 		});
 

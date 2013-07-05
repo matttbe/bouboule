@@ -34,8 +34,11 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -59,6 +62,13 @@ public abstract class AbstractScreen implements Screen {
 	private SpriteBatch batch;
 	private Skin skin;
 
+	// fade
+	private Sprite spriteFade;
+	private float fFade = 1f; // with fade in
+	private SpriteBatch fadeBatch;
+	private Screen nextScreen;
+	private boolean bNeedFading;
+
 	private Timer timerMusic;
 	private boolean bMusicNeedsDelay;
 
@@ -68,6 +78,12 @@ public abstract class AbstractScreen implements Screen {
 				GlobalSettings.APPHEIGHT, true);
 		// Added the camera to enter the screen (black borders on each side)
 		this.stage.setCamera(GlobalSettings.GAME.getCamera());
+
+		if (GlobalSettings.GAME.isGdxMenus()) { // for the transition
+			spriteFade = new Sprite(new Texture(new Pixmap(1, 1, Format.RGB888)));
+			spriteFade.setColor(Color.BLACK);
+			spriteFade.setSize(GlobalSettings.APPWIDTH, GlobalSettings.APPHEIGHT);
+		}
 	}
 
 	protected String getName() {
@@ -143,9 +159,10 @@ public abstract class AbstractScreen implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickBack " + x + ", " + y);
 				if (bReturnToInitMenu)
-					GlobalSettings.MENUS.launchInitMenu();
+					nextScreen = new MenuScreen();
 				else
-					GlobalSettings.GAME.setScreen(new ParamScreen());
+					nextScreen = new ParamScreen();
+				bNeedFading = true;
 
 				/* => to launch the right screen by given its name
 				 *    e.g. "MenuScreen".
@@ -201,6 +218,15 @@ public abstract class AbstractScreen implements Screen {
 		timerMusic.scheduleTask(task, seconds);
 	}
 
+	/**
+	 * Set the next screen with a fading
+	 * @param nextScreen the next screen or null to launch the game
+	 */
+	protected void setScreenWithFading(Screen nextScreen) {
+		this.nextScreen = nextScreen;
+		bNeedFading = true;
+	}
+
 	// Screen implementation
 
 	@Override
@@ -212,6 +238,10 @@ public abstract class AbstractScreen implements Screen {
 			playMusicWithDelay(2);
 		else
 			getMusic().play();
+		if (GlobalSettings.GAME.isGdxMenus()) {
+			fadeBatch = new SpriteBatch();
+			fadeBatch.getProjectionMatrix().setToOrtho2D(0, 0, 2, 2);
+		}
 	}
 
 	@Override
@@ -234,6 +264,31 @@ public abstract class AbstractScreen implements Screen {
 
 		// draw the actors
 		stage.draw();
+
+		// Fade => like paxbritanica
+		if (!bNeedFading && fFade > 0) { // new screen
+			fFade = Math.max(fFade - Gdx.graphics.getDeltaTime() / 2f, 0); // slower
+			fadeBatch.begin();
+			spriteFade.setColor(spriteFade.getColor().r, spriteFade.getColor().g,
+					spriteFade.getColor().b, fFade);
+			spriteFade.draw(fadeBatch);
+			fadeBatch.end();
+		}
+
+		if (bNeedFading) { // quit screen
+			fFade = Math.min(fFade + Gdx.graphics.getDeltaTime() * 2f, 1); // faster
+			fadeBatch.begin();
+			spriteFade.setColor(spriteFade.getColor().r, spriteFade.getColor().g,
+					spriteFade.getColor().b, fFade);
+			spriteFade.draw(fadeBatch);
+			fadeBatch.end();
+			if (fFade >= 1) { // switch
+				if (nextScreen != null)
+					GlobalSettings.GAME.setScreen(nextScreen);
+				else
+					GlobalSettings.GAME.setScreenGame();
+			}
+		}
 	}
 
 	@Override
@@ -269,5 +324,7 @@ public abstract class AbstractScreen implements Screen {
 			batch.dispose();
 		if (skin != null)
 			skin.dispose();
+		if (fadeBatch != null)
+			fadeBatch.dispose();
 	}
 }

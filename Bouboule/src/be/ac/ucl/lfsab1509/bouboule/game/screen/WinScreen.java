@@ -80,14 +80,14 @@ public class WinScreen extends AbstractScreen {
 		nextButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickNext " + x + ", " + y);
-				GlobalSettings.GAME.setScreenGame();
+				setScreenWithFading(null);
 			}
 		});
 
 		menuButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickParam " + x + ", " + y);
-				GlobalSettings.MENUS.launchInitMenu();
+				setScreenWithFading(new MenuScreen());
 			}
 		});
 

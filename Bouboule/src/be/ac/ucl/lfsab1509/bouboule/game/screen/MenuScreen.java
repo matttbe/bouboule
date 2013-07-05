@@ -108,14 +108,14 @@ public class MenuScreen extends AbstractScreen {
 		playButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickStart " + x + ", " + y);
-				GlobalSettings.GAME.setScreenGame();
+				setScreenWithFading(null);
 			}
 		});
 
 		paramButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickParam " + x + ", " + y);
-				GlobalSettings.GAME.setScreen(new ParamScreen());
+				setScreenWithFading(new ParamScreen());
 			}
 		});
 
