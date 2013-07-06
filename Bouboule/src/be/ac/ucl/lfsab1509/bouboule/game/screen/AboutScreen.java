@@ -39,11 +39,20 @@ public class AboutScreen extends AbstractScreen {
 		if (iVersion > 0)
 			cAboutText += "\n\nVersion: " + iVersion;
 		Label label = new Label(cAboutText, getSkin(), "default", Color.WHITE);
-		// label.setFontScale(.5f);
+
+		// not on the border
 		label.setWidth(GlobalSettings.APPWIDTH - 20);
 		label.setHeight(GlobalSettings.APPHEIGHT - 20);
 		label.setPosition(10, 10);
-		label.setWrap(true);
+
+		label.setWrap(true); // return to the next lines
+
+		label.setFontScale(1, 1); // avoid transformations
+		label.setScale(1);
+
+		// filters
+		// label.getStyle().font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+
 		// label.setFillParent(true); used all the screen: too large
 
 		//Set Background
