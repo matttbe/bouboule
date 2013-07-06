@@ -6,7 +6,9 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	oswald-font: { file: fonts/Oswald/Oswald.fnt },
 	oswaldBig-font: { file: fonts/Oswald2/Oswald2.fnt },
 	chinyen-font: { file: fonts/Chinyen/Chinyen.fnt },
-	darktimes-font: { file: fonts/DarkTimes/DarkTimes.fnt}
+	darktimes-font: { file: fonts/DarkTimes/DarkTimes.fnt},
+	droid-font: { file: fonts/Droid/Droid.fnt}
+
  },
 com.badlogic.gdx.graphics.Color: {
 	green: { a: 1, b: 0, g: 1, r: 0 },
