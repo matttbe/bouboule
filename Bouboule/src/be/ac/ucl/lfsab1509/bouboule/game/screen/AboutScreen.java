@@ -22,7 +22,7 @@ public class AboutScreen extends AbstractScreen {
 				+ " Bouboule\n\n"
 				+ "Authors:\n"
 				+ " Baerts Matthieu, Remy Baptiste, Van Wallendael "
-					+ "Nicolas and Verhaeghe Hélène\n\n"
+					+ "Nicolas and Verhaeghe Helene\n\n"
 				+ "Graphisms:\n"
 				+ " Van Wallendael Julien\n\n"
 				+ "Music and sounds:\n"
@@ -30,7 +30,7 @@ public class AboutScreen extends AbstractScreen {
 					+ " Klez (The gateway - SpaceShip level)\n\n"
 				+ "Credits & License:\n"
 				+ " Bouboule was developed during the course"
-					+ " FSAB1509 - Projet Informatique (Yves Deville, Université"
+					+ " FSAB1509 - Projet Informatique (Yves Deville, Universite"
 					+ " Catholique de Louvain, Belgium), 2012–2013.\nOpen-Source"
 					+ " GPL3 license and developed with LibGDX (Free and"
 					+ " Open-Source game development framework under Apache"
@@ -47,7 +47,7 @@ public class AboutScreen extends AbstractScreen {
 
 		label.setWrap(true); // return to the next lines
 
-		label.setFontScale(0.5f, 0.5f); // avoid transformations
+		label.setFontScale(0.5f, 0.5f); // avoid transformations // TODO => set to 1
 		label.setScale(1);
 
 		// filters
