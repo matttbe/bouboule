@@ -50,10 +50,14 @@ public class MyGestureListener implements GestureListener {
 		else if (GlobalSettings.GAME.isGdxMenus()) {
 			// if (y < 150) // the top of the screen
 			Gdx.app.log("SCREEN", "click: " + x + "x" + y);
+
+			int iWidth = Gdx.graphics.getWidth(), iWidth10 = iWidth / 10;
+			int iHeight = Gdx.graphics.getHeight(), iHeight10 = iHeight / 10;
+
 			if (GlobalSettings.GAME.isGeneralPause() // pause and clicking on 'menu' icon
-					&& x < 100 && y > (Gdx.graphics.getHeight() - 100))
+					&& x < iWidth10 && y > (iHeight - iHeight10))
 				GlobalSettings.MENUS.launchInitMenu();
-			else
+			else if (x > iWidth10 && x < (iWidth - iWidth10)) // without border to avoid accidental clicks
 				GlobalSettings.MENUS.launchPauseMenu();
 			return true;
 		}
