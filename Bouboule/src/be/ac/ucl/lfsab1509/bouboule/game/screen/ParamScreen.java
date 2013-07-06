@@ -1,5 +1,7 @@
 package be.ac.ucl.lfsab1509.bouboule.game.screen;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -16,6 +18,7 @@ public class ParamScreen extends AbstractScreen {
 		super.show();
 
 		//Set Background
+		
 		addBackGround("drawable-xhdpi/settings.jpg");
 		
 		//Create all Buttons
@@ -23,17 +26,18 @@ public class ParamScreen extends AbstractScreen {
 		Button globalButton = createButton("transparent", 430, 160, 200, 555);
 		Button aboutButton = createButton("transparent", 430, 160, 200, 385);
 		
+		
 		userButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
 				Gdx.app.log ("SCREEN", "clickUser " + x + ", " + y);
-				//TODO: setScreen(new UserScreen())
+				setScreenWithFading(new UserScreen());
 			}
 		});
 		
 		globalButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
 				Gdx.app.log ("SCREEN", "clickGlobal " + x + ", " + y);
-				//TODO: setScreen(new GlobalScreen());
+				setScreenWithFading(new GlobalScreen());
 			}
 		});
 		
