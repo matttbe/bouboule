@@ -40,13 +40,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -97,6 +102,15 @@ public abstract class AbstractScreen implements Screen {
 			font = new BitmapFont();
 		}
 		return font;
+	}
+
+	protected CheckBoxStyle getCheckBoxStyle() {
+		Drawable checkboxOn = new TextureRegionDrawable(new TextureRegion(
+				new Texture("skin/checkboxon.png")));
+		Drawable checkboxOff = new TextureRegionDrawable(new TextureRegion(
+				new Texture("skin/checkboxoff.png")));
+		return new CheckBoxStyle(checkboxOff, checkboxOn, getSkin().getFont(
+				"osaka-font"), Color.WHITE);
 	}
 
 	public SpriteBatch getBatch() {
@@ -196,6 +210,15 @@ public abstract class AbstractScreen implements Screen {
 		return img;
 	}
 
+	protected CheckBox addCheckBox(String text, boolean bChecked, int x, int y) {
+		CheckBox checkBox = new CheckBox(" " + text, getCheckBoxStyle());
+		checkBox.setX(x);
+		checkBox.setY(y);
+		checkBox.setChecked(bChecked);
+		stage.addActor(checkBox);
+		return checkBox;
+	}
+
 	protected Music getMusic() {
 		return GlobalSettings.GAME.getMenusMusic();
 	}
@@ -211,7 +234,8 @@ public abstract class AbstractScreen implements Screen {
 			public void run() {
 				// handle the case where we already return to the screen game
 				// (we have to be quick!)
-				if (!GlobalSettings.GAME.isGameScreen())
+				if (!GlobalSettings.GAME.isGameScreen() && 
+						! GlobalSettings.SOUND_IS_MUTED)
 					getMusic().play();
 			}
 		};
@@ -234,10 +258,12 @@ public abstract class AbstractScreen implements Screen {
 		Gdx.app.log("SCREEN", "Showing screen: " + getName());
 		// set the stage as the input processor
 		Gdx.input.setInputProcessor(stage);
-		if (bMusicNeedsDelay)
-			playMusicWithDelay(2);
-		else
-			getMusic().play();
+		if (! GlobalSettings.SOUND_IS_MUTED) {
+			if (bMusicNeedsDelay)
+				playMusicWithDelay(2);
+			else
+				getMusic().play();
+		}
 		if (GlobalSettings.GAME.isGdxMenus()) {
 			fadeBatch = new SpriteBatch();
 			fadeBatch.getProjectionMatrix().setToOrtho2D(0, 0, 2, 2);
@@ -304,13 +330,15 @@ public abstract class AbstractScreen implements Screen {
 	@Override
 	public void pause() {
 		Gdx.app.log("SCREEN", "Pausing screen: " + getName());
-		getMusic().pause();
+		if (! GlobalSettings.SOUND_IS_MUTED)
+			getMusic().pause();
 	}
 
 	@Override
 	public void resume() {
 		Gdx.app.log("SCREEN", "Resuming screen: " + getName());
-		getMusic().play();
+		if (! GlobalSettings.SOUND_IS_MUTED)
+			getMusic().play();
 	}
 
 	@Override
