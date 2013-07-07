@@ -46,7 +46,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
@@ -158,11 +157,10 @@ public abstract class AbstractScreen implements Screen {
 	protected TextButton createTButton(String skinType, int sizeX, int sizeY, int x,
 			int y, String text) {
 
-		TextButton button = new TextButton(text,getSkin());
+		TextButton button = new TextButton(text, getSkin(), skinType);
 		button.setSize(sizeX, sizeY);
 		button.setX(x);
 		button.setY(y);
-		
 
 		this.stage.addActor(button);
 
@@ -346,13 +344,15 @@ public abstract class AbstractScreen implements Screen {
 	@Override
 	public void pause() {
 		Gdx.app.log("SCREEN", "Pausing screen: " + getName());
-		getMusic().pause();
+		if (! GlobalSettings.SOUND_IS_MUTED)
+			getMusic().pause();
 	}
 
 	@Override
 	public void resume() {
 		Gdx.app.log("SCREEN", "Resuming screen: " + getName());
-		getMusic().play();
+		if (! GlobalSettings.SOUND_IS_MUTED)
+			getMusic().play();
 	}
 
 	@Override
