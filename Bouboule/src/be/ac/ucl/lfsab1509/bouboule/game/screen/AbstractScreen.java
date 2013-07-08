@@ -48,7 +48,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -140,6 +142,24 @@ public abstract class AbstractScreen implements Screen {
 		stage.addActor(label);
 
 		return label;
+	}
+	
+	protected TextField addTextField(String initText, int sizeX, int sizeY, int x, int y){
+		TextField text = new TextField(initText, getSkin());
+		text.setSize(sizeX, sizeY);
+		text.setX(x);
+		text.setY(y);
+		this.stage.addActor(text);
+		return text;
+	}
+	
+	protected SelectBox addSelectBox(Object[] list, int sizeX, int sizeY, int x, int y){
+		SelectBox box = new SelectBox(list, getSkin());
+		box.setSize(sizeX, sizeY);
+		box.setX(x);
+		box.setY(y);
+		this.stage.addActor(box);
+		return box;
 	}
 
 	protected Button createButton(String skinType, int sizeX, int sizeY, int x,

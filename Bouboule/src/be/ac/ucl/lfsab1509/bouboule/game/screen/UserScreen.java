@@ -31,23 +31,35 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class UserScreen extends AbstractScreen{
 
-	private String font = "default";
-	private float fontScale = 3f;
+	private String font = "chinyen-font";
+	private float fontScale = 0.3f;
 	
 	TextButton resetButton;
 	Button leftButton;
 	Button rightButton;
+	CheckBox tutorialCheck;
+	TextField newUserText;
+	TextButton createButton;
+	SelectBox choseBox;
+	
 	public UserScreen() {
 		super(false);
 	}
@@ -59,20 +71,38 @@ public class UserScreen extends AbstractScreen{
 		//Set Background
 		addBackGround("drawable-xhdpi/settings_blank.jpg");
 		
-		addLabel("Select User:", font, fontScale, Color.WHITE,40,1150);
-		addLabel("Create new user:", font, fontScale, Color.WHITE,40,950);
-		addLabel("Chose your Bouboule:", font, fontScale, Color.WHITE,40,750);
-		addLabel("Show the tutorial:", font, fontScale, Color.WHITE,40,350);
-		resetButton = createTButton("default", 350,100 , 30,200,"Reset your game!");
+		addLabel("SELECT  USER", font, fontScale, Color.WHITE,40,1050);
+		addLabel("CREATE  NEW  USER", font, fontScale, Color.WHITE,40,900);
+		addLabel("CHOSE  YOUR  BOUBOULE", font, fontScale, Color.WHITE,40,700);
+		resetButton = createTButton("default", 300,100 , 30,200,"Reset your game!");
 		
-		addImage("boub/normal/boub_basic.png",30,550);
-		leftButton = createButton("default",100,100,30,550);
+		addImage("boub/small/boub_basic.png",30,500);
+		leftButton = createButton("default",100,100,30,500);
 		
-		addImage("boub/normal/boub_basic.png",530,550);
-		rightButton = createButton("default",100,100,530,550);
+		addImage("boub/small/boub_basic.png",530,500);
+		rightButton = createButton("default",100,100,530,500);
+		
+		tutorialCheck = addCheckBox("Show the tutorial!", true, 40,300);
+		
+		newUserText = addTextField("", (int) GlobalSettings.APPWIDTH - (2*40 + 70+10), 70, 40, 850);
+		createButton = createTButton("default",70,70,(int) GlobalSettings.APPWIDTH - (40 + 70),850,"OK!");
+		Object[] tab = {"un","deux","trois"};
+		choseBox = addSelectBox(tab, (int) GlobalSettings.APPWIDTH - (2*40), 70, 40, 1000);
+		
 		
 		
 		addBackButton(false);
+		
+		
+		choseBox.addCaptureListener(new InputListener(){
+			
+			public boolean handle(Event e){
+				//TODO : select
+				return false;
+			}
+			
+		});
+		
 		
 		resetButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
@@ -90,6 +120,18 @@ public class UserScreen extends AbstractScreen{
 			public void clicked (InputEvent event, float x, float y) {
 				Gdx.app.log ("SCREEN", "rightButton " + x + ", " + y);
 				//TODO : right
+			}
+		});
+		tutorialCheck.addListener( new ClickListener() {
+			public void clicked (InputEvent event, float x, float y) {
+				Gdx.app.log ("SCREEN", "tuto" + x + ", " + y);
+				//TODO : tuto
+			}
+		});
+		createButton.addListener( new ClickListener() {
+			public void clicked (InputEvent event, float x, float y) {
+				Gdx.app.log ("SCREEN", "rightButton " + x + ", " + y);
+				//TODO : new user
 			}
 		});
 	}
