@@ -46,7 +46,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -178,11 +177,10 @@ public abstract class AbstractScreen implements Screen {
 	protected TextButton createTButton(String skinType, int sizeX, int sizeY, int x,
 			int y, String text) {
 
-		TextButton button = new TextButton(text,getSkin());
+		TextButton button = new TextButton(text, getSkin(), skinType);
 		button.setSize(sizeX, sizeY);
 		button.setX(x);
 		button.setY(y);
-		
 
 		this.stage.addActor(button);
 
@@ -195,15 +193,15 @@ public abstract class AbstractScreen implements Screen {
 	 */
 	protected void addBackButton(final boolean bReturnToInitMenu) {
 
+		// Image backButton = addImage(TODO, 10, 10); // TODO add image!
+		//______ REMOVE
 		Button backButton = new Button(getSkin(), "default");
 		backButton.setColor(1, 0, 0, 1);
 		backButton.setSize(100, 100);
 		backButton.setX(10);
 		backButton.setY(10);
-
-		// TODO: custom, an image?
-
 		this.stage.addActor(backButton);
+		//______ REMOVE
 
 		backButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
@@ -366,13 +364,15 @@ public abstract class AbstractScreen implements Screen {
 	@Override
 	public void pause() {
 		Gdx.app.log("SCREEN", "Pausing screen: " + getName());
-		getMusic().pause();
+		if (! GlobalSettings.SOUND_IS_MUTED)
+			getMusic().pause();
 	}
 
 	@Override
 	public void resume() {
 		Gdx.app.log("SCREEN", "Resuming screen: " + getName());
-		getMusic().play();
+		if (! GlobalSettings.SOUND_IS_MUTED)
+			getMusic().play();
 	}
 
 	@Override
