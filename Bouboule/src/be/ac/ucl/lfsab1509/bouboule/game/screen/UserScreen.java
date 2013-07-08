@@ -322,7 +322,7 @@ public class UserScreen extends AbstractScreen {
 					if ((Boolean) object == true)
 						EndGameListener.resetGame ();
 				}
-			}.text("You will restart the game on level 1\nDo you want to continue?")
+			}.text("It will restart the game on level 1\nDo you want to continue?")
 			.button("Yes", true).button("No", false).show(stage);
 		}
 	};
@@ -349,7 +349,7 @@ public class UserScreen extends AbstractScreen {
 					else
 						tutorialCheckBox.setChecked(false);
 				}
-			}.text("You will restart the game on level 1\nDo you want to continue?")
+			}.text("It will restart the game on level 1\nDo you want to continue?")
 			.button("Yes", true).button("No", false).show(stage);
 		}
 	};
