@@ -47,11 +47,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -108,10 +105,8 @@ public abstract class AbstractScreen implements Screen {
 	}
 
 	protected CheckBoxStyle getCheckBoxStyle() {
-		Drawable checkboxOn = new TextureRegionDrawable(new TextureRegion(
-				new Texture("skin/checkboxon.png")));
-		Drawable checkboxOff = new TextureRegionDrawable(new TextureRegion(
-				new Texture("skin/checkboxoff.png")));
+		Drawable checkboxOn = getDrawableFromFile("skin/checkboxon.png");
+		Drawable checkboxOff = getDrawableFromFile("skin/checkboxoff.png");
 		return new CheckBoxStyle(checkboxOff, checkboxOn, getSkin().getFont(
 				"osaka-font"), Color.WHITE);
 	}
@@ -131,6 +126,10 @@ public abstract class AbstractScreen implements Screen {
 		return skin;
 	}
 
+	protected Drawable getDrawableFromFile(String path) {
+		return new TextureRegionDrawable(new TextureRegion(new Texture(path)));
+	}
+
 	protected Label addLabel(String text, String fontName, float scale,
 			Color color, int x, int y) {
 
@@ -142,42 +141,10 @@ public abstract class AbstractScreen implements Screen {
 
 		return label;
 	}
-	
-	protected TextField addTextField(String initText, int sizeX, int sizeY, int x, int y){
-		TextField text = new TextField(initText, getSkin());
-		text.setSize(sizeX, sizeY);
-		text.setX(x);
-		text.setY(y);
-		this.stage.addActor(text);
-		return text;
-	}
-	
-	protected SelectBox addSelectBox(Object[] list, int sizeX, int sizeY, int x, int y){
-		SelectBox box = new SelectBox(list, getSkin());
-		box.setSize(sizeX, sizeY);
-		box.setX(x);
-		box.setY(y);
-		this.stage.addActor(box);
-		return box;
-	}
 
 	protected Button createButton(String skinType, int sizeX, int sizeY, int x,
 			int y) {
-
 		Button button = new Button(getSkin(), skinType);
-		button.setSize(sizeX, sizeY);
-		button.setX(x);
-		button.setY(y);
-
-		this.stage.addActor(button);
-
-		return button;
-	}
-	
-	protected TextButton createTButton(String skinType, int sizeX, int sizeY, int x,
-			int y, String text) {
-
-		TextButton button = new TextButton(text, getSkin(), skinType);
 		button.setSize(sizeX, sizeY);
 		button.setX(x);
 		button.setY(y);
