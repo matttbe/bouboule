@@ -43,6 +43,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class GlobalScreen extends AbstractScreen {
 
+	private static final String FONT_TITLE = "chinyen-font";
+	private static final float  FONT_SCALE = .5f;
+
 	private CheckBox soundCheckBox;
 	private CheckBox rotationCheckBox;
 	private Slider sensitivitySlider;
@@ -79,7 +82,7 @@ public class GlobalScreen extends AbstractScreen {
 	// _________________________________ SOUND
 
 	private void addSoundOptions() {
-		addLabel("SOUND", "chinyen-font", .5f, Color.WHITE, 20, iY)
+		addLabel("SOUND", FONT_TITLE, FONT_SCALE, Color.WHITE, 20, iY)
 				.setTouchable(null);
 
 		soundCheckBox = addCheckBox("Music", ! GlobalSettings.SOUND_IS_MUTED,
@@ -103,7 +106,7 @@ public class GlobalScreen extends AbstractScreen {
 	// _________________________________ ROTATION
 
 	private void addRotationOptions() {
-		addLabel("ROTATION", "chinyen-font", .5f, Color.WHITE, 20, iY)
+		addLabel("ROTATION", FONT_TITLE, FONT_SCALE, Color.WHITE, 20, iY)
 			.setTouchable(null);
 
 		rotationCheckBox = addCheckBox("Rotation of the balls",
@@ -121,7 +124,7 @@ public class GlobalScreen extends AbstractScreen {
 	// _________________________________ SENSITIVITY
 
 	private void addSensitivityOptions() {
-		addLabel("SENSITIVITY", "chinyen-font", .5f, Color.WHITE, 20, iY)
+		addLabel("SENSITIVITY", FONT_TITLE, FONT_SCALE, Color.WHITE, 20, iY)
 				.setTouchable(null);
 
 		sensitivitySlider = new Slider(
@@ -149,7 +152,7 @@ public class GlobalScreen extends AbstractScreen {
 	// ________________________________ BONUS
 
 	private void addBonusImages() {
-		addLabel("BONUS", "chinyen-font", .5f, Color.WHITE, 20, iY)
+		addLabel("BONUS", FONT_TITLE, FONT_SCALE, Color.WHITE, 20, iY)
 				.setTouchable(null);
 
 		final int iX = 125;
