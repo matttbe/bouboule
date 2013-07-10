@@ -152,12 +152,12 @@ public class GameLoop {
 		} catch (GdxRuntimeException e) {
 			level.loadLevel("Level1"); // should not happen...
 		}
-		level.readLevelArena(graphicManager);
+		String arenaName = level.readLevelArena(graphicManager);
 		level.readLevelBouboule(graphicManager);
 		level.readLevelObstacles(graphicManager);
 		level.readLevelMapNodes();
 		
-		background = new Texture("terrain/Arena/arenabg.jpg");
+		background = new Texture(arenaName+"bg.jpg");
 
 	}
 

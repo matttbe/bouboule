@@ -201,7 +201,7 @@ public class LevelLoader {
 	 * 
 	 * 	public void readLevelArena(GraphicManager graphicManager)
 	 */
-	public void readLevelArena(final GraphicManager graphicManager) {
+	public String readLevelArena(final GraphicManager graphicManager) {
 
 		Element aren = file.getChildByName("Arena");	
 
@@ -221,6 +221,8 @@ public class LevelLoader {
 		GlobalSettings.GAME.setNewLoopMusic(cMusicName); // e.g. klez.mp3
 
 		Gdx.app.log("XML", "Arena Loaded :" + jsonName);
+		
+		return texRegionPath.substring(0, texRegionPath.length() - 4);
 
 	}
 
