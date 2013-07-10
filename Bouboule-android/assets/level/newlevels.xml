@@ -510,7 +510,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Schrink/schrink.jpg"
+            texRegionPath="terrain/Schrink/schrink.png"
             music="Schrink.mp3" >
         </Arena>
 
@@ -587,7 +587,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Cheesy/cheesy.jpg"
+            texRegionPath="terrain/Cheesy/cheesy.png"
             music="Cheesy.mp3" >
         </Arena>
 
@@ -742,7 +742,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Sushi/sushi.jpg"
+            texRegionPath="terrain/Sushi/sushi.png"
             music="Sushi.mp3" >
         </Arena>
 
@@ -834,7 +834,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Arena/arena.jpg"
+            texRegionPath="terrain/Arena/arena.png"
             music="Arena.mp3" >
         </Arena>
 
@@ -897,7 +897,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Tatami/tatami.jpg"
+            texRegionPath="terrain/Tatami/tatami.png"
             music="Tatami.mp3" >
         </Arena>
 
@@ -1048,7 +1048,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Sailor/sailor.jpg"
+            texRegionPath="terrain/Sailor/sailor.png"
             music="OneWay.mp3" >
         </Arena>
 
@@ -1121,7 +1121,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Lazer/lazer.jpg"
+            texRegionPath="terrain/Lazer/lazer.png"
             music="Arena.mp3" >
         </Arena>
 
@@ -1203,7 +1203,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Arena/arena.jpg"
+            texRegionPath="terrain/Arena/arena.png"
             music="Arena.mp3" >
         </Arena>
 
@@ -1267,7 +1267,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/SpaceShip/spaceship.jpg" 
+            texRegionPath="terrain/SpaceShip/spaceship.png" 
             music="Arena">
         </Arena>
 
@@ -1319,7 +1319,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/YinYang/yinyang.jpg"
+            texRegionPath="terrain/YinYang/yinyang.png"
             music="YinYang.mp3" >
         </Arena>
 
@@ -1401,7 +1401,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/OneWay/oneway.jpg"
+            texRegionPath="terrain/OneWay/oneway.png"
             music="OneWay.mp3" >
         </Arena>
 
@@ -1570,7 +1570,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Sailor/sailor.jpg" 
+            texRegionPath="terrain/Sailor/sailor.png" 
             music="OneWay.mp3">
         </Arena>
 
@@ -1711,7 +1711,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Skyline/sky.jpg"
+            texRegionPath="terrain/Skyline/sky.png"
             music="Skyline.mp3" >
         </Arena>
 
@@ -1763,7 +1763,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Tatami/tatami.jpg"
+            texRegionPath="terrain/Tatami/tatami.png"
             music="Tatami.mp3" >
         </Arena>
 
@@ -1915,7 +1915,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Lava/lava.jpg"
+            texRegionPath="terrain/Lava/lava.png"
             music="Lava.mp3" >
         </Arena>
 
@@ -1967,7 +1967,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Ice/ice.jpg"
+            texRegionPath="terrain/Ice/ice.png"
             music="Ice.mp3" >
         </Arena>
 
@@ -2021,7 +2021,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/SpaceShip/spaceship.jpg" 
+            texRegionPath="terrain/SpaceShip/spaceship.png" 
             music="Arena.mp3" >
         </Arena>
 
@@ -2077,7 +2077,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Eggroll/eggroll.jpg"
+            texRegionPath="terrain/Eggroll/eggroll.png"
             music="Eggroll.mp3" >
         </Arena>
 
@@ -2144,7 +2144,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Schrink/schrink.jpg"
+            texRegionPath="terrain/Schrink/schrink.png"
             music="Schrink.mp3" >
         </Arena>
 
@@ -2221,7 +2221,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Lazer/lazer.jpg" 
+            texRegionPath="terrain/Lazer/lazer.png" 
             music="Tatami.mp3">
         </Arena>
 
@@ -2302,7 +2302,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/DoubleHoles/doubleholes.jpg"
+            texRegionPath="terrain/DoubleHoles/doubleholes.png"
             music="DoubleHoles.mp3" >
         </Arena>
 
@@ -2468,7 +2468,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Lava/lava.jpg"
+            texRegionPath="terrain/Lava/lava.png"
             music="Lava.mp3" >
         </Arena>
 
