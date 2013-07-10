@@ -144,9 +144,12 @@ public class GameLoop {
 
 		Gdx.app.log("Matth", "Dipose of the graphicManager");
 
-		// Clear the graphic Manager and background for a new use.
+		// Clear the graphic Manager for a new use.
 		graphicManager.dispose();
-		background.dispose();
+		
+		// Clear the background for a new use.
+		if ( background != null)
+			background.dispose();
 		
 
 		// Reset EndGame Listener
@@ -467,16 +470,16 @@ public class GameLoop {
 		CharSequence timerS = getTimerCharFromInt(timer % 60);
 
 		if (timer < 6) // last 5 seconds
-			fontOsakaRed.draw(batch, timerS + "''", 630, 1122);
+			fontOsakaRed.draw(batch, timerS + "''", 1032, 1838);
 		else if (timer < 60)
-			fontOsaka.draw(batch, timerS + "''", 630, 1122);
+			fontOsaka.draw(batch, timerS + "''", 1032, 1838);
 		else
-			fontOsaka.draw(batch, timerM + "' " + timerS + "''", 630, 1122);
+			fontOsaka.draw(batch, timerM + "' " + timerS + "''", 1032, 1838);
 
-		fontOsaka.draw(batch, lives, 630, 1167);
-		fontOsaka.draw(batch, score, 630, 1205);
-		fontOswald.draw(batch, levelD, 285, 1180);
-		fontOswald.draw(batch, levelU, 345, 1180);
+		fontOsaka.draw(batch, lives, 1032, 1912);
+		fontOsaka.draw(batch, score, 1032, 1974);
+		fontOswald.draw(batch, levelD, 467, 1933);
+		fontOswald.draw(batch, levelU, 565, 1933);
 
 	}
 
