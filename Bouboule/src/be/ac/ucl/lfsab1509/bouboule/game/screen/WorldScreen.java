@@ -10,7 +10,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  *    Matthieu Baerts <matthieu.baerts@student.uclouvain.be>
  *    Baptiste Remy <baptiste.remy@student.uclouvain.be>
  *    Nicolas Van Wallendael <nicolas.vanwallendael@student.uclouvain.be>
- *    H??l??ne Verhaeghe <helene.verhaeghe@student.uclouvain.be>
+ *    Hélène Verhaeghe <helene.verhaeghe@student.uclouvain.be>
  * 
  * Bouboule is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,79 +26,48 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-public class LooseScreen extends AbstractScreen {
 
-	private BitmapFont fontOsaka;
+public class WorldScreen extends AbstractScreen {
 
-	public LooseScreen() {
-		super(true);
+	private int iWorld = (GlobalSettings.PROFILE.getBestLevel() - 1) / 4;
+	private int lastUnlockedWorld = (GlobalSettings.PROFILE.getBestLevel() - 1) / 4 + 1;
+
+
+	public WorldScreen() {
+		super(false);
 	}
 
 	@Override
 	public void show() {
 		super.show();
 
-		// Set Font
-
-		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
-				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
-
-		fontOsaka.setColor(0f, 0f, 0f, 0.85f);
-
-		// Set Background
-
-		addBackGround("drawable-xhdpi/you_lose.jpg");
-
-		// Set Lives
-
-		switch (GlobalSettings.PROFILE.getNbLifes()) {
-		case 3:
-			addBackGround("drawable-xhdpi/coeur3.png");
-			break;
-		case 2:
-			addBackGround("drawable-xhdpi/coeur2.png");
-			break;
-		case 1:
-			addBackGround("drawable-xhdpi/coeur1.png");
-			break;
-
-		default:
-			break;
-		}
-
+		setSkin("skin/Bouboule.json");
+		
+		//Set BAckground
+		
+		addBackGround("drawable-xhdpi/bglevel.jpg");
+		
 		// Create all Buttons - Play Button
 
-		Button retryButton = createButton("transparent", 475, 147, 103, 996);
-		Button menuButton  = createButton("transparent", 475, 147, 734, 996);
+		Button nextButton = createButton("default", 0, 0, 63, 608);
 
-		retryButton.addListener(new ClickListener() {
+		nextButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "clickStart " + x + ", " + y);
+				Gdx.app.log("SCREEN", "clickNext " + x + ", " + y);
 				setScreenWithFading(null);
 			}
 		});
 
-		menuButton.addListener(new ClickListener() {
-			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "clickParam " + x + ", " + y);
-				setScreenWithFading(new MenuScreen());
-			}
-		});
-
-		// Create all fonts
-
-		addLabel(Integer.toString(GlobalSettings.PROFILE.getScore()),
-				"osakaBig-font", 0.44f, new Color(0.2f, 0.188f, 0.094f, 1f),
-				328, 1190);
-
 	}
+
+
 }

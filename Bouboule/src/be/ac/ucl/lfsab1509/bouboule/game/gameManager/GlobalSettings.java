@@ -36,8 +36,9 @@ import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 
 public class GlobalSettings {
 
-	public static final float APPWIDTH  = 800f;
-	public static final float APPHEIGHT = 1250f;
+	public static final float APPWIDTH  = 1311f;//1536f;//800f;
+	public static final float APPHEIGHT = 2048f;//1250f;
+	public static 		float SHIFT_BG;
 
 	//Definition for the time step properties
 	public static final float 		BOX_STEP			= 1 / 60f;

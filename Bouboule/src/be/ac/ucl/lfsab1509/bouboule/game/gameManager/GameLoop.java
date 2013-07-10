@@ -64,6 +64,8 @@ public class GameLoop {
 	private float fadePause;
 	private Sprite spriteFade;
 	private SpriteBatch batch;
+	
+	private Texture background;
 
 	private static Random random;
 
@@ -154,6 +156,8 @@ public class GameLoop {
 		level.readLevelBouboule(graphicManager);
 		level.readLevelObstacles(graphicManager);
 		level.readLevelMapNodes();
+		
+		background = new Texture("terrain/Arena/arenabg.jpg");
 
 	}
 
@@ -193,6 +197,10 @@ public class GameLoop {
 
 		// Draw all the know bodies
 
+		batch.disableBlending();
+		batch.draw(background, GlobalSettings.SHIFT_BG,0 );
+		batch.enableBlending();
+		
 		graphicManager.draw(batch);
 
 		writeText();

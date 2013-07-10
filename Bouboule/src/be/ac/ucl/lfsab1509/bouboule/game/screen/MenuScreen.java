@@ -100,11 +100,12 @@ public class MenuScreen extends AbstractScreen {
 		actiontitle.setActor(tableTitle);
 
 		// Add 5 button transparent
-		Button playButton = createButton("transparent", 430, 160, 200, 725);
-		Button paramButton = createButton("transparent", 430, 160, 200, 555);
-		Button scoreButton = createButton("transparent", 430, 160, 200, 385);
-		Button boubouleButton = createButton("transparent", 500, 350, 200, 0);
-		Button titleButton = createButton("transparent", 500, 500, 200, 885);
+		Button playButton 	= createButton("transparent", 690, 250, 312, 1150);
+		Button paramButton	= createButton("transparent", 690, 250, 312, 887);
+		Button scoreButton 	= createButton("transparent", 690, 250, 312, 615);
+		
+		Button boubouleButton = createButton("transparent", 1000, 600, 200, 0);
+		Button titleButton = createButton("transparent", 1000, 1000, 200, 1450);
 
 		// Listener for the button
 		playButton.addListener(new ClickListener() {

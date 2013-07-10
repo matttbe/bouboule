@@ -86,7 +86,7 @@ public class Arena extends GameBody {
 	@Override
 	public void draw(final SpriteBatch sp) {
 		
-		sp.disableBlending();
+		//sp.disableBlending();
 		
 		if (origin != null) {
 
@@ -102,7 +102,7 @@ public class Arena extends GameBody {
 			sp.draw(texture, positionVector.x, positionVector.y);
 		}
 		
-		sp.enableBlending();
+		//sp.enableBlending();
 
 	}
 

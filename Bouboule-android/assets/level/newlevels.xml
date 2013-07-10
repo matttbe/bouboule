@@ -40,7 +40,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Arena/arena.jpg"
+            texRegionPath="terrain/Arena/arena.png"
             music="Arena.mp3" >
         </Arena>
 
@@ -105,7 +105,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Arena/arena.jpg"
+            texRegionPath="terrain/Arena/arena.png"
             music="Arena.mp3" >
         </Arena>
 
@@ -171,7 +171,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Eggroll/eggroll.jpg"
+            texRegionPath="terrain/Eggroll/eggroll.png"
             music="Eggroll.mp3" >
         </Arena>
 
@@ -235,7 +235,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/CherryBlossom/cherryblossom.jpg" 
+            texRegionPath="terrain/CherryBlossom/cherryblossom.png" 
             music="Eggroll.mp3">
         </Arena>
 
@@ -288,7 +288,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/DoubleHoles/doubleholes.jpg"
+            texRegionPath="terrain/DoubleHoles/doubleholes.png"
             music="DoubleHoles.mp3" >
         </Arena>
 
@@ -456,7 +456,7 @@
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Ice/ice.jpg"
+            texRegionPath="terrain/Ice/ice.png"
             music="Ice.mp3" >
         </Arena>
 

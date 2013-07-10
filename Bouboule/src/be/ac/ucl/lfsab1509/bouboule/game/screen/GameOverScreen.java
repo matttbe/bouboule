@@ -51,8 +51,8 @@ public class GameOverScreen extends AbstractScreen {
 
 		// Create all Buttons - Play Button
 
-		Button restartButton = createButton("transparent", 290, 90, 63, 497);
-		Button menuButton = createButton("transparent", 290, 90, 448, 497);
+		Button restartButton = createButton("transparent", 475, 147, 103, 814);
+		Button menuButton 	 = createButton("transparent", 475, 147, 734, 814);
 
 		restartButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
@@ -72,7 +72,7 @@ public class GameOverScreen extends AbstractScreen {
 
 		Label label = addLabel(
 				Integer.toString(GlobalSettings.PROFILE.getEndGameScore()),
-				"chinyen-font", 0.7f, new Color(1f, 1f, 1f, 1f), 0, 625);
+				"chinyen-font", 0, new Color(1f, 1f, 1f, 1f), 0, 1024);
 
 		label.setX(GlobalSettings.APPWIDTH / 2f - 
 				label.getTextBounds().width / 2f);

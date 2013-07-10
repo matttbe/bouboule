@@ -47,9 +47,9 @@ public class ParamScreen extends AbstractScreen {
 		addBackGround("drawable-xhdpi/settings.jpg");
 		
 		//Create all Buttons
-		Button userButton  = createButton("transparent", 430, 160, 200, 725);
-		Button globalButton = createButton("transparent", 430, 160, 200, 555);
-		Button aboutButton = createButton("transparent", 430, 160, 200, 385);
+		Button userButton  	= createButton("transparent", 690, 250, 312, 1150);
+		Button globalButton = createButton("transparent", 690, 250, 312, 887);
+		Button aboutButton 	= createButton("transparent", 690, 250, 312, 615);
 		
 		
 		userButton.addListener( new ClickListener() {

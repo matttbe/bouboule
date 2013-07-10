@@ -27,6 +27,8 @@
 //Tks for the help of http://rotatingcanvas.com/
 package be.ac.ucl.lfsab1509.bouboule.game.util;
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
@@ -47,6 +49,10 @@ public class CameraHelper {
 		float physicalWidth = Gdx.graphics.getWidth();
 		float physicalHeight = Gdx.graphics.getHeight();
 		float aspect = virtualWidth / virtualHeight;
+		
+		//2048f state for the general background size
+		GlobalSettings.SHIFT_BG = -(2048f-Gdx.graphics.getWidth())/2;
+		
 		// This is to maintain the aspect ratio.
 		// If the virtual aspect ration does not match with the aspect ratio
 		// of the hardware screen then the viewport would scaled to
