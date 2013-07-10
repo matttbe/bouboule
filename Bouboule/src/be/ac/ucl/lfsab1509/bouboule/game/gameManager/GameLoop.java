@@ -66,6 +66,8 @@ public class GameLoop {
 	private SpriteBatch batch;
 	
 	private Texture background;
+	private Texture scoreboard;
+
 
 	private static Random random;
 
@@ -120,6 +122,10 @@ public class GameLoop {
 			spriteFade.setColor(0, 0, 0, 0);
 			spriteFade.setSize(GlobalSettings.APPWIDTH, GlobalSettings.APPHEIGHT);
 		}
+		
+		// load the scoreboard
+		
+		scoreboard = new Texture("terrain/ScoreBoard/scoreboard.png");
 
 		// load the counter
 		countDown = new CountDown(2, 2, 1f, "anim/countdown.png", true); // 3 sec
@@ -138,8 +144,10 @@ public class GameLoop {
 
 		Gdx.app.log("Matth", "Dipose of the graphicManager");
 
-		// Clear the graphic Manager for a new use.
+		// Clear the graphic Manager and background for a new use.
 		graphicManager.dispose();
+		background.dispose();
+		
 
 		// Reset EndGame Listener
 		EndGameListener.resetListener();
@@ -200,6 +208,8 @@ public class GameLoop {
 		batch.disableBlending();
 		batch.draw(background, GlobalSettings.SHIFT_BG,0 );
 		batch.enableBlending();
+		
+		batch.draw(scoreboard, 0, 0);
 		
 		graphicManager.draw(batch);
 
@@ -480,6 +490,8 @@ public class GameLoop {
 		if (debugRenderer != null)
 			debugRenderer.dispose();
 		graphicManager.dispose();
+		background.dispose();
+		scoreboard.dispose();
 		countDown.dispose();
 		tutorial.dispose();
 		fontOsaka.dispose();
