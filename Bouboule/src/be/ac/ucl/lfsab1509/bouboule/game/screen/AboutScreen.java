@@ -53,7 +53,7 @@ public class AboutScreen extends AbstractScreen {
 				+ "Graphisms:\n"
 				+ " Van Wallendael Julien\n\n"
 				+ "Music and sounds:\n"
-				+ " Adans Paschal (adanspaschal@gmail.com) and"
+				+ " Adans Paschal (adanspaschal.gmail.com) and"
 					+ " Klez (The gateway - SpaceShip level)\n\n"
 				+ "Credits & License:\n"
 				+ " Bouboule was developed during the course"
