@@ -74,9 +74,6 @@ public class AboutScreen extends AbstractScreen {
 
 		label.setWrap(true); // return to the next lines
 
-		label.setFontScale(0.5f, 0.5f); // avoid transformations // TODO => set to 1
-		label.setScale(1);
-
 		// filters
 		// label.getStyle().font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
