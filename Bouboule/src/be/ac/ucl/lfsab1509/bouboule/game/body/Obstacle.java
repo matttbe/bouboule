@@ -156,4 +156,9 @@ public class Obstacle extends GameBody {
 		getEntity().setAlive(!getEntity().isAlive());
 	}
 
+	@Override
+	public void destroyBody() {
+		super.destroyBody();
+		texture.getTexture().dispose();
+	}
 }

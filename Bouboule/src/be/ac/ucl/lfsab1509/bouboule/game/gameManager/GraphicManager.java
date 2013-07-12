@@ -41,7 +41,7 @@ import com.badlogic.gdx.physics.box2d.World;
  *
  */
 public class GraphicManager {
-	
+
 	private static World world;
 	private static final float GAME_TO_WORLD = 100.0f;
 	private static final float WORLD_TO_GAME = 0.01f;
@@ -51,10 +51,10 @@ public class GraphicManager {
 	public static int				BONUS_SPAWN_RATE = 0;
 	public static ArrayList<String>	BONUS_ENABLED = null;
 	public static int				TIME = 30;
-	
+
 	//Store all the body of the game
 	private ArrayList<GameBody> bodies;
-	
+
 	/**
 	 * Create the world, the body container and define the game as notPaused
 	 * 
@@ -67,7 +67,7 @@ public class GraphicManager {
 		//world.setVelocityThreshold(10.0f);
 		bodies	 = new ArrayList<GameBody>();
 	}
-	
+
 	/**
 	 * Return the world
 	 * 
@@ -86,7 +86,7 @@ public class GraphicManager {
 	public static float convertToGame(final float x) {
 		return x * WORLD_TO_GAME;
 	}
-	
+
 	/**
 	 * Static function that convert the value to the world reality (for distances) 
 	 * @param x : value to convert 
@@ -96,20 +96,21 @@ public class GraphicManager {
 	public static float convertToWorld(final float x) {
 		return x * GAME_TO_WORLD;
 	}
-	
+
 	/**
 	 * Remove all the stored bodies and delete the container
-	 * 
-	 * dispose()
+	 * @param bDisposeWorld true to dispose the world (at the end)
 	 */
-	public void dispose() {
+	public void dispose(boolean bDisposeWorld) {
 		for (GameBody body:bodies) {
 			body.destroyBody();
 		}
 		bodies.clear();
+
+		if (bDisposeWorld)
+			world.dispose();
 	}
-	
-	
+
 	/**
 	 * Add the specified body to the graphical container to be used
 	 * in the generated world
@@ -138,8 +139,7 @@ public class GraphicManager {
 			body.update();
 		}
 	}
-	
-	
+
 	public static float getGameToWorld() {
 		return GAME_TO_WORLD;
 	}
@@ -159,8 +159,4 @@ public class GraphicManager {
 			body.draw(batch);
 		}
 	}
-	
-
-
-	
 }

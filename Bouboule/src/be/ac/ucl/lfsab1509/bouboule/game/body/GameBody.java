@@ -221,12 +221,10 @@ public abstract class GameBody {
 	 * DestroyBody()
 	 */
 	public void destroyBody() {
-
 		if (body != null) {
-
 			entity.setAlive(false);
 			GraphicManager.getWorld().destroyBody(body);
-			body	= null;
+			body = null;
 		}
 	}
 
@@ -245,8 +243,8 @@ public abstract class GameBody {
 
 	//Getter and Setter
 
-	public void setBody(final Body bodi) {
-		this.body = bodi;
+	public void setBody(final Body body) {
+		this.body = body;
 	}
 
 	public Body getBody() {
