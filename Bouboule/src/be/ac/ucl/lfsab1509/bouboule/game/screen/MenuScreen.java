@@ -89,7 +89,7 @@ public class MenuScreen extends AbstractScreen {
 		tableTitle.setTransform(true);
 		tableTitle.setWidth(GlobalSettings.APPWIDTH); // all the width
 		tableTitle.setX(0);
-		tableTitle.setY(1050);
+		tableTitle.setY(1720);
 		tableTitle.setOrigin(GlobalSettings.APPWIDTH / 2,
 				tableTitle.getHeight() / 2); // at the center
 		stage.addActor(tableTitle);
