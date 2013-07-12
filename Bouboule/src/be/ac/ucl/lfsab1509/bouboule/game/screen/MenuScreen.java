@@ -77,10 +77,10 @@ public class MenuScreen extends AbstractScreen {
 		actionbouR.setActor(imgBoubouleR);
 
 		// add the title
-		title = new Label("BOUBOULE", getSkin(), "darktimes-font", new Color(.388f, .733f, .984f, 1f));
+		title = new Label("BOUBOULE", getSkin(), "darktimes-font",
+				new Color(.388f, .733f, .984f, 1f));
 		title.setAlignment(Align.center); // center
 		title.setWidth(GlobalSettings.APPWIDTH);
-		title.setColor(.388f, .733f, .984f, 1f); // menu color
 		// title.setColor(.2f, .7098f, .898f, 1f);  // android color
 
 		// add the title in a table in order to rotate it.
