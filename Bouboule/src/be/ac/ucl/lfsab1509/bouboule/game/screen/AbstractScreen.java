@@ -26,6 +26,8 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.util.ArrayList;
+
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
@@ -50,7 +52,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
@@ -66,6 +67,7 @@ public abstract class AbstractScreen implements Screen {
 	private BitmapFont font;
 	private SpriteBatch batch;
 	private Skin skin;
+	private ArrayList<Texture> textureList;
 
 	// fade
 	private Sprite spriteFade;
@@ -89,6 +91,7 @@ public abstract class AbstractScreen implements Screen {
 			spriteFade.setColor(Color.BLACK);
 			spriteFade.setSize(GlobalSettings.APPWIDTH, GlobalSettings.APPHEIGHT);
 		}
+		textureList = new ArrayList<Texture>();
 	}
 
 	protected String getName() {
@@ -105,8 +108,10 @@ public abstract class AbstractScreen implements Screen {
 	}
 
 	protected CheckBoxStyle getCheckBoxStyle() {
-		Drawable checkboxOn = getDrawableFromFile("skin/checkboxon.png");
-		Drawable checkboxOff = getDrawableFromFile("skin/checkboxoff.png");
+		TextureRegionDrawable checkboxOn =
+				getDrawableFromFile("skin/checkboxon.png", true);
+		TextureRegionDrawable checkboxOff =
+				getDrawableFromFile("skin/checkboxoff.png", true);
 		return new CheckBoxStyle(checkboxOff, checkboxOn, getSkin().getFont(
 				"osaka-font"), Color.WHITE);
 	}
@@ -127,12 +132,23 @@ public abstract class AbstractScreen implements Screen {
 	}
 	
 	protected void setSkin(String path) {
-			FileHandle skinFile = Gdx.files.internal(path);
-			skin = new Skin(skinFile);
+		if (skin != null)
+			skin.dispose();
+		FileHandle skinFile = Gdx.files.internal(path);
+		skin = new Skin(skinFile);
 	}
 
-	protected Drawable getDrawableFromFile(String path) {
-		return new TextureRegionDrawable(new TextureRegion(new Texture(path)));
+	/**
+	 * @return a TextureRegionDrawable (Drawable) which is disposable via:
+	 *           `getRegion().getTexture().dispose();`
+	 *          if bAutomaticallyDisposeTexture is false.
+	 */
+	protected TextureRegionDrawable getDrawableFromFile(String path,
+			boolean bAutomaticallyDisposeTexture) {
+		Texture texture = new Texture(path);
+		if (bAutomaticallyDisposeTexture)
+			textureList.add(texture);
+		return new TextureRegionDrawable(new TextureRegion(texture));
 	}
 
 	protected Label addLabel(String text, String fontName, float scale,
@@ -212,9 +228,16 @@ public abstract class AbstractScreen implements Screen {
 		return addImage(imagePath, 0, 0);
 
 	}
-	
+
+	/**
+	 * @return an Image created from a Texture which will be automatically
+	 *         disposed.
+	 */
 	protected Image addImage(String imagePath, int x, int y) {
-		Image img = new Image(new Texture(imagePath));
+		Texture texture = new Texture(imagePath);
+		textureList.add(texture);
+
+		Image img = new Image(texture);
 		img.setPosition(x, y);
 		this.stage.addActor(img);
 		return img;
@@ -364,5 +387,8 @@ public abstract class AbstractScreen implements Screen {
 			skin.dispose();
 		if (fadeBatch != null)
 			fadeBatch.dispose();
+		for (Texture texture : textureList) {
+			texture.dispose();
+		}
 	}
 }

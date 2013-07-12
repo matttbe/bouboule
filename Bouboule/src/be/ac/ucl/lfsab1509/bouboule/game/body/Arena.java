@@ -103,7 +103,12 @@ public class Arena extends GameBody {
 		}
 		
 		//sp.enableBlending();
+	}
 
+	@Override
+	public void destroyBody() {
+		super.destroyBody();
+		texture.getTexture().dispose();
 	}
 
 }

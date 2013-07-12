@@ -138,20 +138,13 @@ public class Bonus extends GameBody {
 	}
 
 	/**
-	 * Destroy the body+kill speed Task if needed if needed
-	 * 
-	 * DestroyBody()
+	 * Destroy the body + kill speed Task if needed if needed
 	 */
+	@Override
 	public void destroyBody() {
-
-		if (body != null) {
-
-			entity.setAlive(false);
-			GraphicManager.getWorld().destroyBody(body);
-			body	= null;
-			
-			this.entity.stopTask();
-		}
+		super.destroyBody();
+		entity.stopTask();
+		texture.getTexture().dispose();
 	}
 	
 }

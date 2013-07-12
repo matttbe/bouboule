@@ -45,6 +45,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldFilter;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class UserScreen extends AbstractScreen {
 
@@ -69,6 +70,7 @@ public class UserScreen extends AbstractScreen {
 	private ArrayList<String> boubouleFiles;
 	private int iNbBoubouleFiles;
 	private int iCurrentBoub;
+	private TextureRegionDrawable leftBoubDraw, centerBoubDraw, rightBoubDraw;
 
 	public UserScreen() {
 		super(false);
@@ -92,6 +94,12 @@ public class UserScreen extends AbstractScreen {
 		addTutorialOptions();
 
 		addBackButton(false);
+	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		disposeBouboulesImages();
 	}
 
 	// called when selecting a existed/new user
@@ -225,14 +233,23 @@ public class UserScreen extends AbstractScreen {
 		addLabel("CHOOSE  YOUR  BOUBOULE", FONT_TITLE, FONT_SCALE, Color.WHITE, 40, 700)
 				.setTouchable(null);
 
-		leftImage = addImage(DEFAULT_NORMAL_BOUBOULE, 30, 500);
+		leftBoubDraw = getDrawableFromFile(DEFAULT_NORMAL_BOUBOULE, false);
+		leftImage = new Image(leftBoubDraw);
+		leftImage.setPosition(30, 500);
+		stage.addActor(leftImage);
 		leftImage.addListener(leftImageClick);
 
-		centerImage = addImage(BoubImages.BOUB_DIR_GIANT
+		centerBoubDraw = getDrawableFromFile(BoubImages.BOUB_DIR_GIANT
 				+ GlobalSettings.PROFILE.getBoubName()
-				+ BoubImages.BOUB_EXTENTION, 100, 500);
+				+ BoubImages.BOUB_EXTENTION, false);
+		centerImage = new Image(centerBoubDraw);
+		centerImage.setPosition(100, 500);
+		stage.addActor(centerImage);
 
-		rightImage = addImage(DEFAULT_NORMAL_BOUBOULE, 530, 500);
+		rightBoubDraw = getDrawableFromFile(DEFAULT_NORMAL_BOUBOULE, false);
+		rightImage = new Image(rightBoubDraw);
+		rightImage.setPosition(530, 500);
+		stage.addActor(rightImage);
 		rightImage.addListener(rightImageClick);
 
 		setDefaultImages();
@@ -287,19 +304,35 @@ public class UserScreen extends AbstractScreen {
 		return BoubImages.BOUB_DIR_NORMAL + boubName + BoubImages.BOUB_EXTENTION;
 	}
 
+	private void disposeBouboulesImages() {
+		if (leftBoubDraw != null)
+			leftBoubDraw.getRegion().getTexture().dispose();
+		if (centerBoubDraw != null)
+			centerBoubDraw.getRegion().getTexture().dispose();
+		if (rightBoubDraw != null)
+			rightBoubDraw.getRegion().getTexture().dispose();
+	}
+
 	private void setBouboulesImages(int id, boolean bChangeImage) {
 		iCurrentBoub = getRealId(id);
 
 		if (bChangeImage)
 			GlobalSettings.PROFILE.setBoubName(boubouleFiles.get(iCurrentBoub));
 
-		leftImage.setDrawable(getDrawableFromFile(getFullPathNormallBoub(
-				boubouleFiles.get(getRealId(iCurrentBoub - 1)))));
-		centerImage.setDrawable(getDrawableFromFile(BoubImages.BOUB_DIR_GIANT
+		disposeBouboulesImages();
+
+		leftBoubDraw = getDrawableFromFile(getFullPathNormallBoub(
+				boubouleFiles.get(getRealId(iCurrentBoub - 1))), false);
+		leftImage.setDrawable(leftBoubDraw);
+
+		centerBoubDraw = getDrawableFromFile(BoubImages.BOUB_DIR_GIANT
 				+ GlobalSettings.PROFILE.getBoubName()
-				+ BoubImages.BOUB_EXTENTION));
-		rightImage.setDrawable(getDrawableFromFile(getFullPathNormallBoub(
-				boubouleFiles.get(getRealId(iCurrentBoub + 1)))));
+				+ BoubImages.BOUB_EXTENTION, false);
+		centerImage.setDrawable(centerBoubDraw);
+
+		rightBoubDraw = getDrawableFromFile(getFullPathNormallBoub(
+				boubouleFiles.get(getRealId(iCurrentBoub + 1))), false);
+		rightImage.setDrawable(rightBoubDraw);
 	}
 
 	//_________________________________ RESET

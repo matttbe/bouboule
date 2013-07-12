@@ -63,6 +63,7 @@ public class GameLoop {
 	private TextureRegion textureRegionPause;
 	private float fadePause;
 	private Sprite spriteFade;
+	private Pixmap pixmapFade;
 	private SpriteBatch batch;
 	
 	private Texture background;
@@ -118,7 +119,8 @@ public class GameLoop {
 					Gdx.files.internal("fonts/Osaka2/Osaka2.png"), false);
 			fontPause.setColor(.95f, .05f, .05f, 1f);
 			textureRegionPause = new TextureRegion(new Texture("bonus/star/star.png")); // TODO: another picture
-			spriteFade = new Sprite(new Texture(new Pixmap(1, 1, Format.RGB888)));
+			pixmapFade = new Pixmap(1, 1, Format.RGB888);
+			spriteFade = new Sprite(new Texture(pixmapFade));
 			spriteFade.setColor(0, 0, 0, 0);
 			spriteFade.setSize(GlobalSettings.APPWIDTH, GlobalSettings.APPHEIGHT);
 		}
@@ -145,10 +147,10 @@ public class GameLoop {
 		Gdx.app.log("Matth", "Dipose of the graphicManager");
 
 		// Clear the graphic Manager for a new use.
-		graphicManager.dispose();
+		graphicManager.dispose(false);
 		
 		// Clear the background for a new use.
-		if ( background != null)
+		if (background != null)
 			background.dispose();
 		
 
@@ -492,7 +494,7 @@ public class GameLoop {
 		// Remove the memory of the managed object and the debug matrix
 		if (debugRenderer != null)
 			debugRenderer.dispose();
-		graphicManager.dispose();
+		graphicManager.dispose(true);
 		background.dispose();
 		scoreboard.dispose();
 		countDown.dispose();
@@ -502,6 +504,12 @@ public class GameLoop {
 		fontOswald.dispose();
 		if (fontPause != null) // can be null => Android menus
 			fontPause.dispose();
+		if (textureRegionPause != null)
+			textureRegionPause.getTexture().dispose();
+		if (spriteFade != null)
+			spriteFade.getTexture().dispose();
+		if (pixmapFade != null)
+			pixmapFade.dispose();
 		batch.dispose();
 	}
 

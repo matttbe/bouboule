@@ -30,14 +30,11 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 
 public class LooseScreen extends AbstractScreen {
-
-	private BitmapFont fontOsaka;
 
 	public LooseScreen() {
 		super(true);
@@ -46,13 +43,6 @@ public class LooseScreen extends AbstractScreen {
 	@Override
 	public void show() {
 		super.show();
-
-		// Set Font
-
-		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
-				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
-
-		fontOsaka.setColor(0f, 0f, 0f, 0.85f);
 
 		// Set Background
 

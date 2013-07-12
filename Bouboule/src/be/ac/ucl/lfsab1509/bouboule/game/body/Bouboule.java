@@ -133,9 +133,7 @@ public class Bouboule extends GameBody {
 			Vector2 acceleration = AI.compute(AILevel, this);
 			body.applyForceToCenter(acceleration, true);
 			super.update();
-
 		}
-
 	}
 
 	/**
@@ -148,4 +146,9 @@ public class Bouboule extends GameBody {
 		return body.getAngle() * MathUtils.radiansToDegrees;
 	}
 
+	@Override
+	public void destroyBody() {
+		super.destroyBody();
+		texture.getTexture().dispose();
+	}
 }

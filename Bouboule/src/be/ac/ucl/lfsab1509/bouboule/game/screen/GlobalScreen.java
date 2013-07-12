@@ -32,11 +32,9 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -158,9 +156,7 @@ public class GlobalScreen extends AbstractScreen {
 		final int iX = 125;
 		iY -= 20;
 		for (String[] cBonus : Bonus.bonusInfo) {
-			Image image = new Image(new Texture(cBonus[0]));
-			image.setPosition(iX, iY);
-			stage.addActor(image);
+			addImage(cBonus[0], iX, iY);
 			addLabel(cBonus[1], "osaka-font", 1, Color.WHITE, iX + 80, iY + 15); // or droid font?
 			iY -= 55;
 		}
