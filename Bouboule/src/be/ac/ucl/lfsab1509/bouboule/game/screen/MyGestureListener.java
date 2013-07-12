@@ -44,7 +44,7 @@ public class MyGestureListener implements GestureListener {
 
 	@Override
 	public boolean tap(final float x, final float y, final int count, final int button) {
-		if (GlobalSettings.PROFILE.getName().equals(GlobalSettings.CHEATER_NAME)) {
+		if (count > 1 && GlobalSettings.PROFILE.getName().equals(GlobalSettings.CHEATER_NAME)) {
 			GameLoop.bonus(true);
 		}
 		else if (GlobalSettings.GAME.isGdxMenus()) {
