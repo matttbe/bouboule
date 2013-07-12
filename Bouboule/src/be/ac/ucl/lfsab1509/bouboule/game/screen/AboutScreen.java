@@ -65,7 +65,7 @@ public class AboutScreen extends AbstractScreen {
 		int iVersion = Gdx.app.getVersion();
 		if (iVersion > 0)
 			cAboutText += "\n\nVersion: " + iVersion;
-		Label label = new Label(cAboutText, getSkin(), "droid-font", Color.WHITE);
+		Label label = new Label(cAboutText, getSkin(), "osaka-font", Color.WHITE);
 
 		// not on the border
 		label.setWidth(GlobalSettings.APPWIDTH - 20);
