@@ -52,7 +52,7 @@ public class AI {
 	private static float AXE_POSITION = -1;
 	public static float INIT_ORIENTATION = 1;
 	//Acceleration constant (speed of game)
-	private static final float K_ACC_DEFAULT = 24f;
+	private static final float K_ACC_DEFAULT = 12f;
 	private static float K_ACC = K_ACC_DEFAULT;
 	
 	//init this variable at the beginning of each level
@@ -151,6 +151,7 @@ public class AI {
 			Acc = middeler (AI,getClosestCentre(AI));
 			Vector2 slow = new Vector2(VelocityAI).scl(2f);
 			Acc.sub(slow);
+			
 			break;
 		case 8:
 			Acc = multipoint(AI,VelocityAI,LocalEnemi,VelocityEnemi);
@@ -177,7 +178,6 @@ public class AI {
 		// limite the Force for the player and AI
 		if(AILevel != 0){
 			Acc=Acc.limit(FORCE_MAX_AI);
-			
 			//count the frame to know how many time is passe for the game
 			countframe++;
 		}else{
@@ -190,9 +190,7 @@ public class AI {
 				Acc = stopMid(LocalEnemi, VelocityEnemi);
 			}*/
 			
-			
 			Acc=Acc.limit(FORCE_MAX_PLAYER);
-			
 			
 		}
 		
@@ -391,7 +389,7 @@ public class AI {
 				GlobalSettings.SENSITIVITY) / 100;
 		
 		//normalise the acceleration the to the max for the player.
-		Acc.div(div).limit(1).scl(ACC_MAX_PLAYER);
+		Acc.div(div).limit(1).scl(FORCE_MAX_PLAYER);
 	
 		return Acc;
 	}
