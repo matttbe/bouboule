@@ -42,13 +42,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class GlobalScreen extends AbstractScreen {
 
 	private static final String FONT_TITLE = "chinyen-font";
-	private static final float  FONT_SCALE = .5f;
+	private static final float  FONT_SCALE = .82f;
+	private static final float  FONT_SCALE_OSAKA = 1.6384f; // TODO: scale => 1 => we need a bigger font
 
 	private CheckBox soundCheckBox;
 	private CheckBox rotationCheckBox;
 	private Slider sensitivitySlider;
 
-	int iY = 1115;
+	int iX = 33, iY = 1900;
 
 	public GlobalScreen() {
 		super(false); // without music delay
@@ -62,16 +63,16 @@ public class GlobalScreen extends AbstractScreen {
 		addBackGround("drawable-xhdpi/settings_blank.jpg");
 
 		addSoundOptions();
-		iY -= 145;
+		iY -= 238;
 
 		addRotationOptions();
-		iY -= 145;
+		iY -= 238;
 
 		addSensitivityOptions();
-		iY -= 145;
+		iY -= 238;
 
 		addBonusImages();
-		iY -= 145;
+		iY -= 238;
 
 		// BACK
 		addBackButton(false);
@@ -80,11 +81,11 @@ public class GlobalScreen extends AbstractScreen {
 	// _________________________________ SOUND
 
 	private void addSoundOptions() {
-		addLabel("SOUND", FONT_TITLE, FONT_SCALE, Color.WHITE, 20, iY)
+		addLabel("SOUND", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
 
 		soundCheckBox = addCheckBox("Music", ! GlobalSettings.SOUND_IS_MUTED,
-				40, iY + 5);
+				iX * 2, iY - 33);
 		soundCheckBox.addListener(soundClickListener);
 	}
 
@@ -104,11 +105,11 @@ public class GlobalScreen extends AbstractScreen {
 	// _________________________________ ROTATION
 
 	private void addRotationOptions() {
-		addLabel("ROTATION", FONT_TITLE, FONT_SCALE, Color.WHITE, 20, iY)
+		addLabel("ROTATION", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 			.setTouchable(null);
 
 		rotationCheckBox = addCheckBox("Rotation of the balls",
-				!GlobalSettings.FIXED_ROTATION, 40, iY + 5);
+				!GlobalSettings.FIXED_ROTATION, iX * 2, iY - 33);
 		rotationCheckBox.addListener(rotationClickListener);
 	}
 
@@ -122,7 +123,7 @@ public class GlobalScreen extends AbstractScreen {
 	// _________________________________ SENSITIVITY
 
 	private void addSensitivityOptions() {
-		addLabel("SENSITIVITY", FONT_TITLE, FONT_SCALE, Color.WHITE, 20, iY)
+		addLabel("SENSITIVITY", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
 
 		sensitivitySlider = new Slider(
@@ -130,9 +131,9 @@ public class GlobalScreen extends AbstractScreen {
 				GlobalSettings.SENSITIVITY_MAX,
 				(GlobalSettings.SENSITIVITY_MAX - GlobalSettings.SENSITIVITY_MIN) / 50,
 				false, getSkin(), "default");
-		sensitivitySlider.setX(40);
-		sensitivitySlider.setY(iY + 10);
-		sensitivitySlider.setWidth(400);
+		sensitivitySlider.setX(GlobalSettings.APPWIDTH / 8);
+		sensitivitySlider.setY(iY - 33);
+		sensitivitySlider.setWidth(GlobalSettings.APPWIDTH - GlobalSettings.APPWIDTH / 4);
 		sensitivitySlider.setValue(GlobalSettings.SENSITIVITY);
 		sensitivitySlider.addListener(sensitivityClickListener);
 		stage.addActor(sensitivitySlider);
@@ -150,15 +151,15 @@ public class GlobalScreen extends AbstractScreen {
 	// ________________________________ BONUS
 
 	private void addBonusImages() {
-		addLabel("BONUS", FONT_TITLE, FONT_SCALE, Color.WHITE, 20, iY)
+		addLabel("BONUS", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
 
-		final int iX = 125;
-		iY -= 20;
+		iX = 180;
+		iY -= 53;
 		for (String[] cBonus : Bonus.bonusInfo) {
 			addImage(cBonus[0], iX, iY);
-			addLabel(cBonus[1], "osaka-font", 1, Color.WHITE, iX + 80, iY + 15); // or droid font?
-			iY -= 55;
+			addLabel(cBonus[1], "osaka-font", FONT_SCALE_OSAKA, Color.WHITE, iX + 100, iY + 15);
+			iY -= 90;
 		}
 	}
 }
