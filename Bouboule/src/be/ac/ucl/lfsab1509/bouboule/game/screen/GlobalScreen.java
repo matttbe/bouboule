@@ -86,6 +86,7 @@ public class GlobalScreen extends AbstractScreen {
 
 		soundCheckBox = addCheckBox("Music", ! GlobalSettings.SOUND_IS_MUTED,
 				iX * 2, iY - 33);
+		soundCheckBox.getLabel().setFontScale(FONT_SCALE_OSAKA); // TODO => rm when osaka will be bigger
 		soundCheckBox.addListener(soundClickListener);
 	}
 
@@ -110,6 +111,7 @@ public class GlobalScreen extends AbstractScreen {
 
 		rotationCheckBox = addCheckBox("Rotation of the balls",
 				!GlobalSettings.FIXED_ROTATION, iX * 2, iY - 33);
+		rotationCheckBox.getLabel().setFontScale(FONT_SCALE_OSAKA); // TODO => rm when osaka will be bigger
 		rotationCheckBox.addListener(rotationClickListener);
 	}
 
