@@ -52,7 +52,7 @@ public class AI {
 	private static float AXE_POSITION = -1;
 	public static float INIT_ORIENTATION = 1;
 	//Acceleration constant (speed of game)
-	private static final float K_ACC_DEFAULT = 12f;
+	private static final float K_ACC_DEFAULT = 12f; //12f for HD else 6f
 	private static float K_ACC = K_ACC_DEFAULT;
 	
 	//init this variable at the beginning of each level

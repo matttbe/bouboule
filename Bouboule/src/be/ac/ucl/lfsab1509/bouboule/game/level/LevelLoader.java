@@ -147,8 +147,8 @@ public class LevelLoader {
 			BodyType bodyType		= BodyType.DynamicBody;
 			float density			= Float.parseFloat(boub.getAttribute("density"));
 			float elasticity		= Float.parseFloat(boub.getAttribute("elasticity"));
-			float px				= Float.parseFloat(boub.getAttribute("px"));
-			float py				= Float.parseFloat(boub.getAttribute("py"));
+			float px				= Float.parseFloat(boub.getAttribute("px"))*2;//*2 =>HD version
+			float py				= Float.parseFloat(boub.getAttribute("py"))*2;//*2 =>HD version
 			float angle				= Float.parseFloat(boub.getAttribute("angle"));
 			int AILevel				= Integer.parseInt(boub.getAttribute("AILevel"));
 			short entity			= Short.parseShort(boub.getAttribute("entity"));
