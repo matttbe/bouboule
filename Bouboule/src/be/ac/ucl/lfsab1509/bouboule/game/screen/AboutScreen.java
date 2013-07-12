@@ -53,7 +53,7 @@ public class AboutScreen extends AbstractScreen {
 				+ "Graphisms:\n"
 				+ " Van Wallendael Julien\n\n"
 				+ "Music and sounds:\n"
-				+ " Adans Paschal (adanspaschal@gmail.com) and"
+				+ " Adans Paschal (adanspaschal.gmail.com) and"
 					+ " Klez (The gateway - SpaceShip level)\n\n"
 				+ "Credits & License:\n"
 				+ " Bouboule was developed during the course"
@@ -65,7 +65,8 @@ public class AboutScreen extends AbstractScreen {
 		int iVersion = Gdx.app.getVersion();
 		if (iVersion > 0)
 			cAboutText += "\n\nVersion: " + iVersion;
-		Label label = new Label(cAboutText, getSkin(), "droid-font", Color.WHITE);
+		Label label = new Label(cAboutText, getSkin(), "osaka-font", Color.WHITE);
+		label.setFontScale(1.6384f); // TODO => rm when osaka will be bigger
 
 		// not on the border
 		label.setWidth(GlobalSettings.APPWIDTH - 20);
