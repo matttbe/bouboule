@@ -191,9 +191,8 @@ public class LevelLoader {
 		}
 	}
 
-	private static String extractJSonName(final String jsonFile) {
-		return jsonFile.substring(jsonFile.lastIndexOf('/') + 1,
-				jsonFile.lastIndexOf('.'));
+	private static String extractFileName(final String jsonFile) {
+		return jsonFile.substring(jsonFile.lastIndexOf('/') + 1);
 	}
 
 	/**
@@ -210,9 +209,10 @@ public class LevelLoader {
 		float px				= Float.parseFloat(aren.getAttribute("px"));
 		float py				= Float.parseFloat(aren.getAttribute("py"));
 		float angle				= Float.parseFloat(aren.getAttribute("angle"));
-		String texRegionPath 	= aren.getAttribute("texRegionPath");
-		String jsonFile 		= aren.getAttribute("jsonFile");
-		String jsonName 		= extractJSonName(jsonFile);
+		String file				= aren.getAttribute("file");
+		String texRegionPath 	= file + ".jpg";
+		String jsonFile 		= file + ".json";
+		String jsonName 		= extractFileName(file);
 		String cMusicName 		= aren.getAttribute ("music", null);
 
 		graphicManager.addBody(new Arena(radius, px, py,  angle, texRegionPath, 
@@ -289,9 +289,10 @@ public class LevelLoader {
 			float initAccX			= Float.parseFloat(newobstacle.getAttribute("accx", "0"));
 			float initAccY			= Float.parseFloat(newobstacle.getAttribute("accy", "0"));
 			float time				= Float.parseFloat(newobstacle.getAttribute("time", "0"));
-			String texRegionPath 	= newobstacle.getAttribute("texRegionPath");
-			String jsonFile 		= newobstacle.getAttribute("jsonFile");
-			String jsonName 		= extractJSonName(jsonFile);
+			String file				= newobstacle.getAttribute("file");
+			String texRegionPath 	= file + ".png";
+			String jsonFile 		= file + ".json";
+			String jsonName 		= extractFileName(file);
 			Boolean produce 		= Boolean.parseBoolean(newobstacle.getAttribute("produce",
 					"false"));
 			Boolean blink	 		= Boolean.parseBoolean(newobstacle.getAttribute("blink",
