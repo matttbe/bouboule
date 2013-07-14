@@ -57,11 +57,7 @@ public class WorldScreen extends AbstractScreen {
 	public void show() {
 		super.show();
 
-		// TODO : SI le jeu est en cours direct passer ce screen
-		// setScreenWithFading(null);
-
 		// Set Background
-
 		addBackGround("drawable-xhdpi/bglevel0.jpg");
 
 		// Add levels images "recursively"
@@ -200,9 +196,8 @@ public class WorldScreen extends AbstractScreen {
 
 				// Not moving and on the same World as the pushed button
 				if (this.startPos == stopPos) {
-					Gdx.app.log("LAUNCH", "GAME ON WORLD" + stopPos);
+					GlobalSettings.PROFILE.setLevel((stopPos) * 4 + 1);
 					setScreenWithFading(null);
-					// TODO:Launch the good game (stopPos == World-1);
 				}
 
 			}
