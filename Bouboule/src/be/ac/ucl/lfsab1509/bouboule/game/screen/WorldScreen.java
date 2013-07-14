@@ -199,7 +199,6 @@ public class WorldScreen extends AbstractScreen {
 
 				// Not moving and on the same World as the pushed button
 				if (this.startPos == stopPos) {
-					Gdx.app.log("LAUNCH", "GAME ON WORLD" + stopPos);
 					setScreenWithFading(null);
 					// TODO:Launch the good game (stopPos == World-1);
 				}
