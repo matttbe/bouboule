@@ -109,9 +109,11 @@ public class CountDown {
 		}
 		
 		currentFrame = countDownAnimation.getKeyFrame(stateTime, true);
-		batch.draw(currentFrame, 400 - currentFrame.getRegionWidth() / 2,
-				625 - currentFrame.getRegionHeight() / 2);
-		
+		batch.draw(
+				currentFrame,
+				GlobalSettings.APPWIDTH / 2 - currentFrame.getRegionWidth() / 2,
+				GlobalSettings.APPHEIGHT / 2 - currentFrame.getRegionHeight() / 2);
+
 		if (stateTime > N_FRAME * STEPTIME - 0.1f) {
 			if (RESUME_AFTER_END) {
 				GlobalSettings.GAME.setScreenGameResume(); // end of countdown => start the game by launching 'resuming' method

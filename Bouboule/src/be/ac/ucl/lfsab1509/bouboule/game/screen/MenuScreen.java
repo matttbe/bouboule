@@ -110,7 +110,7 @@ public class MenuScreen extends AbstractScreen {
 		playButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickStart " + x + ", " + y);
-				setScreenWithFading(null);
+				setScreenWithFading(new WorldScreen());
 			}
 		});
 
