@@ -37,7 +37,6 @@ public class Profile {
 	private String cName;
 	private String cBoubName;
 	private Preferences prefs;
-	private static final String INIT_SCORE_KEY = "InitScore";
 	private static final String LIFES_KEY = "Lifes";
 	private static final String LEVEL_KEY = "Level";
 	private static final String BEST_LEVEL_KEY = "BestLevel";
@@ -47,7 +46,6 @@ public class Profile {
 
 	// score
 	private int iScore;
-	private int iInitScore;
 	private int iNewInitScore;
 	private int iOldScore; // point before the battle
 	private int iEndGameScore; // score just before the reset
@@ -73,7 +71,6 @@ public class Profile {
 		this.cName = cName;
 		prefs = Gdx.app.getPreferences(cName);
 
-		iInitScore = prefs.getInteger(INIT_SCORE_KEY, GlobalSettings.INIT_SCORE);
 		iLifes = prefs.getInteger(LIFES_KEY, GlobalSettings.INIT_LIFES);
 		iLevel = prefs.getInteger(LEVEL_KEY, GlobalSettings.INIT_LEVEL);
 		if (cName.compareTo(GlobalSettings.CHEATER_NAME) == 0)
@@ -95,8 +92,6 @@ public class Profile {
 	public boolean checkHighScoreAndResetProfile() {
 		boolean bNewHighScoreGlobal = checkHighScore();
 
-		iInitScore = GlobalSettings.INIT_SCORE;
-		prefs.putInteger(INIT_SCORE_KEY, iInitScore);
 		iLifes = GlobalSettings.INIT_LIFES;
 		prefs.putInteger(LIFES_KEY, iLifes);
 		iLevel = GlobalSettings.INIT_LEVEL;
@@ -147,11 +142,11 @@ public class Profile {
 				iRemainingTime = iTimer;
 
 				iOldScore = iScore;
-				iNewInitScore = iScore + iInitScore + iInitScore / 4 * (iLevel - 1);
+				iNewInitScore = iScore + GlobalSettings.INIT_SCORE
+						+ GlobalSettings.INIT_SCORE / 4 * (iLevel - 1);
 				iScore = iNewInitScore;
 				bNewHighScore = false;
 				bNeedSaveScoreEvenIfCancel = false;
-				
 			}
 		};
 
