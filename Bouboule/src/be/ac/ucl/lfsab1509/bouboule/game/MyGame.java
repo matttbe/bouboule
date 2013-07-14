@@ -234,6 +234,14 @@ public class MyGame extends Game implements ApplicationListener {
 		return getScreen() == screenGame;
 	}
 
+	public boolean isPlayingGame() {
+		return (GlobalSettings.PROFILE.getLevel() == 1
+				&& GlobalSettings.GAME.getTimer().isRunning()
+				&& GlobalSettings.PROFILE.getNewInitScore() // and not started
+				!= GlobalSettings.PROFILE.getScore())
+				|| GlobalSettings.PROFILE.getLevel() > 1;
+	}
+
 	/**
 	 * @return the music for the menu (create a new one if it doesn't exist)
 	 */

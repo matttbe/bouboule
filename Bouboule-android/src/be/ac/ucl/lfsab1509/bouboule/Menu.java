@@ -187,11 +187,7 @@ public class Menu extends Activity {
 				
 				case R.id.PlayButton :
 					// launch ChoosingLevel only if we're not playing a game: Game -> Menu -> Game
-					if ((GlobalSettings.PROFILE.getLevel() == 1
-							&& GlobalSettings.GAME.getTimer().isRunning()
-							&& GlobalSettings.PROFILE.getNewInitScore() // and not started
-								!= GlobalSettings.PROFILE.getScore())
-						|| GlobalSettings.PROFILE.getLevel() > 1)
+					if (GlobalSettings.GAME.isPlayingGame())
 						onActivityResult (MENU_CHOOSING_LEVEL, PLAY_GAME, null);
 					else
 						startActivityForResult(new Intent(Menu.this,ChoosingActivity.class), 
