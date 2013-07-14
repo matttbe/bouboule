@@ -1,6 +1,0 @@
-{
-com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-	default: { down: ButtonLevel12, up: ButtonLevel1 },
-	transparent: {},
-}
-}
