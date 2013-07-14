@@ -66,6 +66,9 @@ public class ScreenGame implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log("Matth", "Screen: SHOW");
+		// With GdxMenus, this method is called twice
+		if (GlobalSettings.GAME.getTimer().isRunning())
+			return;
 
 		bIsPause = true; // show the countdown at startup
 		game.resumeGame();
