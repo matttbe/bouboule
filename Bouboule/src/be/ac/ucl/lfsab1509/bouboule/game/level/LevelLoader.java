@@ -227,7 +227,7 @@ public class LevelLoader {
 
 		Gdx.app.log("XML", "Arena Loaded :" + jsonName);
 		
-		return texRegionPath.substring(0, texRegionPath.length() - 4);
+		return file;
 
 	}
 
