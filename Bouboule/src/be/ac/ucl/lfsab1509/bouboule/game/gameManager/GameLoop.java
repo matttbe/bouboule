@@ -126,7 +126,10 @@ public class GameLoop {
 			pixmapFade = new Pixmap(1, 1, Format.RGB888);
 			spriteFade = new Sprite(new Texture(pixmapFade));
 			spriteFade.setColor(0, 0, 0, 0);
-			spriteFade.setSize(GlobalSettings.APPWIDTH, GlobalSettings.APPHEIGHT);
+			spriteFade.setSize(GlobalSettings.APPWIDTH * 2,
+					GlobalSettings.APPHEIGHT * 2);
+			spriteFade.setPosition(- GlobalSettings.APPWIDTH / 2,
+					- GlobalSettings.APPHEIGHT / 2);
 		}
 		
 		// load the scoreboard
@@ -266,7 +269,7 @@ public class GameLoop {
 		displayBackground();
 
 		fontPause.draw(batch, "PAUSE", GlobalSettings.APPWIDTH / 4,
-				GlobalSettings.APPHEIGHT / 2 - 50 * GlobalSettings.HD); // text
+				GlobalSettings.APPHEIGHT / 2 - 50); // text
 		batch.draw(textureRegionPause, 10 * GlobalSettings.HD,
 				10 * GlobalSettings.HD); // home button
 	}
