@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Level>
- 
 
     <Level1
         bonus="True"
@@ -36,11 +35,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Arena/arena.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Arena/arena.png"
+            file="terrain/Arena/arena"
             music="Arena.mp3" >
         </Arena>
 
@@ -101,11 +99,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Arena/arena.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Arena/arena.png"
+            file="terrain/Arena/arena"
             music="Arena.mp3" >
         </Arena>
 
@@ -167,11 +164,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Eggroll/eggroll.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Eggroll/eggroll.png"
+            file="terrain/Eggroll/eggroll"
             music="Eggroll.mp3" >
         </Arena>
 
@@ -231,11 +227,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/CherryBlossom/cherryblossom.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/CherryBlossom/cherryblossom.png" 
+            file="terrain/CherryBlossom/cherryblossom"
             music="Eggroll.mp3">
         </Arena>
 
@@ -284,11 +279,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/DoubleHoles/doubleholes.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/DoubleHoles/doubleholes.png"
+            file="terrain/DoubleHoles/doubleholes"
             music="DoubleHoles.mp3" >
         </Arena>
 
@@ -452,11 +446,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Ice/ice.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Ice/ice.png"
+            file="terrain/Ice/ice"
             music="Ice.mp3" >
         </Arena>
 
@@ -506,11 +499,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Schrink/schrink.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Schrink/schrink.png"
+            file="terrain/Schrink/schrink"
             music="Schrink.mp3" >
         </Arena>
 
@@ -583,11 +575,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Cheesy/cheesy.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Cheesy/cheesy.png"
+            file="terrain/Cheesy/cheesy"
             music="Cheesy.mp3" >
         </Arena>
 
@@ -738,11 +729,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Sushi/sushi.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Sushi/sushi.png"
+            file="terrain/Sushi/sushi"
             music="Sushi.mp3" >
         </Arena>
 
@@ -775,10 +765,9 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="terrain/Sushi/sushi_mur.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/Sushi/sushi_mur.png" >
+                file="terrain/Sushi/sushi_mur" >
             </Obstacle>
 
             <Obstacle
@@ -787,10 +776,9 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="terrain/Sushi/sushi_obs.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/Sushi/sushi_obs.png" >
+                file="terrain/Sushi/sushi_obs" >
             </Obstacle>
         </Obstacles>
     </Level9>
@@ -830,11 +818,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Arena/arena.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Arena/arena.png"
+            file="terrain/Arena/arena"
             music="Arena.mp3" >
         </Arena>
 
@@ -893,11 +880,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Tatami/tatami.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Tatami/tatami.png"
+            file="terrain/Tatami/tatami"
             music="Tatami.mp3" >
         </Arena>
 
@@ -945,11 +931,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Ship/ship.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Ship/ship.jpg" 
+            file="terrain/Ship/ship"
             music="DoubleHoles.mp3">
         </Arena>
 
@@ -972,11 +957,10 @@
                 density="2"
                 elasticity="0.1f"
                 entity="-2"
-                jsonFile="terrain/Ship/ship_canonball.json"
                 produce="True"
                 px="25"
                 py="340"
-                texRegionPath="terrain/Ship/ship_canonball.png"
+                file="terrain/Ship/ship_canonball"
                 time="5f" >
             </Obstacle>
 
@@ -988,11 +972,10 @@
                 density="2"
                 elasticity="0.1f"
                 entity="-2"
-                jsonFile="terrain/Ship/ship_canonball.json"
                 produce="True"
                 px="775"
                 py="770"
-                texRegionPath="terrain/Ship/ship_canonball.png"
+                file="terrain/Ship/ship_canonball"
                 time="5" >
             </Obstacle>
 
@@ -1002,10 +985,9 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="terrain/Ship/ship_mur.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/Ship/ship_mur.png" >
+                file="terrain/Ship/ship_mur" >
             </Obstacle>
         </Obstacles>
     </Level12>
@@ -1044,11 +1026,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Sailor/sailor.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Sailor/sailor.png"
+            file="terrain/Sailor/sailor"
             music="OneWay.mp3" >
         </Arena>
 
@@ -1075,10 +1056,9 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="terrain/Sailor/sailor_mur.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/Sailor/sailor_mur.png" >
+                file="terrain/Sailor/sailor_mur" >
             </Obstacle>
         </Obstacles>
     </Level13>
@@ -1117,11 +1097,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Lazer/lazer.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Lazer/lazer.png"
+            file="terrain/Lazer/lazer"
             music="Arena.mp3" >
         </Arena>
 
@@ -1142,10 +1121,9 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="terrain/Lazer/lazer_mur.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/Lazer/lazer_mur.png" >
+                file="terrain/Lazer/lazer_mur" >
             </Obstacle>
 
             <Obstacle
@@ -1155,10 +1133,9 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="terrain/Lazer/lazer_lazer.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/Lazer/lazer_lazer.png"
+                file="terrain/Lazer/lazer_lazer"
                 time="3" >
             </Obstacle>
         </Obstacles>
@@ -1199,11 +1176,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Arena/arena.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Arena/arena.png"
+            file="terrain/Arena/arena"
             music="Arena.mp3" >
         </Arena>
 
@@ -1263,11 +1239,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/SpaceShip/spaceship.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/SpaceShip/spaceship.png" 
+            file="terrain/SpaceShip/spaceship"
             music="Arena">
         </Arena>
 
@@ -1315,11 +1290,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/YinYang/yinyang.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/YinYang/yinyang.png"
+            file="terrain/YinYang/yinyang"
             music="YinYang.mp3" >
         </Arena>
 
@@ -1397,11 +1371,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/OneWay/oneway.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/OneWay/oneway.png"
+            file="terrain/OneWay/oneway"
             music="OneWay.mp3" >
         </Arena>
 
@@ -1422,10 +1395,9 @@
                 density="1"
                 elasticity="0.5f"
                 entity="-2"
-                jsonFile="terrain/OneWay/oneway_mur.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/OneWay/oneway_mur.png" >
+                file="terrain/OneWay/oneway_mur" >
             </Obstacle>
         </Obstacles>
     </Level18>
@@ -1465,11 +1437,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Ship/ship.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Ship/ship.jpg" 
+            file="terrain/Ship/ship"
             music="DoubleHoles.mp3">
         </Arena>
 
@@ -1492,11 +1463,10 @@
                 density="2"
                 elasticity="0.1f"
                 entity="-2"
-                jsonFile="terrain/Ship/ship_canonball.json"
                 produce="True"
                 px="25"
                 py="340"
-                texRegionPath="terrain/Ship/ship_canonball.png"
+                file="terrain/Ship/ship_canonball"
                 time="1.5f" >
             </Obstacle>
 
@@ -1508,11 +1478,10 @@
                 density="2"
                 elasticity="0.1f"
                 entity="-2"
-                jsonFile="terrain/Ship/ship_canonball.json"
                 produce="True"
                 px="775"
                 py="770"
-                texRegionPath="terrain/Ship/ship_canonball.png"
+                file="terrain/Ship/ship_canonball"
                 time="1.5f" >
             </Obstacle>
 
@@ -1522,10 +1491,9 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="terrain/Ship/ship_mur.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/Ship/ship_mur.png" >
+                file="terrain/Ship/ship_mur" >
             </Obstacle>
         </Obstacles>
     </Level19>
@@ -1566,11 +1534,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Sailor/sailor.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Sailor/sailor.png" 
+            file="terrain/Sailor/sailor"
             music="OneWay.mp3">
         </Arena>
 
@@ -1597,10 +1564,9 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="terrain/Sailor/sailor_mur.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/Sailor/sailor_mur.png" >
+                file="terrain/Sailor/sailor_mur" >
             </Obstacle>
         </Obstacles>
     </Level20>
@@ -1640,11 +1606,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Rock/rock.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Rock/rock.jpg"
+            file="terrain/Rock/rock"
             music="Rock.mp3" >
         </Arena>
 
@@ -1665,10 +1630,9 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="terrain/Rock/rock_mur.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/Rock/rock_mur.png" >
+                file="terrain/Rock/rock_mur" >
             </Obstacle>
         </Obstacles>
     </Level21>
@@ -1707,11 +1671,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Skyline/sky.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Skyline/sky.png"
+            file="terrain/Skyline/sky"
             music="Skyline.mp3" >
         </Arena>
 
@@ -1759,11 +1722,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Tatami/tatami.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Tatami/tatami.png"
+            file="terrain/Tatami/tatami"
             music="Tatami.mp3" >
         </Arena>
 
@@ -1812,11 +1774,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Ship/ship.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Ship/ship.jpg" 
+            file="terrain/Ship/ship"
             music="DoubleHoles.mp3">
         </Arena>
 
@@ -1839,11 +1800,10 @@
                 density="2"
                 elasticity="0.1f"
                 entity="-2"
-                jsonFile="terrain/Ship/ship_canonball.json"
                 produce="True"
                 px="25"
                 py="340"
-                texRegionPath="terrain/Ship/ship_canonball.png"
+                file="terrain/Ship/ship_canonball"
                 time="5" >
             </Obstacle>
 
@@ -1855,11 +1815,10 @@
                 density="2"
                 elasticity="0.1f"
                 entity="-2"
-                jsonFile="terrain/Ship/ship_canonball.json"
                 produce="True"
                 px="775"
                 py="770"
-                texRegionPath="terrain/Ship/ship_canonball.png"
+                file="terrain/Ship/ship_canonball"
                 time="5" >
             </Obstacle>
 
@@ -1869,10 +1828,9 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="terrain/Ship/ship_mur.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/Ship/ship_mur.png" >
+                file="terrain/Ship/ship_mur" >
             </Obstacle>
         </Obstacles>
     </Level24>
@@ -1911,11 +1869,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Lava/lava.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Lava/lava.png"
+            file="terrain/Lava/lava"
             music="Lava.mp3" >
         </Arena>
 
@@ -1963,11 +1920,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Ice/ice.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Ice/ice.png"
+            file="terrain/Ice/ice"
             music="Ice.mp3" >
         </Arena>
 
@@ -2017,11 +1973,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/SpaceShip/spaceship.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/SpaceShip/spaceship.png" 
+            file="terrain/SpaceShip/spaceship"
             music="Arena.mp3" >
         </Arena>
 
@@ -2073,11 +2028,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Eggroll/eggroll.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Eggroll/eggroll.png"
+            file="terrain/Eggroll/eggroll"
             music="Eggroll.mp3" >
         </Arena>
 
@@ -2108,8 +2062,7 @@
         bonusEnabled="inverse"
         bonusrate="100"
         time="45"
-        accmaxai="0.55f"
-		>
+        accmaxai="0.55f" >
 
         <Bouboule
             AILevel="6"
@@ -2140,11 +2093,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Schrink/schrink.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Schrink/schrink.png"
+            file="terrain/Schrink/schrink"
             music="Schrink.mp3" >
         </Arena>
 
@@ -2217,11 +2169,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Lazer/lazer.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Lazer/lazer.png" 
+            file="terrain/Lazer/lazer"
             music="Tatami.mp3">
         </Arena>
 
@@ -2242,10 +2193,9 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="terrain/Lazer/lazer_mur.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/Lazer/lazer_mur.png" >
+                file="terrain/Lazer/lazer_mur" >
             </Obstacle>
 
             <Obstacle
@@ -2255,10 +2205,9 @@
                 density="1"
                 elasticity="0f"
                 entity="-2"
-                jsonFile="terrain/Lazer/lazer_lazer.json"
                 px="0"
                 py="0"
-                texRegionPath="terrain/Lazer/lazer_lazer.png"
+                file="terrain/Lazer/lazer_lazer"
                 time="3" >
             </Obstacle>
         </Obstacles>
@@ -2298,11 +2247,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/DoubleHoles/doubleholes.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/DoubleHoles/doubleholes.png"
+            file="terrain/DoubleHoles/doubleholes"
             music="DoubleHoles.mp3" >
         </Arena>
 
@@ -2464,11 +2412,10 @@
         <Arena
             angle="0"
             entity="0"
-            jsonFile="terrain/Lava/lava.json"
             px="0"
             py="0"
             radius="500"
-            texRegionPath="terrain/Lava/lava.png"
+            file="terrain/Lava/lava"
             music="Lava.mp3" >
         </Arena>
 
