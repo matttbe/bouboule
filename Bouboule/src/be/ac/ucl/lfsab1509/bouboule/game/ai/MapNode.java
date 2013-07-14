@@ -38,12 +38,14 @@ public class MapNode {
 	
 	private Vector2 vector;
 	private float weight;
+	private final float HD = 1.6384f;
 	
 	public MapNode(final float px, final float py, final float poids) {
 		
 		//*2 for the HD
-		this.vector = new Vector2(px*2, py*2);
-		this.weight	= poids*2;
+		
+		this.vector = new Vector2(px*HD, py*HD);
+		this.weight	= poids*HD;
 	}
 
 	public Vector2 getVector() {
