@@ -26,21 +26,27 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-
 public class WorldScreen extends AbstractScreen {
 
+	/* Current World INFO */
 	private int iWorld = (GlobalSettings.PROFILE.getBestLevel() - 1) / 4;
-	private int lastUnlockedWorld = (GlobalSettings.PROFILE.getBestLevel() - 1) / 4 + 1;
+	private int lastUnlockedWorld = iWorld + 1;
 
+	/* Array to store the world position on the screen and size of the buttons */
+	private final int[] posX = { 140, 525, 850, 825, 450, 140, 260, 200 };
+	private final int[] posY = { 50, 100, 200, 400, 490, 600, 850, 1320 };
+	private final int[] sizeX = { 300, 300, 300, 300, 300, 300, 335, 900 };
+	private final int[] sizeY = { 120, 110, 110, 200, 180, 200, 240, 325 };
 
 	public WorldScreen() {
 		super(false);
@@ -50,24 +56,162 @@ public class WorldScreen extends AbstractScreen {
 	public void show() {
 		super.show();
 
-		setSkin("skin/Bouboule.json");
-		
-		//Set BAckground
-		
-		addBackGround("drawable-xhdpi/bglevel.jpg");
-		
-		// Create all Buttons - Play Button
+		// TODO : SI le jeu est en cours direct passer ce screen
+		// setScreenWithFading(null);
 
-		Button nextButton = createButton("default", 0, 0, 63, 608);
+		// Set Background
 
-		nextButton.addListener(new ClickListener() {
-			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "clickNext " + x + ", " + y);
-				setScreenWithFading(null);
-			}
-		});
+		addBackGround("drawable-xhdpi/bglevel0.jpg");
+
+		// Add levels images "recursively"
+		// Level are noted from 0 to 6
+		// Image zero and seven ( begin and end of the game) are always
+		// displayed. -> Corresponding to World 1 and 8.
+		for (int i = 1; i < lastUnlockedWorld
+				&& i < GlobalSettings.NBLEVELS / 4 - 1; i++) {
+
+			addImage("drawable-xhdpi/bglevel" + i + ".png", 0, 0);
+		}
+
+		// Add Boub Image selected by the user
+		String boubPath = BoubImages.BOUB_DIR_NORMAL
+				+ GlobalSettings.PROFILE.getBoubName()
+				+ BoubImages.BOUB_EXTENTION;
+
+		Image boub = addImage(boubPath, 0, 0);
+
+		// Set action for the moving Boub
+		// Attention, the array for the World position begin at 0 not 1 -> (-1)
+		final MoveBoub moveBoub = new MoveBoub(lastUnlockedWorld - 1);
+		this.stage.addAction(moveBoub);
+		moveBoub.setActor(boub);
+		moveBoub.draw(); // First draw
+
+		// Create on the world images from 0 to max 7
+
+		for (int i = 0; i < lastUnlockedWorld
+				&& i < GlobalSettings.NBLEVELS / 4; i++) {
+
+			Button button = createButton("transparent", sizeX[i], sizeY[i],
+					posX[i], posY[i]);
+			addLevelListener(button, moveBoub, i);
+
+		}
 
 	}
 
+	/*
+	 * Listener that store the world associated with the button
+	 */
+	private void addLevelListener(Button button, final MoveBoub action,
+			final int world) {
 
+		button.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				Gdx.app.log("SCREEN", "The world " + world + " is selected");
+				action.init(world);
+			}
+		});
+	}
+
+	private class MoveBoub extends Action {
+
+		private int startPos, stopPos;
+
+		// Position of Boub through the worlds 0 to 7
+		private final float[] posX = { 140, 525, 850, 825, 450, 150, 290, 510 };
+		private final float[] posY = { 50, 100, 200, 400, 490, 630, 950, 1410 };
+
+		// Postion of Boub
+		private float x = 0;
+		private float y = 0;
+
+		// Moving state
+		private boolean moving = false;
+
+		// Fraction between every world
+		private final float span = 50f;
+
+		/*
+		 * Constructor > Only the initial world position is needed We can't draw
+		 * here because actor is not yet set
+		 */
+		public MoveBoub(int startPos) {
+			this.startPos = startPos;
+			this.stopPos = startPos;
+			x = posX[startPos];
+			y = posY[startPos];
+		}
+
+		public boolean act(float delta) {
+
+			// If Boub need to move
+			if (startPos != stopPos) {
+
+				moving = true;
+
+				// Upwards
+				if (startPos < stopPos) {
+					x += (posX[startPos + 1] - posX[startPos]) / span;
+					y += (posY[startPos + 1] - posY[startPos]) / span;
+
+					// We have reached a new world position
+					if (Math.round(x) == posX[(startPos + 1)])
+						startPos++;
+
+					// Downwards
+				} else {
+
+					x += (posX[startPos - 1] - posX[startPos]) / span;
+					y += (posY[startPos - 1] - posY[startPos]) / span;
+
+					// We have reached a new world position
+					if (Math.round(x) == posX[(startPos - 1)])
+						startPos--;
+				}
+
+				Gdx.app.log("Boub", "Moving" + startPos);
+				draw();
+
+			} else {
+
+				moving = false;
+				// return true;
+			}
+
+			return false; // To continue looping
+		}
+
+		// When a new world is selected and Boub is already moving, the initial
+		// position must be adapted if the player wants the Boub to change
+		// direction during moving == true;
+		public void init(int stopPos) {
+
+			if (moving) {
+
+				// Verify if modification are needed
+				if (stopPos <= this.startPos && this.startPos <= this.stopPos)
+					this.startPos++;
+				else if (stopPos >= this.startPos
+						&& this.startPos >= this.stopPos)
+					this.startPos--;
+			} else {
+
+				// Not moving and on the same World as the pushed button
+				if (this.startPos == stopPos) {
+					Gdx.app.log("LAUNCH", "GAME ON WORLD" + stopPos);
+					setScreenWithFading(null);
+					// TODO:Launch the good game (stopPos == World-1);
+				}
+
+			}
+
+			// Set the new endpoint of the animation
+			this.stopPos = stopPos;
+		}
+
+		public void draw() {
+			actor.setPosition(x, y);
+		}
+	}
 }
