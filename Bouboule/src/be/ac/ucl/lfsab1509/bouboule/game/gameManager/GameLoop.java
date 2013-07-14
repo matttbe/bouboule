@@ -103,20 +103,24 @@ public class GameLoop {
 		fontOswald = new BitmapFont(
 				Gdx.files.internal("fonts/Oswald/Oswald.fnt"),
 				Gdx.files.internal("fonts/Oswald/Oswald.png"), false);
+		fontOswald.setScale(GlobalSettings.HD);
 
 		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
 				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
+		fontOsaka.setScale(GlobalSettings.HD);
 
 		fontOsakaRed = new BitmapFont(
 				Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
 				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
 		fontOsakaRed.setColor(.95f, .05f, .05f, 1f);
+		fontOsakaRed.setScale(GlobalSettings.HD);
 
 		// Pause
 		if (GlobalSettings.GAME.isGdxMenus()) {
 			fontPause = new BitmapFont(
 					Gdx.files.internal("fonts/Osaka2/Osaka2.fnt"),
 					Gdx.files.internal("fonts/Osaka2/Osaka2.png"), false);
+			fontPause.setScale(GlobalSettings.HD);
 			fontPause.setColor(.95f, .05f, .05f, 1f);
 			textureRegionPause = new TextureRegion(new Texture("bonus/star/star.png")); // TODO: another picture
 			pixmapFade = new Pixmap(1, 1, Format.RGB888);
@@ -261,8 +265,10 @@ public class GameLoop {
 			fadePause = Math.min(fadePause + Gdx.graphics.getDeltaTime(), .5f);
 		displayBackground();
 
-		fontPause.draw(batch, "PAUSE", 190, 600); // text
-		batch.draw(textureRegionPause, 10, 10); // home button
+		fontPause.draw(batch, "PAUSE", GlobalSettings.APPWIDTH / 4,
+				GlobalSettings.APPHEIGHT / 2 - 50 * GlobalSettings.HD); // text
+		batch.draw(textureRegionPause, 10 * GlobalSettings.HD,
+				10 * GlobalSettings.HD); // home button
 	}
 
 	/**
