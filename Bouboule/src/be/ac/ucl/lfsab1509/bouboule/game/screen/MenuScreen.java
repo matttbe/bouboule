@@ -207,7 +207,7 @@ public class MenuScreen extends AbstractScreen {
 		public ActionBouboul(boolean right) {
 			init();
 			// initial position
-			position = -850f;
+			position = -2 * GlobalSettings.APPWIDTH; // delay the animation
 			// true if it's the action for the right Bouboule
 			this.right = right;
 		}
@@ -215,20 +215,22 @@ public class MenuScreen extends AbstractScreen {
 		public boolean act(float delta) {
 			position += delta * 1100f;
 
-			// max position 800f
-			if (position >= 800f)
-				position = 800f;
+			// max position APPWIDTH
+			if (position >= GlobalSettings.APPWIDTH)
+				position = GlobalSettings.APPWIDTH;
 
 			// set position for the right and left Bouboule
 			if (right)
-				actor.setPosition(800f - position, (800f - position) / 3.5f);
+				actor.setPosition(GlobalSettings.APPWIDTH - position,
+						(GlobalSettings.APPWIDTH - position) / 3.5f);
 			else
-				actor.setPosition(-800f + position, (800f - position) / 3.5f);
+				actor.setPosition(-GlobalSettings.APPWIDTH + position,
+						(GlobalSettings.APPWIDTH - position) / 3.5f);
 
 			return false;
 		}
 
-		// reset the position when the player push on the Bouboule
+		// reset the position when the player click on the Bouboule
 		public void init() {
 			position = 0f;
 		}
