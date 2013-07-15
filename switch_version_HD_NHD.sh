@@ -56,7 +56,7 @@ fi
 
 rm $ANDROID/assets # symlink
 
-type gsed > /dev/null && SED="gsed" || echo SED="sed"
+type gsed > /dev/null && SED="gsed" || SED="sed"
 
 if test $isHD -eq 1; then # HD -> NHD
 	echo "Switch from HD to Non HD version"
