@@ -79,3 +79,4 @@ else # NHD -> HD
 	cd ..
 	echo "You're now using the HD version"
 fi
+echo "Don't forget to refresh Bouboule and Bouboule-android dirs in Eclipse if you're using it ;)"
