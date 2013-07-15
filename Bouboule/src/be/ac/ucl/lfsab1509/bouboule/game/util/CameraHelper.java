@@ -50,8 +50,9 @@ public class CameraHelper {
 		float physicalHeight = Gdx.graphics.getHeight();
 		float aspect = virtualWidth / virtualHeight;
 		
-		//2048f state for the general background size
-		GlobalSettings.SHIFT_BG = -(2048f-Gdx.graphics.getWidth())/2;
+		//2048f (APPHEIGHT) state for the general background size
+		GlobalSettings.SHIFT_BG = -(GlobalSettings.APPHEIGHT
+				- Gdx.graphics.getWidth()) / 2;
 		
 		// This is to maintain the aspect ratio.
 		// If the virtual aspect ration does not match with the aspect ratio
