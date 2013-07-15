@@ -26,8 +26,6 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import java.text.Normalizer;
-
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.HighScoreInfo;
 
@@ -163,14 +161,25 @@ public class MenuScreen extends AbstractScreen {
 		});
 	}
 
+	/* => no need to normalise the text with this font:
+	 *    when adding a new user, it can only contain chars that are available
+	 *    in this font
+	private static final char CHAR_WITH_ACCENTS[] = "àâçéèêëîïôöùüÂÀÇÉÈÊËÎÏÔÖÙÜ".toCharArray();
+	private static final char CHAR_WITHOUT_ACCENTS[] = "aaceeeeiioouuAACEEEEIIOOUU".toCharArray();
 	/**
 	 * @param text Text to be nomalise
 	 * @return a 'normalised' text (without special chars)
 	 */
 	private String normaliseTextForTitle(String text) {
-		return Normalizer.normalize(text, Normalizer.Form.NFD)
-				.replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
-				.toUpperCase();
+		return text;
+		/*return Normalizer.normalize(text, Normalizer.Form.NFD) // Not supported on iOS
+-				.replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+-				.toUpperCase();*/
+		/* String cNewText = text;
+		for (int i = 0; i < CHAR_WITH_ACCENTS.length; i++)
+			cNewText.replace(CHAR_WITH_ACCENTS[i], CHAR_WITHOUT_ACCENTS[i]);
+		Gdx.app.log("SCREEN", "Old " + text + " -> " + cNewText);
+		return cNewText;*/
 	}
 
 	private String getHighScoreText() {
