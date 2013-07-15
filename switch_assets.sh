@@ -30,8 +30,10 @@
 ## USAGE: ##
 ############
 
-# "./switch_assets.sh check" to check if we're using HD or Non HD version
-# "./switch_assets.sh" to switch version
+# "./switch_version_HD_NHD.sh check" to check if we're using HD or Non HD version
+# "./switch_version_HD_NHD.sh" to switch version
+
+# Note: GNU sed is required (sed or gsed)
 
 ANDROID="Bouboule-android"
 if test ! -d $ANDROID; then
@@ -54,22 +56,24 @@ fi
 
 rm $ANDROID/assets # symlink
 
+type gsed > /dev/null && SED="gsed" || echo SED="sed"
+
 if test $isHD -eq 1; then # HD -> NHD
 	echo "Switch from HD to Non HD version"
-	sed -i "/float APPWIDTH/ s/1311f/800f/" $GlobalSettings
-	sed -i "/float APPHEIGHT/ s/2048f/1250f/" $GlobalSettings
-	sed -i "/boolean ISHD/ s/true/false/" $GlobalSettings
-	sed -i "/float HD/ s/1.6384f/1f/" $GlobalSettings
+	$SED -i "/float APPWIDTH/ s/1311f/800f/" $GlobalSettings
+	$SED -i "/float APPHEIGHT/ s/2048f/1250f/" $GlobalSettings
+	$SED -i "/boolean ISHD/ s/true/false/" $GlobalSettings
+	$SED -i "/float HD/ s/1.6384f/1f/" $GlobalSettings
 	cd $ANDROID
 	ln -s assets_NHD assets
 	cd ..
 	echo "You're now using the Non HD version"
 else # NHD -> HD
 	echo "Switch from Non HD to HD version"
-	sed -i "/float APPWIDTH/ s/800f/1311f/" $GlobalSettings
-	sed -i "/float APPHEIGHT/ s/1250f/2048f/" $GlobalSettings
-	sed -i "/boolean ISHD/ s/false/true/" $GlobalSettings
-	sed -i "/float HD/ s/1f/1.6384f/" $GlobalSettings
+	$SED -i "/float APPWIDTH/ s/800f/1311f/" $GlobalSettings
+	$SED -i "/float APPHEIGHT/ s/1250f/2048f/" $GlobalSettings
+	$SED -i "/boolean ISHD/ s/false/true/" $GlobalSettings
+	$SED -i "/float HD/ s/1f/1.6384f/" $GlobalSettings
 	cd $ANDROID
 	ln -s assets_HD assets
 	cd ..
