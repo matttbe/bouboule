@@ -83,7 +83,6 @@ public class GlobalScreen extends AbstractScreen {
 		iY -= iLessY;
 
 		addBonusImages();
-		iY -= iLessY;
 
 		// BACK
 		addBackButton(false);
@@ -149,6 +148,7 @@ public class GlobalScreen extends AbstractScreen {
 		sensitivitySlider.setY(iY + (GlobalSettings.ISHD ? -33 : 10));
 		sensitivitySlider.setWidth(GlobalSettings.APPWIDTH * 3 / 4);
 		sensitivitySlider.setValue(GlobalSettings.SENSITIVITY);
+		sensitivitySlider.setAnimateDuration(.250f);
 		sensitivitySlider.addListener(sensitivityClickListener);
 		stage.addActor(sensitivitySlider);
 	}
