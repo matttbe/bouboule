@@ -49,11 +49,8 @@ public class CameraHelper {
 		float physicalWidth = Gdx.graphics.getWidth();
 		float physicalHeight = Gdx.graphics.getHeight();
 		float aspect = virtualWidth / virtualHeight;
-		
-		//2048f (APPHEIGHT) state for the general background size
-		GlobalSettings.SHIFT_BG = -(GlobalSettings.APPHEIGHT
-				- Gdx.graphics.getWidth()) / 2;
-		
+		float aspectPhysical = physicalWidth / physicalHeight;
+
 		// This is to maintain the aspect ratio.
 		// If the virtual aspect ration does not match with the aspect ratio
 		// of the hardware screen then the viewport would scaled to
@@ -61,15 +58,21 @@ public class CameraHelper {
 		// dimension
 		// If we stretch it to meet the screen aspect ratio then textures will
 		// get distorted either become fatter or elongated
-		if (physicalWidth / physicalHeight >= aspect) {
+		if (aspectPhysical >= aspect) {
 			// Letterbox left and right.
 			viewportHeight = virtualHeight;
-			viewportWidth = viewportHeight * physicalWidth / physicalHeight;
+			viewportWidth = viewportHeight * aspectPhysical;
 		} else {
 			// Letterbox above and below.
 			viewportWidth = virtualWidth;
-			viewportHeight = viewportWidth * physicalHeight / physicalWidth;
+			viewportHeight = viewportWidth * (1 / aspectPhysical);
 		}
+		//2048f (APPHEIGHT) state for the general background size
+		float hiddenWidth = viewportWidth - physicalWidth; // |x||Game||x|
+		float gameWithLetterBox = virtualHeight - 2 * hiddenWidth; // ||Game||
+		float letterBox = gameWithLetterBox - physicalHeight * aspect; // ||
+		GlobalSettings.SHIFT_BG = - (hiddenWidth + letterBox) / 2;
+
 		OrthographicCamera camera = new OrthographicCamera(viewportWidth,
 				viewportHeight);
 		camera.position.set(virtualWidth / 2, virtualHeight / 2, 0);
