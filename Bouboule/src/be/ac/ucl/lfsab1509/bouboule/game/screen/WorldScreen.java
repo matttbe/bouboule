@@ -155,6 +155,12 @@ public class WorldScreen extends AbstractScreen {
 			y = posY[startPos];
 		}
 
+		private void centerBouboule() {
+			// center it
+			x = posX[startPos];
+			y = posY[startPos];
+		}
+
 		public boolean act(float delta) {
 
 			// If Boub need to move
@@ -173,8 +179,10 @@ public class WorldScreen extends AbstractScreen {
 							* (stopPos - startPos) / span ;
 
 					// We have reached a new world position
-					if (Math.round(y) >= posY[(startPos + 1)])
+					if (Math.round(y) >= posY[(startPos + 1)]) {
 						startPos++;
+						centerBouboule();
+					}
 				}
 				// Downwards
 				else {
@@ -184,8 +192,10 @@ public class WorldScreen extends AbstractScreen {
 							* (startPos - stopPos) / span ;
 
 					// We have reached a new world position
-					if (Math.round(y) <= posY[(startPos - 1)])
+					if (Math.round(y) <= posY[(startPos - 1)]) {
 						startPos--;
+						centerBouboule();
+					}
 				}
 
 				draw();
