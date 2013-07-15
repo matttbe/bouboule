@@ -66,6 +66,10 @@ public class GameLoop {
 	private Pixmap pixmapFade;
 	private SpriteBatch batch;
 
+	// background
+	private Texture background;
+	private Texture scoreboard;
+
 	private static Random random;
 
 	/**
@@ -99,27 +103,37 @@ public class GameLoop {
 		fontOswald = new BitmapFont(
 				Gdx.files.internal("fonts/Oswald/Oswald.fnt"),
 				Gdx.files.internal("fonts/Oswald/Oswald.png"), false);
+		fontOswald.setScale(GlobalSettings.HD); // TODO => rm when oswald will be bigger
 
 		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
 				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
+		fontOsaka.setScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 
 		fontOsakaRed = new BitmapFont(
 				Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
 				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
 		fontOsakaRed.setColor(.95f, .05f, .05f, 1f);
+		fontOsakaRed.setScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 
 		// Pause
 		if (GlobalSettings.GAME.isGdxMenus()) {
 			fontPause = new BitmapFont(
 					Gdx.files.internal("fonts/Osaka2/Osaka2.fnt"),
 					Gdx.files.internal("fonts/Osaka2/Osaka2.png"), false);
+			fontPause.setScale(GlobalSettings.HD); // TODO check if it's ok with this zoom in HD but seems ok
 			fontPause.setColor(.95f, .05f, .05f, 1f);
 			textureRegionPause = new TextureRegion(new Texture("bonus/star/star.png")); // TODO: another picture
 			pixmapFade = new Pixmap(1, 1, Format.RGB888);
 			spriteFade = new Sprite(new Texture(pixmapFade));
 			spriteFade.setColor(0, 0, 0, 0);
-			spriteFade.setSize(GlobalSettings.APPWIDTH, GlobalSettings.APPHEIGHT);
+			spriteFade.setSize(GlobalSettings.APPWIDTH * 2,
+					GlobalSettings.APPHEIGHT * 2); // bigger size to cover all the zone
+			spriteFade.setPosition(- GlobalSettings.APPWIDTH / 2,
+					- GlobalSettings.APPHEIGHT / 2);
 		}
+
+		// load the scoreboard
+		scoreboard = new Texture("terrain/ScoreBoard/scoreboard.png");
 
 		// load the counter
 		countDown = new CountDown(2, 2, 1f, "anim/countdown.png", true); // 3 sec
@@ -141,6 +155,10 @@ public class GameLoop {
 		// Clear the graphic Manager for a new use.
 		graphicManager.dispose(false);
 
+		// Clear the background for a new use.
+		if (background != null)
+			background.dispose();
+
 		// Reset EndGame Listener
 		EndGameListener.resetListener();
 
@@ -152,11 +170,12 @@ public class GameLoop {
 		} catch (GdxRuntimeException e) {
 			level.loadLevel("Level1"); // should not happen...
 		}
-		level.readLevelArena(graphicManager);
+		String arenaName = level.readLevelArena(graphicManager);
 		level.readLevelBouboule(graphicManager);
 		level.readLevelObstacles(graphicManager);
 		level.readLevelMapNodes();
 
+		background = new Texture(arenaName + "bg.jpg");
 	}
 
 	/**
@@ -188,12 +207,16 @@ public class GameLoop {
 
 		batch.begin();
 
-		// batch.disableBlending();
-		// Allow to draw the background fast because it disable
-		// the color blending (override the background).
-		// batch.enableBlending();
 
 		// Draw all the know bodies
+
+		batch.disableBlending();
+		// Allow to draw the background fast because it disable
+		// the color blending (override the background).
+		batch.draw(background, GlobalSettings.SHIFT_BG, 0);
+		batch.enableBlending();
+
+		batch.draw(scoreboard, 0, 0);
 
 		graphicManager.draw(batch);
 
@@ -240,8 +263,10 @@ public class GameLoop {
 			fadePause = Math.min(fadePause + Gdx.graphics.getDeltaTime(), .5f);
 		displayBackground();
 
-		fontPause.draw(batch, "PAUSE", 190, 600); // text
-		batch.draw(textureRegionPause, 10, 10); // home button
+		fontPause.draw(batch, "PAUSE", GlobalSettings.APPWIDTH / 4,
+				GlobalSettings.APPHEIGHT / 2 - 50); // text
+		batch.draw(textureRegionPause, 10 * GlobalSettings.HD,
+				10 * GlobalSettings.HD); // home button
 	}
 
 	/**
@@ -450,17 +475,20 @@ public class GameLoop {
 		CharSequence timerM = Integer.toString(timer / 60);
 		CharSequence timerS = getTimerCharFromInt(timer % 60);
 
+		int iPosX = (int) (630 * GlobalSettings.HD);
+		int iPosY = (int) (1122 * GlobalSettings.HD);
 		if (timer < 6) // last 5 seconds
-			fontOsakaRed.draw(batch, timerS + "''", 630, 1122);
+			fontOsakaRed.draw(batch, timerS + "''",iPosX, iPosY);
 		else if (timer < 60)
-			fontOsaka.draw(batch, timerS + "''", 630, 1122);
+			fontOsaka.draw(batch, timerS + "''", iPosX, iPosY);
 		else
-			fontOsaka.draw(batch, timerM + "' " + timerS + "''", 630, 1122);
+			fontOsaka.draw(batch, timerM + "' " + timerS + "''", iPosX, iPosY);
 
-		fontOsaka.draw(batch, lives, 630, 1167);
-		fontOsaka.draw(batch, score, 630, 1205);
-		fontOswald.draw(batch, levelD, 285, 1180);
-		fontOswald.draw(batch, levelU, 345, 1180);
+		iPosY = (int) (1180 * GlobalSettings.HD);
+		fontOsaka.draw(batch, lives, iPosX, (int) (1167 * GlobalSettings.HD));
+		fontOsaka.draw(batch, score, iPosX, (int) (1205 * GlobalSettings.HD));
+		fontOswald.draw(batch, levelD, (int) (285 * GlobalSettings.HD), iPosY);
+		fontOswald.draw(batch, levelU, (int) (345 * GlobalSettings.HD), iPosY);
 
 	}
 
@@ -474,6 +502,9 @@ public class GameLoop {
 		if (debugRenderer != null)
 			debugRenderer.dispose();
 		graphicManager.dispose(true);
+		if (background != null)
+			background.dispose();
+		scoreboard.dispose();
 		countDown.dispose();
 		tutorial.dispose();
 		fontOsaka.dispose();

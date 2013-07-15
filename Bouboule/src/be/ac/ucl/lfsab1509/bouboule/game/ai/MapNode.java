@@ -27,6 +27,8 @@ package be.ac.ucl.lfsab1509.bouboule.game.ai;
  */
 
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+
 import com.badlogic.gdx.math.Vector2;
 
 /*
@@ -41,8 +43,8 @@ public class MapNode {
 	
 	public MapNode(final float px, final float py, final float poids) {
 		
-		this.vector = new Vector2(px, py);
-		this.weight	= poids;
+		this.vector = new Vector2(px * GlobalSettings.HD, py * GlobalSettings.HD);
+		this.weight	= poids * GlobalSettings.HD;
 	}
 
 	public Vector2 getVector() {

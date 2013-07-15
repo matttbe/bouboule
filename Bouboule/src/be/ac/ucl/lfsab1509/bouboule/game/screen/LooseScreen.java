@@ -67,8 +67,20 @@ public class LooseScreen extends AbstractScreen {
 
 		// Create all Buttons - Play Button
 
-		Button retryButton = createButton("transparent", 290, 90, 63, 608);
-		Button menuButton = createButton("transparent", 290, 90, 448, 608);
+		int iX, iY;
+		Button retryButton, menuButton;
+		if (GlobalSettings.ISHD) {
+			iX = 328;
+			iY = 1190;
+			retryButton = createButton("transparent", 475, 147, 103, 996);
+			menuButton = createButton("transparent", 475, 147, 734, 996);
+		}
+		else {
+			iX = 200;
+			iY = 703;
+			retryButton = createButton("transparent", 290, 90, 63, 608);
+			menuButton = createButton("transparent", 290, 90, 448, 608);
+		}
 
 		retryButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
@@ -85,10 +97,9 @@ public class LooseScreen extends AbstractScreen {
 		});
 
 		// Create all fonts
-
 		addLabel(Integer.toString(GlobalSettings.PROFILE.getScore()),
-				"osakaBig-font", 0.27f, new Color(0.2f, 0.188f, 0.094f, 1f),
-				200, 703);
-
+				"osakaBig-font", 0.27f * GlobalSettings.HD,
+				new Color(0.2f, 0.188f, 0.094f, 1f),
+				iX, iY);
 	}
 }

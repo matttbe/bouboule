@@ -64,8 +64,10 @@ public class MenuScreen extends AbstractScreen {
 
 		// Create the 2 Bouboules out of the screen
 
-		Image imgBoubouleR = addImage("drawable-xhdpi/boubouleright.png", 800, 0);
-		Image imgBoubouleL = addImage("drawable-xhdpi/boubouleleft.png", -800, 0);
+		Image imgBoubouleR = addImage("drawable-xhdpi/boubouleright.png",
+				(int) GlobalSettings.APPWIDTH, 0);
+		Image imgBoubouleL = addImage("drawable-xhdpi/boubouleleft.png",
+				(int) -GlobalSettings.APPWIDTH, 0);
 
 		// add action on the bouboule
 		final ActionBouboul actionbouL = new ActionBouboul(false);
@@ -89,7 +91,7 @@ public class MenuScreen extends AbstractScreen {
 		tableTitle.setTransform(true);
 		tableTitle.setWidth(GlobalSettings.APPWIDTH); // all the width
 		tableTitle.setX(0);
-		tableTitle.setY(1050);
+		tableTitle.setY((int) (1050 * GlobalSettings.HD));
 		tableTitle.setOrigin(GlobalSettings.APPWIDTH / 2,
 				tableTitle.getHeight() / 2); // at the center
 		stage.addActor(tableTitle);
@@ -100,11 +102,21 @@ public class MenuScreen extends AbstractScreen {
 		actiontitle.setActor(tableTitle);
 
 		// Add 5 button transparent
-		Button playButton = createButton("transparent", 430, 160, 200, 725);
-		Button paramButton = createButton("transparent", 430, 160, 200, 555);
-		Button scoreButton = createButton("transparent", 430, 160, 200, 385);
-		Button boubouleButton = createButton("transparent", 500, 350, 200, 0);
-		Button titleButton = createButton("transparent", 500, 500, 200, 885);
+		Button playButton, paramButton, scoreButton, boubouleButton, titleButton;
+		if (GlobalSettings.ISHD) {
+			playButton  = createButton("transparent", 690, 250, 312, 1150);
+			paramButton = createButton("transparent", 690, 250, 312, 887);
+			scoreButton = createButton("transparent", 690, 250, 312, 615);
+			boubouleButton = createButton("transparent", 1000, 600, 200, 0);
+			titleButton    = createButton("transparent", 1000, 1000, 200, 1450);
+		}
+		else {
+			playButton = createButton("transparent", 430, 160, 200, 725);
+			paramButton = createButton("transparent", 430, 160, 200, 555);
+			scoreButton = createButton("transparent", 430, 160, 200, 385);
+			boubouleButton = createButton("transparent", 500, 350, 200, 0);
+			titleButton = createButton("transparent", 500, 500, 200, 885);
+		}
 
 		// Listener for the button
 		playButton.addListener(new ClickListener() {

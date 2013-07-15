@@ -81,7 +81,8 @@ public class UserScreen extends AbstractScreen {
 		super.show();
 
 		// Set Background
-		addBackGround("drawable-xhdpi/settings_blank.jpg");
+		Image bg = addBackGround("drawable-xhdpi/settings_blank.jpg");
+		bg.setScale(GlobalSettings.HD); // TODO remove when settings_blank will be bigger
 
 		addChooseUserOptions();
 

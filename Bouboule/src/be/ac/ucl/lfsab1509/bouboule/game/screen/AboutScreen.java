@@ -31,6 +31,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class AboutScreen extends AbstractScreen {
@@ -42,6 +43,10 @@ public class AboutScreen extends AbstractScreen {
 	@Override
 	public void show() {
 		super.show();
+
+		//Set Background
+		Image bg = addBackGround("drawable-xhdpi/settings_blank.jpg");
+		bg.setScale(GlobalSettings.HD); // TODO remove when settings_blank will be bigger
 
 		// Note: no accent with the default font and multiple spaces or \t are not working
 		String cAboutText =
@@ -66,6 +71,7 @@ public class AboutScreen extends AbstractScreen {
 		if (iVersion > 0)
 			cAboutText += "\n\nVersion: " + iVersion;
 		Label label = new Label(cAboutText, getSkin(), "osaka-font", Color.WHITE);
+		label.setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 
 		// not on the border
 		label.setWidth(GlobalSettings.APPWIDTH - 20);
@@ -78,9 +84,6 @@ public class AboutScreen extends AbstractScreen {
 		// label.getStyle().font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
 		// label.setFillParent(true); used all the screen: too large
-
-		//Set Background
-		addBackGround("drawable-xhdpi/settings_blank.jpg");
 
 		stage.addActor(label);
 

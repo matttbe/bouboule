@@ -3,6 +3,8 @@ CheckList for release:
 For Android:
  * Check if bAndroidMenus (MainActivity.java:48)  is set to TRUE
  * Move Bouboule-android/assets/drawable-xhdpi => Bouboule-android/res/drawable-xhdpi
+ * Removed Bouboule-android/res/drawable-xhdpi/GdxMenus
 
 For iOS:
- * Version HD (for Retina) and NHD
+ * Version HD: replaced dir 'asset' by 'asset_HD'
+ * and NHD: replaced dir 'asset' by 'asset_NHD'

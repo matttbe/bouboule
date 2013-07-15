@@ -147,8 +147,10 @@ public class LevelLoader {
 			BodyType bodyType		= BodyType.DynamicBody;
 			float density			= Float.parseFloat(boub.getAttribute("density"));
 			float elasticity		= Float.parseFloat(boub.getAttribute("elasticity"));
-			float px				= Float.parseFloat(boub.getAttribute("px"));
-			float py				= Float.parseFloat(boub.getAttribute("py"));
+			float px				= Float.parseFloat(boub.getAttribute("px"))
+										* GlobalSettings.HD;
+			float py				= Float.parseFloat(boub.getAttribute("py"))
+										* GlobalSettings.HD;
 			float angle				= Float.parseFloat(boub.getAttribute("angle"));
 			int AILevel				= Integer.parseInt(boub.getAttribute("AILevel"));
 			short entity			= Short.parseShort(boub.getAttribute("entity"));
@@ -200,9 +202,9 @@ public class LevelLoader {
 	 * 
 	 * 	public void readLevelArena(GraphicManager graphicManager)
 	 */
-	public void readLevelArena(final GraphicManager graphicManager) {
+	public String readLevelArena(final GraphicManager graphicManager) {
 
-		Element aren = file.getChildByName("Arena");	
+		Element aren = file.getChildByName("Arena");
 
 
 		float radius			= Float.parseFloat(aren.getAttribute("radius"));
@@ -210,9 +212,13 @@ public class LevelLoader {
 		float py				= Float.parseFloat(aren.getAttribute("py"));
 		float angle				= Float.parseFloat(aren.getAttribute("angle"));
 		String file				= aren.getAttribute("file");
-		String texRegionPath 	= file + ".jpg";
+		String texRegionPath 	= file + ".png";
 		String jsonFile 		= file + ".json";
 		String jsonName 		= extractFileName(file);
+		// TODO => remove when SHIP and ROCK will have .png file
+		if (jsonName.equals("rock") || jsonName.equals("ship"))
+			texRegionPath = file + ".jpg";
+		//______________________________________________________
 		String cMusicName 		= aren.getAttribute ("music", null);
 
 		graphicManager.addBody(new Arena(radius, px, py,  angle, texRegionPath, 
@@ -222,6 +228,7 @@ public class LevelLoader {
 
 		Gdx.app.log("XML", "Arena Loaded :" + jsonName);
 
+		return file;
 	}
 
 	/**

@@ -157,7 +157,8 @@ public abstract class AbstractScreen implements Screen {
 		Label label = new Label(text, getSkin(), fontName, color);
 		label.setX(x);
 		label.setY(y);
-		label.setFontScale(scale);
+		if (scale != 0)
+			label.setFontScale(scale);
 		stage.addActor(label);
 
 		return label;
@@ -166,7 +167,8 @@ public abstract class AbstractScreen implements Screen {
 	protected Button createButton(String skinType, int sizeX, int sizeY, int x,
 			int y) {
 		Button button = new Button(getSkin(), skinType);
-		button.setSize(sizeX, sizeY);
+		if (sizeX != 0 && sizeY != 0)
+			button.setSize(sizeX, sizeY);
 		button.setX(x);
 		button.setY(y);
 

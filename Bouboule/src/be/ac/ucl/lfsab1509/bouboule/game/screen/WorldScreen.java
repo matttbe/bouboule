@@ -88,8 +88,11 @@ public class WorldScreen extends AbstractScreen {
 		for (int i = 0; i < lastUnlockedWorld
 				&& i < GlobalSettings.NBLEVELS / 4; i++) {
 
-			Button button = createButton("transparent", sizeX[i], sizeY[i],
-					posX[i], posY[i]);
+			Button button = createButton("transparent",
+					(int) (sizeX[i] * GlobalSettings.HD),
+					(int) (sizeY[i] * GlobalSettings.HD),
+					(int) (posX[i] * GlobalSettings.HD),
+					(int) (posY[i] * GlobalSettings.HD));
 			addLevelListener(button, moveBoub, i);
 
 		}
@@ -135,8 +138,8 @@ public class WorldScreen extends AbstractScreen {
 		public MoveBoub(int startPos) {
 			this.startPos = startPos;
 			this.stopPos = startPos;
-			x = posX[startPos];
-			y = posY[startPos];
+			x = posX[startPos] * GlobalSettings.HD;
+			y = posY[startPos] * GlobalSettings.HD;
 		}
 
 		public boolean act(float delta) {
@@ -148,21 +151,25 @@ public class WorldScreen extends AbstractScreen {
 
 				// Upwards
 				if (startPos < stopPos) {
-					x += (posX[startPos + 1] - posX[startPos]) / span;
-					y += (posY[startPos + 1] - posY[startPos]) / span;
+					x += (posX[startPos + 1] * GlobalSettings.HD
+							- posX[startPos] * GlobalSettings.HD) / span;
+					y += (posY[startPos + 1] * GlobalSettings.HD
+							- posY[startPos] * GlobalSettings.HD) / span;
 
 					// We have reached a new world position
-					if (Math.round(x) == posX[(startPos + 1)])
+					if (Math.round(x) == posX[(startPos + 1)] * GlobalSettings.HD)
 						startPos++;
 
 					// Downwards
 				} else {
 
-					x += (posX[startPos - 1] - posX[startPos]) / span;
-					y += (posY[startPos - 1] - posY[startPos]) / span;
+					x += (posX[startPos - 1] * GlobalSettings.HD
+							- posX[startPos] * GlobalSettings.HD) / span;
+					y += (posY[startPos - 1] * GlobalSettings.HD
+							- posY[startPos] * GlobalSettings.HD) / span;
 
 					// We have reached a new world position
-					if (Math.round(x) == posX[(startPos - 1)])
+					if (Math.round(x) == posX[(startPos - 1)] * GlobalSettings.HD)
 						startPos--;
 				}
 

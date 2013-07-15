@@ -27,6 +27,8 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
  */
 
 
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -47,9 +49,17 @@ public class ParamScreen extends AbstractScreen {
 		addBackGround("drawable-xhdpi/settings.jpg");
 		
 		//Create all Buttons
-		Button userButton  = createButton("transparent", 430, 160, 200, 725);
-		Button globalButton = createButton("transparent", 430, 160, 200, 555);
-		Button aboutButton = createButton("transparent", 430, 160, 200, 385);
+		Button userButton, globalButton, aboutButton;
+		if (GlobalSettings.ISHD) {
+			userButton   = createButton("transparent", 690, 250, 312, 1150);
+			globalButton = createButton("transparent", 690, 250, 312, 887);
+			aboutButton  = createButton("transparent", 690, 250, 312, 615);
+		}
+		else {
+			userButton   = createButton("transparent", 430, 160, 200, 725);
+			globalButton = createButton("transparent", 430, 160, 200, 555);
+			aboutButton  = createButton("transparent", 430, 160, 200, 385);
+		}
 		
 		
 		userButton.addListener( new ClickListener() {
