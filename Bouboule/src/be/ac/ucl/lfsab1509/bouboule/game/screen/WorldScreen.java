@@ -118,8 +118,8 @@ public class WorldScreen extends AbstractScreen {
 		private int startPos, stopPos;
 
 		// Position of Boub through the worlds 0 to 7
-		private final float[] posX = { 85, 320, 519, 503, 275,  92, 177, 311 };
-		private final float[] posY = { 31,  61, 122, 244, 299, 385, 580, 861 };
+		private int[] posX = { 85, 320, 519, 503, 275,  92, 177, 311 };
+		private int[] posY = { 31,  61, 122, 244, 299, 385, 580, 861 };
 
 		// Postion of Boub
 		private float x = 0;
@@ -136,10 +136,16 @@ public class WorldScreen extends AbstractScreen {
 		 * here because actor is not yet set
 		 */
 		public MoveBoub(int startPos) {
+			if (GlobalSettings.ISHD) {
+				for (int i = 0; i < posX.length; i++) {
+					posX[i] = (int) (posX[i] * GlobalSettings.HD);
+					posY[i] = (int) (posY[i] * GlobalSettings.HD);
+				}
+			}
 			this.startPos = startPos;
 			this.stopPos = startPos;
-			x = posX[startPos] * GlobalSettings.HD;
-			y = posY[startPos] * GlobalSettings.HD;
+			x = posX[startPos];
+			y = posY[startPos];
 		}
 
 		public boolean act(float delta) {
@@ -151,25 +157,21 @@ public class WorldScreen extends AbstractScreen {
 
 				// Upwards
 				if (startPos < stopPos) {
-					x += (posX[startPos + 1] * GlobalSettings.HD
-							- posX[startPos] * GlobalSettings.HD) / span;
-					y += (posY[startPos + 1] * GlobalSettings.HD
-							- posY[startPos] * GlobalSettings.HD) / span;
+					x += (posX[startPos + 1] - posX[startPos]) / span;
+					y += (posY[startPos + 1] - posY[startPos]) / span;
 
 					// We have reached a new world position
-					if (Math.round(x) == posX[(startPos + 1)] * GlobalSettings.HD)
+					if (Math.round(x) == posX[(startPos + 1)])
 						startPos++;
 
 					// Downwards
 				} else {
 
-					x += (posX[startPos - 1] * GlobalSettings.HD
-							- posX[startPos] * GlobalSettings.HD) / span;
-					y += (posY[startPos - 1] * GlobalSettings.HD
-							- posY[startPos] * GlobalSettings.HD) / span;
+					x += (posX[startPos - 1] - posX[startPos]) / span;
+					y += (posY[startPos - 1] - posY[startPos]) / span;
 
 					// We have reached a new world position
-					if (Math.round(x) == posX[(startPos - 1)] * GlobalSettings.HD)
+					if (Math.round(x) == posX[(startPos - 1)])
 						startPos--;
 				}
 
