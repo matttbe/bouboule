@@ -1,0 +1,2432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Level>
+
+    <Level1
+        bonus="True"
+        bonusEnabled="star,life"
+        bonusrate="700"
+        time="60" >
+
+        <Bouboule
+            AILevel="7"
+            angle="0"
+            density="1"
+            elasticity="1.1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_basic.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.1f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Arena/arena"
+            music="Arena.mp3" >
+        </Arena>
+
+        <MapNodes terrain="arena" >
+
+            <NodeAllow
+                px="3.3934f"
+                py="4.8933f"
+                weight="3.8000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.3732f"
+                py="6.2056f"
+                weight="3.8000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.3732f"
+                py="3.5811"
+                weight="3.8000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level1>
+
+    <Level2
+        bonus="True"
+        bonusEnabled="star,life"
+        bonusrate="1650"
+        time="55" 
+        accmaxai="0.1f">
+
+        <Bouboule
+            AILevel="4"
+            angle="0"
+            density="0.8"
+            elasticity="1.1f"
+            entity="-1"
+            px="286"
+            py="620"
+            radius="0"
+            texRegionPath="boub_basic.png"
+            type="giant" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Arena/arena"
+            music="Arena.mp3" >
+        </Arena>
+
+        <MapNodes terrain="arena" >
+
+            <NodeAllow
+                px="3.3934f"
+                py="4.8933f"
+                weight="3.8000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.3732f"
+                py="6.2056f"
+                weight="3.8000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.3732f"
+                py="3.5811"
+                weight="3.8000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level2>
+
+    <Level3
+        bonus="True"
+        bonusrate="650"
+        bonusEnabled="star,life,invisible"
+        accmaxai="0.425f"
+        accmaxplayer="0.5f"
+        time="45" >
+
+        <Bouboule
+            AILevel="9"
+            angle="0"
+            density="1"
+            elasticity="1.1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_geisha.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Eggroll/eggroll"
+            music="Eggroll.mp3" >
+        </Arena>
+
+        <MapNodes terrain="Eggroll" >
+
+            <NodeAllow
+                px="3.383338f"
+                py="4.883388f"
+                weight="3.820000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.393430f"
+                py="7.020777f"
+                weight="2.970000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.383338f"
+                py="2.696292f"
+                weight="2.930000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level3>
+
+    <Level4
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="star,life,invisible,speed"
+        time="45" >
+
+        <Bouboule
+            AILevel="9"
+            angle="0"
+            density="0.9f"
+            elasticity="0.9f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_eventail.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="0.9f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/CherryBlossom/cherryblossom"
+            music="Eggroll.mp3">
+        </Arena>
+
+        <MapNodes terrain="cherryBlossom" >
+
+            <NodeAllow
+                px="3.393430f"
+                py="4.933095f"
+                weight="3.350000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level4>
+
+    <Level5
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="star,life,invisible,speed"
+        accmaxai="0.3f"
+        time="90" >
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="2f"
+            elasticity="0.7f"
+            entity="-1"
+            px="100"
+            py="900"
+            radius="0"
+            texRegionPath="boub_samurai.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="0.8f"
+            entity="1"
+            px="600"
+            py="100"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/DoubleHoles/doubleholes"
+            music="DoubleHoles.mp3" >
+        </Arena>
+
+        <MapNodes terrain="Doubleholes" >
+
+            <NodeAllow
+                px="1.243760f"
+                py="8.323094f"
+                weight="1.680000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="1.304314f"
+                py="5.688637f"
+                weight="1.820000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.698774f"
+                py="4.426086f"
+                weight="1.150000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.466650f"
+                py="3.451834f"
+                weight="0.910000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.365726f"
+                py="2.596878f"
+                weight="0.830000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.572619f"
+                py="1.239885f"
+                weight="1.025000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.718958f"
+                py="0.906850f"
+                weight="1.160000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="1.869486f"
+                py="0.558902f"
+                weight="0.760000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="2.914043f"
+                py="0.474401f"
+                weight="0.685000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.205864f"
+                py="0.703052f"
+                weight="0.915000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.638977f"
+                py="1.389005f"
+                weight="1.585000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.538053f"
+                py="4.262054f"
+                weight="1.715000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.403522f"
+                py="4.903271f"
+                weight="0.950000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.411041f"
+                py="6.245352f"
+                weight="0.780000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.390856f"
+                py="6.205587f"
+                weight="0.820000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.491780f"
+                py="7.458197f"
+                weight="0.710000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.123409f"
+                py="8.934487f"
+                weight="1.075000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.750850f"
+                py="9.312258f"
+                weight="0.685000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="2.868628f"
+                py="9.078636f"
+                weight="0.890000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.812262f"
+                py="9.332140f"
+                weight="0.675000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level5>
+
+    <Level6
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="star,life,invisible,speed,elast"
+        time="45" 
+        accmaxai="1f"
+        accmaxplayer="1f">
+
+        <Bouboule
+            AILevel="9"
+            angle="0"
+            density="0.1f"
+            elasticity="0.5f"
+            entity="-1"
+            px="350"
+            py="800"
+            radius="0"
+            texRegionPath="boub_inuit.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="0.1f"
+            elasticity="0.5f"
+            entity="1"
+            px="350"
+            py="200"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Ice/ice"
+            music="Ice.mp3" >
+        </Arena>
+
+        <MapNodes terrain="Ice" >
+
+            <NodeAllow
+                px="3.353061f"
+                py="4.883388f"
+                weight="3.430000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level6>
+
+    <Level7
+        bonus="True"
+        bonusEnabled="inverse"
+        bonusrate="100"
+        time="45" 
+		>
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="0.9f"
+            elasticity="0.8f"
+            entity="-1"
+            px="350"
+            py="900"
+            radius="0"
+            texRegionPath="boub_nuage.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="0.8f"
+            entity="1"
+            px="350"
+            py="100"
+            radius="0"
+            type="normal" 
+            inverted="True">
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Schrink/schrink"
+            music="Schrink.mp3" >
+        </Arena>
+
+        <MapNodes terrain="schrink" >
+
+            <NodeAllow
+                px="3.363153f"
+                py="7.895616f"
+                weight="2.120000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.937559f"
+                py="0.399841f"
+                weight="2.120000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.373245f"
+                py="4.903271f"
+                weight="1.530000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.363153f"
+                py="6.066408f"
+                weight="1.620000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.373245f"
+                py="3.690426f"
+                weight="1.610000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level7>
+
+    <Level8
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="star,life,invisible,speed,elast,inverse"
+        time="30" 
+        accmaxplayer="0.5f">
+
+        <Bouboule
+            AILevel="8"
+            angle="0"
+            density="1"
+            elasticity="0.5f"
+            entity="-1"
+            px="350"
+            py="800"
+            radius="0"
+            texRegionPath="boub_mouse.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="0.5f"
+            entity="1"
+            px="350"
+            py="400"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Cheesy/cheesy"
+            music="Cheesy.mp3" >
+        </Arena>
+
+        <MapNodes terrain="cheesy" >
+
+            <NodeAllow
+                px="2.404380f"
+                py="6.871657f"
+                weight="2.290000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.050290f"
+                py="8.233622f"
+                weight="1.430000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.069617f"
+                py="8.969281f"
+                weight="0.670000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.796266f"
+                py="9.217815f"
+                weight="0.420000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.351345f"
+                py="9.237698f"
+                weight="0.410000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.320210f"
+                py="8.919575f"
+                weight="0.750000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.481687f"
+                py="7.975147f"
+                weight="0.590000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.320210f"
+                py="7.786261f"
+                weight="0.730000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.179775f"
+                py="5.569341f"
+                weight="1.880000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.817308f"
+                py="5.738344f"
+                weight="2.090000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.977070f"
+                py="3.700368f"
+                weight="0.960000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="2.979644f"
+                py="2.875236f"
+                weight="1.130000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.779513f"
+                py="5.092156f"
+                weight="0.820000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.507019f"
+                py="3.938960f"
+                weight="0.580000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.860251f"
+                py="3.173476f"
+                weight="0.540000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="1.556623f"
+                py="2.696292f"
+                weight="0.590000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.170540f"
+                py="2.119694f"
+                weight="0.560000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.159590f"
+                py="2.487524f"
+                weight="0.580000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level8>
+
+    <Level9
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
+        accmaxai="0.55f"
+        time="45" >
+
+        <Bouboule
+            AILevel="10"
+            angle="0"
+            density="0.9"
+            elasticity="1f"
+            entity="-1"
+            px="400"
+            py="800"
+            radius="0"
+            texRegionPath="boub_chef.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="1"
+            px="400"
+            py="300"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Sushi/sushi"
+            music="Sushi.mp3" >
+        </Arena>
+
+        <MapNodes terrain="sushi" >
+
+            <NodeAllow
+                px="4.221002f"
+                py="6.951188f"
+                weight="2.300000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="2.525488f"
+                py="4.883388f"
+                weight="2.300000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.332018f"
+                py="2.825529f"
+                weight="2.180000f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/Sushi/sushi_mur" >
+            </Obstacle>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/Sushi/sushi_obs" >
+            </Obstacle>
+        </Obstacles>
+    </Level9>
+
+    <Level10
+        bonus="TRUE"
+        bonusrate="700"
+        bonusEnabled="star,life,invisible,speed,elast,inverse"
+        accmaxai="0.5f"
+        time="60" >
+
+        <Bouboule
+            AILevel="10"
+            angle="0"
+            density="1"
+            elasticity="1.1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Arena/arena"
+            music="Arena.mp3" >
+        </Arena>
+
+        <MapNodes terrain="arena" >
+
+            <NodeAllow
+                px="3.3934f"
+                py="4.8933f"
+                weight="3.8000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.3732f"
+                py="6.2056f"
+                weight="3.8000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.3732f"
+                py="3.5811"
+                weight="3.8000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level10>
+
+    <Level11
+        bonus="True"
+        bonusrate="1000"
+        time="45" >
+
+        <Bouboule
+            AILevel="10"
+            angle="0"
+            density="1"
+            elasticity="1.1f"
+            entity="-1"
+            px="600"
+            py="750"
+            radius="0"
+            texRegionPath="boub_kid.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            px="80"
+            py="220"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Tatami/tatami"
+            music="Tatami.mp3" >
+        </Arena>
+
+        <MapNodes terrain="tatami" >
+
+            <NodeAllow
+                px="3.383338f"
+                py="4.913212f"
+                weight="3.380000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level11>
+
+    <Level12
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
+        time="45" >
+
+        <Bouboule
+            AILevel="10"
+            angle="0"
+            density="3"
+            elasticity="1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_pirate.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="3"
+            elasticity="1f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Ship/ship"
+            music="DoubleHoles.mp3">
+        </Arena>
+
+        <MapNodes terrain="ship" >
+
+            <NodeAllow
+                px="3.342968f"
+                py="4.525500f"
+                weight="3.100000f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                accx="200"
+                accy="0"
+                angle="0"
+                bodyType="Dynamic"
+                density="2"
+                elasticity="0.1f"
+                entity="-2"
+                produce="True"
+                px="25"
+                py="340"
+                file="terrain/Ship/ship_canonball"
+                time="5f" >
+            </Obstacle>
+
+            <Obstacle
+                accx="-200"
+                accy="0"
+                angle="3.14"
+                bodyType="Dynamic"
+                density="2"
+                elasticity="0.1f"
+                entity="-2"
+                produce="True"
+                px="775"
+                py="770"
+                file="terrain/Ship/ship_canonball"
+                time="5" >
+            </Obstacle>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/Ship/ship_mur" >
+            </Obstacle>
+        </Obstacles>
+    </Level12>
+
+    <Level13
+        bonus="False"
+        bonusrate="650"
+        bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
+        time="60" >
+
+        <Bouboule
+            AILevel="9"
+            angle="0"
+            density="1"
+            elasticity="0.9f"
+            entity="-1"
+            px="220"
+            py="760"
+            radius="0"
+            texRegionPath="boub_sailor.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="0.9f"
+            entity="1"
+            px="465"
+            py="760"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Sailor/sailor"
+            music="OneWay.mp3" >
+        </Arena>
+
+        <MapNodes terrain="sailor" >
+
+            <NodeAllow
+                px="3.342968f"
+                py="9.446466f"
+                weight="8.660000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.363153f"
+                py="1.831395f"
+                weight="3.740000f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/Sailor/sailor_mur" >
+            </Obstacle>
+        </Obstacles>
+    </Level13>
+
+    <Level14
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
+        time="45" >
+
+        <Bouboule
+            AILevel="10"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_ninja.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Lazer/lazer"
+            music="Arena.mp3" >
+        </Arena>
+
+        <MapNodes terrain="Lazer" >
+
+            <NodeAllow
+                px="3.363153f"
+                py="4.913212f"
+                weight="3.060000f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/Lazer/lazer_mur" >
+            </Obstacle>
+
+            <Obstacle
+                angle="0"
+                blink="True"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/Lazer/lazer_lazer"
+                time="3" >
+            </Obstacle>
+        </Obstacles>
+    </Level14>
+
+    <Level15
+        bonus="True"
+        bonusrate="700"
+        time="60"
+        accmaxai="1.0f"
+        accmaxplayer="1.0f">
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="1"
+            elasticity="1.1f"
+            entity="-1"
+            px="366"
+            py="636"
+            radius="0"
+            texRegionPath="boub_basic.png"
+            type="small" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            px="366"
+            py="386"
+            radius="0"
+            type="small" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Arena/arena"
+            music="Arena.mp3" >
+        </Arena>
+
+        <MapNodes terrain="arena" >
+
+            <NodeAllow
+                px="3.3934f"
+                py="4.8933f"
+                weight="3.8000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.3732f"
+                py="6.2056f"
+                weight="3.8000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.3732f"
+                py="3.5811"
+                weight="3.8000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level15>
+
+    <Level16
+        bonus="True"
+        bonusrate="1650"
+        time="45" 
+        accmaxai="0.5f">
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="1"
+            elasticity="1.05f"
+            entity="-1"
+            px="350"
+            py="610"
+            radius="0"
+            texRegionPath="boub_yoda.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.05f"
+            entity="1"
+            px="350"
+            py="390"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/SpaceShip/spaceship"
+            music="Arena">
+        </Arena>
+
+        <MapNodes terrain="spaceship" >
+
+            <NodeAllow
+                px="3.312691f"
+                py="4.426086f"
+                weight="2.190000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level16>
+
+    <Level17
+        bonus="True"
+        bonusrate="1650"
+        accmaxai="0.55f"
+        time="45" >
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="-1"
+            px="366"
+            py="700"
+            radius="0"
+            texRegionPath="boub_monk.png"
+            type="small" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="1"
+            px="366"
+            py="300"
+            radius="0"
+            type="small" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/YinYang/yinyang"
+            music="YinYang.mp3" >
+        </Arena>
+
+        <MapNodes terrain="yingyang" >
+
+            <NodeAllow
+                px="3.342968f"
+                py="6.444179f"
+                weight="1.800000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.363153f"
+                py="3.362362f"
+                weight="1.780000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="1.748378f"
+                py="3.322597f"
+                weight="1.120000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.957743f"
+                py="3.342479f"
+                weight="1.120000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.998113f"
+                py="6.483945f"
+                weight="1.120000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="1.687824f"
+                py="6.424297f"
+                weight="1.120000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level17>
+
+    <Level18
+        bonus="False"
+        bonusrate="1000"
+        bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
+        time="60" >
+
+        <Bouboule
+            AILevel="4"
+            angle="0"
+            density="1f"
+            elasticity="1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_bbmonk.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/OneWay/oneway"
+            music="OneWay.mp3" >
+        </Arena>
+
+        <MapNodes terrain="Oneway" >
+
+            <NodeAllow
+                px="3.433799f"
+                py="8.233622f"
+                weight="6.650000f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0.5f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/OneWay/oneway_mur" >
+            </Obstacle>
+        </Obstacles>
+    </Level18>
+
+    <Level19
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
+        accmaxai="0.55f"
+        time="45" >
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="1.1"
+            elasticity="1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_pirate.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Ship/ship"
+            music="DoubleHoles.mp3">
+        </Arena>
+
+        <MapNodes terrain="ship" >
+
+            <NodeAllow
+                px="3.342968f"
+                py="4.525500f"
+                weight="3.100000f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                accx="200"
+                accy="0"
+                angle="0"
+                bodyType="Dynamic"
+                density="2"
+                elasticity="0.1f"
+                entity="-2"
+                produce="True"
+                px="25"
+                py="340"
+                file="terrain/Ship/ship_canonball"
+                time="1.5f" >
+            </Obstacle>
+
+            <Obstacle
+                accx="-200"
+                accy="0"
+                angle="3.14"
+                bodyType="Dynamic"
+                density="2"
+                elasticity="0.1f"
+                entity="-2"
+                produce="True"
+                px="775"
+                py="770"
+                file="terrain/Ship/ship_canonball"
+                time="1.5f" >
+            </Obstacle>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/Ship/ship_mur" >
+            </Obstacle>
+        </Obstacles>
+    </Level19>
+
+    <Level20
+        bonus="False"
+        bonusrate="1000"
+        bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
+        time="45" >
+
+        <Bouboule
+            AILevel="9"
+            angle="0"
+            density="1"
+            elasticity="0.5f"
+            entity="-1"
+            px="220"
+            py="760"
+            radius="0"
+            texRegionPath="boub_sailor.png"
+            type="small" >
+        </Bouboule>
+        
+        
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="0.5f"
+            entity="1"
+            px="485"
+            py="760"
+            radius="0"
+            type="small" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Sailor/sailor"
+            music="OneWay.mp3">
+        </Arena>
+
+        <MapNodes terrain="sailor" >
+
+            <NodeAllow
+                px="3.342968f"
+                py="9.446466f"
+                weight="8.660000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.363153f"
+                py="1.831395f"
+                weight="3.740000f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/Sailor/sailor_mur" >
+            </Obstacle>
+        </Obstacles>
+    </Level20>
+
+    <Level21
+        bonus="False"
+        bonusrate="1000"
+        bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
+        accmaxai="0.55f"
+        time="45" >
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="1"
+            elasticity="1.1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_seal.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Rock/rock"
+            music="Rock.mp3" >
+        </Arena>
+
+        <MapNodes terrain="rock" >
+
+            <NodeAllow
+                px="3.534723f"
+                py="7.975147f"
+                weight="6.740000f" >
+            </NodeAllow>
+        </MapNodes>
+
+	<Obstacles>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/Rock/rock_mur" >
+            </Obstacle>
+        </Obstacles>
+    </Level21>
+
+    <Level22
+        bonus="True"
+        bonusrate="1000"
+        accmaxai="0.55f"
+        time="45" >
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="1.1"
+            elasticity="1.1f"
+            entity="-1"
+            px="350"
+            py="700"
+            radius="0"
+            texRegionPath="boub_salaryman.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            px="350"
+            py="300"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Skyline/sky"
+            music="Skyline.mp3" >
+        </Arena>
+
+        <MapNodes terrain="sky" >
+
+            <NodeAllow
+                px="3.403522f"
+                py="4.893329f"
+                weight="3.040000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level22>
+
+    <Level23
+        bonus="True"
+        bonusrate="650"
+        accmaxai="0.55f"
+        time="45" >
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="1.2"
+            elasticity="1f"
+            entity="-1"
+            px="600"
+            py="750"
+            radius="0"
+            texRegionPath="boub_kid.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="1"
+            px="80"
+            py="220"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Tatami/tatami"
+            music="Tatami.mp3" >
+        </Arena>
+
+        <MapNodes terrain="tatami" >
+
+            <NodeAllow
+                px="3.383338f"
+                py="4.913212f"
+                weight="3.380000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level23>
+
+    <Level24
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
+        accmaxai="0.55f"
+        time="45" >
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="0.2"
+            elasticity="1f"
+            entity="-1"
+            px="286"
+            py="620"
+            radius="0"
+            texRegionPath="boub_pirate.png"
+            type="giant" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="0.2"
+            elasticity="1f"
+            entity="1"
+            px="286"
+            py="300"
+            radius="0"
+            type="giant" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Ship/ship"
+            music="DoubleHoles.mp3">
+        </Arena>
+
+        <MapNodes terrain="ship" >
+
+            <NodeAllow
+                px="3.342968f"
+                py="4.525500f"
+                weight="3.100000f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                accx="200"
+                accy="0"
+                angle="0"
+                bodyType="Dynamic"
+                density="2"
+                elasticity="0.1f"
+                entity="-2"
+                produce="True"
+                px="25"
+                py="340"
+                file="terrain/Ship/ship_canonball"
+                time="5" >
+            </Obstacle>
+
+            <Obstacle
+                accx="-200"
+                accy="0"
+                angle="3.14"
+                bodyType="Dynamic"
+                density="2"
+                elasticity="0.1f"
+                entity="-2"
+                produce="True"
+                px="775"
+                py="770"
+                file="terrain/Ship/ship_canonball"
+                time="5" >
+            </Obstacle>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/Ship/ship_mur" >
+            </Obstacle>
+        </Obstacles>
+    </Level24>
+
+    <Level25
+        bonus="True"
+        bonusrate="1000"
+        accmaxai="0.5f"
+        time="45" >
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="1.5"
+            elasticity="1.1f"
+            entity="-1"
+            px="350"
+            py="750"
+            radius="0"
+            texRegionPath="boub_fireball.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            px="350"
+            py="250"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Lava/lava"
+            music="Lava.mp3" >
+        </Arena>
+
+        <MapNodes terrain="Lava" >
+
+            <NodeAllow
+                px="3.413615f"
+                py="4.903271f"
+                weight="2.710000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level25>
+
+    <Level26
+
+        bonus="True"
+        bonusrate="1000"
+        accmaxai="0.55f">
+
+        <Bouboule
+            AILevel="11"
+            angle="0"
+            density="1.2"
+            elasticity="1.1f"
+            entity="-1"
+            px="350"
+            py="800"
+            radius="0"
+            texRegionPath="boub_inuit.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.10f"
+            entity="1"
+            px="350"
+            py="200"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Ice/ice"
+            music="Ice.mp3" >
+        </Arena>
+
+        <MapNodes terrain="Ice" >
+
+            <NodeAllow
+                px="3.353061f"
+                py="4.883388f"
+                weight="3.430000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level26>
+
+    <Level27
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
+        accmaxai="0.45f"
+        accmaxplayer="0.55f"
+        time="45" >
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="1.2"
+            elasticity="1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_yoda.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/SpaceShip/spaceship"
+            music="Arena.mp3" >
+        </Arena>
+
+        <MapNodes terrain="spaceship" >
+
+            <NodeAllow
+                px="3.312691f"
+                py="4.426086f"
+                weight="2.190000f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+        </Obstacles>
+    </Level27>
+
+    <Level28
+        bonus="True"
+        bonusrate="1000"
+        accmaxai="0.55f"
+        accmaxplayer="0.5f"
+        time="45" >
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="1.2"
+            elasticity="0.8f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_eventail.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="0.8f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Eggroll/eggroll"
+            music="Eggroll.mp3" >
+        </Arena>
+
+        <MapNodes terrain="Eggroll" >
+
+            <NodeAllow
+                px="3.383338f"
+                py="4.883388f"
+                weight="3.820000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.393430f"
+                py="7.020777f"
+                weight="2.970000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.383338f"
+                py="2.696292f"
+                weight="2.930000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level28>
+    
+    <Level29
+        bonus="True"
+        bonusEnabled="inverse"
+        bonusrate="100"
+        time="45"
+        accmaxai="0.55f" >
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="1.3"
+            elasticity="0.8f"
+            entity="-1"
+            px="350"
+            py="900"
+            radius="0"
+            texRegionPath="boub_nuage.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="0.8f"
+            entity="1"
+            px="350"
+            py="100"
+            radius="0"
+            type="normal" 
+            inverted="True">
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Schrink/schrink"
+            music="Schrink.mp3" >
+        </Arena>
+
+        <MapNodes terrain="schrink" >
+
+            <NodeAllow
+                px="3.363153f"
+                py="7.895616f"
+                weight="2.120000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.937559f"
+                py="0.399841f"
+                weight="2.120000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.373245f"
+                py="4.903271f"
+                weight="1.530000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.363153f"
+                py="6.066408f"
+                weight="1.620000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.373245f"
+                py="3.690426f"
+                weight="1.610000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level29>
+
+    <Level30
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="life,speed,weight,timedown,weight,invisible,timeup,star,inverse"
+        time="45" 
+        accmaxplayer="0.60f">
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="1.25f"
+            elasticity="1f"
+            entity="-1"
+            px="350"
+            py="620"
+            radius="0"
+            texRegionPath="boub_ninja.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="1"
+            px="350"
+            py="380"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Lazer/lazer"
+            music="Tatami.mp3">
+        </Arena>
+
+        <MapNodes terrain="Lazer" >
+
+            <NodeAllow
+                px="3.363153f"
+                py="4.913212f"
+                weight="3.060000f" >
+            </NodeAllow>
+        </MapNodes>
+
+        <Obstacles>
+
+            <Obstacle
+                angle="0"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/Lazer/lazer_mur" >
+            </Obstacle>
+
+            <Obstacle
+                angle="0"
+                blink="True"
+                bodyType="Static"
+                density="1"
+                elasticity="0f"
+                entity="-2"
+                px="0"
+                py="0"
+                file="terrain/Lazer/lazer_lazer"
+                time="3" >
+            </Obstacle>
+        </Obstacles>
+    </Level30>
+
+	<Level31
+        bonus="True"
+        bonusrate="1000"
+        bonusEnabled="life,timedown,invisible,timeup,star,inverse"
+        time="90" >
+
+        <Bouboule
+            AILevel="12"
+            angle="0"
+            density="1.1f"
+            elasticity="1f"
+            entity="-1"
+            px="100"
+            py="900"
+            radius="0"
+            texRegionPath="boub_samurai.png"
+            type="normal" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1f"
+            entity="1"
+            px="600"
+            py="100"
+            radius="0"
+            type="normal" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/DoubleHoles/doubleholes"
+            music="DoubleHoles.mp3" >
+        </Arena>
+
+        <MapNodes terrain="Doubleholes" >
+
+            <NodeAllow
+                px="1.243760f"
+                py="8.323094f"
+                weight="1.680000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="1.304314f"
+                py="5.688637f"
+                weight="1.820000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.698774f"
+                py="4.426086f"
+                weight="1.150000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.466650f"
+                py="3.451834f"
+                weight="0.910000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.365726f"
+                py="2.596878f"
+                weight="0.830000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.572619f"
+                py="1.239885f"
+                weight="1.025000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="0.718958f"
+                py="0.906850f"
+                weight="1.160000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="1.869486f"
+                py="0.558902f"
+                weight="0.760000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="2.914043f"
+                py="0.474401f"
+                weight="0.685000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.205864f"
+                py="0.703052f"
+                weight="0.915000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.638977f"
+                py="1.389005f"
+                weight="1.585000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="5.538053f"
+                py="4.262054f"
+                weight="1.715000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.403522f"
+                py="4.903271f"
+                weight="0.950000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.411041f"
+                py="6.245352f"
+                weight="0.780000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.390856f"
+                py="6.205587f"
+                weight="0.820000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.491780f"
+                py="7.458197f"
+                weight="0.710000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="6.123409f"
+                py="8.934487f"
+                weight="1.075000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="4.750850f"
+                py="9.312258f"
+                weight="0.685000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="2.868628f"
+                py="9.078636f"
+                weight="0.890000f" >
+            </NodeAllow>
+
+            <NodeAllow
+                px="3.812262f"
+                py="9.332140f"
+                weight="0.675000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level31>
+
+    <Level32
+        bonus="True"
+        bonusrate="1000"
+        accmaxai="0.55f"
+        time="45" >
+
+        <Bouboule
+            AILevel="6"
+            angle="0"
+            density="0.75"
+            elasticity="1.f"
+            entity="-1"
+            px="286"
+            py="750"
+            radius="0"
+            texRegionPath="boub_fireball.png"
+            type="giant" >
+        </Bouboule>
+
+        <Bouboule
+            AILevel="0"
+            angle="0"
+            density="1"
+            elasticity="1.f"
+            entity="1"
+            px="366"
+            py="250"
+            radius="0"
+            type="small" >
+        </Bouboule>
+
+        <Arena
+            angle="0"
+            entity="0"
+            px="0"
+            py="0"
+            radius="500"
+            file="terrain/Lava/lava"
+            music="Lava.mp3" >
+        </Arena>
+
+        <MapNodes terrain="Lava" >
+
+            <NodeAllow
+                px="3.413615f"
+                py="4.903271f"
+                weight="2.710000f" >
+            </NodeAllow>
+        </MapNodes>
+    </Level32>
+
+</Level>

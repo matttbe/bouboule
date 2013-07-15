@@ -1,0 +1,70 @@
+info face="DarkTimes" size=77 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=2,2
+common lineHeight=163 base=120 scaleW=1024 scaleH=512 pages=1 packed=0
+page id=0 file="Chinyen.png"
+chars count=40
+char id=78 x=2 y=2 width=89 height=154 xoffset=-8 yoffset=9 xadvance=73 page=0 chnl=0 letter="N"
+char id=72 x=93 y=2 width=95 height=149 xoffset=-8 yoffset=12 xadvance=80 page=0 chnl=0 letter="H"
+char id=68 x=190 y=2 width=76 height=143 xoffset=-8 yoffset=18 xadvance=61 page=0 chnl=0 letter="D"
+char id=66 x=268 y=2 width=89 height=136 xoffset=-8 yoffset=20 xadvance=74 page=0 chnl=0 letter="B"
+char id=83 x=359 y=2 width=82 height=134 xoffset=-8 yoffset=20 xadvance=67 page=0 chnl=0 letter="S"
+char id=74 x=443 y=2 width=70 height=133 xoffset=-8 yoffset=24 xadvance=54 page=0 chnl=0 letter="J"
+char id=70 x=515 y=2 width=73 height=129 xoffset=-8 yoffset=19 xadvance=57 page=0 chnl=0 letter="F"
+char id=77 x=590 y=2 width=109 height=127 xoffset=-8 yoffset=26 xadvance=93 page=0 chnl=0 letter="M"
+char id=82 x=701 y=2 width=94 height=125 xoffset=-8 yoffset=35 xadvance=78 page=0 chnl=0 letter="R"
+char id=56 x=797 y=2 width=80 height=125 xoffset=-8 yoffset=20 xadvance=64 page=0 chnl=0 letter="8"
+char id=75 x=879 y=2 width=104 height=121 xoffset=-8 yoffset=26 xadvance=88 page=0 chnl=0 letter="K"
+char id=57 x=2 y=158 width=101 height=118 xoffset=-8 yoffset=34 xadvance=85 page=0 chnl=0 letter="9"
+char id=80 x=105 y=158 width=123 height=116 xoffset=-8 yoffset=39 xadvance=108 page=0 chnl=0 letter="P"
+char id=54 x=230 y=158 width=83 height=115 xoffset=-8 yoffset=23 xadvance=68 page=0 chnl=0 letter="6"
+char id=86 x=315 y=158 width=96 height=114 xoffset=-8 yoffset=27 xadvance=80 page=0 chnl=0 letter="V"
+char id=52 x=413 y=158 width=84 height=112 xoffset=-8 yoffset=28 xadvance=69 page=0 chnl=0 letter="4"
+char id=65 x=499 y=158 width=84 height=112 xoffset=-8 yoffset=31 xadvance=66 page=0 chnl=0 letter="A"
+char id=87 x=585 y=158 width=127 height=111 xoffset=-8 yoffset=28 xadvance=112 page=0 chnl=0 letter="W"
+char id=69 x=714 y=158 width=112 height=111 xoffset=-8 yoffset=36 xadvance=96 page=0 chnl=0 letter="E"
+char id=73 x=828 y=158 width=48 height=111 xoffset=-8 yoffset=26 xadvance=29 page=0 chnl=0 letter="I"
+char id=89 x=878 y=158 width=133 height=109 xoffset=-8 yoffset=41 xadvance=117 page=0 chnl=0 letter="Y"
+char id=51 x=2 y=278 width=75 height=108 xoffset=-8 yoffset=28 xadvance=59 page=0 chnl=0 letter="3"
+char id=81 x=79 y=278 width=118 height=106 xoffset=-8 yoffset=41 xadvance=102 page=0 chnl=0 letter="Q"
+char id=48 x=199 y=278 width=97 height=105 xoffset=-8 yoffset=35 xadvance=81 page=0 chnl=0 letter="0"
+char id=71 x=298 y=278 width=113 height=102 xoffset=-8 yoffset=35 xadvance=98 page=0 chnl=0 letter="G"
+char id=55 x=413 y=278 width=145 height=99 xoffset=-8 yoffset=40 xadvance=129 page=0 chnl=0 letter="7"
+char id=50 x=560 y=278 width=94 height=99 xoffset=-8 yoffset=32 xadvance=78 page=0 chnl=0 letter="2"
+char id=49 x=656 y=278 width=68 height=99 xoffset=-8 yoffset=29 xadvance=53 page=0 chnl=0 letter="1"
+char id=76 x=726 y=278 width=131 height=97 xoffset=-8 yoffset=42 xadvance=115 page=0 chnl=0 letter="L"
+char id=79 x=859 y=278 width=105 height=97 xoffset=-8 yoffset=39 xadvance=89 page=0 chnl=0 letter="O"
+char id=84 x=2 y=388 width=131 height=92 xoffset=-8 yoffset=40 xadvance=115 page=0 chnl=0 letter="T"
+char id=53 x=135 y=388 width=99 height=92 xoffset=-8 yoffset=41 xadvance=83 page=0 chnl=0 letter="5"
+char id=67 x=236 y=388 width=104 height=90 xoffset=-8 yoffset=40 xadvance=89 page=0 chnl=0 letter="C"
+char id=88 x=342 y=388 width=145 height=89 xoffset=-8 yoffset=43 xadvance=129 page=0 chnl=0 letter="X"
+char id=85 x=489 y=388 width=99 height=89 xoffset=-8 yoffset=42 xadvance=83 page=0 chnl=0 letter="U"
+char id=90 x=590 y=388 width=146 height=86 xoffset=-8 yoffset=41 xadvance=130 page=0 chnl=0 letter="Z"
+char id=44 x=738 y=388 width=52 height=70 xoffset=2 yoffset=84 xadvance=56 page=0 chnl=0 letter=","
+char id=45 x=792 y=388 width=79 height=49 xoffset=3 yoffset=58 xadvance=82 page=0 chnl=0 letter="-"
+char id=46 x=873 y=388 width=51 height=48 xoffset=2 yoffset=83 xadvance=55 page=0 chnl=0 letter="."
+char id=32 x=14 y=482 width=0 height=0 xoffset=31 yoffset=140 xadvance=31 page=0 chnl=0 letter="space"
+kernings count=25
+kerning first=68 second=89 amount=-6
+kerning first=70 second=74 amount=-6
+kerning first=70 second=89 amount=-2
+kerning first=70 second=88 amount=-8
+kerning first=80 second=74 amount=-6
+kerning first=80 second=89 amount=-7
+kerning first=80 second=88 amount=-7
+kerning first=86 second=74 amount=-4
+kerning first=86 second=89 amount=-3
+kerning first=86 second=88 amount=-5
+kerning first=87 second=74 amount=-5
+kerning first=87 second=89 amount=-7
+kerning first=87 second=88 amount=-11
+kerning first=89 second=74 amount=-6
+kerning first=89 second=88 amount=-9
+kerning first=81 second=89 amount=-7
+kerning first=76 second=84 amount=-22
+kerning first=79 second=89 amount=-4
+kerning first=84 second=74 amount=-6
+kerning first=84 second=89 amount=-3
+kerning first=84 second=88 amount=-9
+kerning first=88 second=74 amount=-6
+kerning first=88 second=89 amount=-3
+kerning first=88 second=88 amount=-9
+kerning first=85 second=89 amount=-6
