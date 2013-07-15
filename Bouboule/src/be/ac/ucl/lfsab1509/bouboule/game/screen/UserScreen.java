@@ -50,7 +50,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class UserScreen extends AbstractScreen {
 
 	private static final String FONT_TITLE = "chinyen-font";
-	private static final float  FONT_SCALE = .5f;
+	private static final float  FONT_SCALE = .5f * GlobalSettings.HD;
 	private static final char[] unacceptedChars = { '/', '\n', '\r', '\t', '\0',
 		'\f', '`', '?', '*', '\\', '<', '>', '|', '"', ':'};
 	private static final String DEFAULT_NORMAL_BOUBOULE =
@@ -72,6 +72,9 @@ public class UserScreen extends AbstractScreen {
 	private int iCurrentBoub;
 	private TextureRegionDrawable leftBoubDraw, centerBoubDraw, rightBoubDraw;
 
+	private int iX = (int) (20 * GlobalSettings.HD);
+	private int iY = (int) (1115 * GlobalSettings.HD);
+
 	public UserScreen() {
 		super(false);
 	}
@@ -84,13 +87,19 @@ public class UserScreen extends AbstractScreen {
 		Image bg = addBackGround("drawable-xhdpi/settings_blank.jpg");
 		bg.setScale(GlobalSettings.HD); // TODO remove when settings_blank will be bigger
 
+		int iLessY = (int) (185 * GlobalSettings.HD);
+
 		addChooseUserOptions();
+		iY -= iLessY;
 
 		addNewUserOptions();
+		iY -= iLessY;
 
 		addChooseBoubouleOptions();
+		iY -= centerImage.getHeight() + iLessY - (GlobalSettings.ISHD ? 75 : 0);
 
 		addResetOptions();
+		iY -= iLessY;
 
 		addTutorialOptions();
 
@@ -123,15 +132,17 @@ public class UserScreen extends AbstractScreen {
 	//_________________________________ CHOOSE USER
 
 	private void addChooseUserOptions() {
-		addLabel("SELECT  USER", FONT_TITLE, FONT_SCALE, Color.WHITE, 40, 1050)
+		addLabel("SELECT  USER", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
 
 		listProfiles = GlobalSettings.PROFILE_MGR.getAllProfilesAL();
 
 		chooseUserBox = new SelectBox(listProfiles.toArray(), getSkin(), "default");
 		chooseUserBox.setSelection(GlobalSettings.PROFILE.getName());
-		chooseUserBox.setSize((int) GlobalSettings.APPWIDTH - (2 * 40), 70);
-		chooseUserBox.setPosition(40, 1000);
+		chooseUserBox.setSize(GlobalSettings.APPWIDTH * 3 / 4,
+				(int) (50 * GlobalSettings.HD));
+		chooseUserBox.setX(GlobalSettings.APPWIDTH / 8);
+		chooseUserBox.setY(iY + (GlobalSettings.ISHD ? -100 : -10));
 		chooseUserBox.addListener(chooseUserListener);
 
 		this.stage.addActor(chooseUserBox);
@@ -160,12 +171,14 @@ public class UserScreen extends AbstractScreen {
 	//_________________________________ NEW USER
 
 	private void addNewUserOptions() {
-		addLabel("CREATE  NEW  USER", FONT_TITLE, FONT_SCALE, Color.WHITE, 40, 900)
+		addLabel("CREATE  NEW  USER", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
 
 		newUserTextField = new TextField("", getSkin(), "default");
-		newUserTextField.setSize(GlobalSettings.APPWIDTH - (2 * 40), 70);
-		newUserTextField.setPosition(40, 850);
+		newUserTextField.setSize(GlobalSettings.APPWIDTH * 3 / 4,
+				(int) (50 * GlobalSettings.HD));
+		newUserTextField.setX(GlobalSettings.APPWIDTH / 8);
+		newUserTextField.setY(iY + (GlobalSettings.ISHD ? -100 : -10));
 		// text that will be drawn in the text field if no text has been entered
 		newUserTextField.setMessageText("Enter a new user");
 		newUserTextField.setTextFieldListener(newUserTextFieldListener);
@@ -231,12 +244,11 @@ public class UserScreen extends AbstractScreen {
 	//_________________________________ BOUBOULES IMAGES
 
 	private void addChooseBoubouleOptions() {
-		addLabel("CHOOSE  YOUR  BOUBOULE", FONT_TITLE, FONT_SCALE, Color.WHITE, 40, 700)
+		addLabel("YOUR  BOUBOULE", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
 
 		leftBoubDraw = getDrawableFromFile(DEFAULT_NORMAL_BOUBOULE, false);
 		leftImage = new Image(leftBoubDraw);
-		leftImage.setPosition(30, 500);
 		stage.addActor(leftImage);
 		leftImage.addListener(leftImageClick);
 
@@ -244,14 +256,23 @@ public class UserScreen extends AbstractScreen {
 				+ GlobalSettings.PROFILE.getBoubName()
 				+ BoubImages.BOUB_EXTENTION, false);
 		centerImage = new Image(centerBoubDraw);
-		centerImage.setPosition(100, 500);
 		stage.addActor(centerImage);
 
 		rightBoubDraw = getDrawableFromFile(DEFAULT_NORMAL_BOUBOULE, false);
 		rightImage = new Image(rightBoubDraw);
-		rightImage.setPosition(530, 500);
 		stage.addActor(rightImage);
 		rightImage.addListener(rightImageClick);
+
+		int iYBoub = (int) (iY - centerImage.getHeight());
+		// => center each image: | o O o |
+		int iXCenter = (int) (GlobalSettings.APPWIDTH / 2
+				- centerImage.getWidth() / 2);
+		leftImage.setPosition((int) (iXCenter / 2 - leftImage.getWidth() / 2),
+				iYBoub);
+		centerImage.setPosition(iXCenter, iYBoub);
+		rightImage.setPosition((int) (GlobalSettings.APPWIDTH - iXCenter
+				+ iXCenter / 2 - rightImage.getWidth() / 2),
+				iYBoub);
 
 		setDefaultImages();
 	}
@@ -339,12 +360,15 @@ public class UserScreen extends AbstractScreen {
 	//_________________________________ RESET
 
 	private void addResetOptions() {
-		addLabel("RESTART", FONT_TITLE, FONT_SCALE, Color.WHITE, 40, 700)
+		addLabel("RESTART", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
 
 		resetButton = new TextButton("Restart to level 1!", getSkin(), "default");
-		resetButton.setSize(300, 100);
-		resetButton.setPosition(30, 200);
+		// resetButton.setSize(300, 100);
+		resetButton.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
+		resetButton.setPosition(GlobalSettings.APPWIDTH / 2
+				- resetButton.getWidth() / 2,
+				iY - (GlobalSettings.ISHD ? 50 : 0));
 		this.stage.addActor(resetButton);
 		resetButton.addListener(resetClickListener);
 	}
@@ -364,10 +388,14 @@ public class UserScreen extends AbstractScreen {
 	//_________________________________ TUTORIAL
 
 	private void addTutorialOptions() {
-		addLabel("TUTORIAL", FONT_TITLE, FONT_SCALE, Color.WHITE, 40, 700)
+		addLabel("TUTORIAL", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
 		tutorialCheckBox = addCheckBox("Show the tutorial!",
-				GlobalSettings.PROFILE.needTutorial(), 40, 300);
+				GlobalSettings.PROFILE.needTutorial(), iX,
+				iY - (GlobalSettings.ISHD ? 50 : 0));
+		tutorialCheckBox.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
+		tutorialCheckBox.setX((int) (GlobalSettings.APPWIDTH / 2
+						- tutorialCheckBox.getWidth() / 2));
 		tutorialCheckBox.addListener(tutorialClickListener);
 	}
 
