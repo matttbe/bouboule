@@ -68,10 +68,9 @@ public class CameraHelper {
 			viewportHeight = viewportWidth * (1 / aspectPhysical);
 		}
 		//2048f (APPHEIGHT) state for the general background size
-		float hiddenWidth = viewportWidth - physicalWidth; // |x||Game||x|
-		float gameWithLetterBox = virtualHeight - 2 * hiddenWidth; // ||Game||
-		float letterBox = gameWithLetterBox - physicalHeight * aspect; // ||
-		GlobalSettings.SHIFT_BG = - (hiddenWidth + letterBox) / 2;
+		float aspectMin = 1 - ((1 - physicalHeight * aspect / physicalWidth) / 2);
+		float hiddenWidth = virtualHeight - viewportWidth * aspectMin; // |x||   ||x|
+		GlobalSettings.SHIFT_BG = - hiddenWidth / 2;
 
 		OrthographicCamera camera = new OrthographicCamera(viewportWidth,
 				viewportHeight);
