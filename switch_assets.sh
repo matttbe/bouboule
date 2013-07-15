@@ -56,6 +56,8 @@ rm $ANDROID/assets # symlink
 
 if test $isHD -eq 1; then # HD -> NHD
 	echo "Switch from HD to Non HD version"
+	sed -i "/float APPWIDTH/ s/1311f/800f/" $GlobalSettings
+	sed -i "/float APPHEIGHT/ s/2048f/1250f/" $GlobalSettings
 	sed -i "/boolean ISHD/ s/true/false/" $GlobalSettings
 	sed -i "/float HD/ s/1.6384f/1f/" $GlobalSettings
 	cd $ANDROID
@@ -64,6 +66,8 @@ if test $isHD -eq 1; then # HD -> NHD
 	echo "You're now using the Non HD version"
 else # NHD -> HD
 	echo "Switch from Non HD to HD version"
+	sed -i "/float APPWIDTH/ s/800f/1311f/" $GlobalSettings
+	sed -i "/float APPHEIGHT/ s/1250f/2048f/" $GlobalSettings
 	sed -i "/boolean ISHD/ s/false/true/" $GlobalSettings
 	sed -i "/float HD/ s/1f/1.6384f/" $GlobalSettings
 	cd $ANDROID
