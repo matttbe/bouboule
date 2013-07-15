@@ -94,8 +94,15 @@ public class WorldScreen extends AbstractScreen {
 					(int) (posX[i] * GlobalSettings.HD),
 					(int) (posY[i] * GlobalSettings.HD));
 			addLevelListener(button, moveBoub, i);
-
 		}
+
+		// click on the bouboule
+		boub.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				Gdx.app.log("SCREEN", "The world " + -1 + " is selected");
+				moveBoub.init(-1);
+			}
+		});
 
 	}
 
@@ -190,9 +197,10 @@ public class WorldScreen extends AbstractScreen {
 		// When a new world is selected and Boub is already moving, the initial
 		// position must be adapted if the player wants the Boub to change
 		// direction during moving == true;
+		// stopPos = -1 when clicking on the bouboule
 		public void init(int stopPos) {
 
-			if (moving) {
+			if (moving && stopPos >= 0) {
 
 				// Verify if modification are needed
 				if (stopPos <= this.startPos && this.startPos <= this.stopPos)
@@ -200,18 +208,19 @@ public class WorldScreen extends AbstractScreen {
 				else if (stopPos >= this.startPos
 						&& this.startPos >= this.stopPos)
 					this.startPos--;
-			} else {
+			}
+			else if (! moving) {
 
 				// Not moving and on the same World as the pushed button
-				if (this.startPos == stopPos) {
-					GlobalSettings.PROFILE.setLevel((stopPos) * 4 + 1);
+				if (stopPos < 0 || this.startPos == stopPos) {
+					GlobalSettings.PROFILE.setLevel((this.startPos) * 4 + 1);
 					setScreenWithFading(null);
 				}
-
 			}
 
 			// Set the new endpoint of the animation
-			this.stopPos = stopPos;
+			if (stopPos >= 0)
+				this.stopPos = stopPos;
 		}
 
 		public void draw() {
