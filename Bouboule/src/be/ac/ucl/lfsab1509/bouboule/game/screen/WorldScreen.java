@@ -164,29 +164,34 @@ public class WorldScreen extends AbstractScreen {
 
 				// Upwards
 				if (startPos < stopPos) {
-					x += (posX[startPos + 1] - posX[startPos]) / span;
-					y += (posY[startPos + 1] - posY[startPos]) / span;
+					/* stopPos - startPos to have a bigger speed when switching
+					 * to more than one level
+					 */
+					x += (posX[startPos + 1] - posX[startPos])
+							* (stopPos - startPos) / span ;
+					y += (posY[startPos + 1] - posY[startPos])
+							* (stopPos - startPos) / span ;
 
 					// We have reached a new world position
-					if (Math.round(x) == posX[(startPos + 1)])
+					if (Math.round(y) >= posY[(startPos + 1)])
 						startPos++;
-
-					// Downwards
-				} else {
-
-					x += (posX[startPos - 1] - posX[startPos]) / span;
-					y += (posY[startPos - 1] - posY[startPos]) / span;
+				}
+				// Downwards
+				else {
+					x += (posX[startPos - 1] - posX[startPos])
+							* (startPos - stopPos) / span ;
+					y += (posY[startPos - 1] - posY[startPos])
+							* (startPos - stopPos) / span ;
 
 					// We have reached a new world position
-					if (Math.round(x) == posX[(startPos - 1)])
+					if (Math.round(y) <= posY[(startPos - 1)])
 						startPos--;
 				}
 
-				Gdx.app.log("Boub", "Moving" + startPos);
 				draw();
 
-			} else {
-
+			}
+			else {
 				moving = false;
 				// return true;
 			}
