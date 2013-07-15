@@ -6,5 +6,5 @@ For Android:
  * Removed Bouboule-android/res/drawable-xhdpi/GdxMenus
 
 For iOS:
- * Version HD: replaced dir 'asset' by 'asset_HD'
- * and NHD: replaced dir 'asset' by 'asset_NHD'
+ * Version HD: replaced dir 'assets' by 'assets_HD'
+ * and NHD: replaced dir 'assets' by 'assets_NHD'
