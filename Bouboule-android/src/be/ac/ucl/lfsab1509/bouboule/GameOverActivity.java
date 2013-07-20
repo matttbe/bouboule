@@ -26,11 +26,11 @@ package be.ac.ucl.lfsab1509.bouboule;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,7 +41,9 @@ import android.widget.TextView;
 public class GameOverActivity extends Activity {
 
 	public static GameExitStatus exitStatus = GameExitStatus.NONE;
-	
+
+	private int endScore;
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,16 +59,75 @@ public class GameOverActivity extends Activity {
 		findViewById(R.id.GameOverRestartButton).setOnTouchListener(
 				fireListener);
 
+		endScore = GlobalSettings.PROFILE.getEndGameScore ();
+
 		Typeface font = Typeface.createFromAsset(getAssets(), "chineyen.ttf"); // "osaka-re.ttf");
 		TextView score = (TextView) findViewById (R.id.GameOverScore);
 		score.setTypeface (font);
-		score.setText (Integer.toString (GlobalSettings.PROFILE.getEndGameScore ()));
+		score.setText (Integer.toString (endScore));
+		score.setOnTouchListener(scoreListener);
 	}
 
 	private View.OnTouchListener fireListener = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(final View view, final MotionEvent motionEvent) {
 			return MyAndroidMenus.onTouchGeneric (GameOverActivity.this, view.getId ());
+		}
+	};
+
+	/*private void addScreenShot(View view, Intent shareIntent)
+	{
+		View rootView = view.getRootView();
+		rootView.setDrawingCacheEnabled(true);
+		Bitmap bitmap = rootView.getDrawingCache();
+
+		// save it somewhere (with compression)
+		String cImagePath = Environment.getExternalStorageDirectory().toString()
+				+ "/" + "bouboule_score_" + endScore + ".jpg";
+		File imageFile = new File(cImagePath);
+		Uri imageUri = Uri.fromFile(imageFile);
+		if (imageFile.exists()) {
+			shareIntent.setType("* /*");
+			shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+		}
+		else {
+			FileOutputStream outputStream;
+			try {
+				outputStream = new FileOutputStream(imageFile);
+				bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outputStream);
+				outputStream.flush();
+				outputStream.close();
+				String media = MediaStore.Images.Media.insertImage(
+						getContentResolver(), cImagePath,
+						"Bouboule Score " + endScore,
+						"End score at Bouboule game");
+				shareIntent.setType("* /*");
+				shareIntent.putExtra(Intent.EXTRA_STREAM, media);
+			} catch (FileNotFoundException e) {
+				Log.e("Activity", "File Not Found: " + cImagePath);
+			} catch (IOException e) {
+				Log.e("Activity", "IO error: " + cImagePath);
+			}
+		}
+	}*/
+
+	private View.OnTouchListener scoreListener = new View.OnTouchListener() {
+		@Override
+		public boolean onTouch(final View view, final MotionEvent motionEvent) {
+			Intent shareIntent = new Intent(Intent.ACTION_SEND);
+			shareIntent.putExtra(Intent.EXTRA_TEXT,
+					"This is my last score at Bouboule Game: "
+					+ endScore + "! \n"
+					+ "Try to beat my at this mobile game! \n"
+					+ "http://is.gd/1sYcq6"); // TODO: link to the official website
+			shareIntent.setType("text/plain");
+
+			// take Screenshot
+			// => It needs rights to write files (and also root rights I think)
+			// addScreenShot(view, shareIntent);
+
+			startActivity(shareIntent);
+			return true;
 		}
 	};
 
