@@ -29,6 +29,7 @@ package be.ac.ucl.lfsab1509.bouboule;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager.LayoutParams;
 import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
@@ -76,6 +77,18 @@ public class MainActivity extends AndroidApplication {
 
 			GlobalSettings.MENUS.launchInitMenu ();
 		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		/* Set low profile:
+		 * Navigation buttons dim and other elements in the system bar also hide
+		 * Enabling this is useful for creating more immersive games without
+		 * distraction for the system navigation buttons.
+		 */
+		getWindow().getDecorView().
+			setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 	}
 
 	@Override
