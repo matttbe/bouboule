@@ -30,8 +30,8 @@ package be.ac.ucl.lfsab1509.bouboule.game.profile;
 import java.text.SimpleDateFormat; // @@COMMENT_GWT@@
 import java.util.Date;
 
-import com.badlogic.gdx.Application.ApplicationType;
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType; // @@COMMENT_GWT@@
+import com.badlogic.gdx.Gdx; // @@COMMENT_GWT@@
 import com.badlogic.gdx.Preferences;
 
 import be.ac.ucl.lfsab1509.bouboule.game.ai.AI;

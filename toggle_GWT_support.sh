@@ -30,53 +30,47 @@
 ## USAGE: ##
 ############
 
-# "./switch_version_HD_NHD.sh check" to check if we're using HD or Non HD version
-# "./switch_version_HD_NHD.sh" to switch version
+# "./toggle_GWT_support.sh check" to check if we're using the custom GWT version
+# "./toggle_GWT_support.sh" to enable/disable GWT support
 
 # Note: GNU sed is required (sed or gsed)
 
-ANDROID="Bouboule-android"
-if test ! -d $ANDROID; then
+SRC="Bouboule/src/be/ac/ucl/lfsab1509/bouboule/game"
+if test ! -d $SRC; then
 	echo "Not in the right folder"
 	exit 1
 fi
 
-if test ! -L $ANDROID/assets; then
-	echo "$ANDROID/assets is not a symlink"
-	exit 1
-fi
-
-GlobalSettings="Bouboule/src/be/ac/ucl/lfsab1509/bouboule/game/gameManager/GlobalSettings.java"
-isHD=`grep ISHD $GlobalSettings | grep -c true`
+GlobalSettings="$SRC/gameManager/GlobalSettings.java"
+isGWT=`grep ISGWT $GlobalSettings | grep -c true`
 
 if test "$1" = "check"; then
-	test $isHD -eq 1 && echo "Version HD" || echo "Version Non HD"
+	test $isGWT -eq 1 && echo "GWT support is enabled" || echo "GWT support is disabled"
 	exit 0
 fi
 
-rm $ANDROID/assets # symlink
-
 type gsed > /dev/null && SED="gsed" || SED="sed" ## MacOSX...
 
-if test $isHD -eq 1; then # HD -> NHD
-	echo "Switch from HD to Non HD version"
-	$SED -i "/float APPWIDTH/ s/1311f/800f/" $GlobalSettings
-	$SED -i "/float APPHEIGHT/ s/2048f/1250f/" $GlobalSettings
-	$SED -i "/boolean ISHD/ s/true/false/" $GlobalSettings
-	$SED -i "/float HD/ s/1.6384f/1f/" $GlobalSettings
-	cd $ANDROID
-	ln -s assets_NHD assets
-	cd ..
-	echo "You're now using the Non HD version"
-else # NHD -> HD
-	echo "Switch from Non HD to HD version"
-	$SED -i "/float APPWIDTH/ s/800f/1311f/" $GlobalSettings
-	$SED -i "/float APPHEIGHT/ s/1250f/2048f/" $GlobalSettings
-	$SED -i "/boolean ISHD/ s/false/true/" $GlobalSettings
-	$SED -i "/float HD/ s/1f/1.6384f/" $GlobalSettings
-	cd $ANDROID
-	ln -s assets_HD assets
-	cd ..
-	echo "You're now using the HD version"
+if test $isGWT -eq 1; then # disable GWT support
+	echo "Disabling GWT support"
+	$SED -i "/boolean ISGWT/ s/true/false/" $GlobalSettings
+
+	# uncomment lines
+	grep -r -l "// @@COMMENT_GWT@@" $SRC   | xargs $SED -i '/@@COMMENT_GWT@@/s/^\/\///g'
+	# comment lines
+	grep -r -l "// @@UNCOMMENT_GWT@@" $SRC | xargs $SED -i '/@@UNCOMMENT_GWT@@/s/^/\/\//g'
+
+	echo "GWT support has been disabled"
+
+else # enable GWT support
+	echo "Enabling GWT support"
+	$SED -i "/boolean ISGWT/ s/false/true/" $GlobalSettings
+
+	# comment lines
+	grep -r -l "// @@COMMENT_GWT@@" $SRC   | xargs $SED -i '/@@COMMENT_GWT@@/s/^/\/\//g'
+	# uncomment lines
+	grep -r -l "// @@UNCOMMENT_GWT@@" $SRC | xargs $SED -i '/@@UNCOMMENT_GWT@@/s/^\/\///g'
+
+	echo "GWT support has been enabled"
 fi
-echo "Don't forget to refresh Bouboule and Bouboule-android dirs in Eclipse if you're using it ;)"
+echo "Don't forget to refresh Bouboule dirs in Eclipse if you're using it ;)"

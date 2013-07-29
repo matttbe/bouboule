@@ -42,6 +42,8 @@ public class GlobalSettings {
 	public static final float HD        = 1f;
 	public static       float SHIFT_BG;
 
+	// public static final boolean ISGWT = false; // DO NOT MODIFY THIS LINE! used by switch_backend_GWT.sh script
+
 	//Definition for the time step properties
 	public static final float 		BOX_STEP			= 1 / 60f;
 	public static final int 		VELOCITY_ITERATIONS	= 8;
