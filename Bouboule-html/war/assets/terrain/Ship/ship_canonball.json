@@ -1,1 +1,0 @@
-{"rigidBodies":[{"name":"ship_canonball","imagePath":"../ship_canonball.png","origin":{"x":0,"y":0},"polygons":[],"circles":[{"cx":0.6462502479553223,"cy":0.4712500274181366,"r":0.2634506821632385}],"shapes":[{"type":"CIRCLE","vertices":[{"x":0.6462502479553223,"y":0.4712500274181366},{"x":0.8287502527236938,"y":0.6612500548362732}]}]}],"dynamicObjects":[]}

@@ -13,6 +13,9 @@ Bouboule-ios/bin
 Bouboule-ios/obj
 Bouboule-ios/target
 Bouboule-ios/Bouboule-ios.userprefs
+Bouboule-html/war/WEB-INF/classes
+Bouboule-html/gwt-unitCache
+Bouboule-html/war/assets
 syntax: regexp 
 ^bin/classes\.dex$ 
 ^bin/resources\.ap_$
