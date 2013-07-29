@@ -193,7 +193,8 @@ public class EndGameListener implements ContactListener{
 	public static void looseGame() {
 		Gdx.app.log("KILL", "Bouboule is dead!");
 
-		if (bIsEnding.compareAndSet(false, true) && GlobalSettings.GAME.getTimer().isRunning()) {
+		if (GlobalSettings.GAME.getTimer().isRunning()
+				&& bIsEnding.compareAndSet(false, true)) {
 			// avoid the case where both bouboules loose (go away at the "same" time)
 
 			GlobalSettings.PROFILE.addScorePermanent(-GlobalSettings.INIT_SCORE / 2);
@@ -218,7 +219,8 @@ public class EndGameListener implements ContactListener{
 	public static void winGame() {
 		Gdx.app.log("KILL", "Bouboule win!");
 
-		if (bIsEnding.compareAndSet(false, true) && GlobalSettings.GAME.getTimer().isRunning()) {
+		if (GlobalSettings.GAME.getTimer().isRunning()
+				&& bIsEnding.compareAndSet(false, true)) {
 			// avoid the case where both bouboules loose (go away at the "same" time)
 
 			GlobalSettings.PROFILE.saveScore();
