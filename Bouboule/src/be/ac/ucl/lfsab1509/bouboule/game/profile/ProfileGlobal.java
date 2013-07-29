@@ -27,7 +27,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.profile;
  */
 
 
-import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat; // @@COMMENT_GWT@@
 import java.util.Date;
 
 import com.badlogic.gdx.Application.ApplicationType;
@@ -41,7 +41,7 @@ public class ProfileGlobal {
 	private String SEPARATOR;
 	private String HIGHSCORE_DEFAULT_VALUE;
 
-	private  SimpleDateFormat dateFormat;
+	private  SimpleDateFormat dateFormat; // @@COMMENT_GWT@@
 
 	private static final int iMaxNbHighScore = 5;
 
@@ -54,8 +54,8 @@ public class ProfileGlobal {
 
 	public ProfileGlobal(Preferences prefs, String SEPARATOR) {
 
-		if (Gdx.app.getType() != ApplicationType.iOS)
-			this.dateFormat = new SimpleDateFormat("dd MM yyyy HH:mm:ss Z");
+		if (Gdx.app.getType() != ApplicationType.iOS) // @@COMMENT_GWT@@
+			this.dateFormat = new SimpleDateFormat("dd MM yyyy HH:mm:ss Z"); // @@COMMENT_GWT@@
 		
 		this.prefs = prefs;
 		this.SEPARATOR = SEPARATOR;
@@ -137,9 +137,9 @@ public class ProfileGlobal {
 				cCurrInfo = iNewScore + SEPARATOR // Score
 						+ GlobalSettings.PROFILE.getName() + SEPARATOR // name
 						+ GlobalSettings.PROFILE.getLevel(); // level
-				if (Gdx.app.getType() != ApplicationType.iOS)
-					cCurrInfo += SEPARATOR // level
-						+ dateFormat.format(new Date()).toString(); // date TODO:iOS => no date
+				if (Gdx.app.getType() != ApplicationType.iOS) // @@COMMENT_GWT@@
+					cCurrInfo += SEPARATOR // level // @@COMMENT_GWT@@
+						+ dateFormat.format(new Date()).toString(); // date TODO:iOS => no date // @@COMMENT_GWT@@
 				prefs.putString(HIGHSCORE_KEY + i, cCurrInfo); // save the new score here
 				bNewHighScore = true;
 			}
@@ -181,9 +181,9 @@ public class ProfileGlobal {
 			try {
 				iScore = Integer.parseInt(infos[0]);
 				iLevel = Integer.parseInt(infos[2]);
-				if (Gdx.app.getType() != ApplicationType.iOS)
-					pDate = dateFormat.parse(infos[3]);
-				else
+				if (Gdx.app.getType() != ApplicationType.iOS) // @@COMMENT_GWT@@
+					pDate = dateFormat.parse(infos[3]); // @@COMMENT_GWT@@
+				else // @@COMMENT_GWT@@
 					pDate = new Date(); // TODO:iOS
 			} catch (Exception e) { // should not happen...
 				iScore = 0;

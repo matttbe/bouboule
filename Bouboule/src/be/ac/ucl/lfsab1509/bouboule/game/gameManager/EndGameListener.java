@@ -26,7 +26,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicBoolean; // @@COMMENT_GWT@@
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStatus;
 import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
@@ -46,8 +46,33 @@ public class EndGameListener implements ContactListener{
 	private static int isAlivePlayer 	= 0;
 	private static int isAliveMonster	= 0;
 
+/* // @@COMMENT_GWT@@
+	private class AtomicBoolean {
+		private boolean bStatus;
+		public AtomicBoolean() {
+			bStatus = false;
+		}
+
+		public boolean compareAndSet(boolean isStatus, boolean newStatus) {
+			if (bStatus == isStatus)
+				return false;
+			bStatus = newStatus;
+			return true;
+		}
+
+		public void set(boolean newStatus) {
+			bStatus = newStatus;
+		}
+	}
+*/ // @@COMMENT_GWT@@
+
 	// it's maybe not needed to use that if all actions are launched in the mainloop but is it?
-	private static AtomicBoolean bIsEnding = new AtomicBoolean();
+	private static AtomicBoolean bIsEnding = null;
+
+	public EndGameListener() {
+		super();
+		bIsEnding = new AtomicBoolean();
+	}
 
 	@Override
 	public void beginContact(final Contact contact) {
@@ -168,8 +193,7 @@ public class EndGameListener implements ContactListener{
 	public static void looseGame() {
 		Gdx.app.log("KILL", "Bouboule is dead!");
 
-		if (GlobalSettings.GAME.getTimer().isRunning()
-				&& bIsEnding.compareAndSet(false, true)) {
+		if (bIsEnding.compareAndSet(false, true) && GlobalSettings.GAME.getTimer().isRunning()) {
 			// avoid the case where both bouboules loose (go away at the "same" time)
 
 			GlobalSettings.PROFILE.addScorePermanent(-GlobalSettings.INIT_SCORE / 2);
@@ -194,8 +218,7 @@ public class EndGameListener implements ContactListener{
 	public static void winGame() {
 		Gdx.app.log("KILL", "Bouboule win!");
 
-		if (GlobalSettings.GAME.getTimer().isRunning()
-				&& bIsEnding.compareAndSet(false, true)) {
+		if (bIsEnding.compareAndSet(false, true) && GlobalSettings.GAME.getTimer().isRunning()) {
 			// avoid the case where both bouboules loose (go away at the "same" time)
 
 			GlobalSettings.PROFILE.saveScore();

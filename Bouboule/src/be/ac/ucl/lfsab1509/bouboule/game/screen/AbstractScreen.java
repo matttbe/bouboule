@@ -95,7 +95,8 @@ public abstract class AbstractScreen implements Screen {
 	}
 
 	protected String getName() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName(); // @@COMMENT_GWT@@
+//		return ""; // @@UNCOMMENT_GWT@@ // let the comment at the beginning!!!
 	}
 
 	// Lazily loaded collaborators
