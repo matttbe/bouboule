@@ -27,7 +27,11 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: osaka-font, fontColor: white, downFontColor: red }
 },
 com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
-	default: { listBackground: default-rect, listSelection: default-select-selection, font: osaka-font, fontColor: white, background: default-select }
+	default: {
+		font: osaka-font, fontColor: white, background: default-select,
+		scrollStyle: { background: default-rect },
+		listStyle: { font: osaka-font, selection: default-select-selection }
+	}
 },
 com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
 	default-vertical: { handle: default-splitpane-vertical },
