@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<module>
+    <entry-point class="be.ac.ucl.lfsab1509.bouboule.game.client.GwtLauncher"/>
+    <set-configuration-property name="gdx.assetpath" value="../Bouboule-android/assets"/>
+    <inherits name="MyGame"/>
+    <inherits name="com.badlogic.gdx.backends.gdx_backends_gwt"/>
+</module>

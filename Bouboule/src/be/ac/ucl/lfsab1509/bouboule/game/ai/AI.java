@@ -38,6 +38,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.utils.Array;
 
 public class AI {
 
@@ -98,7 +99,10 @@ public class AI {
 		Vector2 AI = null, VelocityAI =null, LocalEnemi=null, VelocityEnemi = null, Acc = null;
 
 		//search the position and speed of the 2 bouboules
-		Iterator<Body> iter = GraphicManager.getWorld().getBodies();
+		Array<Body> bodies = new Array<Body>();
+		GraphicManager.getWorld().getBodies(bodies);
+		Iterator<Body> iter = bodies.iterator();
+
 		Body bodytemp,bodytempia=null,bodytempplayer=null;
 
 		while(iter.hasNext()){
