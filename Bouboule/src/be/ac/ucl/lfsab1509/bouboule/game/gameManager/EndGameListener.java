@@ -35,6 +35,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 
@@ -126,9 +127,18 @@ public class EndGameListener implements ContactListener{
 	@Override
 	public void endContact(final Contact contact) {
 
-
-		short entity1 = ((Entity) contact.getFixtureA().getBody().getUserData()).getEntity();
-		short entity2 = ((Entity) contact.getFixtureB().getBody().getUserData()).getEntity();
+		Fixture fixture1 = contact.getFixtureA();
+		Fixture fixture2 = contact.getFixtureB();
+		/* With nightly 20130729, endContact is called when bodies are destroyed
+		 * http://code.google.com/p/libgdx/issues/detail?id=1515
+		 * https://github.com/libgdx/libgdx/commit/5bf1e73
+		 */
+		if (fixture1 == null || fixture2 == null) {
+			Gdx.app.log("KILL", "endContact but no fixture: skip");
+			return;
+		}
+		short entity1 = ((Entity) fixture1.getBody().getUserData()).getEntity();
+		short entity2 = ((Entity) fixture2.getBody().getUserData()).getEntity();
 
 
 		if (entity1 == Entity.SCENERY 
@@ -182,7 +192,7 @@ public class EndGameListener implements ContactListener{
 	}
 
 	private static void endGame(final boolean bWithMenu) {
-		Gdx.app.log("KILL", "EndGame: hide + launch menu");
+		Gdx.app.log("KILL", "EndGame: hide + launch menu " + bWithMenu);
 		GlobalSettings.GAME.setScreenGameHide(); // notify the screen that we'll need a new game
 
 		if (bWithMenu) {
@@ -196,6 +206,7 @@ public class EndGameListener implements ContactListener{
 		if (GlobalSettings.GAME.getTimer().isRunning()
 				&& bIsEnding.compareAndSet(false, true)) {
 			// avoid the case where both bouboules loose (go away at the "same" time)
+			Gdx.app.log("KILL", "Bouboule is dead: end game");
 
 			GlobalSettings.PROFILE.addScorePermanent(-GlobalSettings.INIT_SCORE / 2);
 			GlobalSettings.PROFILE.cancelNewScore();
@@ -222,6 +233,7 @@ public class EndGameListener implements ContactListener{
 		if (GlobalSettings.GAME.getTimer().isRunning()
 				&& bIsEnding.compareAndSet(false, true)) {
 			// avoid the case where both bouboules loose (go away at the "same" time)
+			Gdx.app.log("KILL", "Bouboule has won: end game");
 
 			GlobalSettings.PROFILE.saveScore();
 			if (GlobalSettings.PROFILE.levelUp()) {
