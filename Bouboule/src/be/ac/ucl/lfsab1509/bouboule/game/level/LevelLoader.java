@@ -215,10 +215,7 @@ public class LevelLoader {
 		String texRegionPath 	= file + ".png";
 		String jsonFile 		= file + ".json";
 		String jsonName 		= extractFileName(file);
-		// TODO => remove when ROCK will have .png file
-		if (jsonName.equals("rock"))
-			texRegionPath = file + ".jpg";
-		//______________________________________________________
+
 		String cMusicName 		= aren.getAttribute ("music", null);
 
 		graphicManager.addBody(new Arena(radius, px, py,  angle, texRegionPath, 
