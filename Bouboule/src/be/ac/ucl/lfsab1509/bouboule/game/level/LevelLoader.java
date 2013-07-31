@@ -215,8 +215,8 @@ public class LevelLoader {
 		String texRegionPath 	= file + ".png";
 		String jsonFile 		= file + ".json";
 		String jsonName 		= extractFileName(file);
-		// TODO => remove when SHIP and ROCK will have .png file
-		if (jsonName.equals("rock") || jsonName.equals("ship"))
+		// TODO => remove when ROCK will have .png file
+		if (jsonName.equals("rock"))
 			texRegionPath = file + ".jpg";
 		//______________________________________________________
 		String cMusicName 		= aren.getAttribute ("music", null);
