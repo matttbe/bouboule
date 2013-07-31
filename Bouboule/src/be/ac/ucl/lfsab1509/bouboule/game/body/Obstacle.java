@@ -30,6 +30,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.body;
 import java.util.ArrayList;
 
 import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
 import com.badlogic.gdx.Gdx;
@@ -131,8 +132,10 @@ public class Obstacle extends GameBody {
 	 */
 	public void update() {
 
-		if (positionVector.x > 1000 | positionVector.x < -200 
-				| positionVector.y > 2000 | positionVector.y < -200) {
+		if (positionVector.x > GlobalSettings.APPHEIGHT 
+				| positionVector.x < -GlobalSettings.APPHEIGHT / 4 
+				| positionVector.y > GlobalSettings.APPHEIGHT 
+				| positionVector.y < -GlobalSettings.APPHEIGHT / 4) {
 			this.entity.setAlive(false);
 		}
 		

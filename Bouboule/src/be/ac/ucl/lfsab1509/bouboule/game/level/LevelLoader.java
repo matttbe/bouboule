@@ -309,8 +309,10 @@ public class LevelLoader {
 			if (produce) {
 				addContinuousObstacle(graphicManager, time,
 						bodyType, density,
-						elasticity, px, py, angle, texRegionPath, 
-						jsonFile, jsonName, initAccX, initAccY);
+						elasticity, px * GlobalSettings.HD, 
+						py * GlobalSettings.HD, angle, texRegionPath, 
+						jsonFile, jsonName, initAccX * GlobalSettings.HD, 
+						initAccY * GlobalSettings.HD);
 
 			} else {
 
