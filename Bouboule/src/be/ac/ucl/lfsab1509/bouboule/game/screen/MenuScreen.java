@@ -79,6 +79,7 @@ public class MenuScreen extends AbstractScreen {
 		// add the title
 		title = new Label("BOUBOULE", getSkin(), "darktimes-font",
 				new Color(.388f, .733f, .984f, 1f));
+		title.setFontScale(GlobalSettings.HD); // TODO: removed when darktimes font will be bigger
 		title.setAlignment(Align.center); // center
 		title.setWidth(GlobalSettings.APPWIDTH);
 		// title.setColor(.2f, .7098f, .898f, 1f);  // android color
