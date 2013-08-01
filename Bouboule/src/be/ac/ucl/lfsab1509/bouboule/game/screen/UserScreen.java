@@ -33,6 +33,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -92,8 +93,16 @@ public class UserScreen extends AbstractScreen {
 		addChooseUserOptions();
 		iY -= iLessY;
 
-		addNewUserOptions();
-		iY -= iLessY;
+		/* libGDX only supports the onScreenKeyboard of Android and the keyboard
+		 * of the desktop. But this option is not so important.
+		 * (And we can only have one user if we want to use Apple's Game Center)
+		 */
+		if (Gdx.app.getType() == ApplicationType.Android
+				|| Gdx.app.getType() == ApplicationType.Desktop)
+		{
+			addNewUserOptions();
+			iY -= iLessY;
+		}
 
 		addChooseBoubouleOptions();
 		iY -= centerImage.getHeight() + iLessY - (GlobalSettings.ISHD ? 75 : 0);
