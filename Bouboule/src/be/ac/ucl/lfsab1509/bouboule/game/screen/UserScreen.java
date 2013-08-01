@@ -272,6 +272,14 @@ public class UserScreen extends AbstractScreen {
 		stage.addActor(rightImage);
 		rightImage.addListener(rightImageClick);
 
+		// bouboules are 2^2 bigger but we need 1.6384
+		if (GlobalSettings.ISHD) {
+			float scale = .5f * GlobalSettings.HD;
+			leftImage.setScale(scale);
+			centerImage.setScale(scale);
+			rightImage.setScale(scale);
+		}
+
 		int iYBoub = (int) (iY - centerImage.getHeight());
 		// => center each image: | o O o |
 		int iXCenter = (int) (GlobalSettings.APPWIDTH / 2

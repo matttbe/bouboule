@@ -75,6 +75,8 @@ public class WorldScreen extends AbstractScreen {
 				+ BoubImages.BOUB_EXTENTION;
 
 		Image boub = addImage(boubPath, 0, 0);
+		if (GlobalSettings.ISHD)
+			boub.setScale(.5f * GlobalSettings.HD);
 
 		// Set action for the moving Boub
 		// Attention, the array for the World position begin at 0 not 1 -> (-1)

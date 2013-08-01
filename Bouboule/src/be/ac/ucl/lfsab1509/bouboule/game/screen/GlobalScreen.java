@@ -176,8 +176,11 @@ public class GlobalScreen extends AbstractScreen {
 			iX = 125;
 			iY -= 20;
 		}
+		float scale = 1;// .5f * GlobalSettings.HD; // TODO bonus have to be bigger
 		for (String[] cBonus : Bonus.bonusInfo) {
-			addImage(cBonus[0], iX, iY);
+			Image bonus = addImage(cBonus[0], iX, iY);
+			if (GlobalSettings.ISHD)
+				bonus.setScale(scale);
 			addLabel(cBonus[1], "osaka-font", GlobalSettings.HD, // TODO => set "1f" when osaka will be bigger
 					Color.WHITE, iX + (GlobalSettings.ISHD ? 100 : 80), iY + 15);
 			iY -= 55 * GlobalSettings.HD;
