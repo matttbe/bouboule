@@ -67,10 +67,10 @@ public class CameraHelper {
 			viewportWidth = virtualWidth;
 			viewportHeight = viewportWidth * (1 / aspectPhysical);
 		}
-		//2048f (APPHEIGHT) state for the general background size
-		float aspectMin = 1 - ((1 - physicalHeight * aspect / physicalWidth) / 2);
-		float hiddenWidth = virtualHeight - viewportWidth * aspectMin; // |x||   ||x|
-		GlobalSettings.SHIFT_BG = - hiddenWidth / 2;
+
+		// virtualHeight = background size
+		// GlobalSettings.SHIFT_BG = - (virtualHeight - physicalHeight * aspectPhysical) / 2; // 225: ok in NHD only
+		GlobalSettings.SHIFT_BG = - (virtualHeight - virtualWidth) / 2; // ok in HD and NHD
 
 		OrthographicCamera camera = new OrthographicCamera(viewportWidth,
 				viewportHeight);
