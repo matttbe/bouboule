@@ -90,9 +90,6 @@ public class UserScreen extends AbstractScreen {
 
 		int iLessY = (int) (185 * GlobalSettings.HD);
 
-		addChooseUserOptions();
-		iY -= iLessY;
-
 		/* libGDX only supports the onScreenKeyboard of Android and the keyboard
 		 * of the desktop. But this option is not so important.
 		 * (And we can only have one user if we want to use Apple's Game Center)
@@ -100,6 +97,9 @@ public class UserScreen extends AbstractScreen {
 		if (Gdx.app.getType() == ApplicationType.Android
 				|| Gdx.app.getType() == ApplicationType.Desktop)
 		{
+			addChooseUserOptions();
+			iY -= iLessY;
+
 			addNewUserOptions();
 			iY -= iLessY;
 		}
