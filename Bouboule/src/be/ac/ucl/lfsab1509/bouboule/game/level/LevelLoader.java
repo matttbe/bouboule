@@ -164,22 +164,19 @@ public class LevelLoader {
 
 			String jsonFile			= directory + BoubImages.BOUB_JSON_EXT;
 
+			final float scale = GlobalSettings.ISHD ? .5f * GlobalSettings.HD : 1;
 
-			if (entity == Entity.PLAYER) {
-
+			if (entity == Entity.PLAYER)
 				texRegionPath = directory + GlobalSettings.PROFILE.getBoubName()
 						+ BoubImages.BOUB_EXTENTION;
-
-			} else {
-				
-				texRegionPath 		= directory + boub.getAttribute("texRegionPath");
-			}
+			else
+				texRegionPath = directory + boub.getAttribute("texRegionPath");
 
 
 
 			Bouboule body = new Bouboule(radius, bodyType, density,
 					elasticity, px, py, angle, texRegionPath, 
-					jsonFile, "boub_" + type, entity, AILevel);
+					jsonFile, "boub_" + type, entity, AILevel, scale);
 			graphicManager.addBody(body);
 
 			if (inverted) {
@@ -208,7 +205,7 @@ public class LevelLoader {
 
 
 		float radius			= Float.parseFloat(aren.getAttribute("radius"));
-		float px				= Float.parseFloat(aren.getAttribute("px"));
+		float px				= Float.parseFloat(aren.getAttribute("px")); // no * HD here, arena have changed!
 		float py				= Float.parseFloat(aren.getAttribute("py"));
 		float angle				= Float.parseFloat(aren.getAttribute("angle"));
 		String file				= aren.getAttribute("file");
@@ -250,9 +247,9 @@ public class LevelLoader {
 
 			newNode = nodes.next();
 
-			float px			= Float.parseFloat(newNode.getAttribute("px"));
-			float py			= Float.parseFloat(newNode.getAttribute("py"));
-			float weight		= Float.parseFloat(newNode.getAttribute("weight"));
+			float px			= Float.parseFloat(newNode.getAttribute("px")) * GlobalSettings.HD;
+			float py			= Float.parseFloat(newNode.getAttribute("py")) * GlobalSettings.HD;
+			float weight		= Float.parseFloat(newNode.getAttribute("weight")) * GlobalSettings.HD;
 
 			mapNode = new MapNode(px, py, weight);
 			GlobalSettings.ARENAWAYPOINTALLOW.add(mapNode);
@@ -287,11 +284,13 @@ public class LevelLoader {
 
 			float density			= Float.parseFloat(newobstacle.getAttribute("density"));
 			float elasticity		= Float.parseFloat(newobstacle.getAttribute("elasticity"));
-			float px				= Float.parseFloat(newobstacle.getAttribute("px"));
+			float px				= Float.parseFloat(newobstacle.getAttribute("px")); // * HD only for movable obstacles
 			float py				= Float.parseFloat(newobstacle.getAttribute("py"));
 			float angle				= Float.parseFloat(newobstacle.getAttribute("angle"));
-			float initAccX			= Float.parseFloat(newobstacle.getAttribute("accx", "0"));
-			float initAccY			= Float.parseFloat(newobstacle.getAttribute("accy", "0"));
+			float initAccX			= Float.parseFloat(newobstacle.getAttribute("accx", "0"))
+									  * GlobalSettings.HD * GlobalSettings.HD * GlobalSettings.HD;
+			float initAccY			= Float.parseFloat(newobstacle.getAttribute("accy", "0"))
+									  * GlobalSettings.HD * GlobalSettings.HD * GlobalSettings.HD;
 			float time				= Float.parseFloat(newobstacle.getAttribute("time", "0"));
 			String file				= newobstacle.getAttribute("file");
 			String texRegionPath 	= file + ".png";
@@ -304,18 +303,16 @@ public class LevelLoader {
 
 
 			if (produce) {
-				addContinuousObstacle(graphicManager, time,
-						bodyType, density,
-						elasticity, px * GlobalSettings.HD, 
-						py * GlobalSettings.HD, angle, texRegionPath, 
-						jsonFile, jsonName, initAccX * GlobalSettings.HD, 
-						initAccY * GlobalSettings.HD);
-
-			} else {
-
+				final float scale = GlobalSettings.ISHD ? .5f * GlobalSettings.HD : 1;
+				addContinuousObstacle(graphicManager, time, bodyType, density,
+						elasticity, px * GlobalSettings.HD,
+						py * GlobalSettings.HD, angle, texRegionPath,
+						jsonFile, jsonName, initAccX, initAccY, scale);
+			}
+			else {
 				Obstacle obs = new Obstacle(bodyType, density,
 						elasticity, px, py, angle, texRegionPath, 
-						jsonFile, jsonName, initAccX, initAccY);
+						jsonFile, jsonName, initAccX, initAccY, 1f);
 
 				graphicManager.addBody(obs);
 
@@ -355,7 +352,7 @@ public class LevelLoader {
 			final BodyType bodyType, final float density,
 			final float elasticity, final float px, final float py, final float angle,
 			final String texRegionPath, final String jsonFile, final String jsonName,
-			final float initAccX, final float initAccY) {
+			final float initAccX, final float initAccY, final float scale) {
 
 		TimerListener timerListener = new TimerListener() {
 			private int iTimerInc;
@@ -363,12 +360,10 @@ public class LevelLoader {
 			@Override
 			public void run() {
 				if (iTimerInc % time == 0) {
-					
 					Gdx.app.log("Obstacle", "reset Obstacle");
-
 					Obstacle obs = new Obstacle(bodyType, density,
 							elasticity, px, py, angle, texRegionPath, 
-							jsonFile, jsonName, initAccX, initAccY);
+							jsonFile, jsonName, initAccX, initAccY, scale);
 
 					graphicManager.addBody(obs);
 				}

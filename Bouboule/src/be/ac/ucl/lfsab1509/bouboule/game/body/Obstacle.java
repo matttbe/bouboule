@@ -74,7 +74,7 @@ public class Obstacle extends GameBody {
 			final float elasticity, final float px, final float py, 
 			final float angle, final String texRegionPath, 
 			final String jsonFile, final String jsonName,
-			final float initAccX, final float initAccY) {
+			final float initAccX, final float initAccY, final float scale) {
 
 		super();
 
@@ -83,9 +83,15 @@ public class Obstacle extends GameBody {
 		this.texture = new TextureRegion(new Texture(texRegionPath));
 
 		this.sprite = new Sprite(texture);
+		/* We need bigger images in HD but we have to use image where dimensions
+		 * are power of 2. So we have to scale these images here.
+		 */
+		this.sprite.setScale(scale);
 
-		MakeBody(0, 0, 0, bodyType, density, elasticity, false, initialPos, angle, jsonFile, 
-				jsonName, GraphicManager.convertToGame(texture.getRegionWidth()));
+		MakeBody(0, 0, 0, bodyType, density, elasticity, false, initialPos,
+				angle, jsonFile, jsonName,
+				GraphicManager.convertToGame(
+						texture.getRegionWidth() * sprite.getScaleX()));
 
 		//Ensure that the object don't rotate.
 		//body.setFixedRotation(true);

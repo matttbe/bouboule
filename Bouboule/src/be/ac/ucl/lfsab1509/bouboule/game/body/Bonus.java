@@ -82,7 +82,8 @@ public class Bonus extends GameBody {
 	 *		final String jsonFile, final String jsonName, final short bonusType)
 	 */
 	public Bonus(final float angle, final String texRegionPath, 
-			final String jsonFile, final String jsonName, final Entity.BonusType bonusType) {
+			final String jsonFile, final String jsonName,
+			final Entity.BonusType bonusType) {
 
 		super();
 
@@ -98,8 +99,13 @@ public class Bonus extends GameBody {
 
 		this.sprite = new Sprite(texture);
 
+		// TODO: we need bigger bonus
+		// this.sprite.setScale(GlobalSettings.ISHD ? .5f * GlobalSettings.HD : 1);
+		this.sprite.setScale(GlobalSettings.HD);
+
 		MakeBody(0, 0, 0, BodyType.StaticBody, 0, 0, true, pos, angle, jsonFile, jsonName,
-				GraphicManager.convertToGame(texture.getRegionWidth()));
+				GraphicManager.convertToGame(
+						texture.getRegionWidth() * sprite.getScaleX()));
 
 		//Ensure that the object don't rotate.
 		body.setFixedRotation(true);

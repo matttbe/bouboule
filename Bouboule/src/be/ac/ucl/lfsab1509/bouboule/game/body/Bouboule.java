@@ -31,7 +31,6 @@ import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -70,7 +69,8 @@ public class Bouboule extends GameBody {
 	public Bouboule(final float radius, final BodyType bodyType, final float density,
 			final float elasticity, final float px, final float py, 
 			final float angle, final String texRegionPath, 
-			final String jsonFile, final String jsonName, final short type, final int AILevel) {
+			final String jsonFile, final String jsonName, final short type,
+			final int AILevel, final float scale) {
 
 		super();
 
@@ -79,11 +79,16 @@ public class Bouboule extends GameBody {
 
 		
 		this.texture = new TextureRegion(new Texture(texRegionPath));
-		Gdx.app.log("LN", " texture " + texRegionPath);
 		this.sprite = new Sprite(texture);
+		/* We need bigger images in HD but we have to use image where dimensions
+		 * are power of 2. So we have to scale these images here.
+		 */
+		this.sprite.setScale(scale);
 
-		MakeBody(0, 0, radius, bodyType, density, elasticity, false, pos, angle, jsonFile, jsonName,
-				GraphicManager.convertToGame(texture.getRegionWidth()));
+		MakeBody(0, 0, radius, bodyType, density, elasticity, false, pos, angle,
+				jsonFile, jsonName,
+				GraphicManager.convertToGame(
+						texture.getRegionWidth() * sprite.getScaleX()));
 
 		// added sprite to the fixture (to modify it somewhere else
 		body.getFixtureList().get(0).setUserData(sprite);

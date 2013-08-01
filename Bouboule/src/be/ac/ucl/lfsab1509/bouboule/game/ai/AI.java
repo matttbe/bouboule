@@ -52,8 +52,8 @@ public class AI {
 	//invert Axes
 	private static float AXE_POSITION = -1;
 	public static float INIT_ORIENTATION = 1;
-	//Acceleration constant (speed of game) - images are 2x bigger in HD
-	private static final float K_ACC_DEFAULT = GlobalSettings.ISHD ? 12f : 6f;
+	//Acceleration constant (speed of game) - images are 1.6834x bigger in HD
+	private static final float K_ACC_DEFAULT = 6f * GlobalSettings.HD;
 	private static float K_ACC = K_ACC_DEFAULT;
 	
 	//init this variable at the beginning of each level
