@@ -227,12 +227,17 @@ public abstract class AbstractScreen implements Screen {
 		return addImage(imagePath, 0, 0);
 
 	}
+	
+	protected Image addBackGround(String imagePath, float x, float y) {
+		return addImage(imagePath, x, y);
+
+	}
 
 	/**
 	 * @return an Image created from a Texture which will be automatically
 	 *         disposed.
 	 */
-	protected Image addImage(String imagePath, int x, int y) {
+	protected Image addImage(String imagePath, float x, float y) {
 		Texture texture = new Texture(imagePath);
 		textureList.add(texture);
 

@@ -46,7 +46,13 @@ public class ParamScreen extends AbstractScreen {
 
 		//Set Background
 		
-		addBackGround("drawable-xhdpi/settings.jpg");
+		addBackGround("drawable-xhdpi/settings/settingsbg.jpg",
+				GlobalSettings.SHIFT_BG, 0);
+		
+		//Add buttons
+		
+		addBackGround("drawable-xhdpi/settings/settingsbuttons.png");
+
 		
 		//Create all Buttons
 		Button userButton, globalButton, aboutButton;

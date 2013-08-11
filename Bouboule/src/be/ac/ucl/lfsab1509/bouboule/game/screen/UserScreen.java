@@ -85,8 +85,8 @@ public class UserScreen extends AbstractScreen {
 		super.show();
 
 		// Set Background
-		Image bg = addBackGround("drawable-xhdpi/settings_blank.jpg");
-		bg.setScale(GlobalSettings.HD); // TODO remove when settings_blank will be bigger
+		addBackGround("drawable-xhdpi/settings/settingsbg.jpg",
+				GlobalSettings.SHIFT_BG, 0);
 
 		int iLessY = (int) (185 * GlobalSettings.HD);
 

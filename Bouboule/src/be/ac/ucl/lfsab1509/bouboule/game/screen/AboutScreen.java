@@ -31,7 +31,6 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class AboutScreen extends AbstractScreen {
@@ -45,8 +44,8 @@ public class AboutScreen extends AbstractScreen {
 		super.show();
 
 		//Set Background
-		Image bg = addBackGround("drawable-xhdpi/settings_blank.jpg");
-		bg.setScale(GlobalSettings.HD); // TODO remove when settings_blank will be bigger
+		addBackGround("drawable-xhdpi/settings/settingsbg.jpg",
+				GlobalSettings.SHIFT_BG, 0);
 
 		// Note: no accent with the default font and multiple spaces or \t are not working
 		String cAboutText =

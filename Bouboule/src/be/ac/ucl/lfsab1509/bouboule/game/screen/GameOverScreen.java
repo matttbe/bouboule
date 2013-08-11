@@ -47,7 +47,12 @@ public class GameOverScreen extends AbstractScreen {
 
 		// Set Background
 
-		addBackGround("drawable-xhdpi/gameover.jpg");
+		addBackGround("drawable-xhdpi/gameover/gameoverbg.jpg",
+				GlobalSettings.SHIFT_BG, 0);
+		
+		//Add buttons
+		
+		addBackGround("drawable-xhdpi/gameover/gameoverbuttons.png");
 
 		// Create all Buttons - Play Button
 
