@@ -122,7 +122,8 @@ public class GameLoop {
 					Gdx.files.internal("fonts/Osaka2/Osaka2.png"), false);
 			fontPause.setScale(GlobalSettings.HD); // TODO check if it's ok with this zoom in HD but seems ok
 			fontPause.setColor(.95f, .05f, .05f, 1f);
-			textureRegionPause = new TextureRegion(new Texture("bonus/star/star.png")); // TODO: another picture
+			textureRegionPause = new TextureRegion(
+					new Texture("buttons/home_button.png")); // TODO: another picture
 			pixmapFade = new Pixmap(1, 1, Format.RGB888);
 			spriteFade = new Sprite(new Texture(pixmapFade));
 			spriteFade.setColor(0, 0, 0, 0);
