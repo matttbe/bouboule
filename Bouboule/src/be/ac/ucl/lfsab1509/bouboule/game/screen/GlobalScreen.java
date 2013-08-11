@@ -32,12 +32,9 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class GlobalScreen extends AbstractScreen {
@@ -46,8 +43,8 @@ public class GlobalScreen extends AbstractScreen {
 	private static final float  FONT_SCALE = .5f * GlobalSettings.HD;
 
 	private CheckBox soundCheckBox;
-	private CheckBox rotationCheckBox;
-	private Slider sensitivitySlider;
+	/*private CheckBox rotationCheckBox;
+	private Slider sensitivitySlider;*/
 
 	private int iX, iY;
 
@@ -76,11 +73,13 @@ public class GlobalScreen extends AbstractScreen {
 		addSoundOptions();
 		iY -= iLessY;
 
+		/* Not so useful...
 		addRotationOptions();
 		iY -= iLessY;
 
 		addSensitivityOptions();
 		iY -= iLessY;
+		*/
 
 		addBonusImages();
 
@@ -115,6 +114,7 @@ public class GlobalScreen extends AbstractScreen {
 
 	// _________________________________ ROTATION
 
+/*
 	private void addRotationOptions() {
 		addLabel("ROTATION", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 			.setTouchable(null);
@@ -161,6 +161,7 @@ public class GlobalScreen extends AbstractScreen {
 							(int) sensitivitySlider.getValue());
 		}
 	};
+*/
 
 	// ________________________________ BONUS
 
@@ -183,7 +184,7 @@ public class GlobalScreen extends AbstractScreen {
 				bonus.setScale(scale);
 			addLabel(cBonus[1], "osaka-font", GlobalSettings.HD, // TODO => set "1f" when osaka will be bigger
 					Color.WHITE, iX + (GlobalSettings.ISHD ? 100 : 80), iY + 15);
-			iY -= 55 * GlobalSettings.HD;
+			iY -= 60 * GlobalSettings.HD;
 		}
 	}
 }

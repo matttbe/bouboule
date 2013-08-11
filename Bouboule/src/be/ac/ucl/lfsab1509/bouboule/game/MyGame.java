@@ -31,6 +31,7 @@ import java.util.Random;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 import be.ac.ucl.lfsab1509.bouboule.game.menu.GdxMenus;
+import be.ac.ucl.lfsab1509.bouboule.game.profile.GameCenter;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerMgr;
@@ -67,15 +68,15 @@ public class MyGame extends Game implements ApplicationListener {
 
 	//All other
 	public MyGame() {
+		super();
 	}
-	
-	//iOS Launcher 
+
+	// We can add a GameCenter interface: e.g. to add Apple's Game Center support
 	public MyGame(GameCenter gc) {
+		super();
 		GlobalSettings.GAMECENTER = gc;
 	}
-	
-	
-	
+
 	/**
 	 * This class should be the first one which is called after having
 	 * initialized GDX
