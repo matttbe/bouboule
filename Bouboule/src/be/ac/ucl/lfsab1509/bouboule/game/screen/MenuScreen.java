@@ -29,6 +29,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.HighScoreInfo;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
@@ -137,12 +138,21 @@ public class MenuScreen extends AbstractScreen {
 
 		scoreButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "clickScore " + x + ", " + y);
+				Gdx.app.log("SCREEN", "Show LeaderBoard " + x + ", " + y);
 
-				new Dialog("HighScore", getSkin(), "default") {
-					// TODO: improved default skin
-					// protected void result(Object object) {} // Just hide the dialog
-				}.text(getHighScoreText()).button("Close", null).show(stage);
+				
+				if (Gdx.app.getType() == ApplicationType.iOS) {					
+
+					GlobalSettings.GAMECENTER.showLeaderboard();
+								
+					
+				} else {
+				
+					new Dialog("HighScore", getSkin(), "default") {
+						// TODO: improved default skin
+						// protected void result(Object object) {} // Just hide the dialog
+					}.text(getHighScoreText()).button("Close", null).show(stage);
+				}
 			}
 		});
 

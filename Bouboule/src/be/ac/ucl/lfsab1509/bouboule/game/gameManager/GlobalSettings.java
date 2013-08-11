@@ -28,6 +28,7 @@ package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 import java.util.ArrayList;
 
+import be.ac.ucl.lfsab1509.bouboule.game.GameCenter;
 import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
 import be.ac.ucl.lfsab1509.bouboule.game.ai.MapNode;
 import be.ac.ucl.lfsab1509.bouboule.game.menu.Menus;
@@ -79,6 +80,9 @@ public class GlobalSettings {
 	public static ProfileMgr		PROFILE_MGR = null;
 	public static Profile			PROFILE = null;
 	public static MyGame			GAME = null;
+	
+	//IOS GameCenter 
+	public static GameCenter	GAMECENTER = null;
 	
 	public static final String CHEATER_NAME = "D3Vi113";
 }

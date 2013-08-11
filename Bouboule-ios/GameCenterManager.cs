@@ -1,0 +1,182 @@
+using System;
+
+using MonoTouch.GameKit;
+using MonoTouch.UIKit;
+using MonoTouch.Foundation;
+
+using com.badlogic.gdx.backends.ios;
+using com.badlogic.gdx;
+using be.ac.ucl.lfsab1509.bouboule.game;
+
+//Based on Xamarin Documentation and 
+
+namespace GameCenterIOS
+{
+	public class GameCenterManager : GameCenter
+	{
+		private static GameCenterManager _instance = null;
+
+		public GKNotificationHandler authenticatedHandler;
+
+		public PlayerModel player;
+		string currentPlayerID;
+
+		public GameCenterManager ()
+		{
+
+		}
+
+		public static GameCenterManager getInstance(){
+			if (_instance == null) {
+				_instance = new GameCenterManager();
+			}
+
+			return _instance;
+		}
+
+
+
+		public bool isGameCenterAPIAvailble(){
+			return UIDevice.CurrentDevice.CheckSystemVersion (4, 1);
+		}
+
+		public string getPlayerName ()
+		{
+			return player.playerName;
+		}
+
+
+		public void getAchivements(){
+			GKCompletionHandler handler = new GKCompletionHandler((achivements, error) => {
+				if(error==null){
+					if(achivements!=null){
+						Console.Out.WriteLine("there is " + achivements.Length + "achievements");
+						Console.Out.WriteLine(achivements[0].LastReportedDate.ToString());
+					}
+				}else{
+					//Error
+				}
+
+			});
+			GKAchievement.LoadAchievements (handler);
+		}
+
+		//Authentificate the player for Game Center user
+		public void Authenticate ()
+		{
+			authenticatedHandler = new GKNotificationHandler (delegate(NSError error) {
+				if (GKLocalPlayer.LocalPlayer.Authenticated) {
+					//Switching Users
+					if(currentPlayerID != null || currentPlayerID != GKLocalPlayer.LocalPlayer.PlayerID)
+					{
+						//load the player settings
+						currentPlayerID = GKLocalPlayer.LocalPlayer.PlayerID;
+						player = new PlayerModel();
+						player.loadStoredScores();
+						player.loadSotredAchievements();
+					}
+				} else {
+					var alert = new UIAlertView ("Game Center Account Required", "Need login the game center!", null, "Retry", null);
+					alert.Clicked += delegate {
+						GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+					};
+					alert.Show ();
+
+				}
+			});
+
+			GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+
+		}
+
+
+		public void resetAchievements() 
+		{
+			if (!GKLocalPlayer.LocalPlayer.Authenticated) {
+				new UIAlertView ("Error", "Need sign in Game Center to reset the achievement", null, "OK", null).Show();
+				GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+				return;
+			}
+			player.resetAchievements ();
+		
+		}
+
+		//Submit the achivement or store if no connection
+		//"com.ucl.bouboule."+achievementsName and percentageValue is the completion rate.
+		//Completion banner are defaulted activated
+		public void submitAchievement(String achievementsName, int percentageValue)
+		{
+			if (!GKLocalPlayer.LocalPlayer.Authenticated) {
+				new UIAlertView ("Error", "Need sign in Game Center to submit the achievement", null, "OK", null).Show();
+				GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+				return;
+			}
+
+			//Create the achievement we want to submit.
+			NSString identifier = new NSString ("com.ucl.bouboule."+achievementsName);
+
+			GKAchievement achievement = new GKAchievement (identifier);
+
+			achievement.PercentComplete = percentageValue;
+			achievement.ShowsCompletionBanner = true;
+
+			Console.WriteLine (achievement.ShowsCompletionBanner);
+
+			player.submitAchievement (achievement);
+		}
+
+
+		//submit score to default leaderboard
+		public void submitScore(int scoreValue)
+		{
+			if (!GKLocalPlayer.LocalPlayer.Authenticated) {
+				new UIAlertView ("Error", "Need sign in Game Center to submit the score", null, "OK", null).Show();
+				GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+				return;
+			}
+
+
+			GKScore submitScore = new GKScore ("com.ucl.bouboule.boubouleLeaderBoard");
+			submitScore.Init ();
+			try{
+				submitScore.Value = Convert.ToInt64(scoreValue);
+			}
+			catch{
+				new UIAlertView ("Error", "Score should be a number", null, "OK", null).Show();
+				return;
+			}
+
+			submitScore.ShouldSetDefaultLeaderboard = true;
+			player.submitScore (submitScore);
+		}
+
+
+		public void showLeaderboard()
+		{
+			GKLeaderboardViewController leaderboardViewController = new GKLeaderboardViewController ();
+			leaderboardViewController.Category = "Leaderboard";
+			leaderboardViewController.DidFinish += (object sender, EventArgs e) => {
+				leaderboardViewController.DismissViewController(true, null);
+			};
+
+			((IOSApplication)Gdx.app).getUIViewController().PresentViewController (leaderboardViewController, true, null);
+
+			Console.WriteLine ("showLeaderboard complete");
+		}
+
+		public void showAchievements()
+		{
+			GKAchievementViewController achievementViewController = new GKAchievementViewController ();
+			achievementViewController.DidFinish += (object sender, EventArgs e) => {
+				achievementViewController.DismissViewController(true, null);
+			};
+		
+		
+			((IOSApplication)Gdx.app).getUIViewController ().PresentViewController (achievementViewController, true, null);
+
+			Console.WriteLine ("achievementsboard complete");
+		}
+
+
+	}
+}

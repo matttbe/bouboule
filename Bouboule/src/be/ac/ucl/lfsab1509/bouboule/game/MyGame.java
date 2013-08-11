@@ -65,6 +65,17 @@ public class MyGame extends Game implements ApplicationListener {
 
 	private boolean bGeneralPause = false; // not used on Android
 
+	//All other
+	public MyGame() {
+	}
+	
+	//iOS Launcher 
+	public MyGame(GameCenter gc) {
+		GlobalSettings.GAMECENTER = gc;
+	}
+	
+	
+	
 	/**
 	 * This class should be the first one which is called after having
 	 * initialized GDX
