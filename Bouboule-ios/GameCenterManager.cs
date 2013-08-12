@@ -70,7 +70,8 @@ namespace GameCenterIOS
 						player.loadStoredScores();
 						player.loadStoredAchievements();
 
-						GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(currentPlayerID);
+						if (GlobalSettings.PROFILE_MGR != null)
+							GlobalSettings.PROFILE_MGR.switchUser(currentPlayerID);
 
 					}
 				} else {
