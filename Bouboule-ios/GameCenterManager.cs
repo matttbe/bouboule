@@ -128,7 +128,7 @@ namespace GameCenterIOS
 		}
 
 		//Submit the achivement or store if no connection
-		//"com.ucl.bouboule."+achievementsName and percentageValue is the completion rate.
+		//"be.ac.ucl.lfsab1509.bouboule."+achievementsName and percentageValue is the completion rate.
 		//Completion banner are defaulted activated
 		public void submitAchievement(String achievementsName, int percentageValue)
 		{
@@ -139,7 +139,7 @@ namespace GameCenterIOS
 			}
 
 			//Create the achievement we want to submit.
-			NSString identifier = new NSString ("com.ucl.bouboule."+achievementsName);
+			NSString identifier = new NSString ("be.ac.ucl.lfsab1509.bouboule"+achievementsName);
 
 			GKAchievement achievement = new GKAchievement (identifier);
 
@@ -162,7 +162,7 @@ namespace GameCenterIOS
 			}
 
 
-			GKScore submitScore = new GKScore ("com.ucl.bouboule.boubouleLeaderBoard");
+			GKScore submitScore = new GKScore ("be.ac.ucl.lfsab1509.bouboule.boubouleLeaderBoard");
 			submitScore.Init ();
 			try{
 				submitScore.Value = Convert.ToInt64(scoreValue);
