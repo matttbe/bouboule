@@ -129,6 +129,9 @@ public class Entity {
 
 			Gdx.app.log("bonus", bonus + " " + (type == PLAYER));
 
+			if (type == PLAYER)
+				GlobalSettings.PROFILE.newBonus();
+
 			// some bonus have differents effects if it's the AI or the player
 			if (attributeBonusSpecialsCases(type))
 				return;

@@ -135,7 +135,7 @@ public class MyLevelFragment extends Fragment {
 			if(GlobalSettings.GAME.getScreen() != null)
 				EndGameListener.resetGame();
 			
-			GlobalSettings.PROFILE.setLevel((mCurrentPage-1) * 4 + 1);
+			GlobalSettings.PROFILE.setLevel((mCurrentPage-1) * 4 + 1, true);
 			
 			getActivity().setResult(Menu.PLAY_GAME);
 			

@@ -36,13 +36,18 @@ public class Profile {
 	// user
 	private String cName;
 	private String cBoubName;
+
 	private Preferences prefs;
 	private static final String LIFES_KEY = "Lifes";
 	private static final String LEVEL_KEY = "Level";
 	private static final String BEST_LEVEL_KEY = "BestLevel";
+	private static final String START_LEVEL_KEY = "StartLevel";
 	private static final String SCORE_KEY = "Score";
 	private static final String HIGHSCORE_KEY = "HighScore";
 	private static final String BOUB_NAME_KEY = "BoubName";
+	private static final String DEATHS_KEY = "Deaths";
+	private static final String BONUS_KEY = "Bonus";
+	private static final String ALL_LEVELS_WON = "AllLevelsWon";
 
 	// score
 	private int iScore;
@@ -65,21 +70,34 @@ public class Profile {
 
 	// tutorial
 	private boolean bNeedTuto = false;
-	
+
+	// Misc. statistics
+	private int iNbDeaths;
+	private int iNbBonus;
+	private int iStartLevel;
+	private boolean bAllLevelsWon;
+
 	public Profile(final String cName) {
 		
 		this.cName = cName;
 		prefs = Gdx.app.getPreferences(cName);
 
+		// reset at the end of the game
 		iLifes = prefs.getInteger(LIFES_KEY, GlobalSettings.INIT_LIFES);
 		iLevel = prefs.getInteger(LEVEL_KEY, GlobalSettings.INIT_LEVEL);
+		iScore = prefs.getInteger(SCORE_KEY, 0);
+		iStartLevel = prefs.getInteger(START_LEVEL_KEY, GlobalSettings.INIT_LEVEL);
+
+		// should not be reset
 		if (cName.equals(GlobalSettings.CHEATER_NAME))
 			iBestLevel = GlobalSettings.NBLEVELS;
 		else
 			iBestLevel = prefs.getInteger(BEST_LEVEL_KEY, GlobalSettings.INIT_LEVEL);
-		iScore = prefs.getInteger(SCORE_KEY, 0);
 		iHighScore = prefs.getInteger(HIGHSCORE_KEY, Integer.MIN_VALUE);
 		cBoubName = prefs.getString(BOUB_NAME_KEY, GlobalSettings.DEFAULT_BOUB_NAME);
+		iNbDeaths = prefs.getInteger(DEATHS_KEY, 0);
+		iNbBonus = prefs.getInteger(BONUS_KEY, 0);
+		bAllLevelsWon = prefs.getBoolean(ALL_LEVELS_WON, false);
 
 		addNewTimerListener();
 	}
@@ -96,6 +114,8 @@ public class Profile {
 		prefs.putInteger(LIFES_KEY, iLifes);
 		iLevel = GlobalSettings.INIT_LEVEL;
 		prefs.putInteger(LEVEL_KEY, iLevel);
+		iStartLevel = GlobalSettings.INIT_LEVEL;
+		prefs.putInteger(START_LEVEL_KEY, iStartLevel);
 		iEndGameScore = iScore;
 		iScore = 0;
 		prefs.putInteger(SCORE_KEY, iScore);
@@ -203,7 +223,7 @@ public class Profile {
 		if (bNeedSaveScoreEvenIfCancel) {
 			saveScore();
 		} else {
-			GlobalSettings.GAME.getTimer().stop();
+			endGame(true);
 		}
 	}
 
@@ -245,7 +265,7 @@ public class Profile {
 	 * @return true if there is a new highscore
 	 */
 	public void saveScore() {
-		GlobalSettings.GAME.getTimer().stop();
+		endGame(false);
 		prefs.putInteger(SCORE_KEY, iScore);
 		prefs.flush();
 	}
@@ -262,17 +282,28 @@ public class Profile {
 	 * @return false if there is no more life.
 	 */
 	public boolean addLifes(final int iNewLifes) {
-		int iNewLifesTmp = iLifes + iNewLifes;
-		if (iNewLifesTmp <= GlobalSettings.MAX_LIFES) { // we can't add more than 3 lifes
-			iLifes = iNewLifesTmp;
-		}
-
-		if (iLifes <= 0) { // no more life
-			return false;
-		}
+		iLifes += iNewLifes;
+		if (iLifes > GlobalSettings.MAX_LIFES) // we can't add more than 3 lifes
+			iLifes = GlobalSettings.MAX_LIFES;
 
 		this.prefs.putInteger(LIFES_KEY, iLifes);
-		prefs.flush();
+
+		if (iNewLifes < 0) {
+			iNbDeaths -= iNewLifes;
+			prefs.putInteger(DEATHS_KEY, iNbDeaths);
+			/* flush only if we loose lifes: no need to flush during the game
+			 * (if we quit during the game, we lost bonus)
+			 */
+			prefs.flush();
+
+			GameCenterUtils.newDeath(iNbDeaths);
+
+			if (iLifes <= 0) {
+				GameCenterUtils.endGame(iStartLevel, iLevel);
+				return false; // false <=> no more life
+			}
+		}
+
 		return true;
 	}
 
@@ -283,10 +314,17 @@ public class Profile {
 	 */
 	public boolean levelUp() {
 		if (iLevel >= GlobalSettings.NBLEVELS) { // we are already on the last level
+			if (! bAllLevelsWon) {
+				bAllLevelsWon = true;
+				prefs.putBoolean(ALL_LEVELS_WON, bAllLevelsWon);
+				prefs.flush();
+				GameCenterUtils.newBestLevel(iLevel + 1); // => last level not won
+			}
+			GameCenterUtils.endGame(iStartLevel, iLevel + 1); // iEndLevel <=> level not won
 			return false;
 		}
 
-		setLevel(iLevel + 1);
+		setLevel(iLevel + 1, false);
 		return true;
 	}
 
@@ -294,10 +332,14 @@ public class Profile {
 	 * Set the new level.
 	 * @pre iNewLevel < GlobalSettings.NBLEVELS
 	 */
-	public void setLevel(final int iNewLevel) {
+	public void setLevel(final int iNewLevel, final boolean bNewStartLevel) {
 		iLevel = iNewLevel;
 		checkBestLevel();
 		this.prefs.putInteger(LEVEL_KEY, iLevel);
+		if (bNewStartLevel) {
+			iStartLevel = iNewLevel;
+			prefs.putInteger(START_LEVEL_KEY, iStartLevel);
+		}
 		prefs.flush();
 	}
 
@@ -309,6 +351,8 @@ public class Profile {
 		if (iLevel > iBestLevel) {
 			iBestLevel = iLevel; // no need to flush
 			this.prefs.putInteger(BEST_LEVEL_KEY, iBestLevel);
+
+			GameCenterUtils.newBestLevel(iLevel);
 		}
 	}
 
@@ -326,5 +370,28 @@ public class Profile {
 
 	public void setNeedTutorial(final boolean bNeedtuto) {
 		this.bNeedTuto = bNeedtuto;
+	}
+
+	//__________ BONUS
+	public void newBonus() {
+		iNbBonus++;
+		// 'prefs' will be modified at the end of the game
+		// and we'll check if we need an achievement later
+	}
+
+	//__________ GAME
+	/**
+	 * Stop the timer and check some achievements
+	 */
+	private void endGame(boolean bFlush) {
+		GlobalSettings.GAME.getTimer().stop();
+
+		if (iNbBonus != prefs.getInteger(BONUS_KEY, 0)) {
+			prefs.putInteger(BONUS_KEY, iNbBonus);
+			GameCenterUtils.newBonus(iNbBonus);
+			if (bFlush)
+				prefs.flush();
+		}
+		// other achievements?
 	}
 }
