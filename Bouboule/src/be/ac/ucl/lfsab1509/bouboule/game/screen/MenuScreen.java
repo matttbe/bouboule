@@ -193,7 +193,7 @@ public class MenuScreen extends AbstractScreen {
 
 		for (int i = 0; i < CHAR_WITH_ACCENTS.length; i++)
 			cNewText.replace(CHAR_WITH_ACCENTS[i], CHAR_WITHOUT_ACCENTS[i]);
-		Gdx.app.log("SCREEN", "Old " + text + " -> " + cNewText);
+		Gdx.app.log("SCREEN", "Normalise text: Old " + text + " -> " + cNewText);
 
 		return cNewText;
 
