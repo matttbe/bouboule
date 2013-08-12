@@ -28,10 +28,6 @@ package be.ac.ucl.lfsab1509.bouboule.game.profile;
 
 public interface GameCenter {
 
-	public void Authenticate();
-
-	public void resetAchievements();
-
 	public void showLeaderboard();
 
 	public void showAchievements();
