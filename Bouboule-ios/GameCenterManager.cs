@@ -99,7 +99,7 @@ namespace GameCenterIOS
 						currentPlayerID = GKLocalPlayer.LocalPlayer.PlayerID;
 						player = new PlayerModel();
 						player.loadStoredScores();
-						player.loadSotredAchievements();
+						player.loadStoredAchievements();
 					}
 				} else {
 					var alert = new UIAlertView ("Game Center Account Required", "Need login the game center!", null, "Retry", null);

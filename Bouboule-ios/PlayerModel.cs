@@ -199,7 +199,7 @@ namespace GameCenterIOS
 		}
 
 		// Load stored achievements and attempt to submit them
-		public void loadSotredAchievements()
+		public void loadStoredAchievements()
 		{
 			if (storedAchievements == null) 
 			{
