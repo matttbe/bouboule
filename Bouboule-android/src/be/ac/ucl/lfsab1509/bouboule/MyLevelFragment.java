@@ -27,13 +27,8 @@ package be.ac.ucl.lfsab1509.bouboule;
  */
 
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -44,8 +39,6 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
-
 
 
 public class MyLevelFragment extends Fragment {
@@ -70,45 +63,26 @@ public class MyLevelFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		
+
 		View v = inflater.inflate(R.layout.myfragment_layout, container,false);
-		
-		InputStream bitmap = null;
-		
 
-
-		
 		/* Set the locks and co */
 
-		
-		if ( mCurrentPage <= lastUnlockedWorld) {
-			
-			try {
-				bitmap = getActivity().getAssets().open("level_image/world" + mCurrentPage + ".jpg");
-				Bitmap bit = BitmapFactory.decodeStream(bitmap);
+		if (mCurrentPage <= lastUnlockedWorld) {
+			((ImageView) v.findViewById(R.id.levelimage)).setImageResource(
+					(getResources().getIdentifier("world" + mCurrentPage,
+							"drawable", getActivity().getPackageName())));
+				// or (R.drawable.world1 + mCurrentPage - 1) but maybe dangerous
 
-				((ImageView) v.findViewById(R.id.levelimage)).setImageBitmap(bit);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
-				if(bitmap != null)
-					try {
-						bitmap.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-			}	
-			
 			/* Hack to set the right size on small devices */
-			
 			ImageView imageLvl = (ImageView) v.findViewById(R.id.levelimage);
 			LayoutParams params = (LayoutParams) imageLvl.getLayoutParams();
 			params.width = getDisplayVector().x/2;
 			imageLvl.setLayoutParams(params);
-			
+
 			ImageButton play = (ImageButton) v.findViewById(R.id.play);
 			
-			/* Activate the play and desactiavte the lock */
+			/* Activate the play and desactivate the lock */
 
 			play.setOnClickListener(clickListener);
 			
@@ -118,14 +92,11 @@ public class MyLevelFragment extends Fragment {
 		} else { 
 			ImageButton play = (ImageButton) v.findViewById(R.id.play);
 			play.setVisibility(View.INVISIBLE);
-			
+
 			//imageLvl.setColorFilter(new LightingColorFilter(Color.GRAY, 1));
 		}
 
-
-
-
-		return v;		
+		return v;
 	}
 
 	private View.OnClickListener clickListener = new View.OnClickListener() {
@@ -147,9 +118,9 @@ public class MyLevelFragment extends Fragment {
 	
 	private Point getDisplayVector() {
 		Display display = getActivity().getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        
-        return size;
+		Point size = new Point();
+		display.getSize(size);
+
+		return size;
 	}
 }
