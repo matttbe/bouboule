@@ -58,8 +58,7 @@ public class MenuScreen extends AbstractScreen {
 
 		// Set Background
 
-		addBackGround("drawable-xhdpi/main/mainmenubg.jpg", 
-				GlobalSettings.SHIFT_BG ,0);
+		addBackGroundShift("drawable-xhdpi/main/mainmenubg.jpg");
 		
 		Gdx.app.log("SCREEN", ""+GlobalSettings.SHIFT_BG);
 		

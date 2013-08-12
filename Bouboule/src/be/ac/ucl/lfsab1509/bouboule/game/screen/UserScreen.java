@@ -85,8 +85,7 @@ public class UserScreen extends AbstractScreen {
 		super.show();
 
 		// Set Background
-		addBackGround("drawable-xhdpi/settings/settingsbg.jpg",
-				GlobalSettings.SHIFT_BG, 0);
+		addBackGroundShift("drawable-xhdpi/settings/settingsbg.jpg");
 
 		int iLessY = (int) (185 * GlobalSettings.HD);
 

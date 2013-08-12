@@ -228,8 +228,8 @@ public abstract class AbstractScreen implements Screen {
 
 	}
 	
-	protected Image addBackGround(String imagePath, float x, float y) {
-		return addImage(imagePath, x, y);
+	protected Image addBackGroundShift(String imagePath) {
+		return addImage(imagePath, GlobalSettings.SHIFT_BG, 0);
 
 	}
 
