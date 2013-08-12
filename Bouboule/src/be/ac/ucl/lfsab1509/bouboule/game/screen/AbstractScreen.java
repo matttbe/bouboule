@@ -184,15 +184,7 @@ public abstract class AbstractScreen implements Screen {
 	 */
 	protected void addBackButton(final boolean bReturnToInitMenu) {
 
-		// Image backButton = addImage(TODO, 10, 10); // TODO add image!
-		//______ REMOVE
-		Button backButton = new Button(getSkin(), "default");
-		backButton.setColor(1, 0, 0, 1);
-		backButton.setSize(100, 100);
-		backButton.setX(10);
-		backButton.setY(10);
-		this.stage.addActor(backButton);
-		//______ REMOVE
+		Image backButton = addImage("buttons/back_button.png", 10, 10);
 
 		backButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
