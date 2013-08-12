@@ -42,7 +42,6 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -60,7 +59,7 @@ public class GameLoop {
 	private BitmapFont fontOsaka;
 	private BitmapFont fontOsakaRed;
 	private BitmapFont fontPause;
-	private TextureRegion textureRegionPause;
+	private Texture texturePause;
 	private float fadePause;
 	private Sprite spriteFade;
 	private Pixmap pixmapFade;
@@ -122,8 +121,7 @@ public class GameLoop {
 					Gdx.files.internal("fonts/Osaka2/Osaka2.png"), false);
 			fontPause.setScale(GlobalSettings.HD); // TODO check if it's ok with this zoom in HD but seems ok
 			fontPause.setColor(.95f, .05f, .05f, 1f);
-			textureRegionPause = new TextureRegion(
-					new Texture("buttons/home_button.png")); // TODO: another picture
+			texturePause = new Texture("buttons/home_button.png");
 			pixmapFade = new Pixmap(1, 1, Format.RGB888);
 			spriteFade = new Sprite(new Texture(pixmapFade));
 			spriteFade.setColor(0, 0, 0, 0);
@@ -266,7 +264,7 @@ public class GameLoop {
 
 		fontPause.draw(batch, "PAUSE", GlobalSettings.APPWIDTH / 4,
 				GlobalSettings.APPHEIGHT / 2 - 50); // text
-		batch.draw(textureRegionPause, 10 * GlobalSettings.HD,
+		batch.draw(texturePause, 10 * GlobalSettings.HD,
 				10 * GlobalSettings.HD); // home button
 	}
 
@@ -513,8 +511,8 @@ public class GameLoop {
 		fontOswald.dispose();
 		if (fontPause != null) // can be null => Android menus
 			fontPause.dispose();
-		if (textureRegionPause != null)
-			textureRegionPause.getTexture().dispose();
+		if (texturePause != null)
+			texturePause.dispose();
 		if (spriteFade != null)
 			spriteFade.getTexture().dispose();
 		if (pixmapFade != null)
