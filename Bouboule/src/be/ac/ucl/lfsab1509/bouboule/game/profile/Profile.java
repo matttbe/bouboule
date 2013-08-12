@@ -73,7 +73,7 @@ public class Profile {
 
 		iLifes = prefs.getInteger(LIFES_KEY, GlobalSettings.INIT_LIFES);
 		iLevel = prefs.getInteger(LEVEL_KEY, GlobalSettings.INIT_LEVEL);
-		if (cName.compareTo(GlobalSettings.CHEATER_NAME) == 0)
+		if (cName.equals(GlobalSettings.CHEATER_NAME))
 			iBestLevel = GlobalSettings.NBLEVELS;
 		else
 			iBestLevel = prefs.getInteger(BEST_LEVEL_KEY, GlobalSettings.INIT_LEVEL);
@@ -108,6 +108,8 @@ public class Profile {
 	//__________ NAME and IMAGE
 
 	public String getName() {
+		if (GlobalSettings.GAMECENTER != null)
+			return GlobalSettings.GAMECENTER.getPlayerName();
 		return cName;
 	}
 

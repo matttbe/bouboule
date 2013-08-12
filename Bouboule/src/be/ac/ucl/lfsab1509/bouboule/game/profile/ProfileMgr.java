@@ -57,7 +57,7 @@ public class ProfileMgr {
 	/**
 	 * @return get the last profile name or null if we need the default one.
 	 */
-	public String getDefaultProfileName() {
+	private String getDefaultProfileName() {
 		return prefs.getString(LAST_PROFILE_KEY, null);
 	}
 
@@ -72,19 +72,28 @@ public class ProfileMgr {
 		prefs.flush();
 	}
 
+	private boolean gameCenterHasNewId(String cName) {
+		return GlobalSettings.GAMECENTER != null
+				&& ! GlobalSettings.GAMECENTER.getPlayerID().equals(cName);
+	}
+
 	/**
 	 * Load the default profile (the last profile that has been used or.
 	 * DEFAULT_PROFILE_NAME)
 	 */
-	public void loadDefaultProfile() {
+	private void loadDefaultProfile() {
 		String profileName = getDefaultProfileName();
-		if (profileName == null) {
-			loadProfile(GlobalSettings.DEFAULT_PROFILE_NAME);
+
+		// it's the first time we launch the game: we need tuto
+		if (profileName == null || gameCenterHasNewId(profileName)) {
+			if (GlobalSettings.GAMECENTER != null)
+				loadProfile(GlobalSettings.GAMECENTER.getPlayerID());
+			else
+				loadProfile(GlobalSettings.DEFAULT_PROFILE_NAME);
 			GlobalSettings.PROFILE.setNeedTutorial(true); // display the tutorial the first time
-		
-		} else {
-			loadProfile(profileName);
 		}
+		else
+			loadProfile(profileName);
 	}
 
 	private String getAllProfilesAsString() {

@@ -211,7 +211,7 @@ public class EndGameListener implements ContactListener{
 			GlobalSettings.PROFILE.addScorePermanent(-GlobalSettings.INIT_SCORE / 2);
 			GlobalSettings.PROFILE.cancelNewScore();
 			// do not lose life if we are a cheater!
-			if (GlobalSettings.PROFILE.getName().compareTo(GlobalSettings.CHEATER_NAME) == 0
+			if (GlobalSettings.PROFILE.getName().equals(GlobalSettings.CHEATER_NAME)
 					|| GlobalSettings.PROFILE.addLifes(-1)) {
 				GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
 			

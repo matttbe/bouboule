@@ -38,6 +38,9 @@ public interface GameCenter {
 
 	public String getPlayerName();
 
+	/**
+	 * @return an unique player name
+	 */
 	public String getPlayerID();
 
 }
