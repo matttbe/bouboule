@@ -46,10 +46,12 @@
     <string name="global_sound">Sound:</string>
     <string name="global_sound_off">Mute</string>
     <string name="global_sound_on">Music On</string>
+<!--
     <string name="global_rotate">Rotation of the balls:</string>
     <string name="global_rotate_off">No rotation</string>
     <string name="global_rotate_on">Rotation On</string>
     <string name="global_sensitivity">Sensitivity:</string>
+-->
     <string name="global_bonus">Bonus:</string>
     
     <!-- Menu Parameters_about -->
