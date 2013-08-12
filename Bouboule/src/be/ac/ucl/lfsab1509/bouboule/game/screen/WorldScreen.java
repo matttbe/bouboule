@@ -30,17 +30,23 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class WorldScreen extends AbstractScreen {
 
 	/* Current World INFO */
 	private int iWorld = (GlobalSettings.PROFILE.getBestLevel() - 1) / 4;
 	private int lastUnlockedWorld = iWorld + 1;
+
+	private Label infoLabel = null;
+	private boolean bInfoDisplayed = false;
 
 	/* Array to store the world position on the screen and size of the buttons */
 	private final int[] posX =  {  85, 320, 519, 504, 275,  85, 159, 122 };
@@ -58,7 +64,12 @@ public class WorldScreen extends AbstractScreen {
 		super.show();
 
 		// Set Background
-		addBackGround("GdxMenus/levels/bglevel0.jpg");
+		Image background = addBackGround("GdxMenus/levels/bglevel0.jpg");
+		background.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				displayInfoWorlds();
+			}
+		});
 
 		// Add levels images "recursively"
 		// Level are noted from 0 to 6
@@ -66,7 +77,7 @@ public class WorldScreen extends AbstractScreen {
 		// displayed. -> Corresponding to World 1 and 8.
 		for (int i = 1; i < lastUnlockedWorld
 				&& i < GlobalSettings.NBLEVELS / 4 - 1; i++) {
-			addBackGround("GdxMenus/levels/bglevel" + i + ".png");
+			addBackGround("GdxMenus/levels/bglevel" + i + ".png").setTouchable(null);
 		}
 
 		// Add Boub Image selected by the user
@@ -75,8 +86,6 @@ public class WorldScreen extends AbstractScreen {
 				+ BoubImages.BOUB_EXTENTION;
 
 		Image boub = addImage(boubPath, 0, 0);
-		if (GlobalSettings.ISHD)
-			boub.setScale(.5f * GlobalSettings.HD);
 
 		// Set action for the moving Boub
 		// Attention, the array for the World position begin at 0 not 1 -> (-1)
@@ -106,6 +115,8 @@ public class WorldScreen extends AbstractScreen {
 			}
 		});
 
+		if (GlobalSettings.PROFILE.needTutorial())
+			displayInfoWorlds();
 	}
 
 	/*
@@ -230,7 +241,7 @@ public class WorldScreen extends AbstractScreen {
 
 				// Not moving and on the same World as the pushed button
 				if (stopPos < 0 || this.startPos == stopPos) {
-					GlobalSettings.PROFILE.setLevel((this.startPos) * 4 + 1);
+					GlobalSettings.PROFILE.setLevel((this.startPos) * 4 + 1, true);
 					setScreenWithFading(null);
 				}
 			}
@@ -242,6 +253,64 @@ public class WorldScreen extends AbstractScreen {
 
 		public void draw() {
 			actor.setPosition(x, y);
+		}
+	}
+
+	private void displayInfoWorlds() {
+		Gdx.app.log("SCREEN", "disp Info: " + bInfoDisplayed);
+		if (bInfoDisplayed || GlobalSettings.PROFILE.getBestLevel() / 4 > 5)
+			return;
+
+		bInfoDisplayed = true;
+		if (infoLabel == null) {
+			String text = "There are " + GlobalSettings.NBLEVELS / 4 + " worlds\n\n"
+					+ "To unlock the next world,\n"
+					+ "you have to win 4 fights in a row.\n\n"
+					+ "Click on your Bouboule to start the game!";
+			infoLabel = addLabel(text, "osaka-font", 1f,
+					new Color(.388f, .733f, .984f, 1f), 0,
+					(int) (425 * GlobalSettings.HD));
+			infoLabel.setAlignment(Align.center);
+			infoLabel.setWidth(GlobalSettings.APPWIDTH);
+			infoLabel.setOrigin(GlobalSettings.APPWIDTH / 2,
+					infoLabel.getHeight() / 2);
+			infoLabel.setTouchable(null);
+		}
+		else
+			stage.addActor(infoLabel);
+
+		ActionInfo actionInfo = new ActionInfo();
+		this.stage.addAction(actionInfo);
+		actionInfo.setActor(infoLabel);
+	}
+
+	private class ActionInfo extends Action {
+
+		float fTimer = 0f;
+
+		@Override
+		public boolean act(float delta) {
+			fTimer += delta;
+			Label label = (Label) actor;
+
+			if (fTimer < 3) // fade in
+				label.setColor(.388f, .733f, .984f, fTimer / 3f);
+			else if (fTimer < 31) { // blink
+				int iTimer = (int) fTimer;
+				label.setColor(.388f, .733f, .984f,
+						iTimer % 2 == 0 ?
+								.9f + (fTimer - iTimer) / 10f : // fade in 9/10
+								1f - (fTimer - iTimer) / 10f); // fade out 9/10
+			}
+			else if (fTimer < 34) // fade out
+				label.setColor(.388f, .733f, .984f, 1 - (fTimer - 31f) / 3f);
+			else {
+				bInfoDisplayed = false;
+				actor.removeAction(this);
+				actor.remove();
+				return true; // stop
+			}
+			return false;
 		}
 	}
 }
