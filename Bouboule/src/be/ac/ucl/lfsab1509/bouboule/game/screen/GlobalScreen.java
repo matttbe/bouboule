@@ -34,7 +34,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class GlobalScreen extends AbstractScreen {
@@ -93,8 +92,10 @@ public class GlobalScreen extends AbstractScreen {
 				.setTouchable(null);
 
 		soundCheckBox = addCheckBox("Music", ! GlobalSettings.SOUND_IS_MUTED,
-				iX * 2, iY + (GlobalSettings.ISHD ? -33 : 5));
+				iX, iY + (GlobalSettings.ISHD ? -33 : 5));
 		soundCheckBox.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
+		soundCheckBox.setX((int) (GlobalSettings.APPWIDTH / 2 // center
+				- soundCheckBox.getWidth() / 2));
 		soundCheckBox.addListener(soundClickListener);
 	}
 
@@ -176,11 +177,8 @@ public class GlobalScreen extends AbstractScreen {
 			iX = 125;
 			iY -= 20;
 		}
-		float scale = 1;// .5f * GlobalSettings.HD; // TODO bonus have to be bigger
 		for (String[] cBonus : Bonus.bonusInfo) {
-			Image bonus = addImage(cBonus[0], iX, iY);
-			if (GlobalSettings.ISHD)
-				bonus.setScale(scale);
+			addImage(cBonus[0], iX, iY);
 			addLabel(cBonus[1], "osaka-font", GlobalSettings.HD, // TODO => set "1f" when osaka will be bigger
 					Color.WHITE, iX + (GlobalSettings.ISHD ? 100 : 80), iY + 15);
 			iY -= 60 * GlobalSettings.HD;

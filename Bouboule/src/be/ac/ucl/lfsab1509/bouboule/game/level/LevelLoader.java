@@ -164,8 +164,6 @@ public class LevelLoader {
 
 			String jsonFile			= directory + BoubImages.BOUB_JSON_EXT;
 
-			final float scale = GlobalSettings.ISHD ? .5f * GlobalSettings.HD : 1;
-
 			if (entity == Entity.PLAYER)
 				texRegionPath = directory + GlobalSettings.PROFILE.getBoubName()
 						+ BoubImages.BOUB_EXTENTION;
@@ -176,7 +174,7 @@ public class LevelLoader {
 
 			Bouboule body = new Bouboule(radius, bodyType, density,
 					elasticity, px, py, angle, texRegionPath, 
-					jsonFile, "boub_" + type, entity, AILevel, scale);
+					jsonFile, "boub_" + type, entity, AILevel);
 			graphicManager.addBody(body);
 
 			if (inverted) {
@@ -303,16 +301,15 @@ public class LevelLoader {
 
 
 			if (produce) {
-				final float scale = GlobalSettings.ISHD ? .5f * GlobalSettings.HD : 1;
 				addContinuousObstacle(graphicManager, time, bodyType, density,
 						elasticity, px * GlobalSettings.HD,
 						py * GlobalSettings.HD, angle, texRegionPath,
-						jsonFile, jsonName, initAccX, initAccY, scale);
+						jsonFile, jsonName, initAccX, initAccY);
 			}
 			else {
 				Obstacle obs = new Obstacle(bodyType, density,
 						elasticity, px, py, angle, texRegionPath, 
-						jsonFile, jsonName, initAccX, initAccY, 1f);
+						jsonFile, jsonName, initAccX, initAccY);
 
 				graphicManager.addBody(obs);
 
@@ -352,7 +349,7 @@ public class LevelLoader {
 			final BodyType bodyType, final float density,
 			final float elasticity, final float px, final float py, final float angle,
 			final String texRegionPath, final String jsonFile, final String jsonName,
-			final float initAccX, final float initAccY, final float scale) {
+			final float initAccX, final float initAccY) {
 
 		TimerListener timerListener = new TimerListener() {
 			private int iTimerInc;
@@ -363,7 +360,7 @@ public class LevelLoader {
 					Gdx.app.log("Obstacle", "reset Obstacle");
 					Obstacle obs = new Obstacle(bodyType, density,
 							elasticity, px, py, angle, texRegionPath, 
-							jsonFile, jsonName, initAccX, initAccY, scale);
+							jsonFile, jsonName, initAccX, initAccY);
 
 					graphicManager.addBody(obs);
 				}

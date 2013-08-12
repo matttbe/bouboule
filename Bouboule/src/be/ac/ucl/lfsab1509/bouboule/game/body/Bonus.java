@@ -100,8 +100,7 @@ public class Bonus extends GameBody {
 		this.sprite = new Sprite(texture);
 
 		MakeBody(0, 0, 0, BodyType.StaticBody, 0, 0, true, pos, angle, jsonFile, jsonName,
-				GraphicManager.convertToGame(
-						texture.getRegionWidth() * sprite.getScaleX()));
+				GraphicManager.convertToGame(texture.getRegionWidth()));
 
 		//Ensure that the object don't rotate.
 		body.setFixedRotation(true);

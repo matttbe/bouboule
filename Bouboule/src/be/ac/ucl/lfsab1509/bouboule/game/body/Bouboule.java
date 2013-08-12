@@ -70,7 +70,7 @@ public class Bouboule extends GameBody {
 			final float elasticity, final float px, final float py, 
 			final float angle, final String texRegionPath, 
 			final String jsonFile, final String jsonName, final short type,
-			final int AILevel, final float scale) {
+			final int AILevel) {
 
 		super();
 
@@ -80,15 +80,10 @@ public class Bouboule extends GameBody {
 		
 		this.texture = new TextureRegion(new Texture(texRegionPath));
 		this.sprite = new Sprite(texture);
-		/* We need bigger images in HD but we have to use image where dimensions
-		 * are power of 2. So we have to scale these images here.
-		 */
-		this.sprite.setScale(scale);
 
 		MakeBody(0, 0, radius, bodyType, density, elasticity, false, pos, angle,
 				jsonFile, jsonName,
-				GraphicManager.convertToGame(
-						texture.getRegionWidth() * sprite.getScaleX()));
+				GraphicManager.convertToGame(texture.getRegionWidth()));
 
 		// added sprite to the fixture (to modify it somewhere else
 		body.getFixtureList().get(0).setUserData(sprite);
