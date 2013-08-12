@@ -71,6 +71,11 @@ namespace GameCenterIOS
 			return player.playerName;
 		}
 
+		public string getPlayerID ()
+		{
+			return currentPlayerID;
+		}
+
 
 		public void getAchivements(){
 			GKCompletionHandler handler = new GKCompletionHandler((achivements, error) => {

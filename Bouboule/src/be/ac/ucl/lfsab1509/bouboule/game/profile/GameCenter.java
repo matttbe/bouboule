@@ -38,4 +38,6 @@ public interface GameCenter {
 
 	public String getPlayerName();
 
+	public String getPlayerID();
+
 }
