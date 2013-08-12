@@ -120,7 +120,7 @@ public class UserScreen extends AbstractScreen {
 		disposeBouboulesImages();
 	}
 
-	// called when selecting a existed/new user
+	// called when selecting a existed/new user => only on Android/Desktop
 	private void refreshScreen() {
 		// Choose User
 		bIsRefreshing = true; // avoid multiple refresh

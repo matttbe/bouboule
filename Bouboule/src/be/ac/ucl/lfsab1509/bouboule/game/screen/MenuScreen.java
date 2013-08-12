@@ -63,9 +63,8 @@ public class MenuScreen extends AbstractScreen {
 		Gdx.app.log("SCREEN", ""+GlobalSettings.SHIFT_BG);
 		
 		// Add Button image
-		
-		addImage("GdxMenus/main/mainmenubuttons.png", 0, 0);
-				
+
+		addBackGround("GdxMenus/main/mainmenubuttons.png");
 
 		// Create the 2 Bouboules out of the screen
 
