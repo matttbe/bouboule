@@ -105,6 +105,10 @@ public class ProfileGlobal {
 		boolean bNewHighScore = false;
 		int iNewScore = GlobalSettings.PROFILE.getScore();
 
+		if (GlobalSettings.GAMECENTER != null) {
+			GlobalSettings.GAMECENTER.submitScore(iNewScore);
+		}
+
 		String cCurrInfo, cPrevInfo = null;
 		for (int i = 0; i < iMaxNbHighScore; i++) {
 			cCurrInfo = prefs.getString(HIGHSCORE_KEY + i, null);
