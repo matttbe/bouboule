@@ -34,7 +34,6 @@ import com.badlogic.gdx.Application.ApplicationType; // @@COMMENT_GWT@@
 import com.badlogic.gdx.Gdx; // @@COMMENT_GWT@@
 import com.badlogic.gdx.Preferences;
 
-import be.ac.ucl.lfsab1509.bouboule.game.ai.AI;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 public class ProfileGlobal {
@@ -47,8 +46,10 @@ public class ProfileGlobal {
 
 	private static final String MUTE_SOUND_KEY = "mute_sound";
 	private static final String HIGHSCORE_KEY = "highscore"; // score + name + level + date
+/*
 	private static final String SENSITIVITY_KEY = "sensitivity";
 	private static final String FIXED_ROTATIONS_KEY = "fixed_rotations";
+*/
 
 	private Preferences prefs;
 
@@ -70,9 +71,11 @@ public class ProfileGlobal {
 	 */
 	public void loadDefaultSettings() {
 		GlobalSettings.SOUND_IS_MUTED = prefs.getBoolean(MUTE_SOUND_KEY, false);
+		/*
 		GlobalSettings.SENSITIVITY = prefs.getInteger(SENSITIVITY_KEY,
 				(GlobalSettings.SENSITIVITY_MAX + GlobalSettings.SENSITIVITY_MIN) / 2);
 		GlobalSettings.FIXED_ROTATION = prefs.getBoolean(FIXED_ROTATIONS_KEY, true);
+		*/
 	}
 
 	//_________________ SAVE SETTINGS THAT CAN BE CHANGED FROM THE CONFIG PANEL
@@ -82,6 +85,7 @@ public class ProfileGlobal {
 		prefs.flush();
 	}
 
+/*
 	public void changeSensibilitySettings(final int newSensitivity) {
 		GlobalSettings.SENSITIVITY = newSensitivity;
 		AI.setNewSensitivity ();
@@ -94,6 +98,7 @@ public class ProfileGlobal {
 		prefs.putBoolean(FIXED_ROTATIONS_KEY, bFixedRotation);
 		prefs.flush();
 	}
+*/
 
 	//_______________ HighScore Mgr
 	/**
