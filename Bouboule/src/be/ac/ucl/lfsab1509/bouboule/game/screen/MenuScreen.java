@@ -30,6 +30,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.HighScoreInfo;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -173,9 +174,10 @@ public class MenuScreen extends AbstractScreen {
 		});
 	}
 
-	/* => no need to normalise the text with this font:
+	/* => no need to normalise the text with this font on Android/Desktop:
 	 *    when adding a new user, it can only contain chars that are available
 	 *    in this font
+	 */
 	private static final char CHAR_WITH_ACCENTS[] = "àâçéèêëîïôöùüÂÀÇÉÈÊËÎÏÔÖÙÜ".toCharArray();
 	private static final char CHAR_WITHOUT_ACCENTS[] = "aaceeeeiioouuAACEEEEIIOOUU".toCharArray();
 	/**
@@ -183,15 +185,21 @@ public class MenuScreen extends AbstractScreen {
 	 * @return a 'normalised' text (without special chars)
 	 */
 	private String normaliseTextForTitle(String text) {
-		return text;
-		/*return Normalizer.normalize(text, Normalizer.Form.NFD) // Not supported on iOS
--				.replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
--				.toUpperCase();*/
-		/* String cNewText = text;
+		if (Gdx.app.getType() == ApplicationType.Android
+				|| Gdx.app.getType() == ApplicationType.Desktop)
+			return text;
+
+		String cNewText = text;
+
 		for (int i = 0; i < CHAR_WITH_ACCENTS.length; i++)
 			cNewText.replace(CHAR_WITH_ACCENTS[i], CHAR_WITHOUT_ACCENTS[i]);
 		Gdx.app.log("SCREEN", "Old " + text + " -> " + cNewText);
-		return cNewText;*/
+
+		return cNewText;
+
+		/*return Normalizer.normalize(text, Normalizer.Form.NFD) // Not supported on iOS
+				.replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+				.toUpperCase();*/
 	}
 
 	private String getHighScoreText() {
