@@ -53,7 +53,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 
-
 public class MenuParameters_user extends Activity {
 
 	private Spinner user_selectprofile_spin;
@@ -289,9 +288,12 @@ public class MenuParameters_user extends Activity {
 	private AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
 		@Override
 		public void onItemSelected (AdapterView<?> parent, View view, int position, long id){
-			if (!GlobalSettings.PROFILE.getName().equals(listProfile.get((int) id))) {
-				Log.d("LN","USER SETTINGS : change of user : previous : " + GlobalSettings.PROFILE.getName() + " - new : " + listProfile.get((int) id));
-				GlobalSettings.PROFILE_MGR.changeProfile (listProfile.get((int) id));
+			String profile = listProfile.get((int) id);
+			if (!GlobalSettings.PROFILE.getName().equals(profile)) {
+				Log.d("USER", "USER SETTINGS : change user : previous : "
+						+ GlobalSettings.PROFILE.getName()
+						+ " - new : " + profile);
+				GlobalSettings.PROFILE_MGR.changeProfile (profile);
 				refreshScreen();
 			}
 		}
@@ -316,7 +318,7 @@ public class MenuParameters_user extends Activity {
 								// treat the name following the case
 								case 0:
 									GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
-									Log.d("LN","USER SETTINGS : change of user : created new user : " + text);
+									Log.d("USER","USER SETTINGS : created new user : " + text);
 									makeToast(getString (R.string.user_namenewuser));
 									refreshScreen();
 									break;

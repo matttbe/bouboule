@@ -36,7 +36,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 public class ProfileMgr {
-	private Preferences prefs;
+	private Preferences prefs = null;
 	private ProfileGlobal profileGlobal;
 
 	protected final String SEPARATOR = System.getProperty ("file.separator"); // /!\ can change if we use it on different systems
@@ -66,7 +66,7 @@ public class ProfileMgr {
 	 * @pre this profile should have been created with {@link #createAndLoadNewProfile(String)}
 	 * @param cName, the profile name
 	 */
-	public void loadProfile(final String cName) {
+	private void loadProfile(final String cName) {
 		GlobalSettings.PROFILE = new Profile(cName);
 		prefs.putString(LAST_PROFILE_KEY, cName);
 		prefs.flush();
@@ -146,7 +146,27 @@ public class ProfileMgr {
 		loadProfile(cName);
 		GlobalSettings.PROFILE.setNeedTutorial(true); // display the tutorial the first time
 	}
-	
+
+	/**
+	 * Switch to user: create a new one if it's needed
+	 * @param cName the new profile name
+	 */
+	public void switchUser(final String cName) {
+		// check the last user
+		if (getDefaultProfileName().equals(cName)) {
+			Gdx.app.log("PROFILE", "Not a new user: " + cName);
+			return;
+		}
+		for (String profile : getAllProfiles()) {
+			if (profile.equals(cName)) {
+				Gdx.app.log("PROFILE", "This profile already exists");
+				changeProfile(cName);
+				return;
+			}
+		}
+		createAndLoadNewProfile(cName);
+	}
+
 	public ProfileGlobal getProfileGlobal() {
 		return this.profileGlobal;
 	}
