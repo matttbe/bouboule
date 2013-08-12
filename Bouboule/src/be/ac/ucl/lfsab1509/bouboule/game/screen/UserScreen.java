@@ -388,7 +388,9 @@ public class UserScreen extends AbstractScreen {
 					if ((Boolean) object == true)
 						EndGameListener.resetGame ();
 				}
-			}.text("It will restart the game on level 1\nDo you want to continue?")
+			}.text("It will restart the game to level 1\n"
+					+ " and keep all unlocked worlds.\n"
+					+ "Do you want to continue?")
 			.button("Yes", true).button("No", false).show(stage);
 		}
 	};
@@ -419,7 +421,8 @@ public class UserScreen extends AbstractScreen {
 					else
 						tutorialCheckBox.setChecked(false);
 				}
-			}.text("It will restart the game on level 1\nDo you want to continue?")
+			}.text("It will restart the game to level 1.\n"
+				+ "Do you want to continue?")
 			.button("Yes", true).button("No", false).show(stage);
 		}
 	};
