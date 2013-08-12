@@ -6,7 +6,7 @@ using MonoTouch.Foundation;
 
 using com.badlogic.gdx.backends.ios;
 using com.badlogic.gdx;
-using be.ac.ucl.lfsab1509.bouboule.game;
+using be.ac.ucl.lfsab1509.bouboule.game.profile;
 
 //Based on Xamarin Documentation and Trasc0 example from libGDX forum
 
