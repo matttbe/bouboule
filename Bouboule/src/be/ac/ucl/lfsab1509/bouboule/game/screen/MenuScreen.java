@@ -69,9 +69,9 @@ public class MenuScreen extends AbstractScreen {
 
 		// Create the 2 Bouboules out of the screen
 
-		Image imgBoubouleR = addImage("GdxMenus/main/boubouleright.png",
+		final Image imgBoubouleR = addImage("GdxMenus/main/boubouleright.png",
 				(int) GlobalSettings.APPWIDTH, 0);
-		Image imgBoubouleL = addImage("GdxMenus/main/boubouleleft.png",
+		final Image imgBoubouleL = addImage("GdxMenus/main/boubouleleft.png",
 				(int) -GlobalSettings.APPWIDTH, 0);
 
 		// add action on the bouboule
@@ -161,8 +161,15 @@ public class MenuScreen extends AbstractScreen {
 		boubouleButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				Gdx.app.log("SCREEN", "clickBouboule " + x + ", " + y);
+				final ActionBouboul actionbouL = new ActionBouboul(false);
 				actionbouL.init();
+				stage.addAction(actionbouL);
+				actionbouL.setActor(imgBoubouleL);
+
+				final ActionBouboul actionbouR = new ActionBouboul(true);
 				actionbouR.init();
+				stage.addAction(actionbouR);
+				actionbouR.setActor(imgBoubouleR);
 			}
 		});
 
@@ -256,6 +263,10 @@ public class MenuScreen extends AbstractScreen {
 				actor.setPosition(-GlobalSettings.APPWIDTH + position,
 						(GlobalSettings.APPWIDTH - position) / 3.5f);
 
+			if (position == GlobalSettings.APPWIDTH) {
+				actor.removeAction(this);
+				return true; // stop moving these bouboules
+			}
 			return false;
 		}
 
