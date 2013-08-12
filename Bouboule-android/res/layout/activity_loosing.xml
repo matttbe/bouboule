@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/FullscreenTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/you_lose"
+    tools:context=".LoosingActivity" >
+
+    <ImageView
+        android:id="@+id/coeur1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/coeur1" />
+
+    <ImageView
+        android:id="@+id/coeur2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/coeur2" />
+
+    <ImageView
+        android:id="@+id/coeur3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/coeur3" />
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:weightSum="100" >
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="38.5" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4.5"
+            android:weightSum="100" >
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_weight="29"
+                android:layout_height="fill_parent" />
+
+            <TextView
+                android:id="@+id/LoosingScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|left"
+                android:text="@string/pause"
+                android:textAppearance="?android:attr/textAppearanceButton"
+                android:textColor="@color/black_overlay"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:weightSum="100" >
+
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="fill_parent" />
+
+            <Button
+                android:id="@+id/LoosingNextLevelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="50"
+                android:alpha="0" />
+
+            <Space
+                android:layout_width="55dp"
+                android:layout_height="fill_parent" />
+
+            <Button
+                android:id="@+id/LoosingMenuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="50"
+                android:alpha="0" />
+            
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="fill_parent" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

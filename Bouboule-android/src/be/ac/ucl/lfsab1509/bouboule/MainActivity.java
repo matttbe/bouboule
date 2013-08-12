@@ -26,6 +26,7 @@
 
 package be.ac.ucl.lfsab1509.bouboule;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,6 +46,8 @@ public class MainActivity extends AndroidApplication {
 	public static final int CODE_END_GAME 		= 3;
 	public static final int CODE_CHOOSING_LEVEL	= 4;
 
+	private static final boolean bAndroidMenus = false; // TODO: prod => android menus
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		
@@ -59,6 +62,8 @@ public class MainActivity extends AndroidApplication {
 
 		getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON); // to not lock the screen
 
+		if (bAndroidMenus)
+			GlobalSettings.MENUS = new MyAndroidMenus (this);
 
 		game = new MyGame ();
 
@@ -66,6 +71,12 @@ public class MainActivity extends AndroidApplication {
 		initialize (game, cfg);
 		Log.d ("Matth","initialized");
 
+		if (bAndroidMenus)
+		{
+			game.init (false);
+
+			GlobalSettings.MENUS.launchInitMenu ();
+		}
 	}
 
 	@Override
@@ -88,4 +99,70 @@ public class MainActivity extends AndroidApplication {
 			GlobalSettings.MENUS.launchPauseMenu();
 	}
 
+	@Override
+	protected void onActivityResult(final int requestCode, final int resultCode,
+			final Intent data) {
+
+		Log.d("Matth", "onActivityResult (" + requestCode + ", " + resultCode + ")");
+		switch (requestCode) {
+		
+			case CODE_PAUSE_ACTIVITY: // menu pause
+				switch (resultCode) { // it's the id of the button
+				
+					case R.id.PauseContinueButton: // cas ou on continue
+						// game.getScreen ().resume();
+						return;
+					case R.id.PauseMenuButton: // cas ou on stoppe
+						GlobalSettings.MENUS.launchInitMenu ();
+						break;
+					case R.id.PauseQuitButton: // just quit without new activity => quit
+						exit();
+						break;
+					default:
+						break;
+				}
+				break;
+			case CODE_MENU_ACTIVITY:
+				switch (resultCode) {
+					case R.id.PlayButton:
+						Log.i ("Matth", "Menu Activity finished: start game");
+						// we should do nothing... we are now in the game
+						break;
+					default:
+						break;
+				}
+				break;
+				
+
+			case CODE_END_GAME:
+				switch (resultCode) {
+					case R.id.VictoryMenuButton:
+					case R.id.LoosingMenuButton:
+					case R.id.GameOverMenuButton:
+						GlobalSettings.MENUS.launchInitMenu ();
+						break;
+					case R.id.VictoryNextLevelButton:
+					case R.id.LoosingNextLevelButton:
+					default:
+						// return to the screen, nothing to do...
+						break;
+					case R.id.GameOverRestartButton:
+						startActivityForResult(new Intent(this, ChoosingActivity.class), 
+							CODE_CHOOSING_LEVEL);
+						break;
+				}
+			case CODE_CHOOSING_LEVEL:
+				switch (resultCode) {
+				case Menu.RETURN_MENU:
+					GlobalSettings.MENUS.launchInitMenu ();
+					break;
+				case Menu.PLAY_GAME:
+				default:
+					// return to the screen, nothing to do...
+					break;
+				}
+			default:
+				break;
+		}
+	}
 }

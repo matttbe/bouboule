@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/settings_blank"
+    tools:context=".MenuParameters_user" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/user_activeUser_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/user_activeUser"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Spinner
+            android:id="@+id/user_selectprofile_spin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:id="@+id/user_newUser_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/user_newUser"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/user_newname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:ems="12"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/user_playerball_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/user_playerball"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/user_boub_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/settingsbutton" />
+
+            <ImageView
+                android:id="@+id/user_boub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="8" />
+
+            <ImageButton
+                android:id="@+id/user_boub_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/settingsbutton" />
+        </LinearLayout>
+
+        <!--
+            <TextView
+		        android:id="@+id/user_choose_level_txt"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/user_choose_level_txt"
+		        android:layout_marginTop="20dp"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+		    <EditText
+		        android:id="@+id/user_choose_level"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="10"
+		        android:inputType="number"
+		        android:layout_marginBottom="20dp" >
+		    </EditText>
+        -->
+
+        <TextView
+            android:id="@+id/user_tuto_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/user_tuto"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Switch
+            android:id="@+id/user_tuto_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textOff="@string/user_tuto_off"
+            android:textOn="@string/user_tuto_on" />
+
+        <Button
+            android:id="@+id/user_resetgame_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/settingsbutton"
+            android:text="@string/user_resetgame" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/FullscreenTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgmenu"
+    tools:context=".Menu" >
+
+    <ImageView
+        android:id="@+id/boubleft"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/boubouleleft" />
+
+    <ImageView
+        android:id="@+id/boubright"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/boubouleright" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/fullscreen_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="75dip"
+            android:gravity="center"
+            android:keepScreenOn="true"
+            android:text="@string/dynamicName"
+            android:textColor="#33b5e5"
+            android:textStyle="bold" />
+        <!-- android:textSize="40sp" -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="100" >
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="25" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="50"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:weightSum="100" >
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+            <Button
+                android:id="@+id/PlayButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:alpha="0" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+            <Button
+                android:id="@+id/ParameterButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:alpha="0" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+            <Button
+                android:id="@+id/HighScoreButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:alpha="0"
+                android:onClick="showPopup" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
