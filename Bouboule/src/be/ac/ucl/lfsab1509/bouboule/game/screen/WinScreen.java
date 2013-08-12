@@ -33,7 +33,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class WinScreen extends AbstractScreen {
 
@@ -46,19 +45,19 @@ public class WinScreen extends AbstractScreen {
 		super.show();
 
 		// Set Background
-		Image bg = addBackGround("drawable-xhdpi/you_win.jpg");
-		bg.setScale(GlobalSettings.HD); // TODO remove when you_win will be bigger
+		// addBackGroundShift("GdxMenus/endgame/you_win_bg.jpg"); // TODO: file needed (HD & NHD)
+		// addBackGround("GdxMenus/endgame/you_win_buttons.png"); // TODO: file needed (HD & NHD)
 
 		// Set Lives
 		switch (GlobalSettings.PROFILE.getNbLifes()) {
 		case 3:
-			addBackGround("drawable-xhdpi/coeur3.png");
+			addBackGround("GdxMenus/endgame/heart3.png");
 			break;
 		case 2:
-			addBackGround("drawable-xhdpi/coeur2.png");
+			addBackGround("GdxMenus/endgame/heart2.png");
 			break;
 		case 1:
-			addBackGround("drawable-xhdpi/coeur1.png");
+			addBackGround("GdxMenus/endgame/heart1.png");
 			break;
 
 		default:

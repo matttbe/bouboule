@@ -46,11 +46,11 @@ public class ParamScreen extends AbstractScreen {
 
 		//Set Background
 		
-		addBackGroundShift("drawable-xhdpi/settings/settingsbg.jpg");
+		addBackGroundShift("GdxMenus/settings/settingsbg.jpg");
 		
 		//Add buttons
 		
-		addBackGround("drawable-xhdpi/settings/settingsbuttons.png");
+		addBackGround("GdxMenus/settings/settingsbuttons.png");
 
 		
 		//Create all Buttons

@@ -58,7 +58,7 @@ public class WorldScreen extends AbstractScreen {
 		super.show();
 
 		// Set Background
-		addBackGround("drawable-xhdpi/GdxMenus/bglevel0.jpg");
+		addBackGround("GdxMenus/levels/bglevel0.jpg");
 
 		// Add levels images "recursively"
 		// Level are noted from 0 to 6
@@ -66,7 +66,7 @@ public class WorldScreen extends AbstractScreen {
 		// displayed. -> Corresponding to World 1 and 8.
 		for (int i = 1; i < lastUnlockedWorld
 				&& i < GlobalSettings.NBLEVELS / 4 - 1; i++) {
-			addBackGround("drawable-xhdpi/GdxMenus/bglevel" + i + ".png");
+			addBackGround("GdxMenus/levels/bglevel" + i + ".png");
 		}
 
 		// Add Boub Image selected by the user

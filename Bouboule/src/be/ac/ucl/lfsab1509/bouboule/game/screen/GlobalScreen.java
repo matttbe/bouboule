@@ -52,11 +52,11 @@ public class GlobalScreen extends AbstractScreen {
 		super(false); // without music delay
 		if (GlobalSettings.ISHD) {
 			iX = 33;
-			iY = 1900;
+			iY = 1870;
 		}
 		else {
 			iX = 20;
-			iY = 1115;
+			iY = 1100;
 		}
 	}
 
@@ -65,9 +65,9 @@ public class GlobalScreen extends AbstractScreen {
 		super.show();
 
 		// Set Background
-		addBackGroundShift("drawable-xhdpi/settings/settingsbg.jpg");
+		addBackGroundShift("GdxMenus/settings/settingsbg.jpg");
 
-		int iLessY = (int) (145 * GlobalSettings.HD);
+		int iLessY = (int) (155 * GlobalSettings.HD);
 
 		addSoundOptions();
 		iY -= iLessY;

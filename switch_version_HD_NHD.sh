@@ -41,8 +41,8 @@ if test ! -d $ANDROID; then
 	exit 1
 fi
 
-if test ! -L $ANDROID/assets; then
-	echo "$ANDROID/assets is not a symlink"
+if test ! -L $ANDROID/assets -o ! -L $ANDROID/res/drawable-xhdpi; then
+	echo "$ANDROID/assets or $ANDROID/res/drawable-xhdpi are not symlinks"
 	exit 1
 fi
 
@@ -55,6 +55,7 @@ if test "$1" = "check"; then
 fi
 
 rm $ANDROID/assets # symlink
+rm $ANDROID/res/drawable-xhdpi # symlink
 
 type gsed > /dev/null && SED="gsed" || SED="sed" ## MacOSX...
 
@@ -66,7 +67,9 @@ if test $isHD -eq 1; then # HD -> NHD
 	$SED -i "/float HD/ s/1.6384f/1f/" $GlobalSettings
 	cd $ANDROID
 	ln -s assets_NHD assets
-	cd ..
+	cd res
+	ln -s ../drawable-xhdpi_NHD drawable-xhdpi
+	cd ../..
 	echo "You're now using the Non HD version"
 else # NHD -> HD
 	echo "Switch from Non HD to HD version"
@@ -76,7 +79,9 @@ else # NHD -> HD
 	$SED -i "/float HD/ s/1f/1.6384f/" $GlobalSettings
 	cd $ANDROID
 	ln -s assets_HD assets
-	cd ..
+	cd res
+	ln -s ../drawable-xhdpi_HD drawable-xhdpi
+	cd ../..
 	echo "You're now using the HD version"
 fi
 echo "Don't forget to refresh Bouboule and Bouboule-android dirs in Eclipse if you're using it ;)"

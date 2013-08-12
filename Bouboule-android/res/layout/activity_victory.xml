@@ -8,25 +8,25 @@
     tools:context=".VictoryActivity" >
 
     <ImageView
-        android:id="@+id/coeur1"
+        android:id="@+id/heart1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/coeur1" />
+        android:src="@drawable/heart1" />
 
     <ImageView
-        android:id="@+id/coeur2"
+        android:id="@+id/heart2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/coeur2" />
+        android:src="@drawable/heart2" />
 
     <ImageView
-        android:id="@+id/coeur3"
+        android:id="@+id/heart3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/coeur3" />
+        android:src="@drawable/heart3" />
     
     <LinearLayout
         android:layout_width="fill_parent"

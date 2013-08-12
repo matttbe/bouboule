@@ -45,20 +45,20 @@ public class LooseScreen extends AbstractScreen {
 		super.show();
 
 		// Set Background
-
-		addBackGround("drawable-xhdpi/you_lose.jpg");
+		// addBackGroundShift("GdxMenus/endgame/you_loose_bg.jpg"); // TODO: file needed (HD & NHD)
+		// addBackGround("GdxMenus/endgame/you_loose_buttons.png"); // TODO: file needed (HD & NHD)
 
 		// Set Lives
 
 		switch (GlobalSettings.PROFILE.getNbLifes()) {
 		case 3:
-			addBackGround("drawable-xhdpi/coeur3.png");
+			addBackGround("GdxMenus/endgame/heart3.png");
 			break;
 		case 2:
-			addBackGround("drawable-xhdpi/coeur2.png");
+			addBackGround("GdxMenus/endgame/heart2.png");
 			break;
 		case 1:
-			addBackGround("drawable-xhdpi/coeur1.png");
+			addBackGround("GdxMenus/endgame/heart1.png");
 			break;
 
 		default:

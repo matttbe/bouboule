@@ -58,20 +58,20 @@ public class MenuScreen extends AbstractScreen {
 
 		// Set Background
 
-		addBackGroundShift("drawable-xhdpi/main/mainmenubg.jpg");
+		addBackGroundShift("GdxMenus/main/mainmenubg.jpg");
 		
 		Gdx.app.log("SCREEN", ""+GlobalSettings.SHIFT_BG);
 		
 		// Add Button image
 		
-		addImage("drawable-xhdpi/main/mainmenubuttons.png", 0, 0);
+		addImage("GdxMenus/main/mainmenubuttons.png", 0, 0);
 				
 
 		// Create the 2 Bouboules out of the screen
 
-		Image imgBoubouleR = addImage("drawable-xhdpi/boubouleright.png",
+		Image imgBoubouleR = addImage("GdxMenus/main/boubouleright.png",
 				(int) GlobalSettings.APPWIDTH, 0);
-		Image imgBoubouleL = addImage("drawable-xhdpi/boubouleleft.png",
+		Image imgBoubouleL = addImage("GdxMenus/main/boubouleleft.png",
 				(int) -GlobalSettings.APPWIDTH, 0);
 
 		// add action on the bouboule

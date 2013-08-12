@@ -44,7 +44,7 @@ public class AboutScreen extends AbstractScreen {
 		super.show();
 
 		//Set Background
-		addBackGroundShift("drawable-xhdpi/settings/settingsbg.jpg");
+		addBackGroundShift("GdxMenus/settings/settingsbg.jpg");
 
 		// Note: no accent with the default font and multiple spaces or \t are not working
 		String cAboutText =
