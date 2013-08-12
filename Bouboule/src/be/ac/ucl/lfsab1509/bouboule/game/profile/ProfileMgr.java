@@ -36,7 +36,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 public class ProfileMgr {
-	private Preferences prefs = null;
+	private Preferences prefs;
 	private ProfileGlobal profileGlobal;
 
 	protected final String SEPARATOR = System.getProperty ("file.separator"); // /!\ can change if we use it on different systems
@@ -73,8 +73,12 @@ public class ProfileMgr {
 	}
 
 	private boolean gameCenterHasNewId(String cName) {
-		return GlobalSettings.GAMECENTER != null
-				&& ! GlobalSettings.GAMECENTER.getPlayerID().equals(cName);
+		if (GlobalSettings.GAMECENTER != null) {
+			String playerID = GlobalSettings.GAMECENTER.getPlayerID();
+			return playerID != null && ! playerID.equals(cName);
+		}
+		return false;
+		
 	}
 
 	/**
