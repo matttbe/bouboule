@@ -31,13 +31,13 @@
     <string name="user_choose_level_txt">Choose the level to start with:</string>
     <string name="user_choose_level_current">Current level: </string>
     <string name="user_choose_level_max">max: </string>
-    <string name="user_resetgame">Reset your game!</string>
+    <string name="user_resetgame">Restart to level 1!</string>
     <string name="user_resetgame_notif">Your game has been reset!</string>
     <string name="user_yes">Yes</string>
     <string name="user_no">No</string>
-    <string name="user_continuereset">This will erase your progression.\nDo you want to continue?</string>
+    <string name="user_continuereset">It will restart the game to level 1 and keep all unlocked worlds.\nDo you want to continue?</string>
     <string name="user_tuto">Show the tutorial:</string>
-    <string name="user_continuetuto">This will erase your progression and set the tutorial again.\nDo you want to continue?</string>
+    <string name="user_continuetuto">It will restart the game to level 1 and display the tutorial.\nDo you want to continue?</string>
     <string name="user_tuto_notif">Your game has been reset and the tutorial will be shown at first play!</string>
     <string name="user_tuto_on">Yes</string>
     <string name="user_tuto_off">No</string>
