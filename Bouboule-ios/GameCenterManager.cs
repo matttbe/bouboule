@@ -7,6 +7,7 @@ using MonoTouch.Foundation;
 using com.badlogic.gdx.backends.ios;
 using com.badlogic.gdx;
 using be.ac.ucl.lfsab1509.bouboule.game.profile;
+using be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 //Based on Xamarin Documentation and Trasc0 example from libGDX forum
 
@@ -49,6 +50,38 @@ namespace GameCenterIOS
 
 		public GameCenterManager ()
 		{
+			authenticatedHandler = new GKNotificationHandler (delegate(NSError error) {
+				if (GKLocalPlayer.LocalPlayer.Authenticated) {
+					//Switching Users
+
+					if(currentPlayerID != null) {
+						Console.WriteLine(currentPlayerID);
+						Console.WriteLine(currentPlayerID != GKLocalPlayer.LocalPlayer.PlayerID);
+					}
+					else 
+						Console.WriteLine("Il est null");
+
+					if(currentPlayerID == null || currentPlayerID != GKLocalPlayer.LocalPlayer.PlayerID)
+					{
+						Console.WriteLine("new PlatformID");
+						//load the player settings
+						currentPlayerID = GKLocalPlayer.LocalPlayer.PlayerID;
+						player = new PlayerModel();
+						player.loadStoredScores();
+						player.loadStoredAchievements();
+
+						GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(currentPlayerID);
+
+					}
+				} else {
+					var alert = new UIAlertView ("Game Center Account Required", "Need login the game center!", null, "Retry", null);
+					alert.Clicked += delegate {
+						GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+					};
+					alert.Show ();
+
+				}
+			});
 
 		}
 
@@ -95,26 +128,6 @@ namespace GameCenterIOS
 		//Authentificate the player for Game Center user
 		public void Authenticate ()
 		{
-			authenticatedHandler = new GKNotificationHandler (delegate(NSError error) {
-				if (GKLocalPlayer.LocalPlayer.Authenticated) {
-					//Switching Users
-					if(currentPlayerID != null || currentPlayerID != GKLocalPlayer.LocalPlayer.PlayerID)
-					{
-						//load the player settings
-						currentPlayerID = GKLocalPlayer.LocalPlayer.PlayerID;
-						player = new PlayerModel();
-						player.loadStoredScores();
-						player.loadStoredAchievements();
-					}
-				} else {
-					var alert = new UIAlertView ("Game Center Account Required", "Need login the game center!", null, "Retry", null);
-					alert.Clicked += delegate {
-						GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
-					};
-					alert.Show ();
-
-				}
-			});
 
 			GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
 
