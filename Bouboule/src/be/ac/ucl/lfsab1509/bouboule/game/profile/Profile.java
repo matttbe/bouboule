@@ -375,8 +375,8 @@ public class Profile {
 	//__________ BONUS
 	public void newBonus() {
 		iNbBonus++;
+		GameCenterUtils.newBonus(iNbBonus);
 		// 'prefs' will be modified at the end of the game
-		// and we'll check if we need an achievement later
 	}
 
 	//__________ GAME
@@ -388,7 +388,6 @@ public class Profile {
 
 		if (iNbBonus != prefs.getInteger(BONUS_KEY, 0)) {
 			prefs.putInteger(BONUS_KEY, iNbBonus);
-			GameCenterUtils.newBonus(iNbBonus);
 			if (bFlush)
 				prefs.flush();
 		}
