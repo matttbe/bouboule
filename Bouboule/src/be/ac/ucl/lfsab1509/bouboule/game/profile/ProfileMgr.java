@@ -90,8 +90,10 @@ public class ProfileMgr {
 
 		// it's the first time we launch the game: we need tuto
 		if (profileName == null || gameCenterHasNewId(profileName)) {
-			if (GlobalSettings.GAMECENTER != null)
-				loadProfile(GlobalSettings.GAMECENTER.getPlayerID());
+			String cPlayerID;
+			if (GlobalSettings.GAMECENTER != null
+					&& (cPlayerID = GlobalSettings.GAMECENTER.getPlayerID()) != null)
+				loadProfile(cPlayerID);
 			else
 				loadProfile(GlobalSettings.DEFAULT_PROFILE_NAME);
 			GlobalSettings.PROFILE.setNeedTutorial(true); // display the tutorial the first time
