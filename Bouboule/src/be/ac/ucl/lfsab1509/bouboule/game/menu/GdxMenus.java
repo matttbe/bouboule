@@ -61,11 +61,11 @@ public class GdxMenus implements Menus {
 				break;
 			case GAMEOVER_LOOSE :
 				GlobalSettings.GAME.looseSound();
-				GlobalSettings.GAME.setScreen(new GameOverScreen());
+				GlobalSettings.GAME.setScreen(new GameOverScreen(false));
 				break;
 			case GAMEOVER_END :
 				GlobalSettings.GAME.winSound();
-				GlobalSettings.GAME.setScreen(new GameOverScreen());
+				GlobalSettings.GAME.setScreen(new GameOverScreen(true));
 				break;
 		}
 	}

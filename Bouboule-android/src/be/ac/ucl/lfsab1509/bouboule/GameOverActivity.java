@@ -44,6 +44,7 @@ public class GameOverActivity extends Activity {
 	public static GameExitStatus exitStatus = GameExitStatus.NONE;
 
 	private int endScore;
+	private String endScoreText;
 	private TextView score;
 	// Need handler for callback to the UI thread
 	private final Handler mHandler = new Handler();
@@ -64,11 +65,15 @@ public class GameOverActivity extends Activity {
 				fireListener);
 
 		endScore = GlobalSettings.PROFILE.getEndGameScore ();
+		if (exitStatus == GameExitStatus.GAMEOVER_END)
+			endScoreText = "End! " + endScore;
+		else
+			endScoreText = Integer.toString (endScore);
 
 		Typeface font = Typeface.createFromAsset(getAssets(), "chineyen.ttf"); // "osaka-re.ttf");
 		score = (TextView) findViewById (R.id.GameOverScore);
 		score.setTypeface (font);
-		score.setText (Integer.toString (endScore));
+		score.setText (endScoreText);
 		score.setOnClickListener(scoreListener);
 	}
 
@@ -82,7 +87,7 @@ public class GameOverActivity extends Activity {
 	private View.OnClickListener scoreListener = new View.OnClickListener() {
 		@Override
 		public void onClick(final View view) {
-			score.setText(GlobalSettings.PROFILE.getName() + ": " + endScore);
+			score.setText(GlobalSettings.PROFILE.getName() + ": " + endScoreText);
 			mHandler.postDelayed(screenShotDelay, 250);
 		}
 	};
@@ -95,7 +100,7 @@ public class GameOverActivity extends Activity {
 			startActivity(shareScore.getIntent(
 					// ShareScore.getShareScoreIntent(
 					"This is my last score at Bouboule Game: " + endScore + "!"));
-			score.setText (Integer.toString (endScore));
+			score.setText (endScoreText);
 		}
 	};
 
