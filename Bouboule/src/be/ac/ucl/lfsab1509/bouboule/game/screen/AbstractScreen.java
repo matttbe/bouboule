@@ -158,7 +158,7 @@ public abstract class AbstractScreen implements Screen {
 		Label label = new Label(text, getSkin(), fontName, color);
 		label.setX(x);
 		label.setY(y);
-		if (scale != 0)
+		if (scale != 0 && scale != 1)
 			label.setFontScale(scale);
 		stage.addActor(label);
 
