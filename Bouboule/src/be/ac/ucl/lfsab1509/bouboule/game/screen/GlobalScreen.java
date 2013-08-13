@@ -28,13 +28,13 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 
 
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bonus;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class GlobalScreen extends AbstractScreen {
@@ -42,6 +42,7 @@ public class GlobalScreen extends AbstractScreen {
 	private static final String FONT_TITLE = "chinyen-font";
 	private static final float  FONT_SCALE = .5f * GlobalSettings.HD;
 
+	private CheckBox tutorialCheckBox;
 	/*private CheckBox rotationCheckBox;
 	private Slider sensitivitySlider;*/
 
@@ -68,12 +69,8 @@ public class GlobalScreen extends AbstractScreen {
 
 		int iLessY = (int) (155 * GlobalSettings.HD);
 
-		// not enough place on user screen on Android
-		if (Gdx.app.getType() == ApplicationType.Android
-				|| Gdx.app.getType() == ApplicationType.Desktop) {
-			addSoundOptions(this, iX, iY);
-			iY -= iLessY;
-		}
+		addTutorialOptions();
+		iY -= iLessY;
 
 		/* Not so useful...
 		addRotationOptions();
@@ -89,30 +86,37 @@ public class GlobalScreen extends AbstractScreen {
 		addBackButton(false);
 	}
 
-	// _________________________________ SOUND
+	//_________________________________ TUTORIAL
 
-	public static void addSoundOptions(final AbstractScreen screen, int iX, int iY) {
-		screen.addLabel("SOUND", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
+	private void addTutorialOptions() {
+		addLabel("TUTORIAL", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
-
-		final CheckBox soundCheckBox = screen.addCheckBox("Music", ! GlobalSettings.SOUND_IS_MUTED,
-				iX, iY + (GlobalSettings.ISHD ? -33 : 5));
-		soundCheckBox.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
-		soundCheckBox.setX((int) (GlobalSettings.APPWIDTH / 2 // center
-				- soundCheckBox.getWidth() / 2));
-		soundCheckBox.addListener(new ClickListener() {
-			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "sound click");
-				GlobalSettings.PROFILE_MGR.getProfileGlobal().changeSoundSettings(
-						!soundCheckBox.isChecked());
-
-				if (soundCheckBox.isChecked()) // was muted, we need music
-					screen.getMusic().play();
-				else
-					screen.getMusic().stop();
-			}
-		});
+		tutorialCheckBox = addCheckBox("Show the tutorial!",
+				GlobalSettings.PROFILE.needTutorial(), iX,
+				iY - (GlobalSettings.ISHD ? 50 : 0));
+		tutorialCheckBox.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
+		tutorialCheckBox.setX((int) (GlobalSettings.APPWIDTH / 2
+						- tutorialCheckBox.getWidth() / 2));
+		tutorialCheckBox.addListener(tutorialClickListener);
 	}
+
+	private ClickListener tutorialClickListener = new ClickListener() {
+		public void clicked(InputEvent event, float x, float y) {
+			new Dialog("Tutorial", getSkin(), "default") {
+				protected void result(Object object) {
+					if ((Boolean) object == true) {
+						EndGameListener.resetGame ();
+						GlobalSettings.PROFILE.setNeedTutorial(
+								tutorialCheckBox.isChecked());
+					}
+					else
+						tutorialCheckBox.setChecked(false);
+				}
+			}.text("It will restart the game to level 1.\n"
+				+ "Do you want to continue?")
+			.button("Yes", true).button("No", false).show(stage);
+		}
+	};
 
 	// _________________________________ ROTATION
 

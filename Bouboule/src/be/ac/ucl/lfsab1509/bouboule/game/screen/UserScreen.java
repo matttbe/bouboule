@@ -62,7 +62,7 @@ public class UserScreen extends AbstractScreen {
 	private Image leftImage;
 	private Image centerImage;
 	private Image rightImage;
-	private CheckBox tutorialCheckBox;
+	private CheckBox soundCheckBox;
 	private TextField newUserTextField;
 	private SelectBox chooseUserBox;
 	private boolean bIsRefreshing = false;
@@ -101,10 +101,6 @@ public class UserScreen extends AbstractScreen {
 			addNewUserOptions();
 			iY -= iLessY;
 		}
-		else { // there are enough place here, we can add this option
-			GlobalScreen.addSoundOptions(this, iX, iY);
-			iY -= iLessY;
-		}
 
 		addChooseBoubouleOptions();
 		iY -= centerImage.getHeight() + iLessY - (GlobalSettings.ISHD ? 75 : 0);
@@ -112,7 +108,7 @@ public class UserScreen extends AbstractScreen {
 		addResetOptions();
 		iY -= iLessY;
 
-		addTutorialOptions();
+		addSoundOptions();
 
 		addBackButton(false);
 	}
@@ -136,8 +132,6 @@ public class UserScreen extends AbstractScreen {
 		newUserTextField.setText("");
 		// Bouboules
 		setDefaultImages();
-		// Tuto
-		tutorialCheckBox.setChecked(GlobalSettings.PROFILE.needTutorial());
 	}
 
 	//_________________________________ CHOOSE USER
@@ -398,35 +392,30 @@ public class UserScreen extends AbstractScreen {
 		}
 	};
 
-	//_________________________________ TUTORIAL
+	// _________________________________ SOUND
 
-	private void addTutorialOptions() {
-		addLabel("TUTORIAL", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
+	private void addSoundOptions() {
+		addLabel("SOUND", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
-		tutorialCheckBox = addCheckBox("Show the tutorial!",
-				GlobalSettings.PROFILE.needTutorial(), iX,
-				iY - (GlobalSettings.ISHD ? 50 : 0));
-		tutorialCheckBox.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
-		tutorialCheckBox.setX((int) (GlobalSettings.APPWIDTH / 2
-						- tutorialCheckBox.getWidth() / 2));
-		tutorialCheckBox.addListener(tutorialClickListener);
-	}
 
-	private ClickListener tutorialClickListener = new ClickListener() {
+		soundCheckBox = addCheckBox("Music", ! GlobalSettings.SOUND_IS_MUTED,
+				iX, iY + (GlobalSettings.ISHD ? -33 : 5));
+		soundCheckBox.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
+		soundCheckBox.setX((int) (GlobalSettings.APPWIDTH / 2 // center
+				- soundCheckBox.getWidth() / 2));
+		soundCheckBox.addListener(soundClickListener);
+	}
+	
+	ClickListener soundClickListener = new ClickListener() {
 		public void clicked(InputEvent event, float x, float y) {
-			new Dialog("Tutorial", getSkin(), "default") {
-				protected void result(Object object) {
-					if ((Boolean) object == true) {
-						EndGameListener.resetGame ();
-						GlobalSettings.PROFILE.setNeedTutorial(
-								tutorialCheckBox.isChecked());
-					}
-					else
-						tutorialCheckBox.setChecked(false);
-				}
-			}.text("It will restart the game to level 1.\n"
-				+ "Do you want to continue?")
-			.button("Yes", true).button("No", false).show(stage);
+			Gdx.app.log("SCREEN", "sound click");
+			GlobalSettings.PROFILE_MGR.getProfileGlobal().changeSoundSettings(
+					!soundCheckBox.isChecked());
+
+			if (soundCheckBox.isChecked()) // was muted, we need music
+				getMusic().play();
+			else
+				getMusic().stop();
 		}
 	};
 }
