@@ -48,6 +48,7 @@ public class Profile {
 	private static final String DEATHS_KEY = "Deaths";
 	private static final String BONUS_KEY = "Bonus";
 	private static final String ALL_LEVELS_WON = "AllLevelsWon";
+	private static final String WORLDS_IN_A_ROW = "WorldsInARow";
 
 	// score
 	private int iScore;
@@ -76,6 +77,7 @@ public class Profile {
 	private int iNbBonus;
 	private int iStartLevel;
 	private boolean bAllLevelsWon;
+	private boolean bWorldsInARow[];
 
 	public Profile(final String cName) {
 		
@@ -98,6 +100,9 @@ public class Profile {
 		iNbDeaths = prefs.getInteger(DEATHS_KEY, 0);
 		iNbBonus = prefs.getInteger(BONUS_KEY, 0);
 		bAllLevelsWon = prefs.getBoolean(ALL_LEVELS_WON, false);
+		bWorldsInARow = new boolean[GlobalSettings.NBLEVELS - 1];
+		for (int i = 2; i <= GlobalSettings.NBLEVELS; i++)
+			bWorldsInARow[i-2] = prefs.getBoolean(WORLDS_IN_A_ROW + i, false);
 
 		addNewTimerListener();
 	}
@@ -299,7 +304,7 @@ public class Profile {
 			GameCenterUtils.newDeath(iNbDeaths);
 
 			if (iLifes <= 0) {
-				GameCenterUtils.endGame(iStartLevel, iLevel);
+				gameOver(iLevel);
 				return false; // false <=> no more life
 			}
 		}
@@ -320,7 +325,7 @@ public class Profile {
 				prefs.flush();
 				GameCenterUtils.newBestLevel(iLevel + 1); // => last level not won
 			}
-			GameCenterUtils.endGame(iStartLevel, iLevel + 1); // iEndLevel <=> level not won
+			gameOver(iLevel + 1); // => last level not won
 			return false;
 		}
 
@@ -392,5 +397,25 @@ public class Profile {
 				prefs.flush();
 		}
 		// other achievements?
+	}
+
+	// iLastLevel <=> level not won
+	private void gameOver(int iLastLevel) {
+		boolean bNeedFlush = false;
+
+		int iNbWorlds = GameCenterUtils.getWorld(iLastLevel)
+				- GameCenterUtils.getWorld(iStartLevel + 1); // we won this level: +1
+
+		for (int i = 2; i <= iNbWorlds; i++) {
+			if (! bWorldsInARow[i-2]) { // the first time we do that
+				bNeedFlush = true;
+				bWorldsInARow[i-2] = true;
+				prefs.putBoolean(WORLDS_IN_A_ROW + i, true);
+				GameCenterUtils.worldsInARow(i);
+			}
+		}
+
+		if (bNeedFlush)
+			prefs.flush();
 	}
 }

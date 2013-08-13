@@ -37,15 +37,19 @@ public class GameCenterUtils {
 		GlobalSettings.GAMECENTER.submitScore(iNewScore);
 	}
 
-	private static int getWorld(int iLevel) {
-		return (iLevel - 1) / 4 + 1; // 1 => 4 = W1 ; 5 => 8 = W2 (...)
+	/**
+	 * @param iLevel the best level played but NOT WON!
+	 * @return the world unlocked
+	 */
+	public static int getWorld(int iLevel) {
+		return (iLevel - 2) / 4 + 1; // 1 => 4 = W1 ; 5 => 8 = W2 (...)
 	}
 
 	// iLevel > 1 - iLevel: the best level played but NOT WON!
 	public static void newBestLevel(int iLevel) {
 		if (GlobalSettings.GAMECENTER == null) return;
 
-		int iWorld = getWorld(iLevel - 1);
+		int iWorld = getWorld(iLevel);
 		int iPercents = (iLevel - 1 % 4) * 25; // iLevel == 2: only iLevel 1 won = 25%
 		if (iPercents == 0)
 			iPercents = 100; // 4 = 100%
@@ -76,11 +80,9 @@ public class GameCenterUtils {
 	}
 
 	// iEndLevel is not won
-	public static void endGame(int iStartLevel, int iEndLevel) {
+	public static void worldsInARow(int iNbWorlds) {
 		if (GlobalSettings.GAMECENTER == null) return;
 
-		int iNbWorlds = getWorld(iEndLevel) - getWorld(iStartLevel);
-		if (iNbWorlds > 1) // min 2, max NBLEVELS
-			GlobalSettings.GAMECENTER.submitAchievement("WorldsInARow" + iNbWorlds, 100);
+		GlobalSettings.GAMECENTER.submitAchievement("WorldsInARow" + iNbWorlds, 100);
 	}
 }
