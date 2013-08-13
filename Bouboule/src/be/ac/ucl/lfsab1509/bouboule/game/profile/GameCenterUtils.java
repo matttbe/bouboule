@@ -49,7 +49,7 @@ public class GameCenterUtils {
 		if (iPercents == 0)
 			iPercents = 100; // 4 = 100%
 
-		GlobalSettings.GAMECENTER.submitAchievement("World" + iWorld, iPercents);
+		GlobalSettings.GAMECENTER.submitAchievement("world" + iWorld, iPercents);
 	}
 
 	public static void newDeath(int iNbDeaths) {

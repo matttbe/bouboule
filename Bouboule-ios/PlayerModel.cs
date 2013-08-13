@@ -135,17 +135,17 @@ namespace GameCenterIOS
 				score.ReportScore (new GKNotificationHandler( (error) => 
 				{
 					//if(error == null|| (error.Code ==null && error.Domain == null))
-					/*
+
 					if(error == null)
 					{
 						this.resubmitSotredScores();
-						new UIAlertView ("Score Submitted", "Score submitted successfully ", null, "OK", null).Show();
+						//new UIAlertView ("Score Submitted", "Score submitted successfully ", null, "OK", null).Show();
 					}
 					else
 					{
 						this.storeScore(score);
-						new UIAlertView ("Score Stored", "Score Stored ", null, "OK", null).Show();
-					}*/
+						//new UIAlertView ("Score Stored", "Score Stored ", null, "OK", null).Show();
+					}
 				}));
 			}
 		}
