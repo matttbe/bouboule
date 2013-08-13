@@ -94,12 +94,15 @@ public class UserScreen extends AbstractScreen {
 		 * (And we can only have one user if we want to use Apple's Game Center)
 		 */
 		if (Gdx.app.getType() == ApplicationType.Android
-				|| Gdx.app.getType() == ApplicationType.Desktop)
-		{
+				|| Gdx.app.getType() == ApplicationType.Desktop) {
 			addChooseUserOptions();
 			iY -= iLessY;
 
 			addNewUserOptions();
+			iY -= iLessY;
+		}
+		else { // there are enough place here, we can add this option
+			GlobalScreen.addSoundOptions(this, iX, iY);
 			iY -= iLessY;
 		}
 

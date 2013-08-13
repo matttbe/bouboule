@@ -31,6 +31,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.body.Bonus;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -41,7 +42,6 @@ public class GlobalScreen extends AbstractScreen {
 	private static final String FONT_TITLE = "chinyen-font";
 	private static final float  FONT_SCALE = .5f * GlobalSettings.HD;
 
-	private CheckBox soundCheckBox;
 	/*private CheckBox rotationCheckBox;
 	private Slider sensitivitySlider;*/
 
@@ -68,8 +68,12 @@ public class GlobalScreen extends AbstractScreen {
 
 		int iLessY = (int) (155 * GlobalSettings.HD);
 
-		addSoundOptions();
-		iY -= iLessY;
+		// not enough place on user screen on Android
+		if (Gdx.app.getType() == ApplicationType.Android
+				|| Gdx.app.getType() == ApplicationType.Desktop) {
+			addSoundOptions(this, iX, iY);
+			iY -= iLessY;
+		}
 
 		/* Not so useful...
 		addRotationOptions();
@@ -87,30 +91,28 @@ public class GlobalScreen extends AbstractScreen {
 
 	// _________________________________ SOUND
 
-	private void addSoundOptions() {
-		addLabel("SOUND", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
+	public static void addSoundOptions(final AbstractScreen screen, int iX, int iY) {
+		screen.addLabel("SOUND", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
 
-		soundCheckBox = addCheckBox("Music", ! GlobalSettings.SOUND_IS_MUTED,
+		final CheckBox soundCheckBox = screen.addCheckBox("Music", ! GlobalSettings.SOUND_IS_MUTED,
 				iX, iY + (GlobalSettings.ISHD ? -33 : 5));
 		soundCheckBox.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 		soundCheckBox.setX((int) (GlobalSettings.APPWIDTH / 2 // center
 				- soundCheckBox.getWidth() / 2));
-		soundCheckBox.addListener(soundClickListener);
+		soundCheckBox.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				Gdx.app.log("SCREEN", "sound click");
+				GlobalSettings.PROFILE_MGR.getProfileGlobal().changeSoundSettings(
+						!soundCheckBox.isChecked());
+
+				if (soundCheckBox.isChecked()) // was muted, we need music
+					screen.getMusic().play();
+				else
+					screen.getMusic().stop();
+			}
+		});
 	}
-
-	private ClickListener soundClickListener = new ClickListener() {
-		public void clicked(InputEvent event, float x, float y) {
-			Gdx.app.log("SCREEN", "sound click");
-			GlobalSettings.PROFILE_MGR.getProfileGlobal().changeSoundSettings(
-					!soundCheckBox.isChecked());
-
-			if (soundCheckBox.isChecked()) // was muted, we need music
-				getMusic().play();
-			else
-				getMusic().stop();
-		}
-	};
 
 	// _________________________________ ROTATION
 
