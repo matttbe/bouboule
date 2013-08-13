@@ -66,7 +66,7 @@ public class Menu extends Activity {
 	private final int MENU_CHOOSING_LEVEL = 0; 
 	public static final int RETURN_MENU = 1; 
 	public static final int PLAY_GAME = 2; 
-	
+
 	// Need handler for callback to the UI thread
 	private final Handler mHandler = new Handler();
 
@@ -97,8 +97,10 @@ public class Menu extends Activity {
 	};
 
 	//String animated
+	private TextView titleView;
 	private String 	nameToShow;
 	private int 	whatToShow	= 0;
+	private static final int maxWhatToShow = 4;
 	private Random rand = new Random();
 	
 	
@@ -111,6 +113,8 @@ public class Menu extends Activity {
 					animationSetCase4		= new AnimationSet(true),
 					animationSetCaseD		= new AnimationSet(true);
 
+	// share score with a screenshot
+	private ShareScore shareScore;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -122,23 +126,21 @@ public class Menu extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_menu);
 
-
-		final View contentView = findViewById(R.id.fullscreen_content);
+		titleView = (TextView) findViewById(R.id.fullscreen_content);
 
 		//Font Update
 		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
-		((TextView) contentView).setTypeface(myTypeface);
+		titleView.setTypeface(myTypeface);
 		
 		float ratio = getDisplayVector().y / GlobalSettings.APPHEIGHT;
 		
-		((TextView) contentView).setTextSize(TypedValue.COMPLEX_UNIT_PX,  
-				45*ratio);
+		titleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 45*ratio);
 
 		//Incline the blue text
-		contentView.setRotation(-15);
+		titleView.setRotation(-15);
 
 		// relaunch the animations on click
-		contentView.setOnClickListener(clickListener);
+		titleView.setOnClickListener(clickListener);
 		findViewById(R.id.boubleft) .setOnClickListener(clickListener);
 		findViewById(R.id.boubright).setOnClickListener(clickListener);
 
@@ -254,7 +256,8 @@ public class Menu extends Activity {
 			return;
 		}
 
-		for (int i = 0; i < highscores.length; i++) {
+		int i;
+		for (i = 0; i < highscores.length; i++) {
 			HighScoreInfo info = highscores[i];
 
 			if (info == null)
@@ -278,6 +281,8 @@ public class Menu extends Activity {
 			menu.add (0, i, android.view.Menu.NONE, cTitle);
 			//.setTitleCondensed (cTitleCondensed); // for smaller screens => doesn't work...
 		}
+
+		menu.add(0, i+1, android.view.Menu.NONE, "Click here to share your high score!");
 	}
 
 	@Override
@@ -285,9 +290,20 @@ public class Menu extends Activity {
 		super.onCreateContextMenu(menu, view, menuInfo);
 		menu.setHeaderTitle(getString (R.string.HighScore));
 		addScoreInMenu (menu);
-		// TODO: customize...
-		// TODO: find a way to have an horizontal scroll
+
+		// take a screenshot with the score: used special title + delay screenshot
+		whatToShow = maxWhatToShow;
+		startFunWithUi();
+		mHandler.postDelayed(screenShotDelay, 500);
 	}
+
+	// Create runnable to delay the screenshot
+	private final Runnable screenShotDelay = new Runnable() {
+		@Override
+		public void run() {
+			shareScore = new ShareScore(Menu.this); // take screenshot
+		}
+	};
 
 	@Override
 	public boolean onContextItemSelected (MenuItem item) {
@@ -297,11 +313,21 @@ public class Menu extends Activity {
 		if (highscores.length == 0 || highscores[0] == null) // no high score yet
 			cTitle = (String) item.getTitle ();
 		else {
-			HighScoreInfo info = highscores[item.getItemId ()];
+			int iItemID = item.getItemId();
+			if (iItemID >= highscores.length) // last entry text: display info about the first one
+				iItemID = 0;
+			HighScoreInfo info = highscores[iItemID];
 			cTitle = getString (R.string.Score) + " " + info.getScore () + " "
 					+ getString (R.string.by_someone) + " " + info.getName () + " "
 					+ getString (R.string.at_level_x) + " " + info.getLevel () + " ("
 					+ info.getDate ()+ ")";
+
+			// Share info of the highest score (of the current user!!)
+			if (shareScore == null) // should not happen
+				shareScore = new ShareScore(this);
+			startActivity(shareScore.getIntent(
+					"This is my highscore at Bouboule Game: "
+					+ GlobalSettings.PROFILE.getHighScore() + "!"));
 		}
 		Toast.makeText (this, cTitle, Toast.LENGTH_LONG).show ();
 		return true;
@@ -351,63 +377,56 @@ public class Menu extends Activity {
 			nameToShow = normaliseTextForTitle(GlobalSettings.PROFILE.getName ()) + "\n"
 					+ getString(R.string.you_best);
 			break;
+		case maxWhatToShow: // display the score for the screenshot
+			String cHighScore;
+			int iHighScore = GlobalSettings.PROFILE.getHighScore();
+			if (iHighScore == Integer.MIN_VALUE)
+				cHighScore = "NO HIGH SCORE YET";
+			else
+				cHighScore = Integer.toString(iHighScore);
+			String cName = normaliseTextForTitle(GlobalSettings.PROFILE.getName());
+			if (cName.length() > 16)
+				cName = cName.substring(0, 16); // max 16 chars to limit too long text...
+			nameToShow = cName + "\nHIGH SCORE:\n" + cHighScore;
+			break;
 		}
-		whatToShow = (whatToShow + 1) % 4;
+		whatToShow = (whatToShow + 1) % maxWhatToShow;
 
 		//Get the text and update the name
-		TextView myTextView = (TextView) findViewById(R.id.fullscreen_content);
-		myTextView.setText(nameToShow);
+		titleView.setText(nameToShow);
 
 		//Setting the animation
-		myTextView.startAnimation(animationSetForTitle);
+		titleView.startAnimation(animationSetForTitle);
 
 		//Launch the new UI thread to set the Animation on 
 		//the appropriate time.
 		mHandler.postDelayed(animationUpdate, 10 * 1000);
 	}
-	
-	
-	
-	
 
 
 	private void updateAnimationOnUI() {
-
-		//Get the Text to update
-		TextView myTextView = (TextView) findViewById(R.id.fullscreen_content);
-
 		//Animation Launcher
 		switch (rand.nextInt(5)) {
 		//Fire the right animation
-		case 1:  
-			
-			myTextView.startAnimation(animationSetCase1);
+		case 1:
+			titleView.startAnimation(animationSetCase1);
 			break;
-			
-		case 2:  
-			
-			myTextView.startAnimation(animationSetCase2);
+		case 2:
+			titleView.startAnimation(animationSetCase2);
 			break;
-			
-		case 3: 
-			
-			myTextView.startAnimation(animationSetCase3);
+		case 3:
+			titleView.startAnimation(animationSetCase3);
 			break;
-			
 		case 4:
-			
-			myTextView.startAnimation(animationSetCase4);
+			titleView.startAnimation(animationSetCase4);
 			break;
-			
-		
-		default: 
-			
-			myTextView.startAnimation(animationSetCaseD);
+		default:
+			titleView.startAnimation(animationSetCaseD);
 			break;
 		}
 
 		//re launch
-		mHandler.postDelayed(nameUpdate,5 * 1000);
+		mHandler.postDelayed(nameUpdate, 5 * 1000);
 	}
 
 
@@ -454,7 +473,7 @@ public class Menu extends Activity {
 		RotateAnimation r = new RotateAnimation(ROTATE_FROM, ROTATE_TO,
 				Animation.RELATIVE_TO_SELF, 0.5f,
 				Animation.RELATIVE_TO_SELF, 0.5f);
-		r.setDuration(5000);     
+		r.setDuration(5000);
 		r.setRepeatCount(0);
 
 		animationSetCase1.addAnimation(r);

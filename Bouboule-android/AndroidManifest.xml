@@ -74,10 +74,14 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-			android:name="ChoosingActivity"
-			android:label="@string/title_activity_ChoosingActivity"
-			android:screenOrientation="portrait" >
-		</activity>
+            android:name="ChoosingActivity"
+            android:label="@string/title_activity_ChoosingActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <provider android:exported="true"
+            android:authorities="be.ac.ucl.lfsab1509.bouboule"
+            android:name="ShareScoreImageProvider">
+        </provider>
     </application>
 
 </manifest>
