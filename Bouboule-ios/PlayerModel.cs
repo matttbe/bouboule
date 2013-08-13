@@ -84,6 +84,7 @@ namespace GameCenterIOS
 						return;
 					score.ReportScore (new GKNotificationHandler( (error) => 
 					{
+						/*
 						if(error == null)
 						{
 							new UIAlertView ("Score Submitted", "Score submitted successfully ", null, "OK", null).Show();
@@ -92,7 +93,7 @@ namespace GameCenterIOS
 						{
 							this.storeScore(score);
 							new UIAlertView ("Score Stored", "Score Stored ", null, "OK", null).Show();
-						}
+						}*/	
 					}));
 					storedScores.RemoveObject(index);
 					index --;
@@ -134,6 +135,7 @@ namespace GameCenterIOS
 				score.ReportScore (new GKNotificationHandler( (error) => 
 				{
 					//if(error == null|| (error.Code ==null && error.Domain == null))
+					/*
 					if(error == null)
 					{
 						this.resubmitSotredScores();
@@ -143,7 +145,7 @@ namespace GameCenterIOS
 					{
 						this.storeScore(score);
 						new UIAlertView ("Score Stored", "Score Stored ", null, "OK", null).Show();
-					}
+					}*/
 				}));
 			}
 		}
@@ -189,10 +191,11 @@ namespace GameCenterIOS
 					if (error == null) {
 						if (storedAchievements.ContainsKey (new NSString(achievement.Identifier)))
 							storedAchievements.Remove (new NSString(achievement.Identifier));
-						new UIAlertView ("Achievement Submitted", "Achievement submitted successfully ", null, "OK", null).Show ();
+						Console.WriteLine("Achievement submitted successfully");
+						//new UIAlertView ("Achievement Submitted", "Achievement submitted successfully ", null, "OK", null).Show ();
 					} else {
 						this.storeAchievement (achievement);
-						new UIAlertView ("Achievement Stored", "Achievement Stored ", null, "OK", null).Show ();
+						//new UIAlertView ("Achievement Stored", "Achievement Stored ", null, "OK", null).Show ();
 					}
 				}));
 			}

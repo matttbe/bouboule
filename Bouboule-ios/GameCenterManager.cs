@@ -54,16 +54,8 @@ namespace GameCenterIOS
 				if (GKLocalPlayer.LocalPlayer.Authenticated) {
 					//Switching Users
 
-					if(currentPlayerID != null) {
-						Console.WriteLine(currentPlayerID);
-						Console.WriteLine(currentPlayerID != GKLocalPlayer.LocalPlayer.PlayerID);
-					}
-					else 
-						Console.WriteLine("Il est null");
-
 					if(currentPlayerID == null || currentPlayerID != GKLocalPlayer.LocalPlayer.PlayerID)
 					{
-						Console.WriteLine("new PlatformID");
 						//load the player settings
 						currentPlayerID = GKLocalPlayer.LocalPlayer.PlayerID;
 						player = new PlayerModel();
@@ -102,11 +94,15 @@ namespace GameCenterIOS
 
 		public string getPlayerName ()
 		{
-			return player.playerName;
+			if (player != null)
+				return player.playerName;
+			else
+				return "Bouboule";
 		}
 
 		public string getPlayerID ()
 		{
+			Console.WriteLine (currentPlayerID);
 			return currentPlayerID;
 		}
 
@@ -158,7 +154,7 @@ namespace GameCenterIOS
 			}
 
 			//Create the achievement we want to submit.
-			NSString identifier = new NSString ("be.ac.ucl.lfsab1509.bouboule"+achievementsName);
+			NSString identifier = new NSString ("be.ac.ucl.lfsab1509.bouboule."+achievementsName);
 
 			GKAchievement achievement = new GKAchievement (identifier);
 
@@ -181,7 +177,7 @@ namespace GameCenterIOS
 			}
 
 
-			GKScore submitScore = new GKScore ("be.ac.ucl.lfsab1509.bouboule.boubouleLeaderBoard");
+			GKScore submitScore = new GKScore ("be.ac.ucl.lfsab1509.bouboule.leaderboardscore");
 			submitScore.Init ();
 			try{
 				submitScore.Value = Convert.ToInt64(scoreValue);
