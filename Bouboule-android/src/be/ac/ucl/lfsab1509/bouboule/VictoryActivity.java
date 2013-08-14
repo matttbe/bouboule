@@ -33,7 +33,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Point;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -43,6 +42,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 public class VictoryActivity extends Activity {
+
+	private String score = null;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -65,18 +66,12 @@ public class VictoryActivity extends Activity {
 				"osaka-re.ttf");
 		TextView pScoreView = (TextView) findViewById (R.id.VictoryScore);
 
-		String score= null;
-		try {
-			score = Integer.toString (GlobalSettings.PROFILE.getScore ());
-			pScoreView.setText (score);
-		} catch (NullPointerException e) {
-			Log.e ("KILL", "Crash in VictoryActivity with Score: " + score + " " + e.getMessage());
-		}
-		pScoreView.setTypeface (myFontBout);
-		pScoreView.setTextSize(TypedValue.COMPLEX_UNIT_PX,35*ratio);
-		
+		score = Integer.toString (GlobalSettings.PROFILE.getScore ());
+		pScoreView.setText (score);
 
-		
+		pScoreView.setTypeface (myFontBout);
+		pScoreView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 35 * ratio);
+
 		int NbLifes = GlobalSettings.PROFILE.getNbLifes ();
 
 		if (NbLifes == 2) {
@@ -91,7 +86,18 @@ public class VictoryActivity extends Activity {
 			findViewById(R.id.heart1).setVisibility(View.INVISIBLE);
 			findViewById(R.id.heart2).setVisibility(View.INVISIBLE);
 		}
+
+		pScoreView.setOnClickListener(scoreListener);
 	}
+
+	private View.OnClickListener scoreListener = new View.OnClickListener() {
+		@Override
+		public void onClick(final View view) {
+			ShareScore shareScore = new ShareScore(VictoryActivity.this);
+			startActivity(shareScore.getIntent(
+					"This is my last score at Bouboule Game: " + score + "!"));
+		}
+	};
 	
 	private Point getDisplayVector() {
 		Display display = getWindowManager().getDefaultDisplay();

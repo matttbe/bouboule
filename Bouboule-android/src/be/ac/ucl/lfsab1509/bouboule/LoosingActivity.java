@@ -43,7 +43,8 @@ import android.widget.TextView;
 
 public class LoosingActivity extends Activity {
 
-	
+	private String score;
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,9 +66,10 @@ public class LoosingActivity extends Activity {
 		
 		float ratio = getDisplayVector().y / GlobalSettings.APPHEIGHT;
 
-		pScoreView.setText (Integer.toString (GlobalSettings.PROFILE.getScore ()));
+		score = Integer.toString (GlobalSettings.PROFILE.getScore ());
+		pScoreView.setText (score);
 		pScoreView.setTypeface (myFontBout);
-		pScoreView.setTextSize(TypedValue.COMPLEX_UNIT_PX,35*ratio);
+		pScoreView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 35 * ratio);
 		
 		int NbLifes = GlobalSettings.PROFILE.getNbLifes ();
 
@@ -84,7 +86,18 @@ public class LoosingActivity extends Activity {
 			findViewById(R.id.heart2).setVisibility(View.INVISIBLE);
 		}
 		// no life? => GameOverActivity
+
+		pScoreView.setOnClickListener(scoreListener);
 	}
+
+	private View.OnClickListener scoreListener = new View.OnClickListener() {
+		@Override
+		public void onClick(final View view) {
+			ShareScore shareScore = new ShareScore(LoosingActivity.this);
+			startActivity(shareScore.getIntent(
+					"This is my last score at Bouboule Game: " + score + "!"));
+		}
+	};
 	
 	private Point getDisplayVector() {
 		Display display = getWindowManager().getDefaultDisplay();
