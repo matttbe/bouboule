@@ -35,7 +35,6 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.Display;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -57,9 +56,9 @@ public class VictoryActivity extends Activity {
 		float ratio = getDisplayVector().y / GlobalSettings.APPHEIGHT;
 
 		// Listeners for the Game Launcher
-		findViewById(R.id.VictoryMenuButton).setOnTouchListener(
+		findViewById(R.id.VictoryMenuButton).setOnClickListener(
 				fireListener);
-		findViewById(R.id.VictoryNextLevelButton).setOnTouchListener(
+		findViewById(R.id.VictoryNextLevelButton).setOnClickListener(
 				fireListener);
 
 		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
@@ -107,10 +106,10 @@ public class VictoryActivity extends Activity {
 		return size;
 	}
 
-	private View.OnTouchListener fireListener = new View.OnTouchListener() {
+	private View.OnClickListener fireListener = new View.OnClickListener() {
 		@Override
-		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-			return MyAndroidMenus.onTouchGeneric (VictoryActivity.this, view.getId ());
+		public void onClick(final View view) {
+			MyAndroidMenus.onClickGeneric (VictoryActivity.this, view.getId ());
 		}
 	};
 

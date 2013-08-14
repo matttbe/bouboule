@@ -35,7 +35,6 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.Display;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -55,9 +54,9 @@ public class LoosingActivity extends Activity {
 		setContentView(R.layout.activity_loosing);
 
 		// Listeners for the Game Launcher
-		findViewById(R.id.LoosingMenuButton).setOnTouchListener(
+		findViewById(R.id.LoosingMenuButton).setOnClickListener(
 				fireListener);
-		findViewById(R.id.LoosingNextLevelButton).setOnTouchListener(
+		findViewById(R.id.LoosingNextLevelButton).setOnClickListener(
 				fireListener);
 		
 		Typeface myFontBout = Typeface.createFromAsset(getAssets(),
@@ -107,10 +106,10 @@ public class LoosingActivity extends Activity {
 		return size;
 	}
 
-	private View.OnTouchListener fireListener = new View.OnTouchListener() {
+	private View.OnClickListener fireListener = new View.OnClickListener() {
 		@Override
-		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-			return MyAndroidMenus.onTouchGeneric (LoosingActivity.this, view.getId ());
+		public void onClick(final View view) {
+			MyAndroidMenus.onClickGeneric (LoosingActivity.this, view.getId ());
 		}
 	};
 

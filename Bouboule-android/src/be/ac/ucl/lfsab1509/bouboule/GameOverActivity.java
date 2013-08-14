@@ -33,7 +33,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
 import android.graphics.Typeface;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -59,9 +58,9 @@ public class GameOverActivity extends Activity {
 		setContentView(R.layout.activity_gameover);
 
 		// Listeners for the Game Launcher
-		findViewById(R.id.GameOverMenuButton).setOnTouchListener(
+		findViewById(R.id.GameOverMenuButton).setOnClickListener(
 				fireListener);
-		findViewById(R.id.GameOverRestartButton).setOnTouchListener(
+		findViewById(R.id.GameOverRestartButton).setOnClickListener(
 				fireListener);
 
 		endScore = GlobalSettings.PROFILE.getEndGameScore ();
@@ -77,10 +76,10 @@ public class GameOverActivity extends Activity {
 		score.setOnClickListener(scoreListener);
 	}
 
-	private View.OnTouchListener fireListener = new View.OnTouchListener() {
+	private View.OnClickListener fireListener = new View.OnClickListener() {
 		@Override
-		public boolean onTouch(final View view, final MotionEvent motionEvent) {
-			return MyAndroidMenus.onTouchGeneric (GameOverActivity.this, view.getId ());
+		public void onClick(final View view) {
+			MyAndroidMenus.onClickGeneric (GameOverActivity.this, view.getId ());
 		}
 	};
 

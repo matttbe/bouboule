@@ -100,10 +100,9 @@ public class MyAndroidMenus implements Menus {
 		activity.finish ();
 	}
 
-	public static boolean onTouchGeneric (Activity activity, int id) {
+	public static void onClickGeneric (Activity activity, int id) {
 		activity.setResult (id);
 		activity.finish(); // finish activity => return to MainActivity
-		return true; // prevent double calls
 	}
 
 	public static void onResumeMusic (Context context) {

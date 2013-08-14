@@ -37,7 +37,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.TypedValue;
 import android.view.Display;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -110,11 +109,11 @@ public class MenuPause extends Activity {
 		contentView.setRotation(-15);
 
 		// Listeners for the Game Launcher
-		findViewById(R.id.PauseContinueButton).setOnTouchListener(
+		findViewById(R.id.PauseContinueButton).setOnClickListener(
 				fireListener);
-		findViewById(R.id.PauseMenuButton).setOnTouchListener(
+		findViewById(R.id.PauseMenuButton).setOnClickListener(
 				fireListener);
-		findViewById(R.id.PauseQuitButton).setOnTouchListener(
+		findViewById(R.id.PauseQuitButton).setOnClickListener(
 				fireListener);
 
 		
@@ -163,14 +162,11 @@ public class MenuPause extends Activity {
 	/*
 	 * Start the Game // Parameters // HighScore
 	 */
-	private View.OnTouchListener fireListener = new View.OnTouchListener() {
+	private View.OnClickListener fireListener = new View.OnClickListener() {
 		@Override
-		public boolean onTouch(View view, MotionEvent motionEvent) {
-
+		public void onClick(final View view) {
 			setResult(view.getId()); // give the id of the button
 			finish(); // finish activity
-
-			return false;
 		}
 	};
 
