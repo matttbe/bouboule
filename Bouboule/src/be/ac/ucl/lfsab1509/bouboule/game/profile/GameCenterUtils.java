@@ -50,7 +50,7 @@ public class GameCenterUtils {
 		if (GlobalSettings.GAMECENTER == null) return;
 
 		int iWorld = getWorld(iLevel);
-		int iPercents = (iLevel - 1 % 4) * 25; // iLevel == 2: only iLevel 1 won = 25%
+		int iPercents = ((iLevel - 1) % 4) * 25; // iLevel == 2: only iLevel 1 won = 25%
 		if (iPercents == 0)
 			iPercents = 100; // 4 = 100%
 
@@ -64,7 +64,7 @@ public class GameCenterUtils {
 			GlobalSettings.GAMECENTER.submitAchievement("NbDeaths50", iNbDeaths * 2);
 		if (iNbDeaths <= 100) // 33.3
 			GlobalSettings.GAMECENTER.submitAchievement("NbDeaths100", iNbDeaths);
-		if (iNbDeaths <= 500 && iNbDeaths % 5 == 0) // 166.6/2
+		if (iNbDeaths <= 500 && (iNbDeaths % 5) == 0) // 166.6/2
 			GlobalSettings.GAMECENTER.submitAchievement("NbDeaths500", iNbDeaths / 5);
 	}
 
