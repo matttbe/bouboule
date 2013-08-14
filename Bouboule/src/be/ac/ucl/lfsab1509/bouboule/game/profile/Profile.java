@@ -404,7 +404,7 @@ public class Profile {
 		boolean bNeedFlush = false;
 
 		int iNbWorlds = GameCenterUtils.getWorld(iLastLevel)
-				- GameCenterUtils.getWorld(iStartLevel + 1); // we won this level: +1
+				- GameCenterUtils.getWorld(iStartLevel);
 
 		for (int i = 2; i <= iNbWorlds; i++) {
 			if (! bWorldsInARow[i-2]) { // the first time we do that

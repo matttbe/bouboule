@@ -39,17 +39,17 @@ public class GameCenterUtils {
 
 	/**
 	 * @param iLevel the best level played but NOT WON!
-	 * @return the world unlocked
+	 * @return the current world
 	 */
 	public static int getWorld(int iLevel) {
-		return (iLevel - 2) / 4 + 1; // 1 => 4 = W1 ; 5 => 8 = W2 (...)
+		return (iLevel - 1) / 4 + 1; // 1 => 4 = W1 ; 5 => 8 = W2 (...)
 	}
 
 	// iLevel > 1 - iLevel: the best level played but NOT WON!
 	public static void newBestLevel(int iLevel) {
 		if (GlobalSettings.GAMECENTER == null) return;
 
-		int iWorld = getWorld(iLevel);
+		int iWorld = getWorld(iLevel - 1); // - 1, we want the worlds unlocked, not the current one
 		int iPercents = ((iLevel - 1) % 4) * 25; // iLevel == 2: only iLevel 1 won = 25%
 		if (iPercents == 0)
 			iPercents = 100; // 4 = 100%
