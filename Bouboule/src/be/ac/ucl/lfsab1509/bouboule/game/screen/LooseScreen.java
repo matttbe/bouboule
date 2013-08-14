@@ -45,8 +45,8 @@ public class LooseScreen extends AbstractScreen {
 		super.show();
 
 		// Set Background
-		// addBackGroundShift("GdxMenus/endgame/you_loose_bg.jpg"); // TODO: file needed (HD & NHD)
-		// addBackGround("GdxMenus/endgame/you_loose_buttons.png"); // TODO: file needed (HD & NHD)
+		addBackGroundShift("GdxMenus/loose/loosebg.jpg");
+		addBackGround("GdxMenus/loose/loosebuttons.png");
 
 		// Set Lives
 

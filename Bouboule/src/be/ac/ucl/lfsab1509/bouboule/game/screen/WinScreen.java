@@ -45,8 +45,8 @@ public class WinScreen extends AbstractScreen {
 		super.show();
 
 		// Set Background
-		// addBackGroundShift("GdxMenus/endgame/you_win_bg.jpg"); // TODO: file needed (HD & NHD)
-		// addBackGround("GdxMenus/endgame/you_win_buttons.png"); // TODO: file needed (HD & NHD)
+		addBackGroundShift("GdxMenus/win/winbg.jpg"); 
+		addBackGround("GdxMenus/win/winbuttons.png");
 
 		// Set Lives
 		switch (GlobalSettings.PROFILE.getNbLifes()) {

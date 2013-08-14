@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Bouboule</string>
 	<key>MinimumOSVersion</key>
-	<string>3.2</string>
+	<string>5.0</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>2</integer>
