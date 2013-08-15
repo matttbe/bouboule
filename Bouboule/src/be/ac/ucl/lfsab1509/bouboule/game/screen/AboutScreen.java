@@ -32,6 +32,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public class AboutScreen extends AbstractScreen {
 
@@ -49,22 +50,22 @@ public class AboutScreen extends AbstractScreen {
 		// Note: no accent with the default font and multiple spaces or \t are not working
 		String cAboutText =
 				  "App's name:\n"
-				+ " Bouboule\n\n"
+						  + " Bouboule\n\n"
 				+ "Authors:\n"
-				+ " Baerts Matthieu, Remy Baptiste, Van Wallendael "
+					+ " Baerts Matthieu, Remy Baptiste, Van Wallendael "
 					+ "Nicolas and Verhaeghe Helene\n\n"
 				+ "Graphisms:\n"
-				+ " Van Wallendael Julien\n\n"
+					+ " Van Wallendael Julien\n\n"
 				+ "Music and sounds:\n"
-				+ " Adans Paschal (adanspaschal.gmail.com) and"
+					+ " Adans Paschal (adanspaschal.gmail.com) and"
 					+ " Klez (The gateway - SpaceShip level)\n\n"
 				+ "Credits & License:\n"
-				+ " Bouboule was developed during the course"
+					+ " Bouboule was developed during the course"
 					+ " FSAB1509 - Projet Informatique (Yves Deville, Universite"
-					+ " Catholique de Louvain, Belgium), 2012–2013.\nOpen-Source"
-					+ " GPL3 license and developed with LibGDX (Free and"
-					+ " Open-Source game development framework under Apache"
-					+ " License 2.0).";
+					+ " Catholique de Louvain, Belgium), 2012-2013.\n\n"
+					+ "Open-Source  GPL3 license and developed with LibGDX"
+					+ " (Free and Open-Source game development framework under"
+					+ " Apache License 2.0).";
 		int iVersion = Gdx.app.getVersion();
 		if (iVersion > 0)
 			cAboutText += "\n\nVersion: " + iVersion;
@@ -72,9 +73,10 @@ public class AboutScreen extends AbstractScreen {
 		label.setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 
 		// not on the border
-		label.setWidth(GlobalSettings.APPWIDTH - 20);
-		label.setHeight(GlobalSettings.APPHEIGHT - 20);
-		label.setPosition(10, 10);
+		label.setWidth(GlobalSettings.APPWIDTH - 20 * GlobalSettings.HD);
+		label.setHeight(GlobalSettings.APPHEIGHT - 20 * GlobalSettings.HD);
+		label.setPosition(10 * GlobalSettings.HD, 10 * GlobalSettings.HD);
+		label.setAlignment(Align.center);
 
 		label.setWrap(true); // return to the next lines
 
