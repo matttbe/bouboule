@@ -70,7 +70,6 @@
     <string name="about_music">Music and sounds:</string>
     <string name="about_music_txt">Adans Paschal (adanspaschal@gmail.com)\nMusic of SpaceShip arena by Klez (The gateway)</string>
     
-    
     <!-- Menu Pause -->
     <string name="Pause_continue">Continue</string>
     <string name="Menu">Menu</string>
@@ -79,12 +78,15 @@
     <string name="pause">PAUSE</string>
     
     <!-- Menu Victory -->
-    <string name="Victory_next_level">Next Level</string>
     
     <!-- Menu Loosing -->
-    <string name="Loosing_continue">Retry</string>
+    
+    <!-- Menu GameOver -->
     <string name="GameOver">Game Over</string>
     <string name="title_activity_gameover">GameOverActivity</string>
+    <string name="GameOverHighScore">HIGH SCORE</string>
+    
+    <!-- Menu - HighScore -->
     <string name="by_someone">by</string>
     <string name="at_level_x">at level</string>
     <string name="Score">Score:</string>

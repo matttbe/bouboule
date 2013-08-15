@@ -32,10 +32,16 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStat
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.graphics.Point;
 import android.graphics.Typeface;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
 public class GameOverActivity extends Activity {
@@ -45,6 +51,7 @@ public class GameOverActivity extends Activity {
 	private int endScore;
 	private String endScoreText;
 	private TextView score;
+	private TextView highScoreTextView;
 	// Need handler for callback to the UI thread
 	private final Handler mHandler = new Handler();
 
@@ -74,6 +81,38 @@ public class GameOverActivity extends Activity {
 		score.setTypeface (font);
 		score.setText (endScoreText);
 		score.setOnClickListener(scoreListener);
+
+		//_______ HighScore
+		highScoreTextView = (TextView) findViewById(R.id.GameOverHighScore);
+
+		if (GlobalSettings.PROFILE.isNewHighScore())
+			animateHighScore();
+		else
+			highScoreTextView.setVisibility(View.INVISIBLE);
+	}
+
+	private void animateHighScore() {
+		// ratio
+		Display display = getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		float ratio = size.y / GlobalSettings.APPHEIGHT;
+
+		Typeface myTypeface = Typeface.createFromAsset(getAssets(), "menu_font.ttf");
+		highScoreTextView.setTypeface(myTypeface);
+		highScoreTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 35 * ratio);
+
+		AnimationSet animationSetForHighScore = new AnimationSet(true);
+		ScaleAnimation anim = new ScaleAnimation(1.0f, 1.10f, 1.0f, 1.10f,
+				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+				0.5f);
+		anim.setDuration(1000);
+		anim.setRepeatCount(Animation.INFINITE);
+		anim.setRepeatMode(Animation.REVERSE);
+		animationSetForHighScore.addAnimation(anim);
+		highScoreTextView.startAnimation(animationSetForHighScore);
+
+		highScoreTextView.setOnClickListener(scoreListener);
 	}
 
 	private View.OnClickListener fireListener = new View.OnClickListener() {
