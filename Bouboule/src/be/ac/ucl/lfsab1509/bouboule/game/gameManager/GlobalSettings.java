@@ -37,11 +37,16 @@ import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 
 public class GlobalSettings {
 
+	//Resolution
 	public static final float APPWIDTH  = 800f;
 	public static final float APPHEIGHT = 1250f;
 	public static final boolean ISHD    = false;
 	public static final float HD        = 1f;
-	public static       float SHIFT_BG;
+	
+	// For multiscreen size support
+	public static float SHIFT_BG_WIDTH	= 0f;
+	public static float SHIFT_BG_HEIGHT	= 0f;
+	public static float SCALE 			= 1f;
 
 	// public static final boolean ISGWT = false; // DO NOT MODIFY THIS LINE! used by switch_backend_GWT.sh script
 
