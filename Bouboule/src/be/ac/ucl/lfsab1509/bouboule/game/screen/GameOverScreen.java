@@ -30,7 +30,9 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -38,6 +40,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 public class GameOverScreen extends AbstractScreen {
 
 	private boolean endGame;
+	private Label highScoreLabel;
 
 	public GameOverScreen(boolean endGame) {
 		super(true);
@@ -82,7 +85,7 @@ public class GameOverScreen extends AbstractScreen {
 		// Set Font for end Score
 
 		float fScaleFont = GlobalSettings.ISHD ? 1f : 0.7f;
-		int iY = GlobalSettings.ISHD ? 1024 : 625;
+		int iY = (int) (650 * GlobalSettings.HD);
 		int endScore = GlobalSettings.PROFILE.getEndGameScore();
 		String text = endGame ? "End! " + endScore : Integer.toString(endScore);
 		Label label = addLabel(text, "chinyen-font", fScaleFont,
@@ -91,5 +94,44 @@ public class GameOverScreen extends AbstractScreen {
 		label.setX(GlobalSettings.APPWIDTH / 2f - 
 				label.getTextBounds().width / 2f);
 
+		if (GlobalSettings.PROFILE.isNewHighScore())
+			showHighScore();
+	}
+
+	private void showHighScore() {
+		highScoreLabel = new Label("HIGH SCORE", getSkin(),
+				"darktimes-font",
+				new Color(1f, 1f, .212f, 1f));
+		highScoreLabel.setFontScale(.6f);
+		highScoreLabel.setAlignment(Align.center);
+		highScoreLabel.setWidth(GlobalSettings.APPWIDTH);
+		highScoreLabel.setY((int) (560 * GlobalSettings.HD));
+		highScoreLabel.setTouchable(null); // we can click through it
+
+		stage.addActor(highScoreLabel);
+		ActionHighScore highScoreAction = new ActionHighScore();
+		stage.addAction(highScoreAction);
+		highScoreAction.setActor(highScoreLabel);
+	}
+
+	private class ActionHighScore extends Action {
+
+		private float fTime = 0;
+
+		@Override
+		public boolean act(float delta) {
+			fTime += delta;
+
+			int iTime = (int) fTime;
+			float fDiffTime = fTime - iTime;
+			if (iTime % 2 == 0) { // grow down => .6 => .5
+				highScoreLabel.setFontScale(.6f - fDiffTime / 10f);
+				fTime = fDiffTime; // avoid overflow... ok almost impossible :)
+			}
+			else
+				highScoreLabel.setFontScale(.5f + fDiffTime / 10f);
+
+			return false; // continue the animation...
+		}
 	}
 }
