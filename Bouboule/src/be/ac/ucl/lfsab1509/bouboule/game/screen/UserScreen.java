@@ -399,7 +399,7 @@ public class UserScreen extends AbstractScreen {
 				.setTouchable(null);
 
 		soundCheckBox = addCheckBox("Music", ! GlobalSettings.SOUND_IS_MUTED,
-				iX, iY + (GlobalSettings.ISHD ? -33 : 5));
+				iX, iY + (GlobalSettings.ISHD ? -50 : 5));
 		soundCheckBox.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 		soundCheckBox.setX((int) (GlobalSettings.APPWIDTH / 2 // center
 				- soundCheckBox.getWidth() / 2));

@@ -42,7 +42,7 @@ public class GlobalSettings {
 	public static final float APPHEIGHT = 1250f;
 	public static final boolean ISHD    = false;
 	public static final float HD        = 1f;
-	
+
 	// For multiscreen size support
 	public static float SHIFT_BG_WIDTH	= 0f;
 	public static float SHIFT_BG_HEIGHT	= 0f;

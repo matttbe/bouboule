@@ -217,13 +217,11 @@ public abstract class AbstractScreen implements Screen {
 
 	protected Image addBackGround(String imagePath) {
 		return addImage(imagePath, 0, 0);
-
 	}
 	
 	protected Image addBackGroundShift(String imagePath) {
 		return addImage(imagePath, GlobalSettings.SHIFT_BG_WIDTH,
 				GlobalSettings.SHIFT_BG_HEIGHT,GlobalSettings.SCALE);
-
 	}
 
 	/**
@@ -235,19 +233,16 @@ public abstract class AbstractScreen implements Screen {
 		textureList.add(texture);
 
 		Image img = new Image(texture);
-		
+
 		if (scale != 1f)
 			img.setScale(scale);
-		
-		Gdx.app.log("SCREEN", "UPSCALLING :::a:::"+img.getPrefHeight());
-		
+
 		img.setPosition(x, y);
 		this.stage.addActor(img);
 		return img;
 	}
 
 	protected Image addImage(String imagePath, float x, float y) {
-
 		return addImage(imagePath, x, y, 1f);
 	}
 
