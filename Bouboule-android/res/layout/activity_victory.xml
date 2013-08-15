@@ -57,7 +57,7 @@
                 android:layout_gravity="center_vertical|left"
                 android:text="@string/pause"
                 android:textAppearance="?android:attr/textAppearanceButton"
-                android:textColor="@color/black_overlay"
+                android:textColor="#000000"
                 android:textStyle="bold" />
 
         </LinearLayout>

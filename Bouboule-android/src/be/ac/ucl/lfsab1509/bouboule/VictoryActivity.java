@@ -70,6 +70,7 @@ public class VictoryActivity extends Activity {
 
 		pScoreView.setTypeface (myFontBout);
 		pScoreView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 35 * ratio);
+		pScoreView.setOnClickListener(scoreListener);
 
 		int NbLifes = GlobalSettings.PROFILE.getNbLifes ();
 
@@ -85,8 +86,6 @@ public class VictoryActivity extends Activity {
 			findViewById(R.id.heart1).setVisibility(View.INVISIBLE);
 			findViewById(R.id.heart2).setVisibility(View.INVISIBLE);
 		}
-
-		pScoreView.setOnClickListener(scoreListener);
 	}
 
 	private View.OnClickListener scoreListener = new View.OnClickListener() {

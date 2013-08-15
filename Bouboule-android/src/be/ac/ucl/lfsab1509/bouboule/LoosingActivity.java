@@ -69,7 +69,8 @@ public class LoosingActivity extends Activity {
 		pScoreView.setText (score);
 		pScoreView.setTypeface (myFontBout);
 		pScoreView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 35 * ratio);
-		
+		pScoreView.setOnClickListener(scoreListener);
+
 		int NbLifes = GlobalSettings.PROFILE.getNbLifes ();
 
 		if (NbLifes == 2) {
@@ -85,8 +86,6 @@ public class LoosingActivity extends Activity {
 			findViewById(R.id.heart2).setVisibility(View.INVISIBLE);
 		}
 		// no life? => GameOverActivity
-
-		pScoreView.setOnClickListener(scoreListener);
 	}
 
 	private View.OnClickListener scoreListener = new View.OnClickListener() {
