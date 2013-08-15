@@ -120,8 +120,8 @@ public class LevelLoader {
 		GraphicManager.TIME = Integer.parseInt(file.getAttribute("time", "30"));
 
 		// AI
-		AI.ACC_MAX_AI = Float.parseFloat(file.getAttribute("accmaxai", "0.5f")); 
-		AI.ACC_MAX_PLAYER = Float.parseFloat(file.getAttribute("accmaxplayer", "0.5f"));
+		AI.ACC_MAX_AI = Float.parseFloat(file.getAttribute("accmaxai", "0.5f")) * GlobalSettings.HD;
+		AI.ACC_MAX_PLAYER = Float.parseFloat(file.getAttribute("accmaxplayer", "0.5f")) * GlobalSettings.HD;
 		AI.countframe = 0;
 		AI.IS_INIT=false;
 
@@ -294,9 +294,9 @@ public class LevelLoader {
 			String texRegionPath 	= file + ".png";
 			String jsonFile 		= file + ".json";
 			String jsonName 		= extractFileName(file);
-			Boolean produce 		= Boolean.parseBoolean(newobstacle.getAttribute("produce",
+			boolean produce 		= Boolean.parseBoolean(newobstacle.getAttribute("produce",
 					"false"));
-			Boolean blink	 		= Boolean.parseBoolean(newobstacle.getAttribute("blink",
+			boolean blink	 		= Boolean.parseBoolean(newobstacle.getAttribute("blink",
 					"false"));
 
 
