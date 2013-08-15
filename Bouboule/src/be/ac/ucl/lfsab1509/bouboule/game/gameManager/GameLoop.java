@@ -42,6 +42,7 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -67,6 +68,8 @@ public class GameLoop {
 
 	// background
 	private Texture background;
+	private TextureRegion backgroundRegion;
+
 	private Texture scoreboard;
 
 	private static Random random;
@@ -157,6 +160,9 @@ public class GameLoop {
 		// Clear the background for a new use.
 		if (background != null)
 			background.dispose();
+		
+		if (backgroundRegion != null && backgroundRegion.getTexture() != null)
+			backgroundRegion.getTexture().dispose();
 
 		// Reset EndGame Listener
 		EndGameListener.resetListener();
@@ -175,6 +181,7 @@ public class GameLoop {
 		level.readLevelMapNodes();
 
 		background = new Texture(arenaName + "bg.jpg");
+		backgroundRegion = new TextureRegion(background);
 	}
 
 	/**
@@ -212,7 +219,19 @@ public class GameLoop {
 		batch.disableBlending();
 		// Allow to draw the background fast because it disable
 		// the color blending (override the background).
-		batch.draw(background, GlobalSettings.SHIFT_BG, 0);
+		
+		//If the background is upscaled, we must use a TextureRegion
+		if (GlobalSettings.SCALE != 1f) {
+			batch.draw(backgroundRegion, GlobalSettings.SHIFT_BG_WIDTH,
+					GlobalSettings.SHIFT_BG_HEIGHT, 0f, 0f,
+					backgroundRegion.getRegionWidth(),
+					backgroundRegion.getRegionHeight(), GlobalSettings.SCALE,
+					GlobalSettings.SCALE, 0f);
+
+		} else {
+			batch.draw(background, GlobalSettings.SHIFT_BG_WIDTH, 0f);
+		}
+		
 		batch.enableBlending();
 
 		batch.draw(scoreboard, 0, 0);
@@ -503,6 +522,8 @@ public class GameLoop {
 		graphicManager.dispose(true);
 		if (background != null)
 			background.dispose();
+		if (backgroundRegion != null && backgroundRegion.getTexture() != null)
+			backgroundRegion.getTexture().dispose();
 		scoreboard.dispose();
 		countDown.dispose();
 		tutorial.dispose();

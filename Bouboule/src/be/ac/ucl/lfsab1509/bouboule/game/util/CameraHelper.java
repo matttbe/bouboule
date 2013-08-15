@@ -62,15 +62,24 @@ public class CameraHelper {
 			// Letterbox left and right.
 			viewportHeight = virtualHeight;
 			viewportWidth = viewportHeight * aspectPhysical;
+			
+			GlobalSettings.SHIFT_BG_WIDTH = - (virtualHeight - virtualWidth) / 2; // ok in HD and NHD
+
 		} else {
 			// Letterbox above and below.
 			viewportWidth = virtualWidth;
 			viewportHeight = viewportWidth * (1 / aspectPhysical);
-		}
+			GlobalSettings.SCALE = viewportHeight / virtualHeight;
+			Gdx.app.log("SCREEN", "SCALE : " + physicalHeight + "/"
+					+ viewportHeight);
+			Gdx.app.log("SCREEN", "SCALE : " + GlobalSettings.SCALE);
 
-		// virtualHeight = background size
-		// GlobalSettings.SHIFT_BG = - (virtualHeight - physicalHeight * aspectPhysical) / 2; // 225: ok in NHD only
-		GlobalSettings.SHIFT_BG = - (virtualHeight - virtualWidth) / 2; // ok in HD and NHD
+			GlobalSettings.SHIFT_BG_WIDTH = -(viewportHeight 
+					- virtualWidth)	 / 2;
+			GlobalSettings.SHIFT_BG_HEIGHT = -(viewportHeight 
+					- virtualHeight) / 2;
+
+		}
 
 		OrthographicCamera camera = new OrthographicCamera(viewportWidth,
 				viewportHeight);

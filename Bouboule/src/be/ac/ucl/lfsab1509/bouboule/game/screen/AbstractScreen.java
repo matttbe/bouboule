@@ -221,7 +221,8 @@ public abstract class AbstractScreen implements Screen {
 	}
 	
 	protected Image addBackGroundShift(String imagePath) {
-		return addImage(imagePath, GlobalSettings.SHIFT_BG, 0);
+		return addImage(imagePath, GlobalSettings.SHIFT_BG_WIDTH,
+				GlobalSettings.SHIFT_BG_HEIGHT,GlobalSettings.SCALE);
 
 	}
 
@@ -229,14 +230,25 @@ public abstract class AbstractScreen implements Screen {
 	 * @return an Image created from a Texture which will be automatically
 	 *         disposed.
 	 */
-	protected Image addImage(String imagePath, float x, float y) {
+	protected Image addImage(String imagePath, float x, float y, float scale) {
 		Texture texture = new Texture(imagePath);
 		textureList.add(texture);
 
 		Image img = new Image(texture);
+		
+		if (scale != 1f)
+			img.setScale(scale);
+		
+		Gdx.app.log("SCREEN", "UPSCALLING :::a:::"+img.getPrefHeight());
+		
 		img.setPosition(x, y);
 		this.stage.addActor(img);
 		return img;
+	}
+
+	protected Image addImage(String imagePath, float x, float y) {
+
+		return addImage(imagePath, x, y, 1f);
 	}
 
 	protected CheckBox addCheckBox(String text, boolean bChecked, int x, int y) {

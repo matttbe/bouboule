@@ -60,9 +60,7 @@ public class MenuScreen extends AbstractScreen {
 		// Set Background
 
 		addBackGroundShift("GdxMenus/main/mainmenubg.jpg");
-		
-		Gdx.app.log("SCREEN", ""+GlobalSettings.SHIFT_BG);
-		
+				
 		// Add Button image
 
 		addBackGround("GdxMenus/main/mainmenubuttons.png");
@@ -70,9 +68,9 @@ public class MenuScreen extends AbstractScreen {
 		// Create the 2 Bouboules out of the screen
 
 		final Image imgBoubouleR = addImage("GdxMenus/main/boubouleright.png",
-				(int) GlobalSettings.APPWIDTH, 0);
+				GlobalSettings.APPWIDTH, 0f);
 		final Image imgBoubouleL = addImage("GdxMenus/main/boubouleleft.png",
-				(int) -GlobalSettings.APPWIDTH, 0);
+				-GlobalSettings.APPWIDTH, 0f);
 
 		// add action on the bouboule
 		final ActionBouboul actionbouL = new ActionBouboul(false);
@@ -97,7 +95,7 @@ public class MenuScreen extends AbstractScreen {
 		tableTitle.setTransform(true);
 		tableTitle.setWidth(GlobalSettings.APPWIDTH); // all the width
 		tableTitle.setX(0);
-		tableTitle.setY((int) (1050 * GlobalSettings.HD));
+		tableTitle.setY((int) (1050 * GlobalSettings.HD) - GlobalSettings.SHIFT_BG_HEIGHT / 2);
 		tableTitle.setOrigin(GlobalSettings.APPWIDTH / 2,
 				tableTitle.getHeight() / 2); // at the center
 		stage.addActor(tableTitle);
@@ -258,10 +256,12 @@ public class MenuScreen extends AbstractScreen {
 			// set position for the right and left Bouboule
 			if (right)
 				actor.setPosition(GlobalSettings.APPWIDTH - position,
-						(GlobalSettings.APPWIDTH - position) / 3.5f);
+						(GlobalSettings.APPWIDTH - position) / 3.5f
+						+ GlobalSettings.SHIFT_BG_HEIGHT);
 			else
 				actor.setPosition(-GlobalSettings.APPWIDTH + position,
-						(GlobalSettings.APPWIDTH - position) / 3.5f);
+						(GlobalSettings.APPWIDTH - position) / 3.5f
+						+ GlobalSettings.SHIFT_BG_HEIGHT);
 
 			if (position == GlobalSettings.APPWIDTH) {
 				actor.removeAction(this);
