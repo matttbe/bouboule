@@ -32,6 +32,7 @@ import java.util.Arrays;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.EndGameListener;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
@@ -48,7 +49,13 @@ public class ProfileMgr {
 	 * Create PREFS_GLOBAL, PROFILE and load default settings.
 	 */
 	public ProfileMgr() {
-		prefs = Gdx.app.getPreferences(GlobalSettings.PREFS_GLOBAL);
+		
+		//In iOS, the storage folder is home/Documents/* not home/Library
+		prefs = Gdx.app.getPreferences(
+				Gdx.app.getType() == ApplicationType.iOS ?
+				"../Documents/"+GlobalSettings.PREFS_GLOBAL : 
+					GlobalSettings.PREFS_GLOBAL);
+		
 		loadDefaultProfile();
 		profileGlobal = new ProfileGlobal(prefs, SEPARATOR);
 		profileGlobal.loadDefaultSettings();

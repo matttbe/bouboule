@@ -31,6 +31,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerListener;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.Application.ApplicationType;
 
 public class Profile {
 	// user
@@ -82,7 +83,12 @@ public class Profile {
 	public Profile(final String cName) {
 		
 		this.cName = cName;
-		prefs = Gdx.app.getPreferences(cName);
+		
+		// In iOS, the storage folder is home/Documents/* not home/Library
+		prefs = Gdx.app.getPreferences(
+				Gdx.app.getType() == ApplicationType.iOS ? 
+						"../Documents/"	+ cName
+						: cName);
 
 		// reset at the end of the game
 		iLifes = prefs.getInteger(LIFES_KEY, GlobalSettings.INIT_LIFES);
