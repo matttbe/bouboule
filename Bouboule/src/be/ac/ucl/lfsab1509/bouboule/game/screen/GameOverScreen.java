@@ -85,7 +85,7 @@ public class GameOverScreen extends AbstractScreen {
 		// Set Font for end Score
 
 		float fScaleFont = GlobalSettings.ISHD ? 1f : 0.7f;
-		int iY = GlobalSettings.ISHD ? 1100 : 650;
+		int iY = GlobalSettings.ISHD ? 1130 : 650;
 		int endScore = GlobalSettings.PROFILE.getEndGameScore();
 		String text = endGame ? "End! " + endScore : Integer.toString(endScore);
 		Label label = addLabel(text, "chinyen-font", fScaleFont,
@@ -105,7 +105,7 @@ public class GameOverScreen extends AbstractScreen {
 		highScoreLabel.setFontScale(.6f);
 		highScoreLabel.setAlignment(Align.center);
 		highScoreLabel.setWidth(GlobalSettings.APPWIDTH);
-		highScoreLabel.setY(GlobalSettings.ISHD ? 950 : 560);
+		highScoreLabel.setY(GlobalSettings.ISHD ? 930 : 560);
 		highScoreLabel.setTouchable(null); // we can click through it
 
 		stage.addActor(highScoreLabel);
