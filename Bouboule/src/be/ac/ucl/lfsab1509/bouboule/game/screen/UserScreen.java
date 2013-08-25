@@ -165,9 +165,9 @@ public class UserScreen extends AbstractScreen {
 						+ cNewUser);
 				GlobalSettings.PROFILE_MGR.changeProfile(cNewUser);
 				refreshScreen();
-				new Dialog("New User Selected", getSkin(), "default") {} // close the dialogue
-						.text("Hello " + cNewUser + "!")
-						.button("Close", null)
+				new Dialog("  New User Selected  ", getSkin(), "default") {} // close the dialogue
+						.text("\n  Hello " + cNewUser + "!  \n ")
+						.button("     Close     ", null)
 						.show(stage);
 			}
 		}
@@ -233,17 +233,17 @@ public class UserScreen extends AbstractScreen {
 			GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(
 					newUserTextField.getText());
 			refreshScreen();
-			new Dialog("New User Created", getSkin(), "default") {} // close the dialogue
-					.text("New user created with succes!")
-					.button("Close", null)
+			new Dialog("  New User Created  ", getSkin(), "default") {} // close the dialogue
+					.text("\n  New user created with succes!  \n ")
+					.button("     Close     ", null)
 					.show(stage);
 		}
 		else
-			new Dialog("Error", getSkin(), "default") {
+			new Dialog("  Error  ", getSkin(), "default") {
 				protected void result(Object object) {
 					refreshScreen();
 				}
-			}.text(error).button("Close", null).show(stage);
+			}.text("\n  " + error + "  \n ").button("     Close     ", null).show(stage);
 	}
 
 	//_________________________________ BOUBOULES IMAGES
@@ -303,9 +303,9 @@ public class UserScreen extends AbstractScreen {
 	};
 
 	private void displayDialogOneImage() {
-		new Dialog("No other skin available", getSkin(), "default") {} // close the dialogue
-				.text("You've to win against other bouboules!")
-				.button("Close", null)
+		new Dialog("  No other skin available  ", getSkin(), "default") {} // close the dialogue
+				.text("\n  You've to win against other bouboules!  \n ")
+				.button("     Close     ", null)
 				.show(stage);
 	}
 
@@ -368,7 +368,7 @@ public class UserScreen extends AbstractScreen {
 		addLabel("RESTART", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
 
-		resetButton = new TextButton("End Current Game", getSkin(), "default");
+		resetButton = new TextButton("  End Current Game  ", getSkin(), "default");
 		// resetButton.setSize(300, 100);
 		resetButton.setPosition(GlobalSettings.APPWIDTH / 2
 				- resetButton.getWidth() / 2,
@@ -379,15 +379,16 @@ public class UserScreen extends AbstractScreen {
 
 	private ClickListener resetClickListener = new ClickListener() {
 		public void clicked(InputEvent event, float x, float y) {
-			new Dialog("Tutorial", getSkin(), "default") {
+			new Dialog("  End Current Game  ", getSkin(), "default") {
 				protected void result(Object object) {
 					if ((Boolean) object == true)
 						EndGameListener.resetGame ();
 				}
-			}.text("It will restart the game to level 1\n"
-					+ " and keep all unlocked worlds.\n"
-					+ "Do you want to continue?")
-			.button("Yes", true).button("No", false).show(stage);
+			}.text("\n  It will restart the game to level 1  \n"
+					+ "   and keep all unlocked worlds.  \n"
+					+ "  Do you want to continue?  \n ")
+			.button("      Yes      ", true).button("       No       ", false)
+			.show(stage);
 		}
 	};
 

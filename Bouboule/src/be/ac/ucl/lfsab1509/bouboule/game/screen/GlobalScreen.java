@@ -101,7 +101,7 @@ public class GlobalScreen extends AbstractScreen {
 
 	private ClickListener tutorialClickListener = new ClickListener() {
 		public void clicked(InputEvent event, float x, float y) {
-			new Dialog("Tutorial", getSkin(), "default") {
+			new Dialog("  Tutorial  ", getSkin(), "default") {
 				protected void result(Object object) {
 					if ((Boolean) object == true) {
 						EndGameListener.resetGame ();
@@ -111,9 +111,10 @@ public class GlobalScreen extends AbstractScreen {
 					else
 						tutorialCheckBox.setChecked(false);
 				}
-			}.text("It will restart the game to level 1.\n"
-				+ "Do you want to continue?")
-			.button("Yes", true).button("No", false).show(stage);
+			}.text("\n  It will restart the game to level 1.  \n"
+				+ "  Do you want to continue?  \n ")
+			.button("      Yes      ", true).button("       No       ", false)
+			.show(stage);
 		}
 	};
 
