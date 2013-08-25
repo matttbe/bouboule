@@ -41,6 +41,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.utils.Timer;
 
 /**
  * Class that define bonus that can be found on the board.
@@ -52,6 +53,7 @@ public class Bonus extends GameBody {
 	private Sprite 			sprite;			//Sprite to draw the Bonus
 
 	private static final Random			random = new Random();
+	private Timer timer;
 
 	public static String[][] bonusInfo = {
 			{"bonus/elasticity/elasticity_high.png", "Collision are more elastic"},
@@ -109,6 +111,16 @@ public class Bonus extends GameBody {
 		this.entity = new Entity(Entity.BONUS, true, bonusType);
 
 		body.setUserData(this.entity);
+
+		// removed the bonus after a delay
+		Timer.Task task = new Timer.Task() {
+			@Override
+			public void run() {
+				entity.setAlive(false);
+			}
+		};
+		Timer timer = new Timer();
+		timer.scheduleTask(task, 10f);
 	}
 
 	/**
@@ -144,6 +156,10 @@ public class Bonus extends GameBody {
 	@Override
 	public void destroyBody() {
 		super.destroyBody();
+		if (timer != null) {
+			timer.stop();
+			timer.clear();
+		}
 		entity.stopTask();
 		texture.getTexture().dispose();
 	}
