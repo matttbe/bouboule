@@ -93,7 +93,7 @@ public class GlobalScreen extends AbstractScreen {
 				.setTouchable(null);
 		tutorialCheckBox = addCheckBox("Show the tutorial!",
 				GlobalSettings.PROFILE.needTutorial(), iX,
-				iY - (GlobalSettings.ISHD ? 50 : 0));
+				iY - (GlobalSettings.ISHD ? 80 : 0));
 		tutorialCheckBox.setX((int) (GlobalSettings.APPWIDTH / 2
 						- tutorialCheckBox.getWidth() / 2));
 		tutorialCheckBox.addListener(tutorialClickListener);
@@ -175,7 +175,7 @@ public class GlobalScreen extends AbstractScreen {
 
 		if (GlobalSettings.ISHD) {
 			iX = 180;
-			iY -= 53;
+			iY -= 100;
 		}
 		else {
 			iX = 125;

@@ -118,7 +118,6 @@ public class GameLoop {
 			fontPause = new BitmapFont(
 					Gdx.files.internal("fonts/OsakaBig/OsakaBig.fnt"),
 					Gdx.files.internal("fonts/OsakaBig/OsakaBig.png"), false);
-			fontPause.setScale(GlobalSettings.HD);
 			fontPause.setColor(.95f, .05f, .05f, 1f);
 			texturePause = new Texture("buttons/home_button.png");
 			pixmapFade = new Pixmap(1, 1, Format.RGB888);
