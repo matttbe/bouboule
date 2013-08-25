@@ -105,24 +105,20 @@ public class GameLoop {
 		fontOswald = new BitmapFont(
 				Gdx.files.internal("fonts/Oswald/Oswald.fnt"),
 				Gdx.files.internal("fonts/Oswald/Oswald.png"), false);
-		fontOswald.setScale(GlobalSettings.HD); // TODO => rm when oswald will be bigger
-
 		fontOsaka = new BitmapFont(Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
 				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
-		fontOsaka.setScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 
 		fontOsakaRed = new BitmapFont(
 				Gdx.files.internal("fonts/Osaka/Osaka.fnt"),
 				Gdx.files.internal("fonts/Osaka/Osaka.png"), false);
 		fontOsakaRed.setColor(.95f, .05f, .05f, 1f);
-		fontOsakaRed.setScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 
 		// Pause
 		if (GlobalSettings.GAME.isGdxMenus()) {
 			fontPause = new BitmapFont(
-					Gdx.files.internal("fonts/Osaka2/Osaka2.fnt"),
-					Gdx.files.internal("fonts/Osaka2/Osaka2.png"), false);
-			fontPause.setScale(GlobalSettings.HD); // TODO check if it's ok with this zoom in HD but seems ok
+					Gdx.files.internal("fonts/OsakaBig/OsakaBig.fnt"),
+					Gdx.files.internal("fonts/OsakaBig/OsakaBig.png"), false);
+			fontPause.setScale(GlobalSettings.HD);
 			fontPause.setColor(.95f, .05f, .05f, 1f);
 			texturePause = new Texture("buttons/home_button.png");
 			pixmapFade = new Pixmap(1, 1, Format.RGB888);

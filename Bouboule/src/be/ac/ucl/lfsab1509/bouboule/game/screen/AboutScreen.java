@@ -70,7 +70,6 @@ public class AboutScreen extends AbstractScreen {
 		if (iVersion > 0)
 			cAboutText += "\n\nVersion: " + iVersion;
 		Label label = new Label(cAboutText, getSkin(), "osaka-font", Color.WHITE);
-		label.setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 
 		// not on the border
 		label.setWidth(GlobalSettings.APPWIDTH - 20 * GlobalSettings.HD);

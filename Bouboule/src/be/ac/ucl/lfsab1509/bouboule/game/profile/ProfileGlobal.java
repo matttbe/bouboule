@@ -146,7 +146,7 @@ public class ProfileGlobal {
 						+ GlobalSettings.PROFILE.getLevel(); // level
 				if (Gdx.app.getType() != ApplicationType.iOS) // @@COMMENT_GWT@@
 					cCurrInfo += SEPARATOR // level // @@COMMENT_GWT@@
-						+ dateFormat.format(new Date()).toString(); // date TODO:iOS => no date // @@COMMENT_GWT@@
+						+ dateFormat.format(new Date()).toString(); // date // @@COMMENT_GWT@@
 				prefs.putString(HIGHSCORE_KEY + i, cCurrInfo); // save the new score here
 				bNewHighScore = true;
 			}
@@ -191,7 +191,7 @@ public class ProfileGlobal {
 				if (Gdx.app.getType() != ApplicationType.iOS) // @@COMMENT_GWT@@
 					pDate = dateFormat.parse(infos[3]); // @@COMMENT_GWT@@
 				else // @@COMMENT_GWT@@
-					pDate = new Date(); // TODO:iOS
+					pDate = new Date(); // iOS and GWT don't support SimpleDateFormat
 			} catch (Exception e) { // should not happen...
 				iScore = 0;
 				iLevel = 0;

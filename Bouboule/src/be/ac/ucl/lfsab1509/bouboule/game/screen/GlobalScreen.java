@@ -94,7 +94,6 @@ public class GlobalScreen extends AbstractScreen {
 		tutorialCheckBox = addCheckBox("Show the tutorial!",
 				GlobalSettings.PROFILE.needTutorial(), iX,
 				iY - (GlobalSettings.ISHD ? 50 : 0));
-		tutorialCheckBox.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 		tutorialCheckBox.setX((int) (GlobalSettings.APPWIDTH / 2
 						- tutorialCheckBox.getWidth() / 2));
 		tutorialCheckBox.addListener(tutorialClickListener);
@@ -128,7 +127,6 @@ public class GlobalScreen extends AbstractScreen {
 		rotationCheckBox = addCheckBox("Rotation of the balls",
 				!GlobalSettings.FIXED_ROTATION,
 				iX * 2, iY + (GlobalSettings.ISHD ? -33 : 5));
-		rotationCheckBox.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 		rotationCheckBox.addListener(rotationClickListener);
 	}
 
@@ -185,7 +183,7 @@ public class GlobalScreen extends AbstractScreen {
 		}
 		for (String[] cBonus : Bonus.bonusInfo) {
 			addImage(cBonus[0], iX, iY);
-			addLabel(cBonus[1], "osaka-font", GlobalSettings.HD, // TODO => set "1f" when osaka will be bigger
+			addLabel(cBonus[1], "osaka-font", 1f,
 					Color.WHITE, iX + (GlobalSettings.ISHD ? 100 : 80), iY + 15);
 			iY -= 60 * GlobalSettings.HD;
 		}

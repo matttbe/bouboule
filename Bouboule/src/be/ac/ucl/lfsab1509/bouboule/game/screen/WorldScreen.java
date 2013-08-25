@@ -265,9 +265,9 @@ public class WorldScreen extends AbstractScreen {
 		if (infoLabel == null) {
 			String text = "There are " + GlobalSettings.NBLEVELS / 4 + " worlds\n\n"
 					+ "To unlock the next world,\n"
-					+ "you have to win 4 fights in a row.\n\n"
-					+ "Click on your player to start the game!";
-			infoLabel = addLabel(text, "osaka-font", 1.25f, // TODO: Scale to 1 when osakaMid-font available
+					+ "you have to win 4 fights in a row.\n"
+					+ "Click on your player to start fighting!";
+			infoLabel = addLabel(text, "osakaMid-font", 1f,
 					new Color(.388f, .733f, .984f, 1f), 0,
 					(int) (450 * GlobalSettings.HD));
 			infoLabel.setAlignment(Align.center);

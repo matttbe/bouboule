@@ -370,7 +370,6 @@ public class UserScreen extends AbstractScreen {
 
 		resetButton = new TextButton("Restart to level 1!", getSkin(), "default");
 		// resetButton.setSize(300, 100);
-		resetButton.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 		resetButton.setPosition(GlobalSettings.APPWIDTH / 2
 				- resetButton.getWidth() / 2,
 				iY - (GlobalSettings.ISHD ? 50 : 0));
@@ -400,7 +399,6 @@ public class UserScreen extends AbstractScreen {
 
 		soundCheckBox = addCheckBox("Music", ! GlobalSettings.SOUND_IS_MUTED,
 				iX, iY + (GlobalSettings.ISHD ? -50 : 5));
-		soundCheckBox.getLabel().setFontScale(GlobalSettings.HD); // TODO => rm when osaka will be bigger
 		soundCheckBox.setX((int) (GlobalSettings.APPWIDTH / 2 // center
 				- soundCheckBox.getWidth() / 2));
 		soundCheckBox.addListener(soundClickListener);
