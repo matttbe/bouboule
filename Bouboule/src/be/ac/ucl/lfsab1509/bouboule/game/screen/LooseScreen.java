@@ -98,8 +98,8 @@ public class LooseScreen extends AbstractScreen {
 
 		// Create all fonts
 		addLabel(Integer.toString(GlobalSettings.PROFILE.getScore()),
-				"osakaBig-font", 0.27f,
+				"osakaMid-font", 1f,
 				new Color(0.2f, 0.188f, 0.094f, 1f),
-				iX, iY);
+				iX, iY + (GlobalSettings.ISHD ? 34 : 44));
 	}
 }
