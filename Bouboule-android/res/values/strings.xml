@@ -31,7 +31,7 @@
     <string name="user_choose_level_txt">Choose the level to start with:</string>
     <string name="user_choose_level_current">Current level: </string>
     <string name="user_choose_level_max">max: </string>
-    <string name="user_resetgame">Restart to level 1!</string>
+    <string name="user_resetgame">End current game</string>
     <string name="user_resetgame_notif">Your game has been reset!</string>
     <string name="user_yes">Yes</string>
     <string name="user_no">No</string>

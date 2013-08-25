@@ -368,7 +368,7 @@ public class UserScreen extends AbstractScreen {
 		addLabel("RESTART", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
 				.setTouchable(null);
 
-		resetButton = new TextButton("Restart to level 1!", getSkin(), "default");
+		resetButton = new TextButton("End Current Game", getSkin(), "default");
 		// resetButton.setSize(300, 100);
 		resetButton.setPosition(GlobalSettings.APPWIDTH / 2
 				- resetButton.getWidth() / 2,
