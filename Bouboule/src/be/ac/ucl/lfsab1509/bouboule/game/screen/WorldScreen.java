@@ -268,7 +268,7 @@ public class WorldScreen extends AbstractScreen {
 					+ "you have to win 4 fights in a row.\n"
 					+ "Click on your player to start fighting!";
 			infoLabel = addLabel(text, "osakaMid-font", 1f,
-					new Color(.388f, .733f, .984f, 1f), 0,
+					new Color(.411f, .443f, .188f, 1f), 0,
 					(int) (450 * GlobalSettings.HD));
 			infoLabel.setAlignment(Align.center);
 			infoLabel.setWidth(GlobalSettings.APPWIDTH);

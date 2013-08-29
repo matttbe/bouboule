@@ -101,7 +101,7 @@ public class GameOverScreen extends AbstractScreen {
 	private void showHighScore() {
 		highScoreLabel = new Label("HIGH SCORE", getSkin(),
 				"darktimes-font",
-				new Color(1f, 1f, .212f, 1f));
+				new Color(0.309f, 0.584f, .796f, 1f));
 		highScoreLabel.setFontScale(.6f);
 		highScoreLabel.setAlignment(Align.center);
 		highScoreLabel.setWidth(GlobalSettings.APPWIDTH);
