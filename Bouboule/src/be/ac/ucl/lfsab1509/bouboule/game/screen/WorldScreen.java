@@ -47,6 +47,7 @@ public class WorldScreen extends AbstractScreen {
 
 	private Label infoLabel = null;
 	private boolean bInfoDisplayed = false;
+	private float shift_bg_width_Level = 0f;
 
 	/* Array to store the world position on the screen and size of the buttons */
 	private final int[] posX =  {  85, 320, 519, 504, 275,  85, 159, 122 };
@@ -64,12 +65,20 @@ public class WorldScreen extends AbstractScreen {
 		super.show();
 
 		// Set Background
-		Image background = addBackGround("GdxMenus/levels/bglevel0.jpg");
+		Image background = addBackGroundShift("GdxMenus/levels/bglevel0.jpg");
 		background.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				displayInfoWorlds();
 			}
 		});
+		
+		
+		//The level image are 1250*800f and not 1250*1250
+		// -> Du eto scale factor, the shift is not SHIFT_BG_WIDTH
+		if (GlobalSettings.SCALE != 1)
+			shift_bg_width_Level = GlobalSettings.SHIFT_BG_WIDTH 
+					+ (1250f - 800f) / 2 * GlobalSettings.HD;
+			
 
 		// Add levels images "recursively"
 		// Level are noted from 0 to 6
@@ -77,9 +86,13 @@ public class WorldScreen extends AbstractScreen {
 		// displayed. -> Corresponding to World 1 and 8.
 		for (int i = 1; i < lastUnlockedWorld
 				&& i < GlobalSettings.NBLEVELS / 4 - 1; i++) {
-			addBackGround("GdxMenus/levels/bglevel" + i + ".png").setTouchable(null);
+			
+			addImage("GdxMenus/levels/bglevel" + i + ".png", 
+					shift_bg_width_Level,
+					GlobalSettings.SHIFT_BG_HEIGHT, GlobalSettings.SCALE)
+					.setTouchable(null);
 		}
-
+		
 		// Add Boub Image selected by the user
 		String boubPath = BoubImages.BOUB_DIR_NORMAL
 				+ GlobalSettings.PROFILE.getBoubName()
@@ -100,10 +113,12 @@ public class WorldScreen extends AbstractScreen {
 				&& i < GlobalSettings.NBLEVELS / 4; i++) {
 
 			Button button = createButton("transparent",
-					(int) (sizeX[i] * GlobalSettings.HD),
-					(int) (sizeY[i] * GlobalSettings.HD),
-					(int) (posX[i] * GlobalSettings.HD),
-					(int) (posY[i] * GlobalSettings.HD));
+					(int) (sizeX[i] * GlobalSettings.HD * GlobalSettings.SCALE),
+					(int) (sizeY[i] * GlobalSettings.HD * GlobalSettings.SCALE),
+					(int) (posX[i] * GlobalSettings.HD + shift_bg_width_Level / 2),
+					(int) (posY[i] * GlobalSettings.HD + GlobalSettings.SHIFT_BG_HEIGHT 
+							* GlobalSettings.SCALE * (GlobalSettings.APPHEIGHT / 2 - posY[i]) 
+							/ GlobalSettings.APPHEIGHT));
 			addLevelListener(button, moveBoub, i);
 		}
 
@@ -139,7 +154,7 @@ public class WorldScreen extends AbstractScreen {
 
 		// Position of Boub through the worlds 0 to 7
 		private int[] posX = { 85, 320, 519, 503, 275,  92, 177, 311 };
-		private int[] posY = { 31,  61, 122, 244, 299, 385, 580, 861 };
+		private int[] posY = { 31,  61, 122, 244, 299, 385, 595, 861 };
 
 		// Postion of Boub
 		private float x = 0;
@@ -158,8 +173,10 @@ public class WorldScreen extends AbstractScreen {
 		public MoveBoub(int startPos) {
 			if (GlobalSettings.ISHD) {
 				for (int i = 0; i < posX.length; i++) {
-					posX[i] = (int) (posX[i] * GlobalSettings.HD);
-					posY[i] = (int) (posY[i] * GlobalSettings.HD);
+					posX[i] = (int) (posX[i] * GlobalSettings.HD );
+					posY[i] = (int) (posY[i] * GlobalSettings.HD + GlobalSettings.SHIFT_BG_HEIGHT 
+							* GlobalSettings.SCALE * (GlobalSettings.APPHEIGHT / 2 - posY[i]) 
+							/ GlobalSettings.APPHEIGHT);
 				}
 			}
 			this.startPos = startPos;
