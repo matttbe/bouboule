@@ -14,6 +14,7 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -21,8 +22,14 @@
 	</array>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>Icon</string>
+		<string>Icon-72</string>
 		<string>Icon@2x</string>
+		<string>Icon-72@2x</string>
+		<string>Icon</string>
+		<string>Icon-Small@2x</string>
+		<string>Icon-Small-50</string>
+		<string>Icon-Small-50@2x</string>
+		<string>Icon-Small</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<true/>
