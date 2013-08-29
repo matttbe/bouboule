@@ -38,10 +38,10 @@ import be.ac.ucl.lfsab1509.bouboule.game.profile.ProfileMgr;
 public class GlobalSettings {
 
 	//Resolution
-	public static final float APPWIDTH  = 1311f;
-	public static final float APPHEIGHT = 2048f;
-	public static final boolean ISHD    = true;
-	public static final float HD        = 1.6384f;
+	public static final float APPWIDTH  = 800f;
+	public static final float APPHEIGHT = 1250f;
+	public static final boolean ISHD    = false;
+	public static final float HD        = 1f;
 
 	// For multiscreen size support
 	public static float SHIFT_BG_WIDTH	= 0f;
