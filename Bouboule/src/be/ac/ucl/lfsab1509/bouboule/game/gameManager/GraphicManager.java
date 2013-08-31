@@ -122,6 +122,15 @@ public class GraphicManager {
 	public void addBody(final GameBody body) {
 		bodies.add(body);
 	}
+
+	/**
+	 * Remove the specified body from the graphical container to no longer be
+	 * used in the generated world
+	 * @param body : the GameBody to remove
+	 */
+	public void removeBody(final GameBody body) {
+		bodies.remove(body);
+	}
 	
 	
 	/**

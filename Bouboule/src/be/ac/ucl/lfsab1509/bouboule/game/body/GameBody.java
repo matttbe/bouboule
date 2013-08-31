@@ -114,24 +114,18 @@ public abstract class GameBody {
 		//Storage in the main variable
 		body = world.createBody(bodyDef);
 
-		if (jsonFile == "") {
-			if (radius == 0) {
-
+		if (jsonFile.isEmpty()) {
+			/*if (radius == 0)
 				makeRectBody(width, height, bodyType, density, elasticity, sensor, pos, angle);
-
-			} else {
+			else*/
 				makeCircleBody(radius, bodyType, density, elasticity, sensor, pos, angle);
-			}
-
-		} else {
-
+		}
+		else {
 			makeJsonBody(bodyType, density, elasticity, sensor, pos, angle, 
 					jsonFile, jsonName, size);
 		}
 
-
 		//Set up of the Vector2 that define the object durection
-
 		positionVector.set(GraphicManager.convertToWorld(body.getPosition().x),
 				GraphicManager.convertToWorld(body.getPosition().y));
 
@@ -153,13 +147,13 @@ public abstract class GameBody {
 	 * makeRectBody(float width,float height,BodyDef.BodyType bodyType,
 	 * 	float density,float elasticity, Vector2 pos,float angle)
 	 */
-	void makeRectBody(final float width, final float height, final BodyDef.BodyType bodyType,
+	/* private void makeRectBody(final float width, final float height, final BodyDef.BodyType bodyType,
 			final float density, final float elasticity, final boolean sensor,
 			final Vector2 pos, final float angle) {
 
 
-		/** IN case of future need**/
-	}
+		// IN case of future need //
+	}*/
 
 
 
@@ -169,7 +163,7 @@ public abstract class GameBody {
 	 * makeCircleBody(float radius,BodyDef.BodyType bodyType,
 	 * 	float density,float elasticity, Vector2 pos,float angle)
 	 */
-	void makeCircleBody(final float radius, final BodyDef.BodyType bodyType,
+	private void makeCircleBody(final float radius, final BodyDef.BodyType bodyType,
 			final float density, final float elasticity, final boolean sensor,
 			final Vector2 pos, final float angle) {
 
@@ -195,7 +189,7 @@ public abstract class GameBody {
 	 * makeJsonBody(BodyDef.BodyType bodyType, float density,
 	 * 	float elasticity, Vector2 pos,float angle, String jsonFile, String jsonName, float size)
 	 */
-	void makeJsonBody(final BodyDef.BodyType bodyType, final float density,
+	private void makeJsonBody(final BodyDef.BodyType bodyType, final float density,
 			final float elasticity, final boolean sensor, final Vector2 pos,
 			final float angle, final String jsonFile, final String jsonName, 
 			final float size) {
