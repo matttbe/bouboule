@@ -57,7 +57,9 @@ public class Bonus extends GameBody {
 
 	private float fDelta = 0;        // used for the end effects
 	private boolean bKilled = false; // avoid double destroy
-	private static final float MAX_TIME_EFFECT = .75f;
+	private static final float TIME_END_EFFECT = .75f;
+	private boolean bIsOpening = true;
+	private static final float TIME_OPEN_EFFECT = .25f;
 
 	private static final Random random = new Random();
 	private Timer timer;
@@ -120,6 +122,18 @@ public class Bonus extends GameBody {
 
 		body.setUserData(this.entity);
 
+
+		//Ensure that the body image position is set on the origin defined by 
+		//the jsonFile
+		if (origin != null)
+		{
+			pos = positionVector.cpy();
+			pos = pos.sub(origin);
+			sprite.setPosition(pos.x, pos.y);
+			sprite.setOrigin(origin.x, origin.y);
+			sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
+		}
+
 		// removed the bonus after a delay
 		Timer.Task task = new Timer.Task() {
 			@Override
@@ -137,43 +151,53 @@ public class Bonus extends GameBody {
 	 * draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)
 	 */
 	public void draw(final SpriteBatch sp) {
-
-		if (entity.isAlive()) {
-
-			if (origin != null) {
-
-				//Ensure that the body image position is set on the origin defined by 
-				//the jsonFile
-				Vector2 pos = positionVector.cpy();
-
-				pos = pos.sub(origin);
-				sprite.setPosition(pos.x, pos.y);
-				sprite.setOrigin(origin.x, origin.y);
-				sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
-
+		if (bIsOpening)
+			setOpeningEffect(sp);
+		else if (entity.isAlive()) {
+			if (origin != null)
 				sprite.draw(sp);
-			}
-			else {
+			else
 				sp.draw(texture, positionVector.x, positionVector.y);
-			}
 		}
-		else if (! bKilled) { // zoom effect
-			fDelta += Gdx.graphics.getDeltaTime();
-			if (fDelta > MAX_TIME_EFFECT) {
-				bKilled = true;
-				destroyBody();
-				return;
-			}
-			// zoom
-			sprite.setScale(1 + fDelta / MAX_TIME_EFFECT);
+		else if (! bKilled)
+			setEndingEffect(sp);
+	}
 
-			// transparency
-			Color color = sprite.getColor();
-			color.a = 1 - fDelta / MAX_TIME_EFFECT;
-			sprite.setColor(color);
+	private void setOpeningEffect(final SpriteBatch sp) {
+		fDelta += Gdx.graphics.getDeltaTime();
+		if (fDelta > TIME_OPEN_EFFECT)
+			fDelta = TIME_OPEN_EFFECT;
+		// zoom
+		sprite.setScale(fDelta / TIME_OPEN_EFFECT);
 
-			sprite.draw(sp);
+		// transparency
+		Color color = sprite.getColor();
+		color.a = fDelta / TIME_OPEN_EFFECT;
+		sprite.setColor(color);
+
+		sprite.draw(sp);
+		if (fDelta == TIME_OPEN_EFFECT) {
+			bIsOpening = false;
+			fDelta = 0;
 		}
+	}
+
+	private void setEndingEffect(final SpriteBatch sp) {
+		fDelta += Gdx.graphics.getDeltaTime();
+		if (fDelta > TIME_END_EFFECT) {
+			bKilled = true;
+			destroyBody();
+			return;
+		}
+		// zoom
+		sprite.setScale(1 + fDelta / TIME_END_EFFECT);
+
+		// transparency
+		Color color = sprite.getColor();
+		color.a = 1 - fDelta / TIME_END_EFFECT;
+		sprite.setColor(color);
+
+		sprite.draw(sp);
 	}
 
 	/**
