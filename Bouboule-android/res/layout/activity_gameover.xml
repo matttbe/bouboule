@@ -76,7 +76,7 @@
         android:layout_marginTop="-15dip"
         android:gravity="center"
         android:text="@string/GameOverHighScore"
-        android:textColor="#FFFF36"
+        android:textColor="#4f95cb"
         android:textStyle="bold" />
 
 </FrameLayout>
