@@ -231,9 +231,9 @@ public class GameLoop {
 
 		batch.draw(scoreboard, 0, 0);
 
-		graphicManager.draw(batch);
-
 		writeText();
+
+		graphicManager.draw(batch);
 
 		if (pause) { // draw the countdown or tuto
 
