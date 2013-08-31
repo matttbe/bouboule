@@ -31,9 +31,12 @@ import java.util.Random;
 
 import be.ac.ucl.lfsab1509.bouboule.game.ai.MapNode;
 import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
+import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GameLoop;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GraphicManager;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -49,13 +52,18 @@ import com.badlogic.gdx.utils.Timer;
  */
 public class Bonus extends GameBody {
 
-	private TextureRegion 	texture;		//Texture of the Bonus
-	private Sprite 			sprite;			//Sprite to draw the Bonus
+	private TextureRegion texture;   // Texture of the Bonus
+	private Sprite sprite;           // Sprite to draw the Bonus
 
-	private static final Random			random = new Random();
+	private float fDelta = 0;        // used for the end effects
+	private boolean bKilled = false; // avoid double destroy
+	private static final float MAX_TIME_EFFECT = .75f;
+
+	private static final Random random = new Random();
 	private Timer timer;
 
-	public static String[][] bonusInfo = {
+
+	public static final String[][] bonusInfo = {
 			{"bonus/elasticity/elasticity_high.png", "Collision are more elastic"},
 			{"bonus/elasticity/elasticity_low.png",  "Collision are less elastic"},
 			{"bonus/heart/heart.png", "One more life"},
@@ -144,9 +152,27 @@ public class Bonus extends GameBody {
 				sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
 
 				sprite.draw(sp);
-			} else {
+			}
+			else {
 				sp.draw(texture, positionVector.x, positionVector.y);
 			}
+		}
+		else if (! bKilled) { // zoom effect
+			fDelta += Gdx.graphics.getDeltaTime();
+			if (fDelta > MAX_TIME_EFFECT) {
+				bKilled = true;
+				destroyBody();
+				return;
+			}
+			// zoom
+			sprite.setScale(1 + fDelta / MAX_TIME_EFFECT);
+
+			// transparency
+			Color color = sprite.getColor();
+			color.a = 1 - fDelta / MAX_TIME_EFFECT;
+			sprite.setColor(color);
+
+			sprite.draw(sp);
 		}
 	}
 
@@ -156,6 +182,7 @@ public class Bonus extends GameBody {
 	@Override
 	public void destroyBody() {
 		super.destroyBody();
+		GameLoop.removeBonus(this);
 		if (timer != null) {
 			timer.stop();
 			timer.clear();
