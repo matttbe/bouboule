@@ -129,7 +129,11 @@ public class GraphicManager {
 	 * @param body : the GameBody to remove
 	 */
 	public void removeBody(final GameBody body) {
-		bodies.remove(body);
+		// do that on a temp arraylist to avoid concurrent modifications
+		ArrayList<GameBody> bodiesTmp = new ArrayList<GameBody>(bodies);
+		bodiesTmp.remove(body);
+		// old bodies will be automatically freed by gc
+		bodies = bodiesTmp;
 	}
 	
 	

@@ -30,7 +30,6 @@ import java.util.Random;
 
 import be.ac.ucl.lfsab1509.bouboule.game.anim.CountDown;
 import be.ac.ucl.lfsab1509.bouboule.game.body.Bonus;
-import be.ac.ucl.lfsab1509.bouboule.game.body.GameBody;
 import be.ac.ucl.lfsab1509.bouboule.game.entity.Entity;
 import be.ac.ucl.lfsab1509.bouboule.game.level.LevelLoader;
 
@@ -455,8 +454,8 @@ public class GameLoop {
 		}
 	}
 
-	public static void removeBody (GameBody body) {
-		graphicManager.removeBody(body);
+	public static void removeBonus (Bonus bonus) {
+		graphicManager.removeBody(bonus);
 	}
 
 	private CharSequence getTimerCharFromInt(int iNumber) {
