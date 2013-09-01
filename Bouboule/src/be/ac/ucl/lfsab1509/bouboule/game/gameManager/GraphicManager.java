@@ -72,11 +72,11 @@ public class GraphicManager {
 	 */
 	public GraphicManager() {
 		world = new World(new Vector2(0, 0), true);
-		
+
 		world.setContactListener(new EndGameListener());
 		//world.setVelocityThreshold(10.0f);
-		bodies	 = new ArrayList<GameBody>();
-		
+		bodies = new ArrayList<GameBody>();
+
 		loadScoreboard();
 	}
 
@@ -91,18 +91,14 @@ public class GraphicManager {
 	
 	/**
 	 * Load the scoreboard
-	 * 
-	 * 
 	 */
 	protected void loadScoreboard() {
-		
 		this.scoreboard = new Texture("terrain/ScoreBoard/scoreboard.png");
 	}
 	
 	/**
-	 * Load the scoreboard
-	 * 
-	 * 
+	 * Load the background
+	 * @pre: {@link #dispose(false)} should have been called before
 	 */
 	protected void loadBackground(final String arenaName) {
 
@@ -140,25 +136,34 @@ public class GraphicManager {
 	public void dispose(boolean bDisposeWorld) {
 		
 		// Clear the background for a new use.
-		if (this.background != null)
+		if (this.background != null) {
 			this.background.dispose();
+			this.background = null;
+		}
 		
-		if (backgroundRegion != null && backgroundRegion.getTexture() != null)
+		if (backgroundRegion != null && backgroundRegion.getTexture() != null) {
 			backgroundRegion.getTexture().dispose();
+			backgroundRegion = null;
+		}
 		
-		if (this.tutorial != null)
+		if (this.tutorial != null) {
 			this.tutorial.dispose();
+			this.tutorial = null;
+		}
 		
 		// Clear arena
-		if (this.arena != null)
+		if (this.arena != null) {
 			this.arena.destroyBody();
+			this.arena = null;
+		}
 		
 		// Clear the bodies
-		for (GameBody body:bodies) {
+		for (GameBody body : bodies) {
 			body.destroyBody();
 		}
 		bodies.clear();
 
+		// at the end
 		if (bDisposeWorld) {
 			scoreboard.dispose();
 			world.dispose();
@@ -178,14 +183,15 @@ public class GraphicManager {
 	}
 	
 	/**
-	 * Add the specified arena to the graphical container to be used
+	 * Set the specified arena to the graphical container to be used
 	 * in the generated world
 	 * 
-	 * @param body : the Arena to add 
+	 * @param body : the Arena to use
+	 * @pre: {@link #dispose(false)} should have been called before
 	 * 
-	 * addArena(Arena body)
+	 * setArena(Arena body)
 	 */
-	public void addArena(final Arena body) {
+	public void setArena(final Arena body) {
 		this.arena = body;
 	}
 	

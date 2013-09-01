@@ -213,8 +213,8 @@ public class LevelLoader {
 
 		String cMusicName 		= aren.getAttribute ("music", null);
 
-		graphicManager.addArena(new Arena(radius, px, py,  angle, texRegionPath, 
-				jsonFile,  jsonName));
+		graphicManager.setArena(new Arena(radius, px, py,  angle, texRegionPath,
+				jsonFile, jsonName));
 
 		GlobalSettings.GAME.setNewLoopMusic(cMusicName); // e.g. klez.mp3
 
