@@ -29,7 +29,6 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -69,21 +68,18 @@ public class ParamScreen extends AbstractScreen {
 		
 		userButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
-				Gdx.app.log ("SCREEN", "clickUser " + x + ", " + y);
 				setScreenWithFading(new UserScreen());
 			}
 		});
 		
 		globalButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
-				Gdx.app.log ("SCREEN", "clickGlobal " + x + ", " + y);
 				setScreenWithFading(new GlobalScreen());
 			}
 		});
 		
 		aboutButton.addListener( new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
-				Gdx.app.log ("SCREEN", "clickAbout " + x + ", " + y);
 				setScreenWithFading(new AboutScreen());
 			}
 		});

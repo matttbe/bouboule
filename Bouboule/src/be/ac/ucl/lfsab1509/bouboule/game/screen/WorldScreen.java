@@ -29,7 +29,6 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 import be.ac.ucl.lfsab1509.bouboule.game.profile.BoubImages;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -125,7 +124,6 @@ public class WorldScreen extends AbstractScreen {
 		// click on the bouboule
 		boub.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "The world " + -1 + " is selected");
 				moveBoub.init(-1);
 			}
 		});
@@ -142,7 +140,6 @@ public class WorldScreen extends AbstractScreen {
 
 		button.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "The world " + world + " is selected");
 				action.init(world);
 			}
 		});
@@ -274,7 +271,6 @@ public class WorldScreen extends AbstractScreen {
 	}
 
 	private void displayInfoWorlds() {
-		Gdx.app.log("SCREEN", "disp Info: " + bInfoDisplayed);
 		if (bInfoDisplayed || GlobalSettings.PROFILE.getBestLevel() / 4 > 5)
 			return;
 

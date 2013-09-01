@@ -28,13 +28,11 @@ package be.ac.ucl.lfsab1509.bouboule;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
 import be.ac.ucl.lfsab1509.bouboule.game.MyGame;
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
@@ -67,9 +65,7 @@ public class MainActivity extends AndroidApplication {
 
 		game = new MyGame ();
 
-		Log.d ("Matth","initialize now");
 		initialize (game, cfg);
-		Log.d ("Matth","initialized");
 
 		if (bAndroidMenus)
 		{
@@ -94,7 +90,6 @@ public class MainActivity extends AndroidApplication {
 	@Override
 	public void onBackPressed() {
 		// game.getScreen ().pause(); // will do that automatically
-		Gdx.app.log("Matth","Game should pause now !");
 		if (GlobalSettings.GAME.isGameScreen())
 			GlobalSettings.MENUS.launchPauseMenu();
 	}
@@ -103,7 +98,6 @@ public class MainActivity extends AndroidApplication {
 	protected void onActivityResult(final int requestCode, final int resultCode,
 			final Intent data) {
 
-		Log.d("Matth", "onActivityResult (" + requestCode + ", " + resultCode + ")");
 		switch (requestCode) {
 		
 			case CODE_PAUSE_ACTIVITY: // menu pause
@@ -125,7 +119,6 @@ public class MainActivity extends AndroidApplication {
 			case CODE_MENU_ACTIVITY:
 				switch (resultCode) {
 					case R.id.PlayButton:
-						Log.i ("Matth", "Menu Activity finished: start game");
 						// we should do nothing... we are now in the game
 						break;
 					default:

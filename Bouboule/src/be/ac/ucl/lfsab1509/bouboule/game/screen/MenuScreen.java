@@ -124,7 +124,6 @@ public class MenuScreen extends AbstractScreen {
 		// Listener for the button
 		playButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "clickStart " + x + ", " + y);
 				if (GlobalSettings.GAME.isPlayingGame())
 					setScreenWithFading(null);
 				else
@@ -134,14 +133,12 @@ public class MenuScreen extends AbstractScreen {
 
 		paramButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "clickParam " + x + ", " + y);
 				setScreenWithFading(new ParamScreen());
 			}
 		});
 
 		scoreButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "Show LeaderBoard " + x + ", " + y);
 
 				if (GlobalSettings.GAMECENTER != null) {
 					GlobalSettings.GAMECENTER.showLeaderboard();
@@ -158,7 +155,6 @@ public class MenuScreen extends AbstractScreen {
 
 		boubouleButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "clickBouboule " + x + ", " + y);
 				final ActionBouboul actionbouL = new ActionBouboul(false);
 				actionbouL.init();
 				stage.addAction(actionbouL);
@@ -173,7 +169,6 @@ public class MenuScreen extends AbstractScreen {
 
 		titleButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "clickBouboule " + x + ", " + y);
 				actiontitle.switchName();
 			}
 		});
@@ -198,7 +193,6 @@ public class MenuScreen extends AbstractScreen {
 
 		for (int i = 0; i < CHAR_WITH_ACCENTS.length; i++)
 			cNewText.replace(CHAR_WITH_ACCENTS[i], CHAR_WITHOUT_ACCENTS[i]);
-		Gdx.app.log("SCREEN", "Normalise text: Old " + text + " -> " + cNewText);
 
 		return cNewText;
 
@@ -390,7 +384,6 @@ public class MenuScreen extends AbstractScreen {
 				degreeRot = 0f;
 				break;
 			}
-			// Gdx.app.log("SCREEN", "Rotation: " + degreeRot);
 		}
 	}
 }

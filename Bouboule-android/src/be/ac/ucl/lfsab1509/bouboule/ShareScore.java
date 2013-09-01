@@ -57,7 +57,6 @@ public class ShareScore {
 			imageFile.delete();
 
 		Bitmap bitmap = getScreenshotBitMap();
-		// Log.d("Matth", "BM " + bitmap.getHeight() + " " + bitmap.getWidth()
 		//		+ " " + bitmap.getByteCount());
 
 		// ByteArrayOutputStream stream = new ByteArrayOutputStream();

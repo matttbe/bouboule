@@ -42,7 +42,6 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -184,7 +183,6 @@ public class Menu extends Activity {
 		@Override
 		public void onClick (View view)
 		{
-			Log.d("LN","clickmenu");
 			switch (view.getId()) {
 				
 				case R.id.PlayButton :
@@ -218,7 +216,6 @@ public class Menu extends Activity {
 	
 	protected void onActivityResult(final int requestCode, final int resultCode,
 			final Intent data) {
-		Log.d("kamoulox","on activity");
 		if(requestCode == MENU_CHOOSING_LEVEL) { // it's the id of the button
 			
 			switch (resultCode) {
@@ -540,7 +537,6 @@ public class Menu extends Activity {
 
 	protected void onStop () {
 		super.onStop ();
-		Gdx.app.log ("Sound", "Menu: STOP");
 		MyAndroidMenus.onStopMusic (this);
 	}
 

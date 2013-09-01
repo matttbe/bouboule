@@ -37,7 +37,6 @@ import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
-import android.util.Log;
 
 // http://stackoverflow.com/questions/17082417
 
@@ -52,7 +51,6 @@ public class ShareScoreImageProvider extends ContentProvider {
 		uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 		uriMatcher.addURI(AUTHORITY, "img/*", 1);
 
-		Log.i("Matth", "ContentProvider: onCreate");
 
 		return true;
 	}
@@ -60,9 +58,6 @@ public class ShareScoreImageProvider extends ContentProvider {
 	@Override
 	public ParcelFileDescriptor openFile(Uri uri, String mode)
 			throws FileNotFoundException {
-
-		Log.i("Matth", "Called with uri: '"
-				+ uri + "'." + uri.getLastPathSegment());
 
 		switch (uriMatcher.match(uri)) {
 		case 1:
@@ -72,7 +67,6 @@ public class ShareScoreImageProvider extends ContentProvider {
 					fileLocation), ParcelFileDescriptor.MODE_READ_ONLY);
 			return image;
 		default:
-			Log.i("Matth", "Unsupported uri: '" + uri + "'.");
 			throw new FileNotFoundException("Unsupported uri: "
 					+ uri.toString());
 		}
@@ -81,13 +75,11 @@ public class ShareScoreImageProvider extends ContentProvider {
 	@Override
 	public int update(Uri uri, ContentValues contentvalues, String s,
 			String[] as) {
-		Log.i("Matth", "ContentProvider: update + uri: " + uri.getLastPathSegment());
 		return 0;
 	}
 
 	@Override
 	public int delete(Uri uri, String s, String[] as) {
-		Log.i("Matth", "ContentProvider: delete + uri: " + uri.getLastPathSegment());
 		if (uriMatcher.match(uri) == 1) {
 			String fileLocation = getContext().getFilesDir() + File.separator
 					+ uri.getLastPathSegment();
@@ -97,19 +89,16 @@ public class ShareScoreImageProvider extends ContentProvider {
 				return 1;
 			}
 		}
-		Log.i("Matth", "Unsupported uri: '" + uri + "'.");
 		return 0;
 	}
 
 	@Override
 	public Uri insert(Uri uri, ContentValues contentvalues) {
-		Log.i("Matth", "ContentProvider: insert + uri: " + uri.getLastPathSegment());
 		return null;
 	}
 
 	@Override
 	public String getType(Uri uri) {
-		Log.i("Matth", "ContentProvider: getType + uri: " + uri.getLastPathSegment());
 		return "image/jpeg";
 	}
 
@@ -117,7 +106,6 @@ public class ShareScoreImageProvider extends ContentProvider {
 	public Cursor query(Uri uri, String[] projection, String s, String[] as1,
 			String s1) {
 
-		Log.i("Matth", "query: " + java.util.Arrays.toString(projection));
 
 		MatrixCursor result = new MatrixCursor(projection);
 
@@ -147,7 +135,6 @@ public class ShareScoreImageProvider extends ContentProvider {
 
 	@Override
 	public String[] getStreamTypes(Uri uri, String mimeTypeFilter) {
-		Log.i("Matth", "ContentProvider: getStreamTypes + uri: " + uri.getLastPathSegment());
 		return null;
 	}
 

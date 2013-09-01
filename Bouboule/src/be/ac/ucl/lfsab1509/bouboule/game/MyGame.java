@@ -37,6 +37,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.screen.ScreenGame;
 import be.ac.ucl.lfsab1509.bouboule.game.timer.TimerMgr;
 import be.ac.ucl.lfsab1509.bouboule.game.util.CameraHelper;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -91,6 +92,9 @@ public class MyGame extends Game implements ApplicationListener {
 
 	@Override
 	public void create() {
+		// TODO Prod: LOG_ERROR
+		Gdx.app.setLogLevel(Application.LOG_ERROR);
+
 		Gdx.app.log("Matth", "Game: Create");
 		hitSounds = new Sound[5];
 		hitSounds[0] = Gdx.audio.newSound(Gdx.files.internal("music/sounds/hit1.mp3"));

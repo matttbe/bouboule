@@ -28,7 +28,6 @@ package be.ac.ucl.lfsab1509.bouboule.game.screen;
 
 import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -70,14 +69,12 @@ public class GameOverScreen extends AbstractScreen {
 
 		restartButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "clickStart " + x + ", " + y);
 				setScreenWithFading(new WorldScreen());
 			}
 		});
 
 		menuButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "clickParam " + x + ", " + y);
 				setScreenWithFading(new MenuScreen());
 			}
 		});

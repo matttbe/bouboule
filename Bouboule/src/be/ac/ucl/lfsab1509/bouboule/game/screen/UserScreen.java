@@ -160,9 +160,6 @@ public class UserScreen extends AbstractScreen {
 				return;
 			String cNewUser = chooseUserBox.getSelection();
 			if (! GlobalSettings.PROFILE.getName().equals(cNewUser)) { // new user
-				Gdx.app.log("SCREEN", "Change user: was: "
-						+ GlobalSettings.PROFILE.getName() + " - new: "
-						+ cNewUser);
 				GlobalSettings.PROFILE_MGR.changeProfile(cNewUser);
 				refreshScreen();
 				new Dialog("  New User Selected  ", getSkin(), "default") {} // close the dialogue
@@ -284,7 +281,6 @@ public class UserScreen extends AbstractScreen {
 
 	private ClickListener leftImageClick = new ClickListener() {
 		public void clicked(InputEvent event, float x, float y) {
-			Gdx.app.log("SCREEN", "leftButton " + x + ", " + y);
 			if (iNbBoubouleFiles == 1)
 				displayDialogOneImage();
 			else
@@ -294,7 +290,6 @@ public class UserScreen extends AbstractScreen {
 
 	private ClickListener rightImageClick = new ClickListener() {
 		public void clicked(InputEvent event, float x, float y) {
-			Gdx.app.log("SCREEN", "rightButton " + x + ", " + y);
 			if (iNbBoubouleFiles == 1)
 				displayDialogOneImage();
 			else
@@ -407,7 +402,6 @@ public class UserScreen extends AbstractScreen {
 	
 	ClickListener soundClickListener = new ClickListener() {
 		public void clicked(InputEvent event, float x, float y) {
-			Gdx.app.log("SCREEN", "sound click");
 			GlobalSettings.PROFILE_MGR.getProfileGlobal().changeSoundSettings(
 					!soundCheckBox.isChecked());
 

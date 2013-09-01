@@ -140,7 +140,6 @@ public class ProfileMgr {
 	 * @param cName the profile that already exists.
 	 */
 	public void changeProfile(final String cName) {
-		Gdx.app.log("LN", "Load: " + cName);
 		EndGameListener.cancelGame();
 		loadProfile(cName);
 	}

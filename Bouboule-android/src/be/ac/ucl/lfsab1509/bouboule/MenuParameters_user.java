@@ -45,8 +45,17 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
-import android.util.*;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -122,7 +131,6 @@ public class MenuParameters_user extends Activity {
 	 */
 	private void refreshScreen(){
 		
-		Log.d("LN","USER SETTINGS : refresh in progress");
 		
 		// refresh the user selected
 		listProfile = GlobalSettings.PROFILE_MGR.getAllProfilesAL();
@@ -136,7 +144,6 @@ public class MenuParameters_user extends Activity {
 		BOUB_INDEX_MAX = boub_str.size();
 		boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
 		if (boub_index == -1){ // if the precedent selected ball no more takable, set the default, must not happen
-			Log.d("LN","USER SETTINGS : choice of bouboule: require access to unaccessible bouboule (must not happen)");
 			GlobalSettings.PROFILE.setBoubName(GlobalSettings.DEFAULT_BOUB_NAME);
 			boub_index = boub_str.indexOf(GlobalSettings.PROFILE.getBoubName());
 		}
@@ -173,7 +180,6 @@ public class MenuParameters_user extends Activity {
 		user_choose_level.setFilters (new InputFilter[] {
 				new InputFilterMinMax (1, iBestLevel)});*/
 		
-		Log.d("LN","USER SETTINGS : refresh done");
 	}
 	
 	/**
@@ -290,9 +296,6 @@ public class MenuParameters_user extends Activity {
 		public void onItemSelected (AdapterView<?> parent, View view, int position, long id){
 			String profile = listProfile.get((int) id);
 			if (!GlobalSettings.PROFILE.getName().equals(profile)) {
-				Log.d("USER", "USER SETTINGS : change user : previous : "
-						+ GlobalSettings.PROFILE.getName()
-						+ " - new : " + profile);
 				GlobalSettings.PROFILE_MGR.changeProfile (profile);
 				refreshScreen();
 			}
@@ -318,7 +321,6 @@ public class MenuParameters_user extends Activity {
 								// treat the name following the case
 								case 0:
 									GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(text); // new profile create
-									Log.d("USER","USER SETTINGS : created new user : " + text);
 									makeToast(getString (R.string.user_namenewuser));
 									refreshScreen();
 									break;
@@ -343,7 +345,6 @@ public class MenuParameters_user extends Activity {
 								return false;
 							int iNewLevel = Integer.parseInt (cInputText);
 							if (iNewLevel != GlobalSettings.PROFILE.getLevel ()) {
-								Log.d("LN","USER SETTINGS : change of level : " + iNewLevel);
 								EndGameListener.resetGame ();
 								GlobalSettings.PROFILE.setLevel (iNewLevel);
 								makeToast (getString(R.string.user_resetgame_notif));
@@ -368,13 +369,11 @@ public class MenuParameters_user extends Activity {
 				case R.id.user_boub_left :
 					boub_index = getPrevIndex(boub_index);
 					GlobalSettings.PROFILE.setBoubName(boub_str.get(boub_index));
-					Log.d("LN","USER SETTINGS : change of boub : left - new index " + boub_index);
 					updateBouboule();
 					break;
 				case R.id.user_boub_right :
 					boub_index = getNextIndex(boub_index);
 					GlobalSettings.PROFILE.setBoubName(boub_str.get(boub_index));
-					Log.d("LN","USER SETTINGS : change of boub : right - new index " + boub_index);
 					updateBouboule();
 					break;
 				case R.id.user_resetgame_button :
@@ -400,10 +399,8 @@ public class MenuParameters_user extends Activity {
 				if (dialog == user_alert_tuto){
 					GlobalSettings.PROFILE.setNeedTutorial(true);
 					makeToast(getString(R.string.user_tuto_notif));
-					Log.d("LN","USER SETTINGS : game reset + new tuto");
 				} else if (dialog == user_alert_reset) {
 					makeToast(getString(R.string.user_resetgame_notif));
-					Log.d("LN","USER SETTINGS : game reset");
 				}
 				refreshScreen();
 				break;
@@ -434,7 +431,6 @@ public class MenuParameters_user extends Activity {
 					user_alert_tuto = builderTuto.show();
 				} else {
 					GlobalSettings.PROFILE.setNeedTutorial(false);
-					Log.d("LN","USER SETTINGS : no tuto");
 				}
 				
 			}

@@ -188,7 +188,6 @@ public abstract class AbstractScreen implements Screen {
 
 		backButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.log("SCREEN", "clickBack " + x + ", " + y);
 				if (bReturnToInitMenu)
 					nextScreen = new MenuScreen();
 				else
@@ -291,7 +290,6 @@ public abstract class AbstractScreen implements Screen {
 
 	@Override
 	public void show() {
-		Gdx.app.log("SCREEN", "Showing screen: " + getName());
 		// set the stage as the input processor
 		Gdx.input.setInputProcessor(stage);
 		if (! GlobalSettings.SOUND_IS_MUTED) {
@@ -308,7 +306,6 @@ public abstract class AbstractScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		Gdx.app.log("SCREEN", "Resizing screen: " + getName());
 	}
 
 	@Override
@@ -355,7 +352,6 @@ public abstract class AbstractScreen implements Screen {
 
 	@Override
 	public void hide() {
-		Gdx.app.log("SCREEN", "Hiding screen: " + getName());
 
 		// dispose the screen when leaving the screen;
 		// note that the dipose() method is not called automatically by the
@@ -365,21 +361,18 @@ public abstract class AbstractScreen implements Screen {
 
 	@Override
 	public void pause() {
-		Gdx.app.log("SCREEN", "Pausing screen: " + getName());
 		if (! GlobalSettings.SOUND_IS_MUTED)
 			getMusic().pause();
 	}
 
 	@Override
 	public void resume() {
-		Gdx.app.log("SCREEN", "Resuming screen: " + getName());
 		if (! GlobalSettings.SOUND_IS_MUTED)
 			getMusic().play();
 	}
 
 	@Override
 	public void dispose() {
-		Gdx.app.log("SCREEN", "Disposing screen: " + getName());
 
 		// as the collaborators are lazily loaded, they may be null
 		if (font != null)

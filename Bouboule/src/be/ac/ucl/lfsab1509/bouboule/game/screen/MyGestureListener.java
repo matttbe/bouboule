@@ -49,7 +49,6 @@ public class MyGestureListener implements GestureListener {
 		}
 		else if (GlobalSettings.GAME.isGdxMenus()) {
 			// if (y < 150) // the top of the screen
-			Gdx.app.log("SCREEN", "click: " + x + "x" + y);
 
 			int iWidth = Gdx.graphics.getWidth(), iWidthDiv = iWidth / 8;
 			int iHeight = Gdx.graphics.getHeight(), iHeightDiv = iHeight / 8;
@@ -91,7 +90,6 @@ public class MyGestureListener implements GestureListener {
 	public boolean pinch(final Vector2 initialPointer1, final Vector2 initialPointer2,
 			final Vector2 pointer1, final Vector2 pointer2) {
 		
-		Gdx.app.log("Touch", "Pinch event " + GlobalSettings.GAME.getTimer().isRunning());
 		
 		if (GlobalSettings.PROFILE.getName().equals(GlobalSettings.CHEATER_NAME)
 				&& GlobalSettings.GAME.getTimer().isRunning() 
