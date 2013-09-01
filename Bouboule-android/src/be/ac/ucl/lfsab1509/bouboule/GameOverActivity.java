@@ -72,7 +72,7 @@ public class GameOverActivity extends Activity {
 
 		endScore = GlobalSettings.PROFILE.getEndGameScore ();
 		if (exitStatus == GameExitStatus.GAMEOVER_END)
-			endScoreText = "End! " + endScore;
+			endScoreText = "END - " + endScore;
 		else
 			endScoreText = Integer.toString (endScore);
 

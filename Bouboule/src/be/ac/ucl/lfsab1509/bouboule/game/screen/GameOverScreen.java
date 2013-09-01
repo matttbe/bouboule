@@ -87,7 +87,7 @@ public class GameOverScreen extends AbstractScreen {
 		float fScaleFont = GlobalSettings.ISHD ? 1f : 0.7f;
 		int iY = GlobalSettings.ISHD ? 1130 : 650;
 		int endScore = GlobalSettings.PROFILE.getEndGameScore();
-		String text = endGame ? "End! " + endScore : Integer.toString(endScore);
+		String text = endGame ? "END - " + endScore : Integer.toString(endScore);
 		Label label = addLabel(text, "chinyen-font", fScaleFont,
 				new Color(1f, 1f, 1f, 1f), 0, iY);
 
