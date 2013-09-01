@@ -42,7 +42,6 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -55,7 +54,6 @@ public class GameLoop {
 	private Matrix4 debugMatrix;
 
 	private CountDown countDown;
-	private CountDown tutorial;
 	private BitmapFont fontOswald;
 	private BitmapFont fontOsaka;
 	private BitmapFont fontOsakaRed;
@@ -66,11 +64,6 @@ public class GameLoop {
 	private Pixmap pixmapFade;
 	private SpriteBatch batch;
 
-	// background
-	private Texture background;
-	private TextureRegion backgroundRegion;
-
-	private Texture scoreboard;
 
 	private static Random random;
 
@@ -90,7 +83,7 @@ public class GameLoop {
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(cam.combined);
 
-		if (debug) {
+		if (true) {
 			debugMatrix = new Matrix4(cam.combined);
 			debugMatrix.scale(GraphicManager.getGameToWorld(),
 					GraphicManager.getGameToWorld(), 1f);
@@ -129,14 +122,8 @@ public class GameLoop {
 					- GlobalSettings.APPHEIGHT / 2);
 		}
 
-		// load the scoreboard
-		scoreboard = new Texture("terrain/ScoreBoard/scoreboard.png");
-
 		// load the counter
 		countDown = new CountDown(2, 2, 1f, "anim/countdown.png", true); // 3 sec
-
-		// load the tuto
-		tutorial = new CountDown(2, 1, 4f, "anim/tuto.png", false);
 
 		// new randomGenerator
 		random = new Random();
@@ -151,13 +138,6 @@ public class GameLoop {
 
 		// Clear the graphic Manager for a new use.
 		graphicManager.dispose(false);
-
-		// Clear the background for a new use.
-		if (background != null)
-			background.dispose();
-		
-		if (backgroundRegion != null && backgroundRegion.getTexture() != null)
-			backgroundRegion.getTexture().dispose();
 
 		// Reset EndGame Listener
 		EndGameListener.resetListener();
@@ -175,8 +155,7 @@ public class GameLoop {
 		level.readLevelObstacles(graphicManager);
 		level.readLevelMapNodes();
 
-		background = new Texture(arenaName + "bg.jpg");
-		backgroundRegion = new TextureRegion(background);
+		graphicManager.loadBackground(arenaName);
 	}
 
 	/**
@@ -215,22 +194,14 @@ public class GameLoop {
 		// Allow to draw the background fast because it disable
 		// the color blending (override the background).
 		
-		//If the background is upscaled, we must use a TextureRegion
-		if (GlobalSettings.SCALE != 1f) {
-			batch.draw(backgroundRegion, GlobalSettings.SHIFT_BG_WIDTH,
-					GlobalSettings.SHIFT_BG_HEIGHT, 0f, 0f,
-					backgroundRegion.getRegionWidth(),
-					backgroundRegion.getRegionHeight(), GlobalSettings.SCALE,
-					GlobalSettings.SCALE, 0f);
-
-		} else {
-			batch.draw(background, GlobalSettings.SHIFT_BG_WIDTH, 0f);
-		}
+		graphicManager.drawBackground(batch);
 		
 		batch.enableBlending();
 
-		batch.draw(scoreboard, 0, 0);
-
+		//graphicManager.drawBackground(batch);
+		
+		graphicManager.drawArena(batch);
+		
 		writeText();
 
 		graphicManager.draw(batch);
@@ -238,8 +209,8 @@ public class GameLoop {
 		if (pause) { // draw the countdown or tuto
 
 			if (GlobalSettings.PROFILE.needTutorial()) {
-				GlobalSettings.PROFILE.setNeedTutorial(tutorial.draw(batch,
-						delta));
+				GlobalSettings.PROFILE.setNeedTutorial(
+						graphicManager.drawTutorial(batch, delta));
 				status = true;
 			}
 			else if (GlobalSettings.GAME.isGeneralPause()) { // only for GdxMenus
@@ -519,13 +490,7 @@ public class GameLoop {
 		if (debugRenderer != null)
 			debugRenderer.dispose();
 		graphicManager.dispose(true);
-		if (background != null)
-			background.dispose();
-		if (backgroundRegion != null && backgroundRegion.getTexture() != null)
-			backgroundRegion.getTexture().dispose();
-		scoreboard.dispose();
 		countDown.dispose();
-		tutorial.dispose();
 		fontOsaka.dispose();
 		fontOsakaRed.dispose();
 		fontOswald.dispose();

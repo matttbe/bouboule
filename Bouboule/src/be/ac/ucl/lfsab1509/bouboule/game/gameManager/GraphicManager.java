@@ -28,10 +28,14 @@ package be.ac.ucl.lfsab1509.bouboule.game.gameManager;
 
 import java.util.ArrayList;
 
+import be.ac.ucl.lfsab1509.bouboule.game.anim.CountDown;
+import be.ac.ucl.lfsab1509.bouboule.game.body.Arena;
 import be.ac.ucl.lfsab1509.bouboule.game.body.GameBody;
 
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -54,6 +58,12 @@ public class GraphicManager {
 
 	//Store all the body of the game
 	private ArrayList<GameBody> bodies;
+	private Texture scoreboard;
+	private Arena arena;
+	// background
+	private Texture background;
+	private TextureRegion backgroundRegion;
+	private CountDown tutorial;
 
 	/**
 	 * Create the world, the body container and define the game as notPaused
@@ -66,6 +76,8 @@ public class GraphicManager {
 		world.setContactListener(new EndGameListener());
 		//world.setVelocityThreshold(10.0f);
 		bodies	 = new ArrayList<GameBody>();
+		
+		loadScoreboard();
 	}
 
 	/**
@@ -76,6 +88,30 @@ public class GraphicManager {
 	public static World getWorld() {
 		return world;
 	}
+	
+	/**
+	 * Load the scoreboard
+	 * 
+	 * 
+	 */
+	protected void loadScoreboard() {
+		
+		this.scoreboard = new Texture("terrain/ScoreBoard/scoreboard.png");
+	}
+	
+	/**
+	 * Load the scoreboard
+	 * 
+	 * 
+	 */
+	protected void loadBackground(final String arenaName) {
+
+		background = new Texture(arenaName + "bg.jpg");
+		
+		if (GlobalSettings.SCALE != 1f)
+			backgroundRegion = new TextureRegion(background);
+	}
+
 
 	/**
 	 * Static function that convert the value to the game reality (for distances)
@@ -102,13 +138,31 @@ public class GraphicManager {
 	 * @param bDisposeWorld true to dispose the world (at the end)
 	 */
 	public void dispose(boolean bDisposeWorld) {
+		
+		// Clear the background for a new use.
+		if (this.background != null)
+			this.background.dispose();
+		
+		if (backgroundRegion != null && backgroundRegion.getTexture() != null)
+			backgroundRegion.getTexture().dispose();
+		
+		if (this.tutorial != null)
+			this.tutorial.dispose();
+		
+		// Clear arena
+		if (this.arena != null)
+			this.arena.destroyBody();
+		
+		// Clear the bodies
 		for (GameBody body:bodies) {
 			body.destroyBody();
 		}
 		bodies.clear();
 
-		if (bDisposeWorld)
+		if (bDisposeWorld) {
+			scoreboard.dispose();
 			world.dispose();
+		}
 	}
 
 	/**
@@ -122,6 +176,35 @@ public class GraphicManager {
 	public void addBody(final GameBody body) {
 		bodies.add(body);
 	}
+	
+	/**
+	 * Add the specified arena to the graphical container to be used
+	 * in the generated world
+	 * 
+	 * @param body : the Arena to add 
+	 * 
+	 * addArena(Arena body)
+	 */
+	public void addArena(final Arena body) {
+		this.arena = body;
+	}
+	
+	/**
+	 * Add the specified arena to the graphical container to be used
+	 * in the generated world
+	 * 
+	 * @param body : the Arena to add 
+	 * 
+	 * addArena(Arena body)
+	 */
+	public CountDown getTutorial() {
+		
+		if (this.tutorial == null)
+			this.tutorial = new CountDown(2, 1, 4f, "anim/tuto.png", false);
+		
+		return this.tutorial;
+	}
+
 
 	/**
 	 * Remove the specified body from the graphical container to no longer be
@@ -168,8 +251,53 @@ public class GraphicManager {
 	 * draw(SpriteBatch batch)
 	 */
 	public void draw(final SpriteBatch batch) {
-		for (GameBody body:bodies) {
+
+		for (GameBody body : bodies) {
 			body.draw(batch);
 		}
+	}
+	
+	/**
+	 * Draw the Arena > Arena + scoreboard
+	 * @param sp : SpriteBatch to draw to
+	 * 
+	 * draw(SpriteBatch batch)
+	 */
+	public void drawArena(final SpriteBatch batch) {
+
+		arena.draw(batch);
+		batch.draw(scoreboard, 0, 0);
+	}
+	
+	/**
+	 * Draw the background with scalling if needed
+	 * @param sp : SpriteBatch to draw to
+	 * 
+	 * draw(SpriteBatch batch)
+	 */
+	public void drawBackground(final SpriteBatch batch) {
+
+		// If the background is upscaled, we must use a TextureRegion
+		if (GlobalSettings.SCALE != 1f) {
+			batch.draw(backgroundRegion, GlobalSettings.SHIFT_BG_WIDTH,
+					GlobalSettings.SHIFT_BG_HEIGHT, 0f, 0f,
+					backgroundRegion.getRegionWidth(),
+					backgroundRegion.getRegionHeight(), GlobalSettings.SCALE,
+					GlobalSettings.SCALE, 0f);
+
+		} else {
+			batch.draw(background, GlobalSettings.SHIFT_BG_WIDTH, 0f);
+		}
+	}
+	
+	/**
+	 * Draw the tutorial
+	 * @param sp : SpriteBatch to draw to
+	 * 
+	 * draw(SpriteBatch batch)
+	 */
+	public boolean drawTutorial(final SpriteBatch batch, final float delta) {
+		
+		return getTutorial().draw(batch, delta);
 	}
 }
