@@ -511,7 +511,7 @@ public class Menu extends Activity {
 		/**Animation for CASE 4*/
 		//Upscaling and fading animation
 		
-		ScaleAnimation grow = new ScaleAnimation(1.0f, 15f, 1.0f, 15f,
+		ScaleAnimation grow = new ScaleAnimation(1.0f, 5f, 1.0f, 5f,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
 				0.5f);
 		grow.setDuration(5000);
