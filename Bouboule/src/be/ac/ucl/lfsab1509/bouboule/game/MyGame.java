@@ -247,11 +247,18 @@ public class MyGame extends Game implements ApplicationListener {
 	}
 
 	public boolean isPlayingGame() {
-		return (GlobalSettings.PROFILE.getLevel() == 1
-				&& GlobalSettings.GAME.getTimer().isRunning()
-				&& GlobalSettings.PROFILE.getNewInitScore() // and not started
-				!= GlobalSettings.PROFILE.getScore())
-				|| GlobalSettings.PROFILE.getLevel() > 1;
+		return GlobalSettings.PROFILE.getLevel() > 1 // it means we are playing
+				// special cases for level 1:
+				|| GlobalSettings.PROFILE.getNbLifes() != GlobalSettings.MAX_LIFES
+				|| (GlobalSettings.GAME.getTimer().isRunning() // not started
+					&& GlobalSettings.PROFILE.getNewInitScore()
+						!= GlobalSettings.PROFILE.getScore())
+				/* if we want the tuto (game has been reset) we have to force
+				 * to directly play the level 1 if the user can select another
+				 * world
+				 */
+				|| (GlobalSettings.PROFILE.needTutorial()
+					&& GlobalSettings.PROFILE.getBestLevel() > 4);
 	}
 
 	/**
