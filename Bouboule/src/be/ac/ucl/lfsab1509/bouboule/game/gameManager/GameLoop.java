@@ -83,7 +83,7 @@ public class GameLoop {
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(cam.combined);
 
-		if (true) {
+		if (debug) {
 			debugMatrix = new Matrix4(cam.combined);
 			debugMatrix.scale(GraphicManager.getGameToWorld(),
 					GraphicManager.getGameToWorld(), 1f);
@@ -197,8 +197,6 @@ public class GameLoop {
 		graphicManager.drawBackground(batch);
 		
 		batch.enableBlending();
-
-		//graphicManager.drawBackground(batch);
 		
 		graphicManager.drawArena(batch);
 		
