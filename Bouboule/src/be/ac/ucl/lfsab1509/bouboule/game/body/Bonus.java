@@ -66,9 +66,9 @@ public class Bonus extends GameBody {
 
 
 	public static final String[][] bonusInfo = {
-			{"bonus/elasticity/elasticity_high.png", "Collision are more elastic"},
-			{"bonus/elasticity/elasticity_low.png",  "Collision are less elastic"},
-			{"bonus/heart/heart.png", "One more life"},
+			{"bonus/elasticity/elasticity_high.png", "Collisions are more elastic"},
+			{"bonus/elasticity/elasticity_low.png",  "Collisions are less elastic"},
+			{"bonus/heart/heart.png", "Extra life"},
 			{"bonus/inverse/inverse.png", "The axes are inverted"},
 			{"bonus/invincible/invincible.png", "Bouboule is invincible"},
 			{"bonus/invisible/invisible.png", "Bouboule is invisible"},
