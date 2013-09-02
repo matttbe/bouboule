@@ -90,7 +90,7 @@ public class GlobalScreen extends AbstractScreen {
 
 	private void addTutorialOptions() {
 		addLabel("TUTORIAL", FONT_TITLE, FONT_SCALE, Color.WHITE, iX, iY)
-				.setTouchable(null);
+				.addListener(tutorialLabelClickListener);
 		tutorialCheckBox = addCheckBox("Show the tutorial!",
 				GlobalSettings.PROFILE.needTutorial(), iX,
 				iY - (GlobalSettings.ISHD ? 80 : 0));
@@ -99,22 +99,35 @@ public class GlobalScreen extends AbstractScreen {
 		tutorialCheckBox.addListener(tutorialClickListener);
 	}
 
+	private void showTutorialDialog() {
+		if (! tutorialCheckBox.isChecked())
+			return;
+		new Dialog("  Tutorial  ", getSkin(), "default") {
+			protected void result(Object object) {
+				if ((Boolean) object == true) {
+					EndGameListener.resetGame ();
+					GlobalSettings.PROFILE.setNeedTutorial(
+							tutorialCheckBox.isChecked());
+				}
+				else
+					tutorialCheckBox.setChecked(false);
+			}
+		}.text("\n  It will restart the game to level 1.  \n"
+			+ "  Do you want to continue?  \n ")
+		.button("      Yes      ", true).button("       No       ", false)
+		.show(stage);
+	}
+
+	private ClickListener tutorialLabelClickListener = new ClickListener() {
+		public void clicked(InputEvent event, float x, float y) {
+			tutorialCheckBox.setChecked(! tutorialCheckBox.isChecked());
+			showTutorialDialog();
+		}
+	};
+
 	private ClickListener tutorialClickListener = new ClickListener() {
 		public void clicked(InputEvent event, float x, float y) {
-			new Dialog("  Tutorial  ", getSkin(), "default") {
-				protected void result(Object object) {
-					if ((Boolean) object == true) {
-						EndGameListener.resetGame ();
-						GlobalSettings.PROFILE.setNeedTutorial(
-								tutorialCheckBox.isChecked());
-					}
-					else
-						tutorialCheckBox.setChecked(false);
-				}
-			}.text("\n  It will restart the game to level 1.  \n"
-				+ "  Do you want to continue?  \n ")
-			.button("      Yes      ", true).button("       No       ", false)
-			.show(stage);
+			showTutorialDialog();
 		}
 	};
 
