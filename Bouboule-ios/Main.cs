@@ -86,7 +86,7 @@ namespace be.ac.ucl.lfsab1509.bouboule.game
 			{
 				base.FinishedLaunching(app,options);
 
-				//Set the GameManager Obligatory Connection
+				//Set the GameManager Connection, can be dismissed by user.
 				_gameCenterManager.Authenticate ();
 
 				return true;
