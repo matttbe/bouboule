@@ -62,6 +62,10 @@ namespace GameCenterIOS
 						player.loadStoredScores();
 						player.loadStoredAchievements();
 
+						//If the user log in after  the lauchn of the game.
+						if (GlobalSettings.GAMECENTER == null)
+							GlobalSettings.GAMECENTER = this;
+
 						if (GlobalSettings.PROFILE_MGR != null)
 							GlobalSettings.PROFILE_MGR.switchUser(currentPlayerID);
 
