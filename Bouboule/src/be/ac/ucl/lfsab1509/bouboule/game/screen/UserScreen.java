@@ -44,6 +44,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldFilter;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -367,7 +368,8 @@ public class UserScreen extends AbstractScreen {
 		// resetButton.setSize(300, 100);
 		resetButton.setPosition(GlobalSettings.APPWIDTH / 2
 				- resetButton.getWidth() / 2,
-				iY - (GlobalSettings.ISHD ? 50 : 0));
+				iY - (GlobalSettings.ISHD ? 100 : 15));
+		resetButton.setHeight(resetButton.getHeight() * 1.5f);
 		this.stage.addActor(resetButton);
 		resetButton.addListener(resetClickListener);
 	}
@@ -394,13 +396,16 @@ public class UserScreen extends AbstractScreen {
 				.setTouchable(null);
 
 		soundCheckBox = addCheckBox("Music", ! GlobalSettings.SOUND_IS_MUTED,
-				iX, iY + (GlobalSettings.ISHD ? -50 : 5));
-		soundCheckBox.setX((int) (GlobalSettings.APPWIDTH / 2 // center
-				- soundCheckBox.getWidth() / 2));
+				iX, iY - (GlobalSettings.ISHD ? 150 : 50));
+		// bigger click zone
+		soundCheckBox.getLabelCell().align(Align.center);
+		soundCheckBox.setHeight(soundCheckBox.getHeight() * 3);
+		soundCheckBox.setWidth(GlobalSettings.APPWIDTH
+				- soundCheckBox.getImage().getWidth()); // align center
 		soundCheckBox.addListener(soundClickListener);
 	}
-	
-	ClickListener soundClickListener = new ClickListener() {
+
+	private ClickListener soundClickListener = new ClickListener() {
 		public void clicked(InputEvent event, float x, float y) {
 			GlobalSettings.PROFILE_MGR.getProfileGlobal().changeSoundSettings(
 					!soundCheckBox.isChecked());
