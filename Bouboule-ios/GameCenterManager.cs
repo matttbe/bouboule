@@ -67,10 +67,29 @@ namespace GameCenterIOS
 
 					}
 				} else {
-					var alert = new UIAlertView ("Game Center Account Required", "Need login the game center!", null, "Retry", null);
+					/* var alert = new UIAlertView ("Game Center Login", "Need login the game center!", null, "Retry", null);
 					alert.Clicked += delegate {
 						GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
 					};
+					alert.Show (); */
+
+					UIAlertView alert = new UIAlertView () { 
+						Title = "Game Center Login", Message = "The Game Center improve the Bouboule experience but you can play without."
+					};
+					alert.AddButton("Login");
+					alert.AddButton("Dismiss");
+					alert.Clicked += (sender, e) => {
+
+						//If the user don't want to use the game center -> choice 2
+						if ( e.ButtonIndex == 0) //Retry login
+							GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+
+						if ( e.ButtonIndex == 1) { //Disable gamecenter
+							Console.WriteLine("Game Center Disabled");
+							GlobalSettings.GAMECENTER = null;
+						}
+					};
+
 					alert.Show ();
 
 				}
