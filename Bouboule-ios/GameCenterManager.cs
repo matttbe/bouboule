@@ -96,6 +96,7 @@ namespace GameCenterIOS
 								//Console.WriteLine("Game Center Disabled");
 								GlobalSettings.GAMECENTER = null;
 								GlobalSettings.PROFILE_MGR.getProfileGlobal().toggleGameCenter();
+								GlobalSettings.PROFILE_MGR.switchUser(GlobalSettings.DEFAULT_PROFILE_NAME);
 
 							}
 						};
@@ -105,6 +106,7 @@ namespace GameCenterIOS
 
 						//The game Center must be disabled !
 						GlobalSettings.GAMECENTER = null;
+						GlobalSettings.PROFILE_MGR.switchUser(GlobalSettings.DEFAULT_PROFILE_NAME);
 					}
 
 				}
