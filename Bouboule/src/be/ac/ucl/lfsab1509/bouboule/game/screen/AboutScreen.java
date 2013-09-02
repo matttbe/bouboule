@@ -51,9 +51,11 @@ public class AboutScreen extends AbstractScreen {
 		String cAboutText =
 				  "App's name:\n"
 						  + " Bouboule\n\n"
-				+ "Authors:\n"
+				+ "Authors: (v1)\n"
 					+ " Baerts Matthieu, Remy Baptiste, Van Wallendael "
 					+ "Nicolas and Verhaeghe Helene\n\n"
+				+ "Authors: (v2+)\n"
+					+ " Baerts Matthieu, Van Wallendael Nicolas\n\n"
 				+ "Graphisms:\n"
 					+ " Van Wallendael Julien\n\n"
 				+ "Music and sounds:\n"
