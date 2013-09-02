@@ -71,11 +71,6 @@ namespace GameCenterIOS
 
 					}
 				} else {
-					/* var alert = new UIAlertView ("Game Center Login", "Need login the game center!", null, "Retry", null);
-					alert.Clicked += delegate {
-						GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
-					};
-					alert.Show (); */
 
 					//By verifying the availability here (error) and before the call, it ensure
 					//that if the user activate later the game center, it is set on.
@@ -96,7 +91,9 @@ namespace GameCenterIOS
 								//Console.WriteLine("Game Center Disabled");
 								GlobalSettings.GAMECENTER = null;
 								GlobalSettings.PROFILE_MGR.getProfileGlobal().toggleGameCenter();
-								GlobalSettings.PROFILE_MGR.switchUser(GlobalSettings.DEFAULT_PROFILE_NAME);
+
+								//Set the default user
+								setDefaultUser ();
 
 							}
 						};
@@ -106,12 +103,22 @@ namespace GameCenterIOS
 
 						//The game Center must be disabled !
 						GlobalSettings.GAMECENTER = null;
-						GlobalSettings.PROFILE_MGR.switchUser(GlobalSettings.DEFAULT_PROFILE_NAME);
+
+						//Set the default user
+						setDefaultUser ();
 					}
 
 				}
 			});
 
+		}
+
+		//Set the default Bouboule User.
+		private void setDefaultUser () {
+
+			currentPlayerID = null;
+			//EndGameListener.resetGame ();
+			GlobalSettings.PROFILE_MGR.switchUser(GlobalSettings.DEFAULT_PROFILE_NAME);
 		}
 
 		public static GameCenterManager getInstance(){
