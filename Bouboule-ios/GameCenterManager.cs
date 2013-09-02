@@ -73,24 +73,31 @@ namespace GameCenterIOS
 					};
 					alert.Show (); */
 
-					UIAlertView alert = new UIAlertView () { 
-						Title = "Game Center Login", Message = "The Game Center improves the game experience but you can play without it."
-					};
-					alert.AddButton("Login");
-					alert.AddButton("Dismiss");
-					alert.Clicked += (sender, e) => {
+					//By verifying the availability here (error) and before the call, it ensure
+					//that if the user activate later the game center, it is set on.
+					if ( ! GlobalSettings.PROFILE_MGR.getProfileGlobal().isGameCenterDisable() ) {
 
-						//If the user don't want to use the game center -> choice 2
-						if ( e.ButtonIndex == 0) //Retry login
-							GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+						UIAlertView alert = new UIAlertView () { 
+							Title = "Game Center Login", Message = "The Game Center improves the game experience but you can play without it."
+						};
+						alert.AddButton("Login");
+						alert.AddButton("Dismiss");
+						alert.Clicked += (sender, e) => {
 
-						if ( e.ButtonIndex == 1) { //Disable gamecenter
-							Console.WriteLine("Game Center Disabled");
-							GlobalSettings.GAMECENTER = null;
-						}
-					};
+							//If the user don't want to use the game center -> choice 2
+							if ( e.ButtonIndex == 0) //Retry login
+								GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
 
-					alert.Show ();
+							if ( e.ButtonIndex == 1) { //Disable gamecenter
+								Console.WriteLine("Game Center Disabled");
+								GlobalSettings.GAMECENTER = null;
+								GlobalSettings.PROFILE_MGR.getProfileGlobal().toggleGameCenter();
+
+							}
+						};
+
+						alert.Show ();
+					}
 
 				}
 			});
