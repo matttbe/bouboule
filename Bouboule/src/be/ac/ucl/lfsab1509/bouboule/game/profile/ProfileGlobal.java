@@ -46,7 +46,6 @@ public class ProfileGlobal {
 
 	private static final String MUTE_SOUND_KEY = "mute_sound";
 	private static final String HIGHSCORE_KEY = "highscore"; // score + name + level + date
-	private static final String GAMECENTER_KEY = "gamecenter";
 /*
 	private static final String SENSITIVITY_KEY = "sensitivity";
 	private static final String FIXED_ROTATIONS_KEY = "fixed_rotations";
@@ -201,16 +200,5 @@ public class ProfileGlobal {
 			highScores[i] = new HighScoreInfo(cName, iScore, iLevel, pDate);
 		}
 		return highScores;
-	}
-
-	public void toggleGameCenter() {
-		if (prefs.contains(GAMECENTER_KEY))
-			prefs.remove(GAMECENTER_KEY);
-		else
-			prefs.putBoolean(GAMECENTER_KEY, true);
-	}
-
-	public boolean isGameCenterDisable() {
-		return prefs.contains(GAMECENTER_KEY);
 	}
 }
