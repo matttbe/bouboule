@@ -89,7 +89,7 @@ namespace GameCenterIOS
 								GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
 
 							if ( e.ButtonIndex == 1) { //Disable gamecenter
-								Console.WriteLine("Game Center Disabled");
+								//Console.WriteLine("Game Center Disabled");
 								GlobalSettings.GAMECENTER = null;
 								GlobalSettings.PROFILE_MGR.getProfileGlobal().toggleGameCenter();
 
@@ -97,6 +97,10 @@ namespace GameCenterIOS
 						};
 
 						alert.Show ();
+					} else { 
+
+						//The game Center must be disabled !
+						GlobalSettings.GAMECENTER = null;
 					}
 
 				}
