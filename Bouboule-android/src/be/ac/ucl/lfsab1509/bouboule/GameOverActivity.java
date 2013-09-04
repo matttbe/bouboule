@@ -32,6 +32,7 @@ import be.ac.ucl.lfsab1509.bouboule.game.gameManager.GlobalSettings.GameExitStat
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.util.TypedValue;
@@ -80,6 +81,7 @@ public class GameOverActivity extends Activity {
 		score = (TextView) findViewById (R.id.GameOverScore);
 		score.setTypeface (font);
 		score.setText (endScoreText);
+		score.setShadowLayer(1, 3, 3, Color.BLACK);
 		score.setOnClickListener(scoreListener);
 
 		//_______ HighScore
