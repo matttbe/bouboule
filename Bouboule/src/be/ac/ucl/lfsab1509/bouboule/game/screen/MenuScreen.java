@@ -144,11 +144,12 @@ public class MenuScreen extends AbstractScreen {
 					GlobalSettings.GAMECENTER.showLeaderboard();
 				}
 				else {
-					new Dialog("  HighScore  ", getSkin(), "default") {
+					Dialog dialog = new Dialog("  HighScore  ", getSkin(), "default") {
 						// improved default skin?
 						// protected void result(Object object) {} // Just hide the dialog
 					}.text("\n" + getHighScoreText() + " ")
 					.button("     Close     ", null).show(stage);
+					dialog.setX((GlobalSettings.APPWIDTH - dialog.getWidth()) / 2);
 				}
 			}
 		});
