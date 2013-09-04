@@ -102,7 +102,7 @@ public class GlobalScreen extends AbstractScreen {
 	private void showTutorialDialog() {
 		if (! tutorialCheckBox.isChecked())
 			return;
-		new Dialog("  Tutorial  ", getSkin(), "default") {
+		Dialog dialog = new Dialog("  Tutorial  ", getSkin(), "default") {
 			protected void result(Object object) {
 				if ((Boolean) object == true) {
 					EndGameListener.resetGame ();
@@ -116,6 +116,7 @@ public class GlobalScreen extends AbstractScreen {
 			+ "  Do you want to continue?  \n ")
 		.button("      Yes      ", true).button("       No       ", false)
 		.show(stage);
+		dialog.setX((GlobalSettings.APPWIDTH - dialog.getWidth()) / 2);
 	}
 
 	private ClickListener tutorialLabelClickListener = new ClickListener() {

@@ -163,10 +163,12 @@ public class UserScreen extends AbstractScreen {
 			if (! GlobalSettings.PROFILE.getName().equals(cNewUser)) { // new user
 				GlobalSettings.PROFILE_MGR.changeProfile(cNewUser);
 				refreshScreen();
-				new Dialog("  New User Selected  ", getSkin(), "default") {} // close the dialogue
-						.text("\n  Hello " + cNewUser + "!  \n ")
-						.button("     Close     ", null)
-						.show(stage);
+				Dialog dialog = new Dialog("  New User Selected  ", getSkin(),
+						"default") {} // close the dialogue
+					.text("\n  Hello " + cNewUser + "!  \n ")
+					.button("     Close     ", null)
+					.show(stage);
+				dialog.setX((GlobalSettings.APPWIDTH - dialog.getWidth()) / 2);
 			}
 		}
 	};
@@ -227,21 +229,25 @@ public class UserScreen extends AbstractScreen {
 
 	private void addNewUser() {
 		String error = checkNewUser();
+		Dialog dialog;
 		if (error == null) {
 			GlobalSettings.PROFILE_MGR.createAndLoadNewProfile(
 					newUserTextField.getText());
 			refreshScreen();
-			new Dialog("  New User Created  ", getSkin(), "default") {} // close the dialogue
-					.text("\n  New user created with succes!  \n ")
-					.button("     Close     ", null)
-					.show(stage);
+			dialog = new Dialog("  New User Created  ", getSkin(), "default")
+				{} // close the dialogue
+				.text("\n  New user created with succes!  \n ")
+				.button("     Close     ", null)
+				.show(stage);
 		}
 		else
-			new Dialog("  Error  ", getSkin(), "default") {
+			dialog = new Dialog("  Error  ", getSkin(), "default") {
 				protected void result(Object object) {
 					refreshScreen();
 				}
-			}.text("\n  " + error + "  \n ").button("     Close     ", null).show(stage);
+			}.text("\n  " + error + "  \n ");
+		dialog.button("     Close     ", null).show(stage);
+		dialog.setX((GlobalSettings.APPWIDTH - dialog.getWidth()) / 2);
 	}
 
 	//_________________________________ BOUBOULES IMAGES
@@ -299,10 +305,12 @@ public class UserScreen extends AbstractScreen {
 	};
 
 	private void displayDialogOneImage() {
-		new Dialog("  No other skin available  ", getSkin(), "default") {} // close the dialogue
-				.text("\n  You've to win against other bouboules!  \n ")
-				.button("     Close     ", null)
-				.show(stage);
+		Dialog dialog = new Dialog("  No other skin available  ", getSkin(),
+				"default") {} // close the dialogue
+			.text("\n  You've to win against other bouboules!  \n ")
+			.button("     Close     ", null)
+			.show(stage);
+		dialog.setX((GlobalSettings.APPWIDTH - dialog.getWidth()) / 2);
 	}
 
 	private void setDefaultImages() {
@@ -376,7 +384,8 @@ public class UserScreen extends AbstractScreen {
 
 	private ClickListener resetClickListener = new ClickListener() {
 		public void clicked(InputEvent event, float x, float y) {
-			new Dialog("  End Current Game  ", getSkin(), "default") {
+			Dialog dialog = new Dialog("  End Current Game  ", getSkin(),
+					"default") {
 				protected void result(Object object) {
 					if ((Boolean) object == true)
 						EndGameListener.resetGame ();
@@ -386,6 +395,7 @@ public class UserScreen extends AbstractScreen {
 					+ "  Do you want to continue?  \n ")
 			.button("      Yes      ", true).button("       No       ", false)
 			.show(stage);
+			dialog.setX((GlobalSettings.APPWIDTH - dialog.getWidth()) / 2);
 		}
 	};
 
