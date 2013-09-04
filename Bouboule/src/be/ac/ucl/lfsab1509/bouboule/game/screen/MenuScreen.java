@@ -221,8 +221,8 @@ public class MenuScreen extends AbstractScreen {
 				break;
 
 			// note: we have to used only chars that are available in the font
-			cText += normaliseTextForTitle(info.getName()) + " - Score "
-					+ info.getScore() + " - Level " + info.getLevel() + "\n";
+			cText += "  " + normaliseTextForTitle(info.getName()) + " - Score "
+					+ info.getScore() + " - Level " + info.getLevel() + "  \n";
 		}
 
 		return cText;
