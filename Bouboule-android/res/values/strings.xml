@@ -92,7 +92,12 @@
     <string name="Score">Score:</string>
     <string name="no_highscore">No high score yet</string>
     <string name="Level">level</string>
-    
-    
+
+    <!-- Translatable strings -->
+    <string name="share_high_score">Click here to share your high score!</string>
+    <string name="share_this_score">Click here to share this score!</string>
+    <string name="last_score">This is my last score at Bouboule Game:</string>
+    <string name="high_score">This is my high score at Bouboule Game:</string>
+    <string name="beat_me">Try to beat me at this mobile game!</string>
     
 </resources>

@@ -93,7 +93,8 @@ public class LoosingActivity extends Activity {
 		public void onClick(final View view) {
 			ShareScore shareScore = new ShareScore(LoosingActivity.this);
 			startActivity(shareScore.getIntent(
-					"This is my last score at Bouboule Game: " + score + "!"));
+					getString(R.string.last_score) + " " + score + "!",
+					getResources()));
 		}
 	};
 	

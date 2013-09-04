@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:hint="@string/share_this_score"
             android:maxLines="1"
             android:text="@string/GameOver"
             android:textAppearance="?android:attr/textAppearanceLarge"

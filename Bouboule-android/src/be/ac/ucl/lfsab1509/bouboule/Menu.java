@@ -279,7 +279,7 @@ public class Menu extends Activity {
 			//.setTitleCondensed (cTitleCondensed); // for smaller screens => doesn't work...
 		}
 
-		menu.add(0, i+1, android.view.Menu.NONE, "Click here to share your high score!");
+		menu.add(0, i+1, android.view.Menu.NONE, getString(R.string.share_high_score));
 	}
 
 	@Override
@@ -323,8 +323,8 @@ public class Menu extends Activity {
 			if (shareScore == null) // should not happen
 				shareScore = new ShareScore(this);
 			startActivity(shareScore.getIntent(
-					"This is my highscore at Bouboule Game: "
-					+ GlobalSettings.PROFILE.getHighScore() + "!"));
+					getString(R.string.high_score) + " "
+					+ GlobalSettings.PROFILE.getHighScore() + "!", getResources()));
 		}
 		Toast.makeText (this, cTitle, Toast.LENGTH_LONG).show ();
 		return true;

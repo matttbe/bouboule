@@ -33,6 +33,7 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -98,12 +99,12 @@ public class ShareScore {
 		return screenshot;
 	}
 
-	public Intent getIntent (String text) {
+	public Intent getIntent (String text, Resources r) {
 	//public static Intent getShareScoreIntent (String text) {
 		Intent shareIntent = new Intent(Intent.ACTION_SEND);
 		shareIntent.putExtra(Intent.EXTRA_TEXT,
 				text + "\n"
-				+ "Try to beat me at this mobile game!\n"
+				+ r.getString(R.string.beat_me) + "\n"
 				+ "http://is.gd/1sYcq6"); // TODO: link to the official website
 		// shareIntent.setType("text/plain");
 		shareIntent.setType("image/jpeg");

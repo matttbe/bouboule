@@ -137,7 +137,8 @@ public class GameOverActivity extends Activity {
 			ShareScore shareScore = new ShareScore(GameOverActivity.this);
 			startActivity(shareScore.getIntent(
 					// ShareScore.getShareScoreIntent(
-					"This is my last score at Bouboule Game: " + endScore + "!"));
+					getString(R.string.last_score) + " " + endScore + "!",
+					getResources()));
 			score.setText (endScoreText);
 		}
 	};
