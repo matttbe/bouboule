@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Translatable strings -->
+    <string name="share_high_score">Cliquez ici pour partager votre meilleur score!</string>
+    <string name="share_this_score">Cliquez ici pour partager ce score!</string>
+    <string name="last_score">Ceci est mon dernier score au jeu Bouboule :</string>
+    <string name="high_score">Ceci est mon meilleur score au jeu Bouboule :</string>
+    <string name="beat_me">Essayez de me battre à ce jeu mobile !</string>
+
+</resources>
