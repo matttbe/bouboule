@@ -53,6 +53,7 @@ public class GameOverActivity extends Activity {
 	private String endScoreText;
 	private TextView score;
 	private TextView highScoreTextView;
+	private View share;
 	// Need handler for callback to the UI thread
 	private final Handler mHandler = new Handler();
 
@@ -88,6 +89,9 @@ public class GameOverActivity extends Activity {
 			animateHighScore();
 		else
 			highScoreTextView.setVisibility(View.INVISIBLE);
+
+		//_______ Click to Share
+		share = findViewById(R.id.click_to_share);
 	}
 
 	private void animateHighScore() {
@@ -125,6 +129,7 @@ public class GameOverActivity extends Activity {
 		@Override
 		public void onClick(final View view) {
 			score.setText(GlobalSettings.PROFILE.getName() + ": " + endScoreText);
+			share.setVisibility(View.INVISIBLE);
 			mHandler.postDelayed(screenShotDelay, 250);
 		}
 	};
@@ -139,6 +144,7 @@ public class GameOverActivity extends Activity {
 					getString(R.string.last_score) + " " + endScore + "!",
 					getResources()));
 			score.setText (endScoreText);
+			share.setVisibility(View.VISIBLE);
 		}
 	};
 
