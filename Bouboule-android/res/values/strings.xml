@@ -82,7 +82,7 @@
     <!-- Menu Loosing -->
     
     <!-- Menu GameOver -->
-    <string name="GameOver">Game Over</string>
+    <string name="GameOver">12345</string>
     <string name="title_activity_gameover">GameOverActivity</string>
     <string name="GameOverHighScore">HIGH SCORE</string>
     
