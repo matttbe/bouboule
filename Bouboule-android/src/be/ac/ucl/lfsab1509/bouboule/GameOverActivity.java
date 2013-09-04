@@ -72,10 +72,7 @@ public class GameOverActivity extends Activity {
 				fireListener);
 
 		endScore = GlobalSettings.PROFILE.getEndGameScore ();
-		if (exitStatus == GameExitStatus.GAMEOVER_END)
-			endScoreText = "END - " + endScore;
-		else
-			endScoreText = Integer.toString (endScore);
+		endScoreText = Integer.toString (endScore);
 
 		Typeface font = Typeface.createFromAsset(getAssets(), "chineyen.ttf"); // "osaka-re.ttf");
 		score = (TextView) findViewById (R.id.GameOverScore);
