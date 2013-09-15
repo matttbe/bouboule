@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Bouboule HD</string>
+	<string>Bouboule</string>
 	<key>MinimumOSVersion</key>
 	<string>5.0</string>
 	<key>UIDeviceFamily</key>

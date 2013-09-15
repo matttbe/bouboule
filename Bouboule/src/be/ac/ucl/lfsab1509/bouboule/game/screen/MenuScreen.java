@@ -68,9 +68,9 @@ public class MenuScreen extends AbstractScreen {
 		// Create the 2 Bouboules out of the screen
 
 		final Image imgBoubouleR = addImage("GdxMenus/main/boubouleright.png",
-				GlobalSettings.APPWIDTH, 0f);
+				GlobalSettings.APPWIDTH, 1f);
 		final Image imgBoubouleL = addImage("GdxMenus/main/boubouleleft.png",
-				-GlobalSettings.APPWIDTH, 0f);
+				-GlobalSettings.APPWIDTH, 1f);
 
 		// add action on the bouboule
 		final ActionBouboul actionbouL = new ActionBouboul(false);
