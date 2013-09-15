@@ -50,66 +50,38 @@ namespace GameCenterIOS
 
 		public GameCenterManager ()
 		{
-			authenticatedHandler = new GKNotificationHandler (delegate(NSError error) {
-				if (GKLocalPlayer.LocalPlayer.Authenticated) {
-					//Switching Users
+			// For devices lower than 6.0
+			if ( !UIDevice.CurrentDevice.CheckSystemVersion (6, 0) )
 
-					if(currentPlayerID == null || currentPlayerID != GKLocalPlayer.LocalPlayer.PlayerID)
-					{
-						//load the player settings
-						currentPlayerID = GKLocalPlayer.LocalPlayer.PlayerID;
-						player = new PlayerModel();
-						player.loadStoredScores();
-						player.loadStoredAchievements();
+				authenticatedHandler = new GKNotificationHandler (delegate(NSError error) {
+					if (GKLocalPlayer.LocalPlayer.Authenticated) {
+						//Switching Users
 
-						//If the user log in after  the lauchn of the game.
-						if (GlobalSettings.GAMECENTER == null)
-							GlobalSettings.GAMECENTER = this;
+						if(currentPlayerID == null || currentPlayerID != GKLocalPlayer.LocalPlayer.PlayerID)
+							switchUserInfo ();
 
-						if (GlobalSettings.PROFILE_MGR != null)
-							GlobalSettings.PROFILE_MGR.switchUser(currentPlayerID);
+
+					} else {
+
+						Console.WriteLine(GlobalSettings.PROFILE_MGR.getProfileGlobal().isGameCenterDisable());
+
+						//By verifying the availability here (error) and before the call, it ensure
+						//that if the user activate later the game center, it is set on.
+						if ( ! GlobalSettings.PROFILE_MGR.getProfileGlobal().isGameCenterDisable() ) {
+
+							showGameCenterAlert ();
+
+						} else { 
+
+							//The game Center must be disabled !
+							GlobalSettings.GAMECENTER = null;
+
+							//Set the default user
+							setDefaultUser ();
+						}
 
 					}
-				} else {
-
-					//By verifying the availability here (error) and before the call, it ensure
-					//that if the user activate later the game center, it is set on.
-					if ( ! GlobalSettings.PROFILE_MGR.getProfileGlobal().isGameCenterDisable() ) {
-
-						UIAlertView alert = new UIAlertView () { 
-							Title = "Game Center Login", Message = "The Game Center improves the game experience but you can play without it."
-						};
-						alert.AddButton("Login");
-						alert.AddButton("Dismiss");
-						alert.Clicked += (sender, e) => {
-
-							//If the user don't want to use the game center -> choice 2
-							if ( e.ButtonIndex == 0) //Retry login
-								GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
-
-							if ( e.ButtonIndex == 1) { //Disable gamecenter
-								//Console.WriteLine("Game Center Disabled");
-								GlobalSettings.GAMECENTER = null;
-								GlobalSettings.PROFILE_MGR.getProfileGlobal().toggleGameCenter();
-
-								//Set the default user
-								setDefaultUser ();
-
-							}
-						};
-
-						alert.Show ();
-					} else { 
-
-						//The game Center must be disabled !
-						GlobalSettings.GAMECENTER = null;
-
-						//Set the default user
-						setDefaultUser ();
-					}
-
-				}
-			});
+				});
 
 		}
 
@@ -129,8 +101,6 @@ namespace GameCenterIOS
 			return _instance;
 		}
 
-
-
 		public bool isGameCenterAPIAvailble(){
 			return UIDevice.CurrentDevice.CheckSystemVersion (4, 1);
 		}
@@ -140,7 +110,7 @@ namespace GameCenterIOS
 			if (player != null)
 				return player.playerName;
 			else
-				return "Bouboule";
+				return GlobalSettings.DEFAULT_PROFILE_NAME;
 		}
 
 		public string getPlayerID ()
@@ -169,7 +139,138 @@ namespace GameCenterIOS
 		public void Authenticate ()
 		{
 
-			GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+			//Tentative de connexion
+
+			// For devices lower than 6.0
+			if ( ! UIDevice.CurrentDevice.CheckSystemVersion (6, 0)) {
+				GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+				return;
+			}
+
+			GKLocalPlayer.LocalPlayer.AuthenticateHandler = (ui, err) => {
+
+				// If ui is null, that means the user is already authenticated,
+				// for example, if the user used Game Center directly to log in
+
+				if (ui != null) {
+
+					// Not authentificated
+					// Show the login UI view for log in.
+
+					UIViewController controller = UIApplication.SharedApplication.Windows[0].RootViewController;
+					controller.PresentViewController(ui,true,null);
+
+					return;
+				
+				} else {
+
+					//Console.WriteLine ("Authentication result: {0}", err);
+
+					// Check if you are authenticated:
+					if (GKLocalPlayer.LocalPlayer.Authenticated) {
+						// Switching Users
+
+						if(currentPlayerID == null || currentPlayerID != GKLocalPlayer.LocalPlayer.PlayerID)
+							switchUserInfo();
+
+					} else {
+
+						Console.WriteLine("Is the game center disabled : " + GlobalSettings.PROFILE_MGR.getProfileGlobal().isGameCenterDisable());
+
+						// By verifying the availability here (error) and before the call, it ensure
+						// that if the user activate later the game center, it is set on.
+						if ( ! GlobalSettings.PROFILE_MGR.getProfileGlobal().isGameCenterDisable() ) {
+
+							showGameCenterAlert ();
+
+						} else { 
+
+							// The game Center is disabled !
+							GlobalSettings.GAMECENTER = null;
+
+							// Set the default user
+							setDefaultUser ();
+						}
+
+					}
+
+				}
+			};
+
+		}
+
+		private void switchUserInfo () {
+
+			// Load the player settings
+			currentPlayerID = GKLocalPlayer.LocalPlayer.PlayerID;
+			player = new PlayerModel();
+			player.loadStoredScores();
+			player.loadStoredAchievements();
+
+			// If the user log in after  the lauchn of the game.
+			if (GlobalSettings.GAMECENTER == null)
+				GlobalSettings.GAMECENTER = this;
+
+			if (GlobalSettings.PROFILE_MGR != null)
+				GlobalSettings.PROFILE_MGR.switchUser(currentPlayerID);
+		
+		}
+
+		private void showGameCenterAlert () {
+
+			UIAlertView alert;
+
+			// For devices lower than 6.0
+			if (!UIDevice.CurrentDevice.CheckSystemVersion (6, 0)) {
+
+				alert = new UIAlertView () { 
+					Title = "Game Center Login", Message = "The Game Center improves the game experience but you can play without it."
+				};
+				alert.AddButton("Login");
+				alert.AddButton("Dismiss");
+				alert.Clicked += (sender, e) => {
+
+					//If the user don't want to use the game center -> choice 2
+					if ( e.ButtonIndex == 0) //Retry login
+						GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+
+					if ( e.ButtonIndex == 1) { //Disable gamecenter
+						//Console.WriteLine("Game Center Disabled");
+						GlobalSettings.GAMECENTER = null;
+						GlobalSettings.PROFILE_MGR.getProfileGlobal().toggleGameCenter();
+
+						//Set the default user
+						setDefaultUser ();
+
+					}
+				};
+
+			} else {
+
+				alert = new UIAlertView () { 
+					Title = "Game Center Disabled", Message = "Login from the Game Center App, if you want to use it later."
+				};
+				alert.AddButton ("Ok");
+				alert.Clicked += (sender, e) => {
+
+					/* Depreciated in iOS 6+ - You can't relauch the login window */
+
+					if (e.ButtonIndex == 0) { //Disable gamecenter
+						Console.WriteLine ("Game Center Disabled");
+
+						// The game Center must be disabled !
+						GlobalSettings.GAMECENTER = null;
+						GlobalSettings.PROFILE_MGR.getProfileGlobal ().toggleGameCenter ();
+
+						// Set the default user
+						setDefaultUser ();
+
+					}
+				};
+			}
+
+			alert.Show ();
+
 
 		}
 
@@ -178,7 +279,7 @@ namespace GameCenterIOS
 		{
 			if (!GKLocalPlayer.LocalPlayer.Authenticated) {
 				new UIAlertView ("Error", "Need sign in Game Center to reset the achievement", null, "OK", null).Show();
-				GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+				Authenticate ();
 				return;
 			}
 			player.resetAchievements ();
@@ -192,7 +293,7 @@ namespace GameCenterIOS
 		{
 			if (!GKLocalPlayer.LocalPlayer.Authenticated) {
 				new UIAlertView ("Error", "Need sign in Game Center to submit the achievement", null, "OK", null).Show();
-				GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+				Authenticate ();
 				return;
 			}
 
@@ -215,7 +316,7 @@ namespace GameCenterIOS
 		{
 			if (!GKLocalPlayer.LocalPlayer.Authenticated) {
 				new UIAlertView ("Error", "Need sign in Game Center to submit the score", null, "OK", null).Show();
-				GKLocalPlayer.LocalPlayer.Authenticate (authenticatedHandler);
+				Authenticate ();
 				return;
 			}
 

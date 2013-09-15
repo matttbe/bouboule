@@ -67,10 +67,6 @@ namespace be.ac.ucl.lfsab1509.bouboule.game
 				config.useAccelerometer = true;
 				config.useMonotouchOpenTK = true;
 				config.useObjectAL = true;
-				//config.displayScaleLargeScreenIfRetina = 1f;
-				//config.displayScaleLargeScreenIfNonRetina = 1f;
-				//config.displayScaleSmallScreenIfNonRetina = 1f;
-				//config.displayScaleSmallScreenIfRetina = 0.5f;
 
 				return config;
 			}
