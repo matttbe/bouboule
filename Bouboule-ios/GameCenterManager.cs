@@ -321,7 +321,7 @@ namespace GameCenterIOS
 			}
 
 
-			GKScore submitScore = new GKScore ("be.ac.ucl.lfsab1509.bouboule.leaderboardscore");
+			GKScore submitScore = new GKScore ("be.ac.ucl.lfsab1509.bouboule.leaderboardscorebest");
 			submitScore.Init ();
 			try{
 				submitScore.Value = Convert.ToInt64(scoreValue);

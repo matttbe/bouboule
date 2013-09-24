@@ -40,6 +40,8 @@
 	<key>CFBundleIdentifier</key>
 	<string>be.ac.ucl.lfsab1509.bouboule</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.1</string>
 </dict>
 </plist>
