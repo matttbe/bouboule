@@ -116,6 +116,7 @@ public class Profile {
 	/**
 	 * Check if there is a new high score (for this profile and for all profiles).
 	 * Reset all data about the score (init score, lifes, level, current score).
+	 * @pre need to be done asap (before calling gamecenter, etc. to avoid cheating)
 	 * @return true if there is a new highscore global (for all profiles)
 	 */
 	public boolean checkHighScoreAndResetProfile() {
@@ -302,17 +303,22 @@ public class Profile {
 		if (iNewLifes < 0) {
 			iNbDeaths -= iNewLifes;
 			prefs.putInteger(DEATHS_KEY, iNbDeaths);
+
+
+			if (iLifes <= 0) {
+				int iStartLevel = this.iStartLevel;
+				int iEndLevel = this.iLevel;
+				checkHighScoreAndResetProfile(); // reset iLevel and iStartLevel
+				GameCenterUtils.newDeath(iNbDeaths);
+				gameOver(iStartLevel, iEndLevel);
+				return false; // false <=> no more life
+			}
+
+			GameCenterUtils.newDeath(iNbDeaths);
 			/* flush only if we loose lifes: no need to flush during the game
 			 * (if we quit during the game, we lost bonus)
 			 */
 			prefs.flush();
-
-			GameCenterUtils.newDeath(iNbDeaths);
-
-			if (iLifes <= 0) {
-				gameOver(iLevel);
-				return false; // false <=> no more life
-			}
 		}
 
 		return true;
@@ -325,13 +331,16 @@ public class Profile {
 	 */
 	public boolean levelUp() {
 		if (iLevel >= GlobalSettings.NBLEVELS) { // we are already on the last level
-			if (! bAllLevelsWon) {
+			int iStartLevel = this.iStartLevel;
+			int iEndLevel = this.iLevel;
+			checkHighScoreAndResetProfile(); // reset iLevel and iStartLevel
+			if (! bAllLevelsWon) { // notif endlevel only one
 				bAllLevelsWon = true;
 				prefs.putBoolean(ALL_LEVELS_WON, bAllLevelsWon);
 				prefs.flush();
-				GameCenterUtils.newBestLevel(iLevel + 1); // => last level not won
+				GameCenterUtils.newBestLevel(iEndLevel + 1); // => last level not won
 			}
-			gameOver(iLevel + 1); // => last level not won
+			gameOver(iStartLevel, iEndLevel + 1); // => last level not won
 			return false;
 		}
 
@@ -406,7 +415,7 @@ public class Profile {
 	}
 
 	// iLastLevel <=> level not won
-	private void gameOver(int iLastLevel) {
+	private void gameOver(int iStartLevel, int iLastLevel) {
 		boolean bNeedFlush = false;
 
 		int iNbWorlds = GameCenterUtils.getWorld(iLastLevel)

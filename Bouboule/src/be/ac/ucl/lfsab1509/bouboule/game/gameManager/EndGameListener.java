@@ -212,13 +212,10 @@ public class EndGameListener implements ContactListener{
 			GlobalSettings.PROFILE.cancelNewScore();
 			// do not lose life if we are a cheater!
 			if (GlobalSettings.PROFILE.getName().equals(GlobalSettings.CHEATER_NAME)
-					|| GlobalSettings.PROFILE.addLifes(-1)) {
+					|| GlobalSettings.PROFILE.addLifes(-1))
 				GlobalSettings.GAME_EXIT = GameExitStatus.LOOSE;
-			
-			} else {
+			else
 				GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER_LOOSE;
-				GlobalSettings.PROFILE.checkHighScoreAndResetProfile();
-			}
 
 			endGame(true);
 			GlobalSettings.GAME_EXIT = GameExitStatus.NONE;
@@ -236,14 +233,10 @@ public class EndGameListener implements ContactListener{
 			Gdx.app.log("KILL", "Bouboule has won: end game");
 
 			GlobalSettings.PROFILE.saveScore();
-			if (GlobalSettings.PROFILE.levelUp()) {
+			if (GlobalSettings.PROFILE.levelUp())
 				GlobalSettings.GAME_EXIT = GameExitStatus.WIN;
-			
-			} else { // no more level: end game
-				
+			else // no more level: end game
 				GlobalSettings.GAME_EXIT = GameExitStatus.GAMEOVER_END;
-				GlobalSettings.PROFILE.checkHighScoreAndResetProfile();
-			}
 
 			endGame(true);
 			GlobalSettings.GAME_EXIT = GameExitStatus.NONE;
