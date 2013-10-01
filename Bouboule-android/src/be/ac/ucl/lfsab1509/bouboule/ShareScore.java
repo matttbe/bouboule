@@ -105,7 +105,8 @@ public class ShareScore {
 		shareIntent.putExtra(Intent.EXTRA_TEXT,
 				text + "\n"
 				+ r.getString(R.string.beat_me) + "\n"
-				+ "http://is.gd/1sYcq6"); // TODO: link to the official website
+				+ "http://is.gd/bouboule"); // Android Play Store.
+				// stats: http://is.gd/bouboule-
 		// shareIntent.setType("text/plain");
 		shareIntent.setType("image/jpeg");
 		shareIntent.putExtra(Intent.EXTRA_STREAM,
