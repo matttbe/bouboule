@@ -157,6 +157,7 @@ namespace GameCenterIOS
 					// Not authentificated
 					// Show the login UI view for log in.
 
+					Console.WriteLine("Will show the login screen");
 					UIViewController controller = UIApplication.SharedApplication.Windows[0].RootViewController;
 					controller.PresentViewController(ui,true,null);
 
@@ -292,7 +293,8 @@ namespace GameCenterIOS
 		public void submitAchievement(String achievementsName, int percentageValue)
 		{
 			if (!GKLocalPlayer.LocalPlayer.Authenticated) {
-				new UIAlertView ("Error", "Need sign in Game Center to submit the achievement", null, "OK", null).Show();
+				//new UIAlertView ("Error", "Need sign in Game Center to submit the achievement", null, "OK", null).Show();
+				Console.WriteLine ("Need sign in Game Center to submit the achievement");
 				Authenticate ();
 				return;
 			}
@@ -310,19 +312,29 @@ namespace GameCenterIOS
 			player.submitAchievement (achievement);
 		}
 
+		public void submitScore(int scoreValue) {
+
+			//Submit and server check Best Score.
+			submitScore(scoreValue, "be.ac.ucl.lfsab1509.bouboule.leaderboardscorebest");
+			//Submit Last Score.
+			submitScore(scoreValue, "be.ac.ucl.lfsab1509.bouboule.leaderboardscore");
+
+		}
 
 		//submit score to default leaderboard
-		public void submitScore(int scoreValue)
+		public void submitScore(int scoreValue, String leaderboardName)
 		{
 			if (!GKLocalPlayer.LocalPlayer.Authenticated) {
-				new UIAlertView ("Error", "Need sign in Game Center to submit the score", null, "OK", null).Show();
+				//new UIAlertView ("Error", "Need sign in Game Center to submit the score", null, "OK", null).Show();
+				Console.WriteLine ("Need sign in Game Center to submit the score");
 				Authenticate ();
 				return;
 			}
 
 
-			GKScore submitScore = new GKScore ("be.ac.ucl.lfsab1509.bouboule.leaderboardscorebest");
+			GKScore submitScore = new GKScore (leaderboardName);
 			submitScore.Init ();
+			submitScore.category = leaderboardName;
 			try{
 				submitScore.Value = Convert.ToInt64(scoreValue);
 			}
