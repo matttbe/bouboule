@@ -114,8 +114,6 @@ public class GameOverActivity extends Activity {
 		anim.setRepeatMode(Animation.REVERSE);
 		animationSetForHighScore.addAnimation(anim);
 		highScoreTextView.startAnimation(animationSetForHighScore);
-
-		highScoreTextView.setOnClickListener(scoreListener);
 	}
 
 	private View.OnClickListener fireListener = new View.OnClickListener() {
