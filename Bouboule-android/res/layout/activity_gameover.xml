@@ -83,6 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="-15dip"
+        android:clickable="false"
         android:gravity="center"
         android:text="@string/GameOverHighScore"
         android:textColor="#4f95cb"
