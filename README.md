@@ -54,4 +54,4 @@ Previews
 
 ![Preview](https://raw.githubusercontent.com/matttbe/bouboule/master/PlayStore/ScreenShots/7_Yoda.png)
 
-![Preview](https://raw.githubusercontent.com/matttbe/bouboule/master/PlayStore/ScreenShots/7_UserSettings.png)
+![Preview](https://raw.githubusercontent.com/matttbe/bouboule/master/PlayStore/ScreenShots/8_UserSettings.png)
